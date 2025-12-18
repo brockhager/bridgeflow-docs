@@ -1,0 +1,6 @@
+site_name: BridgeFlow Docs
+site_url: https://bridgeflow.readthedocs.io/
+nav:
+  - Home: index.md
+theme: readthedocs
+

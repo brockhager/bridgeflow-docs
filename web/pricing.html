@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Pricing — BridgeFlow</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="nav" role="banner">
+    <div class="container inner">
+      <a class="logo" href="/">BridgeFlow</a>
+      <nav class="nav-links" role="navigation" aria-label="Main navigation">
+        <a href="/pricing.html">Pricing</a>
+        <a href="https://docs.bridgeflow.example" target="_blank" rel="noopener">Docs</a>
+        <a class="btn-ghost" href="/register.html">Try BridgeFlow Free</a>
+      </nav>
+      <button class="hamburger" aria-label="Open menu" aria-expanded="false">☰</button>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container">
+        <h1>Pricing that scales with you</h1>
+        <p>Simple, transparent pricing for growing businesses. Switch between monthly and yearly billing.</p>
+        <div style="margin-top:12px;display:flex;gap:12px;align-items:center">
+          <button id="billing-toggle" data-mode="month" aria-pressed="false" class="btn-ghost">Toggle Yearly</button>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <div class="pricing-grid">
+          <div class="tier">
+            <h3>Starter</h3>
+            <p class="price"><span data-price-month="$19/mo" data-price-year="$190/yr">$19/mo</span></p>
+            <p>Up to 5 integrations</p>
+            <a class="btn-primary" href="/register.html">Get started</a>
+          </div>
+          <div class="tier">
+            <h3>Pro</h3>
+            <p class="price"><span data-price-month="$49/mo" data-price-year="$490/yr">$49/mo</span></p>
+            <p>Up to 25 integrations + alerts</p>
+            <a class="btn-primary" href="/register.html">Start free trial</a>
+          </div>
+          <div class="tier">
+            <h3>Business</h3>
+            <p class="price"><span data-price-month="$129/mo" data-price-year="$1290/yr">$129/mo</span></p>
+            <p>Unlimited integrations & premium support</p>
+            <a class="btn-primary" href="/register.html">Contact sales</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <h3>Feature comparison</h3>
+        <table class="cmp-table" role="table" aria-label="Feature comparison">
+          <thead><tr><th>Feature</th><th>Starter</th><th>Pro</th><th>Business</th></tr></thead>
+          <tbody>
+            <tr><td>Integrations</td><td>5</td><td>25</td><td>Unlimited</td></tr>
+            <tr><td>Retries & monitoring</td><td>✓</td><td>✓</td><td>✓</td></tr>
+            <tr><td>SSO & SAML</td><td>—</td><td>—</td><td>✓</td></tr>
+            <tr><td>Priority support</td><td>—</td><td>Email</td><td>Phone + Email</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <h3>FAQ</h3>
+        <details><summary>Can I switch plans later?</summary><p>Yes — you can upgrade or change billing at any time.</p></details>
+        <details><summary>Do you offer annual discounts?</summary><p>Yes — selecting yearly billing applies a discount shown in the yearly price.</p></details>
+        <details><summary>Is there a free trial?</summary><p>We offer a 14-day free trial for Pro plans; see registration for details.</p></details>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <div class="cta">
+          <div style="flex:1"><h3>Ready to streamline integrations?</h3><p>Sign up and try BridgeFlow free.</p></div>
+          <div><a class="btn-primary" href="/register.html">Get started</a></div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="container">
+      <small>&copy; BridgeFlow</small>
+    </div>
+  </footer>
+
+  <script src="src/pricing.js" defer></script>
+  <script src="src/site.js" defer></script>
+</body>
+</html>

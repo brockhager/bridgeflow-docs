@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="description" content="Create or edit a bridge - BridgeFlow">
+  <title>Bridge Builder — BridgeFlow</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .form-container {
+      max-width: 800px;
+      margin: 40px auto;
+      padding: 40px;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+    .form-group {
+      margin-bottom: 24px;
+    }
+    .form-group label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 600;
+      color: #0F172A;
+    }
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      padding: 12px;
+      border: 2px solid #E5E7EB;
+      border-radius: 8px;
+      font-size: 15px;
+      font-family: inherit;
+    }
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: #2563EB;
+    }
+    .form-group .help-text {
+      font-size: 13px;
+      color: #6B7280;
+      margin-top: 4px;
+    }
+    .auth-fields {
+      background: #F9FAFB;
+      padding: 20px;
+      border-radius: 8px;
+      margin-top: 12px;
+    }
+    .form-actions {
+      display: flex;
+      gap: 12px;
+      margin-top: 32px;
+      padding-top: 24px;
+      border-top: 1px solid #E5E7EB;
+    }
+    .template-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 16px;
+      background: #EFF6FF;
+      border: 1px solid #2563EB;
+      border-radius: 8px;
+      margin-bottom: 24px;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+  <header class="nav" role="banner">
+    <div class="container inner">
+      <a class="logo" href="/">BridgeFlow</a>
+      <nav class="nav-links" role="navigation" aria-label="Main navigation">
+        <a href="/canvas-visual.html">Canvas</a>
+        <a href="/bridges.html">Bridges</a>
+        <a href="/transactions.html">Transactions</a>
+        <a href="https://bridgeflow-docs.readthedocs.io/" target="_blank" rel="noopener">Docs</a>
+      </nav>
+      <button class="hamburger" aria-label="Open menu" aria-expanded="false">☰</button>
+    </div>
+  </header>
+
+  <main>
+    <div class="container">
+      <div class="form-container">
+        <div id="templateBadge" style="display: none;"></div>
+
+        <h1>Create Bridge</h1>
+        <p style="color: #6B7280; margin-bottom: 32px;">Connect your business with partners and services</p>
+
+        <form id="bridgeForm">
+          <div class="form-group">
+            <label for="name">Bridge Name *</label>
+            <input type="text" id="name" name="name" required placeholder="e.g., Shopify Orders Bridge">
+            <div class="help-text">Give your bridge a descriptive name</div>
+          </div>
+
+          <div class="form-group">
+            <label for="type">Bridge Type *</label>
+            <select id="type" name="type" required>
+              <option value="api">API Bridge</option>
+              <option value="webhook">Webhook</option>
+              <option value="file">File Transfer</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="direction">Data Flow Direction *</label>
+            <select id="direction" name="direction" required>
+              <option value="inbound">Inbound (Receiving Data)</option>
+              <option value="outbound">Outbound (Sending Data)</option>
+              <option value="both">Both Directions</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="sourceUrl">Source URL</label>
+            <input type="url" id="sourceUrl" name="sourceUrl" placeholder="https://api.partner.com/endpoint">
+            <div class="help-text">Where data comes from (for inbound bridges)</div>
+          </div>
+
+          <div class="form-group">
+            <label for="targetUrl">Target URL</label>
+            <input type="url" id="targetUrl" name="targetUrl" placeholder="https://api.destination.com/endpoint">
+            <div class="help-text">Where data goes to (for outbound bridges)</div>
+          </div>
+
+          <div class="form-group">
+            <label for="authMethod">Authentication Method *</label>
+            <select id="authMethod" name="authMethod" required>
+              <option value="none">No Authentication</option>
+              <option value="api_key">API Key</option>
+              <option value="bearer">Bearer Token</option>
+              <option value="basic">Basic Auth</option>
+              <option value="oauth2">OAuth 2.0</option>
+            </select>
+          </div>
+
+          <div id="authFields"></div>
+
+          <div class="form-group">
+            <label for="description">Description</label>
+            <textarea id="description" name="description" rows="3" placeholder="What does this bridge do?"></textarea>
+          </div>
+
+          <div class="form-actions">
+            <button type="submit" class="btn-primary">Create Bridge</button>
+            <button type="button" class="btn-ghost" onclick="window.location.href='/canvas-visual.html'">Cancel</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap">
+        <small>&copy; BridgeFlow — <a href="https://bridgeflow-docs.readthedocs.io/" target="_blank" rel="noopener">Documentation</a></small>
+        <div>
+          <a class="btn-ghost" href="/pricing.html">Pricing</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="src/bridge-form.js"></script>
+</body>
+</html>

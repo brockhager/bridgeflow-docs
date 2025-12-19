@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="description" content="Visual Canvas — See your business connections at a glance">
+  <title>Your Business Canvas — BridgeFlow</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="canvas-visual.css">
+</head>
+<body>
+  <header class="nav" role="banner">
+    <div class="container inner">
+      <a class="logo" href="/">BridgeFlow</a>
+      <nav class="nav-links" role="navigation" aria-label="Main navigation">
+        <a href="/canvas-visual.html" aria-current="page">Canvas</a>
+        <a href="/bridges.html">Bridges</a>
+        <a href="/transactions.html">Transactions</a>
+        <a href="https://bridgeflow-docs.readthedocs.io/" target="_blank" rel="noopener">Docs</a>
+      </nav>
+      <button class="hamburger" aria-label="Open menu" aria-expanded="false">☰</button>
+    </div>
+  </header>
+
+  <main class="canvas-container">
+    <!-- Page Header -->
+    <div class="canvas-header">
+      <div>
+        <h1>🏢 Your Business Canvas</h1>
+        <p class="canvas-subtitle">Visual overview of all your integrations</p>
+      </div>
+      <button id="refreshBtn" class="btn-ghost" onclick="location.reload()" aria-label="Refresh canvas">
+        🔄 Refresh
+      </button>
+    </div>
+
+    <!-- Canvas Content Area -->
+    <div class="canvas-content">
+      <!-- Center Company Card -->
+      <div class="company-card center-company">
+        <div class="company-icon">🏢</div>
+        <h2>Your Business</h2>
+        <p class="company-subtitle">Integration Hub</p>
+        <div class="company-stats" id="companyStats">
+          <div class="stat">
+            <span class="stat-value">0</span>
+            <span class="stat-label">Bridges</span>
+          </div>
+          <div class="stat">
+            <span class="stat-value">0</span>
+            <span class="stat-label">Active</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bridges Container (populated by JS) -->
+      <div id="bridgesContainer" class="bridges-container">
+        <!-- Bridge cards will be inserted here by JavaScript -->
+      </div>
+
+      <!-- Empty State -->
+      <div id="emptyState" class="empty-state" style="display: none;">
+        <div class="empty-icon">🌉</div>
+        <h2>No Bridges Yet</h2>
+        <p>Build your first bridge to connect with partners and start integrating data flows</p>
+        <button class="btn-primary btn-large" onclick="showTemplates()">
+          + Create Your First Bridge
+        </button>
+        <div class="popular-templates">
+          <p class="popular-label">Popular integrations:</p>
+          <div class="template-chips">
+            <button class="template-chip" onclick="quickAdd('shopify')">
+              <span class="chip-icon">🛒</span>
+              <span>Shopify</span>
+            </button>
+            <button class="template-chip" onclick="quickAdd('stripe')">
+              <span class="chip-icon">💳</span>
+              <span>Stripe</span>
+            </button>
+            <button class="template-chip" onclick="quickAdd('quickbooks')">
+              <span class="chip-icon">📊</span>
+              <span>QuickBooks</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Floating Add Button (hidden in empty state) -->
+    <button id="addBridgeBtn" class="btn-add-bridge" onclick="showTemplates()" aria-label="Add new bridge" style="display: none;">
+      + Add Bridge
+    </button>
+  </main>
+
+  <!-- Template Picker Modal -->
+  <div id="templateModal" class="modal" role="dialog" aria-labelledby="templateModalTitle" aria-hidden="true">
+    <div class="modal-backdrop" onclick="closeTemplates()"></div>
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 id="templateModalTitle">Choose a Connection</h2>
+        <button class="modal-close" onclick="closeTemplates()" aria-label="Close modal">×</button>
+      </div>
+      <div class="modal-body">
+        <p class="modal-description">Select a popular integration or build a custom connection</p>
+        <div id="templateGrid" class="template-grid">
+          <!-- Templates will be populated by JavaScript -->
+        </div>
+        <button class="btn-ghost btn-block" onclick="customBridge()">
+          ⚙️ Build Custom Connection
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bridge Detail Modal -->
+  <div id="bridgeDetailModal" class="modal" role="dialog" aria-labelledby="bridgeDetailTitle" aria-hidden="true">
+    <div class="modal-backdrop" onclick="closeBridgeDetail()"></div>
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 id="bridgeDetailTitle">Bridge Details</h2>
+        <button class="modal-close" onclick="closeBridgeDetail()" aria-label="Close modal">×</button>
+      </div>
+      <div class="modal-body" id="bridgeDetailContent">
+        <!-- Details will be populated by JavaScript -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Loading Overlay -->
+  <div id="loadingOverlay" class="loading-overlay" style="display: none;">
+    <div class="spinner"></div>
+    <p>Loading your canvas...</p>
+  </div>
+
+  <footer>
+    <div class="container">
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap">
+        <small>&copy; BridgeFlow — <a href="https://bridgeflow-docs.readthedocs.io/" target="_blank" rel="noopener">Documentation</a></small>
+        <div>
+          <a class="btn-ghost" href="/pricing.html">Pricing</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="src/canvas-visual.js"></script>
+</body>
+</html>

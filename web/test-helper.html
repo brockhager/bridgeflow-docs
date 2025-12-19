@@ -1,0 +1,288 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Canvas Testing Helper — BridgeFlow</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .test-container {
+      max-width: 800px;
+      margin: 40px auto;
+      padding: 40px;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+    .test-section {
+      margin-bottom: 32px;
+      padding: 24px;
+      background: #F9FAFB;
+      border-radius: 8px;
+    }
+    .test-section h3 {
+      margin: 0 0 16px;
+      color: #0F172A;
+    }
+    .test-buttons {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .test-buttons button {
+      padding: 12px 20px;
+      font-size: 14px;
+    }
+    .status {
+      margin-top: 16px;
+      padding: 12px;
+      background: white;
+      border-radius: 6px;
+      font-family: monospace;
+      font-size: 13px;
+    }
+  </style>
+</head>
+<body>
+  <header class="nav" role="banner">
+    <div class="container inner">
+      <a class="logo" href="/">BridgeFlow</a>
+      <nav class="nav-links" role="navigation">
+        <a href="/canvas-visual.html">Canvas</a>
+        <a href="/test-helper.html" aria-current="page">Testing Helper</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <div class="container">
+      <div class="test-container">
+        <h1>🧪 Canvas Testing Helper</h1>
+        <p style="color: #6B7280; margin-bottom: 32px;">Use these tools to test the Visual Canvas Builder</p>
+
+        <!-- Data Management -->
+        <div class="test-section">
+          <h3>📦 Data Management</h3>
+          <div class="test-buttons">
+            <button class="btn-primary" onclick="addSampleData()">Add Sample Bridges</button>
+            <button class="btn-ghost" onclick="clearAllData()">Clear All Data</button>
+            <button class="btn-ghost" onclick="checkDataStatus()">Check Status</button>
+          </div>
+          <div id="dataStatus" class="status"></div>
+        </div>
+
+        <!-- Quick Navigation -->
+        <div class="test-section">
+          <h3>🧭 Quick Navigation</h3>
+          <div class="test-buttons">
+            <button class="btn-primary" onclick="location.href='/canvas-visual.html'">Open Canvas</button>
+            <button class="btn-ghost" onclick="location.href='/bridge-form.html'">Open Form (Empty)</button>
+            <button class="btn-ghost" onclick="openFormWithTemplate('shopify')">Open Form (Shopify)</button>
+            <button class="btn-ghost" onclick="openFormWithTemplate('stripe')">Open Form (Stripe)</button>
+          </div>
+        </div>
+
+        <!-- Test Scenarios -->
+        <div class="test-section">
+          <h3>🎯 Test Scenarios</h3>
+          <div class="test-buttons">
+            <button class="btn-primary" onclick="testScenario1()">1. Empty State</button>
+            <button class="btn-primary" onclick="testScenario2()">2. One Bridge</button>
+            <button class="btn-primary" onclick="testScenario3()">3. Multiple Bridges</button>
+            <button class="btn-primary" onclick="testScenario4()">4. All Statuses</button>
+          </div>
+          <div id="scenarioStatus" class="status"></div>
+        </div>
+
+        <!-- Browser Testing -->
+        <div class="test-section">
+          <h3>🌐 Browser Testing Checklist</h3>
+          <ul style="list-style: none; padding: 0; margin: 16px 0;">
+            <li style="padding: 8px; margin: 4px 0; background: white; border-radius: 4px;">
+              <input type="checkbox" id="chrome"> <label for="chrome">Chrome/Edge</label>
+            </li>
+            <li style="padding: 8px; margin: 4px 0; background: white; border-radius: 4px;">
+              <input type="checkbox" id="firefox"> <label for="firefox">Firefox</label>
+            </li>
+            <li style="padding: 8px; margin: 4px 0; background: white; border-radius: 4px;">
+              <input type="checkbox" id="safari"> <label for="safari">Safari</label>
+            </li>
+            <li style="padding: 8px; margin: 4px 0; background: white; border-radius: 4px;">
+              <input type="checkbox" id="mobile"> <label for="mobile">Mobile Browser</label>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Console Commands -->
+        <div class="test-section">
+          <h3>💻 Console Commands</h3>
+          <pre style="background: white; padding: 12px; border-radius: 6px; font-size: 12px; overflow-x: auto;">
+// On canvas-visual.html:
+addSampleBridges()    // Add 3 sample bridges
+clearBridges()        // Clear all bridges
+
+// Check localStorage:
+localStorage.getItem('bridgeflow_bridges')
+
+// Clear localStorage:
+localStorage.clear()
+          </pre>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap">
+        <small>&copy; BridgeFlow</small>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Sample bridge data
+    const sampleBridges = {
+      one: [
+        {
+          id: 'bridge-1',
+          name: 'Shopify Orders',
+          type: 'api',
+          direction: 'inbound',
+          status: 'active',
+          sourceUrl: 'https://mystore.myshopify.com/api',
+          transactionCount: 247,
+          successCount: 247
+        }
+      ],
+      three: [
+        {
+          id: 'bridge-1',
+          name: 'Shopify Orders',
+          type: 'api',
+          direction: 'inbound',
+          status: 'active',
+          sourceUrl: 'https://mystore.myshopify.com/api',
+          transactionCount: 247,
+          successCount: 247
+        },
+        {
+          id: 'bridge-2',
+          name: 'Stripe Payments',
+          type: 'api',
+          direction: 'outbound',
+          status: 'active',
+          targetUrl: 'https://api.stripe.com/v1',
+          transactionCount: 189,
+          successCount: 185
+        },
+        {
+          id: 'bridge-3',
+          name: 'QuickBooks Sync',
+          type: 'api',
+          direction: 'both',
+          status: 'active',
+          targetUrl: 'https://quickbooks.api.intuit.com',
+          transactionCount: 156,
+          successCount: 148
+        }
+      ],
+      allStatuses: [
+        {
+          id: 'bridge-1',
+          name: 'Active Bridge',
+          type: 'api',
+          direction: 'inbound',
+          status: 'active',
+          sourceUrl: 'https://api.example.com',
+          transactionCount: 100,
+          successCount: 100
+        },
+        {
+          id: 'bridge-2',
+          name: 'Warning Bridge',
+          type: 'api',
+          direction: 'outbound',
+          status: 'warning',
+          targetUrl: 'https://api.example.com',
+          transactionCount: 100,
+          successCount: 85
+        },
+        {
+          id: 'bridge-3',
+          name: 'Error Bridge',
+          type: 'api',
+          direction: 'both',
+          status: 'error',
+          targetUrl: 'https://api.example.com',
+          transactionCount: 100,
+          successCount: 50
+        },
+        {
+          id: 'bridge-4',
+          name: 'Inactive Bridge',
+          type: 'api',
+          direction: 'inbound',
+          status: 'inactive',
+          sourceUrl: 'https://api.example.com',
+          transactionCount: 0,
+          successCount: 0
+        }
+      ]
+    };
+
+    function addSampleData() {
+      localStorage.setItem('bridgeflow_bridges', JSON.stringify({ bridges: sampleBridges.three }));
+      updateStatus('dataStatus', '✅ Added 3 sample bridges. <a href="/canvas-visual.html">Open Canvas →</a>');
+    }
+
+    function clearAllData() {
+      localStorage.removeItem('bridgeflow_bridges');
+      updateStatus('dataStatus', '🗑️ All data cleared. <a href="/canvas-visual.html">Open Canvas →</a>');
+    }
+
+    function checkDataStatus() {
+      const data = localStorage.getItem('bridgeflow_bridges');
+      if (data) {
+        const parsed = JSON.parse(data);
+        updateStatus('dataStatus', `📊 Found ${parsed.bridges.length} bridge(s) in localStorage`);
+      } else {
+        updateStatus('dataStatus', '📭 No bridges in localStorage (empty state)');
+      }
+    }
+
+    function openFormWithTemplate(template) {
+      location.href = `/bridge-form.html?template=${template}&name=${template.charAt(0).toUpperCase() + template.slice(1)} Bridge&type=api&direction=inbound`;
+    }
+
+    function testScenario1() {
+      clearAllData();
+      updateStatus('scenarioStatus', '📭 Scenario 1: Empty State prepared. <a href="/canvas-visual.html">Open Canvas →</a>');
+    }
+
+    function testScenario2() {
+      localStorage.setItem('bridgeflow_bridges', JSON.stringify({ bridges: sampleBridges.one }));
+      updateStatus('scenarioStatus', '📊 Scenario 2: One bridge added. <a href="/canvas-visual.html">Open Canvas →</a>');
+    }
+
+    function testScenario3() {
+      localStorage.setItem('bridgeflow_bridges', JSON.stringify({ bridges: sampleBridges.three }));
+      updateStatus('scenarioStatus', '📊 Scenario 3: Three bridges added. <a href="/canvas-visual.html">Open Canvas →</a>');
+    }
+
+    function testScenario4() {
+      localStorage.setItem('bridgeflow_bridges', JSON.stringify({ bridges: sampleBridges.allStatuses }));
+      updateStatus('scenarioStatus', '🎨 Scenario 4: All status types added. <a href="/canvas-visual.html">Open Canvas →</a>');
+    }
+
+    function updateStatus(elementId, html) {
+      document.getElementById(elementId).innerHTML = html;
+    }
+
+    // Initial status check
+    window.addEventListener('DOMContentLoaded', () => {
+      checkDataStatus();
+    });
+  </script>
+</body>
+</html>

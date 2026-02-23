@@ -48,15 +48,25 @@
     </li>
         </ul>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#2-future-vision">2. Future Vision</a>
+    <li class="toctree-l2"><a class="reference internal" href="#2-platform-stack">2. Platform Stack</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#service-layer-core-services-and-modules">Service Layer (Core Services and Modules)</a>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#3-developer-hub">3. Developer Hub</a>
+    <li class="toctree-l3"><a class="reference internal" href="#stack-relationship">Stack Relationship</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#3-future-vision">3. Future Vision</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#4-developer-hub">4. Developer Hub</a>
     </li>
     </ul>
                 </li>
               </ul>
               <p class="caption"><span class="caption-text">Products</span></p>
               <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="products/">Overview</a>
+                  </li>
                   <li class="toctree-l1"><a class="reference internal" href="products/control-tower/">Control Tower</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="products/control-tower/quickstart/">Quickstart</a>
@@ -68,6 +78,33 @@
                   <li class="toctree-l1"><a class="reference internal" href="products/control-tower/public-api/">Public API</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="products/control-tower/integration-guide/">Integration Guide</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="products/coords-app/">Coords App</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="products/carrier-portal/">Carrier Portal</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="products/tracking-portal/">Tracking Portal</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Platform</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="platform/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="platform/bf-admin-console/">Admin Console</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="platform/bf-identity/">Identity Service</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="platform/bf-masterdata/">Masterdata Service</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="platform/bf-orders/">Orders Service</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="platform/bf-shipments/">Shipments Service</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="platform/bf-search/">Search Service</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="platform/bf-fintech/">Fintech Service</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="platform/bf-warehouse/">Warehouse Service</a>
                   </li>
               </ul>
               <ul>
@@ -113,13 +150,37 @@ Core model: <strong>Event -&gt; Policy -&gt; Action</strong>.</p>
 <li>Live demo: <a href="https://control-tower.up.railway.app/">control-tower.up.railway.app</a></li>
 </ul>
 <p><img alt="Bridgeflow Control Tower live view" src="images/phase-60-control-tower-home.png" /></p>
-<h2 id="2-future-vision">2. Future Vision</h2>
+<p>Other product repos in workspace:
+- <code>products/carrier-portal/</code>
+- <code>products/tracking-portal/</code>
+- <code>products/coords-app/</code></p>
+<h2 id="2-platform-stack">2. Platform Stack</h2>
+<p>Bridgeflow products are powered by a modular service layer.</p>
+<h3 id="service-layer-core-services-and-modules">Service Layer (Core Services and Modules)</h3>
+<ul>
+<li>Auth and tenancy: <code>platform/bf-identity/</code></li>
+<li>Master data: <code>platform/bf-masterdata/</code></li>
+<li>Orders: <code>platform/bf-orders/</code></li>
+<li>Shipments: <code>platform/bf-shipments/</code></li>
+<li>Search: <code>platform/bf-search/</code></li>
+<li>Fintech and billing: <code>platform/bf-fintech/</code></li>
+<li>Warehouse operations: <code>platform/bf-warehouse/</code></li>
+<li>Internal operations console: <code>platform/bf-admin-console/</code></li>
+</ul>
+<h3 id="stack-relationship">Stack Relationship</h3>
+<ul>
+<li>Products (customer-facing):</li>
+<li>Control Tower, Carrier Portal, Tracking Portal</li>
+<li>Platform (powering services):</li>
+<li>Identity, Masterdata, Orders, Shipments, Search, Fintech, Warehouse, Admin Console</li>
+</ul>
+<h2 id="3-future-vision">3. Future Vision</h2>
 <p>Bridgeflow's long-term architecture is preserved in the BF-INTEGRATION vision archive:</p>
 <ul>
 <li>Vision deep dive: <code>vision/bf-integration/</code></li>
 <li>Vision index and migration map: <code>vision/</code></li>
 </ul>
-<h2 id="3-developer-hub">3. Developer Hub</h2>
+<h2 id="4-developer-hub">4. Developer Hub</h2>
 <p>Start integrating without choosing a product first:</p>
 <ul>
 <li>API reference hub: <code>api-reference/</code></li>
@@ -130,7 +191,7 @@ Core model: <strong>Event -&gt; Policy -&gt; Action</strong>.</p>
             </div>
           </div><footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
-        <a href="products/control-tower/" class="btn btn-neutral float-right" title="Control Tower">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="products/" class="btn btn-neutral float-right" title="Overview">Next <span class="icon icon-circle-arrow-right"></span></a>
     </div>
 
   <hr/>
@@ -154,7 +215,7 @@ Core model: <strong>Event -&gt; Policy -&gt; Action</strong>.</p>
     
     
     
-      <span><a href="products/control-tower/" style="color: #fcfcfc">Next &raquo;</a></span>
+      <span><a href="products/" style="color: #fcfcfc">Next &raquo;</a></span>
     
   </span>
 </div>
@@ -174,5 +235,5 @@ Core model: <strong>Event -&gt; Policy -&gt; Action</strong>.</p>
 
 <!--
 MkDocs version : 1.6.1
-Build Date UTC : 2026-02-23 04:44:24.902803+00:00
+Build Date UTC : 2026-02-23 05:09:01.797286+00:00
 -->

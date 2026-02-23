@@ -1,0 +1,3 @@
+purchaseOrderId,vendorId,orderDate,amount,currency
+PO-123,VEN-10,2025-06-01,120.50,USD
+PO-124,VEN-11,2025-06-02,210.00,USD

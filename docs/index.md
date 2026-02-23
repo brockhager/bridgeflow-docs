@@ -1,42 +1,33 @@
-# Bridgeflow Control Tower Docs
+# Bridgeflow: The Policy-First Logistics Runtime
 
-Bridgeflow is a logistics runtime that enforces policy across distributed systems. You keep your ERP/WMS/TMS; Bridgeflow ingests events, applies rules, and coordinates exception handling in real time.
+Bridgeflow is a policy enforcement layer for logistics operations.  
+Core model: **Event -> Policy -> Action**.
 
-## 1. Start Here (New Users and Partners)
+Teams keep their ERP/WMS/TMS systems, while Bridgeflow ingests operational signals, evaluates policy, and coordinates action automatically.
 
-### Live Demo
+## 1. Live Products
 
-- Public Control Tower: [control-tower.up.railway.app](https://control-tower.up.railway.app/)
+### Control Tower (Live Pilot)
+
+See the Lima/Callao pilot in production:
+
+- Product docs: `products/control-tower/`
+- Live demo: [control-tower.up.railway.app](https://control-tower.up.railway.app/)
 
 ![Bridgeflow Control Tower live view](images/phase-60-control-tower-home.png)
 
-### Key Capabilities
+## 2. Future Vision
 
-- TRL 7 validated live loop (Event -> Policy -> Risk -> Case).
-- Autonomous case creation with SLA assignment.
-- Live risk scoring and public resilience visibility.
+Bridgeflow's long-term architecture is preserved in the BF-INTEGRATION vision archive:
 
-### Why It Matters: Lima Pilot
+- Vision deep dive: `vision/bf-integration/`
+- Vision index and migration map: `vision/`
 
-In the Callao/Lima pilot, Bridgeflow moved from mock data to live weather ingestion and autonomous response. On February 20, 2026, the system completed the full chain from live signal to policy execution and case creation, proving production-ready operations.
+## 3. Developer Hub
 
-## 2. Developer Quickstart (Integrators)
+Start integrating without choosing a product first:
 
-Goal: connect your system and send your first event.
-
-1. Get an API key/token:
-`current/control-tower/integration-guide/`
-2. Send your first event in under 5 minutes:
-`topics/quickstart/`
-3. Verify and monitor through the API:
-`current/control-tower/public-api/`
-
-## 3. Deep Dives (Architecture and Vision)
-
-- Current System: how the Control Tower works today (events, policy engine, cases):
-`topics/concepts/`
-- Future Vision (BF-INTEGRATION): enterprise roadmap and archived design vision:
-`topics/vision/`
-- TRL 7 validation details:
-`current/control-tower/trl7-validation/`
+- API reference hub: `api-reference/`
+- Integration guide: `products/control-tower/integration-guide/`
+- First event quickstart: `products/control-tower/quickstart/`
 

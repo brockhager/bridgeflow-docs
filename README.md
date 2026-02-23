@@ -2,12 +2,11 @@
 
 Bridgeflow is a logistics runtime that enforces policy across distributed systems.
 
-Documentation is organized as a user-centric portal:
-- `Home`: live demo context and onboarding paths
-- `Quickstart`: first event in minutes
-- `Concepts`: events, policies, and cases
-- `API Reference`: public and ingest endpoints
-- `Vision`: BF-INTEGRATION roadmap and archive
+Documentation is organized as a platform-centric portal:
+- `Home`: Bridgeflow platform overview
+- `Products`: live product documentation (Control Tower)
+- `Vision`: BF-INTEGRATION future architecture archive
+- `API Reference`: developer entry point across products
 
 Live docs:
 - `https://brockhager.github.io/bridgeflow-docs/`

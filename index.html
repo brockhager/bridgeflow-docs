@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="description" content="None" /><link rel="canonical" href="https://bridgeflow.readthedocs.io/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="description" content="None" /><link rel="canonical" href="https://brockhager.github.io/bridgeflow-docs/" />
       <link rel="shortcut icon" href="img/favicon.ico" />
     <title>BridgeFlow Docs</title>
     <link rel="stylesheet" href="css/theme.css" />
@@ -14,7 +14,7 @@
         // Current page data
         var mkdocs_page_name = "Home";
         var mkdocs_page_input_path = "index.md";
-        var mkdocs_page_url = "/";
+        var mkdocs_page_url = "/bridgeflow-docs/";
       </script>
     
     <!--[if lt IE 9]>
@@ -42,37 +42,38 @@
               <ul class="current">
                 <li class="toctree-l1 current"><a class="reference internal current" href="#">Home</a>
     <ul class="current">
-    <li class="toctree-l2"><a class="reference internal" href="#start-here">Start Here</a>
+    <li class="toctree-l2"><a class="reference internal" href="#1-start-here-new-users-and-partners">1. Start Here (New Users and Partners)</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#live-demo">Live Demo</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#key-capabilities">Key Capabilities</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#why-it-matters-lima-pilot">Why It Matters: Lima Pilot</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#2-developer-quickstart-integrators">2. Developer Quickstart (Integrators)</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#3-deep-dives-architecture-and-vision">3. Deep Dives (Architecture and Vision)</a>
     </li>
     </ul>
                 </li>
               </ul>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="ARCHITECTURE/">Architecture</a>
+                <li class="toctree-l1"><a class="reference internal" href="topics/quickstart/">Quickstart</a>
                 </li>
               </ul>
-              <p class="caption"><span class="caption-text">Current System</span></p>
               <ul>
-                  <li class="toctree-l1"><a class="reference internal" href="current/control-tower/">Control Tower</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="current/control-tower/trl7-validation/">TRL 7 Validation</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="current/control-tower/public-api/">Public API</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="current/control-tower/integration-guide/">Integration Guide</a>
-                  </li>
+                <li class="toctree-l1"><a class="reference internal" href="topics/concepts/">Concepts</a>
+                </li>
               </ul>
-              <p class="caption"><span class="caption-text">Future Vision</span></p>
               <ul>
-                  <li class="toctree-l1"><a class="reference internal" href="vision/">Vision Archive Index</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="roadmap/future-architecture/">BF-INTEGRATION Roadmap</a>
-                  </li>
+                <li class="toctree-l1"><a class="reference internal" href="current/control-tower/public-api/">API Reference</a>
+                </li>
               </ul>
-              <p class="caption"><span class="caption-text">Phase 60</span></p>
               <ul>
-                  <li class="toctree-l1"><a class="reference internal" href="phase-60-gap-analysis/">Gap Analysis</a>
-                  </li>
+                <li class="toctree-l1"><a class="reference internal" href="topics/vision/">Vision</a>
+                </li>
               </ul>
       </div>
     </div>
@@ -97,30 +98,46 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <h1 id="bridgeflow-documentation">Bridgeflow Documentation</h1>
-<p>Bridgeflow documentation is split into two tracks:</p>
-<ol>
-<li><strong>Current System (Live):</strong> what is operational today in production.</li>
-<li><strong>Future Vision (BF-INTEGRATION):</strong> preserved roadmap architecture and legacy design docs.</li>
-</ol>
-<h2 id="start-here">Start Here</h2>
+                <h1 id="bridgeflow-control-tower-docs">Bridgeflow Control Tower Docs</h1>
+<p>Bridgeflow is a logistics runtime that enforces policy across distributed systems. You keep your ERP/WMS/TMS; Bridgeflow ingests events, applies rules, and coordinates exception handling in real time.</p>
+<h2 id="1-start-here-new-users-and-partners">1. Start Here (New Users and Partners)</h2>
+<h3 id="live-demo">Live Demo</h3>
 <ul>
-<li>Current live platform:</li>
-<li><code>docs/current/control-tower/README.md</code></li>
-<li>Live architecture:</li>
-<li><code>docs/ARCHITECTURE.md</code></li>
-<li>Phase 60 gap analysis and migration plan:</li>
-<li><code>docs/phase-60-gap-analysis.md</code></li>
-<li>Future-vision index:</li>
-<li><code>docs/roadmap/future-architecture/README.md</code></li>
+<li>Public Control Tower: <a href="https://control-tower.up.railway.app/">control-tower.up.railway.app</a></li>
 </ul>
-<p>Live production URL:
-- <code>https://control-tower.up.railway.app/</code></p>
+<p><img alt="Bridgeflow Control Tower live view" src="images/phase-60-control-tower-home.png" /></p>
+<h3 id="key-capabilities">Key Capabilities</h3>
+<ul>
+<li>TRL 7 validated live loop (Event -&gt; Policy -&gt; Risk -&gt; Case).</li>
+<li>Autonomous case creation with SLA assignment.</li>
+<li>Live risk scoring and public resilience visibility.</li>
+</ul>
+<h3 id="why-it-matters-lima-pilot">Why It Matters: Lima Pilot</h3>
+<p>In the Callao/Lima pilot, Bridgeflow moved from mock data to live weather ingestion and autonomous response. On February 20, 2026, the system completed the full chain from live signal to policy execution and case creation, proving production-ready operations.</p>
+<h2 id="2-developer-quickstart-integrators">2. Developer Quickstart (Integrators)</h2>
+<p>Goal: connect your system and send your first event.</p>
+<ol>
+<li>Get an API key/token:
+<code>current/control-tower/integration-guide/</code></li>
+<li>Send your first event in under 5 minutes:
+<code>topics/quickstart/</code></li>
+<li>Verify and monitor through the API:
+<code>current/control-tower/public-api/</code></li>
+</ol>
+<h2 id="3-deep-dives-architecture-and-vision">3. Deep Dives (Architecture and Vision)</h2>
+<ul>
+<li>Current System: how the Control Tower works today (events, policy engine, cases):
+<code>topics/concepts/</code></li>
+<li>Future Vision (BF-INTEGRATION): enterprise roadmap and archived design vision:
+<code>topics/vision/</code></li>
+<li>TRL 7 validation details:
+<code>current/control-tower/trl7-validation/</code></li>
+</ul>
               
             </div>
           </div><footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
-        <a href="ARCHITECTURE/" class="btn btn-neutral float-right" title="Architecture">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="topics/quickstart/" class="btn btn-neutral float-right" title="Quickstart">Next <span class="icon icon-circle-arrow-right"></span></a>
     </div>
 
   <hr/>
@@ -144,7 +161,7 @@
     
     
     
-      <span><a href="ARCHITECTURE/" style="color: #fcfcfc">Next &raquo;</a></span>
+      <span><a href="topics/quickstart/" style="color: #fcfcfc">Next &raquo;</a></span>
     
   </span>
 </div>
@@ -164,5 +181,5 @@
 
 <!--
 MkDocs version : 1.6.1
-Build Date UTC : 2026-02-23 01:38:05.934308+00:00
+Build Date UTC : 2026-02-23 04:33:45.282511+00:00
 -->

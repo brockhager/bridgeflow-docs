@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://bridgeflow.readthedocs.io/vision/bf-integration/docs/phases/phases31-40/" />
+      <link rel="shortcut icon" href="../../../../../img/favicon.ico" />
+    <title>Index - BridgeFlow Docs</title>
+    <link rel="stylesheet" href="../../../../../css/theme.css" />
+    <link rel="stylesheet" href="../../../../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Index";
+        var mkdocs_page_input_path = "vision\\bf-integration\\docs\\phases\\phases31-40\\README.md";
+        var mkdocs_page_url = "/vision/bf-integration/docs/phases/phases31-40/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../../../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../../../../.." class="icon icon-home"> BridgeFlow Docs
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../../..">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../../../ARCHITECTURE/">Architecture</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Current System</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../current/control-tower/">Control Tower</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../current/control-tower/trl7-validation/">TRL 7 Validation</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../current/control-tower/public-api/">Public API</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../current/control-tower/integration-guide/">Integration Guide</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Future Vision</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../">Vision Archive Index</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../roadmap/future-architecture/">BF-INTEGRATION Roadmap</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Phase 60</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../phase-60-gap-analysis/">Gap Analysis</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../..">BridgeFlow Docs</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../../../.." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">Index</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <blockquote>
+<p>[!WARNING]
+Status: Planned / In Development
+Context: Original BF-INTEGRATION Vision (Pre-Phase 30)</p>
+</blockquote>
+<h1 id="phases-31-40-advanced-integration-intelligence">Phases 31-40: Advanced Integration &amp; Intelligence</h1>
+<p>This folder contains documentation for Phases 31-40, focusing on advanced Layer 3 integration, document intelligence, and enterprise-grade B2B capabilities.</p>
+<hr />
+<h2 id="phase-overview">Phase Overview</h2>
+<h3 id="phase-31a-unified-adapter-framework">Phase 31A — Unified Adapter Framework ✅</h3>
+<p><strong>Completed:</strong> January 8, 2026<br />
+<strong>Status:</strong> Foundation Complete</p>
+<p><strong>What We Built:</strong>
+Established the foundational Layer 3 adapter framework with symmetric architecture, enabling both enterprise and free tier adapters to run from the same codebase with capabilities controlled by token permissions.</p>
+<p><strong>Core Deliverables (4/4):</strong>
+1. <strong>BridgeFlowAdapter Interface</strong>: Unified interface for all adapter types with common lifecycle methods
+2. <strong>PermissionManager System</strong>: Token-based authentication and capability gating
+3. <strong>FileAdapter Implementation</strong>: Symmetric deployment with tier-gated features
+4. <strong>Database Schema Foundation</strong>: Unified models for all tiers with RLS security</p>
+<p><strong>System Impact:</strong>
+Created the critical unified bridge between BridgeFlow and customer systems using a symmetric, single-codebase architecture. This enables BridgeFlow to scale from free trading partners to enterprise customers through token-based capability gates.</p>
+<p><strong>Key Documents:</strong>
+- <a href="phase-31A/">Phase 31A Implementation</a> — Complete foundation specification
+- <a href="phase-31-plan/">Phase 31 Plan</a> — Original planning document</p>
+<hr />
+<h3 id="phase-31b-document-intelligence-advanced-adapters">Phase 31B — Document Intelligence &amp; Advanced Adapters ✅</h3>
+<p><strong>Completed:</strong> January 8, 2026<br />
+<strong>Status:</strong> Intelligence Layer Complete</p>
+<p><strong>What We Built:</strong>
+Added intelligence to the Phase 31A foundation, enabling enterprise-tier adapters to ingest data from advanced sources, parse &amp; validate intelligently, and transform to standardized BridgeFlow Packages.</p>
+<p><strong>Core Deliverables (4/4):</strong>
+1. <strong>Advanced Adapter Implementations</strong>: DatabaseAdapter (SQL/NoSQL) and APIAdapter (REST/webhooks)
+2. <strong>Document Intelligence Engine</strong>: DataTypeRegistry and TypeDetector with multi-strategy detection
+3. <strong>Transformation Pipeline</strong>: Rule-based mapping with enterprise-only custom transformations
+4. <strong>Admin Integration Foundation</strong>: Adapter management and transformation builder foundations</p>
+<p><strong>System Impact:</strong>
+Transformed BridgeFlow from a simple file transfer system into a sophisticated B2B integration platform with enterprise-grade database and API integration capabilities, intelligent document processing, and custom transformation rules.</p>
+<p><strong>Key Documents:</strong>
+- <a href="phase-31B/">Phase 31B Implementation</a> — Complete intelligence layer specification</p>
+<h3 id="phase-32-bridge-canvas-blueprint-implementation">Phase 32 — Bridge Canvas (blueprint) Implementation ✅</h3>
+<p><strong>Completed:</strong> January 8, 2026
+<strong>Status:</strong> Canvas &amp; Assembly Complete</p>
+<p><strong>What We Built:</strong>
+Implemented the "Canvas Assembly" experience, allowing users to visually construct integration bridges from Blueprints. Included a dynamic catalog, ghost component workflow, and package-based activation.</p>
+<p><strong>Core Deliverables (3/3):</strong>
+1. <strong>Blueprint Engine</strong>: specialized API with RBAC (Public vs Private) and scoping.
+2. <strong>Canvas UI</strong>: <code>gallery.js</code> (Catalog) and <code>assembly.js</code> (Gap-Filling Wizard).
+3. <strong>Traceability</strong>: Full lineage from Blueprint to Activated Package.</p>
+<p><strong>Key Documents:</strong>
+- <a href="phase-32-summary/">Phase 32 Summary</a> — Summary of deliverables</p>
+<hr />
+<h3 id="phase-33-layer-4-firewall-security">Phase 33 — Layer 4 Firewall Security ✅</h3>
+<p><strong>Completed:</strong> January 11, 2026
+<strong>Status:</strong> API Complete, Canvas integration ready</p>
+<p><strong>What We Built:</strong>
+Implemented Firewall (Layer 4) controls for Integration Bridges, including secure API endpoints, validation, Prisma model and migration, and a Canvas integration pattern. Comprehensive tests are passing against PostgreSQL.</p>
+<p><strong>Key Documents:</strong>
+- <a href="phase-33-firewall-api/">Phase 33 — Firewall API</a>
+- <a href="phase-33-firewall-canvas-integration/">Phase 33 — Firewall Canvas Integration Guide</a>
+- <a href="PHASE-33-COMPLETE-SUMMARY/">Phase 33 — Complete Summary</a>
+- <a href="README-PHASE-33/">Phase 33 — Quick Start / README</a></p>
+<hr />
+<h3 id="phase-34-mapping-studio-visual-data-transformation">Phase 34 — Mapping Studio (Visual Data Transformation) ✅</h3>
+<p><strong>Completed:</strong> January 10, 2026<br />
+<strong>Status:</strong> Intelligence Integration Complete<br />
+<strong>Summary:</strong> <a href="phase-34-summary/">Phase 34 — Summary</a> — short checklist + smoke tests</p>
+<p><strong>What We Built:</strong>
+Created a visual, customer-managed data transformation tool that leverages Phase 31B's DataTypeRegistry for schema-driven mapping. Enterprise customers can now map X12, HL7, and EDIFACT documents using a drag-drop interface with real-time validation and preview powered by the existing transformation engine.</p>
+<p><strong>Core Deliverables (5/5):</strong>
+1. <strong>DataMap Model &amp; Migration</strong>: Store customer-defined mapping rules per bridge (inbound/outbound)
+2. <strong>Security Layer</strong>: Safe function whitelist, dangerous pattern blocklist, no arbitrary code execution
+3. <strong>DataTypeRegistry Integration</strong>: Schema-driven field palettes, auto-loaded sample data, required field validation
+4. <strong>Visual Mapping Studio UI</strong>: 4-panel drag-drop editor with live preview and function toolbar
+5. <strong>Canvas Integration</strong>: Adapter slots show mapping status (🟢 mapped, ⚪ unmapped)</p>
+<p><strong>System Impact:</strong>
+Transformed Mapping Studio from a generic JSON mapper into an intelligent, schema-driven enterprise tool. Free users get basic JSON/CSV mapping; enterprise users unlock X12, HL7, EDIFACT with full validation — all powered by Phase 31B's existing transformation infrastructure.</p>
+<p><strong>Key Documents:</strong>
+- <a href="phase-34-integration-complete/">Phase 34 — Integration Complete Summary</a></p>
+<p><strong>Strategic Insight:</strong>
+<em>"Mapping Studio isn't a new feature — it's the visual interface to your existing intelligence layer."</em> No duplicate infrastructure, leverages DataTypeRegistry + APIAdapter transform engine.</p>
+<hr />
+<h3 id="phase-35-future-enhancements">Phase 35+ — Future Enhancements 📋</h3>
+<p><strong>Status:</strong> Planned<br />
+<strong>Phase 35:</strong> Profile Templates ✅ Completed — <a href="phase-35-summary/">Summary</a> • <a href="phase-35-placeholder/">Details</a></p>
+<p><strong>Upcoming Phases:</strong>
+- <strong>Phase 36</strong>: Onboarding &amp; Startup Templates ✅ Completed (Jan 11, 2026) — <a href="phase-36-summary/">Summary</a> • <a href="phase-36-foundation/">Details</a>
+- <strong>Phase 37</strong>: Infrastructure &amp; Reliability — Complete ✅ (Week 3 — Structured Logging, Monitoring, Alerting &amp; Vault integration) — <a href="PHASE-37-COMPLETE-SUMMARY/">Details</a>
+- <strong>Phase 38</strong>: Blueprint Templates &amp; Library ✅ Completed (Jan 11, 2026) — Unified Blueprint System and BlueprintInstance deployment tracking — <a href="PHASE-38-COMPLETE-SUMMARY/">Details</a>
+- <strong>Phase 39</strong>: Layer 1 Canvas Polish &amp; UX ✅ Completed (Jan 12, 2026) — Canvas UX enhancements, placement guides, connection visualization, undo/redo, tooltips, and <strong>critical authentication fixes</strong> enabling CTO super-admin access — <a href="PHASE-39-COMPLETE-SUMMARY/">Details</a>
+- <strong>Phase 39</strong>: AI-Powered Features (Intelligent routing, predictive analytics)
+- <strong>Phase 40</strong>: Connection Reliability &amp; Security ✅ Completed (Jan 13, 2026) — Connection health observability, on-demand protocol test/retry APIs, startup-enforced Vault credential compliance. See <a href="PHASE-40-COMPLETE-SUMMARY/">Phase 40 summary</a>.</p>
+<hr />
+<h2 id="architecture-overview">Architecture Overview</h2>
+<h3 id="layer-3-data-exchange-adapters">Layer 3: Data Exchange Adapters</h3>
+<pre><code>Customer System A ←→ Adapter ←→ BridgeFlow Package ←→ Connector ←→ Trading Partner System B
+      ↓              ↓              ↓              ↓              ↓
+  Raw Data    Same Binary    Standardized    Same Binary    Target Format
+  Ingestion   All Tiers      Package        All Tiers      Delivery
+</code></pre>
+<h3 id="symmetric-architecture-principle">Symmetric Architecture Principle</h3>
+<ul>
+<li><strong>One Codebase</strong>: Same adapter binary runs for all tiers</li>
+<li><strong>Token Gating</strong>: Features controlled by permissions, not code paths</li>
+<li><strong>Zero Reinstall</strong>: Upgrade by issuing new token</li>
+<li><strong>Unified Deployment</strong>: Single deployment package for all customers</li>
+</ul>
+<h3 id="capability-matrix">Capability Matrix</h3>
+<table>
+<thead>
+<tr>
+<th>Feature</th>
+<th>Free Tier</th>
+<th>Enterprise</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>File Adapter</td>
+<td>✅ Offramp only</td>
+<td>✅ Full onramp/offramp</td>
+</tr>
+<tr>
+<td>Database Adapter</td>
+<td>❌</td>
+<td>✅ Full capabilities</td>
+</tr>
+<tr>
+<td>API Adapter</td>
+<td>❌</td>
+<td>✅ Full capabilities</td>
+</tr>
+<tr>
+<td>Custom Transformations</td>
+<td>❌</td>
+<td>✅ Rule-based mapping</td>
+</tr>
+<tr>
+<td>Advanced Validation</td>
+<td>❌</td>
+<td>✅ Enterprise rules</td>
+</tr>
+<tr>
+<td>Monitoring</td>
+<td>❌</td>
+<td>✅ Real-time monitoring</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="key-achievements">Key Achievements</h2>
+<h3 id="unified-adapter-framework">🏗️ <strong>Unified Adapter Framework</strong></h3>
+<ul>
+<li><strong>BridgeFlowAdapter Interface</strong>: Single interface for all adapter types</li>
+<li><strong>PermissionManager</strong>: Token-based capability gating system</li>
+<li><strong>BaseAdapter Class</strong>: Common functionality with permission checks</li>
+<li><strong>Symmetric Deployment</strong>: Same binary for enterprise and free tiers</li>
+</ul>
+<h3 id="document-intelligence">🧠 <strong>Document Intelligence</strong></h3>
+<ul>
+<li><strong>DataTypeRegistry</strong>: Centralized data type management (X12, JSON, CSV, etc.)</li>
+<li><strong>TypeDetector</strong>: Multi-strategy content detection with confidence scoring</li>
+<li><strong>Parser System</strong>: Pluggable parsers for all supported data types</li>
+<li><strong>Validation Engine</strong>: Type-specific validation with business rules</li>
+</ul>
+<h3 id="enterprise-adapters">🔌 <strong>Enterprise Adapters</strong></h3>
+<ul>
+<li><strong>DatabaseAdapter</strong>: PostgreSQL, MySQL, MongoDB integration with change detection</li>
+<li><strong>APIAdapter</strong>: REST API and webhook integration with multiple auth methods</li>
+<li><strong>Rate Limiting</strong>: Built-in rate limiting and retry logic</li>
+<li><strong>Connection Management</strong>: Secure connection pooling and monitoring</li>
+</ul>
+<h3 id="transformation-pipeline">🔄 <strong>Transformation Pipeline</strong></h3>
+<ul>
+<li><strong>Rule-Based Mapping</strong>: Visual field mapping with transformation functions</li>
+<li><strong>Template Engine</strong>: Multiple output formats (EDI, JSON, XML, CSV)</li>
+<li><strong>Error Handling</strong>: Graceful degradation with detailed error reporting</li>
+<li><strong>Quality Metrics</strong>: Data quality scoring and validation</li>
+</ul>
+<hr />
+<h2 id="real-world-impact">Real-World Impact</h2>
+<h3 id="healthcare-integration">🏥 <strong>Healthcare Integration</strong></h3>
+<pre><code>EHR System → DatabaseAdapter → X12_837 Package → AS2 Connector → Insurance System
+</code></pre>
+<ul>
+<li><strong>Automated Claims Processing</strong>: Database polling for new claims</li>
+<li><strong>HIPAA Compliance</strong>: Intelligent validation and error handling</li>
+<li><strong>Real-Time Processing</strong>: Continuous monitoring and transformation</li>
+</ul>
+<h3 id="retail-supply-chain">🛍️ <strong>Retail Supply Chain</strong></h3>
+<pre><code>ERP System → APIAdapter → JSON Package → Transform → X12_850 Package → SFTP Connector → Supplier System
+</code></pre>
+<ul>
+<li><strong>Order Integration</strong>: API polling for new orders</li>
+<li><strong>Format Conversion</strong>: JSON to EDI transformation</li>
+<li><strong>Supplier Onboarding</strong>: Zero-cost file drop for small suppliers</li>
+</ul>
+<h3 id="financial-services">🏦 <strong>Financial Services</strong></h3>
+<pre><code>Core Banking → DatabaseAdapter → Payment Package → Transform → X12_820 Package → API Connector → Regulatory System
+</code></pre>
+<ul>
+<li><strong>Payment Processing</strong>: Database monitoring for payment records</li>
+<li><strong>Regulatory Compliance</strong>: Format validation and transformation</li>
+<li><strong>Audit Trail</strong>: Complete transaction logging and reporting</li>
+</ul>
+<hr />
+<h2 id="strategic-benefits">Strategic Benefits</h2>
+<h3 id="business-value">🚀 <strong>Business Value</strong></h3>
+<ul>
+<li><strong>Faster Onboarding</strong>: Enterprise customers integrate existing systems in hours, not weeks</li>
+<li><strong>Reduced Costs</strong>: Standardized adapters eliminate custom integration development</li>
+<li><strong>Improved Quality</strong>: Intelligent validation and error handling reduce data issues</li>
+<li><strong>Scalable Growth</strong>: Add new data types and capabilities without code changes</li>
+</ul>
+<h3 id="security-compliance">🔒 <strong>Security &amp; Compliance</strong></h3>
+<ul>
+<li><strong>Multi-Tenant Architecture</strong>: Complete data isolation between organizations</li>
+<li><strong>Token-Based Access</strong>: Granular permission control with audit trails</li>
+<li><strong>Enterprise Security</strong>: Encrypted credentials, secure connections, compliance frameworks</li>
+<li><strong>CTO Oversight</strong>: Global visibility and control across all organizations</li>
+</ul>
+<h3 id="competitive-advantage">🎯 <strong>Competitive Advantage</strong></h3>
+<ul>
+<li><strong>Two-Sided Platform</strong>: BridgeFlow owns integration on both sides</li>
+<li><strong>Zero-Cost Entry</strong>: Free trading partners get immediate value</li>
+<li><strong>Frictionless Upgrades</strong>: Token-based capability unlocking</li>
+<li><strong>Defensible Moat</strong>: Symmetric architecture is hard to replicate</li>
+</ul>
+<hr />
+<h2 id="development-guidelines">Development Guidelines</h2>
+<h3 id="implementation-principles">📋 <strong>Implementation Principles</strong></h3>
+<ol>
+<li><strong>Symmetric Architecture</strong>: One codebase for all tiers</li>
+<li><strong>Token Gating</strong>: Features controlled by permissions, not code paths</li>
+<li><strong>Permission-First</strong>: Always check permissions before executing capabilities</li>
+<li><strong>Error Handling</strong>: Graceful degradation with detailed error reporting</li>
+<li><strong>Audit Logging</strong>: Complete activity tracking for all operations</li>
+</ol>
+<h3 id="development-workflow">🛠️ <strong>Development Workflow</strong></h3>
+<ol>
+<li><strong>Implement Interface</strong>: Extend BridgeFlowAdapter for new adapter types</li>
+<li><strong>Add Permissions</strong>: Define required permissions in PermissionManager</li>
+<li><strong>Create Tests</strong>: Test both enterprise and free tier scenarios</li>
+<li><strong>Update Schema</strong>: Add database models if needed</li>
+<li><strong>Document</strong>: Update API documentation and examples</li>
+</ol>
+<h3 id="security-checklist">🔐 <strong>Security Checklist</strong></h3>
+<ul>
+<li>[ ] All operations check permissions before execution</li>
+<li>[ ] Sensitive data is encrypted at rest</li>
+<li>[ ] Network connections use secure protocols</li>
+<li>[ ] Audit trails capture all adapter activities</li>
+<li>[ ] Rate limiting prevents abuse</li>
+<li>[ ] Error messages don't leak sensitive information</li>
+</ul>
+<hr />
+<h2 id="quick-start">Quick Start</h2>
+<h3 id="for-enterprise-customers">For Enterprise Customers</h3>
+<pre><code class="language-typescript">// Create database adapter
+const dbAdapter = new DatabaseAdapter();
+await dbAdapter.initialize(config, authContext);
+
+// Monitor for new orders
+await dbAdapter.monitorSource({
+  type: 'database',
+  config: { tableName: 'orders', changeDetection: 'timestamp' }
+}, (pkg) =&gt; {
+  console.log(`Created ${pkg.type} package`);
+});
+</code></pre>
+<h3 id="for-free-trading-partners">For Free Trading Partners</h3>
+<pre><code class="language-typescript">// File adapter works automatically
+const fileAdapter = new FileAdapter();
+await fileAdapter.initialize(config, authContext);
+
+// Files are delivered to configured drop location
+</code></pre>
+<h3 id="for-developers">For Developers</h3>
+<pre><code class="language-typescript">// Create custom adapter
+class CustomAdapter extends BaseAdapter {
+  async onramp(source: DataSource): Promise&lt;PackagePayload&gt; {
+    this.requirePermission('onramp:custom');
+    // Implementation works for all tiers
+  }
+}
+</code></pre>
+<hr />
+<h2 id="related-documentation">Related Documentation</h2>
+<p><strong>Phase 31 Foundation:</strong>
+- <a href="phase-31A/">Phase 31A Implementation</a> — Unified adapter framework
+- <a href="phase-31B/">Phase 31B Implementation</a> — Document intelligence layer
+- <a href="phase-31-plan/">Phase 31 Plan</a> — Original planning document</p>
+<p><strong>Integration Points:</strong>
+- <a href="../phases21-30/phase-30/">Phase 30: Layer 2 Core Entities</a> — Connectors and endpoints
+- <a href="../phases21-30/phase-28/">Phase 28: Package Management</a> — Package lifecycle
+- <a href="../phases21-30/phase-29-organizations-tenets/">Phase 29: Organizations &amp; Tenets</a> — Multi-tenant architecture</p>
+<p><strong>Technical Documentation:</strong>
+- <a href="../api/adapters.md">Adapter API Reference</a> — Complete adapter API documentation
+- <a href="../security/permissions.md">Permission System</a> — Token-based permission system
+- <a href="../intelligence/data-types.md">Data Types</a> — Supported data types and parsers</p>
+<hr />
+<p><strong>Last Updated:</strong> January 12, 2026<br />
+<strong>Phase Status:</strong> 31A ✅ Complete, 31B ✅ Complete, 32 ✅ Complete, 33 ✅ Complete, 34 ✅ Complete, 35 ✅ Complete, 36 ✅ Complete, 37 ✅ Complete, 38 ✅ Complete, 39 ✅ Complete<br />
+<strong>Maintained by:</strong> Development Team</p>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+    
+  </span>
+</div>
+    <script src="../../../../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../../../../..";</script>
+    <script src="../../../../../js/theme_extra.js"></script>
+    <script src="../../../../../js/theme.js"></script>
+      <script src="../../../../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

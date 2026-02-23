@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://bridgeflow.readthedocs.io/SPA-architecture/" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>Single Page Application (SPA) Architecture - BridgeFlow Docs</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Single Page Application (SPA) Architecture";
+        var mkdocs_page_input_path = "SPA-architecture\\README.md";
+        var mkdocs_page_url = "/SPA-architecture/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href=".." class="icon icon-home"> BridgeFlow Docs
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="..">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../ARCHITECTURE/">Architecture</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Current System</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../current/control-tower/">Control Tower</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../current/control-tower/trl7-validation/">TRL 7 Validation</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../current/control-tower/public-api/">Public API</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../current/control-tower/integration-guide/">Integration Guide</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Future Vision</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../vision/">Vision Archive Index</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../roadmap/future-architecture/">BF-INTEGRATION Roadmap</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Phase 60</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../phase-60-gap-analysis/">Gap Analysis</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">BridgeFlow Docs</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">Single Page Application (SPA) Architecture</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="single-page-application-spa-architecture">Single Page Application (SPA) Architecture</h1>
+<h2 id="overview">Overview</h2>
+<p>BridgeFlow uses a <strong>pure Single Page Application (SPA)</strong> architecture where all page navigation happens client-side without full page reloads. This provides a fast, app-like experience with smooth transitions between pages.</p>
+<h2 id="what-is-a-single-page-application">What is a Single Page Application?</h2>
+<p>A Single Page Application is a web application that:
+- Loads a single HTML document (<code>index.html</code>) on first visit
+- Dynamically updates content by manipulating the DOM with JavaScript
+- Uses the browser's History API to update the URL without reloading the page
+- Fetches data from APIs (JSON) rather than server-rendered HTML</p>
+<h3 id="traditional-multi-page-app-vs-spa">Traditional Multi-Page App vs SPA</h3>
+<p><strong>Traditional (Multi-Page):</strong></p>
+<pre><code>User clicks link → Browser requests new HTML → Server renders page → Full page reload
+</code></pre>
+<p><strong>SPA (BridgeFlow):</strong></p>
+<pre><code>User clicks link → JavaScript intercepts → Updates DOM → Updates URL (no reload)
+</code></pre>
+<h2 id="bridgeflow-spa-architecture">BridgeFlow SPA Architecture</h2>
+<h3 id="core-files">Core Files</h3>
+<pre><code>web/
+├── index.html              # Single entry point - contains &lt;div id=&quot;app&quot;&gt;
+├── login.html              # Standalone login page (not part of SPA)
+├── dist/
+│   └── main.js            # Bundled app including router and all routes
+└── src/
+    ├── main.js            # App entry point - starts the router
+    ├── router.js          # Core routing logic - maps URLs to routes
+    ├── main-menu.js       # Renders the main menu with RBAC filtering
+    └── routes/
+        ├── main-menu.js           # Home page / menu
+        ├── canvas-assembly.js     # Canvas assembly page
+        ├── admin-users.js         # Admin users page
+        ├── infrastructure.js      # Infrastructure overview
+        └── ...                    # Other route modules
+</code></pre>
+<h3 id="how-it-works">How It Works</h3>
+<ol>
+<li><strong>Initial Load</strong></li>
+<li>User visits <code>http://localhost:4000</code></li>
+<li>Server sends <code>index.html</code> with empty <code>&lt;div id="app"&gt;</code></li>
+<li>Browser loads and executes <code>main.js</code></li>
+<li>
+<p>Router initializes and reads current URL</p>
+</li>
+<li>
+<p><strong>Routing</strong></p>
+</li>
+<li>Router matches URL path to a route handler</li>
+<li>Route module's <code>render()</code> function returns HTML string</li>
+<li>HTML is injected into <code>&lt;div id="app"&gt;</code></li>
+<li>
+<p>Route module's <code>init()</code> function wires up event listeners</p>
+</li>
+<li>
+<p><strong>Navigation</strong></p>
+</li>
+<li>User clicks a link like <code>&lt;a href="/canvas-assembly"&gt;</code></li>
+<li>Router intercepts click via global event listener</li>
+<li>Prevents default browser navigation</li>
+<li>Updates <code>&lt;div id="app"&gt;</code> with new content</li>
+<li>
+<p>Uses <code>history.pushState()</code> to update URL without reload</p>
+</li>
+<li>
+<p><strong>Back/Forward</strong></p>
+</li>
+<li>User clicks browser back/forward</li>
+<li><code>popstate</code> event fires</li>
+<li>Router re-renders appropriate route for the URL</li>
+</ol>
+<h2 id="route-module-pattern">Route Module Pattern</h2>
+<p>Every page in BridgeFlow is defined as a route module with three functions:</p>
+<pre><code class="language-javascript">// web/src/routes/example.js
+
+export function render() {
+  // Returns HTML string to inject into #app
+  return `
+    &lt;div class=&quot;example-page&quot;&gt;
+      &lt;h1&gt;Example Page&lt;/h1&gt;
+      &lt;button id=&quot;my-button&quot;&gt;Click Me&lt;/button&gt;
+    &lt;/div&gt;
+  `
+}
+
+export function init() {
+  // Wire up event listeners after DOM is injected
+  const btn = document.getElementById('my-button')
+  btn.addEventListener('click', () =&gt; {
+    alert('Button clicked!')
+  })
+}
+
+export function cleanup() {
+  // Optional: clean up listeners, timers, etc.
+  console.log('Leaving example page')
+}
+</code></pre>
+<h3 id="lifecycle">Lifecycle</h3>
+<pre><code>Route matched
+    ↓
+cleanup() called on previous route
+    ↓
+render() called → HTML injected into #app
+    ↓
+init() called → event listeners attached
+    ↓
+User interacts with page
+    ↓
+User navigates away
+    ↓
+cleanup() called
+</code></pre>
+<h2 id="router-implementation">Router Implementation</h2>
+<h3 id="registering-routes">Registering Routes</h3>
+<p>Routes are registered in <code>web/src/router.js</code>:</p>
+<pre><code class="language-javascript">import * as myRoute from './routes/my-route.js'
+
+export async function route(pathArg) {
+  const path = pathArg || window.location.pathname
+  const normalized = path.replace(/\/$/, '').replace(/\.html$/, '')
+
+  if (normalized === '/my-route') {
+    app.innerHTML = myRoute.render()
+    if (myRoute.init) await myRoute.init()
+    currentCleanup = myRoute.cleanup
+    return
+  }
+
+  // ... other routes
+}
+</code></pre>
+<h3 id="link-interception">Link Interception</h3>
+<p>Router automatically intercepts same-origin links:</p>
+<pre><code class="language-javascript">document.addEventListener('click', (e) =&gt; {
+  const link = e.target.closest('a[href]')
+  if (!link) return
+
+  const href = link.getAttribute('href')
+  const url = new URL(href, window.location.origin)
+
+  if (url.origin === window.location.origin) {
+    e.preventDefault()
+    navigateTo(url.pathname)
+  }
+})
+</code></pre>
+<h3 id="programmatic-navigation">Programmatic Navigation</h3>
+<p>Navigate from JavaScript:</p>
+<pre><code class="language-javascript">// From any route module
+window.router.navigateTo('/canvas-assembly')
+</code></pre>
+<h2 id="menu-system-with-rbac">Menu System with RBAC</h2>
+<p>The main menu in <code>web/src/main-menu.js</code> dynamically filters items based on user role:</p>
+<pre><code class="language-javascript">// Menu items are organized by layer
+const menuItems = [
+  {
+    layer: 'Layer 0 (Admin)',
+    short: '0. Admin',
+    roles: ['bf_employee'],  // Only visible to BridgeFlow employees
+    items: [
+      { label: 'Metrics', path: '/admin/metrics' },
+      { label: 'Users', path: '/admin/users' }
+    ]
+  },
+  {
+    layer: 'Layer 1 (Business)',
+    short: '1. Business',
+    roles: [],  // Empty = visible to all authenticated users
+    items: [
+      { label: 'Canvas Assembly', path: '/canvas-assembly' },
+      { label: 'Bridges', path: '/bridges' }
+    ]
+  }
+]
+</code></pre>
+<h2 id="adding-a-new-page">Adding a New Page</h2>
+<h3 id="step-1-create-route-module">Step 1: Create Route Module</h3>
+<p>Create <code>web/src/routes/my-new-page.js</code>:</p>
+<pre><code class="language-javascript">export function render() {
+  return `
+    &lt;div class=&quot;my-new-page&quot;&gt;
+      &lt;h1&gt;My New Page&lt;/h1&gt;
+      &lt;p&gt;Content here&lt;/p&gt;
+      &lt;button id=&quot;action-btn&quot;&gt;Do Something&lt;/button&gt;
+    &lt;/div&gt;
+  `
+}
+
+export function init() {
+  const btn = document.getElementById('action-btn')
+  btn.addEventListener('click', async () =&gt; {
+    const res = await fetch('/api/my-endpoint')
+    const data = await res.json()
+    console.log(data)
+  })
+}
+
+export function cleanup() {
+  // Clean up if needed
+}
+</code></pre>
+<h3 id="step-2-register-route">Step 2: Register Route</h3>
+<p>Edit <code>web/src/router.js</code>:</p>
+<pre><code class="language-javascript">// Add import at top
+import * as myNewPage from './routes/my-new-page.js'
+
+// Add route handler in route() function
+if (normalized === '/my-new-page') {
+  app.innerHTML = myNewPage.render()
+  if (myNewPage.init) await myNewPage.init()
+  currentCleanup = myNewPage.cleanup
+  return
+}
+</code></pre>
+<h3 id="step-3-add-to-menu-optional">Step 3: Add to Menu (Optional)</h3>
+<p>Edit <code>web/src/main-menu.js</code>:</p>
+<pre><code class="language-javascript">{
+  layer: 'Layer 1 (Business)',
+  short: '1. Business',
+  roles: [],
+  items: [
+    { label: 'Canvas Assembly', path: '/canvas-assembly' },
+    { label: 'My New Page', path: '/my-new-page' },  // Add here
+    { label: 'Bridges', path: '/bridges' }
+  ]
+}
+</code></pre>
+<h3 id="step-4-rebuild">Step 4: Rebuild</h3>
+<pre><code class="language-bash">pnpm run build
+</code></pre>
+<p>That's it! Navigate to <code>/my-new-page</code> and your page loads.</p>
+<h2 id="benefits-of-spa-architecture">Benefits of SPA Architecture</h2>
+<h3 id="performance">Performance</h3>
+<ul>
+<li><strong>Faster navigation</strong>: No full page reloads, only content updates</li>
+<li><strong>Reduced bandwidth</strong>: Only JSON data transferred after initial load</li>
+<li><strong>Better caching</strong>: Static assets (JS/CSS) cached separately from data</li>
+</ul>
+<h3 id="user-experience">User Experience</h3>
+<ul>
+<li><strong>Instant transitions</strong>: Smooth, app-like feel</li>
+<li><strong>Persistent state</strong>: Client-side state survives navigation</li>
+<li><strong>No flash</strong>: No blank screen between pages</li>
+</ul>
+<h3 id="development">Development</h3>
+<ul>
+<li><strong>Modular</strong>: Each page is a self-contained module</li>
+<li><strong>Testable</strong>: Routes can be unit tested independently</li>
+<li><strong>Type-safe</strong>: Can add TypeScript without changing architecture</li>
+</ul>
+<h2 id="trade-offs">Trade-offs</h2>
+<h3 id="challenges">Challenges</h3>
+<ul>
+<li><strong>Initial load</strong>: Larger JavaScript bundle (79KB for BridgeFlow)</li>
+<li><strong>SEO</strong>: Search engines may have trouble indexing (not a concern for BridgeFlow admin app)</li>
+<li><strong>JavaScript required</strong>: App won't work without JS (acceptable for internal tools)</li>
+<li><strong>State management</strong>: Need to manage client-side state carefully</li>
+</ul>
+<h3 id="when-not-to-use-spa">When NOT to Use SPA</h3>
+<ul>
+<li>Public marketing sites (SEO critical)</li>
+<li>Simple content sites (unnecessary complexity)</li>
+<li>Large legacy codebases (migration cost)</li>
+</ul>
+<h3 id="why-spa-works-for-bridgeflow">Why SPA Works for BridgeFlow</h3>
+<ul>
+<li>✅ Internal admin tool (SEO not needed)</li>
+<li>✅ Authenticated users only (JavaScript always available)</li>
+<li>✅ Complex interactions (drag-and-drop, real-time updates)</li>
+<li>✅ Fast navigation between many pages</li>
+<li>✅ Clean architecture for scaling</li>
+</ul>
+<h2 id="authentication-in-spa">Authentication in SPA</h2>
+<p>BridgeFlow uses session-based auth:</p>
+<ol>
+<li>Login happens on standalone <code>login.html</code></li>
+<li>After login, session cookie is set</li>
+<li>SPA requests include session cookie automatically</li>
+<li>Router checks <code>/api/auth/me</code> on mount</li>
+<li>If unauthenticated, redirects to <code>/login.html</code></li>
+</ol>
+<p>Routes that need auth check in their <code>init()</code>:</p>
+<pre><code class="language-javascript">export async function init() {
+  const res = await fetch('/api/auth/me')
+  if (!res.ok) {
+    window.location.href = '/login.html'
+    return
+  }
+  // Continue with page logic
+}
+</code></pre>
+<h2 id="api-communication">API Communication</h2>
+<p>All API calls use <code>fetch()</code> with JSON:</p>
+<pre><code class="language-javascript">// In any route module
+export async function init() {
+  try {
+    const res = await fetch('/api/bridges')
+    if (!res.ok) throw new Error('Failed to fetch bridges')
+    const bridges = await res.json()
+
+    // Update UI with data
+    document.getElementById('bridge-list').innerHTML = bridges
+      .map(b =&gt; `&lt;li&gt;${b.name}&lt;/li&gt;`)
+      .join('')
+  } catch (err) {
+    console.error('Error loading bridges:', err)
+  }
+}
+</code></pre>
+<h2 id="debugging-tips">Debugging Tips</h2>
+<h3 id="view-current-route">View Current Route</h3>
+<pre><code class="language-javascript">console.log(window.location.pathname)
+</code></pre>
+<h3 id="trigger-route-manually">Trigger Route Manually</h3>
+<pre><code class="language-javascript">window.router.route('/canvas-assembly')
+</code></pre>
+<h3 id="inspect-app-container">Inspect App Container</h3>
+<pre><code class="language-javascript">console.log(document.getElementById('app').innerHTML)
+</code></pre>
+<h3 id="check-route-registration">Check Route Registration</h3>
+<p>View <code>web/src/router.js</code> and search for your path.</p>
+<h2 id="migration-notes">Migration Notes</h2>
+<p><strong>Before SPA (Multi-Page):</strong>
+- 14 separate HTML files in <code>web/</code>
+- Each with full HTML structure and scripts
+- Fastify served static files
+- Links caused full page reloads</p>
+<p><strong>After SPA (Current):</strong>
+- 1 HTML file: <code>index.html</code>
+- Route modules in <code>web/src/routes/</code>
+- Fastify fallback serves <code>index.html</code> for all routes
+- Links intercepted by router, no reloads</p>
+<p><strong>Deleted Files:</strong>
+- <code>web/canvas-assembly.html</code>
+- <code>web/infrastructure.html</code>
+- <code>web/admin/users.html</code>
+- ... (all page HTML files)</p>
+<p><strong>Kept:</strong>
+- <code>web/index.html</code> (SPA entry)
+- <code>web/login.html</code> (standalone, not part of SPA)</p>
+<h2 id="further-reading">Further Reading</h2>
+<ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/API/History_API">MDN: Working with the History API</a></li>
+<li><a href="https://javascript.info/fetch">JavaScript Info: Fetch API</a></li>
+<li>See also: <code>docs/development.md</code> for build/dev workflow</li>
+</ul>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+    
+  </span>
+</div>
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "..";</script>
+    <script src="../js/theme_extra.js"></script>
+    <script src="../js/theme.js"></script>
+      <script src="../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

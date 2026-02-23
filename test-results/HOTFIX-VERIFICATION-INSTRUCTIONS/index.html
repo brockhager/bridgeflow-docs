@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://bridgeflow.readthedocs.io/test-results/HOTFIX-VERIFICATION-INSTRUCTIONS/" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>🔥 HOTFIX DEPLOYED - CRITICAL BUGS RESOLVED - BridgeFlow Docs</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "\ud83d\udd25 HOTFIX DEPLOYED - CRITICAL BUGS RESOLVED";
+        var mkdocs_page_input_path = "test-results\\HOTFIX-VERIFICATION-INSTRUCTIONS.md";
+        var mkdocs_page_url = "/test-results/HOTFIX-VERIFICATION-INSTRUCTIONS/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> BridgeFlow Docs
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../ARCHITECTURE/">Architecture</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Current System</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../current/control-tower/">Control Tower</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../current/control-tower/trl7-validation/">TRL 7 Validation</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../current/control-tower/public-api/">Public API</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../current/control-tower/integration-guide/">Integration Guide</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Future Vision</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../vision/">Vision Archive Index</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../roadmap/future-architecture/">BF-INTEGRATION Roadmap</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Phase 60</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../phase-60-gap-analysis/">Gap Analysis</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">BridgeFlow Docs</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">🔥 HOTFIX DEPLOYED - CRITICAL BUGS RESOLVED</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="hotfix-deployed-critical-bugs-resolved">🔥 HOTFIX DEPLOYED - CRITICAL BUGS RESOLVED</h1>
+<p><strong>Date:</strong> December 21, 2025<br />
+<strong>Status:</strong> READY FOR RE-TEST<br />
+<strong>Commit:</strong> 1279901</p>
+<hr />
+<h2 id="root-causes-identified-and-fixed">🎯 ROOT CAUSES IDENTIFIED AND FIXED</h2>
+<h3 id="1-duplication-bug-fixed">1. <strong>DUPLICATION BUG</strong> ✅ FIXED</h3>
+<p><strong>Root Cause Found:</strong>
+- Two different guard flag names were being used: <code>_tpBound</code> vs <code>_bound</code>
+- Handler at line 157 checked: <code>if(!tpForm.dataset._tpBound)</code>
+- Handler at line 397 checked: <code>if(!tpForm.dataset._tpBound)</code> ← NOW MATCHES!
+- BEFORE: Both handlers registered because they checked different flags
+- AFTER: Only ONE handler registers because both check <code>_tpBound</code></p>
+<p><strong>What Was Fixed:</strong>
+- Changed line 397 from <code>!tpForm.dataset._bound</code> → <code>!tpForm.dataset._tpBound</code>
+- Changed line 407 from <code>!resourceForm.dataset._bound</code> → <code>!resourceForm.dataset._resBound</code>
+- Added extensive console logging to verify NO DUPLICATE executions</p>
+<hr />
+<h3 id="2-click-navigation-broken-fixed">2. <strong>CLICK NAVIGATION BROKEN</strong> ✅ FIXED</h3>
+<p><strong>Root Cause Found:</strong>
+- Wrong file paths in navigation code
+- Was linking to: <code>trading-partners.html</code> (doesn't exist) → 404
+- Should link to: <code>trading-partners/manage.html</code> (actual file)</p>
+<p><strong>What Was Fixed:</strong>
+- <a href="c:/JS/bridgeflow/web/src/tp-adapter.js#L62">tp-adapter.js</a>: <code>trading-partners/manage.html</code>
+- <a href="c:/JS/bridgeflow/web/resources/resources.js#L26">resources.js</a>: <code>resources/create.html</code>
+- Added console logging to verify clicks are registering</p>
+<hr />
+<h3 id="3-add-folder-button-missing-added">3. <strong>"ADD FOLDER" BUTTON MISSING</strong> ✅ ADDED</h3>
+<p><strong>Root Cause Found:</strong>
+- HTML had wrong element ID: <code>&lt;div id="tpFolders"&gt;</code> (camelCase)
+- JavaScript looked for: <code>document.getElementById('tp-folders')</code> (kebab-case)
+- Selector mismatch = renderTPFolders() failed silently</p>
+<p><strong>What Was Fixed:</strong>
+- Fixed HTML ID to match: <code>&lt;div id="tp-folders"&gt;</code>
+- Added "Add Folder" button above partner folders
+- Created folder modal (simple name input)
+- Folder saves as Trading Partner with <code>type: "Folder"</code></p>
+<hr />
+<h2 id="clean-test-procedure">🧪 CLEAN TEST PROCEDURE</h2>
+<h3 id="step-1-clear-everything"><strong>STEP 1: Clear Everything</strong></h3>
+<pre><code class="language-javascript">// In browser console (F12):
+localStorage.clear();
+location.reload();
+</code></pre>
+<h3 id="step-2-test-duplication-bug-fix"><strong>STEP 2: Test Duplication Bug Fix</strong></h3>
+<ol>
+<li>Open DevTools Console (F12)</li>
+<li>Go to Canvas page: <code>http://localhost:8080/web/canvas-legacy.html</code> (legacy)</li>
+<li>Click "+ Add TP" button</li>
+<li>Enter name: "Test Partner 1"</li>
+<li>Click "Save"</li>
+<li>
+<p><strong>Watch Console Output</strong> - Should see:
+   <code>[TP Save] tpForm submit handler triggered at 1703123456789
+   [TP Save] Adding new partner: Test Partner 1</code>
+   ✅ PASS if you see these logs <strong>ONLY ONCE</strong>
+   ❌ FAIL if you see duplicate log entries</p>
+</li>
+<li>
+<p>Open DevTools → Application → Local Storage → <code>localStorage.bridgeflow_partners</code></p>
+</li>
+<li><strong>Verify:</strong> Array has exactly ONE entry with name "Test Partner 1"</li>
+<li>Count entries: Should show <code>length: 1</code></li>
+</ol>
+<p><strong>Repeat for Resources:</strong>
+1. Click "+ New Resource"
+2. Enter name: "Test Resource 1", type: "API"
+3. Click "Save Resource"
+4. Check console for single log entry (no duplicates)
+5. Check <code>localStorage.bridgeflow_resources</code> - should have exactly ONE entry</p>
+<hr />
+<h3 id="step-3-test-click-navigation-fix"><strong>STEP 3: Test Click Navigation Fix</strong></h3>
+<p><strong>Test Partner Click:</strong>
+1. Scroll to left panel "📁 Trading Partner Folders"
+2. See "Test Partner 1" listed
+3. Click on the partner NAME (not the toggle button)
+4. <strong>Watch Console</strong> - Should see: <code>[TP Click] Navigating to partner: tp-xxx Test Partner 1</code>
+5. <strong>Verify:</strong> Browser navigates to <code>trading-partners/manage.html?id=tp-xxx</code>
+6. Page should load successfully (not 404)</p>
+<p><strong>Test Resource Click:</strong>
+1. Go back to Canvas
+2. Scroll to right panel "Resources"
+3. Click on "Test Resource 1" row
+4. <strong>Watch Console</strong> - Should see: <code>[Resource Click] Navigating to resource: res-xxx Test Resource 1</code>
+5. <strong>Verify:</strong> Browser navigates to <code>resources/create.html?id=res-xxx</code>
+6. Page should load successfully (not 404)</p>
+<hr />
+<h3 id="step-4-test-add-folder-button"><strong>STEP 4: Test "Add Folder" Button</strong></h3>
+<ol>
+<li>Go to Canvas page</li>
+<li>Look at left panel: "📁 Trading Partner Folders"</li>
+<li><strong>Verify:</strong> See "+ Add Folder" button (blue/primary button)</li>
+<li>Click "+ Add Folder"</li>
+<li><strong>Verify:</strong> Modal opens with title "Add Trading Partner Folder"</li>
+<li>Enter folder name: "Retail Partners"</li>
+<li>Click "Create Folder"</li>
+<li><strong>Verify:</strong> Modal closes</li>
+<li><strong>Verify:</strong> "Retail Partners" appears in the partner folders list</li>
+<li>Check <code>localStorage.bridgeflow_partners</code> - should have entry with <code>type: "Folder"</code></li>
+</ol>
+<hr />
+<h2 id="debugging-helpers">🔍 DEBUGGING HELPERS</h2>
+<h3 id="console-commands-for-quick-checks">Console Commands for Quick Checks</h3>
+<pre><code class="language-javascript">// Check partner count
+JSON.parse(localStorage.bridgeflow_partners || '[]').length
+
+// Check resource count  
+JSON.parse(localStorage.bridgeflow_resources || '[]').length
+
+// Check bridge count
+JSON.parse(localStorage.bridgeflow_bridges || '{&quot;bridges&quot;:[]}').bridges.length
+
+// View all partners
+console.table(JSON.parse(localStorage.bridgeflow_partners || '[]'))
+
+// Clear and reset
+localStorage.clear(); location.reload();
+</code></pre>
+<hr />
+<h2 id="pass-criteria">✅ PASS CRITERIA</h2>
+<p><strong>Duplication Fix:</strong>
+- [ ] Console shows only ONE log entry per save operation
+- [ ] localStorage has exactly ONE entry per entity created
+- [ ] No duplicate entries after creating 3 partners and 3 resources</p>
+<p><strong>Click Navigation Fix:</strong>
+- [ ] Clicking partner name navigates to <code>trading-partners/manage.html?id=xxx</code>
+- [ ] Clicking resource row navigates to <code>resources/create.html?id=xxx</code>
+- [ ] Both pages load successfully (no 404 errors)
+- [ ] Console shows <code>[TP Click]</code> or <code>[Resource Click]</code> debug message</p>
+<p><strong>Add Folder Button:</strong>
+- [ ] "+ Add Folder" button visible in left panel
+- [ ] Button opens folder creation modal
+- [ ] Folder saves and appears in partner list
+- [ ] Folder has correct <code>type: "Folder"</code> in localStorage</p>
+<hr />
+<h2 id="selection-model-manual-builder-population">Selection Model — Manual Builder Population</h2>
+<p><strong>Goals:</strong> Ensure Bridge Builder is populated only by explicit user action (selection + Add to Builder), and selection UI works for partners and resources.</p>
+<p><strong>Tests:</strong>
+- [ ] Verify Bridge Builder starts empty on page load
+- [ ] In left panel, click the small select button on a partner folder — it should toggle selection highlight and button changes to ✓
+- [ ] Click "Add to Builder" in the folder — Builder should show that partner node and a success notification
+- [ ] In Resources panel, click a resource row to select it (row highlights)
+- [ ] Click "Add Selected" next to "+ New Resource" — Builder should show selected resource nodes and selection clears
+- [ ] Verify no automatic nodes are added on page load (no auto-population)
+- [ ] Verify drag connector works with manually added nodes (drag from partner to resource to create bridge)</p>
+<p><strong>Notes:</strong>
+- Selection is visual-only (no persistence); adding to Builder does not change localStorage for partners/resources
+- For now, "Add to Builder" per folder adds the entire partner; resource add works via selected rows</p>
+<hr />
+<h2 id="if-issues-persist">🚨 IF ISSUES PERSIST</h2>
+<p><strong>If Still Seeing Duplicates:</strong>
+1. Hard refresh: Ctrl+Shift+R (Windows) or Cmd+Shift+R (Mac)
+2. Check console for WHICH handler is firing (line 157 vs line 397)
+3. Share console screenshot with all log entries</p>
+<p><strong>If Navigation Still Broken:</strong>
+1. Check browser console for errors
+2. Verify file exists: Open <code>trading-partners/manage.html</code> directly in browser
+3. Share console output showing <code>[TP Click]</code> or <code>[Resource Click]</code> message</p>
+<p><strong>If Folder Button Missing:</strong>
+1. View page source (Ctrl+U) and search for "add-folder-btn"
+2. Check if button exists but is hidden (CSS issue)
+3. Share screenshot of left panel area</p>
+<hr />
+<h2 id="status-update">📞 STATUS UPDATE</h2>
+<p><strong>Ready for CTO Re-Test:</strong><br />
+All critical bugs have been fixed at the root cause level. The duplication issue was caused by inconsistent guard flag names, navigation was using wrong file paths, and folder button had HTML ID mismatch. All fixes are now deployed and include extensive debugging output.</p>
+<p><strong>Confidence Level:</strong> High - Root causes identified and fixed with verification logging</p>
+<p><strong>Next Steps:</strong><br />
+1. CTO performs clean test following above procedure
+2. If all tests pass → Resume Bridge Builder work
+3. If any test fails → Share console logs and screenshots for immediate investigation</p>
+<hr />
+<p><strong>Agent4</strong><br />
+Emergency Hotfix Complete<br />
+Awaiting CTO Verification</p>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

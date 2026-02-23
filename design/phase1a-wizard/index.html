@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://bridgeflow.readthedocs.io/design/phase1a-wizard/" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>Phase 1A — 5‑Minute Wizard: "Send invoices automatically" - BridgeFlow Docs</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Phase 1A \u2014 5\u2011Minute Wizard: \"Send invoices automatically\"";
+        var mkdocs_page_input_path = "design\\phase1a-wizard.md";
+        var mkdocs_page_url = "/design/phase1a-wizard/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> BridgeFlow Docs
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../ARCHITECTURE/">Architecture</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Current System</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../current/control-tower/">Control Tower</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../current/control-tower/trl7-validation/">TRL 7 Validation</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../current/control-tower/public-api/">Public API</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../current/control-tower/integration-guide/">Integration Guide</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Future Vision</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../vision/">Vision Archive Index</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../roadmap/future-architecture/">BF-INTEGRATION Roadmap</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Phase 60</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../phase-60-gap-analysis/">Gap Analysis</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">BridgeFlow Docs</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">Phase 1A — 5‑Minute Wizard: "Send invoices automatically"</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="phase-1a-5minute-wizard-send-invoices-automatically">Phase 1A — 5‑Minute Wizard: "Send invoices automatically"</h1>
+<p>Goal: SMB owners set up automatic invoice delivery in 5 minutes or less without seeing a single technical term. The wizard is focused, friendly, and purpose-driven: "It just works." This doc contains the screen flow (max 5 screens), business copy, progress indicators, and plain-language error handling.</p>
+<p>Overview
+- Target user: SMB owner or office manager
+- Promise: "Set up automatic invoices in under 5 minutes"
+- Source systems for Phase 1A: QuickBooks CSV export (recommended) or QuickBooks read-only API (optional)
+- Delivery method for Phase 1A: <strong>Encrypted Email with PDF attachments</strong> (recommended)</p>
+<p>Why these choices (short)
+- CSV export is fastest for a pilot and avoids needing a live integration for every customer.
+- Encrypted email is universally supported by customers and simple for pilots — no partner setup required.</p>
+<hr />
+<p>Screen 1 — Welcome &amp; Start
+- Title: "Send invoices automatically"
+- Subtitle: "We’ll send your invoices for you — set it up in 5 minutes."
+- Body: "Pick your invoice source and who should receive invoices. We’ll handle the rest."
+- Primary CTA: <strong>Start setup</strong>
+- Secondary: Help (small link)
+- Microcopy: "Estimated time: 5 minutes. No technical details required."</p>
+<p>Why this screen
+- Sets expectation and reduces friction. One clear CTA to begin.</p>
+<hr />
+<p>Screen 2 — How do you want to provide invoices?
+- Title: "Where are your invoices today?"
+- Options (card buttons):
+  1. <strong>Upload invoice CSV</strong> (Recommended — fastest)
+     - Copy: "Upload a QuickBooks CSV export and we’ll read it for you. We’ll show a preview so you can confirm."
+  2. <strong>Connect QuickBooks</strong> (Convenient — one-click if you want automation)
+     - Copy: "Connect QuickBooks to fetch invoices automatically. We only read invoices — no changes to your books."
+- Small hint: "Don’t see QuickBooks? Upload a CSV and we’ll guide you."</p>
+<p>Behavior &amp; copy notes
+- Default focus: <strong>Upload CSV</strong> to meet 5-minute goal.
+- If user chooses Connect QuickBooks, show simplified success/failure copy (see Error Handling below).
+- For CSV flow, accept typical QuickBooks invoice export formats and show a quick preview on next step.</p>
+<hr />
+<p>Screen 3 — Who should we send invoices to?
+- Title: "Which customers should receive invoices?"
+- If QuickBooks connected: show a short list of customers loaded from QuickBooks with checkboxes (show first 10 + search).
+- If CSV upload: show auto-detected customer list from the uploaded file and a 3-row preview table.
+- Options: 
+  - <strong>All customers</strong> (default)
+  - <strong>Select customers</strong> (open multi-select list)
+- Copy: "Choose the customers who should receive automated invoices now. You can change this anytime."</p>
+<p>Microcopy for mapping problems
+- If customer names are ambiguous: "We found multiple entries for ‘Acme’. Please confirm which one(s) to send to."</p>
+<hr />
+<p>Screen 4 — How should we deliver the invoice?
+- Title: "How should we send invoices?"
+- Options (radio buttons):
+  1. <strong>Encrypted email with PDF (recommended)</strong>
+     - Copy: "We’ll securely email invoices as PDF attachments to your customers. No setup required on their side."
+  2. <strong>Customer portal (optional)</strong>
+     - Copy: "We’ll put invoices in a secure download area that customers can use if you prefer not to email attachments."
+  3. <strong>Send to partner (optional)</strong>
+     - Copy: "If your partner can accept webhooks, we can forward invoices to their system (pilot only)."
+- Default: <strong>Encrypted email</strong>
+- Additional field (simple): "Notify me when the first invoice is sent" — toggle: <strong>On</strong> (default)
+- Microcopy: "You can change this anytime from the Invoice Settings page."</p>
+<p>Why encrypted email
+- Works for nearly all customers, requires no partner setup, and supports pilot speed.</p>
+<hr />
+<p>Screen 5 — Review &amp; Start
+- Title: "Ready — we’ll take it from here"
+- Summary block:
+  - Source: "Uploaded CSV (file.csv)"
+  - Customers: "All customers" or list of selected customers
+  - Delivery: "Encrypted email with PDF"
+  - Start: "Now" or scheduled time (optional; default Now)
+- CTA: <strong>Start sending invoices</strong> (primary)
+- Secondary: <strong>Save &amp; finish later</strong></p>
+<p>On-click behavior: show a single-line progress modal with friendly stepper:
+- Header: "Setting things up — this usually takes less than a minute"
+- Stepper (3 steps):
+  1. <strong>Importing invoices</strong> — "We’re reading your invoices and preparing them." (shows counts under it)
+  2. <strong>Preparing files</strong> — "Generating PDF copies and secure delivery packages." (shows progress spinner)
+  3. <strong>Sending test invoice</strong> — "We send a test to confirm delivery and report back." (shows status)
+- Progress UI: stepper with checkmarks + short text for current step; overall progress bar for long-running tasks</p>
+<p>Success &amp; confirmation
+- After steps complete, show screen: "Success — First invoice sent to ACME Corp"
+- Provide CTA: <strong>View status</strong> (takes to job progress page) and <strong>Done</strong> (closes wizard)
+- Send an in-app and email notification: "Your automatic invoices are active and the first invoice was delivered to Acme Corp."</p>
+<hr />
+<p>Error handling (business-language only)
+- File upload problems
+  - If CSV cannot be read: "We couldn’t read this file. Please try exporting again from QuickBooks and upload the new file or choose ‘Connect QuickBooks’." Buttons: <strong>Re-upload</strong>, <strong>Connect QuickBooks</strong>, <strong>Help</strong>
+  - If required columns missing: "It looks like your file is missing some information we need (customer, amount, date). We can try to map columns for you — would you like us to map them?" Buttons: <strong>Auto-map</strong>, <strong>I’ll fix the file</strong>
+- QuickBooks connect failure
+  - "We couldn’t connect to QuickBooks right now. You can try again, or upload your CSV to continue. If this continues, click Help to see step-by-step instructions." Buttons: <strong>Try again</strong>, <strong>Upload CSV</strong>, <strong>Help</strong>
+- Delivery failure (first test send)
+  - If the test invoice fails to deliver: "We tried to deliver a test invoice and it did not reach the recipient. We’ll retry automatically and notify you. You can also update delivery settings or add an alternate contact." Buttons: <strong>Retry now</strong>, <strong>Change delivery</strong>, <strong>Contact support</strong>
+- Unexpected problem
+  - "Something went wrong on our side — we’ve logged the issue and our team will look into it. We’ll update you as soon as it’s fixed." CTA: <strong>View status</strong> or <strong>Close</strong></p>
+<p>All error messages are written in plain business language without technical jargon. Include a small ‘Help’ path that presents simple steps (e.g., how to export CSV from QuickBooks) and an option to contact support.</p>
+<hr />
+<p>Progress indicators &amp; ongoing status
+- Short tasks: modal with 3-step stepper and checkmarks
+- Longer background jobs (e.g., large backfills): show a job status page with timeline and progress, and send an email when complete
+- Real-time updates: use web notifications or polling — keep messages short and business oriented</p>
+<hr />
+<p>What the user sees after setup
+- A short confirmation message and a first delivery notification
+- A simple recurring status card in the Dashboard: "Invoices are being sent automatically — last invoice sent to Acme Corp at 10:12 AM"
+- Controls: <strong>Pause sending</strong>, <strong>Stop</strong>, <strong>Change customers</strong>, <strong>Change delivery method</strong> — all business language</p>
+<hr />
+<p>Admin controls (hidden; for operators)
+- UI for internal operators to see job logs, retry failed deliveries, and run manual test sends
+- Operators have a clear audit trail for changes (who changed what and when)</p>
+<hr />
+<p>Time estimates &amp; flow rationale
+- Happy path (CSV upload + default settings): under 5 minutes from Start to first test send
+- QuickBooks connect path: may take longer depending on OAuth steps (still attempt to keep &lt;5 minutes for common cases)</p>
+<hr />
+<p>Next UX follow-ups (Phase 1B-ready hooks)
+- Add an optional enhanced mapping screen if CSVs vary a lot (but make it behind a "Need help mapping?" link)
+- Add a one-click "Resend to these customers" and a history view for delivered invoices
+- Add telemetry hooks to track step conversion times and drop-off points</p>
+<hr />
+<p>Deliverable: This file serves as the canonical UX spec for the Phase 1A 5-minute wizard. After review, I will prepare a simple wireframe (PNG or Mermaid diagram) and the auto-configuration doc describing default behaviors and fallback strategies.</p>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

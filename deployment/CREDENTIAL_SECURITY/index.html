@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://bridgeflow.readthedocs.io/deployment/CREDENTIAL_SECURITY/" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>Credential Security &amp; Vault Enforcement - BridgeFlow Docs</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Credential Security \u0026amp; Vault Enforcement";
+        var mkdocs_page_input_path = "deployment\\CREDENTIAL_SECURITY.md";
+        var mkdocs_page_url = "/deployment/CREDENTIAL_SECURITY/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> BridgeFlow Docs
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../ARCHITECTURE/">Architecture</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Current System</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../current/control-tower/">Control Tower</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../current/control-tower/trl7-validation/">TRL 7 Validation</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../current/control-tower/public-api/">Public API</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../current/control-tower/integration-guide/">Integration Guide</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Future Vision</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../vision/">Vision Archive Index</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../roadmap/future-architecture/">BF-INTEGRATION Roadmap</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Phase 60</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../phase-60-gap-analysis/">Gap Analysis</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">BridgeFlow Docs</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">Credential Security &amp; Vault Enforcement</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="credential-security-vault-enforcement">Credential Security &amp; Vault Enforcement</h1>
+<p><strong>Purpose:</strong> Describe startup-enforced credential security introduced in Phase 40 and provide runbook guidance for production rollout.</p>
+<h2 id="overview">Overview</h2>
+<p>Phase 40 introduced a credential security enforcer that ensures all protocol handlers retrieve credentials exclusively from the configured secret backend (Vault). This prevents accidental plaintext credentials and enforces a consistent, auditable secret retrieval path.</p>
+<p>Key components
+- <code>api/lib/credentialSecurity.js</code> — Core enforcement module
+  - <code>registerHandler(handlerName, config)</code> — Register a protocol handler to be tracked
+  - <code>markVaultCompliant(handlerName)</code> — Mark handler as compliant (called when handler successfully fetches/uses Vault secrets)
+  - <code>fetchSftpCredentials</code>, <code>fetchAs2Credentials</code>, <code>fetchApiCredentials</code> — Protocol helpers to resolve credential batches from Vault
+  - <code>enforceVaultCompliance()</code> — Throws when non-compliant handlers exist (called during startup enforcement)
+- <code>api/launcher.js</code> — Calls <code>enforceCredentialSecurity()</code> during startup and will block production startup if handlers are non-compliant</p>
+<h2 id="production-runbook">Production Runbook</h2>
+<ol>
+<li>Configure Vault and set env vars: <code>SECRET_BACKEND=vault</code>, <code>VAULT_ADDR</code>, <code>VAULT_TOKEN</code> (or configure a proper auth backend)</li>
+<li>Ensure all protocol handlers call the credential helpers (<code>fetch*Credentials</code>) or explicitly call <code>markVaultCompliant()</code> during configuration/test paths</li>
+<li>Start server with production env: <code>NODE_ENV=production START_SERVER=true pnpm run api:start</code> — startup will block when any handler is non-compliant</li>
+<li>If deployment blocks, inspect startup logs for the list of non-compliant handlers and remediate code to use the Vault helpers</li>
+</ol>
+<h2 id="notes-tips">Notes &amp; Tips</h2>
+<ul>
+<li>In development, non-compliance logs a warning but does not block startup (to avoid breaking local workflows). In production, enforcement is strict.</li>
+<li>Keep credential Vault paths consistent using <code>getCredentialPath(organizationId, connectorId, credentialType)</code> (e.g., <code>organizations/{org}/connectors/{connector}/{type}</code>)</li>
+<li>Add unit/integration tests that assert handlers call Vault helpers or that call <code>markVaultCompliant()</code> when appropriate</li>
+</ul>
+<h2 id="troubleshooting">Troubleshooting</h2>
+<ul>
+<li><code>Error: handler(s) missing Vault integration: SFTP, AS2</code>: The handler registration exists, but the handler never called <code>markVaultCompliant()</code>; ensure credential fetch occurs during test or configuration paths.</li>
+<li><code>Vault connectivity errors</code>: Verify <code>VAULT_ADDR</code> and <code>VAULT_TOKEN</code> or service role authentication; use <code>api/lib/secretManager.js</code> to mock or inspect behaviour during local development.</li>
+</ul>
+<hr />
+<p><em>For operational questions, consult the Launcher logs during startup — they will report registered handlers and clear instructions when enforcement fails.</em></p>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

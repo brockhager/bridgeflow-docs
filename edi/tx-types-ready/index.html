@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://bridgeflow.readthedocs.io/edi/tx-types-ready/" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>Tx types ready - BridgeFlow Docs</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Tx types ready";
+        var mkdocs_page_input_path = "edi\\tx-types-ready.md";
+        var mkdocs_page_url = "/edi/tx-types-ready/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> BridgeFlow Docs
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../ARCHITECTURE/">Architecture</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Current System</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../current/control-tower/">Control Tower</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../current/control-tower/trl7-validation/">TRL 7 Validation</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../current/control-tower/public-api/">Public API</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../current/control-tower/integration-guide/">Integration Guide</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Future Vision</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../vision/">Vision Archive Index</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../roadmap/future-architecture/">BF-INTEGRATION Roadmap</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Phase 60</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../phase-60-gap-analysis/">Gap Analysis</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">BridgeFlow Docs</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">Tx types ready</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <p><strong>Example Variants:</strong>
+- <code>docs/examples/variants/complex-shipment-856.txt</code> - Complex order→shipment→package→item example
+- <code>docs/examples/variants/minimal-856.txt</code> - Minimal example
+- <code>docs/examples/variants/international-856.txt</code> - International / special chars example
+ - <code>docs/examples/sample-945.txt</code> - Sample 945 Warehouse Shipping Advice
+ - <code>docs/examples/variants/warehouse-receiving-945.txt</code> - Warehouse receiving variant
+ - <code>docs/examples/variants/warehouse-crossdock-945.txt</code> - Warehouse cross-dock variant
+ - <code>docs/examples/variants/warehouse-returns-945.txt</code> - Warehouse returns variant
+ - <code>docs/examples/sample-210.txt</code> - Sample 210 Motor Carrier Freight Invoice
+ - <code>docs/examples/variants/standard-freight-210.txt</code> - Standard freight invoice variant
+ - <code>docs/examples/variants/international-freight-210.txt</code> - International freight invoice variant
+ - <code>docs/examples/variants/accessorial-charges-210.txt</code> - Accessorial charges variant</p>
+<h1 id="edi-transaction-types-ready-for-customers">EDI Transaction Types - Ready for Customers</h1>
+<p>This document lists all X12 EDI transaction types that are currently supported by the BridgeFlow EDI Library with complete specifications, parser support, and generator capabilities.</p>
+<h2 id="production-ready-transaction-types">Production-Ready Transaction Types</h2>
+<h3 id="850-purchase-order">850 - Purchase Order</h3>
+<p><strong>Status</strong>: ✅ Fully Supported (Parser + Generator + Tested)</p>
+<ul>
+<li><strong>Functional Group</strong>: PO</li>
+<li><strong>Industry</strong>: Retail, Manufacturing, Distribution</li>
+<li><strong>Description</strong>: Used to place orders for goods or services</li>
+<li><strong>Parser Support</strong>: Yes - Fully tested with real-world samples</li>
+<li><strong>Generator Support</strong>: Yes - Complete implementation</li>
+<li><strong>Specification</strong>: <code>src/formats/x12/specs/transactions/850-purchase-order.json</code></li>
+<li><strong>Examples</strong>:</li>
+<li><code>examples/parse-850.js</code> - Parse existing 850 PO</li>
+<li><code>examples/generate-850.js</code> - Generate new 850 PO</li>
+<li><code>examples/roundtrip-850.js</code> - Round-trip validation</li>
+<li><strong>Sample Files</strong>: <code>docs/examples/x12/850-real-world-complete.txt</code></li>
+</ul>
+<p><strong>Key Segments</strong>:
+- BEG - Beginning Segment for Purchase Order
+- REF - Reference Identification
+- DTM - Date/Time Reference
+- N1 - Party Identification
+- PO1 - Baseline Item Data
+- CTT - Transaction Totals</p>
+<hr />
+<h3 id="810-invoice">810 - Invoice</h3>
+<p><strong>Status</strong>: ✅ Specification Complete (Parser + Generator Ready)</p>
+<ul>
+<li><strong>Functional Group</strong>: IN</li>
+<li><strong>Industry</strong>: All industries</li>
+<li><strong>Description</strong>: Used to request payment for goods or services</li>
+<li><strong>Parser Support</strong>: Yes - Spec-based parsing available</li>
+<li><strong>Generator Support</strong>: Yes - Complete implementation</li>
+<li><strong>Specification</strong>: <code>src/formats/x12/specs/transactions/810-invoice.json</code></li>
+<li><strong>Examples</strong>: Generator support included in library</li>
+<li><strong>Sample Files</strong>: Pending</li>
+</ul>
+<p><strong>Key Segments</strong>:
+- BIG - Beginning Segment for Invoice
+- REF - Reference Identification
+- N1 - Party Identification (Name)
+- IT1 - Baseline Item Data (Invoice)
+- TDS - Total Monetary Value Summary</p>
+<hr />
+<h2 id="in-development">In Development</h2>
+<h3 id="210-motor-carrier-freight-details-and-invoice">210 - Motor Carrier Freight Details and Invoice</h3>
+<p><strong>Status</strong>: ✅ Implemented (Core segments + Variants + Tests)</p>
+<ul>
+<li><strong>Functional Group</strong>: MI</li>
+<li><strong>Industry</strong>: Transportation, Logistics</li>
+<li><strong>Description</strong>: Freight billing and shipment details for motor carriers</li>
+<li><strong>Parser Support</strong>: Yes - B3/B4/L0/L5/L1 parsing implemented</li>
+<li><strong>Generator Support</strong>: Yes - Core segments and L0/L5/L1 generation implemented</li>
+<li><strong>Specification</strong>: Partial - core fields implemented; remaining optional segments TBD</li>
+<li><strong>Examples / Variants</strong>:</li>
+<li><code>packages/edi-library/examples/generate-210.js</code> - Generate sample 210</li>
+<li><code>docs/examples/sample-210.txt</code> - Generated sample 210 file</li>
+<li><code>docs/examples/variants/standard-freight-210.txt</code> - Standard freight invoice</li>
+<li><code>docs/examples/variants/international-freight-210.txt</code> - International variant (customs)</li>
+<li><code>docs/examples/variants/accessorial-charges-210.txt</code> - Accessorial charges (fuel, detention)
+<strong>Target</strong>: Complete remaining optional segments and expand edge-case tests in follow-up work</li>
+</ul>
+<hr />
+<h3 id="820-payment-orderremittance-advice">820 - Payment Order/Remittance Advice</h3>
+<p><strong>Status</strong>: ✅ Fully Supported (Parser + Generator + Tested)</p>
+<ul>
+<li><strong>Functional Group</strong>: RA</li>
+<li><strong>Industry</strong>: Financial, All industries</li>
+<li><strong>Description</strong>: Payment details and remittance information</li>
+<li><strong>Parser Support</strong>: Yes - Fully tested with examples</li>
+<li><strong>Generator Support</strong>: Yes - Complete implementation</li>
+<li><strong>Specification</strong>: <code>src/formats/x12/specs/transactions/820-payment-order.json</code></li>
+<li><strong>Examples</strong>:</li>
+<li><code>examples/generate-820.js</code> - Generate 820 Payment Order</li>
+<li><code>examples/parse-820.js</code> - Parse a sample 820</li>
+<li><code>examples/roundtrip-820.js</code> - Round-trip validation</li>
+<li><code>examples/sample-820.txt</code> - Sample generated 820 file</li>
+</ul>
+<hr />
+<h3 id="856-ship-noticemanifest-asn">856 - Ship Notice/Manifest (ASN)</h3>
+<p><strong>Status</strong>: ✅ Fully Supported (Parser + Generator + Variants + Tests)</p>
+<ul>
+<li><strong>Functional Group</strong>: SH</li>
+<li><strong>Industry</strong>: Retail, Manufacturing, Distribution</li>
+<li><strong>Description</strong>: Advanced Shipping Notice with detailed package/item information</li>
+<li><strong>Parser Support</strong>: Yes - HL loop parsing and attachment of N1/TD1/TD5/LIN/SN1/MAN/PID</li>
+<li><strong>Generator Support</strong>: Yes - BSN, recursive HL generation, TD1/TD5, LIN/SN1, MAN/PID emission
+<strong>Examples</strong>:</li>
+<li><code>packages/edi-library/examples/generate-856.js</code> - Generate a sample 856 ASN and write <code>docs/examples/sample-856.txt</code></li>
+<li><code>packages/edi-library/examples/parse-856.js</code> - Parse <code>docs/examples/sample-856.txt</code> and print transaction structure</li>
+<li><code>packages/edi-library/examples/roundtrip-856.js</code> - Generate → Parse → Regenerate roundtrip script</li>
+<li><code>docs/examples/sample-856.txt</code> - Sample generated 856 file</li>
+<li><strong>Specification</strong>: Partial (works for core use-cases)</li>
+<li><strong>Target Completion</strong>: Complete for Phase 5; follow-up refinements tracked in TECHNICAL-DEBT
+-- <strong>Target Completion</strong>: TBD - work in progress (tests added)</li>
+</ul>
+<hr />
+<h3 id="945-warehouse-shipping-advice">945 - Warehouse Shipping Advice</h3>
+<p><strong>Status</strong>: ✅ Fully Supported (Parser + Generator + Variants + Tests)</p>
+<ul>
+<li><strong>Functional Group</strong>: WA</li>
+<li><strong>Industry</strong>: Warehousing, 3PL</li>
+<li><strong>Description</strong>: Notification of shipment from warehouse</li>
+<li><strong>Parser Support</strong>: Yes - W05/N9/G62/NTE/W27/W28 parsing implemented and attached to structured output</li>
+<li><strong>Generator Support</strong>: Yes - generate945Segments emits W05/N9/G62/NTE/W27/W28 and N1 loops</li>
+<li><strong>Specification</strong>: Planned (core segments implemented)</li>
+<li><strong>Examples / Variants</strong>:</li>
+<li><code>packages/edi-library/examples/generate-945.js</code> - Generate sample 945 file</li>
+<li><code>docs/examples/sample-945.txt</code> - Sample generated 945 file</li>
+<li><code>docs/examples/variants/warehouse-receiving-945.txt</code>, <code>warehouse-crossdock-945.txt</code>, <code>warehouse-returns-945.txt</code></li>
+<li><strong>Target Completion</strong>: Phase 5 complete for core 945 scenarios; edge-case tests tracked for follow-up</li>
+</ul>
+<hr />
+<h3 id="997-functional-acknowledgment">997 - Functional Acknowledgment</h3>
+<p><strong>Status</strong>: ✅ Fully Supported (Parser + Generator + Tested)</p>
+<ul>
+<li><strong>Functional Group</strong>: FA</li>
+<li><strong>Industry</strong>: All industries (EDI infrastructure)</li>
+<li><strong>Description</strong>: Acknowledges receipt and syntax validation of EDI transactions</li>
+<li><strong>Parser Support</strong>: Yes - Fully tested with examples</li>
+<li><strong>Generator Support</strong>: Yes - Complete implementation</li>
+<li><strong>Specification</strong>: <code>src/formats/x12/specs/transactions/997-functional-ack.json</code></li>
+<li><strong>Examples</strong>:</li>
+<li><code>examples/generate-997.js</code> - Generate 997 FA</li>
+<li><code>examples/parse-997.js</code> - Parse a sample 997</li>
+<li><code>examples/roundtrip-997.js</code> - Round-trip validation</li>
+<li><code>examples/sample-997.txt</code> - Sample generated 997 file</li>
+</ul>
+<hr />
+<h2 id="how-to-use">How to Use</h2>
+<h3 id="parsing-edi-files">Parsing EDI Files</h3>
+<pre><code class="language-javascript">import { parseX12 } from '@bridgeflow/edi-library'
+
+const ediText = '...' // Your X12 EDI text
+const parsed = parseX12(ediText, { validate: true })
+
+console.log(parsed.transactionSets[0].type) // '850', '810', etc.
+</code></pre>
+<h3 id="generating-edi-files">Generating EDI Files</h3>
+<pre><code class="language-javascript">import { generateX12 } from '@bridgeflow/edi-library'
+
+const data = {
+  interchange: { /* ... */ },
+  functionalGroups: [ /* ... */ ],
+  transactionSets: [ /* ... */ ]
+}
+
+const ediText = generateX12(data, { prettyPrint: false })
+</code></pre>
+<h3 id="round-trip-validation">Round-trip Validation</h3>
+<pre><code class="language-javascript">import { parseX12, generateX12 } from '@bridgeflow/edi-library'
+
+const original = '...' // Original EDI
+const parsed = parseX12(original)
+const regenerated = generateX12(parsed)
+
+// Should match perfectly
+console.log(original === regenerated)
+</code></pre>
+<hr />
+<h2 id="version-support">Version Support</h2>
+<p>All transaction types support X12 version <strong>004010</strong> (and later versions as needed).</p>
+<hr />
+<h2 id="documentation">Documentation</h2>
+<ul>
+<li><strong>Parser Documentation</strong>: See <code>src/formats/x12/parser.js</code></li>
+<li><strong>Generator Documentation</strong>: See <code>src/formats/x12/generator.js</code></li>
+<li><strong>Transaction Specifications</strong>: See <code>src/formats/x12/specs/transactions/</code></li>
+<li><strong>Examples</strong>: See <code>examples/</code> directory</li>
+</ul>
+<hr />
+<h2 id="getting-started">Getting Started</h2>
+<ol>
+<li>
+<p>Install the library:
+   <code>bash
+   npm install @bridgeflow/edi-library</code></p>
+</li>
+<li>
+<p>Run examples:
+   <code>bash
+   npm run example:parse      # Parse 850 PO
+   npm run example:generate   # Generate 850 PO
+   npm run example:roundtrip  # Validate round-trip</code></p>
+</li>
+<li>
+<p>Check documentation in <code>/docs/edi/</code></p>
+</li>
+</ol>
+<hr />
+<p><strong>Last Updated</strong>: 2025-12-17
+<strong>Library Version</strong>: 0.1.0</p>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

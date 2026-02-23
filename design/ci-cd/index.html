@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://bridgeflow.readthedocs.io/design/ci-cd/" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>CI/CD &amp; Release Plan (Draft) - BridgeFlow Docs</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "CI/CD \u0026amp; Release Plan (Draft)";
+        var mkdocs_page_input_path = "design\\ci-cd.md";
+        var mkdocs_page_url = "/design/ci-cd/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> BridgeFlow Docs
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../ARCHITECTURE/">Architecture</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Current System</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../current/control-tower/">Control Tower</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../current/control-tower/trl7-validation/">TRL 7 Validation</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../current/control-tower/public-api/">Public API</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../current/control-tower/integration-guide/">Integration Guide</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Future Vision</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../vision/">Vision Archive Index</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../roadmap/future-architecture/">BF-INTEGRATION Roadmap</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Phase 60</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../phase-60-gap-analysis/">Gap Analysis</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">BridgeFlow Docs</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">CI/CD &amp; Release Plan (Draft)</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="cicd-release-plan-draft">CI/CD &amp; Release Plan (Draft)</h1>
+<p>Goals
+- Fast feedback loop (lint, test, typecheck) on every PR
+- Security gates (CodeQL, dependency scanning) enforced before merge
+- Clean release pipeline with rollback strategies (canary/blue-green)</p>
+<h2 id="github-actions-suggested-jobs">GitHub Actions - Suggested Jobs</h2>
+<ul>
+<li>push / PR</li>
+<li>lint (eslint + formatting check)</li>
+<li>test (unit + fast integration using pg-mem or dev DB)</li>
+<li>typecheck</li>
+<li>code-scan (CodeQL + dependency-check)</li>
+<li>build (TypeScript build across packages)</li>
+<li>merge to main (after protection)</li>
+<li>integration tests (full suite against real Postgres in CI)</li>
+<li>e2e smoke tests</li>
+<li>publish artifacts (package registry/private npm + image registry if used)</li>
+<li>release</li>
+<li>deploy to staging</li>
+<li>run migration dry-run and smoke tests</li>
+<li>promote to prod using canary/blue-green pattern</li>
+</ul>
+<h2 id="pr-requirements">PR Requirements</h2>
+<ul>
+<li>PR template includes checklist: tests included, security review, migration impact, operational runbook required? (yes/no)</li>
+<li>Require at least one code owner review for core libraries and security-sensitive changes</li>
+</ul>
+<h2 id="secrets-in-ci">Secrets in CI</h2>
+<ul>
+<li>Use GitHub Encrypted Secrets (or Vault integration) — do not commit credentials</li>
+</ul>
+<h2 id="esm-policy-and-prisma-in-ci">ESM policy and Prisma in CI</h2>
+<ul>
+<li>This repository is ESM-only; ensure <code>package.json</code> has <code>"type": "module"</code> and all in-repo JS files use <code>import</code>/<code>export</code>.</li>
+<li>The Prisma CLI historically expects CommonJS config files; to avoid needing CJS artifacts in the repo, invoke Prisma CLI with explicit flags (e.g., <code>--schema ./prisma/schema.prisma</code>) in CI scripts.</li>
+</ul>
+<h2 id="packaging-and-deployments">Packaging and Deployments</h2>
+<ul>
+<li>For serverless: build and publish packages as artifacts, deployments use IaC modules to manage release</li>
+<li>For containerized services: build images, push to registry, scan images before deploy</li>
+<li>For VMs or managed services: use deployment scripts and IAM roles with least privilege</li>
+</ul>
+<h2 id="rollback-strategies">Rollback Strategies</h2>
+<ul>
+<li>Database migrations must be reversible where possible; maintain <code>down</code> steps and backup before irreversible schema changes</li>
+<li>Deployments should have a health-check based automated rollback threshold (e.g., &gt;1% error rate in 5 minutes triggers rollback)</li>
+</ul>
+<h2 id="observability-in-pipeline">Observability in Pipeline</h2>
+<ul>
+<li>Publish test coverage and SLO smoke results as part of PR checks</li>
+<li>Keep a deployment log and attach migration evidence to releases for compliance</li>
+</ul>
+<p>Next steps
+- Implement <code>ci.yml</code> and an integration <code>integration.yml</code> workflow example
+- Add CodeQL and Dependabot configuration files
+- Add a <code>PR_TEMPLATE.md</code> and <code>SECURITY_CHECKLIST.md</code> in <code>.github/</code></p>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://bridgeflow.readthedocs.io/phases/phases21-30/" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>Phases 21-30 — Advanced Features &amp; Unified Experience - BridgeFlow Docs</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Phases 21-30 \u2014 Advanced Features \u0026amp; Unified Experience";
+        var mkdocs_page_input_path = "phases\\phases21-30\\README.md";
+        var mkdocs_page_url = "/phases/phases21-30/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> BridgeFlow Docs
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../ARCHITECTURE/">Architecture</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Current System</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../current/control-tower/">Control Tower</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../current/control-tower/trl7-validation/">TRL 7 Validation</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../current/control-tower/public-api/">Public API</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../current/control-tower/integration-guide/">Integration Guide</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Future Vision</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../vision/">Vision Archive Index</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../roadmap/future-architecture/">BF-INTEGRATION Roadmap</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Phase 60</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../phase-60-gap-analysis/">Gap Analysis</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">BridgeFlow Docs</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">Phases 21-30 — Advanced Features &amp; Unified Experience</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="phases-21-30-advanced-features-unified-experience">Phases 21-30 — Advanced Features &amp; Unified Experience</h1>
+<p>This folder contains documentation for Phases 21-30, focusing on advanced trading partner features, sophisticated B2B workflows, and unified command center capabilities.</p>
+<hr />
+<h2 id="phase-overview">Phase Overview</h2>
+<h3 id="phase-21-tbd">Phase 21 — TBD</h3>
+<p><strong>Status:</strong> Not yet documented</p>
+<p><strong>Note:</strong> No documentation found for Phase 21 in this folder. Check commit history or related RFCs for details.</p>
+<hr />
+<h3 id="phase-22-trading-partner-registration-system">Phase 22 — Trading Partner Registration System ✅</h3>
+<p><strong>Completed:</strong> December 30, 2025</p>
+<p><strong>What We Built:</strong>
+- <strong>22A (Public Partner Registration):</strong> Self-service signup at <code>/partner-signup</code> (no login required)
+  - Form: Partner name, admin email, password, contact info
+  - Backend: <code>POST /api/auth/register-partner</code> creates Organization + User + PartnerRegistration (pending status)
+  - Email verification required before activation
+  - Confirmation page: "Thank you for registering. Your account is pending approval."</p>
+<ul>
+<li><strong>22B (Admin Approval Queue):</strong> Admin-facing approval workflow</li>
+<li>Admin queue UI at <code>/admin/partner-queue</code> lists pending registrations</li>
+<li>Endpoints: GET pending registrations, POST approve/deny</li>
+<li>Approve flow: Creates TradingPartner, sets <code>accessLevel='limited'</code>, sends approval email</li>
+<li>Feature gating: Limited partners can only send/receive, no Canvas or bridge creation</li>
+<li>
+<p>RLS-first security: DB-level tenant isolation, not role-based</p>
+</li>
+<li>
+<p><strong>22C (Onboarding Wizard):</strong> Scoped for follow-up (not implemented)</p>
+</li>
+<li>Would include: <code>/partner/onboarding</code> flow, limited partner dashboard, API key generation</li>
+<li>Upgrade path to full customer account</li>
+</ul>
+<p><strong>System Impact:</strong>
+Enabled external trading partners to self-register and be approved into a limited-access partner organization. Established RLS-first security model where data isolation is enforced at database level, not application layer. Created clear separation between limited partners (send/receive only) and full customers (Canvas access).</p>
+<p><strong>Key Documents:</strong>
+- <a href="phase-22-spec/">Phase 22 Specification</a> — Complete feature spec with three issues
+- <a href="phase-22-completion-summary/">Phase 22 Completion Summary</a> — Implementation details and verification steps
+- <a href="phase-22-issue/">Phase 22 Issue</a> — Issue tracking</p>
+<p><strong>Files Delivered:</strong>
+- Frontend: <code>web/partner-signup.html</code>, <code>web/src/partner-signup.js</code>, router entry
+- Backend: <code>api/handlers/auth.js</code> (registration), <code>api/handlers/partnerRegistrations.js</code> (approve/deny)
+- Database: <code>PartnerRegistration</code> model, <code>Organization.type</code> and <code>Organization.accessLevel</code> fields
+- Tests: <code>test/integration/partner-registration.test.js</code>, <code>test/integration/partner-approval.test.js</code>, <code>test/integration/partner-rls.test.js</code></p>
+<p><strong>Test Coverage:</strong> ✅ Registration → verification, admin approve → org creation, RLS scoping, access control</p>
+<p><strong>Security Model:</strong> RLS-first (backend doesn't rely on role/accessLevel for gating; Postgres RLS enforces tenant isolation)</p>
+<p><strong>How to Run:</strong></p>
+<pre><code class="language-bash">pnpm exec vitest run test/integration/partner-registration.test.js
+pnpm exec vitest run test/integration/partner-approval.test.js
+# Manual: Start API, visit /partner-signup, verify email, approve in admin UI
+</code></pre>
+<p><strong>Outstanding:</strong> Phase 22C (onboarding wizard) deferred to follow-up phase</p>
+<hr />
+<h3 id="phase-23-tbd">Phase 23 — TBD</h3>
+<p><strong>Status:</strong> Not yet documented</p>
+<p><strong>Note:</strong> No documentation found for Phase 23. May have been skipped or merged into adjacent phases.</p>
+<hr />
+<h3 id="phase-24-tbd">Phase 24 — TBD</h3>
+<p><strong>Status:</strong> Not yet documented</p>
+<p><strong>Note:</strong> No documentation found for Phase 24. Check project board or issues for context.</p>
+<hr />
+<h3 id="phase-25-po-to-acknowledgment-cycle">Phase 25 — PO-to-Acknowledgment Cycle ✅</h3>
+<p><strong>Completed:</strong> 2025 (Production Ready)</p>
+<p><strong>What We Built:</strong>
+- <strong>Document Ingestion:</strong> <code>POST /api/documents</code> accepts raw EDI 210 (text/plain or JSON)
+  - Validates basic syntax
+  - Stores payload with <code>status = RECEIVED</code></p>
+<ul>
+<li><strong>Real EDI Parsing:</strong> Uses <code>x12-parser</code> to parse EDI 210</li>
+<li>Extracts: shipmentId (BSN), weight &amp; weightUnit (L5), sender, receiver</li>
+<li>
+<p>Returns structured JSON for downstream processing</p>
+</li>
+<li>
+<p><strong>Mapping Engine:</strong> Organization-specific mapping rules</p>
+</li>
+<li>Transforms parsed 210 → canonical internal format (e.g., <code>{ externalId, totalWeight, weightUnit, sender }</code>)</li>
+<li>
+<p>Stores result in <code>Document.canonicalContent</code></p>
+</li>
+<li>
+<p><strong>Acknowledgment Generation:</strong> <code>generate997.js</code> creates EDI 997 acknowledgment</p>
+</li>
+<li>Swaps sender/receiver in ISA/GS for ACK</li>
+<li>Uses original control numbers</li>
+<li>Sets <code>AK5*A</code> (accepted) for success case</li>
+<li>
+<p>Stores generated 997 in <code>Document.ackContent</code>, updates <code>status = ACK_GENERATED</code></p>
+</li>
+<li>
+<p><strong>ACK Access:</strong> <code>GET /api/documents/:id/ack</code> returns plain-text 997 (Content-Type: text/plain)</p>
+</li>
+</ul>
+<p><strong>System Impact:</strong>
+Established complete PO-to-Acknowledgment workflow for EDI 210 documents. Core capability for B2B supply chain integration. Mapping engine creates flexibility for organization-specific transformations. Ready for pilot deployments.</p>
+<p><strong>Key Documents:</strong>
+- <a href="phase25-complete/">Phase 25 Completion</a> — Full scope, verification checklist, technical details</p>
+<p><strong>Data Model:</strong></p>
+<pre><code>Document:
+  - content (raw EDI payload)
+  - canonicalContent (mapped JSON)
+  - ackContent (generated 997 EDI)
+  - status (RECEIVED → PARSING → PROCESSED → ACK_GENERATED)
+  - organizationId (RBAC)
+</code></pre>
+<p><strong>Test Coverage:</strong> ✅ Unit tests (parser, mapper, generator), E2E tests (ingestion → mapping → ACK generation)</p>
+<p><strong>Demo:</strong> <code>start/start-ctodemo.ps1</code> demonstrates flow: sends sample 210, fetches generated 997</p>
+<p><strong>Not Included (Phase 26+):</strong>
+- Job queues and async background workers
+- Email/SMS alerts and external notifications
+- <code>/alerts</code> dashboard and live monitoring UI
+- Retry logic and retry policies
+- Additional transaction sets (850, 810, etc.)</p>
+<hr />
+<h3 id="phase-26-tbd">Phase 26 — TBD</h3>
+<p><strong>Status:</strong> Not yet documented</p>
+<p><strong>Note:</strong> No documentation found for Phase 26. May cover monitoring, alerts, or additional transaction types.</p>
+<hr />
+<h3 id="phase-27-enterprise-workflow-unification">Phase 27 — Enterprise Workflow Unification ✅</h3>
+<p><strong>Completed:</strong> January 2, 2026<br />
+<strong>Status:</strong> Production Ready (80% Core Deliverables)</p>
+<p><strong>What We Built:</strong></p>
+<p><strong>Core Deliverables (8/10):</strong>
+1. <strong>Phase 27 Documentation</strong> — Comprehensive spec with objectives, user flows, architecture
+2. <strong>Database Schema Updates</strong> — <code>Document.partnerId</code>, <code>TradingPartner.status</code>, migration applied
+3. <strong>Homepage Dashboard Backend</strong> — <code>GET /api/dashboard/health</code>, <code>/api/dashboard/quick-stats</code>
+   - Health calculation (healthy/warning/critical based on stuck/failed docs)
+   - Uptime metrics, recent activity, action items
+4. <strong>Homepage Dashboard Frontend</strong> — Health widget in main menu
+   - Badge (✅⚠️❌), metrics, quick links to alerts/Canvas/create-TP
+5. <strong>Canvas TP Status Indicators Backend</strong> — <code>GET /api/trading-partners/:id/doc-status</code>, <code>/api/trading-partners/statuses</code>
+   - Individual and bulk partner health endpoints
+6. <strong>Canvas TP Status Indicators Frontend</strong> — Status dots on TP nodes
+   - ✅ (healthy) / ⚠️ (warning) / ➖ (no docs)
+   - Click warning → navigate to alerts filtered by partner
+7. <strong>Ingest Auto-Linking</strong> — ISA sender ID extraction
+   - Automatically populate <code>partnerId</code> on document creation
+8. <strong>End-to-End Integration Test</strong> — Comprehensive E2E validation
+   - 2 tests: Full unified flow + partner auto-linking
+   - ✅ All passing (2/2)</p>
+<p><strong>Intentionally Deferred (2/10):</strong>
+- Activity stream backend API (new models required, Phase 28 candidate)
+- Activity stream frontend route (depends on backend, Phase 28 candidate)</p>
+<p><strong>System Impact:</strong>
+Transformed BridgeFlow from "5 tools that share a database" → unified B2B command center. Users experience seamless workflows: login → see health warning → navigate to Canvas → investigate partner → retry failed documents → watch ACK generation → see health recover. Homepage + Canvas = 80% of user touchpoints, delivering full unified value.</p>
+<p><strong>Key Documents:</strong>
+- <a href="phase27-unified-experience/">Phase 27 Unified Experience Spec</a> — Complete specification
+- <a href="phase27-completion-report/">Phase 27 Completion Report</a> — Full implementation report (production-ready)</p>
+<p><strong>Core Features:</strong></p>
+<p><em>Homepage Dashboard:</em>
+- Health badge + activity metrics + action items
+- "All systems normal" or "Action needed" status
+- Links to /alerts, /canvas, /create-tp</p>
+<p><em>Canvas Integration:</em>
+- Real-time partner health indicators
+- Status dots with hover tooltips
+- One-click navigation to alerts for investigation</p>
+<p><em>Partner-Centric Health Tracking:</em>
+- Document.partnerId links docs to partners
+- Health calculated per partner (healthy/warning/critical)
+- Stuck document detection (RECEIVED status, &gt;2min old)</p>
+<p><em>Auto-Linking:</em>
+- ISA segment parser extracts sender ID
+- Automatic TradingPartner lookup
+- Populates Document.partnerId on ingest</p>
+<p><strong>Technical Implementation:</strong>
+- Backend handlers: <code>api/handlers/dashboard.js</code>, <code>api/handlers/trading-partners.js</code>
+- Frontend routes: <code>web/src/routes/main-menu.js</code>, <code>web/src/assembly.js</code>
+- CSS: <code>web/css/assembly.css</code> (status indicators, pulse animation)
+- E2E test: <code>api/tests/integration/phase27-unified-flow.test.js</code></p>
+<p><strong>Critical Fixes Applied:</strong>
+- Fixed missing <code>await getPrisma()</code> calls (was causing 500 errors)
+- Fixed MockDB <code>createdAt</code> preservation (tests couldn't simulate stuck docs)
+- Added MockDB <code>select</code> and <code>take</code> support (Prisma parity)</p>
+<p><strong>Test Results:</strong> ✅ All passing (2/2 E2E tests)</p>
+<pre><code>✓ validates full unified experience flow
+✓ validates partner auto-linking from ISA sender ID
+Duration: 1.85s (tests 300ms)
+</code></pre>
+<p><strong>Production Readiness:</strong> ✅ All core touchpoints functional, E2E validated, RBAC enforced, error handling in place</p>
+<p><strong>Demo Ready:</strong> 90-second script (login → alert → Canvas → retry → success)</p>
+<p><strong>Next Steps (User Direction: "Stop building. Start validating."):</strong>
+1. Record 90-second demo for pilot prospects
+2. Validate with 5 pilot customers (send real 210 → see ACK + health)
+3. Charge early access ($500/mo first 3 customers)</p>
+<hr />
+<h3 id="phase-28-partner-onboarding-workflow">Phase 28 — Partner Onboarding Workflow ✅</h3>
+<p><strong>Completed:</strong> January 3, 2026</p>
+<p><strong>What We Built:</strong>
+Complete end-to-end partner onboarding workflow connecting automated partner discovery with manual profile completion. Enables seamless transition from <code>PENDING_ONBOARDING</code> partners to <code>ACTIVE</code> trading partners.</p>
+<p><strong>Core Features:</strong>
+- <strong>Pending Partners UI:</strong> Separate section showing partners requiring profile completion
+- <strong>Profile Completion Flow:</strong> Pre-filled forms for completing partner profiles
+- <strong>Status Promotion:</strong> Automatic <code>PENDING_ONBOARDING</code> → <code>ACTIVE</code> transition
+- <strong>Success Feedback:</strong> User confirmation banners and navigation
+- <strong>Safe Error Handling:</strong> Crash-prevention patterns for API failures</p>
+<p><strong>System Impact:</strong>
+Bridges automated partner discovery (ingest) with manual onboarding (UI). Eliminates admin intervention in profile completion. Establishes pattern for other onboarding workflows.</p>
+<p><strong>Key Documents:</strong>
+- <a href="phase-28/">Phase 28 Implementation</a> — Complete specification and implementation details</p>
+<p><strong>Files Delivered:</strong>
+- Frontend: <code>web/src/routes/trading-partners.js</code>, <code>web/src/routes/trading-partners-create.js</code>
+- State: <code>web/src/state/store.js</code>
+- Tests: <code>test/integration/partner-onboarding-e2e.test.js</code></p>
+<p><strong>Test Coverage:</strong> ✅ E2E workflow validation, error handling, UI integration</p>
+<p><strong>Demo:</strong> Visit <code>/trading-partners</code> to see pending partners, click "Complete Profile" to test workflow</p>
+<hr />
+<h3 id="phase-30-layer-2-core-entities">Phase 30 — Layer 2 Core Entities ✅</h3>
+<p><strong>Completed:</strong> January 8, 2026<br />
+<strong>Effort:</strong> 2-3 hours<br />
+<strong>Priority:</strong> High (protocol integration foundation)</p>
+<p><strong>What We Built:</strong>
+Complete Layer 2 Core Entities implementation providing critical scaffolding for real protocol integration. Establishes Connectors and Endpoints as the foundation for AS2, SFTP, API, and EMAIL protocols while maintaining proper multi-tenant architecture and admin management capabilities.</p>
+<p><strong>Core Deliverables (4/4):</strong>
+1. <strong>Prisma Schema</strong>: Connector, Endpoint, and Tenet models with proper relations
+2. <strong>Admin API Endpoints</strong>: Full CRUD with organization scoping and security
+3. <strong>Admin UI Foundations</strong>: Professional connector management interface
+4. <strong>Protocol Handler Stubs</strong>: AS2, SFTP, API, EMAIL protocol foundations</p>
+<p><strong>System Impact:</strong>
+Establishes the Layer 2 foundation for protocol integration. Connectors represent protocol-specific communication channels owned by organizations, while Endpoints define directional data flow with optional tenet binding. This architecture enables real protocol integration while maintaining security, scalability, and professional admin experience.</p>
+<p><strong>Key Documents:</strong>
+- <a href="phase-30/">Phase 30 Implementation</a> — Complete specification and implementation details</p>
+<p><strong>Files Delivered:</strong>
+- Database: <code>prisma/schema.prisma</code> - Added Connector, Endpoint, Tenet models
+- Backend: <code>api/handlers/admin/connectors.js</code>, <code>api/handlers/admin/endpoints.js</code>
+- API Routes: <code>api/routes/adminConnectors.js</code>, <code>api/routes/adminEndpoints.js</code>
+- Frontend: <code>admin-bridgeflow/src/pages/Connectors.jsx</code>
+- Protocol Stubs: <code>api/handlers/protocols/as2.js</code>, <code>api/handlers/protocols/sftp.js</code>, <code>api/handlers/protocols/api.js</code></p>
+<p><strong>Test Coverage:</strong> ✅ API endpoints, validation, UI components, protocol handler stubs</p>
+<p><strong>Demo:</strong> 
+1. Run <code>pwsh -File start/start-admin.ps1</code>
+2. Login to <code>http://localhost:3001/admin</code> (cto@bridgeflow.test / BridgeFlow123!)
+3. Click "📦 Connectors" to manage protocol connectors
+4. Create AS2, SFTP, API, or EMAIL connectors with dynamic forms</p>
+<p><strong>Real-World Workflow:</strong></p>
+<pre><code>Org: BridgeFlow Group
+├── Connector: SFTP - Inbound Claims (type: SFTP)
+│   └── Endpoint: Inbound 837 (direction: INGRESS, tenetId: hipaa-claims-tenet)
+│       ↓
+│       When file lands in SFTP folder → System creates Package
+│       ↓
+│       Package attributes:
+│       - organizationId = BridgeFlow Group
+│       - tenetId = hipaa-claims-tenet  
+│       - endpointId = endpoint.id
+│       - Enters Phase 28 processing
+</code></pre>
+<hr />
+<h3 id="phase-29-organizations-tenets-complete">Phase 29 — Organizations &amp; Tenets ✅ COMPLETE</h3>
+<p><strong>Status:</strong> COMPLETE AND VALIDATED</p>
+<p><strong>System Impact:</strong>
+Establishes the core organizational model and tenet enforcement that underpins the entire BridgeFlow platform. Implements multi-tenant architecture with proper data isolation, security, and scalability. Provides CTO with full admin access to all organizations and tenets.</p>
+<p><strong>Key Documents:</strong>
+- <a href="phase-29-organizations-tenets/">Phase 29 Implementation</a> — Complete specification, implementation details, and CTO access guide</p>
+<p><strong>Files Delivered:</strong>
+- Backend: <code>api/handlers/auth.js</code>, <code>api/lib/seedDevData.js</code>, <code>api/migrations/phase29-migration.js</code>
+- Frontend: <code>admin-bridgeflow/src/pages/TenetProfiles.jsx</code>, <code>admin-bridgeflow/src/pages/TenetDetail.jsx</code>
+- API: <code>api/handlers/tenetProfiles.js</code>, <code>api/routes/tenetProfiles.js</code>
+- Tests: <code>test-phase29.js</code>, <code>test-login-cto.js</code></p>
+<p><strong>Test Coverage:</strong> ✅ 5/5 tests passing - Regular users, bf_employees, cross-org isolation, CTO admin access, TenetProfiles access</p>
+<p><strong>Demo:</strong> 
+1. Run <code>pwsh -File start/start-admin.ps1</code>
+2. Login to <code>http://localhost:3001/admin</code> (cto@bridgeflow.test / BridgeFlow123!)
+3. Click "🏢 Tenets" to view and manage all organizations</p>
+<p><strong>Critical Fix:</strong> Resolved CTO <code>isBfEmployee</code> flag issue that was preventing admin tenet access</p>
+<hr />
+<h2 id="phase-progression-summary">Phase Progression Summary</h2>
+<p><strong>Phase 21:</strong> TBD<br />
+<strong>Phase 22:</strong> Trading Partner registration + approval workflow (RLS-first security)<br />
+<strong>Phase 23-24:</strong> TBD<br />
+<strong>Phase 25:</strong> PO-to-Acknowledgment EDI 210 workflow (parsing, mapping, 997 generation)<br />
+<strong>Phase 26:</strong> TBD<br />
+<strong>Phase 27:</strong> Unified B2B command center (homepage + Canvas integration)<br />
+<strong>Phase 28:</strong> Partner onboarding workflow (PENDING_ONBOARDING → ACTIVE)<br />
+<strong>Phase 29:</strong> Organizations &amp; Tenets (multi-tenant architecture + CTO admin access) ✅<br />
+<strong>Phase 30:</strong> Layer 2 Core Entities (Connectors &amp; Endpoints for protocol integration) ✅<br />
+<strong>Phase 31+:</strong> Real protocol implementation (AS2, SFTP, API, EMAIL)</p>
+<hr />
+<h2 id="common-patterns-established">Common Patterns Established</h2>
+<h3 id="partner-lifecycle">Partner Lifecycle</h3>
+<ul>
+<li>Self-registration → email verification → admin approval → limited access</li>
+<li>RLS-enforced tenant isolation (no role-based gating)</li>
+<li>Clear upgrade path to full customer account</li>
+<li><strong>Automated Discovery → Manual Onboarding:</strong> Ingest creates PENDING_ONBOARDING partners → UI enables profile completion → ACTIVE status</li>
+</ul>
+<h3 id="b2b-document-processing">B2B Document Processing</h3>
+<ul>
+<li>Ingest → parse (structured JSON) → map (organization-specific) → transform → acknowledge</li>
+<li>EDI 210 (PO) → mapping → EDI 997 (ACK) cycle</li>
+<li>Partner-centric document tracking (partnerId links docs to partners)</li>
+</ul>
+<h3 id="unified-user-experience">Unified User Experience</h3>
+<ul>
+<li>Homepage dashboard provides situational awareness on login</li>
+<li>Canvas shows real-time partner health indicators</li>
+<li>One-click navigation from alerts → investigation → retry → resolution</li>
+<li>Seamless flow: problem detection → partner identification → action → recovery</li>
+</ul>
+<h3 id="error-handling-patterns">Error Handling Patterns</h3>
+<ul>
+<li>Error-as-values pattern prevents frontend crashes</li>
+<li>Graceful degradation maintains user experience</li>
+<li>API failures return structured error objects, not exceptions</li>
+<li>UI components handle errors with appropriate user feedback</li>
+</ul>
+<hr />
+<h2 id="related-documentation">Related Documentation</h2>
+<p><strong>Phases 1-10:</strong> Foundation architecture, webhook integration, EDI, Bridge Builder<br />
+<strong>Phases 11-20:</strong> Customer core, enterprise features, admin console, API platform<br />
+<strong>Phases 21-30:</strong> Advanced partner features, unified experience<br />
+<strong>Phase 31+:</strong> To be documented in future phase folders</p>
+<p><strong>Additional Resources:</strong>
+- Architecture: <code>docs/ARCHITECTURE.md</code>
+- Security: <code>docs/security/mtls-guide.md</code>, RLS policies
+- EDI: <code>docs/edi/</code>, example files, technical debt
+- Integration: <code>docs/integrations/</code>, partner inbound, CSV, QBO</p>
+<hr />
+<p><strong>Document Index:</strong> This README provides high-level summaries. Refer to individual phase documents for detailed specifications, acceptance criteria, and implementation notes.</p>
+<p>Visit <a href="phase27-completion-report/">phase27-completion-report.md</a> for comprehensive production-readiness assessment.</p>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

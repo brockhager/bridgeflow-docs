@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://bridgeflow.readthedocs.io/instructions/UI-TESTING/" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>UI Testing Guide — Canvas + Wizard End-to-End Flow - BridgeFlow Docs</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "UI Testing Guide \u2014 Canvas + Wizard End-to-End Flow";
+        var mkdocs_page_input_path = "instructions\\UI-TESTING.md";
+        var mkdocs_page_url = "/instructions/UI-TESTING/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> BridgeFlow Docs
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../ARCHITECTURE/">Architecture</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Current System</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../current/control-tower/">Control Tower</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../current/control-tower/trl7-validation/">TRL 7 Validation</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../current/control-tower/public-api/">Public API</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../current/control-tower/integration-guide/">Integration Guide</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Future Vision</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../vision/">Vision Archive Index</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../roadmap/future-architecture/">BF-INTEGRATION Roadmap</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Phase 60</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../phase-60-gap-analysis/">Gap Analysis</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">BridgeFlow Docs</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">UI Testing Guide — Canvas + Wizard End-to-End Flow</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="ui-testing-guide-canvas-wizard-end-to-end-flow">UI Testing Guide — Canvas + Wizard End-to-End Flow</h1>
+<p>This guide explains how to test the complete user interface flow, from the Canvas landing page through the wizard to backend job execution and email delivery.</p>
+<h2 id="overview">Overview</h2>
+<p>The BridgeFlow UI consists of:
+- <strong>Canvas Landing Page</strong> (<code>web/canvas.html</code>) - Shows available workflow cards
+- <strong>Wizard</strong> (<code>web/index.html</code>) - 5-step invoice automation setup wizard
+- <strong>Backend API</strong> (<code>api/server.js</code>) - Handles job creation and execution
+- <strong>Worker</strong> (<code>api/worker/simulatedWorker.js</code>) - Processes jobs and sends emails</p>
+<h2 id="quick-start-development-mode">Quick Start (Development Mode)</h2>
+<h3 id="1-start-the-api-server-with-dev-worker">1. Start the API server with dev worker</h3>
+<pre><code class="language-bash"># PowerShell
+$env:USE_MOCK_DB=&quot;true&quot;
+$env:NODE_ENV=&quot;development&quot;
+node api/server.js
+</code></pre>
+<p>This will:
+- Start the API server on port 4000
+- Serve the web UI at http://localhost:4000
+- Auto-start the worker loop (processes jobs every 5 seconds)
+- Use the in-memory mock database (no Postgres required)</p>
+<h3 id="2-open-the-canvas-page">2. Open the Canvas page</h3>
+<p>Open your browser to: http://localhost:4000/canvas.html</p>
+<p>You should see:
+- A "BridgeFlow Workflows" header
+- A workflow card titled "Send invoices automatically"
+- A "Setup now" button</p>
+<h3 id="3-test-the-wizard-flow">3. Test the wizard flow</h3>
+<ol>
+<li>Click "Setup now" - The wizard opens in a modal</li>
+<li>Navigate through the wizard steps:</li>
+<li><strong>Welcome</strong>: Click "Start setup"</li>
+<li><strong>Source</strong>: Select "Upload invoice CSV" (recommended)</li>
+<li><strong>Customer</strong>: Select "All customers" or choose specific customers</li>
+<li><strong>Delivery</strong>: Select "Encrypted email with PDF" (default)</li>
+<li>
+<p><strong>Review</strong>: Click "Start sending invoices"</p>
+</li>
+<li>
+<p>Watch the job progress modal:</p>
+</li>
+<li>The modal shows a 4-step progress indicator</li>
+<li>Steps: Preparing → Mapping Data → Sending → Complete</li>
+<li>
+<p>During "Sending", you'll see a live percentage (e.g., "10%... 30%... 95%...")</p>
+</li>
+<li>
+<p>Success screen:</p>
+</li>
+<li>On completion, you'll see: "Success — First invoice sent"</li>
+<li>Click "View Sent Invoice" to see the invoice HTML</li>
+<li>
+<p>Click "Done" to close the modal and return to Canvas</p>
+</li>
+<li>
+<p>Success notification:</p>
+</li>
+<li>A green notification appears in the bottom-right corner</li>
+<li>Shows the job ID that was created</li>
+</ol>
+<h2 id="testing-with-real-emails-ethereal">Testing with Real Emails (Ethereal)</h2>
+<p>To see actual email delivery with preview URLs:</p>
+<pre><code class="language-bash"># PowerShell
+$env:USE_MOCK_DB=&quot;true&quot;
+$env:NODE_ENV=&quot;development&quot;
+node api/server.js
+</code></pre>
+<p>Then, before creating a job through the UI, you need to seed an Ethereal resource. Run the test script once to create it:</p>
+<pre><code class="language-bash">pnpm exec cross-env USE_MOCK_DB=true USE_ETHEREAL=true EMAIL_FROM=bridgeflow@test.ethereal.email EMAIL_TO=test@example.com CLEANUP=false node scripts/test-email-flow.js
+</code></pre>
+<p>This will:
+- Create an Ethereal test email account
+- Print the Ethereal web login URL
+- Create a test job and send an email
+- Leave the Ethereal resource in the mock DB for subsequent UI tests
+- Print the preview URL where you can view the sent email</p>
+<p>After that, use the UI as normal. The worker will use the Ethereal resource and log preview URLs in the console.</p>
+<h2 id="manual-testing-checklist">Manual Testing Checklist</h2>
+<h3 id="canvas-page">Canvas Page</h3>
+<ul>
+<li>[ ] Canvas page loads and displays workflow card</li>
+<li>[ ] Workflow card shows correct title and description</li>
+<li>[ ] "Setup now" button opens the wizard modal</li>
+<li>[ ] Modal has a close button (X) in the top right</li>
+<li>[ ] Clicking outside the modal (backdrop) closes it</li>
+<li>[ ] Pressing ESC key closes the modal</li>
+</ul>
+<h3 id="wizard-navigation">Wizard Navigation</h3>
+<ul>
+<li>[ ] Wizard displays current step (1/5, 2/5, etc.)</li>
+<li>[ ] Step indicators highlight the active step</li>
+<li>[ ] "Next" button advances to the next step</li>
+<li>[ ] "Back" button returns to the previous step</li>
+<li>[ ] All 5 steps can be navigated successfully</li>
+</ul>
+<h3 id="wizard-inputs">Wizard Inputs</h3>
+<ul>
+<li>[ ] Source selection (CSV vs QuickBooks) is saved</li>
+<li>[ ] Customer selection (all vs select) is saved</li>
+<li>[ ] Delivery method (email, portal, partner) is saved</li>
+<li>[ ] Review screen shows all selected options correctly</li>
+</ul>
+<h3 id="job-execution">Job Execution</h3>
+<ul>
+<li>[ ] Clicking "Start sending invoices" opens the progress modal</li>
+<li>[ ] Progress modal shows all 4 steps</li>
+<li>[ ] Steps transition correctly (Preparing → Mapping → Sending → Complete)</li>
+<li>[ ] "Sending" step shows live percentage updates</li>
+<li>[ ] Percentage increases from 0% to 100%</li>
+<li>[ ] On success, the modal updates to show "Success — First invoice sent"</li>
+<li>[ ] Job ID is displayed and can be viewed</li>
+</ul>
+<h3 id="error-handling">Error Handling</h3>
+<ul>
+<li>[ ] If the API is not running, an error is shown</li>
+<li>[ ] If job creation fails, an error message is displayed</li>
+<li>[ ] "Retry" button attempts to create the job again</li>
+<li>[ ] "Close" button dismisses the error modal</li>
+</ul>
+<h3 id="backend-integration">Backend Integration</h3>
+<ul>
+<li>[ ] POST /api/jobs creates a job successfully</li>
+<li>[ ] Job includes customers array from the wizard state</li>
+<li>[ ] GET /api/jobs/:id returns job status and progress</li>
+<li>[ ] Worker processes the job automatically (in dev mode)</li>
+<li>[ ] Job state transitions: PENDING → RETRYING → SUCCEEDED</li>
+<li>[ ] Invoice is created when job succeeds</li>
+<li>[ ] Audit logs are written with email preview URLs</li>
+</ul>
+<h2 id="architecture-notes">Architecture Notes</h2>
+<h3 id="ui-backend-communication">UI → Backend Communication</h3>
+<ul>
+<li>Wizard calls <code>POST /api/jobs</code> with payload containing:</li>
+<li><code>customers</code>: Array of email addresses</li>
+<li><code>type</code>: 'SEND_INVOICE'</li>
+<li><code>source</code>: 'csv' or 'qb'</li>
+<li><code>payload</code>: Delivery options</li>
+<li>Wizard polls <code>GET /api/jobs/:id</code> every 1 second to check progress</li>
+<li>Maximum 30 polls before timeout</li>
+</ul>
+<h3 id="worker-processing">Worker Processing</h3>
+<ul>
+<li>In development mode, the worker runs automatically every 5 seconds</li>
+<li>Worker picks up PENDING jobs and processes them</li>
+<li>Worker resolves email_sender resources from the database</li>
+<li>Worker sends emails via Nodemailer (Ethereal or real SMTP)</li>
+<li>Worker writes audit logs with preview URLs (Ethereal only)</li>
+<li>Worker updates job state and progress</li>
+</ul>
+<h3 id="mock-database">Mock Database</h3>
+<ul>
+<li>Uses in-memory storage (no Postgres required)</li>
+<li>Resets on server restart</li>
+<li>Safe for development and testing</li>
+<li>To persist resources between UI tests, set CLEANUP=false in test-email-flow.js</li>
+</ul>
+<h2 id="troubleshooting">Troubleshooting</h2>
+<h3 id="problem-modal-doesnt-open">Problem: Modal doesn't open</h3>
+<ul>
+<li>Check browser console for JavaScript errors</li>
+<li>Ensure the wizard iframe path is correct (<code>./index.html</code>)</li>
+</ul>
+<h3 id="problem-job-creation-fails-400-error">Problem: Job creation fails (400 error)</h3>
+<ul>
+<li>Check that the wizard state includes a valid <code>customers</code> array</li>
+<li>Verify the payload structure matches the API schema</li>
+</ul>
+<h3 id="problem-job-stays-in-pending-state">Problem: Job stays in PENDING state</h3>
+<ul>
+<li>Ensure the worker loop is running (should see "Dev worker loop started" in server logs)</li>
+<li>Check server logs for worker processing messages</li>
+<li>Verify USE_MOCK_DB=true is set</li>
+</ul>
+<h3 id="problem-job-fails-with-bad-sender-address-syntax">Problem: Job fails with "Bad sender address syntax"</h3>
+<ul>
+<li>An email_sender resource exists but has an invalid FROM address</li>
+<li>Reset the mock DB by restarting the server</li>
+<li>Or seed a new Ethereal resource with a valid FROM address</li>
+</ul>
+<h3 id="problem-no-preview-url-in-audit-logs">Problem: No preview URL in audit logs</h3>
+<ul>
+<li>Ensure USE_ETHEREAL=true when creating the resource</li>
+<li>Ethereal preview URLs are only available when using nodemailer.createTestAccount()</li>
+<li>Check that the resource config includes <code>ethereal: true</code></li>
+</ul>
+<h2 id="next-steps">Next Steps</h2>
+<ol>
+<li><strong>Add CSV parsing</strong>: Parse uploaded CSV files and extract customer emails</li>
+<li><strong>Improve error messages</strong>: Show user-friendly error messages in the wizard</li>
+<li><strong>Add job history</strong>: Show a list of past jobs on the Canvas page</li>
+<li><strong>Real-time updates</strong>: Use WebSockets or SSE for live job progress updates</li>
+<li><strong>Add tests</strong>: Write automated UI tests using Playwright or Cypress</li>
+</ol>
+<h2 id="related-documentation">Related Documentation</h2>
+<ul>
+<li><a href="../TESTING/">TESTING.md</a> - Backend E2E testing with mock DB</li>
+<li><a href="../test-email-flow/">test-email-flow.md</a> - CLI test script usage</li>
+<li><a href="../mysql-testing/">mysql-testing.md</a> - Optional MySQL local testing</li>
+<li><a href="../../design/phase1a-wizard/">Phase 1A Wizard Spec</a> - Original UX specification</li>
+</ul>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

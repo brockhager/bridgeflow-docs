@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://bridgeflow.readthedocs.io/vision/bf-integration/docs/phases/phases11-20/phase-18/18A-in-progress/" />
+      <link rel="shortcut icon" href="../../../../../../../img/favicon.ico" />
+    <title>18A in progress - BridgeFlow Docs</title>
+    <link rel="stylesheet" href="../../../../../../../css/theme.css" />
+    <link rel="stylesheet" href="../../../../../../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "18A in progress";
+        var mkdocs_page_input_path = "vision\\bf-integration\\docs\\phases\\phases11-20\\phase-18\\18A-in-progress.md";
+        var mkdocs_page_url = "/vision/bf-integration/docs/phases/phases11-20/phase-18/18A-in-progress/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../../../../../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../../../../../../.." class="icon icon-home"> BridgeFlow Docs
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../../../../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../../../../..">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../../../../../ARCHITECTURE/">Architecture</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Current System</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../../current/control-tower/">Control Tower</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../../current/control-tower/trl7-validation/">TRL 7 Validation</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../../current/control-tower/public-api/">Public API</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../../current/control-tower/integration-guide/">Integration Guide</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Future Vision</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../">Vision Archive Index</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../../roadmap/future-architecture/">BF-INTEGRATION Roadmap</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Phase 60</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../../phase-60-gap-analysis/">Gap Analysis</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../../../..">BridgeFlow Docs</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../../../../../.." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">18A in progress</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <blockquote>
+<p>[!WARNING]
+Status: Planned / In Development
+Context: Original BF-INTEGRATION Vision (Pre-Phase 30)</p>
+</blockquote>
+<h1 id="18a-idempotency-migration-middleware-in-progress">18A — Idempotency Migration &amp; Middleware — In Progress</h1>
+<p>Status: In Progress (Agent4)</p>
+<p>Actions completed (initial):
+- Added Prisma model <code>IdempotencyKey</code> and SQL migration template: <code>scripts/migrations/2025-12-29_add_idempotency_and_rls.sql</code> ✅
+- Fixed Prisma schema (composite @@id) and successfully ran <code>pnpm run migrate:dev</code> locally; migration applied to configured DB ✅
+- Implemented tenant context (<code>api/lib/tenantContext.js</code>) and Prisma middleware to inject tenant filters on tenant-scoped models (<code>api/lib/db.js</code>) ✅
+- Implemented idempotency middleware (<code>api/lib/middleware/idempotency.js</code>) and added tests (<code>test/middleware/idempotency.test.js</code>) ✅
+- Enabled idempotency middleware on <code>/api/trading-partners</code> route (server scaffold) and wrote tests proving:
+  - duplicate creation without idempotency header returns 409 ✅
+  - same idempotency key returns stored response on second request ✅
+- Added S3 flush worker scaffold and Redis stream fallback for ingestion pipeline (Phase 18C scaffold) ✅</p>
+<p>Next steps (short-term):
+- Stabilize tests and address small integration issues on Windows (Prisma generate EPERM on file rename) — investigate CI-friendly generator flow
+- Add pruning job for old idempotency keys (cron) and monitoring
+- Create PR, mark GitHub Issue 18A as "In Progress" and add comment linking PR &amp; initial commit</p>
+<p>Notes / blockers:
+- Local vitest runs on Windows experienced an EPERM during Prisma client generate (rename of query_engine dll) intermittently; may be due to file locking by antivirus or parallel generation attempts. Investigating.
+- Tenant enforcement default is permissive; set <code>TENANT_ENFORCE=true</code> in environments where strict per-tenant enforcement is required.</p>
+<p>Timebox: initial implementation completed within the allocated 4 hours.</p>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+    
+  </span>
+</div>
+    <script src="../../../../../../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../../../../../../..";</script>
+    <script src="../../../../../../../js/theme_extra.js"></script>
+    <script src="../../../../../../../js/theme.js"></script>
+      <script src="../../../../../../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

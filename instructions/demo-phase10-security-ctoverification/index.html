@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://bridgeflow.readthedocs.io/instructions/demo-phase10-security-ctoverification/" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>Demo: Phase 10 Security Verification (CTO) - BridgeFlow Docs</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Demo: Phase 10 Security Verification (CTO)";
+        var mkdocs_page_input_path = "instructions\\demo-phase10-security-ctoverification.md";
+        var mkdocs_page_url = "/instructions/demo-phase10-security-ctoverification/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> BridgeFlow Docs
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../ARCHITECTURE/">Architecture</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Current System</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../current/control-tower/">Control Tower</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../current/control-tower/trl7-validation/">TRL 7 Validation</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../current/control-tower/public-api/">Public API</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../current/control-tower/integration-guide/">Integration Guide</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Future Vision</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../vision/">Vision Archive Index</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../roadmap/future-architecture/">BF-INTEGRATION Roadmap</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Phase 60</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../phase-60-gap-analysis/">Gap Analysis</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">BridgeFlow Docs</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">Demo: Phase 10 Security Verification (CTO)</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="demo-phase-10-security-verification-cto">Demo: Phase 10 Security Verification (CTO)</h1>
+<p><strong>Goal:</strong> Provide a short, 30-minute demo script for the CTO to verify Phase 10 security (RBAC, audit, job lockdown, friendly 401/403 UX). ✅</p>
+<hr />
+<h2 id="overview">Overview ✨</h2>
+<ul>
+<li>Timebox: <strong>30 minutes</strong> (setup + verification)</li>
+<li>Top-level checks:</li>
+<li>Start secure dev server with job lockdown &amp; RBAC enabled</li>
+<li>Create dev users (user + operator)</li>
+<li>Verify unauthenticated requests fail (401)</li>
+<li>Verify user can create jobs but cannot perform operator-only actions (403)</li>
+<li>Verify operator can perform privileged actions</li>
+<li>Confirm audit logs contain relevant events</li>
+<li>Validate friendly 401/403 messages in the UI</li>
+</ul>
+<hr />
+<h2 id="quick-prereqs">Quick Prereqs 🔧</h2>
+<ul>
+<li>Node.js (v18+ recommended)</li>
+<li>pnpm installed</li>
+<li>From repo root: c:\JS\bridgeflow</li>
+<li>Ensure migrations are applied if you use a real DB; tests use mock DB by default.</li>
+</ul>
+<hr />
+<h2 id="commands-get-started">Commands — get started ▶️</h2>
+<p>1) Start secure dev server (PowerShell):</p>
+<pre><code class="language-powershell">pnpm run dev:secure
+# This runs the API with LOCKDOWN_JOBS=true REQUIRE_AUTH=true ENFORCE_RBAC=true
+# Server listens on http://localhost:4000
+</code></pre>
+<p>2) Create dev users (runs registration flows and prints credentials):</p>
+<pre><code class="language-powershell"># Recommended: include super admin email in env so admin is recognized
+$env:SUPER_ADMINS='dev-op@example.com'
+node scripts/create-dev-users.mjs
+# Look for printed lines like: dev user: &lt;email&gt; / password: &lt;secret&gt;
+# and super admin user: &lt;email&gt; / password: &lt;secret&gt;
+</code></pre>
+<p>Note: If the script cannot reach the running API (network/server not ready), it will fall back to creating the user records directly in the database. If you prefer to always create users directly, run <code>node scripts/create-dev-users-direct.mjs</code> instead.</p>
+<p>3) (Quick automated verification) Run in-process verification script:</p>
+<pre><code class="language-powershell">node scripts/verify-job-lockdown.mjs
+</code></pre>
+<p>If the API server cannot be started locally (network issues), you can validate the auth handler directly (no network) using:</p>
+<pre><code class="language-powershell">node scripts/test-login-inject.mjs
+# Use $env:TEST_EMAIL and $env:TEST_PASS to test specific credentials
+# Use $env:SUPER_ADMINS to validate super admin role detection
+</code></pre>
+<p>Expected high-level outputs (from the verification script):
+- Unauthenticated POST /api/jobs -&gt; <strong>401</strong>
+- User registration/login -&gt; tokens/cookies returned
+- User POST /api/jobs -&gt; <strong>201 Created</strong>
+- User worker.run -&gt; <strong>403 Forbidden</strong>
+- Super admin worker.run -&gt; <strong>200 OK</strong>
+- GET /api/audit -&gt; <strong>200</strong> with audit events</p>
+<p>4) Run test-suite (sanity):</p>
+<pre><code class="language-powershell">pnpm -s test
+# Expect: all tests pass (26 passed, 1 skipped as in CI)
+</code></pre>
+<hr />
+<h2 id="manual-verification-steps-recommended-for-cto">Manual verification steps (recommended for CTO) 🧭</h2>
+<p>1) Start the secure server (see commands above).
+2) Create dev users (script above) or create via the UI register flow.
+3) In a browser, open the Hub/UI at: <code>http://localhost:4000/</code> (or specific pages: <code>/login</code>, <code>bridge-form.html</code>, <code>wizard.html</code>).</p>
+<p>4) Verify authentication flows:
+- Attempt a privileged action while not signed in (e.g., call <code>POST /api/jobs</code> via the UI action or curl) → you should be redirected to login and see a friendly notification: "Session expired — please sign in." and the UI should record the post-login action for replay.</p>
+<p>5) Verify user vs super admin permission boundaries:
+- Login as <strong>dev user</strong> and create a job via the Wizard. Expect <strong>201 Created</strong>.
+- As the dev user, attempt to run the worker action that requires admin privileges (UI control or <code>POST /api/worker/run</code>) → Expect <strong>403</strong> and a friendly permission message informing required permission (e.g., <code>Required: jobs:write</code>).
+- Login as <strong>super admin</strong> and perform the same worker action → Expect <strong>200</strong> and successful run; audit events should be recorded.</p>
+<p>6) Audit verification:
+- GET <code>/api/audit</code> (requires <code>audit:read</code>) — confirm entries exist for job creation, worker runs, and permission denials.</p>
+<p>Sample curl (manual API checks):</p>
+<pre><code class="language-bash"># Unauthenticated should yield 401
+curl -i -X POST http://localhost:4000/api/jobs -H &quot;Content-Type: application/json&quot; -d '{&quot;type&quot;:&quot;SEND_INVOICE&quot;,&quot;payload&quot;:{}}'
+
+# If you have a Bearer token:
+curl -i -X POST http://localhost:4000/api/jobs -H &quot;Authorization: Bearer &lt;token&gt;&quot; -H &quot;Content-Type: application/json&quot; -d '{&quot;type&quot;:&quot;SEND_INVOICE&quot;,&quot;payload&quot;:{}}'
+</code></pre>
+<blockquote>
+<p>Tip: Use <code>node scripts/verify-job-lockdown.mjs</code> for a deterministic run that prints results and assertions.</p>
+</blockquote>
+<hr />
+<h2 id="verification-checklist">Verification Checklist ✅</h2>
+<ul>
+<li>[ ] Secure server started with <code>LOCKDOWN_JOBS</code>, <code>REQUIRE_AUTH</code>, <code>ENFORCE_RBAC</code> enabled</li>
+<li>[ ] <code>create-dev-users.mjs</code> completed and both dev user and super admin accounts exist</li>
+<li>[ ] Unauthenticated <code>POST /api/jobs</code> returns <strong>401</strong></li>
+<li>[ ] Authenticated dev user can <strong>create</strong> job (201)</li>
+<li>[ ] Dev user cannot perform admin actions (403)</li>
+<li>[ ] Operator can perform operator actions (200)</li>
+<li>[ ] Audit entries present for create/job/run/permission-denied</li>
+<li>[ ] Friendly 401 → notification &amp; redirect to login is shown in UI</li>
+<li>[ ] Friendly 403 → permission message shown and logs include missing permission</li>
+</ul>
+<p><strong>Success criteria:</strong> All checks above pass and <code>scripts/verify-job-lockdown.mjs</code> exits with success and test suite is green.</p>
+<hr />
+<h2 id="runbook-troubleshooting">Runbook / Troubleshooting 🛠️</h2>
+<p>Problem: <code>node scripts/create-dev-users.mjs</code> fails with connection refused
+- Cause: server not fully up yet or network issue
+- Fix: wait 2–5 seconds and retry; check server logs for startup messages.
+- Workaround: the script will automatically fall back to direct DB insertion if it cannot reach the API. You can also run <code>node scripts/create-dev-users-direct.mjs</code> to create users directly in the DB.</p>
+<p>Problem: <code>create-dev-users</code> error about <code>fetch</code> not found
+- Cause: Node too old or global fetch missing
+- Fix: Use Node v18+ or run <code>node --experimental-fetch scripts/create-dev-users.mjs</code> (script already has fetch fallback in most dev setups).</p>
+<p>Problem: 403 returned but super admin is expected to succeed
+- Check <code>SUPER_ADMINS</code> environment variable — it must include the admin email
+- Check server console logs for RBAC decision logs (api/lib/rbac.js outputs).</p>
+<p>Problem: No audit entries
+- Ensure <code>writeAudit</code> is wired where the action occurs (jobs, worker) — check server logs for <code>Audit</code> write events.
+- Confirm DB has audit table or using mock DB (mock DB may keep audit events in memory for tests).</p>
+<p>Useful logs and checks:
+- Server stdout for <code>JOB_STARTED</code>, <code>JOB_SUCCEEDED</code>, <code>JOB_FAILED</code> messages.
+- API request/response logs when running <code>pnpm run dev:secure</code>.</p>
+<hr />
+<h2 id="optional-assets-quick-guides">Optional assets &amp; quick guides 📸</h2>
+<ul>
+<li>Terminal recording suggestion (cross-platform):</li>
+<li>Linux/macOS: <code>asciinema rec demo.cast</code> (stop with <code>Ctrl-D</code>), upload to asciinema.org</li>
+<li>Windows PowerShell: <code>Start-Transcript -Path .\demo-transcript.txt</code> before the session and <code>Stop-Transcript</code> after</li>
+<li>Screenshots to capture:</li>
+<li>Login page + notification on 401</li>
+<li>Successful job creation confirmation</li>
+<li>403 permission notification</li>
+<li>Audit query showing entries</li>
+<li>Quick reference cheat (commands):</li>
+<li>Start server: <code>pnpm run dev:secure</code></li>
+<li>Create users: <code>node scripts/create-dev-users.mjs</code></li>
+<li>Verify: <code>node scripts/verify-job-lockdown.mjs</code></li>
+<li>Run tests: <code>pnpm -s test</code></li>
+</ul>
+<hr />
+<h2 id="agenda-for-the-30-minute-cto-verification-session">Agenda for the 30-minute CTO verification session</h2>
+<p>1) (5m) Start secure server &amp; create dev users
+2) (10m) Walk through automated verification script and review outputs
+3) (10m) Manual UI checks (login, create job, try operator action as user, then as operator)
+4) (3m) Confirm audit entries and discuss roll-out plan
+2) (2m) Wrap-up &amp; acceptance criteria</p>
+<hr />
+<p>If you'd like, I can also:
+- Provide a short recorded terminal session (asciinema or transcript) for the CTO
+- Produce a 1-page PDF cheat sheet for the session</p>
+<hr />
+<p><em>File location:</em> <code>docs/instructions/demo-phase10-security-ctoverification.md</code></p>
+<p>If this looks good I will mark the demo materials done and prepare the optional terminal recording/screenshot assets.</p>
+<hr />
+<h2 id="recent-fixes-dec-22-2025">Recent fixes (dec 22, 2025) 🔧</h2>
+<ul>
+<li>Fixed Hub login form JavaScript calling the wrong endpoint (<code>/auth/login</code> → <strong>now</strong> calls <code>/api/auth/login</code>). This resolves the "POST /auth/login Not Found" error reported in the verification run.</li>
+<li><code>create-dev-users.mjs</code> now falls back to direct DB insertion if the API is unreachable; see <code>scripts/create-dev-users-direct.mjs</code> for an always-direct option.</li>
+</ul>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

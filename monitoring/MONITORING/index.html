@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://bridgeflow.readthedocs.io/monitoring/MONITORING/" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>BridgeFlow Monitoring Guide - BridgeFlow Docs</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "BridgeFlow Monitoring Guide";
+        var mkdocs_page_input_path = "monitoring\\MONITORING.md";
+        var mkdocs_page_url = "/monitoring/MONITORING/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> BridgeFlow Docs
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../ARCHITECTURE/">Architecture</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Current System</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../current/control-tower/">Control Tower</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../current/control-tower/trl7-validation/">TRL 7 Validation</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../current/control-tower/public-api/">Public API</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../current/control-tower/integration-guide/">Integration Guide</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Future Vision</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../vision/">Vision Archive Index</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../roadmap/future-architecture/">BF-INTEGRATION Roadmap</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Phase 60</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../phase-60-gap-analysis/">Gap Analysis</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">BridgeFlow Docs</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">BridgeFlow Monitoring Guide</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="bridgeflow-monitoring-guide">BridgeFlow Monitoring Guide</h1>
+<h2 id="overview">Overview</h2>
+<p>BridgeFlow includes basic monitoring capabilities for tracking system health and job metrics.</p>
+<h2 id="health-endpoints">Health Endpoints</h2>
+<h3 id="get-health-detailed-health-check">GET /health (Detailed Health Check)</h3>
+<p>Returns comprehensive system status and metrics.</p>
+<p><strong>Example Request:</strong></p>
+<pre><code class="language-bash">curl http://localhost:4000/health
+</code></pre>
+<p><strong>Example Response:</strong></p>
+<pre><code class="language-json">{
+  &quot;status&quot;: &quot;healthy&quot;,
+  &quot;timestamp&quot;: &quot;2025-12-16T18:30:00.000Z&quot;,
+  &quot;uptime&quot;: 3600,
+  &quot;version&quot;: &quot;1.0.0&quot;,
+  &quot;environment&quot;: &quot;production&quot;,
+  &quot;database&quot;: {
+    &quot;status&quot;: &quot;healthy&quot;,
+    &quot;responseTime&quot;: &quot;12ms&quot;
+  },
+  &quot;metrics&quot;: {
+    &quot;jobs&quot;: {
+      &quot;total&quot;: 150,
+      &quot;succeeded&quot;: 120,
+      &quot;failed&quot;: 25,
+      &quot;pending&quot;: 5,
+      &quot;successRate&quot;: &quot;82.76%&quot;,
+      &quot;jobsPerHour&quot;: 15
+    }
+  },
+  &quot;recentActivity&quot;: [
+    {
+      &quot;id&quot;: &quot;cmj8x5kpu0000wz5hh4boyjkm&quot;,
+      &quot;state&quot;: &quot;FAILED&quot;,
+      &quot;age&quot;: &quot;120s ago&quot;
+    }
+  ],
+  &quot;responseTime&quot;: &quot;145ms&quot;
+}
+</code></pre>
+<h3 id="get-well-knownhealth-simple-health-check">GET /.well-known/health (Simple Health Check)</h3>
+<p>Returns minimal health status for load balancers.</p>
+<p><strong>Example Response:</strong></p>
+<pre><code class="language-json">{
+  &quot;status&quot;: &quot;ok&quot;
+}
+</code></pre>
+<h3 id="temporary-bypass-for-vault-compliance-previewtest-only">Temporary Bypass for Vault Compliance (Preview/Test Only)</h3>
+<p>In some preview or infra-validation deployments where Vault is not yet available (for example, Railway preview environments), you can temporarily bypass the Vault credential compliance check by setting the environment variable <code>SKIP_VAULT_COMPLIANCE=true</code>.</p>
+<ul>
+<li><strong>Use only</strong> in preview, test, or infra-validation deployments (e.g., Railway previews before Vault integration).</li>
+<li><strong>Never enable</strong> in production once Vault is provisioned.</li>
+<li>When set, the server logs a clear warning such as:</li>
+</ul>
+<pre><code class="language-text">⚠️ SKIP_VAULT_COMPLIANCE=true - Continuing startup despite compliance violations (temporary/preview environment).
+</code></pre>
+<p>This escape hatch allows the server to start and ensures <code>/.well-known/health</code> responds successfully even when Vault-managed secrets are not available. Treat this as a temporary measure and prioritize provisioning Vault and removing the flag as soon as possible.</p>
+<h2 id="metrics">Metrics</h2>
+<h3 id="job-metrics">Job Metrics</h3>
+<p>The health endpoint provides the following job metrics:</p>
+<ul>
+<li><strong>total</strong>: Total number of jobs in the system</li>
+<li><strong>succeeded</strong>: Number of successfully completed jobs</li>
+<li><strong>failed</strong>: Number of failed jobs</li>
+<li><strong>pending</strong>: Number of jobs awaiting processing</li>
+<li><strong>successRate</strong>: Percentage of successful jobs (succeeded / (succeeded + failed))</li>
+<li><strong>jobsPerHour</strong>: Number of jobs created in the last hour</li>
+</ul>
+<h3 id="database-metrics">Database Metrics</h3>
+<ul>
+<li><strong>status</strong>: Database connection status (healthy/unhealthy)</li>
+<li><strong>responseTime</strong>: Database query response time</li>
+</ul>
+<h2 id="job-event-logging">Job Event Logging</h2>
+<p>Job events are logged in JSON format for easy parsing and monitoring.</p>
+<h3 id="log-events">Log Events</h3>
+<ul>
+<li><code>JOB_CREATED</code>: When a new job is created</li>
+<li><code>JOB_STARTED</code>: When worker begins processing a job</li>
+<li><code>JOB_SUCCEEDED</code>: When a job completes successfully</li>
+<li><code>JOB_FAILED</code>: When a job fails after max retries</li>
+<li><code>JOB_RETRYING</code>: When a job is scheduled for retry</li>
+<li><code>TASK_COMPLETED</code>: When an individual task completes</li>
+<li><code>TASK_FAILED</code>: When an individual task fails</li>
+</ul>
+<h3 id="log-format">Log Format</h3>
+<pre><code class="language-json">{
+  &quot;timestamp&quot;: &quot;2025-12-16T18:30:00.000Z&quot;,
+  &quot;level&quot;: &quot;INFO&quot;,
+  &quot;message&quot;: &quot;Job completed successfully&quot;,
+  &quot;jobId&quot;: &quot;cmj8x5kpu0000wz5hh4boyjkm&quot;,
+  &quot;event&quot;: &quot;JOB_SUCCEEDED&quot;,
+  &quot;successCount&quot;: 5,
+  &quot;total&quot;: 5,
+  &quot;invoiceId&quot;: &quot;inv_123&quot;
+}
+</code></pre>
+<h3 id="log-levels">Log Levels</h3>
+<ul>
+<li><strong>ERROR</strong>: Job failures, task failures, system errors</li>
+<li><strong>WARN</strong>: Job retries, degraded performance</li>
+<li><strong>INFO</strong>: Job creation, job completion, task completion</li>
+<li><strong>DEBUG</strong>: Detailed debugging information</li>
+</ul>
+<h2 id="monitoring-best-practices">Monitoring Best Practices</h2>
+<h3 id="1-health-check-polling">1. Health Check Polling</h3>
+<p>Set up automated health checks every 30-60 seconds:</p>
+<pre><code class="language-bash"># Cron job example (every minute)
+* * * * * curl -f http://localhost:4000/.well-known/health || alert-team
+</code></pre>
+<h3 id="2-log-aggregation">2. Log Aggregation</h3>
+<p>Use a log aggregation tool (e.g., ELK Stack, Splunk, Datadog) to:
+- Parse JSON logs
+- Create dashboards for job success rates
+- Set up alerts for error patterns
+- Track job processing times</p>
+<h3 id="3-metrics-dashboards">3. Metrics Dashboards</h3>
+<p>Key metrics to track:
+- Success rate over time
+- Jobs per hour
+- Average job processing time
+- Failed job count
+- Pending job backlog</p>
+<h3 id="4-alerting-rules">4. Alerting Rules</h3>
+<p>Recommended alerts:
+- Health endpoint returns 503 (unhealthy)
+- Success rate drops below 80%
+- Pending jobs exceed threshold (e.g., &gt; 100)
+- Database response time &gt; 500ms
+- No jobs processed in last hour (if expected)</p>
+<h2 id="troubleshooting">Troubleshooting</h2>
+<h3 id="database-connectivity-issues">Database Connectivity Issues</h3>
+<p>If health endpoint shows <code>database.status: "unhealthy"</code>:
+1. Check DATABASE_URL environment variable
+2. Verify database is running
+3. Check network connectivity
+4. Review database logs</p>
+<h3 id="high-failure-rate">High Failure Rate</h3>
+<p>If <code>metrics.jobs.successRate</code> is low:
+1. Check recent error logs for patterns
+2. Review failed job details in history page
+3. Verify email sender configuration
+4. Check for network/SMTP issues</p>
+<h3 id="growing-pending-queue">Growing Pending Queue</h3>
+<p>If <code>metrics.jobs.pending</code> is increasing:
+1. Check if worker is running (dev mode: NODE_ENV=development)
+2. Verify worker processing jobs (check logs)
+3. Consider scaling worker capacity
+4. Review job backoff/retry configuration</p>
+<h2 id="metrics-persistence-aggregator">Metrics persistence &amp; aggregator</h2>
+<p>The system now persists aggregate metrics for historical queries. A background worker parses structured logs (from <code>AuditLog</code>) and writes hourly aggregates to the <code>MetricAggregate</code> table (schema updated in <code>prisma/schema.prisma</code>).</p>
+<p>Run the aggregator once:</p>
+<pre><code class="language-bash">pnpm run worker:metrics-aggregator
+</code></pre>
+<p>Migration &amp; smoke-test checklist</p>
+<ol>
+<li>Apply the migration and generate Prisma client (local/dev):</li>
+</ol>
+<pre><code class="language-bash"># apply new migration and generate client
+pnpm run migrate:metrics
+pnpm run prisma:generate
+</code></pre>
+<ol>
+<li>Backfill once using the aggregator to populate hourly aggregates:</li>
+</ol>
+<pre><code class="language-bash">pnpm run worker:metrics-aggregator
+</code></pre>
+<ol>
+<li>Smoke tests (basic verification):</li>
+<li>Check <code>MetricAggregate</code> table exists and contains rows: <code>SELECT count(*) FROM "MetricAggregate";</code></li>
+<li>Verify <code>GET /api/metrics/summary?group=jobs</code> returns non-empty totals after backfill</li>
+<li>Confirm <code>/admin/metrics</code> dashboard loads and displays charts</li>
+<li>Run unit/integration tests: <code>pnpm test</code> and ensure monitoring tests pass</li>
+</ol>
+<p>Rollback plan</p>
+<p>If you must rollback the migration in an emergency, you can drop the metric tables (manual SQL rollback):</p>
+<pre><code class="language-sql">DROP TABLE IF EXISTS &quot;MetricAggregate&quot; CASCADE;
+DROP TABLE IF EXISTS &quot;MetricCursor&quot; CASCADE;
+</code></pre>
+<p>After rollback, re-run <code>pnpm run prisma:generate</code> to sync the Prisma client.</p>
+<p>Endpoints to query persisted metrics:
+- <code>GET /api/metrics/timeseries?metricKey=&lt;prefix or key&gt;&amp;orgId=&lt;org&gt;&amp;from=&lt;ISO&gt;&amp;to=&lt;ISO&gt;</code> — returns time series grouped by <code>metricKey</code>
+- <code>GET /api/metrics/summary?group=jobs|api|onboarding|errors&amp;orgId=&lt;org&gt;&amp;from=&lt;ISO&gt;&amp;to=&lt;ISO&gt;</code> — returns aggregated summary (e.g., job success rate)</p>
+<p>This enables enterprise dashboards and historical trend analysis without external dependencies.</p>
+<h2 id="future-enhancements">Future Enhancements</h2>
+<p>Planned monitoring improvements:
+- Prometheus metrics endpoint
+- Grafana dashboard templates
+- Custom metric exports
+- Performance profiling
+- Distributed tracing
+- Real-time metrics streaming</p>
+<h2 id="related-documentation">Related Documentation</h2>
+<ul>
+<li><a href="RAILWAY-SETUP.md">Railway Setup</a> - Database configuration</li>
+<li><a href="instructions/TESTING.md">Testing Guide</a> - Testing procedures</li>
+<li><a href="task-list-2.md">Task Board</a> - Project progress tracking</li>
+</ul>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

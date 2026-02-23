@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://bridgeflow.readthedocs.io/phases/phases21-30/phase25-complete/" />
+      <link rel="shortcut icon" href="../../../img/favicon.ico" />
+    <title>Phase 25: PO-to-Acknowledgment Cycle — Complete Scope ✅ - BridgeFlow Docs</title>
+    <link rel="stylesheet" href="../../../css/theme.css" />
+    <link rel="stylesheet" href="../../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Phase 25: PO-to-Acknowledgment Cycle \u2014 Complete Scope \u2705";
+        var mkdocs_page_input_path = "phases\\phases21-30\\phase25-complete.md";
+        var mkdocs_page_url = "/phases/phases21-30/phase25-complete/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../../.." class="icon icon-home"> BridgeFlow Docs
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../..">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../ARCHITECTURE/">Architecture</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Current System</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../current/control-tower/">Control Tower</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../current/control-tower/trl7-validation/">TRL 7 Validation</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../current/control-tower/public-api/">Public API</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../current/control-tower/integration-guide/">Integration Guide</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Future Vision</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../vision/">Vision Archive Index</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../roadmap/future-architecture/">BF-INTEGRATION Roadmap</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Phase 60</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../phase-60-gap-analysis/">Gap Analysis</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../..">BridgeFlow Docs</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../.." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">Phase 25: PO-to-Acknowledgment Cycle — Complete Scope ✅</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="phase-25-po-to-acknowledgment-cycle-complete-scope">Phase 25: PO-to-Acknowledgment Cycle — Complete Scope ✅</h1>
+<p><strong>Status:</strong> Complete — ready for pilot deployments</p>
+<p>This document captures the full Phase 25 scope and verification checklist. This is a production-ready B2B integration workflow for EDI 210 → 997 acknowledgments.</p>
+<h2 id="1-document-ingestion">1. Document Ingestion</h2>
+<ul>
+<li>POST <code>/api/documents</code> accepts raw EDI 210 (text/plain or JSON payload with content string)</li>
+<li>Validates basic syntax</li>
+<li>Stores received payload in the Document table with status = <code>RECEIVED</code></li>
+</ul>
+<h2 id="2-real-edi-parsing">2. Real EDI Parsing</h2>
+<ul>
+<li>Uses <code>x12-parser</code> to parse EDI 210</li>
+<li>Extracts key fields: shipmentId (BSN), weight &amp; weightUnit (L5), sender and receiver</li>
+<li>Returns structured JSON used by downstream mapping</li>
+</ul>
+<h2 id="3-mapping-engine">3. Mapping Engine</h2>
+<ul>
+<li>Applies organization-specific mapping rules (stored on <code>Mapping</code>)</li>
+<li>Transforms parsed 210 → canonical internal format (example: <code>{ externalId, totalWeight, weightUnit, sender }</code>)</li>
+<li>Stores mapping result in <code>Document.canonicalContent</code></li>
+</ul>
+<h2 id="4-acknowledgment-generation">4. Acknowledgment Generation</h2>
+<ul>
+<li><code>generate997.js</code> creates a valid EDI 997 acknowledgment from the original 210</li>
+<li>Swaps sender/receiver in ISA/GS for the ACK</li>
+<li>Uses original control numbers where applicable</li>
+<li>Sets <code>AK5*A</code> (accepted) for now (success case)</li>
+<li>Stores generated 997 in <code>Document.ackContent</code></li>
+<li>Updates document <code>status</code> to <code>ACK_GENERATED</code></li>
+</ul>
+<h2 id="5-ack-access">5. ACK Access</h2>
+<ul>
+<li><code>GET /api/documents/:id/ack</code> returns the plain-text 997 (Content-Type: text/plain)</li>
+<li>Returns 404 if no ACK exists for the document</li>
+</ul>
+<h2 id="6-data-model-document">6. Data Model (Document)</h2>
+<p>Key fields used by Phase 25:
+- <code>content</code> (raw EDI payload)
+- <code>canonicalContent</code> (mapped JSON)
+- <code>ackContent</code> (generated 997 EDI)
+- <code>status</code> (RECEIVED → PARSING → PROCESSED → ACK_GENERATED)
+- <code>organizationId</code> and tenant/ownership fields (used for RBAC)</p>
+<blockquote>
+<p>Note: internally we store the raw EDI as <code>content</code> (phase semantics document it as rawContent for clarity).</p>
+</blockquote>
+<h2 id="7-testing">7. Testing</h2>
+<ul>
+<li>Unit tests:</li>
+<li><code>edi210.test.js</code> (parser)</li>
+<li><code>applyMapping.test.js</code> (mapper)</li>
+<li><code>generate997.test.js</code> (997 generator)</li>
+<li>Integration tests:</li>
+<li>End-to-end ingestion → mapping</li>
+<li>End-to-end ACK generation → retrieval via <code>/api/documents/:id/ack</code></li>
+</ul>
+<h2 id="8-demo-docs">8. Demo &amp; Docs</h2>
+<ul>
+<li><code>start/start-ctodemo.ps1</code> demonstrates the flow: sends a sample 210 and fetches the generated 997</li>
+<li>This file (<code>docs/phases/phase25-complete.md</code>) documents the milestone and verification steps</li>
+</ul>
+<hr />
+<h2 id="not-in-phase-25-saved-for-phase-26">Not in Phase 25 (Saved for Phase 26+)</h2>
+<ul>
+<li>Job queues and background workers for async processing</li>
+<li>Email/SMS alerts / external notification channels</li>
+<li><code>/alerts</code> dashboard and live monitoring UI</li>
+<li>Built-in retry logic and retry policies</li>
+<li>Support for additional transaction sets (850, 810, etc.)</li>
+</ul>
+<hr />
+<p>This milestone completes the core PO → ACK cycle for EDI 210 and is ready for pilot testing and initial production use.</p>
+<p>— BridgeFlow Team</p>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+    
+  </span>
+</div>
+    <script src="../../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../../..";</script>
+    <script src="../../../js/theme_extra.js"></script>
+    <script src="../../../js/theme.js"></script>
+      <script src="../../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

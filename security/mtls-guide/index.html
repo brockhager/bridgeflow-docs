@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://bridgeflow.readthedocs.io/security/mtls-guide/" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>mTLS (Mutual TLS) Authentication Guide - BridgeFlow Docs</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "mTLS (Mutual TLS) Authentication Guide";
+        var mkdocs_page_input_path = "security\\mtls-guide.md";
+        var mkdocs_page_url = "/security/mtls-guide/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> BridgeFlow Docs
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../ARCHITECTURE/">Architecture</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Current System</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../current/control-tower/">Control Tower</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../current/control-tower/trl7-validation/">TRL 7 Validation</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../current/control-tower/public-api/">Public API</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../current/control-tower/integration-guide/">Integration Guide</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Future Vision</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../vision/">Vision Archive Index</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../roadmap/future-architecture/">BF-INTEGRATION Roadmap</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Phase 60</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../phase-60-gap-analysis/">Gap Analysis</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">BridgeFlow Docs</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">mTLS (Mutual TLS) Authentication Guide</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="mtls-mutual-tls-authentication-guide">mTLS (Mutual TLS) Authentication Guide</h1>
+<h2 id="overview">Overview</h2>
+<p>This guide covers the implementation of mutual TLS (mTLS) authentication in BridgeFlow. mTLS provides strong client authentication by requiring clients to present valid X.509 certificates signed by a trusted Certificate Authority.</p>
+<h2 id="table-of-contents">Table of Contents</h2>
+<ol>
+<li><a href="#architecture">Architecture</a></li>
+<li><a href="#certificate-generation">Certificate Generation</a></li>
+<li><a href="#configuration">Configuration</a></li>
+<li><a href="#api-usage">API Usage</a></li>
+<li><a href="#testing">Testing</a></li>
+<li><a href="#production-deployment">Production Deployment</a></li>
+<li><a href="#troubleshooting">Troubleshooting</a></li>
+</ol>
+<hr />
+<h2 id="architecture">Architecture</h2>
+<h3 id="components">Components</h3>
+<pre><code>┌─────────────────────────────────────────────────────────┐
+│                    mTLS Architecture                     │
+└─────────────────────────────────────────────────────────┘
+
+┌──────────────┐         TLS Handshake          ┌──────────────┐
+│              │  ←─────────────────────────→   │              │
+│   Client     │   - Server cert validation     │   Server     │
+│ (with cert)  │   - Client cert validation     │ (Fastify)    │
+│              │   - Mutual authentication      │              │
+└──────────────┘                                 └──────────────┘
+                                                        ↓
+                                                 ┌──────────────┐
+                                                 │ mTLS Plugin  │
+                                                 │   Middleware │
+                                                 └──────────────┘
+                                                        ↓
+                                    ┌───────────────────────────────┐
+                                    │  Certificate Validation        │
+                                    │  1. Extract from TLS socket    │
+                                    │  2. Check expiry dates         │
+                                    │  3. Verify fingerprint         │
+                                    │  4. Verify Common Name (CN)    │
+                                    │  5. Verify CA chain            │
+                                    └───────────────────────────────┘
+                                                        ↓
+                                    ┌───────────────────────────────┐
+                                    │  Route Protection             │
+                                    │  - requireMTLS() enforced     │
+                                    │  - optionalMTLS() permissive  │
+                                    └───────────────────────────────┘
+                                                        ↓
+                                    ┌───────────────────────────────┐
+                                    │  Audit Logging                │
+                                    │  - Auth success/failure        │
+                                    │  - Certificate management      │
+                                    └───────────────────────────────┘
+</code></pre>
+<h3 id="features">Features</h3>
+<ul>
+<li><strong>Certificate Extraction</strong>: Extracts client certificates from TLS socket</li>
+<li><strong>Multi-stage Validation</strong>:</li>
+<li>Expiry checking (valid_from, valid_to)</li>
+<li>Fingerprint matching (SHA256)</li>
+<li>Common Name (CN) verification</li>
+<li>CA chain validation</li>
+<li>Self-signed cert detection</li>
+<li><strong>Route Protection</strong>: Decorators for required vs optional mTLS</li>
+<li><strong>Certificate Management</strong>: Runtime certificate addition/removal via secret manager</li>
+<li><strong>Audit Integration</strong>: Comprehensive logging of auth events</li>
+<li><strong>Environment-aware</strong>: Graceful degradation when disabled</li>
+</ul>
+<hr />
+<h2 id="certificate-generation">Certificate Generation</h2>
+<h3 id="prerequisites">Prerequisites</h3>
+<ul>
+<li>OpenSSL installed</li>
+<li>Node.js 18+ (for certificate generation script)</li>
+</ul>
+<h3 id="generate-certificate-authority-ca">Generate Certificate Authority (CA)</h3>
+<pre><code class="language-bash"># Using the provided script
+node scripts/generate-certs.js ca
+
+# Or manually with OpenSSL
+openssl genrsa -out certs/ca-key.pem 4096
+openssl req -new -x509 -days 3650 -key certs/ca-key.pem \
+  -out certs/ca-cert.pem \
+  -subj &quot;/C=US/ST=California/L=San Francisco/O=BridgeFlow/CN=BridgeFlow CA&quot;
+</code></pre>
+<p>This generates:
+- <code>certs/ca-key.pem</code> - CA private key (keep secure!)
+- <code>certs/ca-cert.pem</code> - CA certificate (distribute to clients)</p>
+<h3 id="generate-server-certificate">Generate Server Certificate</h3>
+<pre><code class="language-bash"># Using the script
+node scripts/generate-certs.js server
+
+# Or manually
+openssl genrsa -out certs/server-key.pem 2048
+openssl req -new -key certs/server-key.pem \
+  -out certs/server-csr.pem \
+  -subj &quot;/C=US/ST=California/L=San Francisco/O=BridgeFlow/CN=localhost&quot;
+
+openssl x509 -req -in certs/server-csr.pem \
+  -CA certs/ca-cert.pem -CAkey certs/ca-key.pem -CAcreateserial \
+  -out certs/server-cert.pem -days 365
+</code></pre>
+<p>This generates:
+- <code>certs/server-key.pem</code> - Server private key
+- <code>certs/server-cert.pem</code> - Server certificate</p>
+<h3 id="generate-client-certificate">Generate Client Certificate</h3>
+<pre><code class="language-bash"># Using the script (required CN parameter)
+node scripts/generate-certs.js client --cn=&quot;trading-partner-1&quot;
+
+# Or manually
+openssl genrsa -out certs/client-trading-partner-1-key.pem 2048
+openssl req -new -key certs/client-trading-partner-1-key.pem \
+  -out certs/client-trading-partner-1-csr.pem \
+  -subj &quot;/C=US/ST=California/L=San Francisco/O=Trading Partner/CN=trading-partner-1&quot;
+
+openssl x509 -req -in certs/client-trading-partner-1-csr.pem \
+  -CA certs/ca-cert.pem -CAkey certs/ca-key.pem -CAcreateserial \
+  -out certs/client-trading-partner-1-cert.pem -days 365
+</code></pre>
+<p>This generates:
+- <code>certs/client-{name}-key.pem</code> - Client private key
+- <code>certs/client-{name}-cert.pem</code> - Client certificate</p>
+<h3 id="get-certificate-fingerprint">Get Certificate Fingerprint</h3>
+<pre><code class="language-bash"># SHA256 fingerprint (recommended)
+openssl x509 -in certs/client-trading-partner-1-cert.pem -noout -fingerprint -sha256
+
+# Example output:
+# SHA256 Fingerprint=AA:BB:CC:DD:EE:FF:00:11:22:33:44:55:66:77:88:99:AA:BB:CC:DD:EE:FF:00:11:22:33:44:55:66:77:88:99
+</code></pre>
+<h3 id="verify-certificate-chain">Verify Certificate Chain</h3>
+<pre><code class="language-bash"># Verify server certificate against CA
+openssl verify -CAfile certs/ca-cert.pem certs/server-cert.pem
+
+# Using the script
+node scripts/generate-certs.js verify
+</code></pre>
+<hr />
+<h2 id="configuration">Configuration</h2>
+<h3 id="environment-variables">Environment Variables</h3>
+<pre><code class="language-bash"># Enable/disable mTLS
+MTLS_ENABLED=true
+
+# Trusted certificate fingerprints (comma-separated)
+MTLS_TRUSTED_FINGERPRINTS=AA:BB:CC:DD:EE:FF:...,11:22:33:44:55:66:...
+
+# Trusted Common Names (comma-separated)
+MTLS_TRUSTED_CN=trading-partner-1,trading-partner-2,admin-client
+
+# Require CA-signed certificates (reject self-signed)
+MTLS_REQUIRE_CA=true
+
+# Enable audit logging for successful authentications
+MTLS_AUDIT_SUCCESS=true
+</code></pre>
+<h3 id="server-configuration">Server Configuration</h3>
+<pre><code class="language-javascript">// api/server.js
+import fs from 'fs'
+import fastify from 'fastify'
+import mtlsPlugin from './lib/mtls.js'
+
+const server = fastify({
+  logger: true,
+  https: {
+    key: fs.readFileSync('certs/server-key.pem'),
+    cert: fs.readFileSync('certs/server-cert.pem'),
+    ca: fs.readFileSync('certs/ca-cert.pem'),
+    requestCert: true,          // Request client certificate
+    rejectUnauthorized: false   // Don't reject at TLS level (let middleware handle)
+  }
+})
+
+// Register mTLS plugin
+await server.register(mtlsPlugin, {
+  trustedFingerprints: [
+    'AA:BB:CC:DD:EE:FF:00:11:22:33:44:55:66:77:88:99:AA:BB:CC:DD:EE:FF:00:11:22:33:44:55:66:77:88:99'
+  ],
+  trustedCN: ['trading-partner-1', 'admin-client'],
+  requireCA: true,
+  auditFailures: true,
+  auditSuccess: false  // Reduce noise in production
+})
+
+await server.listen({ port: 3000, host: '0.0.0.0' })
+</code></pre>
+<hr />
+<h2 id="api-usage">API Usage</h2>
+<h3 id="protecting-routes">Protecting Routes</h3>
+<h4 id="required-mtls-401403-if-invalid">Required mTLS (401/403 if invalid)</h4>
+<pre><code class="language-javascript">// Protect admin endpoints
+server.get('/api/admin/users', {
+  preHandler: server.requireMTLS()
+}, async (request, reply) =&gt; {
+  // Only clients with valid certificates can access this
+  const clientCN = request.getClientCN()
+  return { message: `Hello ${clientCN}` }
+})
+
+// Protect with specific options
+server.post('/api/secrets', {
+  preHandler: server.requireMTLS({
+    trustedCN: ['admin-client'],  // Override plugin config
+    requireCA: true
+  })
+}, async (request, reply) =&gt; {
+  // Only &quot;admin-client&quot; can access
+  return { success: true }
+})
+</code></pre>
+<h4 id="optional-mtls-attach-cert-if-present">Optional mTLS (attach cert if present)</h4>
+<pre><code class="language-javascript">// Endpoint works with or without certificate
+server.get('/api/status', {
+  preHandler: server.optionalMTLS()
+}, async (request, reply) =&gt; {
+  if (request.hasClientCert()) {
+    return {
+      status: 'authenticated',
+      client: request.getClientCN()
+    }
+  }
+  return { status: 'anonymous' }
+})
+</code></pre>
+<h3 id="request-decorators">Request Decorators</h3>
+<pre><code class="language-javascript">// Check if request has valid client certificate
+if (request.hasClientCert()) {
+  // Certificate present and valid
+}
+
+// Get client Common Name
+const clientCN = request.getClientCN()  // Returns null if no cert
+
+// Access full certificate details
+const cert = request.clientCert
+console.log(cert.subject)       // { CN: 'trading-partner-1', O: 'Trading Partner' }
+console.log(cert.issuer)        // { CN: 'BridgeFlow CA', O: 'BridgeFlow' }
+console.log(cert.fingerprint256) // SHA256 fingerprint
+console.log(cert.valid_to)      // Expiry date
+</code></pre>
+<h3 id="certificate-management-api">Certificate Management API</h3>
+<pre><code class="language-javascript">// Add trusted certificate
+await fastify.addTrustedCertificate({
+  fingerprint: 'AA:BB:CC:...',
+  cn: 'new-trading-partner'
+})
+
+// Remove trusted certificate
+await fastify.removeTrustedCertificate('AA:BB:CC:...')
+</code></pre>
+<hr />
+<h2 id="testing">Testing</h2>
+<h3 id="unit-tests">Unit Tests</h3>
+<pre><code class="language-bash"># Run mTLS test suite (29 tests)
+node --test api/tests/mtls.test.js
+</code></pre>
+<h3 id="manual-testing-with-curl">Manual Testing with curl</h3>
+<pre><code class="language-bash"># Test with valid client certificate
+curl --cacert certs/ca-cert.pem \
+     --cert certs/client-trading-partner-1-cert.pem \
+     --key certs/client-trading-partner-1-key.pem \
+     https://localhost:3000/api/admin/users
+
+# Test without certificate (should fail)
+curl --cacert certs/ca-cert.pem \
+     https://localhost:3000/api/admin/users
+</code></pre>
+<h3 id="testing-with-postman">Testing with Postman</h3>
+<ol>
+<li>Import CA certificate: Settings → Certificates → CA Certificates</li>
+<li>Add client certificate: Settings → Certificates → Client Certificates</li>
+<li>Host: localhost:3000</li>
+<li>CRT file: client-trading-partner-1-cert.pem</li>
+<li>KEY file: client-trading-partner-1-key.pem</li>
+<li>Make request to mTLS-protected endpoint</li>
+</ol>
+<hr />
+<h2 id="production-deployment">Production Deployment</h2>
+<h3 id="pre-deployment-checklist">Pre-deployment Checklist</h3>
+<ul>
+<li>[ ] Generate production CA with strong key (4096-bit)</li>
+<li>[ ] Store CA private key in secure vault (not in source control)</li>
+<li>[ ] Generate server certificate with proper SANs</li>
+<li>[ ] Generate client certificates for each partner</li>
+<li>[ ] Distribute CA certificate to all clients</li>
+<li>[ ] Configure trusted fingerprints in secret manager</li>
+<li>[ ] Enable audit logging (<code>MTLS_AUDIT_SUCCESS=true</code>)</li>
+<li>[ ] Test certificate rotation procedure</li>
+<li>[ ] Document certificate issuance process</li>
+<li>[ ] Set up certificate expiry monitoring</li>
+</ul>
+<h3 id="certificate-distribution">Certificate Distribution</h3>
+<p><strong>Server Certificate</strong>: Deploy to application servers
+- Keep private key secure (0600 permissions)
+- Use environment variables or secret manager
+- Never commit to source control</p>
+<p><strong>Client Certificates</strong>: Distribute to partners
+- Send via secure channel (encrypted email, secure portal)
+- Provide installation instructions
+- Include CA certificate for server verification</p>
+<p><strong>CA Certificate</strong>: Public distribution
+- Include in API documentation
+- Provide via HTTPS download
+- Update when CA rotates</p>
+<h3 id="certificate-rotation">Certificate Rotation</h3>
+<h4 id="rotating-ca-certificate">Rotating CA Certificate</h4>
+<pre><code class="language-bash"># 1. Generate new CA
+node scripts/generate-certs.js ca --cn=&quot;BridgeFlow CA v2&quot;
+
+# 2. Generate new server cert signed by new CA
+node scripts/generate-certs.js server
+
+# 3. Deploy new certificates to servers
+# 4. Update clients to trust new CA
+# 5. Deprecate old CA after transition period
+</code></pre>
+<h4 id="rotating-client-certificates">Rotating Client Certificates</h4>
+<pre><code class="language-bash"># 1. Generate new client cert
+node scripts/generate-certs.js client --cn=&quot;trading-partner-1&quot;
+
+# 2. Get new fingerprint
+openssl x509 -in certs/client-trading-partner-1-cert.pem -noout -fingerprint -sha256
+
+# 3. Add new fingerprint to trusted list
+curl -X POST https://admin.bridgeflow.com/api/admin/mtls/certificates \
+  -H &quot;Authorization: Bearer $ADMIN_TOKEN&quot; \
+  -d '{&quot;fingerprint&quot;:&quot;NEW:FINGERPRINT&quot;,&quot;cn&quot;:&quot;trading-partner-1&quot;}'
+
+# 4. Distribute new certificate to partner
+# 5. Remove old fingerprint after transition period
+</code></pre>
+<h3 id="monitoring">Monitoring</h3>
+<p>Monitor certificate expiry:</p>
+<pre><code class="language-javascript">// Check certificate expiry
+const daysUntilExpiry = (certValidTo) =&gt; {
+  const now = new Date()
+  const expiry = new Date(certValidTo)
+  return Math.floor((expiry - now) / (1000 * 60 * 60 * 24))
+}
+
+// Alert if certificate expires in &lt; 30 days
+if (daysUntilExpiry(clientCert.valid_to) &lt; 30) {
+  alert('Certificate expiring soon!')
+}
+</code></pre>
+<h3 id="performance-considerations">Performance Considerations</h3>
+<ul>
+<li><strong>Connection Pooling</strong>: Reuse TLS connections to avoid repeated handshakes</li>
+<li><strong>Certificate Caching</strong>: Plugin caches validated certificates for request duration</li>
+<li><strong>Audit Logging</strong>: Set <code>MTLS_AUDIT_SUCCESS=false</code> in high-traffic environments</li>
+<li><strong>Fingerprint List</strong>: Keep trusted fingerprint list small (&lt;100 entries)</li>
+</ul>
+<hr />
+<h2 id="troubleshooting">Troubleshooting</h2>
+<h3 id="common-issues">Common Issues</h3>
+<h4 id="client-certificate-required-401">"Client certificate required" (401)</h4>
+<p><strong>Cause</strong>: No client certificate presented</p>
+<p><strong>Solution</strong>:
+1. Verify client is sending certificate
+2. Check curl/Postman configuration
+3. Verify certificate files are readable
+4. Check TLS version compatibility</p>
+<pre><code class="language-bash"># Test certificate is readable
+openssl x509 -in certs/client-cert.pem -text -noout
+</code></pre>
+<h4 id="certificate-validation-failed-403">"Certificate validation failed" (403)</h4>
+<p><strong>Cause</strong>: Certificate is invalid or not trusted</p>
+<p><strong>Solution</strong>:
+1. Check certificate expiry: <code>openssl x509 -in cert.pem -noout -dates</code>
+2. Verify fingerprint is in trusted list
+3. Check CN is in trusted list
+4. Verify CA chain is valid
+5. Ensure certificate is signed by trusted CA</p>
+<pre><code class="language-bash"># Verify certificate chain
+openssl verify -CAfile certs/ca-cert.pem certs/client-cert.pem
+</code></pre>
+<h4 id="certificate-has-expired">"Certificate has expired"</h4>
+<p><strong>Cause</strong>: Certificate valid_to date has passed</p>
+<p><strong>Solution</strong>:
+1. Generate new certificate
+2. Distribute to client
+3. Update trusted fingerprints</p>
+<h4 id="self-signed-certificates-not-allowed">"Self-signed certificates not allowed"</h4>
+<p><strong>Cause</strong>: Client presented self-signed certificate and <code>requireCA=true</code></p>
+<p><strong>Solution</strong>:
+1. Sign certificate with your CA
+2. Or disable <code>MTLS_REQUIRE_CA</code> (not recommended for production)</p>
+<h4 id="fingerprint-mismatch">Fingerprint Mismatch</h4>
+<p><strong>Cause</strong>: Certificate fingerprint not in trusted list</p>
+<p><strong>Solution</strong>:</p>
+<pre><code class="language-bash"># Get current fingerprint
+openssl x509 -in cert.pem -noout -fingerprint -sha256
+
+# Add to environment
+export MTLS_TRUSTED_FINGERPRINTS=&quot;AA:BB:CC:...,NEW:FINGERPRINT&quot;
+
+# Or add via API
+curl -X POST /api/admin/mtls/certificates \
+  -d '{&quot;fingerprint&quot;:&quot;NEW:FINGERPRINT&quot;,&quot;cn&quot;:&quot;partner&quot;}'
+</code></pre>
+<h3 id="debug-mode">Debug Mode</h3>
+<p>Enable verbose logging:</p>
+<pre><code class="language-javascript">const server = fastify({
+  logger: {
+    level: 'debug',
+    prettyPrint: true
+  }
+})
+</code></pre>
+<p>Check audit logs:</p>
+<pre><code class="language-sql">SELECT * FROM audit_logs
+WHERE event LIKE 'mtls.%'
+ORDER BY timestamp DESC
+LIMIT 50;
+</code></pre>
+<h3 id="security-best-practices">Security Best Practices</h3>
+<ol>
+<li><strong>Strong Keys</strong>: Use 4096-bit keys for CA, 2048-bit for certificates</li>
+<li><strong>Short Validity</strong>: 365 days max for client certs, 90 days for server certs</li>
+<li><strong>Fingerprint Pinning</strong>: Use fingerprints for high-security endpoints</li>
+<li><strong>Regular Rotation</strong>: Rotate certificates annually</li>
+<li><strong>Audit Logging</strong>: Monitor all auth attempts</li>
+<li><strong>Secret Storage</strong>: Never commit private keys to source control</li>
+<li><strong>Access Control</strong>: Restrict CA private key to dedicated systems</li>
+<li><strong>Revocation</strong>: Implement certificate revocation process</li>
+</ol>
+<hr />
+<h2 id="api-reference">API Reference</h2>
+<h3 id="plugin-options">Plugin Options</h3>
+<pre><code class="language-typescript">interface MtlsOptions {
+  enabled?: boolean              // Enable/disable plugin (default: env.MTLS_ENABLED)
+  trustedFingerprints?: string[] // SHA256 fingerprints (default: env.MTLS_TRUSTED_FINGERPRINTS)
+  trustedCN?: string[]           // Trusted Common Names (default: env.MTLS_TRUSTED_CN)
+  requireCA?: boolean            // Reject self-signed certs (default: true)
+  auditFailures?: boolean        // Log failed auth attempts (default: true)
+  auditSuccess?: boolean         // Log successful auth (default: false)
+}
+</code></pre>
+<h3 id="decorators">Decorators</h3>
+<pre><code class="language-typescript">// Server decorators
+fastify.requireMTLS(options?: MtlsOptions): FastifyMiddleware
+fastify.optionalMTLS(): FastifyMiddleware
+fastify.addTrustedCertificate(certData: CertData): Promise&lt;{success: boolean}&gt;
+fastify.removeTrustedCertificate(fingerprint: string): Promise&lt;{success: boolean}&gt;
+
+// Request decorators
+request.hasClientCert(): boolean
+request.getClientCN(): string | null
+request.clientCert: CertificateInfo | undefined
+</code></pre>
+<h3 id="audit-events">Audit Events</h3>
+<ul>
+<li><code>mtls.auth.success</code> - Successful authentication</li>
+<li><code>mtls.auth.failed</code> - Failed authentication</li>
+<li><code>mtls.cert.added</code> - Trusted certificate added</li>
+<li><code>mtls.cert.removed</code> - Trusted certificate removed</li>
+</ul>
+<hr />
+<h2 id="resources">Resources</h2>
+<ul>
+<li><a href="https://www.rfc-editor.org/rfc/rfc8705.html">RFC 8705: OAuth 2.0 Mutual-TLS Client Authentication</a></li>
+<li><a href="https://www.openssl.org/docs/">OpenSSL Documentation</a></li>
+<li><a href="https://nodejs.org/api/tls.html">Node.js TLS/SSL</a></li>
+<li><a href="https://www.fastify.io/docs/latest/Reference/Plugins/">Fastify Plugin Guide</a></li>
+</ul>
+<h2 id="support">Support</h2>
+<p>For questions or issues:
+- Check troubleshooting guide above
+- Review audit logs for auth failures
+- Consult security team for certificate management
+- File issue in project repository</p>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

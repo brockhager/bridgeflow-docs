@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://bridgeflow.readthedocs.io/instructions/test-email-flow/" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>End-to-End Email Flow Test (Real SMTP) - BridgeFlow Docs</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "End-to-End Email Flow Test (Real SMTP)";
+        var mkdocs_page_input_path = "instructions\\test-email-flow.md";
+        var mkdocs_page_url = "/instructions/test-email-flow/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> BridgeFlow Docs
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../ARCHITECTURE/">Architecture</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Current System</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../current/control-tower/">Control Tower</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../current/control-tower/trl7-validation/">TRL 7 Validation</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../current/control-tower/public-api/">Public API</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../current/control-tower/integration-guide/">Integration Guide</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Future Vision</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../vision/">Vision Archive Index</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../roadmap/future-architecture/">BF-INTEGRATION Roadmap</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Phase 60</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../phase-60-gap-analysis/">Gap Analysis</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">BridgeFlow Docs</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">End-to-End Email Flow Test (Real SMTP)</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="end-to-end-email-flow-test-real-smtp">End-to-End Email Flow Test (Real SMTP)</h1>
+<p>Use this guide to validate real email delivery through the Job Orchestrator. This runs locally (not CI) with disposable SMTP credentials and sends to <code>brockhager@gmail.com</code>.</p>
+<h2 id="prerequisites">Prerequisites</h2>
+<ul>
+<li>Postgres reachable with <code>DATABASE_URL</code> set (non-mock).</li>
+<li>Node/pnpm installed.</li>
+<li>A test SMTP account (e.g., Gmail app password or Ethereal). Do <strong>not</strong> commit credentials.</li>
+</ul>
+<h2 id="required-environment">Required environment</h2>
+<pre><code>DATABASE_URL=postgresql://user:pass@host:5432/db?schema=public
+USE_MOCK_DB=false
+EMAIL_HOST=smtp.gmail.com
+EMAIL_PORT=587
+EMAIL_SECURE=false
+EMAIL_USER=&lt;smtp user or app password email&gt;
+EMAIL_PASS=&lt;app password or smtp password&gt;
+EMAIL_FROM=&lt;from address&gt;
+EMAIL_TO=brockhager@gmail.com
+</code></pre>
+<p>Optional envs:
+- <code>CLEANUP=true|false</code> (default <code>true</code>) — whether the script should delete the created test records after a successful run.
+- <code>USE_EMAIL_SIMULATION=true</code> — force simulation instead of real SMTP (helps debugging without sending mail).
+Optional: <code>USE_EMAIL_SIMULATION=true</code> to skip real send.</p>
+<h2 id="run-the-test">Run the test</h2>
+<pre><code class="language-powershell">$env:DATABASE_URL=&quot;postgresql://...&quot;
+$env:USE_MOCK_DB=&quot;false&quot;
+$env:EMAIL_HOST=&quot;smtp.gmail.com&quot;
+$env:EMAIL_PORT=&quot;587&quot;
+$env:EMAIL_SECURE=&quot;false&quot;
+$env:EMAIL_USER=&quot;&lt;app-user&gt;&quot;
+$env:EMAIL_PASS=&quot;&lt;app-password&gt;&quot;
+$env:EMAIL_FROM=&quot;bridgeflow-test@yourdomain.com&quot;
+$env:EMAIL_TO=&quot;brockhager@gmail.com&quot;
+node scripts/test-email-flow.js
+</code></pre>
+<h2 id="what-the-script-does">What the script does</h2>
+<p>1) Creates or reuses an active <code>email_sender</code> Resource with the provided SMTP config.
+2) Creates a <code>SEND_INVOICE</code> job with one task to <code>EMAIL_TO</code>.
+3) Runs the worker once to process the job.
+4) Prints job state, invoice record, and audit logs. The script fails if the job is not <code>SUCCEEDED</code>.</p>
+<h2 id="expected-outcome">Expected outcome</h2>
+<ul>
+<li>Console shows <code>✅ Email flow test completed — check inbox for delivery</code>.</li>
+<li>An email arrives at <code>brockhager@gmail.com</code>.</li>
+<li>Invoice record exists and audit logs show send/completion events.</li>
+</ul>
+<h2 id="safety-notes">Safety notes</h2>
+<ul>
+<li>Use disposable or test-only SMTP credentials; prefer app passwords.</li>
+<li>Never commit <code>.env</code> files with secrets.</li>
+<li>For Ethereal, replace host/user/pass/from with provided test values; Ethereal gives a preview URL for received mail.</li>
+</ul>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

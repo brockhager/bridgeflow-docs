@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://bridgeflow.readthedocs.io/vision/bf-integration/docs/phases/phases11-20/PHASE-16-KICKOFF-AGENDA/" />
+      <link rel="shortcut icon" href="../../../../../../img/favicon.ico" />
+    <title>PHASE 16 KICKOFF AGENDA - BridgeFlow Docs</title>
+    <link rel="stylesheet" href="../../../../../../css/theme.css" />
+    <link rel="stylesheet" href="../../../../../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "PHASE 16 KICKOFF AGENDA";
+        var mkdocs_page_input_path = "vision\\bf-integration\\docs\\phases\\phases11-20\\PHASE-16-KICKOFF-AGENDA.md";
+        var mkdocs_page_url = "/vision/bf-integration/docs/phases/phases11-20/PHASE-16-KICKOFF-AGENDA/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../../../../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../../../../../.." class="icon icon-home"> BridgeFlow Docs
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../../../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../../../..">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../../../../ARCHITECTURE/">Architecture</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Current System</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../current/control-tower/">Control Tower</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../current/control-tower/trl7-validation/">TRL 7 Validation</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../current/control-tower/public-api/">Public API</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../current/control-tower/integration-guide/">Integration Guide</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Future Vision</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../">Vision Archive Index</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../roadmap/future-architecture/">BF-INTEGRATION Roadmap</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Phase 60</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../phase-60-gap-analysis/">Gap Analysis</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../../..">BridgeFlow Docs</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../../../../.." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">PHASE 16 KICKOFF AGENDA</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <blockquote>
+<p>[!WARNING]
+Status: Planned / In Development
+Context: Original BF-INTEGRATION Vision (Pre-Phase 30)</p>
+</blockquote>
+<h1 id="phase-16-kickoff-agenda-persistent-storage-tps-bridges">Phase 16 Kickoff Agenda — Persistent Storage (TPs &amp; Bridges)</h1>
+<p><strong>Purpose</strong>
+- Align stakeholders on Phase 16 goals: implement persistent storage for Trading Partners (TPs), Bridges, and follow-on entities; define MVP, scope, tech choices, and migration strategy.</p>
+<p><strong>Proposed duration:</strong> 30 minutes
+<strong>Attendees:</strong> CTO, Product Lead, Engineering Lead, Backend Engineer(s), QA, (optional) DevOps</p>
+<hr />
+<h2 id="1-opening-3-min">1) Opening (3 min)</h2>
+<ul>
+<li>Quick Phase 15 recap &amp; CTO sign-off (status: DONE)</li>
+<li>Objective for this meeting: decide Phase 16 goal, MVP, storage tech direction, and first tasks</li>
+</ul>
+<h2 id="2-goal-success-metrics-5-min">2) Goal &amp; Success Metrics (5 min)</h2>
+<ul>
+<li>Proposed goal: Provide durable, queryable persistent storage for TPs and Bridges so user workflows persist across restarts and re-deploys</li>
+<li>Success metrics (example):</li>
+<li>MVP stores and retrieves TPs and Bridges reliably (CRUD) in production-like environment</li>
+<li>Migration path completed for seed/dev data; CI tests exercise new storage</li>
+<li>End-to-end TP→Bridge creation flow validated via integration tests</li>
+</ul>
+<h2 id="3-scope-priority-5-min">3) Scope &amp; Priority (5 min)</h2>
+<ul>
+<li>Minimal scope (MVP):
+  1) Trading Partners (TPs) — create, list, update, delete
+  2) Bridges — CRUD and association with TPs
+  3) Basic migration tooling + tests</li>
+<li>Phased additions: transactions, templates, mappings (later phases)</li>
+</ul>
+<h2 id="4-storage-technology-options-5-min">4) Storage Technology Options (5 min)</h2>
+<ul>
+<li>Short analysis:</li>
+<li>SQLite (local/dev-friendly, simple migrations) — good for MVP &amp; dev envs</li>
+<li>Postgres (recommended for production parity) — harder to migrate but scalable</li>
+<li>Use existing Prisma setup (we already have <code>prisma/schema.prisma</code>) — prefer Postgres for prod, SQLite for local/dev/CI where appropriate</li>
+</ul>
+<h2 id="5-migration-strategy-api-changes-5-min">5) Migration Strategy &amp; API Changes (5 min)</h2>
+<ul>
+<li>Options: write-new + backfill vs inline migrations</li>
+<li>Suggestion: implement new schema support with feature flag; migrate new writes to persistent storage first and plan backfill/porting later (minimizes risk)</li>
+<li>Add tests in <code>test/</code> and CI scripts (e.g., <code>pnpm prisma:migrate</code> in a job using ephemeral DB)</li>
+</ul>
+<h2 id="6-tech-debt-risks-3-min">6) Tech Debt &amp; Risks (3 min)</h2>
+<ul>
+<li>Link Vitest Exclusions issue: https://github.com/brockhager/bridgeflow/issues/5 (Phase 16 tech-debt)</li>
+<li>Risk: test-runner compatibility, DB connection config, secrets and deployment changes</li>
+</ul>
+<h2 id="7-next-steps-ownership-2-min">7) Next Steps &amp; Ownership (2 min)</h2>
+<ul>
+<li>Define immediate 1–2 week tasks (spike, schema changes for TPs, migration test) and assign owners</li>
+<li>Decide meeting cadence for Phase 16 planning (weekly syncs)</li>
+</ul>
+<hr />
+<p><strong>Artifacts / Links</strong>
+- Vitest tech-debt: <code>docs/phases/PHASE-16-vitest-exclude-TECHDEBT.md</code> (and issue #5)
+- Schema reference: <code>prisma/schema.prisma</code> (models: <code>TradingPartner</code>, <code>Bridge</code>)</p>
+<p><strong>Proposed times for kickoff:</strong> Today AM or tomorrow 9–11am — pick a 30-minute slot.</p>
+<hr />
+<p><em>Notes:</em> I can post this agenda to issue #5 and create the storage plan doc next (draft <code>docs/PHASE16-storage-plan.md</code>) if you'd like me to continue. </p>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+    
+  </span>
+</div>
+    <script src="../../../../../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../../../../../..";</script>
+    <script src="../../../../../../js/theme_extra.js"></script>
+    <script src="../../../../../../js/theme.js"></script>
+      <script src="../../../../../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

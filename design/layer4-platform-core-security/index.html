@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://bridgeflow.readthedocs.io/design/layer4-platform-core-security/" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>Layer 4 (Platform Core) — Security Design (RBAC-first) - BridgeFlow Docs</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Layer 4 (Platform Core) \u2014 Security Design (RBAC-first)";
+        var mkdocs_page_input_path = "design\\layer4-platform-core-security.md";
+        var mkdocs_page_url = "/design/layer4-platform-core-security/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> BridgeFlow Docs
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../ARCHITECTURE/">Architecture</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Current System</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../current/control-tower/">Control Tower</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../current/control-tower/trl7-validation/">TRL 7 Validation</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../current/control-tower/public-api/">Public API</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../current/control-tower/integration-guide/">Integration Guide</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Future Vision</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../vision/">Vision Archive Index</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../roadmap/future-architecture/">BF-INTEGRATION Roadmap</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Phase 60</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../phase-60-gap-analysis/">Gap Analysis</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">BridgeFlow Docs</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">Layer 4 (Platform Core) — Security Design (RBAC-first)</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="layer-4-platform-core-security-design-rbac-first">Layer 4 (Platform Core) — Security Design (RBAC-first)</h1>
+<p>Status: Draft</p>
+<blockquote>
+<p>Note: a curated and summarized version of this design has been moved to <code>docs/Layer4-PlatformCoreLayer/Security-Foundation.md</code> for operational docs and verification materials.</p>
+</blockquote>
+<p>This document defines the <strong>Layer 4 security foundation</strong> that gates every layer (API, workers, resources, and audit).</p>
+<p>Context:
+- <strong>Phase 10</strong> is the current workstream (Production Readiness &amp; Enterprise Features).
+- <strong>Layer 4 (Platform Core)</strong> is the architecture layer that hosts orchestration, security enforcement, resource/secret governance, and audit.</p>
+<p>Implementation is intended to be incremental, starting with <strong>tenant isolation + RBAC + audit logging</strong>, then expanding to stronger enterprise hardening.</p>
+<p>Related documents:
+- <a href="docs/design/security-foundation-plan.md">docs/design/security-foundation-plan.md</a>
+- <a href="docs/design/phase1a-architecture.md">docs/design/phase1a-architecture.md</a>
+- <a href="docs/design/phase1a-evolution-resources.md">docs/design/phase1a-evolution-resources.md</a></p>
+<hr />
+<h2 id="goals">Goals</h2>
+<ul>
+<li>Enforce <strong>tenant isolation</strong> across all API reads/writes.</li>
+<li>Provide <strong>RBAC</strong> that is simple enough to ship, but extensible.</li>
+<li>Make all high-value actions <strong>auditable</strong> with immutable, queryable events.</li>
+<li>Ensure secrets are <strong>never stored in plaintext</strong> and all secret access is audited.</li>
+<li>Define enforcement points for:</li>
+<li>HTTP API handlers</li>
+<li>worker/queue execution</li>
+<li>resource resolution (connector credentials)</li>
+</ul>
+<h2 id="non-goals-for-this-design-pass">Non-goals (for this design pass)</h2>
+<ul>
+<li>Implement Layer 3 mapper features (paused).</li>
+<li>Full enterprise SSO/MFA implementation (design hooks only).</li>
+<li>Full policy-as-code engine (start with role checks + explicit permissions).</li>
+</ul>
+<hr />
+<h2 id="core-concepts">Core concepts</h2>
+<h3 id="principal">Principal</h3>
+<p>A <strong>principal</strong> is the authenticated identity making a request.</p>
+<p>Principal types:
+- <code>user</code>: a human user (browser or API)
+- <code>service</code>: internal service account (worker, automation)
+- <code>api_key</code>: long-lived key used by integrations (optional; can be deferred)</p>
+<h3 id="tenant">Tenant</h3>
+<p>A <strong>tenant</strong> is the unit of isolation. Every business object is tenant-scoped unless explicitly global.</p>
+<p>Tenant-scoped objects (initial):
+- Users (membership in a tenant)
+- Bridges
+- Resources
+- Jobs / Tasks / Transactions
+- Audit events</p>
+<p>Global objects (allowed, tightly controlled):
+- System configuration
+- Platform operators/admins</p>
+<h3 id="role-vs-permission">Role vs permission</h3>
+<ul>
+<li><strong>Roles</strong> are human-friendly bundles (Admin/Developer/Viewer/Operator).</li>
+<li><strong>Permissions</strong> are the actual checks enforced in code.</li>
+</ul>
+<p>This design starts with role checks, but defines permissions so we can evolve toward a granular model without refactoring every endpoint.</p>
+<hr />
+<h2 id="authentication-authn">Authentication (AuthN)</h2>
+<h3 id="current-baseline-in-repo">Current baseline in repo</h3>
+<p>The API already supports:
+- JWT tokens via <code>@fastify/jwt</code>
+- Cookie-based sessions (httpOnly <code>token</code> cookie)
+- Bearer tokens via <code>Authorization: Bearer &lt;token&gt;</code></p>
+<p>Layer 4 requirement: every authenticated request results in a normalized <code>request.principal</code> object:</p>
+<pre><code class="language-json">{
+  &quot;type&quot;: &quot;user&quot;,
+  &quot;userId&quot;: &quot;...&quot;,
+  &quot;tenantId&quot;: &quot;...&quot;,
+  &quot;roles&quot;: [&quot;tenant_admin&quot;],
+  &quot;scopes&quot;: [&quot;bridges:write&quot;, &quot;resources:read&quot;],
+  &quot;auth&quot;: { &quot;method&quot;: &quot;cookie&quot; }
+}
+</code></pre>
+<h3 id="token-contents-minimum">Token contents (minimum)</h3>
+<ul>
+<li><code>sub</code> or <code>userId</code></li>
+<li><code>tenantId</code> (selected tenant; see multi-tenant UX below)</li>
+<li><code>roles</code> (tenant role + optional operator role)</li>
+<li><code>iat</code>, <code>exp</code></li>
+</ul>
+<h3 id="multi-tenant-ux-selection">Multi-tenant UX (selection)</h3>
+<p>If a user belongs to multiple tenants:
+- browser session selects an active <code>tenantId</code> (stored server-side or in token)
+- API requires explicit tenant context for tenant-scoped endpoints</p>
+<p>Simplest MVP: require one tenant per user initially; later add membership + tenant switcher.</p>
+<hr />
+<h2 id="authorization-authz">Authorization (AuthZ)</h2>
+<h3 id="enforcement-points">Enforcement points</h3>
+<ol>
+<li><strong>HTTP request preHandler</strong></li>
+<li>Verify principal</li>
+<li>Resolve tenant context</li>
+<li>
+<p>Check permission</p>
+</li>
+<li>
+<p><strong>DB access layer</strong></p>
+</li>
+<li>Always include <code>tenantId</code> in WHERE clause for tenant-scoped objects</li>
+<li>
+<p>Never “fetch then filter” in memory</p>
+</li>
+<li>
+<p><strong>Worker execution</strong></p>
+</li>
+<li>Workers act as <code>service</code> principals</li>
+<li>
+<p>A worker must only process jobs/tasks for a tenant and must emit audit events</p>
+</li>
+<li>
+<p><strong>Resource/secret access</strong></p>
+</li>
+<li>Any <code>getSecret(...)</code> requires a principal and emits audit</li>
+</ol>
+<h3 id="roles-initial">Roles (initial)</h3>
+<p>Tenant roles:
+- <code>tenant_admin</code>: full tenant control
+- <code>tenant_developer</code>: can create/update bridges/resources, view logs
+- <code>tenant_viewer</code>: read-only views
+- <code>tenant_auditor</code>: read-only + audit log access</p>
+<p>Platform roles:
+- <code>operator</code>: can support tenants, validate resources
+- <code>platform_admin</code>: full system control</p>
+<h3 id="permission-catalog-initial">Permission catalog (initial)</h3>
+<p>This is the smallest stable set that maps cleanly to endpoints.</p>
+<ul>
+<li><code>users:read</code>, <code>users:write</code></li>
+<li><code>roles:read</code>, <code>roles:write</code></li>
+<li><code>bridges:read</code>, <code>bridges:write</code>, <code>bridges:delete</code>, <code>bridges:test</code></li>
+<li><code>resources:read</code>, <code>resources:write</code>, <code>resources:validate</code></li>
+<li><code>jobs:read</code>, <code>jobs:write</code>, <code>jobs:retry</code>, <code>jobs:cancel</code></li>
+<li><code>transactions:read</code>, <code>transactions:retry</code></li>
+<li><code>audit:read</code>, <code>audit:write</code></li>
+<li><code>secrets:read</code> (never exposed directly to tenant users; used by services)</li>
+</ul>
+<h3 id="role-permissions-mapping-mvp">Role → permissions mapping (MVP)</h3>
+<table>
+<thead>
+<tr>
+<th>Permission</th>
+<th>tenant_admin</th>
+<th>tenant_developer</th>
+<th>tenant_viewer</th>
+<th>tenant_auditor</th>
+<th>operator</th>
+<th>platform_admin</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>users:read</td>
+<td>✓</td>
+<td>✓</td>
+<td>✗</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+</tr>
+<tr>
+<td>users:write</td>
+<td>✓</td>
+<td>✗</td>
+<td>✗</td>
+<td>✗</td>
+<td>✓ (tenant-limited)</td>
+<td>✓</td>
+</tr>
+<tr>
+<td>bridges:read</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+</tr>
+<tr>
+<td>bridges:write</td>
+<td>✓</td>
+<td>✓</td>
+<td>✗</td>
+<td>✗</td>
+<td>✓</td>
+<td>✓</td>
+</tr>
+<tr>
+<td>bridges:delete</td>
+<td>✓</td>
+<td>✗</td>
+<td>✗</td>
+<td>✗</td>
+<td>✓</td>
+<td>✓</td>
+</tr>
+<tr>
+<td>bridges:test</td>
+<td>✓</td>
+<td>✓</td>
+<td>✗</td>
+<td>✗</td>
+<td>✓</td>
+<td>✓</td>
+</tr>
+<tr>
+<td>resources:read</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+</tr>
+<tr>
+<td>resources:write</td>
+<td>✓</td>
+<td>✓</td>
+<td>✗</td>
+<td>✗</td>
+<td>✓</td>
+<td>✓</td>
+</tr>
+<tr>
+<td>resources:validate</td>
+<td>✓</td>
+<td>✗</td>
+<td>✗</td>
+<td>✗</td>
+<td>✓</td>
+<td>✓</td>
+</tr>
+<tr>
+<td>jobs:read</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+</tr>
+<tr>
+<td>jobs:write</td>
+<td>✓</td>
+<td>✓</td>
+<td>✗</td>
+<td>✗</td>
+<td>✓</td>
+<td>✓</td>
+</tr>
+<tr>
+<td>jobs:retry</td>
+<td>✓</td>
+<td>✓</td>
+<td>✗</td>
+<td>✗</td>
+<td>✓</td>
+<td>✓</td>
+</tr>
+<tr>
+<td>transactions:read</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+</tr>
+<tr>
+<td>transactions:retry</td>
+<td>✓</td>
+<td>✓</td>
+<td>✗</td>
+<td>✗</td>
+<td>✓</td>
+<td>✓</td>
+</tr>
+<tr>
+<td>audit:read</td>
+<td>✓</td>
+<td>✓</td>
+<td>✗</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+</tr>
+<tr>
+<td>audit:write</td>
+<td>(internal)</td>
+<td>(internal)</td>
+<td>(internal)</td>
+<td>(internal)</td>
+<td>✓</td>
+<td>✓</td>
+</tr>
+<tr>
+<td>secrets:read</td>
+<td>✗</td>
+<td>✗</td>
+<td>✗</td>
+<td>✗</td>
+<td>✓ (break-glass)</td>
+<td>✓</td>
+</tr>
+</tbody>
+</table>
+<p>Notes:
+- “internal” means only services/worker write audit; user-facing endpoints do not write directly.
+- <code>secrets:read</code> should not grant raw secret material to humans by default; prefer “test resource” operations.</p>
+<hr />
+<h2 id="data-model-proposed">Data model (proposed)</h2>
+<p>This is a design-only proposal to enable tenant isolation + RBAC.</p>
+<h3 id="tenant_1">Tenant</h3>
+<ul>
+<li><code>Tenant { id, name, status, createdAt }</code></li>
+</ul>
+<h3 id="membership">Membership</h3>
+<ul>
+<li><code>TenantMembership { id, tenantId, userId, role, createdAt }</code></li>
+</ul>
+<h3 id="audit-event">Audit event</h3>
+<p>Either extend <code>AuditLog</code> or add an append-only <code>AuditEvent</code> table.</p>
+<p>Minimum fields:
+- <code>id</code>
+- <code>tenantId</code> (nullable for platform events)
+- <code>actorType</code> (<code>user</code>|<code>service</code>|<code>operator</code>)
+- <code>actorId</code>
+- <code>action</code> (string enum-ish)
+- <code>targetType</code>, <code>targetId</code>
+- <code>meta</code> (JSON)
+- <code>createdAt</code></p>
+<hr />
+<h2 id="audit-logging-whowhatwhen">Audit logging (who/what/when)</h2>
+<h3 id="events-initial">Events (initial)</h3>
+<p>Tenant-scoped:
+- <code>user.invite</code>, <code>user.role_changed</code>, <code>user.removed</code>
+- <code>bridge.created</code>, <code>bridge.updated</code>, <code>bridge.deleted</code>, <code>bridge.tested</code>
+- <code>resource.created</code>, <code>resource.updated</code>, <code>resource.validated</code>
+- <code>job.created</code>, <code>job.retried</code>, <code>job.cancelled</code></p>
+<p>System/platform:
+- <code>operator.impersonation_started</code>, <code>operator.impersonation_ended</code>
+- <code>secret.accessed</code> (always)</p>
+<h3 id="immutable-write-path">Immutable write path</h3>
+<ul>
+<li>Audit writes must not be “best effort logs”; they are part of the platform contract.</li>
+<li>If audit write fails for a high-value action, default to <strong>fail closed</strong> (block the action) unless explicitly marked low-risk.</li>
+</ul>
+<hr />
+<h2 id="secrets-management">Secrets management</h2>
+<h3 id="rules">Rules</h3>
+<ul>
+<li>No plaintext secrets in DB (<code>secret_id</code> pointers only).</li>
+<li>Secret reads must be attributed to a principal and audited.</li>
+<li>Prefer “capability endpoints” over “show secret” (e.g., validate webhook).</li>
+</ul>
+<h3 id="interfaces">Interfaces</h3>
+<p>Introduce a Layer 4 interface:
+- <code>secrets.get(secretId, principal)</code>
+- <code>secrets.put(secretId, value, principal)</code></p>
+<hr />
+<h2 id="cross-layer-interaction-diagrams">Cross-layer interaction diagrams</h2>
+<h3 id="api-request-auth-authz">API request auth + authz</h3>
+<pre><code class="language-mermaid">sequenceDiagram
+  participant Browser
+  participant API as API Server (Layer 4)
+  participant Auth as AuthN/AuthZ Middleware
+  participant DB as Database
+  participant Audit as Audit Writer
+
+  Browser-&gt;&gt;API: HTTP request (cookie or Bearer token)
+  API-&gt;&gt;Auth: verify token; build principal
+  Auth-&gt;&gt;Auth: check permission + tenant context
+  Auth-&gt;&gt;DB: query/update with tenantId filter
+  DB--&gt;&gt;Auth: result
+  Auth-&gt;&gt;Audit: append audit event (actor/tenant/action/target)
+  Audit--&gt;&gt;Auth: ok
+  Auth--&gt;&gt;Browser: 200 / 403
+</code></pre>
+<h3 id="worker-job-execution">Worker job execution</h3>
+<pre><code class="language-mermaid">sequenceDiagram
+  participant Worker as Worker (Layer 4)
+  participant DB as Database
+  participant Secrets as Secrets Provider
+  participant Connector as Layer 2 Connector
+  participant Audit as Audit Writer
+
+  Worker-&gt;&gt;DB: claim next task (tenant-scoped)
+  DB--&gt;&gt;Worker: task + tenantId + resourceId
+  Worker-&gt;&gt;Secrets: get secret (service principal)
+  Secrets--&gt;&gt;Worker: secret material
+  Worker-&gt;&gt;Connector: deliver (email/webhook)
+  Connector--&gt;&gt;Worker: success/failure
+  Worker-&gt;&gt;Audit: delivery_attempt + outcome
+  Worker-&gt;&gt;DB: persist attempt + nextRunAt
+</code></pre>
+<hr />
+<h2 id="lock-down-strategy-minimum-viable">“Lock down” strategy (minimum viable)</h2>
+<p>Phase 1: Protect everything behind auth
+- Require <code>authMiddleware</code> for all <code>/api/*</code> except:
+  - <code>/api/auth/login</code>, <code>/api/auth/register</code>
+  - <code>/health</code> and <code>/.well-known/health</code>
+  - public inbound webhook endpoints (must use per-bridge auth)</p>
+<p>Phase 2: Tenant isolation everywhere
+- Add <code>tenantId</code> to tenant-scoped models.
+- Change API queries to scope by <code>tenantId</code>.</p>
+<p>Phase 3: RBAC enforcement
+- Add a small <code>requirePermission(permission)</code> helper.
+- Attach required permissions per route.</p>
+<p>Phase 4: Operator workflows
+- Add operator-only endpoints for validating resources and support.</p>
+<hr />
+<h2 id="rollout-flags-implemented">Rollout flags (implemented)</h2>
+<p>Environment variables used by the current implementation:
+- <code>REQUIRE_AUTH=true|false</code>
+  - When <code>true</code>, API endpoints wired with <code>requireAuthIfEnabled()</code> require a valid JWT (cookie or Bearer).
+- <code>LOCKDOWN_JOBS=true|false</code>
+  - When <code>true</code>, all <code>/api/jobs*</code> endpoints require authentication (high-value target protection).
+  - Takes precedence over <code>REQUIRE_AUTH</code> for job endpoints specifically.
+  - Dev verification: use <code>scripts/start-secure-dev.ps1</code> (Windows) or run <code>cross-env LOCKDOWN_JOBS=true REQUIRE_AUTH=true ENFORCE_RBAC=true pnpm run api:start</code> and then <code>node scripts/create-dev-users.mjs</code> to provision test accounts.
+- <code>ENFORCE_RBAC=true|false</code>
+  - When <code>true</code>, <code>requirePermission('...')</code> actively enforces permissions and returns 403 on violations.
+- <code>SUPER_ADMINS=email1,email2</code>
+  - Users with matching email are issued <code>isSuperAdmin=true</code> in JWT and bypass organization membership checks.</p>
+<p>Notes:
+- Audit visibility (<code>GET /api/audit</code>) is always protected by auth middleware.
+- Recommended rollout: <code>LOCKDOWN_JOBS=true</code> first, then <code>REQUIRE_AUTH=true</code> for full coverage.</p>
+<h2 id="dev-verification-steps">Dev verification steps</h2>
+<ol>
+<li>Start secure dev API (Windows):</li>
+</ol>
+<p><code>powershell
+   ./scripts/start-secure-dev.ps1</code></p>
+<p>or cross-platform:</p>
+<p><code>bash
+   cross-env LOCKDOWN_JOBS=true REQUIRE_AUTH=true ENFORCE_RBAC=true pnpm run api:start</code></p>
+<ol>
+<li>Provision test accounts (run while server is running):</li>
+</ol>
+<p><code>bash
+   node scripts/create-dev-users.mjs</code></p>
+<ol>
+<li>Run the in-process verification script to validate lockdown and audit:</li>
+</ol>
+<p><code>bash
+   node scripts/verify-job-lockdown.mjs</code></p>
+<p>Expected basic outputs:
+   - Unauthenticated POST /api/jobs -&gt; 401
+   - Regular user can create job with token -&gt; 201
+   - Regular user cannot run worker -&gt; 403
+   - Operator can run worker -&gt; 200
+   - Audit events present for job actions</p>
+<ol>
+<li>If all checks pass, proceed to schedule CTO verification session and optionally enable <code>REQUIRE_AUTH=true</code> globally.</li>
+</ol>
+<hr />
+<h2 id="open-questions-for-cto-alignment">Open questions (for CTO alignment)</h2>
+<ul>
+<li>Tenant model: one-tenant-per-user initially vs membership now?</li>
+<li>Do we need <code>tenant_auditor</code> as a first-class role immediately?</li>
+<li>Operator access: do we allow “impersonation” or only scoped support actions?</li>
+</ul>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

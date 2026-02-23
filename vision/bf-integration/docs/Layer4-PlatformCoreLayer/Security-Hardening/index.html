@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://bridgeflow.readthedocs.io/vision/bf-integration/docs/Layer4-PlatformCoreLayer/Security-Hardening/" />
+      <link rel="shortcut icon" href="../../../../../img/favicon.ico" />
+    <title>Security Hardening - BridgeFlow Docs</title>
+    <link rel="stylesheet" href="../../../../../css/theme.css" />
+    <link rel="stylesheet" href="../../../../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Security Hardening";
+        var mkdocs_page_input_path = "vision\\bf-integration\\docs\\Layer4-PlatformCoreLayer\\Security-Hardening.md";
+        var mkdocs_page_url = "/vision/bf-integration/docs/Layer4-PlatformCoreLayer/Security-Hardening/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../../../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../../../../.." class="icon icon-home"> BridgeFlow Docs
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../../..">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../../../ARCHITECTURE/">Architecture</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Current System</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../current/control-tower/">Control Tower</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../current/control-tower/trl7-validation/">TRL 7 Validation</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../current/control-tower/public-api/">Public API</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../current/control-tower/integration-guide/">Integration Guide</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Future Vision</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../">Vision Archive Index</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../roadmap/future-architecture/">BF-INTEGRATION Roadmap</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Phase 60</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../phase-60-gap-analysis/">Gap Analysis</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../..">BridgeFlow Docs</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../../../.." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">Security Hardening</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <blockquote>
+<p>[!WARNING]
+Status: Planned / In Development
+Context: Original BF-INTEGRATION Vision (Pre-Phase 30)</p>
+</blockquote>
+<h1 id="security-hardening-phase-a-t-045">Security Hardening — Phase A (T-045)</h1>
+<p>Overview
+This document captures the Phase A plan for security hardening (Secret Management, mTLS, Rate Limiting/DDoS, Headers/CSP, and Audit prep).</p>
+<p>Goals
+- Add a secure secret-management abstraction that supports multiple backends (mock, AWS Secrets Manager, Vault).
+- Ensure secret access is audited (read/write) and RBAC-protected where relevant.
+- Add mTLS support for sensitive endpoints and provide certificate management tooling.
+- Harden rate-limiting and add DDoS detection hooks.
+- Enforce security headers and a baseline Content Security Policy (CSP).
+- Prepare an audit package (checklist, scripts) for security reviewers and the CTO.</p>
+<p>Secret Management (first workstream)
+- Design
+  - <code>api/lib/secretManager.js</code> abstraction with methods: <code>init</code>, <code>getSecret(name)</code>, <code>setSecret(name, value)</code>, <code>listSecrets(prefix)</code>, <code>checkSecretBackendHealth()</code>.
+  - Backends via <code>SECRET_BACKEND</code> env var: <code>mock</code> (default), <code>aws</code>, <code>vault</code> (stub).
+  - Audit secret reads/writes and AWS calls via <code>writeAudit({ message: 'secret.read'|'secret.write'|'secret.aws.call', meta: { key, actor, op } })</code>.
+  - Secret APIs are RBAC-gated (<code>secrets:read|write</code>) and rate-limited by Fastify global limiter.
+- Env vars
+  - <code>SECRET_BACKEND</code> — <code>mock|aws|vault</code> (default <code>mock</code>)
+  - AWS: <code>AWS_REGION</code> (required for aws backend), optional <code>AWS_ACCESS_KEY_ID</code>, <code>AWS_SECRET_ACCESS_KEY</code>, <code>AWS_SESSION_TOKEN</code> (or use IAM role). Optional <code>AWS_SECRETS_ENDPOINT</code> for VPC endpoints/localstack (maps to <code>endpoint</code>).
+  - Vault: <code>VAULT_ADDR</code> (required), <code>VAULT_TOKEN</code> (token auth), <code>VAULT_ROLE_ID</code> + <code>VAULT_SECRET_ID</code> (AppRole), optional <code>VAULT_NAMESPACE</code>, <code>VAULT_KV_MOUNT</code> (default <code>secret</code>), <code>VAULT_KV_VERSION</code> (default <code>2</code>), <code>VAULT_AUTH_METHOD</code> (<code>token|approle</code>).
+- Behavior
+  - AWS backend uses <code>@aws-sdk/client-secrets-manager</code> with retry on throttling and audit of AWS API calls.
+  - Vault backend supports KV v2 (read/write/list) with token or AppRole auth, retries on 429/5xx, and audit of Vault calls.
+  - Missing <code>AWS_REGION</code> or <code>VAULT_ADDR</code> forces a safe fallback to <code>mock</code> backend for local dev.
+  - Health check: <code>checkSecretBackendHealth()</code> issues <code>ListSecrets</code> (aws) or <code>/sys/health</code> (vault) to confirm connectivity.
+- Verification
+  - Unit tests for <code>mock</code>, AWS, and Vault adapters (mocked SDK/fetch), including retry, health, and fallback behavior.
+  - QA: create and fetch a secret in dev, confirm audit logs and RBAC enforcement.</p>
+<p>mTLS &amp; Certificate Management
+- Add TLS client-auth option to sensitive endpoints (configurable via <code>REQUIRE_MTLS=true</code>)
+- Add certificate management tooling for generating CSRs and rotating certs</p>
+<p>Rate Limiting &amp; DDoS
+- Extend rate limiter configuration for IP-based allow/deny lists and per-endpoint policies
+- Add simple anomaly detection rules for traffic spikes and trigger alerts</p>
+<p>Security Headers &amp; CSP
+- Phase 1: HTTP Security Headers (complete) ✅
+  - Implemented Fastify plugin (<code>api/lib/securityHeaders.js</code>) with OWASP recommended headers
+  - Headers: <code>Strict-Transport-Security</code> (HSTS), <code>X-Frame-Options</code>, <code>X-Content-Type-Options</code>, <code>Referrer-Policy</code>, <code>Permissions-Policy</code>, <code>X-XSS-Protection</code>
+  - Content Security Policy (CSP) with environment-aware configuration
+  - 16 comprehensive tests covering all headers and environment behavior ✅
+- Phase 2: CSP Advanced Features (complete) ✅
+  - <strong>Nonce Generation</strong>: Cryptographically secure per-request nonces for inline scripts/styles
+  - <strong>Violation Reporting</strong>: POST /api/csp-report endpoint with rate limiting, sanitization, audit logging
+  - <strong>Production Hardening</strong>: Removed unsafe-inline/unsafe-eval, added granular directives (script-src-elem, style-src-elem, etc.)
+  - <strong>Route-Specific CSP</strong>: Different policies for /admin vs public routes, custom policy support
+  - Environment variables:
+    - <code>DISABLE_HSTS</code> — disable HSTS (default: enabled in production only)
+    - <code>HSTS_MAX_AGE</code> — HSTS max-age in seconds (default: 31536000 = 1 year)
+    - <code>HSTS_INCLUDE_SUBDOMAINS</code> — include subdomains in HSTS (default: true)
+    - <code>HSTS_IN_DEV</code> — enable HSTS in development (default: false)
+    - <code>DISABLE_CSP</code> — disable CSP entirely (default: false)
+    - <code>CSP_REPORT_ONLY</code> — CSP report-only mode (default: true in development)
+    - <code>CSP_ENFORCE</code> — enforce CSP in development (default: false)
+    - <code>CSP_USE_NONCES</code> — enable nonce generation (default: false, auto-enabled in production with hardened CSP)
+    - <code>USE_PRODUCTION_CSP</code> — use hardened CSP (default: true in production)
+    - <code>CSP_REPORT_URI</code> — violation report endpoint (default: /api/csp-report)
+    - <code>X_FRAME_OPTIONS</code> — X-Frame-Options header value (default: DENY)
+    - <code>REFERRER_POLICY</code> — Referrer-Policy header value (default: strict-origin-when-cross-origin)
+  - Production CSP policy (no unsafe-inline):
+    - <code>default-src 'self'</code> — only same-origin resources
+    - <code>script-src 'self'</code> — scripts from same origin only
+    - <code>script-src-elem 'self'</code> — script elements from same origin
+    - <code>script-src-attr 'none'</code> — no inline event handlers
+    - <code>style-src 'self'</code> — styles from same origin only
+    - <code>style-src-elem 'self'</code> — style elements from same origin
+    - <code>style-src-attr 'none'</code> — no inline style attributes
+    - <code>img-src 'self' data: https:</code> — images from same origin, data URIs, HTTPS
+    - <code>connect-src 'self'</code> — API calls to same origin
+    - <code>font-src 'self' data:</code> — fonts from same origin or data URIs
+    - <code>object-src 'none'</code> — no plugins
+    - <code>base-uri 'self'</code> — prevent base tag injection
+    - <code>form-action 'self'</code> — prevent form hijacking
+    - <code>frame-ancestors 'none'</code> — prevent framing
+    - <code>upgrade-insecure-requests</code> — upgrade HTTP to HTTPS
+  - Admin route CSP (more restrictive):
+    - No external images (<code>img-src 'self' data:</code> only)
+    - No external scripts or styles
+    - No external fonts
+  - CSP violation reporting:
+    - Rate-limited endpoint (100 reports/minute)
+    - Sanitization (truncate long values, filter unexpected fields)
+    - Audit logging with severity classification
+    - Console logging in development
+  - Tests: 19 tests total (16 baseline + 3 production CSP) ✅
+  - Documentation: Complete implementation guide with examples ✅</p>
+<p>Audit Prep
+- Prepare a security audit checklist and scripts
+- Run static analyzer + dependency vulnerability scans and record results</p>
+<p>Acceptance Criteria
+- Secret manager abstraction implemented with <code>mock</code> backend and tests ✅
+- Secret access audit entries emitted on read/write ✅
+- Documentation added to <code>docs/Layer4-PlatformCoreLayer/Security-Hardening.md</code> and <code>Deployment-Guide.md</code> ✅
+- AWS Secrets Manager adapter with retry, health check, audit logging ✅
+- Vault adapter with token/AppRole auth, KV v2 support, audit logging ✅
+- Admin UI for secrets management with RBAC integration, masked values, accessibility ✅
+- Security headers plugin with OWASP recommended headers (HSTS, X-Frame-Options, CSP, etc.) ✅
+- Environment-aware header configuration with CSP report-only mode in development ✅
+- 16 comprehensive tests for security headers covering all directives and environment behavior ✅
+- CSP advanced features: nonce generation, violation reporting, production hardening, route-specific policies ✅
+- CSP violation reporting endpoint with rate limiting and audit logging ✅
+- Production CSP hardened (no unsafe-inline/unsafe-eval, granular directives) ✅
+- 19 total CSP tests (16 baseline + 3 production CSP passing) ✅
+- Complete CSP implementation documentation with usage examples ✅
+- mTLS and rate-limiting enhancements scoped and scheduled for implementation ✅</p>
+<h2 id="network-boundary-protection-phase-33">Network Boundary Protection (Phase 33)</h2>
+<p>All firewall configurations are restricted to <strong>Layer 4 public endpoints only</strong>:</p>
+<ul>
+<li><strong>Private IP ranges blocked</strong>: <code>10.0.0.0/8</code>, <code>172.16.0.0/12</code>, <code>192.168.0.0/16</code>, <code>127.0.0.0/8</code></li>
+<li><strong>Port validation</strong>: Only ports 1-65535 accepted</li>
+<li><strong>Protocol enforcement</strong>: TCP/UDP/BOTH only</li>
+</ul>
+<blockquote>
+<p>🔒 <strong>Never store internal topology</strong> — firewall data is strictly for partner coordination.</p>
+</blockquote>
+<p><strong>References:</strong>
+- Firewall API validation: <a href="../../api/validators/firewall.js"><code>api/validators/firewall.js</code></a>
+- Complete specification: <a href="../../phases/phases31-40/phase-33-firewall-api/">Phase 33 Firewall API</a>
+- Canvas integration guide: <a href="../../phases/phases31-40/phase-33-firewall-canvas-integration/">Phase 33 Canvas Integration</a></p>
+<hr />
+<p>Next steps
+1. ~~Implement <code>api/lib/secretManager.js</code> (mock + interface) and tests~~ — complete
+2. ~~Add audit writes and RBAC checks for secret access~~ — complete
+3. ~~Add adapters for <code>aws</code> and <code>vault</code>~~ — complete
+4. ~~Build Admin UI for secrets management~~ — complete
+5. ~~Implement Security Headers &amp; CSP (Phase 1)~~ — complete
+6. ~~Complete CSP Phase 2 (nonce support, violation reporting, production hardening, route-specific policies)~~ — complete
+7. Implement mTLS support for sensitive endpoints
+8. Add rate-limiting enhancements (IP allow/deny lists, anomaly detection)
+9. Prepare security audit package (checklist, vulnerability scans, static analysis)</p>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+    
+  </span>
+</div>
+    <script src="../../../../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../../../../..";</script>
+    <script src="../../../../../js/theme_extra.js"></script>
+    <script src="../../../../../js/theme.js"></script>
+      <script src="../../../../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

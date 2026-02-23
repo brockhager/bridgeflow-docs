@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://bridgeflow.readthedocs.io/design/monorepo-structure/" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>BridgeFlow Monorepo Structure Proposal - BridgeFlow Docs</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "BridgeFlow Monorepo Structure Proposal";
+        var mkdocs_page_input_path = "design\\monorepo-structure.md";
+        var mkdocs_page_url = "/design/monorepo-structure/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> BridgeFlow Docs
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../ARCHITECTURE/">Architecture</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Current System</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../current/control-tower/">Control Tower</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../current/control-tower/trl7-validation/">TRL 7 Validation</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../current/control-tower/public-api/">Public API</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../current/control-tower/integration-guide/">Integration Guide</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Future Vision</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../vision/">Vision Archive Index</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../roadmap/future-architecture/">BF-INTEGRATION Roadmap</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Phase 60</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../phase-60-gap-analysis/">Gap Analysis</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">BridgeFlow Docs</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">BridgeFlow Monorepo Structure Proposal</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="bridgeflow-monorepo-structure-proposal">BridgeFlow Monorepo Structure Proposal</h1>
+<p>Summary
+- Primary stack: <strong>TypeScript / Node.js</strong> for services and libs
+- Monorepo using <strong>pnpm workspaces</strong> + <strong>Turborepo</strong> (or Nx) for orchestration
+- Prefer <strong>Prisma</strong> for DB schema + migrations (PostgreSQL)
+- Local dev that does not <em>require</em> Docker; optional Docker helpers for convenience
+- CI: <strong>GitHub Actions</strong> with lint/test/build/scanning steps</p>
+<p>Goals &amp; Constraints
+- Small team: prefer simple conventions and battle-tested tools
+- SaaS: we operate infra; design for multi-tenancy and security from day 1
+- Start with tenant_id shared schema; design to migrate to schema/db-per-tenant
+- No complex Docker orchestration required for local dev</p>
+<p>Top-level layout (proposal)</p>
+<pre><code>/ (root)
+├─ package.json                # workspace scripts
+├─ pnpm-workspace.yaml
+├─ turbo.json                  # task runner
+├─ .github/workflows/*         # CI pipelines
+├─ packages/
+│  ├─ services/
+│  │  ├─ api-gateway/
+│  │  ├─ tenant-service/
+│  │  ├─ connector-service/
+│  │  ├─ workflow-service/
+│  │  ├─ billing-service/
+│  │  └─ audit-service/
+│  └─ libs/
+│     ├─ db/                   # db adapters, migrations, Prisma schema templates
+│     ├─ auth/                 # auth helpers, middleware
+│     ├─ observability/        # tracing/metrics/logging helpers
+│     ├─ secrets/              # secrets manager abstraction + dev shim
+│     └─ shared/               # shared types, utilities
+├─ design/                     # design docs (this folder)
+└─ docs/
+</code></pre>
+<p>Package responsibilities
+- services/api-gateway: Edge, auth, rate limiting, routing to internal services
+- services/tenant-service: tenant lifecycle, TenantManager, onboarding
+- services/audit-service: immutable event logging, retention/archival
+- services/connector-service: integrations (QuickBooks, HubSpot, etc.)
+- services/workflow-service: orchestration, long-running jobs
+- services/billing-service: usage collection, billing, invoicing
+- libs/db: repository interfaces, connection managers, migration helpers
+- libs/auth: <code>RequestContext</code>, auth middleware, token validation
+- libs/observability: OTEL instrumentation, metric helpers
+- libs/secrets: Secrets manager interface + dev/local shim
+- libs/shared: domain types, errors, results</p>
+<p>Tooling choices (rationale)
+- pnpm workspaces: fast installs and strictness; good for monorepo
+- Turborepo: task orchestration and caching; Nx is an alternative
+- TypeScript strict mode: no <code>any</code> for security-critical code
+- Prisma: fast developer experience, type-safe DB access, and migrations
+- Vitest + Supertest / Playwright: unit &amp; integration tests
+- ESLint + Prettier: code style &amp; guardrails
+- OpenTelemetry (OTEL): tracing + metrics (exporters pluggable)</p>
+<p>Local development (no Docker)
+- Option A (recommended): Use a managed dev Postgres instance (e.g., Supabase dev project) and a <code>.env.development</code> file pointing to it.
+- Option B (local Postgres): install Postgres locally (Windows: Postgres installer or WSL), then run migrations locally.
+- Tests: Use <code>pg-mem</code> for fast unit tests that emulate Postgres behavior (no Docker needed).</p>
+<p>Dev scripts (examples)
+- <code>pnpm dev --filter services/*</code> - run all services in parallel (or use a single service filter)
+- <code>pnpm -w run migrate:dev --filter libs/db</code> - run migrations against the configured DB
+- <code>pnpm test</code> - run unit tests across workspace</p>
+<p>Security &amp; Compliance hooks
+- Central <code>libs/audit</code> for append-only audit events; write-only via API with RBAC
+- Secrets accessed via <code>libs/secrets</code> interface; production implementation uses KMS/Secrets Manager
+- Logging standard: structured JSON, includes <code>requestId</code>, <code>tenantId</code>, <code>principal.id</code>
+- All security-critical env must be read from secrets store in production (not raw env)
+- Field-level encryption: <code>libs/secrets</code> + <code>libs/db</code> utilities with encrypt/decrypt helpers</p>
+<p>Migration Path from tenant_id -&gt; schema/db-per-tenant
+- Start: shared schema <code>tenant_id</code> enforced at repository layer
+- Plan: add <code>TenantDescriptor</code> + <code>TenantManager</code> (metadata), allow marking tenant isolation level
+- Tools: migration jobs to copy per-tenant data to new schema; use dual-write strategy during cutover
+- Long-term: automated provisioning (schema creation, migrations, backups) when moving to schema/db per tenant</p>
+<p>Operational &amp; CI decisions
+- GitHub Actions pipeline: lint, test, build, dependency-scan, image-scan (if images used later)
+- PR policy: require codeowners + security checklist in PR template
+- Release: Canary or blue/green deployment for services when possible</p>
+<p>Notes: Keep the design flexible — most heavy infra (multi-region, DB per tenant) should be behind feature flags and admin-only workflows until required.</p>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

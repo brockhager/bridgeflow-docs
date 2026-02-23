@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://bridgeflow.readthedocs.io/current/control-tower/integration-guide/" />
+      <link rel="shortcut icon" href="../../../img/favicon.ico" />
+    <title>Integration Guide - BridgeFlow Docs</title>
+    <link rel="stylesheet" href="../../../css/theme.css" />
+    <link rel="stylesheet" href="../../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Integration Guide";
+        var mkdocs_page_input_path = "current\\control-tower\\integration-guide.md";
+        var mkdocs_page_url = "/current/control-tower/integration-guide/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../../.." class="icon icon-home"> BridgeFlow Docs
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../..">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../ARCHITECTURE/">Architecture</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Current System</span></p>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="../">Control Tower</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../trl7-validation/">TRL 7 Validation</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../public-api/">Public API</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">Integration Guide</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#endpoint">Endpoint</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#auth">Auth</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#required-envelope">Required envelope</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#common-event-types">Common event types</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#curl-example">cURL example</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#canonical-source">Canonical source</a>
+    </li>
+    </ul>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Future Vision</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../vision/">Vision Archive Index</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../roadmap/future-architecture/">BF-INTEGRATION Roadmap</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Phase 60</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../phase-60-gap-analysis/">Gap Analysis</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../..">BridgeFlow Docs</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../.." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">Current System</li>
+      <li class="breadcrumb-item active">Integration Guide</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="integration-guide-current-quickstart">Integration Guide (Current Quickstart)</h1>
+<p>This is the customer-facing quickstart for pushing private ERP/WMS/TMS events into Bridgeflow.</p>
+<h2 id="endpoint">Endpoint</h2>
+<ul>
+<li><code>POST https://control-tower.up.railway.app/api/control/events</code></li>
+</ul>
+<h2 id="auth">Auth</h2>
+<ul>
+<li>Header: <code>Authorization: Bearer &lt;INTEGRATION_TOKEN&gt;</code></li>
+<li>Token provisioning today: manual Bridgeflow onboarding flow</li>
+<li>Self-service API key portal: planned in Phase 59+</li>
+</ul>
+<h2 id="required-envelope">Required envelope</h2>
+<pre><code class="language-json">{
+  &quot;event_id&quot;: &quot;evt_erp_20260223_0001&quot;,
+  &quot;tenant_id&quot;: &quot;tenant-acme&quot;,
+  &quot;event_type&quot;: &quot;shipment.created&quot;,
+  &quot;source&quot;: &quot;sap-s4&quot;,
+  &quot;occurred_at&quot;: &quot;2026-02-23T00:30:00Z&quot;,
+  &quot;payload&quot;: {
+    &quot;shipment_id&quot;: &quot;SHP-10001&quot;
+  }
+}
+</code></pre>
+<h2 id="common-event-types">Common event types</h2>
+<ul>
+<li><code>shipment.created</code></li>
+<li><code>shipment.delayed</code></li>
+<li><code>shipment.delivered</code></li>
+<li><code>shipment.delivery_failed</code></li>
+<li><code>shipment.tracking_stale</code></li>
+</ul>
+<h2 id="curl-example">cURL example</h2>
+<pre><code class="language-bash">curl -X POST &quot;https://control-tower.up.railway.app/api/control/events&quot; \
+  -H &quot;Content-Type: application/json&quot; \
+  -H &quot;Authorization: Bearer &lt;INTEGRATION_TOKEN&gt;&quot; \
+  -d '{
+    &quot;event_id&quot;: &quot;evt_erp_20260223_0001&quot;,
+    &quot;tenant_id&quot;: &quot;tenant-acme&quot;,
+    &quot;event_type&quot;: &quot;shipment.delivered&quot;,
+    &quot;source&quot;: &quot;sap-s4&quot;,
+    &quot;occurred_at&quot;: &quot;2026-02-23T09:10:00Z&quot;,
+    &quot;payload&quot;: {
+      &quot;shipment_id&quot;: &quot;SHP-10001&quot;,
+      &quot;promised_delivery_at&quot;: &quot;2026-02-23T08:00:00Z&quot;,
+      &quot;delivered_at&quot;: &quot;2026-02-23T09:10:00Z&quot;
+    }
+  }'
+</code></pre>
+<h2 id="canonical-source">Canonical source</h2>
+<p>This quickstart is synced from:
+- <code>bf-control/docs/03-integrations/INTEGRATION_GUIDE.md</code></p>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../public-api/" class="btn btn-neutral float-left" title="Public API"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../../../vision/" class="btn btn-neutral float-right" title="Vision Archive Index">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../public-api/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../../../vision/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../../..";</script>
+    <script src="../../../js/theme_extra.js"></script>
+    <script src="../../../js/theme.js"></script>
+      <script src="../../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

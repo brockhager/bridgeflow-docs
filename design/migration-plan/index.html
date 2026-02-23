@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://bridgeflow.readthedocs.io/design/migration-plan/" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>Migration Plan: tenant_id -&gt; schema/db-per-tenant - BridgeFlow Docs</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Migration Plan: tenant_id -\u0026gt; schema/db-per-tenant";
+        var mkdocs_page_input_path = "design\\migration-plan.md";
+        var mkdocs_page_url = "/design/migration-plan/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> BridgeFlow Docs
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../ARCHITECTURE/">Architecture</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Current System</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../current/control-tower/">Control Tower</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../current/control-tower/trl7-validation/">TRL 7 Validation</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../current/control-tower/public-api/">Public API</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../current/control-tower/integration-guide/">Integration Guide</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Future Vision</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../vision/">Vision Archive Index</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../roadmap/future-architecture/">BF-INTEGRATION Roadmap</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Phase 60</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../phase-60-gap-analysis/">Gap Analysis</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">BridgeFlow Docs</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">Migration Plan: tenant_id -&gt; schema/db-per-tenant</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="migration-plan-tenant_id-schemadb-per-tenant">Migration Plan: tenant_id -&gt; schema/db-per-tenant</h1>
+<p>This is a pragmatic, staged migration plan designed to avoid downtime and provide rollback options. Keep migrations idempotent and script-driven.</p>
+<h2 id="phases">Phases</h2>
+<h3 id="phase-0-mvp-shared-schema-with-tenant_id">Phase 0 — MVP (shared schema with tenant_id)</h3>
+<ul>
+<li>Enforce tenant filters in repository layer and test for tenant isolation</li>
+<li>Add <code>TenantDescriptor</code> and <code>TenantManager</code> to centralize tenant metadata</li>
+<li>Add operator tools to tag heavy tenants for future isolation</li>
+</ul>
+<h3 id="phase-1-prepare-introduce-schema-per-tenant-capabilities">Phase 1 — Prepare (introduce schema-per-tenant capabilities)</h3>
+<ul>
+<li>Add schema management utilities in <code>lib-db</code> and small migration worker service</li>
+<li>Implement per-tenant schema templates and migration pipelines</li>
+<li>Add status tracking for tenant migration state (pending, in-progress, completed, failed)</li>
+</ul>
+<h3 id="phase-2-migrate-selected-tenants-schema-per-tenant">Phase 2 — Migrate selected tenants (schema-per-tenant)</h3>
+<ul>
+<li>For a single tenant:</li>
+<li>Create schema and apply base migrations</li>
+<li>Dual-write: update application layer to write to both shared and tenant schema</li>
+<li>Backfill: run data copy from shared schema to tenant schema with validation (checksums, counts)</li>
+<li>Swap reads via feature flag when validation passes</li>
+<li>Monitor for data divergence for a period (e.g., 24-72 hours)</li>
+<li>Cut over reads fully and disable dual-write after confident</li>
+<li>Repeat per tenant; prefer non-critical tenants first</li>
+</ul>
+<h3 id="phase-3-db-per-tenant-enterprise">Phase 3 — DB-per-tenant (enterprise)</h3>
+<ul>
+<li>Provision dedicated DB instance or cluster per tenant (automated via IaC)</li>
+<li>Implement connection pooling and operator limits</li>
+<li>Ensure backup/restore and per-tenant recovery procedures exist</li>
+</ul>
+<hr />
+<h2 id="patterns-best-practices">Patterns &amp; Best Practices</h2>
+<ul>
+<li>Dual-Write &amp; Read-Fallback</li>
+<li>Dual-write to old and new models, and read from old by default until validation completes</li>
+<li>
+<p>Ensure writes are idempotent and have conservative error handling</p>
+</li>
+<li>
+<p>Backfill &amp; Validation</p>
+</li>
+<li>Use incremental bulk copy with consistency checks (row counts, checksums)</li>
+<li>
+<p>Record migration checkpoints and resume support</p>
+</li>
+<li>
+<p>Transactional Guarantees</p>
+</li>
+<li>For operations that cross multiple tables, ensure transactional semantics in the target schema</li>
+<li>
+<p>Do not allow cross-tenant joins (explicitly ban in code reviews and tests)</p>
+</li>
+<li>
+<p>Testing</p>
+</li>
+<li>Add migration tests that run on test tenants and verify data parity</li>
+<li>
+<p>Add chaos tests to simulate partial failures (e.g., network blips) during migration</p>
+</li>
+<li>
+<p>Rollback</p>
+</li>
+<li>If copy fails: mark tenant state as <code>failed</code> and resume later</li>
+<li>If production divergence occurs: re-enable reads from shared schema and investigate</li>
+</ul>
+<hr />
+<h2 id="operational-runbook-example">Operational Runbook (example)</h2>
+<ol>
+<li>Pre-checks: ensure nightly backup succeeded and target schema has been created</li>
+<li>Start migration job in <code>dry-run</code> mode to capture expected differences</li>
+<li>Start backfill; monitor metrics and queue sizes</li>
+<li>Run validation checks; escalate on failures</li>
+<li>Switch reads behind feature flag</li>
+<li>Monitor for N days; if stable, disable dual-write</li>
+</ol>
+<hr />
+<h2 id="tooling-recommendations">Tooling Recommendations</h2>
+<ul>
+<li><code>migration-worker</code> service to perform backfills and monitor progress</li>
+<li><code>migration-cli</code> as operator tool to trigger and supervise migrations</li>
+<li><code>migration-audit</code> into <code>audit-service</code> for every step</li>
+</ul>
+<hr />
+<h2 id="risks-mitigations">Risks &amp; Mitigations</h2>
+<ul>
+<li>Risk: performance hit during dual-write/backfill</li>
+<li>Mitigation: throttle backfill, schedule during low traffic windows</li>
+<li>Risk: data divergence</li>
+<li>Mitigation: strong checksums, incremental validation, and ability to resume</li>
+<li>Risk: cost explosion (many DBs)</li>
+<li>Mitigation: tiered offering — charge premium for dedicated infra</li>
+</ul>
+<hr />
+<p>Next steps: create <code>migration-worker</code> stub, implement migration-status UI in operator console, and create runbook tests for the first tenant migration in staging.</p>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

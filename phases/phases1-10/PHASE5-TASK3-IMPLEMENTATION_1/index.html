@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://bridgeflow.readthedocs.io/phases/phases1-10/PHASE5-TASK3-IMPLEMENTATION_1/" />
+      <link rel="shortcut icon" href="../../../img/favicon.ico" />
+    <title>Phase 5 Task 3: Onboarding Flow Implementation Guide - BridgeFlow Docs</title>
+    <link rel="stylesheet" href="../../../css/theme.css" />
+    <link rel="stylesheet" href="../../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Phase 5 Task 3: Onboarding Flow Implementation Guide";
+        var mkdocs_page_input_path = "phases\\phases1-10\\PHASE5-TASK3-IMPLEMENTATION_1.md";
+        var mkdocs_page_url = "/phases/phases1-10/PHASE5-TASK3-IMPLEMENTATION_1/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../../.." class="icon icon-home"> BridgeFlow Docs
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../..">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../ARCHITECTURE/">Architecture</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Current System</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../current/control-tower/">Control Tower</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../current/control-tower/trl7-validation/">TRL 7 Validation</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../current/control-tower/public-api/">Public API</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../current/control-tower/integration-guide/">Integration Guide</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Future Vision</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../vision/">Vision Archive Index</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../roadmap/future-architecture/">BF-INTEGRATION Roadmap</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Phase 60</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../phase-60-gap-analysis/">Gap Analysis</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../..">BridgeFlow Docs</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../.." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">Phase 5 Task 3: Onboarding Flow Implementation Guide</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="phase-5-task-3-onboarding-flow-implementation-guide">Phase 5 Task 3: Onboarding Flow Implementation Guide</h1>
+<h2 id="overview">Overview</h2>
+<p>This guide provides the complete implementation for the welcome/onboarding screen in BridgeFlow. The onboarding flow helps new users understand the platform and guides them through their first steps.</p>
+<h2 id="whats-included">What's Included</h2>
+<h3 id="1-welcome-screen-webwelcomehtml">1. Welcome Screen (<code>web/welcome.html</code>)</h3>
+<p>A comprehensive onboarding page that includes:
+- <strong>User Profile Display</strong>: Shows user's name, email, and initials in a gradient avatar
+- <strong>3-Step Getting Started Guide</strong>: 
+  - Step 1: Create Your First Bridge
+  - Step 2: Test Your Connection
+  - Step 3: Monitor Activity
+- <strong>Feature Highlights</strong>: Showcases key BridgeFlow capabilities
+- <strong>Quick Navigation Links</strong>: Easy access to all main pages
+- <strong>Continue to Dashboard</strong>: Primary CTA to proceed</p>
+<h3 id="2-welcome-page-logic-websrcwelcomejs">2. Welcome Page Logic (<code>web/src/welcome.js</code>)</h3>
+<p>JavaScript that handles:
+- Fetching user information from <code>/api/auth/me</code>
+- Displaying user's name and email
+- Generating user initials for avatar
+- Authentication redirect (if not logged in)
+- Optional analytics tracking for step clicks</p>
+<h3 id="3-updated-registration-flow-websrcregisterjs">3. Updated Registration Flow (<code>web/src/register.js</code>)</h3>
+<p>Modified to redirect new users to the welcome page instead of directly to the dashboard.</p>
+<h2 id="file-changes-required">File Changes Required</h2>
+<h3 id="file-1-create-webwelcomehtml">File 1: Create <code>web/welcome.html</code></h3>
+<pre><code class="language-html">&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot; /&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width,initial-scale=1&quot; /&gt;
+  &lt;title&gt;Welcome to BridgeFlow&lt;/title&gt;
+  &lt;link rel=&quot;stylesheet&quot; href=&quot;/styles.css&quot; /&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;main class=&quot;canvas-app&quot; role=&quot;main&quot;&gt;
+    &lt;!-- Welcome Header --&gt;
+    &lt;div class=&quot;canvas-header&quot;&gt;
+      &lt;h1&gt;🎉 Welcome to BridgeFlow!&lt;/h1&gt;
+      &lt;p class=&quot;muted&quot;&gt;Let's get you started with your first integration&lt;/p&gt;
+    &lt;/div&gt;
+
+    &lt;!-- User Info Section --&gt;
+    &lt;div style=&quot;max-width: 900px; margin: 0 auto 48px;&quot;&gt;
+      &lt;div class=&quot;app&quot; style=&quot;padding: 24px; text-align: center;&quot;&gt;
+        &lt;div style=&quot;margin-bottom: 16px;&quot;&gt;
+          &lt;div style=&quot;width: 80px; height: 80px; border-radius: 50%; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); margin: 0 auto 16px; display: flex; align-items: center; justify-content: center; font-size: 36px; color: white; font-weight: 600;&quot;&gt;
+            &lt;span id=&quot;userInitials&quot;&gt;?&lt;/span&gt;
+          &lt;/div&gt;
+          &lt;h2 style=&quot;margin: 0 0 4px 0; font-size: 24px;&quot; id=&quot;userName&quot;&gt;Loading...&lt;/h2&gt;
+          &lt;p style=&quot;margin: 0; color: var(--muted);&quot; id=&quot;userEmail&quot;&gt;Loading...&lt;/p&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;!-- Onboarding Steps --&gt;
+    &lt;div style=&quot;max-width: 900px; margin: 0 auto;&quot;&gt;
+      &lt;h2 style=&quot;font-size: 24px; margin: 0 0 24px 0; text-align: center;&quot;&gt;Get Started in 3 Easy Steps&lt;/h2&gt;
+
+      &lt;div style=&quot;display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; margin-bottom: 48px;&quot;&gt;
+        &lt;!-- Step 1: Create Your First Bridge --&gt;
+        &lt;div class=&quot;workflow-card&quot;&gt;
+          &lt;div class=&quot;workflow-card-icon&quot;&gt;🌉&lt;/div&gt;
+          &lt;div class=&quot;workflow-card-content&quot;&gt;
+            &lt;h3&gt;1. Create Your First Bridge&lt;/h3&gt;
+            &lt;p&gt;Connect BridgeFlow to your external APIs. Bridges are the foundation of your integrations.&lt;/p&gt;
+          &lt;/div&gt;
+          &lt;div class=&quot;workflow-card-footer&quot;&gt;
+            &lt;span class=&quot;workflow-status ready&quot;&gt;Step 1&lt;/span&gt;
+            &lt;a href=&quot;./bridge-form.html&quot; class=&quot;btn primary&quot; style=&quot;text-decoration: none;&quot;&gt;
+              Create Bridge
+            &lt;/a&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+
+        &lt;!-- Step 2: Test Your Connection --&gt;
+        &lt;div class=&quot;workflow-card&quot;&gt;
+          &lt;div class=&quot;workflow-card-icon&quot;&gt;🔌&lt;/div&gt;
+          &lt;div class=&quot;workflow-card-content&quot;&gt;
+            &lt;h3&gt;2. Test Your Connection&lt;/h3&gt;
+            &lt;p&gt;Use our webhook tester to send test data and verify your bridge is working correctly.&lt;/p&gt;
+          &lt;/div&gt;
+          &lt;div class=&quot;workflow-card-footer&quot;&gt;
+            &lt;span class=&quot;workflow-status ready&quot;&gt;Step 2&lt;/span&gt;
+            &lt;a href=&quot;./webhook-tester.html&quot; class=&quot;btn primary&quot; style=&quot;text-decoration: none;&quot;&gt;
+              Test Webhook
+            &lt;/a&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+
+        &lt;!-- Step 3: Monitor Activity --&gt;
+        &lt;div class=&quot;workflow-card&quot;&gt;
+          &lt;div class=&quot;workflow-card-icon&quot;&gt;📊&lt;/div&gt;
+          &lt;div class=&quot;workflow-card-content&quot;&gt;
+            &lt;h3&gt;3. Monitor Activity&lt;/h3&gt;
+            &lt;p&gt;View real-time transaction logs and see exactly what data flows through your integrations.&lt;/p&gt;
+          &lt;/div&gt;
+          &lt;div class=&quot;workflow-card-footer&quot;&gt;
+            &lt;span class=&quot;workflow-status ready&quot;&gt;Step 3&lt;/span&gt;
+            &lt;a href=&quot;./transactions.html&quot; class=&quot;btn primary&quot; style=&quot;text-decoration: none;&quot;&gt;
+              View Transactions
+            &lt;/a&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+
+      &lt;!-- What You Can Do Section --&gt;
+      &lt;div class=&quot;app&quot; style=&quot;padding: 32px; margin-bottom: 48px;&quot;&gt;
+        &lt;h2 style=&quot;font-size: 20px; margin: 0 0 24px 0; text-align: center;&quot;&gt;What You Can Do with BridgeFlow&lt;/h2&gt;
+
+        &lt;div style=&quot;display: grid; gap: 16px;&quot;&gt;
+          &lt;div style=&quot;display: flex; gap: 16px; align-items: start;&quot;&gt;
+            &lt;div style=&quot;font-size: 32px; line-height: 1;&quot;&gt;📧&lt;/div&gt;
+            &lt;div&gt;
+              &lt;h4 style=&quot;margin: 0 0 4px 0; font-size: 16px;&quot;&gt;Invoice Automation&lt;/h4&gt;
+              &lt;p style=&quot;margin: 0; font-size: 14px; color: var(--muted);&quot;&gt;
+                Send invoices via email automatically with our simple 5-minute wizard.
+              &lt;/p&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+
+          &lt;div style=&quot;display: flex; gap: 16px; align-items: start;&quot;&gt;
+            &lt;div style=&quot;font-size: 32px; line-height: 1;&quot;&gt;🔄&lt;/div&gt;
+            &lt;div&gt;
+              &lt;h4 style=&quot;margin: 0 0 4px 0; font-size: 16px;&quot;&gt;API Integration&lt;/h4&gt;
+              &lt;p style=&quot;margin: 0; font-size: 14px; color: var(--muted);&quot;&gt;
+                Connect to any API with support for multiple authentication methods (API Key, Bearer, OAuth2).
+              &lt;/p&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+
+          &lt;div style=&quot;display: flex; gap: 16px; align-items: start;&quot;&gt;
+            &lt;div style=&quot;font-size: 32px; line-height: 1;&quot;&gt;⚙️&lt;/div&gt;
+            &lt;div&gt;
+              &lt;h4 style=&quot;margin: 0 0 4px 0; font-size: 16px;&quot;&gt;Data Transformation&lt;/h4&gt;
+              &lt;p style=&quot;margin: 0; font-size: 14px; color: var(--muted);&quot;&gt;
+                Automatically transform data between different formats as it flows through your bridges.
+              &lt;/p&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+
+          &lt;div style=&quot;display: flex; gap: 16px; align-items: start;&quot;&gt;
+            &lt;div style=&quot;font-size: 32px; line-height: 1;&quot;&gt;🎯&lt;/div&gt;
+            &lt;div&gt;
+              &lt;h4 style=&quot;margin: 0 0 4px 0; font-size: 16px;&quot;&gt;Webhook Processing&lt;/h4&gt;
+              &lt;p style=&quot;margin: 0; font-size: 14px; color: var(--muted);&quot;&gt;
+                Receive webhooks from external systems and automatically forward them to your APIs.
+              &lt;/p&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+
+      &lt;!-- Quick Links --&gt;
+      &lt;div style=&quot;text-align: center; margin-bottom: 32px;&quot;&gt;
+        &lt;h3 style=&quot;font-size: 18px; margin: 0 0 16px 0;&quot;&gt;Quick Links&lt;/h3&gt;
+        &lt;div style=&quot;display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;&quot;&gt;
+          &lt;a href=&quot;./canvas.html&quot; class=&quot;btn&quot; style=&quot;text-decoration: none;&quot;&gt;
+            🏠 Dashboard
+          &lt;/a&gt;
+          &lt;a href=&quot;./bridges.html&quot; class=&quot;btn&quot; style=&quot;text-decoration: none;&quot;&gt;
+            🌉 Manage Bridges
+          &lt;/a&gt;
+          &lt;a href=&quot;./history.html&quot; class=&quot;btn&quot; style=&quot;text-decoration: none;&quot;&gt;
+            📜 Invoice History
+          &lt;/a&gt;
+          &lt;a href=&quot;./transactions.html&quot; class=&quot;btn&quot; style=&quot;text-decoration: none;&quot;&gt;
+            📊 Transactions
+          &lt;/a&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+
+      &lt;!-- Continue to Dashboard --&gt;
+      &lt;div style=&quot;text-align: center; padding: 32px 0;&quot;&gt;
+        &lt;a href=&quot;./canvas.html&quot; class=&quot;btn primary&quot; style=&quot;text-decoration: none; padding: 16px 48px; font-size: 18px;&quot;&gt;
+          Continue to Dashboard →
+        &lt;/a&gt;
+        &lt;p style=&quot;margin: 16px 0 0 0; font-size: 14px; color: var(--muted);&quot;&gt;
+          You can always access this guide from your account settings
+        &lt;/p&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/main&gt;
+  &lt;script type=&quot;module&quot; src=&quot;./src/welcome.js&quot;&gt;&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<h3 id="file-2-create-websrcwelcomejs">File 2: Create <code>web/src/welcome.js</code></h3>
+<pre><code class="language-javascript">/**
+ * Welcome/Onboarding page logic
+ * Load and display user information after successful registration
+ */
+
+// Get API base URL
+const API_BASE = window.location.port === '5173'
+  ? 'http://localhost:4000/api'
+  : '/api'
+
+// Load user information
+async function loadUserInfo() {
+  try {
+    const response = await fetch(`${API_BASE}/auth/me`, {
+      credentials: 'include'
+    })
+
+    if (!response.ok) {
+      // Not logged in, redirect to login
+      window.location.href = '/login'
+      return
+    }
+
+    const data = await response.json()
+    const user = data.user
+
+    // Update user name
+    const userNameEl = document.getElementById('userName')
+    if (user.name) {
+      userNameEl.textContent = `Hello, ${user.name}!`
+    } else {
+      userNameEl.textContent = 'Hello!'
+    }
+
+    // Update user email
+    const userEmailEl = document.getElementById('userEmail')
+    userEmailEl.textContent = user.email
+
+    // Update user initials
+    const initialsEl = document.getElementById('userInitials')
+    if (user.name) {
+      const names = user.name.split(' ')
+      if (names.length &gt;= 2) {
+        initialsEl.textContent = names[0][0].toUpperCase() + names[names.length - 1][0].toUpperCase()
+      } else {
+        initialsEl.textContent = names[0][0].toUpperCase()
+      }
+    } else {
+      // Use first letter of email as fallback
+      initialsEl.textContent = user.email[0].toUpperCase()
+    }
+
+  } catch (error) {
+    console.error('Failed to load user info:', error)
+    // Redirect to login on error
+    window.location.href = '/login'
+  }
+}
+
+// Load user info on page load
+loadUserInfo()
+
+// Optional: Track if user completes each step (for future analytics)
+// For now, just log clicks on action buttons
+const actionButtons = document.querySelectorAll('.workflow-card a.btn')
+actionButtons.forEach((button, index) =&gt; {
+  button.addEventListener('click', () =&gt; {
+    console.log(`User clicked on step ${index + 1}:`, button.textContent.trim())
+    // In production, you might want to track this with analytics
+  })
+})
+</code></pre>
+<h3 id="file-3-update-websrcregisterjs">File 3: Update <code>web/src/register.js</code></h3>
+<p>Change line 65 from:</p>
+<pre><code class="language-javascript">window.location.href = './canvas.html'
+</code></pre>
+<p>To:</p>
+<pre><code class="language-javascript">window.location.href = './welcome.html'
+</code></pre>
+<p>Full updated file:</p>
+<pre><code class="language-javascript">/**
+ * Register page logic
+ */
+
+const form = document.getElementById('registerForm')
+const errorDiv = document.getElementById('errorMessage')
+
+// Get API base URL
+const API_BASE = window.location.port === '5173'
+  ? 'http://localhost:4000/api'
+  : '/api'
+
+form.addEventListener('submit', async (e) =&gt; {
+  e.preventDefault()
+
+  const name = document.getElementById('name').value.trim()
+  const email = document.getElementById('email').value.trim()
+  const password = document.getElementById('password').value
+
+  // Clear previous errors
+  hideError()
+
+  // Validate password
+  if (password.length &lt; 8) {
+    showError('Password must be at least 8 characters long')
+    return
+  }
+
+  // Show loading state
+  const submitButton = form.querySelector('button[type=&quot;submit&quot;]')
+  const originalText = submitButton.textContent
+  submitButton.textContent = 'Creating account...'
+  submitButton.disabled = true
+
+  try {
+    const response = await fetch(`${API_BASE}/auth/register`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      credentials: 'include', // Include cookies
+      body: JSON.stringify({
+        name: name || undefined,
+        email,
+        password
+      })
+    })
+
+    const data = await response.json()
+
+    if (!response.ok) {
+      throw new Error(data.message || data.error || 'Registration failed')
+    }
+
+    // Store token in localStorage as backup
+    if (data.token) {
+      localStorage.setItem('token', data.token)
+      localStorage.setItem('user', JSON.stringify(data.user))
+    }
+
+    // Show success and redirect
+    showNotification('Account created successfully! Redirecting...', 'success')
+
+    // Redirect to welcome page after a brief delay
+    setTimeout(() =&gt; {
+      window.location.href = './welcome.html'
+    }, 1000)
+
+  } catch (error) {
+    console.error('Registration error:', error)
+    showError(error.message)
+
+    // Reset button
+    submitButton.textContent = originalText
+    submitButton.disabled = false
+  }
+})
+
+function showError(message) {
+  errorDiv.textContent = '❌ ' + message
+  errorDiv.style.display = 'block'
+}
+
+function hideError() {
+  errorDiv.style.display = 'none'
+}
+
+function showNotification(message, type = 'info') {
+  const notification = document.createElement('div')
+  notification.style.cssText = `
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 16px 20px;
+    background: ${type === 'error' ? '#ef4444' : type === 'success' ? '#10b981' : '#3b82f6'};
+    color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    z-index: 2000;
+    font-size: 14px;
+    font-weight: 500;
+    max-width: 400px;
+  `
+  notification.textContent = message
+  document.body.appendChild(notification)
+
+  setTimeout(() =&gt; {
+    notification.remove()
+  }, 4000)
+}
+</code></pre>
+<h2 id="implementation-steps">Implementation Steps</h2>
+<ol>
+<li><strong>Add welcome.html</strong></li>
+<li>Navigate to your <code>web</code> folder</li>
+<li>
+<p>Create <code>welcome.html</code> with the content above</p>
+</li>
+<li>
+<p><strong>Add welcome.js</strong></p>
+</li>
+<li>Navigate to your <code>web/src</code> folder</li>
+<li>
+<p>Create <code>welcome.js</code> with the content above</p>
+</li>
+<li>
+<p><strong>Update register.js</strong></p>
+</li>
+<li>Open <code>web/src/register.js</code></li>
+<li>
+<p>Change the redirect from <code>canvas.html</code> to <code>welcome.html</code> (line 65)</p>
+</li>
+<li>
+<p><strong>Test the Flow</strong>
+   ```bash
+   # Start your server
+   pnpm run api:start</p>
+</li>
+</ol>
+<p># In browser:
+   # 1. Go to http://localhost:4000/register.html
+   # 2. Register a new account
+   # 3. Should redirect to http://localhost:4000/welcome.html
+   # 4. Click "Continue to Dashboard" to go to canvas.html
+   ```</p>
+<h2 id="features-implemented">Features Implemented</h2>
+<h3 id="user-personalization">✅ User Personalization</h3>
+<ul>
+<li>Displays user's name and email</li>
+<li>Shows initials in a gradient avatar</li>
+<li>Fallback to email initial if no name provided</li>
+</ul>
+<h3 id="clear-onboarding-steps">✅ Clear Onboarding Steps</h3>
+<ul>
+<li>3-step guide with clear CTAs</li>
+<li>Direct links to key features</li>
+<li>Visual workflow cards (reuses existing CSS)</li>
+</ul>
+<h3 id="feature-education">✅ Feature Education</h3>
+<ul>
+<li>Highlights 4 main BridgeFlow capabilities</li>
+<li>Icons and descriptions for each feature</li>
+<li>Helps users understand platform value</li>
+</ul>
+<h3 id="easy-navigation">✅ Easy Navigation</h3>
+<ul>
+<li>Quick links to all main pages</li>
+<li>Primary CTA to continue to dashboard</li>
+<li>Note about accessing guide later</li>
+</ul>
+<h3 id="authentication-protection">✅ Authentication Protection</h3>
+<ul>
+<li>Redirects to login if not authenticated</li>
+<li>Fetches user data from <code>/api/auth/me</code></li>
+<li>Handles errors gracefully</li>
+</ul>
+<h2 id="design-consistency">Design Consistency</h2>
+<p>The welcome screen uses existing BridgeFlow design patterns:
+- <strong>CSS Classes</strong>: Reuses <code>.canvas-app</code>, <code>.workflow-card</code>, <code>.btn</code>, etc.
+- <strong>Color Scheme</strong>: Matches existing accent colors and gradients
+- <strong>Responsive</strong>: Works on mobile and desktop (existing CSS handles this)
+- <strong>Icons</strong>: Uses emojis consistent with other pages</p>
+<h2 id="future-enhancements-optional">Future Enhancements (Optional)</h2>
+<ol>
+<li><strong>Progress Tracking</strong>: Store which steps user has completed</li>
+<li><strong>Skip Option</strong>: Allow users to skip onboarding</li>
+<li><strong>Video Tutorial</strong>: Embed a walkthrough video</li>
+<li><strong>Interactive Tour</strong>: Add tooltips or guided tour on dashboard</li>
+<li><strong>Analytics</strong>: Track onboarding completion rates</li>
+<li><strong>Personalization</strong>: Customize based on user's role or industry</li>
+</ol>
+<h2 id="testing-checklist">Testing Checklist</h2>
+<ul>
+<li>[ ] New user registration redirects to welcome page</li>
+<li>[ ] Welcome page displays user name and email correctly</li>
+<li>[ ] Initials are calculated properly (first + last name)</li>
+<li>[ ] All navigation links work</li>
+<li>[ ] "Continue to Dashboard" goes to canvas.html</li>
+<li>[ ] Mobile responsive layout works</li>
+<li>[ ] Unauthenticated users are redirected to login</li>
+<li>[ ] Error handling works if API call fails</li>
+</ul>
+<h2 id="commit-message">Commit Message</h2>
+<pre><code>Phase 5 Task 3: Add welcome/onboarding screen
+
+- Created welcome.html with 3-step onboarding flow
+- Created welcome.js to load and display user info
+- Updated register.js to redirect to welcome page after signup
+- Includes feature highlights and quick navigation links
+- Reuses existing design system (CSS classes, colors, patterns)
+- Responsive design works on mobile and desktop
+</code></pre>
+<h2 id="notes">Notes</h2>
+<ul>
+<li>No database changes required</li>
+<li>No API changes required</li>
+<li>Works with existing authentication system</li>
+<li>Can be deployed immediately after testing</li>
+<li>Users can always access canvas.html directly if they bookmark it</li>
+</ul>
+<hr />
+<p><strong>Status</strong>: Ready for implementation
+<strong>Estimated Time</strong>: 10-15 minutes to implement and test
+<strong>Risk Level</strong>: Low (no breaking changes, additive only)</p>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+    
+  </span>
+</div>
+    <script src="../../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../../..";</script>
+    <script src="../../../js/theme_extra.js"></script>
+    <script src="../../../js/theme.js"></script>
+      <script src="../../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

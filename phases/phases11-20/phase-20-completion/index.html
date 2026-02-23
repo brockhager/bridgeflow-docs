@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://bridgeflow.readthedocs.io/phases/phases11-20/phase-20-completion/" />
+      <link rel="shortcut icon" href="../../../img/favicon.ico" />
+    <title>Phase 20 — Partner Inbound Gateway &amp; Inbox Delivery (20A / 20B / 20C) ✅ - BridgeFlow Docs</title>
+    <link rel="stylesheet" href="../../../css/theme.css" />
+    <link rel="stylesheet" href="../../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Phase 20 \u2014 Partner Inbound Gateway \u0026amp; Inbox Delivery (20A / 20B / 20C) \u2705";
+        var mkdocs_page_input_path = "phases\\phases11-20\\phase-20-completion.md";
+        var mkdocs_page_url = "/phases/phases11-20/phase-20-completion/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../../.." class="icon icon-home"> BridgeFlow Docs
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../..">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../ARCHITECTURE/">Architecture</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Current System</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../current/control-tower/">Control Tower</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../current/control-tower/trl7-validation/">TRL 7 Validation</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../current/control-tower/public-api/">Public API</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../current/control-tower/integration-guide/">Integration Guide</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Future Vision</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../vision/">Vision Archive Index</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../roadmap/future-architecture/">BF-INTEGRATION Roadmap</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Phase 60</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../phase-60-gap-analysis/">Gap Analysis</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../..">BridgeFlow Docs</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../.." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">Phase 20 — Partner Inbound Gateway &amp; Inbox Delivery (20A / 20B / 20C) ✅</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="phase-20-partner-inbound-gateway-inbox-delivery-20a-20b-20c">Phase 20 — Partner Inbound Gateway &amp; Inbox Delivery (20A / 20B / 20C) ✅</h1>
+<p><strong>Status:</strong> Completed and pushed to <code>main</code> (backend + admin UI + tests + docs). 🎉</p>
+<hr />
+<h2 id="executive-summary">Executive summary 🔍</h2>
+<p>Phase 20 delivered the Partner Inbound Gateway (20A) and Inbox Delivery (20B), and the Admin Partner Management UI (20C). This completes end-to-end partner onboarding and invoice ingestion: partners can be issued API keys via the admin UI, post invoice JSON to the Partner Gateway, and those invoices are enqueued and recorded in the S3 inbox for downstream processing.</p>
+<p>Key outcomes:
+- Secure partner API key model with RLS awareness (sha256-stored keys)
+- Partner authentication middleware and idempotent ingestion pipeline
+- Redis stream enqueue + S3 inbox delivery for visibility
+- Minimal Admin UI to create/list/revoke partner keys
+- Tests (unit &amp; integration) and documentation updates</p>
+<hr />
+<h2 id="what-was-implemented-high-level">What was implemented (high-level) ✅</h2>
+<ul>
+<li>20A — Partner Inbound Gateway</li>
+<li>POST /partner/:partnerId/invoice (auth via X-Partner-Key)</li>
+<li>Validates invoice JSON, enqueues to Redis stream <code>partner_inbound:&lt;orgId&gt;</code>, writes CSV to S3 inbox <code>inbox/&lt;orgId&gt;/&lt;uuid&gt;.csv</code></li>
+<li>Idempotency support (via existing idempotency middleware, header <code>Idempotency-Key</code> / <code>X-Idempotency-Key</code>)</li>
+<li>
+<p>Metrics: <code>partner_invoice_received_total</code>, <code>partner_invoice_failures_total</code></p>
+</li>
+<li>
+<p>20B — Inbox delivery &amp; visibility</p>
+</li>
+<li>Partner invoice JSON → converted to CSV using the existing invoice template and uploaded to the S3 inbox</li>
+<li>
+<p>Existing inbox listing endpoint (<code>GET /api/customer/:id/inbox</code>) shows inbox contents (partner entries included)</p>
+</li>
+<li>
+<p>20C — Admin Partner Management UI (MVP)</p>
+</li>
+<li>Admin page: <code>/partners</code> in the admin app</li>
+<li>Create Partner (returns raw API key once) — POST <code>/api/admin/partner</code></li>
+<li>List partners (by organization) — GET <code>/api/admin/partner?organizationId=...</code></li>
+<li>Revoke partner key — DELETE <code>/api/admin/partner/:partnerId/key</code></li>
+<li>UI shows raw API key once in a dismissible banner and never persists/logs it</li>
+</ul>
+<hr />
+<h2 id="files-added-changed-representative">Files added / changed (representative) 🗂️</h2>
+<ul>
+<li>Prisma / DB</li>
+<li>
+<p><code>prisma/schema.prisma</code> — added <code>PartnerApiKey</code> model (sha256 key, partnerId, organizationId)</p>
+</li>
+<li>
+<p>Backend</p>
+</li>
+<li><code>api/lib/middleware/partnerAuth.js</code> — validates <code>X-Partner-Key</code>, sets <code>request.partnerOrgId</code> &amp; <code>request.partnerId</code></li>
+<li><code>api/handlers/partnerInbound.js</code> — <code>receiveInvoice</code> handler (validation, enqueue, CSV-&gt;S3)</li>
+<li><code>api/handlers/admin/partnerAdmin.js</code> — admin handlers for create / list / revoke</li>
+<li><code>api/routes/admin/partnerRoutes.js</code> — admin route registration</li>
+<li>
+<p><code>api/lib/metrics.js</code> — added <code>partnerInvoiceReceived</code> and <code>partnerInvoiceFailure</code> helper counters</p>
+</li>
+<li>
+<p>Tests</p>
+</li>
+<li><code>test/middleware/partner-auth.test.js</code> (unit)</li>
+<li><code>test/integration/partner-inbound.integration.test.js</code> (integration: enqueue + inbox + idempotency)</li>
+<li><code>test/handlers/partnerAdmin.test.js</code> (admin create/list/revoke) </li>
+<li>
+<p><code>admin-bridgeflow/test/partnerManagement.test.jsx</code> (admin page unit tests)</p>
+</li>
+<li>
+<p>Admin UI</p>
+</li>
+<li><code>admin-bridgeflow/src/pages/Admin/PartnerManagementPage.jsx</code> (MVP page)</li>
+<li>
+<p>route added in <code>admin-bridgeflow/src/App.jsx</code></p>
+</li>
+<li>
+<p>Docs</p>
+</li>
+<li><code>docs/integrations/partner-inbound.md</code> (contract, examples)</li>
+<li><code>docs/phases/phase-20-completion.md</code> (this file)</li>
+</ul>
+<hr />
+<h2 id="contracts-usage-examples">Contracts &amp; usage examples 🧾</h2>
+<p>Create partner (admin):</p>
+<ul>
+<li>POST /api/admin/partner</li>
+<li>Body: <code>{ name: string, organizationId: string, deliveryMethod: 'dashboard'|'email' }</code></li>
+<li>Response: <code>{ partnerId: "...", apiKey: "partner_..." }</code>  ← <strong>raw apiKey returned only at creation</strong></li>
+</ul>
+<p>List partners:
+- GET /api/admin/partner?organizationId=org-123 → <code>{ partners: [{ id, name, deliveryMethod, createdAt, organizationId }, ...] }</code></p>
+<p>Revoke keys:
+- DELETE /api/admin/partner/:partnerId/key → <code>{ success: true, revoked: N }</code></p>
+<p>Partner posts invoice:
+- POST /partner/:partnerId/invoice
+  - Headers: <code>X-Partner-Key: &lt;raw-key&gt;</code>
+  - Body (JSON): minimal schema {
+    invoiceId: string,
+    customerId: string,
+    amount: number,
+    currency: string,
+    invoiceDate: string (ISO)
+  }
+  - Success: 202 Accepted (enqueued)
+  - Duplicate idempotency key: stored response returned + <code>x-from-idempotency: true</code> header</p>
+<p>cURL examples:</p>
+<ul>
+<li>Create partner (admin):</li>
+</ul>
+<pre><code>curl -X POST https://api.local.test/api/admin/partner \
+  -H &quot;Content-Type: application/json&quot; \
+  --data '{&quot;name&quot;:&quot;Acme&quot;,&quot;organizationId&quot;:&quot;org-123&quot;,&quot;deliveryMethod&quot;:&quot;dashboard&quot;}'
+</code></pre>
+<ul>
+<li>Partner invoice post:</li>
+</ul>
+<pre><code>curl -X POST https://api.local.test/partner/p-1/invoice \
+  -H &quot;Content-Type: application/json&quot; \
+  -H &quot;X-Partner-Key: partner_test_abc&quot; \
+  --data '{&quot;invoiceId&quot;:&quot;I1&quot;,&quot;customerId&quot;:&quot;C1&quot;,&quot;amount&quot;:120.5,&quot;currency&quot;:&quot;USD&quot;,&quot;invoiceDate&quot;:&quot;2025-06-01&quot;}'
+</code></pre>
+<hr />
+<h2 id="testing-validation">Testing &amp; validation ✅</h2>
+<ul>
+<li>Unit &amp; integration tests added and run locally (Vitest): middleware, handlers, and admin page tests.</li>
+<li>Manual runs validated: idempotency behavior, redis enqueue (via in-memory redis stub), S3 inbox writes (via s3 mock), and admin UI flows (JSDOM tests).</li>
+</ul>
+<hr />
+<h2 id="security-operational-notes">Security &amp; operational notes 🔒</h2>
+<ul>
+<li>API keys are stored only as SHA-256 hashes in <code>PartnerApiKey</code> — raw keys are shown only once on creation and not logged or persisted.</li>
+<li>RLS-compatible: <code>PartnerApiKey.organizationId</code> is denormalized to support tenant-scoped queries without costly joins.</li>
+<li>Idempotency TTL respects <code>IDEMPOTENCY_TTL_HOURS</code> env var (default: 24h).</li>
+<li>Rate limiting and RBAC applied: partner gateway is secured via <code>X-Partner-Key</code>; admin endpoints require admin permissions (<code>requirePermission('admin:partners:manage')</code>).</li>
+</ul>
+<hr />
+<h2 id="next-steps-optional-backlog">Next steps (optional backlog) ▶️</h2>
+<ul>
+<li>Email delivery pipeline: implement <code>sendInvoiceNotification(orgId, s3Key)</code> and templating (deferred intentionally).</li>
+<li>End-to-end Playwright tests that run the full flow using a test server (create partner via UI, post invoice, assert S3 inbox entry).</li>
+<li>Grafana dashboards or Prometheus panels for <code>partner_invoice_*</code> metrics.</li>
+</ul>
+<hr />
+<p>If you want, I can follow up by adding the e2e Playwright test or implementing the email delivery flow next — say which and I’ll pick it up. ✨</p>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+    
+  </span>
+</div>
+    <script src="../../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../../..";</script>
+    <script src="../../../js/theme_extra.js"></script>
+    <script src="../../../js/theme.js"></script>
+      <script src="../../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

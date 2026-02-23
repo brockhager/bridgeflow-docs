@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://bridgeflow.readthedocs.io/design/phase1a-architecture/" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>Phase 1A Architecture — 5-Layer Model with Dual Delivery - BridgeFlow Docs</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Phase 1A Architecture \u2014 5-Layer Model with Dual Delivery";
+        var mkdocs_page_input_path = "design\\phase1a-architecture.md";
+        var mkdocs_page_url = "/design/phase1a-architecture/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> BridgeFlow Docs
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../ARCHITECTURE/">Architecture</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Current System</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../current/control-tower/">Control Tower</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../current/control-tower/trl7-validation/">TRL 7 Validation</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../current/control-tower/public-api/">Public API</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../current/control-tower/integration-guide/">Integration Guide</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Future Vision</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../vision/">Vision Archive Index</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../roadmap/future-architecture/">BF-INTEGRATION Roadmap</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Phase 60</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../phase-60-gap-analysis/">Gap Analysis</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">BridgeFlow Docs</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">Phase 1A Architecture — 5-Layer Model with Dual Delivery</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="phase-1a-architecture-5-layer-model-with-dual-delivery">Phase 1A Architecture — 5-Layer Model with Dual Delivery</h1>
+<p>Purpose: Define the minimal, practical architecture for the Phase 1A Invoice Delivery vertical slice. The system supports two business-language delivery options in the wizard:</p>
+<ul>
+<li>"Send as a secure email" (Default)</li>
+<li>"Connect directly to my system" (API / JSON Webhook — configured by our team)</li>
+</ul>
+<p>This spec uses a 5-Layer model and includes minimal data models, retry rules, security notes, and Mermaid sequence diagrams for each happy path.</p>
+<hr />
+<h2 id="summary-intent">Summary &amp; Intent</h2>
+<ul>
+<li>Phase 1A is focused on delivering “magic” for pilots (5–10 customers) — minimal operational overhead, small infra footprint, and fast time to value.</li>
+<li>We support two delivery methods: Email (default) and Webhook (manual setup by ops). The wizard exposes both as simple business choices; only operators configure webhooks behind the scenes.</li>
+<li>Keep complexity low: no tenant self-service webhook configuration in Phase 1A, simple API key/HMAC auth for webhook deliveries, encrypted PDF attachments for email.</li>
+</ul>
+<hr />
+<h2 id="layer-1-abstraction-ux-workflow">Layer 1 — Abstraction (UX / Workflow)</h2>
+<p>Purpose: Provide a simple, business-language workflow for users and minimal, operator-facing controls to configure webhooks.</p>
+<p>Phase 1A capabilities:
+- Wizard exposes two choices in Screen 4 (see <code>phase1a-wizard.md</code>):
+  - <strong>Send as a secure email</strong> (default)
+  - <strong>Connect directly to my system</strong> ("We’ll set this up for you — chat with an operator")
+- If user chooses webhook option, the wizard records <code>preferred_delivery_method = webhook</code>, but does not ask for endpoint or credentials.
+- Operator workflow (internal): Admin creates <code>WebhookConfig</code> for the tenant (endpoint URL, secret, optional headers).
+- UX guarantees: business-language only. User sees "Connect directly to my system — we’ll handle setup" and receives notification when the connector is active.</p>
+<p>Notes:
+- For pilot speed, webhook setup is a manual operator step (internal portal or CLI) that is fast and controlled.</p>
+<hr />
+<h2 id="layer-2-connection-fabric">Layer 2 — Connection Fabric</h2>
+<p>Purpose: Connectors that actually deliver invoices to external endpoints.</p>
+<p>Components:
+- Connector A: <strong>SMTP/Email Gateway Connector</strong>
+  - Sends emails via a trusted provider (e.g., AWS SES).
+  - Accepts: recipient email, subject, PDF attachment S3 link (or inline base64 if small), optional email template data.
+  - Retry logic: transient errors retried (1m, 10m, 60m), mark permanent on hard bounces.
+  - Timeouts: connect 5s, send 30s (provider limit). Handle provider throttling with exponential backoff.</p>
+<ul>
+<li>Connector B: <strong>HTTPS Webhook Client Connector</strong></li>
+<li>Posts JSON v1 payload to operator-configured endpoint.</li>
+<li>Retries: <strong>up to 3 attempts total</strong>, with retries spaced <strong>5 minutes</strong> apart (attempt 1 = immediate, retry 1 = +5m, retry 2 = +10m). Failure classification: 2xx = success, 3xx/4xx = permanent (no retry unless 429), 5xx/network = transient retry.</li>
+<li>Timeouts: <strong>30 seconds</strong> per attempt (adjustable if endpoint indicates otherwise).</li>
+<li>Security: include HMAC signature header using a per-webhook shared secret (HMAC-SHA256 over payload + timestamp) and an <code>X-Bridgeflow-Signature</code> header.</li>
+<li>Idempotency: include <code>x-bridgeflow-id</code> header (deliveryTaskId) so receivers can dedupe.</li>
+</ul>
+<p>Phase 1A constraints:
+- No mTLS; simple HMAC-based auth is sufficient for pilot customers.
+- Webhook endpoints are validated by operator before enabling for production jobs (test send required).</p>
+<hr />
+<h2 id="layer-3-data-mapping">Layer 3 — Data Mapping</h2>
+<p>Purpose: Normalize invoice data and produce two target formats: PDF (for email) and JSON schema (for webhook).</p>
+<p>Components &amp; behavior:
+- <strong>Auto-mapping service</strong> (already defined in <code>phase1a-autoconfig.md</code>) produces normalized <code>Invoice</code> objects.
+- <strong>Transformer A — PDF Generator</strong>
+  - Input: normalized <code>Invoice</code> object
+  - Output: PDF file (templated layout) uploaded to S3 (server-side encryption enabled).
+  - PDF name convention: <code>invoices/{tenantId}/{jobId}/{invoiceId}.pdf</code></p>
+<ul>
+<li><strong>Transformer B — JSON v1 Schema</strong></li>
+<li>Input: normalized <code>Invoice</code> object</li>
+<li>Output: JSON payload conforming to v1 schema (see below)</li>
+</ul>
+<p>JSON v1 schema (minimal):</p>
+<pre><code class="language-json">{
+  &quot;invoice_id&quot;: &quot;string&quot;,
+  &quot;tenant_id&quot;: &quot;string&quot;,
+  &quot;customer&quot;: { &quot;name&quot;: &quot;string&quot;, &quot;email&quot;: &quot;string&quot; },
+  &quot;date&quot;: &quot;YYYY-MM-DD&quot;,
+  &quot;due_date&quot;: &quot;YYYY-MM-DD&quot;,
+  &quot;amount&quot;: { &quot;currency&quot;: &quot;USD&quot;, &quot;value&quot;: 123.45 },
+  &quot;items&quot;: [{ &quot;description&quot;: &quot;&quot;, &quot;qty&quot;: 1, &quot;unit_price&quot;: 123.45 }],
+  &quot;metadata&quot;: { }
+}
+</code></pre>
+<p>Notes:
+- Both transformers have the same source <code>Invoice</code> objects, so normalized data feeds both flows with a single parsing step.
+- Validation occurs pre-transform; invalid invoices are flagged and surfaced to users/operators.</p>
+<hr />
+<h2 id="layer-4-platform-core">Layer 4 — Platform Core</h2>
+<p>Purpose: Orchestration, routing, minimal agent management, security, and audit.</p>
+<p>Core components:
+- <strong>DeliveryJob Orchestrator</strong>
+  - Responsible for: reading parsed invoices, scheduling <code>DeliveryTask</code>s, selecting route (email vs webhook) based on <code>preferred_delivery_method</code> and <code>WebhookConfig</code> availability.
+  - For each invoice: create <code>DeliveryTask</code> record and enqueue to worker queue.</p>
+<ul>
+<li><strong>Worker(s)</strong></li>
+<li>Execute the delivery tasks: call Transformer(s) and then Connector(s).</li>
+<li>
+<p>Maintain attempt counters and schedule retries per policy.</p>
+</li>
+<li>
+<p><strong>Agent Management (Phase 1A minimal)</strong></p>
+</li>
+<li>Simple internal <code>WebhookConfig</code> service for operator-created endpoint configurations.</li>
+<li>
+<p>Service accounts or internal credentials stored in <code>lib-secrets</code> and audited on access.</p>
+</li>
+<li>
+<p><strong>Resources (new abstraction — Phase 1A minimal)</strong></p>
+</li>
+<li>A <strong>Resource</strong> is a configured entity that encapsulates connection details and authentication for external systems (e.g., <code>webhook_endpoint</code>, <code>s3_bucket</code>, <code>email_sender</code>).</li>
+<li>Phase 1A: implement a minimal <code>Resource</code> record to store operator-configured webhook endpoints (type=webhook_endpoint), a pointer to secret (secret_id), a <code>validated</code> flag, and owner/tenant association. This is the canonical place to keep operator-managed connectors.</li>
+<li>The DeliveryJob Orchestrator will select a Resource when routing a <code>DeliveryTask</code> to the webhook connector. For email, Resources can store the email sender configuration (phase1A: a shared sender managed by ops).</li>
+<li>
+<p>Rationale: introducing the Resource concept early avoids later refactors and provides a single source of truth for connectors and credentials.</p>
+</li>
+<li>
+<p><strong>Security &amp; Audit</strong></p>
+</li>
+<li>Audit events: <code>JOB_CREATED</code>, <code>MAPPING_AUTODETECT</code>, <code>DELIVERY_TASK_CREATED</code>, <code>DELIVERY_ATTEMPT</code>, <code>DELIVERY_SUCCESS</code>, <code>DELIVERY_FAILED</code>, <code>PORTAL_CREATED</code>.</li>
+<li>Access control: tenant-scoped RBAC (tenant owners and operators). Webhook config is operator-only in Phase 1A.</li>
+</ul>
+<p>Routing rules (simple):
+- If <code>preferred_delivery_method == webhook</code> and a validated <code>WebhookConfig</code> exists -&gt; route to webhook connector.
+- Otherwise -&gt; route to email connector.
+- If webhook config absent for webhook preference: default back to email and notify tenant: "We’ll send by email while we set up your webhook." (business language)</p>
+<hr />
+<h2 id="layer-5-infrastructure">Layer 5 — Infrastructure</h2>
+<p>Purpose: Runtime environments, storage, and operational considerations.</p>
+<p>Runtime and hosting:
+- Minimal services can run as small Node.js processes behind a single cluster (ECS/Fargate or a single VM for pilots).
+- Worker queue: simple Redis/RabbitMQ or small SQS queue (AWS SQS recommended for easy provisioning).</p>
+<p>Storage &amp; artifacts:
+ - PDFs: S3 (encrypted SSE), short retention policy (default <strong>24 hours</strong> hot storage, then delete). Core invoice data (normalized JSON and audit events) are retained for <strong>7 years</strong> to support regeneration and audits.
+- JSON payloads: store a copy with each <code>DeliveryAttempt</code> as a small JSON blob in the DB (Postgres JSONB) for quick debugging and audit; optionally archive to S3 if retention needed.
+- Audit logs &amp; events: write-only ingest to <code>audit-service</code> with 7-year retention for compliance events.</p>
+<p>Operational notes:
+- Health checks and metrics endpoints for every service (ready/liveness)
+- Alerts: jobs error rate, deliverability drop (&lt;95% success), high retry counts, webhook endpoint failure rates</p>
+<hr />
+<h2 id="minimal-data-model-sql-conceptual">Minimal Data Model (SQL / conceptual)</h2>
+<p>DeliveryJob
+- id (UUID)
+- tenant_id
+- created_by (user id)
+- preferred_delivery_method ENUM('email','webhook')
+- source_id (csv_file_id or qb_connection_id)
+- status ENUM('pending','active','failed')
+- created_at, updated_at</p>
+<p>Invoice
+- id (UUID)
+- job_id
+- invoice_number (string)
+- customer_name
+- customer_email
+- date
+- due_date
+- amount_currency, amount_value
+- items JSONB
+- normalized JSONB
+- status ENUM('valid','invalid','delivered','failed')</p>
+<p>DeliveryTask
+- id (UUID)
+- invoice_id
+- delivery_method ENUM('email','webhook')
+- webhook_config_id (nullable)
+- pdf_s3_key (nullable)
+- json_payload JSONB (nullable)
+- status ENUM('queued','in_progress','delivered','failed')</p>
+<p>DeliveryAttempt
+- id
+- delivery_task_id
+- attempt_number
+- status (success/failure)
+- error_code
+- error_message
+- response_code (for webhook)
+- response_body (optional)
+- payload_snapshot (opt JSON)
+- created_at</p>
+<p>WebhookConfig
+- id
+- tenant_id
+- endpoint_url
+- secret_id (reference to secrets manager)
+- validated boolean
+- created_at</p>
+<p>Resource (Phase 1A minimal)
+- id (UUID)
+- tenant_id (nullable)
+- type (enum: 'webhook_endpoint' | 's3_bucket' | 'email_sender')
+- name (string)
+- config JSONB (non-sensitive fields, e.g., endpoint URL, bucket name)
+- secret_id (nullable) — pointer to <code>lib-secrets</code>
+- validated (bool)
+- created_by
+- created_at, updated_at</p>
+<p>Note: <code>WebhookConfig</code> can be migrated into <code>Resource</code> records; <code>Resource</code> is the long-term canonical model for connector configuration.</p>
+<hr />
+<h2 id="mermaid-sequence-diagrams-happy-paths">Mermaid Sequence Diagrams (Happy Paths)</h2>
+<p>Email flow (happy path):</p>
+<pre><code class="language-mermaid">sequenceDiagram
+  participant User
+  participant UI
+  participant Orchestrator
+  participant Parser
+  participant Transformer
+  participant S3
+  participant EmailConnector
+  participant Recipient
+
+  User-&gt;&gt;UI: Click Start (preferred_delivery_method=email)
+  UI-&gt;&gt;Orchestrator: Create DeliveryJob
+  Orchestrator-&gt;&gt;Parser: Parse CSV / fetch invoices
+  Parser--&gt;&gt;Orchestrator: invoices[] (normalized)
+  Orchestrator-&gt;&gt;Transformer: generate PDFs
+  Transformer-&gt;&gt;S3: Upload PDFs (s3://...)
+  Transformer--&gt;&gt;Orchestrator: pdf_s3_keys
+  Orchestrator-&gt;&gt;EmailConnector: send email with PDF link/attachment
+  EmailConnector-&gt;&gt;Recipient: Deliver email
+  Recipient--&gt;&gt;EmailConnector: 250 OK
+  EmailConnector--&gt;&gt;Orchestrator: Delivery success
+  Orchestrator--&gt;&gt;UI: Job Active; notify user &quot;First invoice sent&quot;
+</code></pre>
+<p>Webhook flow (happy path):</p>
+<pre><code class="language-mermaid">sequenceDiagram
+  participant User
+  participant UI
+  participant Orchestrator
+  participant Parser
+  participant Transformer
+  participant WebhookConnector
+  participant CustomerSystem
+
+  User-&gt;&gt;UI: Click Start (preferred_delivery_method=webhook)
+  UI-&gt;&gt;Orchestrator: Create DeliveryJob
+  Orchestrator-&gt;&gt;Parser: Parse CSV / fetch invoices
+  Parser--&gt;&gt;Orchestrator: invoices[] (normalized)
+  Orchestrator-&gt;&gt;Transformer: transform to JSON v1
+  Transformer--&gt;&gt;Orchestrator: json_payloads
+  Orchestrator-&gt;&gt;WebhookConnector: POST payload (signed)
+  WebhookConnector-&gt;&gt;CustomerSystem: POST /endpoint
+  CustomerSystem--&gt;&gt;WebhookConnector: 200 OK
+  WebhookConnector--&gt;&gt;Orchestrator: Delivery success
+  Orchestrator--&gt;&gt;UI: Job Active; notify user &quot;First invoice sent&quot;
+</code></pre>
+<p>In both diagrams, the flows diverge at the Connector stage (EmailConnector vs WebhookConnector).</p>
+<hr />
+<h2 id="retry-timeout-failure-policies-recap">Retry, Timeout &amp; Failure Policies (recap)</h2>
+<p>-- Retries:
+  - Email: transient errors retried (1m, 10m, 60m) (three attempts total)
+  - Webhook: <strong>up to 3 attempts total</strong>, spaced <strong>5 minutes</strong> apart (attempt 1 immediate, retries at +5m and +10m)
+-- Timeouts:
+  - Email connect 5s, email send 30s
+  - Webhook: <strong>30 seconds</strong> per attempt
+-- Permanent failure rules: webhook 4xx except 429 = permanent; email 5xx and hard bounces = permanent
+- On permanent failure: create portal entry and notify tenant; operator can retry manually</p>
+<hr />
+<h2 id="security-compliance-phase-1a-minimal">Security &amp; Compliance (Phase 1A minimal)</h2>
+<ul>
+<li>Transport: HTTPS / TLS for webhooks and API; email via TLS</li>
+<li>Storage: S3 SSE for PDFs; DB encryption for JSON payloads or store small payloads in JSONB</li>
+<li>Secrets: webhook shared secrets stored in <code>lib-secrets</code> (Secrets Manager) and rotated per policy (Phase 1B for automated rotation)</li>
+<li>Audit: all major events are logged to <code>audit-service</code></li>
+</ul>
+<hr />
+<h2 id="decision-points-questions-for-cto">Decision Points / Questions for CTO</h2>
+<ol>
+<li><strong>PDF retention</strong>: Confirmed — PDFs retained in hot storage for <strong>24 hours</strong>; core invoice data retained for <strong>7 years</strong> for audit/regeneration.</li>
+<li><strong>Webhook retry schedule &amp; timeout</strong>: Confirmed — webhooks retry up to <strong>3 attempts</strong> spaced <strong>5 minutes</strong> apart; <strong>30s</strong> timeout per attempt.</li>
+<li><strong>Webhook auth</strong>: Confirmed — HMAC-based signatures (HMAC-SHA256) are acceptable for Phase 1A pilots.</li>
+<li>Next decisions: confirm whether we should create a minimal <code>Resource</code> table in Phase 1A to store operator-managed webhook configs (recommended: yes). </li>
+</ol>
+<hr />
+<h2 id="next-steps">Next steps</h2>
+<ol>
+<li>Sign-off on decision points above</li>
+<li>I will scaffold the minimal service structure and a small sequence diagram snippet in Mermaid files for docs</li>
+<li>Implement monitoring and alert templates for job failure thresholds and retry spikes</li>
+</ol>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

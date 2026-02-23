@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://bridgeflow.readthedocs.io/vision/bf-integration/docs/phases/phases11-20/phase-11/" />
+      <link rel="shortcut icon" href="../../../../../../img/favicon.ico" />
+    <title>Phase 11 - BridgeFlow Docs</title>
+    <link rel="stylesheet" href="../../../../../../css/theme.css" />
+    <link rel="stylesheet" href="../../../../../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Phase 11";
+        var mkdocs_page_input_path = "vision\\bf-integration\\docs\\phases\\phases11-20\\phase-11.md";
+        var mkdocs_page_url = "/vision/bf-integration/docs/phases/phases11-20/phase-11/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../../../../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../../../../../.." class="icon icon-home"> BridgeFlow Docs
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../../../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../../../..">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../../../../ARCHITECTURE/">Architecture</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Current System</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../current/control-tower/">Control Tower</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../current/control-tower/trl7-validation/">TRL 7 Validation</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../current/control-tower/public-api/">Public API</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../current/control-tower/integration-guide/">Integration Guide</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Future Vision</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../">Vision Archive Index</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../roadmap/future-architecture/">BF-INTEGRATION Roadmap</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Phase 60</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../phase-60-gap-analysis/">Gap Analysis</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../../..">BridgeFlow Docs</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../../../../.." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">Phase 11</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <blockquote>
+<p>[!WARNING]
+Status: Planned / In Development
+Context: Original BF-INTEGRATION Vision (Pre-Phase 30)</p>
+</blockquote>
+<h1 id="phase-11-customer-core-authentication-tenancy-billing">Phase 11 — Customer Core (Authentication, Tenancy, Billing) 🚀</h1>
+<p><strong>Status:</strong> ✅ COMPLETE (Dec 23, 2025)
+<strong>Owner:</strong> Backend (Auth/Billing) / Frontend (Auth UI) / Ops (Infra)</p>
+<hr />
+<h2 id="overview">Overview</h2>
+<p>Phase 11 transformed BridgeFlow from an internal security tool into a commercial SaaS platform with full customer authentication, multi-tenant organization support, and monetization capabilities via Stripe billing integration.</p>
+<p><strong>Completion Summary:</strong> All core customer-facing features implemented and tested. The platform now supports user registration, organization creation, paid plan subscriptions, and automated subscription activation via Stripe webhooks. Full E2E test coverage with mock database integration.</p>
+<h2 id="goals">Goals 🎯</h2>
+<ul>
+<li>Complete auth flows: registration, login, logout, <code>GET /me</code>, session persistence (cookie + JWT), password reset basics.</li>
+<li>Add E2E tests and contract tests for auth and session behavior.</li>
+<li>Scaffold multi-tenant (organization) model and required DB migrations.</li>
+<li>Harden ops: Redis HA/backups, monitoring/alerts for rate limiting and auth anomalies, and add a small runbook for failover.</li>
+</ul>
+<h2 id="deliverables-all-complete">Deliverables ✅ (All Complete)</h2>
+<ul>
+<li>✅ <code>api/handlers/auth.js</code> — Complete authentication system: register, login, logout, GET /me, password reset prep</li>
+<li>✅ <code>api/handlers/organizations.js</code> — Organization CRUD, membership management, tenant isolation</li>
+<li>✅ <code>api/handlers/billing.js</code> — Plan listing, subscription creation with Stripe checkout</li>
+<li>✅ <code>api/handlers/stripeWebhook.js</code> — Webhook handler for checkout.session.completed, subscription activation</li>
+<li>✅ Frontend auth pages: <code>/login</code> (SPA route), <code>register.html</code> with JWT session management</li>
+<li>✅ E2E tests: <code>api/tests/auth.test.js</code>, <code>api/tests/billing.test.js</code> (full flow coverage)</li>
+<li>✅ DB migrations: <code>Plan</code> and <code>Subscription</code> models, organization-user relationships</li>
+<li>✅ Mock DB extensions: billing models, subscription queries with status filtering</li>
+<li>✅ Rate limiting: Redis-backed with in-memory fallback, admin bypass, IP controls</li>
+</ul>
+<h2 id="acceptance-criteria">Acceptance Criteria ✅</h2>
+<ul>
+<li>All auth unit and integration tests pass locally and on CI.</li>
+<li>An operator can create an organization and create users attached to it via API.</li>
+<li>Rate limiter and admin endpoints unaffected; admin users can bypass blocks as documented.</li>
+<li>Demo: successful registration → login → <code>GET /me</code> → logout flow works end-to-end.</li>
+</ul>
+<h2 id="tasks-priority-order">Tasks (priority order) 🔧</h2>
+<ol>
+<li>Finish/extend auth tests (<code>api/tests/auth.*</code>) and fix failures. — <strong>Backend</strong></li>
+<li>Add frontend auth pages and e2e flows. — <strong>Frontend</strong></li>
+<li>Add <code>organizations</code> Prisma model + migrations. — <strong>Backend/DB</strong></li>
+<li>Add tenancy guards and basic RBAC scaffolding. — <strong>Backend</strong></li>
+<li>Add Redis HA/backups notes + small monitoring docs. — <strong>Ops</strong></li>
+<li>Add load/chaos test plan for Redis failover (optional). — <strong>QA/Ops</strong></li>
+</ol>
+<h2 id="risks-mitigations">Risks &amp; Mitigations ⚠️</h2>
+<ul>
+<li>Risk: DB migration collisions in shared test envs — mitigate by namespaced test databases and unique test data (timestamped emails). </li>
+<li>Risk: Redis instability causing auth rate limit false positives — mitigate with StoreProvider failover tests and better alerting.</li>
+</ul>
+<h2 id="timeline">Timeline</h2>
+<p>Suggest 1–2 sprints (2–4 weeks) depending on scope choices; break into two milestones: Auth completion (week 1) and Tenancy + Hardening (week 2).</p>
+<hr />
+<h2 id="what-we-built">What We Built 🎉</h2>
+<p><strong>Customer Core (Monetization Ready):</strong>
+- <strong>Authentication System:</strong> Full JWT-based auth with bcrypt password hashing, session cookies, token refresh
+- <strong>Organization/Tenancy:</strong> Multi-tenant architecture with organization creation, membership roles (OWNER/ADMIN/MEMBER), tenant isolation
+- <strong>Billing Integration:</strong> Stripe checkout flow, Plan model (Free/Pro/Enterprise), Subscription lifecycle (PENDING → ACTIVE)
+- <strong>Webhook Processing:</strong> Automated subscription activation on Stripe checkout completion
+- <strong>Test Coverage:</strong> E2E billing test covering register → create org → subscribe → webhook → verify active</p>
+<p><strong>Technical Achievements:</strong>
+- Mock DB enhanced with dual-path membership lookup (junction table + owners array fallback)
+- Subscription findFirst with status/organizationId/planId filtering
+- Organization creation with proper role assignment in mock mode
+- Full integration with Fastify auth decorators and JWT plugin</p>
+<p><strong>Commercial Readiness:</strong>
+- Platform can now onboard paying customers
+- Subscription status tracked and queryable
+- Webhook signature verification ready for production
+- Multiple pricing tiers supported (extensible plan system)</p>
+<h2 id="demo-checklist-verified">Demo Checklist 🧪 (Verified)</h2>
+<ul>
+<li>✅ Run migrations and seed demo plans</li>
+<li>✅ Register user and receive JWT token</li>
+<li>✅ Login and verify <code>GET /api/auth/me</code> returns user data</li>
+<li>✅ Create organization and confirm OWNER role</li>
+<li>✅ Subscribe to plan, receive checkout sessionId</li>
+<li>✅ Process webhook, verify subscription status → ACTIVE</li>
+<li>✅ Query subscription and confirm Stripe subscription ID attached</li>
+</ul>
+<hr />
+<h2 id="references">References</h2>
+<ul>
+<li><code>docs/auth/AUTH-SPEC.md</code>  </li>
+<li><code>docs/task-lists/TASK-LIST-3.md</code>  </li>
+<li>Rate limiting code &amp; tests: <code>api/lib/rateLimit/</code> and <code>api/tests/rate-limit-*.test.js</code></li>
+</ul>
+<blockquote>
+<p>Note: This phase assumes Phase 10 (rate limiting + failover) is merged to <code>main</code> and that flaky CSP tests remain quarantined until reevaluation.</p>
+</blockquote>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+    
+  </span>
+</div>
+    <script src="../../../../../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../../../../../..";</script>
+    <script src="../../../../../../js/theme_extra.js"></script>
+    <script src="../../../../../../js/theme.js"></script>
+      <script src="../../../../../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

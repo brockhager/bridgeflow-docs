@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://bridgeflow.readthedocs.io/edi/TECHNICAL-DEBT/" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>EDI Technical Debt - BridgeFlow Docs</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "EDI Technical Debt";
+        var mkdocs_page_input_path = "edi\\TECHNICAL-DEBT.md";
+        var mkdocs_page_url = "/edi/TECHNICAL-DEBT/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> BridgeFlow Docs
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../ARCHITECTURE/">Architecture</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Current System</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../current/control-tower/">Control Tower</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../current/control-tower/trl7-validation/">TRL 7 Validation</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../current/control-tower/public-api/">Public API</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../current/control-tower/integration-guide/">Integration Guide</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Future Vision</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../vision/">Vision Archive Index</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../roadmap/future-architecture/">BF-INTEGRATION Roadmap</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Phase 60</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../phase-60-gap-analysis/">Gap Analysis</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">BridgeFlow Docs</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">EDI Technical Debt</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="edi-technical-debt">EDI Technical Debt</h1>
+<p>This document captures known technical debt in the EDI library and serves as a checklist for the post-Phase 5 architectural refactor.</p>
+<h2 id="purpose">Purpose</h2>
+<ul>
+<li>Track duplicated segment logic across parser/generator implementations</li>
+<li>Call out inconsistent validations and data typing</li>
+<li>Capture opportunities to extract shared element/segment primitives</li>
+<li>Prioritize refactoring work and acceptance criteria</li>
+</ul>
+<h2 id="known-issues-debt-items">Known Issues / Debt Items</h2>
+<ol>
+<li>Duplicated Generation/Parsing Logic</li>
+<li>Multiple transactions implement similar handling for segments like <code>N1</code>, <code>TD1</code>, <code>TD5</code>, <code>LIN</code>, <code>SN1</code>, etc.</li>
+<li>
+<p>Generators and parsers repeat element mapping logic that should be centralized.</p>
+</li>
+<li>
+<p>Inconsistent Validations</p>
+</li>
+<li>Some segments receive strict field validation while others accept loose values.</li>
+<li>
+<p>No unified validation schema per segment/element (e.g., numeric weights, date formats).</p>
+</li>
+<li>
+<p>HL Hierarchy Handling</p>
+</li>
+<li>HL tree is attached ad-hoc; consistency across transaction types should be improved.</li>
+<li>
+<p>Need a shared HL model to reduce per-transaction duplication.</p>
+</li>
+<li>
+<p>Segment/Element Data Typing</p>
+</li>
+<li>Lack of consistent types for elements (numbers vs strings, optional fields).</li>
+<li>
+<p>No clear canonical JSON shape for certain segments (e.g., TD1 weight fields).</p>
+</li>
+<li>
+<p>Repetition &amp; Performance</p>
+</li>
+<li>Repeated parse/generate operations for large HL trees could be optimized.</li>
+</ol>
+<h2 id="945-specific-notes">945-specific notes</h2>
+<ul>
+<li>Reuse TD1/TD5/N1 handling where applicable</li>
+<li>W05/N9/G62/NTE/W27/W28 scaffolding added; consider centralizing date/reference handling</li>
+</ul>
+<h2 id="proposed-refactor-plan-post-phase-5">Proposed Refactor Plan (Post-Phase 5)</h2>
+<ol>
+<li>Design a small element/segment model (JS module) that provides:</li>
+<li>Segment definitions (id, element names, required/optional, types)</li>
+<li>Utilities: normalizeElements(), validateSegment(), buildSegment(), parseSegment()</li>
+<li>Replace ad-hoc generator/parse calls with segment primitives</li>
+<li>Introduce a HL helper API for building and traversing hierarchical levels</li>
+<li>Add schema-based validation (lightweight) using the definitions above</li>
+<li>Create migration tests that verify parity between old and new implementations</li>
+</ol>
+<h2 id="acceptance-criteria-for-refactor">Acceptance Criteria for Refactor</h2>
+<ul>
+<li>All existing tests pass (generator ↔ parser round-trip parity maintained)</li>
+<li>Reduced code duplication by &gt;50% across segment handling code paths</li>
+<li>Segment validation coverage in unit tests for all core segments (850,810,820,856,997)</li>
+<li>Performance of roundtrip generation/parsing for large HL trees acceptable (no regressions)</li>
+</ul>
+<h2 id="short-term-mitigations-before-refactor">Short-term Mitigations (Before Refactor)</h2>
+<ul>
+<li>Add unit tests for all edge cases encountered during Phase 5</li>
+<li>Document canonical JSON shapes for each segment in <code>docs/edi/</code> as we implement them</li>
+<li>Use consistent helper functions in the EDI package where obvious (e.g., generateSegment)</li>
+</ul>
+<h2 id="tracking">Tracking</h2>
+<ul>
+<li>Use this file to list specific code pointers and improvements discovered while implementing 856/945/210</li>
+<li>Link PRs that address the items above for visibility</li>
+</ul>
+<p><em>Last Updated: 2025-12-17</em></p>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

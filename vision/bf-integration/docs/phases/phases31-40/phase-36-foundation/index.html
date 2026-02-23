@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://bridgeflow.readthedocs.io/vision/bf-integration/docs/phases/phases31-40/phase-36-foundation/" />
+      <link rel="shortcut icon" href="../../../../../../img/favicon.ico" />
+    <title>Phase 36 foundation - BridgeFlow Docs</title>
+    <link rel="stylesheet" href="../../../../../../css/theme.css" />
+    <link rel="stylesheet" href="../../../../../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Phase 36 foundation";
+        var mkdocs_page_input_path = "vision\\bf-integration\\docs\\phases\\phases31-40\\phase-36-foundation.md";
+        var mkdocs_page_url = "/vision/bf-integration/docs/phases/phases31-40/phase-36-foundation/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../../../../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../../../../../.." class="icon icon-home"> BridgeFlow Docs
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../../../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../../../..">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../../../../ARCHITECTURE/">Architecture</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Current System</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../current/control-tower/">Control Tower</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../current/control-tower/trl7-validation/">TRL 7 Validation</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../current/control-tower/public-api/">Public API</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../current/control-tower/integration-guide/">Integration Guide</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Future Vision</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../">Vision Archive Index</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../roadmap/future-architecture/">BF-INTEGRATION Roadmap</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Phase 60</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../phase-60-gap-analysis/">Gap Analysis</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../../..">BridgeFlow Docs</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../../../../.." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">Phase 36 foundation</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <blockquote>
+<p>[!WARNING]
+Status: Planned / In Development
+Context: Original BF-INTEGRATION Vision (Pre-Phase 30)</p>
+</blockquote>
+<h1 id="phase-36-foundation-onboarding-startup-templates-week-1-complete">Phase 36 — Foundation: Onboarding &amp; Startup Templates (Week 1 Complete)</h1>
+<p><strong>Status:</strong> ✅ Week 1 Complete — Foundation Built (January 11, 2026)
+<strong>Owner:</strong> TBD (Onboarding team)</p>
+<h2 id="week-1-summary">Week 1 Summary</h2>
+<p>Week 1 delivered the foundational backend and data models to enable guided onboarding and one-click provisioning of starter templates for new customers. The emphasis in Week 1 was on schema design, API surface, seed data scripts, and a provisioning job engine.</p>
+<h3 id="files-created">Files Created</h3>
+<ul>
+<li><code>prisma/schema.prisma</code> — Added <code>OnboardingSession</code> and <code>StartupTemplate</code> models</li>
+<li><code>api/handlers/onboarding.js</code> — Questionnaire flow, session management, status tracking</li>
+<li><code>api/handlers/onboardingJobs.js</code> — Provisioning engine (org, users, partners, templates)</li>
+<li><code>api/handlers/startupTemplates.js</code> — Template CRUD + industry recommendations</li>
+<li><code>api/routes/onboarding.js</code> — Onboarding API endpoints</li>
+<li><code>api/routes/startupTemplates.js</code> — Startup template endpoints</li>
+<li><code>scripts/seed-startup-templates.js</code> — Seed script to create 4 initial startup templates</li>
+</ul>
+<h2 id="api-endpoints-week-1">API Endpoints (Week 1)</h2>
+<p><strong>Onboarding:</strong>
+- POST <code>/api/onboarding/start</code> — Create session
+- POST <code>/api/onboarding/questionnaire</code> — Submit answers
+- GET  <code>/api/onboarding/status/:id</code> — Get session progress
+- POST <code>/api/onboarding/:id/provision</code> — Trigger provisioning job
+- DELETE <code>/api/onboarding/:id</code> — Cancel session
+- GET  <code>/api/onboarding</code> — List sessions (admin)</p>
+<p><strong>Startup Templates:</strong>
+- GET  <code>/api/startup-templates</code> — List templates
+- GET  <code>/api/startup-templates/:id</code> — Get details
+- POST <code>/api/startup-templates/seed</code> — Seed initial templates (admin only)</p>
+<h2 id="startup-templates-seeded-scenarios">Startup Templates (seeded scenarios)</h2>
+<table>
+<thead>
+<tr>
+<th>Template</th>
+<th style="text-align: right;">Category</th>
+<th style="text-align: right;">Est. Time</th>
+<th style="text-align: right;">Compliance</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Simple File Transfer</td>
+<td style="text-align: right;">file</td>
+<td style="text-align: right;">15 min</td>
+<td style="text-align: right;">-</td>
+</tr>
+<tr>
+<td>X12 EDI Hub</td>
+<td style="text-align: right;">edi</td>
+<td style="text-align: right;">45 min</td>
+<td style="text-align: right;">HIPAA</td>
+</tr>
+<tr>
+<td>API Integration</td>
+<td style="text-align: right;">api</td>
+<td style="text-align: right;">30 min</td>
+<td style="text-align: right;">-</td>
+</tr>
+<tr>
+<td>Custom Enterprise</td>
+<td style="text-align: right;">enterprise</td>
+<td style="text-align: right;">60 min</td>
+<td style="text-align: right;">HIPAA, PCI-DSS</td>
+</tr>
+</tbody>
+</table>
+<h2 id="week-2-accomplished-user-experience-ui">Week 2 — Accomplished (User Experience &amp; UI)</h2>
+<p>Week 2 delivered the full Onboarding Wizard and front-end polish. Key accomplishments:</p>
+<ul>
+<li><strong>Complete Onboarding Wizard</strong>: 4-step guided flow (Company → Integrations → Team → Template) with session persistence and resume capability ✅</li>
+<li><strong>Progress stepper with validation</strong>: Professional UX that prevents forward progress until required steps pass validation ✅</li>
+<li><strong>Industry intelligence</strong>: Questionnaire-driven template recommendations (auto-suggest relevant startup templates) ✅</li>
+<li><strong>Enterprise-grade UI features</strong>: Compliance badges (HIPAA/PCI-DSS), estimated timing per template, and a visual template grid for simple selection ✅</li>
+<li><strong>Real-time polling &amp; responsiveness</strong>: Progress polling at 5-second intervals, with optional WebSocket upgrade if needed ✅</li>
+<li><strong>Mobile-ready</strong>: Responsive design for admins and power users on mobile devices ✅</li>
+<li><strong>Layer 0 integration</strong>: Admin menu links and navigation completed for onboarding workflow ✅</li>
+</ul>
+<h2 id="week-3-remaining-final-touches">Week 3 (Remaining — Final Touches)</h2>
+<p>Priority items to complete in Week 3 (ordered):
+1. <strong>Email notifications (High priority)</strong>
+   - Welcome email, provisioning start, completion, and failure templates
+2. <strong>Support escalation UI (Critical)</strong>
+   - "Contact Support" button visible on failed provisions and "Retry provisioning" option
+3. <strong>Enhanced progress updates</strong>
+   - More granular progress steps (e.g., "Configuring AS2 connector") and optional WebSocket upgrade if polling is insufficient
+4. <strong>Template customization (Nice-to-have / Phase 37)</strong>
+   - Allow modifications to templates before provisioning; hybrid templates mixing adapters
+5. <strong>Monitoring &amp; Observability</strong>
+   - Add job duration dashboards, provision metrics, and long-running job alerts (&gt;10 minutes)</p>
+<h2 id="testing-success-criteria">Testing &amp; Success Criteria</h2>
+<ul>
+<li>End-to-end onboarding flow (signup → wizard → provision → production bridge) fully covered by Playwright</li>
+<li>Failure scenarios validated: network errors, validation failures, and timeouts</li>
+<li>Production scenarios tested: X12 EDI Hub provisioning with HIPAA compliance checks</li>
+<li>Performance: acceptable provisioning times for large templates (benchmark targets in infra)</li>
+</ul>
+<p><strong>Notes:</strong> Prioritize email notifications and support escalation UI to maximize customer trust and enterprise readiness.</p>
+<h2 id="how-to-run-locally-dev">How to run locally (dev)</h2>
+<ol>
+<li>Ensure DB is available and <code>DATABASE_URL</code> set</li>
+<li>Seed templates (when DB is available):</li>
+</ol>
+<pre><code class="language-bash">node scripts/seed-startup-templates.js
+</code></pre>
+<ol>
+<li>Start dev servers:</li>
+</ol>
+<pre><code class="language-bash">pnpm run api:start
+pnpm run web:dev
+</code></pre>
+<ol>
+<li>Run E2E tests (when UI is ready):</li>
+</ol>
+<pre><code class="language-bash">npx playwright test -c playwright/playwright.config.js
+</code></pre>
+<h2 id="notes-next-steps">Notes &amp; Next Steps</h2>
+<ul>
+<li>Add frontend onboarding wizard and progress polling components (Week 2)</li>
+<li>Implement real-time provisioning notifications (WebSockets + email) and add monitoring dashboards (Week 3)</li>
+<li>Add CI playbooks to run the provisioning job in test runs and include smoke tests for end-to-end onboarding</li>
+</ul>
+<p><strong>Contact:</strong> CTO / Onboarding Team</p>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+    
+  </span>
+</div>
+    <script src="../../../../../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../../../../../..";</script>
+    <script src="../../../../../../js/theme_extra.js"></script>
+    <script src="../../../../../../js/theme.js"></script>
+      <script src="../../../../../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

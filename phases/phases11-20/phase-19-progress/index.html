@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://bridgeflow.readthedocs.io/phases/phases11-20/phase-19-progress/" />
+      <link rel="shortcut icon" href="../../../img/favicon.ico" />
+    <title>Phase 19 Progress - BridgeFlow Docs</title>
+    <link rel="stylesheet" href="../../../css/theme.css" />
+    <link rel="stylesheet" href="../../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Phase 19 Progress";
+        var mkdocs_page_input_path = "phases\\phases11-20\\phase-19-progress.md";
+        var mkdocs_page_url = "/phases/phases11-20/phase-19-progress/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../../.." class="icon icon-home"> BridgeFlow Docs
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../..">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../ARCHITECTURE/">Architecture</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Current System</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../current/control-tower/">Control Tower</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../current/control-tower/trl7-validation/">TRL 7 Validation</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../current/control-tower/public-api/">Public API</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../current/control-tower/integration-guide/">Integration Guide</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Future Vision</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../vision/">Vision Archive Index</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../roadmap/future-architecture/">BF-INTEGRATION Roadmap</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Phase 60</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../phase-60-gap-analysis/">Gap Analysis</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../..">BridgeFlow Docs</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../.." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">Phase 19 Progress</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="phase-19-progress">Phase 19 Progress</h1>
+<h2 id="19b-csv-mailbox-core-engine">19B: CSV Mailbox — Core Engine (✅)</h2>
+<ul>
+<li>Backend CSV upload endpoint: <code>POST /api/upload/csv</code> implemented</li>
+<li>Stores original CSV into S3 inbox (<code>inbox/&lt;orgId&gt;/&lt;template&gt;/</code>)</li>
+<li>Enqueues parsed payloads to Redis Streams (<code>raw_payloads:&lt;orgId&gt;</code>) with LPUSH fallback</li>
+<li>Idempotency and rate-limiting applied via middleware</li>
+<li>E2E integration test added and passing: <code>test/integration/upload-csv-integration.test.js</code> ✅</li>
+</ul>
+<h2 id="19c-quickbooks-connector-backend">19C: QuickBooks Connector — Backend (✅)</h2>
+<ul>
+<li>QBO OAuth credential storage: <code>IntegrationCredential</code> model (encrypted AES-256-GCM)</li>
+<li>QBO client with refresh logic and per-org rate limiting implemented</li>
+<li>Mapping of QBO PurchaseOrder → internal payloads (<code>api/lib/qboToInternal.js</code>)</li>
+<li>Sync ingestion endpoint: <code>POST /api/qbo/sync</code> (auth via <code>x-api-key</code>, rate-limited)</li>
+<li>Idempotent producer (checks <code>IdempotencyKey</code> and skips duplicates) with integration test <code>test/integration/qbo-sync.integration.test.js</code> ✅</li>
+</ul>
+<h2 id="19a-partner-connection-wizard-frontend">19A: Partner Connection Wizard — Frontend (🔜)</h2>
+<ul>
+<li>Frontend route pattern and guardrails finalized by Solution Architect</li>
+<li>Frontend Lead: Start building <code>ConnectionFlow</code> routed sub-app using nested routes</li>
+<li>Frontend Integration Guide added: <code>docs/integrations/frontend-integration.md</code> (dev debug endpoint <code>GET /api/debug/customer-context</code> included)</li>
+<li>Backend endpoints for 19A/19C remain unchanged; you can start integrating now</li>
+</ul>
+<hr />
+<p>Notes: small follow-ups added:
+- Accept <code>text/csv</code> and <code>text/plain</code> contenttypes for CSV uploads to improve compatibility
+- Added extra tests for content-type and header-only API key validation to increase coverage</p>
+<h2 id="20ab-kickoff-partner-inbound-inbox-delivery">20A/B kickoff (partner inbound &amp; inbox delivery)</h2>
+<ul>
+<li><code>PartnerApiKey</code> Prisma model added (Phase 20A)</li>
+<li><code>POST /partner/:partnerId/invoice</code> gateway implemented with <code>validatePartnerApiKey</code> middleware, idempotency and Redis enqueue</li>
+<li>Partner payloads are converted to CSV and stored in S3 inbox path (<code>inbox/&lt;orgId&gt;</code>) for visibility (Phase 20B)</li>
+<li>Metrics: <code>partner_invoice_received_total</code>, <code>partner_invoice_failures_total</code></li>
+<li>Docs: <code>docs/integrations/partner-inbound.md</code> (contract, examples, idempotency)</li>
+</ul>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+    
+  </span>
+</div>
+    <script src="../../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../../..";</script>
+    <script src="../../../js/theme_extra.js"></script>
+    <script src="../../../js/theme.js"></script>
+      <script src="../../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

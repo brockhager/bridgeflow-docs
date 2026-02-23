@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://bridgeflow.readthedocs.io/phases/phases21-30/phase-22-spec/" />
+      <link rel="shortcut icon" href="../../../img/favicon.ico" />
+    <title>Phase 22: Trading Partner Registration System - BridgeFlow Docs</title>
+    <link rel="stylesheet" href="../../../css/theme.css" />
+    <link rel="stylesheet" href="../../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Phase 22: Trading Partner Registration System";
+        var mkdocs_page_input_path = "phases\\phases21-30\\phase-22-spec.md";
+        var mkdocs_page_url = "/phases/phases21-30/phase-22-spec/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../../.." class="icon icon-home"> BridgeFlow Docs
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../..">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../ARCHITECTURE/">Architecture</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Current System</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../current/control-tower/">Control Tower</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../current/control-tower/trl7-validation/">TRL 7 Validation</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../current/control-tower/public-api/">Public API</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../current/control-tower/integration-guide/">Integration Guide</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Future Vision</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../vision/">Vision Archive Index</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../roadmap/future-architecture/">BF-INTEGRATION Roadmap</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Phase 60</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../phase-60-gap-analysis/">Gap Analysis</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../..">BridgeFlow Docs</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../.." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">Phase 22: Trading Partner Registration System</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="phase-22-trading-partner-registration-system">Phase 22: Trading Partner Registration System</h1>
+<h2 id="goal">Goal</h2>
+<p>Allow external trading partners to self‑register, enter a pending queue for admin approval, and upon approval become limited‑access partners capable of sending/receiving documents, with a clear upgrade path to become full BridgeFlow customers.</p>
+<hr />
+<h2 id="issue-22a-public-partner-registration-portal">Issue 22A: Public Partner Registration Portal</h2>
+<p><strong>Assignee:</strong> Agent4<br />
+<strong>Labels:</strong> phase:22, frontend, auth, registration</p>
+<h3 id="deliverables">Deliverables</h3>
+<ol>
+<li><strong>Public sign‑up route</strong> <code>/partner‑signup</code></li>
+<li>Standalone page, no login required</li>
+<li>Form: Partner name, admin email, password, contact info</li>
+<li><strong>Backend registration endpoint</strong> <code>POST /api/auth/register-partner</code></li>
+<li>Creates:<ul>
+<li><code>Organization</code> with <code>type = 'partner'</code></li>
+<li><code>User</code> with <code>role = 'partner'</code></li>
+<li><code>PartnerRegistration</code> record with <code>status = 'pending'</code></li>
+</ul>
+</li>
+<li>Email verification required before activation</li>
+<li><strong>Confirmation page</strong> after sign‑up</li>
+<li>“Thank you for registering. Your account is pending approval.”</li>
+<li>Links to support/docs</li>
+</ol>
+<h3 id="guardrails">Guardrails</h3>
+<ul>
+<li>One partner per registration</li>
+<li>Email must be unique across system</li>
+<li>No automatic activation — admin must approve</li>
+<li>Reuse existing auth flow (JWT, verification emails)</li>
+</ul>
+<hr />
+<h2 id="issue-22b-admin-approval-queue-feature-gating">Issue 22B: Admin Approval Queue &amp; Feature Gating</h2>
+<p><strong>Assignee:</strong> Agent4<br />
+<strong>Labels:</strong> phase:22, backend, admin</p>
+<h3 id="deliverables_1">Deliverables</h3>
+<ol>
+<li><strong>Admin queue UI</strong> <code>/admin/partner‑queue</code></li>
+<li>Lists pending registrations (name, email, submitted date)</li>
+<li>Actions: Approve / Deny (with reason)</li>
+<li><strong>Approval workflow</strong></li>
+<li>Approve → creates <code>TradingPartner</code> record linked to inviting SMB’s org (TBD later)</li>
+<li>Sets <code>accessLevel = 'limited'</code> on partner’s organization</li>
+<li>Sends approval email to partner</li>
+<li><strong>Feature gating</strong></li>
+<li><code>accessLevel = 'limited'</code>: can only send/receive via existing bridges, no canvas, no bridge creation</li>
+<li><code>accessLevel = 'full'</code>: full customer access (future upgrade)</li>
+<li><strong>Notifications</strong></li>
+<li>Email to partner when approved/denied</li>
+<li>In‑app alert to SMB customer when invited partner is approved</li>
+</ol>
+<h3 id="guardrails_1">Guardrails</h3>
+<ul>
+<li>RBAC not used — RLS isolates partner data</li>
+<li>Pending registrations are visible only to admins</li>
+<li>Denied registrations are logged but soft‑deleted</li>
+</ul>
+<hr />
+<h2 id="issue-22c-partner-onboarding-conversion-path">Issue 22C: Partner Onboarding &amp; Conversion Path</h2>
+<p><strong>Assignee:</strong> Agent4<br />
+<strong>Labels:</strong> phase:22, frontend, onboarding</p>
+<h3 id="deliverables_2">Deliverables</h3>
+<ol>
+<li><strong>Post‑approval onboarding wizard</strong> <code>/partner/onboarding</code></li>
+<li>Steps:<ol>
+<li>Confirm contact/details</li>
+<li>Set up first connection (CSV or QBO)</li>
+<li>Generate first API key</li>
+<li>View limited dashboard</li>
+</ol>
+</li>
+<li><strong>Limited partner dashboard</strong></li>
+<li>Inbox/outbox (documents sent/received)</li>
+<li>API key management</li>
+<li>No canvas, no bridge configuration</li>
+<li><strong>Upgrade path</strong></li>
+<li>“Upgrade to full account” button (placeholder for future billing)</li>
+<li>If upgraded, <code>accessLevel = 'full'</code> and partner becomes full customer with canvas access</li>
+</ol>
+<h3 id="guardrails_2">Guardrails</h3>
+<ul>
+<li>Onboarding skippable (partner can exit and return)</li>
+<li>Dashboard only shows data scoped to partner’s own org (RLS)</li>
+<li>Upgrade button is non‑functional in Phase 22 — logs event for future phase</li>
+</ul>
+<hr />
+<h2 id="data-model-additions">Data Model Additions</h2>
+<pre><code class="language-prisma">model PartnerRegistration {
+  id          String   @id @default(cuid())
+  email       String   @unique
+  partnerName String
+  contactInfo Json?    // { phone, address }
+  status      String   // 'pending', 'approved', 'denied'
+  submittedAt DateTime @default(now())
+  reviewedAt  DateTime?
+  reviewedBy  String?  // admin user ID
+  notes       String?
+}
+
+// Add to Organization model:
+// type        String  @default('customer') // 'customer', 'partner'
+// accessLevel String  @default('full')     // 'full', 'limited'
+</code></pre>
+<p><strong>Dependencies</strong>
+Existing auth system (/api/auth/register)</p>
+<p>RLS policies (already in place)</p>
+<p>Email service (already used for verification)</p>
+<p><strong>Timeline</strong>
+2‑week sprint</p>
+<p><strong>Order:</strong> 22A → 22B → 22C</p>
+<p><strong>All work direct to main after local test pass (USE_MOCK_DB=true)</strong></p>
+<p><strong>Out of Scope</strong>
+Payment/plan selection</p>
+<p>Bulk partner import</p>
+<p>Partner‑to‑partner networking</p>
+<p>Custom roles or permissions beyond accessLevel</p>
+<p><strong>Once you or Agent4 creates the file, I will instruct the team to begin.</strong></p>
+<hr />
+<h2 id="implementation-constraints-agent10-directives-must-follow">Implementation constraints &amp; Agent10 directives (must follow)</h2>
+<ol>
+<li><strong>Security model: RLS is the sole gatekeeper</strong></li>
+<li>Do NOT use <code>role = 'partner'</code> or <code>accessLevel</code> in application logic to gate data access.</li>
+<li>All data queries (documents, connections, API keys) must rely on PostgreSQL RLS policies that use <code>organization.type</code> and <code>organization.id</code> from the JWT context.</li>
+<li>
+<p><code>accessLevel</code> is UI-only (e.g., hide/disable “Upgrade” button) and <strong>must never</strong> be used for backend data isolation.</p>
+</li>
+<li>
+<p><strong>Auth flow: extend existing registration</strong></p>
+</li>
+<li>Do not add a separate registration endpoint.</li>
+<li>Extend <code>/api/auth/register</code> to accept <code>type='partner'</code> (query param or request body) and reuse the existing email uniqueness, password hashing, and verification email flow.</li>
+<li>
+<p>Skip SMB profile creation for partners; link the created User to a new <code>Organization { type: 'partner', accessLevel: 'limited' }</code> on approval.</p>
+</li>
+<li>
+<p><strong>PartnerRegistration lifecycle</strong></p>
+</li>
+<li>On approve: create the <code>Organization</code> (type = 'partner', accessLevel = 'limited'), link the <code>User</code> to this org, and <strong>archive/delete</strong> the <code>PartnerRegistration</code> record to avoid duplication.</li>
+<li>
+<p>On deny: soft-delete <code>PartnerRegistration</code> and record denial reason/notes.</p>
+</li>
+<li>
+<p><strong>RLS policy guidance (for Agent10/DB)</strong></p>
+</li>
+<li>Documents, API keys, and connections must be scoped by <code>current_setting('app.current_org_id')</code> and include <code>organization.type = 'partner'</code> where relevant (see implementation notes below).</li>
+<li>
+<p>Do not hard-code RLS in application logic; add SQL <code>CREATE POLICY</code> statements in migrations or DB init scripts.</p>
+</li>
+<li>
+<p><strong>Go/No-Go</strong></p>
+</li>
+<li>Agent4 may proceed when they confirm they will:<ul>
+<li>Reuse <code>/api/auth/register</code> (type='partner')</li>
+<li>Not use <code>accessLevel</code>/<code>role</code> in backend queries</li>
+<li>Add RLS-aware smoke tests and migration for required policies</li>
+</ul>
+</li>
+</ol>
+<hr />
+<p><strong>Agent10 note:</strong> I will add the specific SQL policy snippets and a short migration plan for <code>organization.type = 'partner'</code> to accompany the phase work. Proceed when Agent4 confirms understanding.</p>
+<p>—<br />
+Agent2</p>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+    
+  </span>
+</div>
+    <script src="../../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../../..";</script>
+    <script src="../../../js/theme_extra.js"></script>
+    <script src="../../../js/theme.js"></script>
+      <script src="../../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

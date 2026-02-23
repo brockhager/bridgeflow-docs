@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://bridgeflow.readthedocs.io/database/RAILWAY-SETUP/" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>Railway PostgreSQL Setup - Complete ✅ - BridgeFlow Docs</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Railway PostgreSQL Setup - Complete \u2705";
+        var mkdocs_page_input_path = "database\\RAILWAY-SETUP.md";
+        var mkdocs_page_url = "/database/RAILWAY-SETUP/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> BridgeFlow Docs
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../ARCHITECTURE/">Architecture</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Current System</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../current/control-tower/">Control Tower</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../current/control-tower/trl7-validation/">TRL 7 Validation</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../current/control-tower/public-api/">Public API</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../current/control-tower/integration-guide/">Integration Guide</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Future Vision</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../vision/">Vision Archive Index</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../roadmap/future-architecture/">BF-INTEGRATION Roadmap</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Phase 60</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../phase-60-gap-analysis/">Gap Analysis</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">BridgeFlow Docs</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">Railway PostgreSQL Setup - Complete ✅</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="railway-postgresql-setup-complete">Railway PostgreSQL Setup - Complete ✅</h1>
+<h2 id="summary">Summary</h2>
+<p>BridgeFlow is now configured to use Railway PostgreSQL as the production/staging database. All migrations have been applied and the system is operational.</p>
+<h2 id="connection-details">Connection Details</h2>
+<p><strong>Database</strong>: Railway PostgreSQL
+<strong>Host</strong>: <code>gondola.proxy.rlwy.net:42013</code>
+<strong>Database Name</strong>: <code>railway</code>
+<strong>Connection String</strong>: Stored in <code>.env</code> and GitHub Secrets as <code>STAGING_DATABASE_URL</code></p>
+<h2 id="what-was-configured">What Was Configured</h2>
+<h3 id="1-environment-variables">1. Environment Variables</h3>
+<p><strong>Local Development</strong> (<code>.env</code>):</p>
+<pre><code class="language-env">DATABASE_URL=&quot;postgresql://postgres:***@gondola.proxy.rlwy.net:42013/railway&quot;
+NODE_ENV=&quot;staging&quot;
+</code></pre>
+<p><strong>CI/CD</strong> (GitHub Secrets):
+- <code>STAGING_DATABASE_URL</code>: Railway connection string (already configured)</p>
+<h3 id="2-database-schema">2. Database Schema</h3>
+<p>All Prisma migrations have been applied to Railway:
+- ✅ 3 migrations applied successfully
+- ✅ Database schema is up to date
+- ✅ Tables created: Entity, Resource, DeliveryJob, DeliveryTask, Invoice, AuditLog</p>
+<h3 id="3-current-database-state">3. Current Database State</h3>
+<p>As of 2025-12-16:
+- <strong>Entities</strong>: 100 (from CI seed runs)
+- <strong>Resources</strong>: 100 (from CI seed runs)
+- <strong>Delivery Jobs</strong>: 31+ (test jobs)
+- <strong>Audit Logs</strong>: 225+
+- <strong>Invoices</strong>: Generating on successful jobs</p>
+<h3 id="4-verification-steps-completed">4. Verification Steps Completed</h3>
+<p>✅ <strong>Connection Test</strong>: Successfully connected to Railway DB
+✅ <strong>Migration Status</strong>: All migrations applied, schema up to date
+✅ <strong>Data Persistence</strong>: Jobs created via API persist in Railway
+✅ <strong>Worker Processing</strong>: Dev worker processes jobs from Railway DB
+✅ <strong>Foreign Keys</strong>: Constraints working correctly
+✅ <strong>API Endpoints</strong>: All endpoints work with Railway DB</p>
+<h3 id="5-test-results">5. Test Results</h3>
+<p><strong>Unit Tests</strong> (Mock DB): 6/6 passing ✅
+<strong>API Test</strong>: Job creation successful ✅
+<strong>Worker Test</strong>: Jobs processed correctly ✅
+<strong>Data Persistence</strong>: Verified in Railway dashboard ✅</p>
+<h2 id="usage">Usage</h2>
+<h3 id="starting-the-server">Starting the Server</h3>
+<p><strong>Development Mode</strong> (with dev worker):</p>
+<pre><code class="language-bash"># PowerShell
+$env:NODE_ENV=&quot;development&quot;
+node api/server.js
+
+# Bash
+NODE_ENV=development node api/server.js
+</code></pre>
+<p><strong>Production Mode</strong>:</p>
+<pre><code class="language-bash"># PowerShell
+$env:NODE_ENV=&quot;production&quot;
+node api/server.js
+
+# Bash
+NODE_ENV=production node api/server.js
+</code></pre>
+<h3 id="running-migrations">Running Migrations</h3>
+<p><strong>Deploy migrations to Railway</strong>:</p>
+<pre><code class="language-bash">pnpm exec prisma migrate deploy --schema prisma/schema.prisma
+</code></pre>
+<p><strong>Check migration status</strong>:</p>
+<pre><code class="language-bash">pnpm exec prisma migrate status --schema prisma/schema.prisma
+</code></pre>
+<p><strong>Create new migration</strong> (dev only):</p>
+<pre><code class="language-bash">pnpm exec prisma migrate dev --name description_here --schema prisma/schema.prisma
+</code></pre>
+<h3 id="database-management">Database Management</h3>
+<p><strong>View data with Prisma Studio</strong>:</p>
+<pre><code class="language-bash">pnpm exec prisma studio --schema prisma/schema.prisma
+</code></pre>
+<p><strong>Check database state</strong>:</p>
+<pre><code class="language-bash">node scripts/cleanup-railway-db.js
+</code></pre>
+<p><strong>Clean up old test data</strong>:</p>
+<pre><code class="language-bash">pnpm exec cross-env CLEANUP=true node scripts/cleanup-railway-db.js
+</code></pre>
+<h2 id="cicd-integration">CI/CD Integration</h2>
+<p>The CI/CD pipeline is configured to use Railway PostgreSQL:</p>
+<ol>
+<li><strong>Workflow</strong>: <code>.github/workflows/migrate.yml</code></li>
+<li><strong>Secret</strong>: <code>STAGING_DATABASE_URL</code> (Railway connection string)</li>
+<li><strong>Steps</strong>:</li>
+<li>Generate Prisma client</li>
+<li>Apply migrations</li>
+<li>Seed database</li>
+<li>Verify schema</li>
+</ol>
+<p><strong>All CI jobs now run against Railway instead of local Postgres service.</strong></p>
+<h2 id="mock-db-vs-railway-db">Mock DB vs Railway DB</h2>
+<h3 id="mock-db-developmenttesting">Mock DB (Development/Testing)</h3>
+<pre><code class="language-bash"># Use in-memory mock DB
+$env:USE_MOCK_DB=&quot;true&quot;
+node scripts/test-email-flow.js
+</code></pre>
+<p><strong>Use cases</strong>:
+- Unit tests (<code>pnpm test</code>)
+- Local development without DB
+- Fast, isolated testing</p>
+<h3 id="railway-db-stagingproduction">Railway DB (Staging/Production)</h3>
+<pre><code class="language-bash"># Use Railway PostgreSQL
+# (no USE_MOCK_DB flag)
+node api/server.js
+</code></pre>
+<p><strong>Use cases</strong>:
+- Production workloads
+- Data persistence
+- Integration testing
+- CI/CD pipelines</p>
+<h2 id="switching-between-databases">Switching Between Databases</h2>
+<h3 id="use-railway-default">Use Railway (Default)</h3>
+<pre><code class="language-bash"># Just run with .env configured
+node api/server.js
+</code></pre>
+<h3 id="use-mock-db">Use Mock DB</h3>
+<pre><code class="language-bash">$env:USE_MOCK_DB=&quot;true&quot;
+node api/server.js
+</code></pre>
+<h3 id="use-local-postgres">Use Local Postgres</h3>
+<pre><code class="language-bash"># Update .env
+DATABASE_URL=&quot;postgresql://postgres:postgres@localhost:5432/postgres?schema=public&quot;
+node api/server.js
+</code></pre>
+<h2 id="important-notes">Important Notes</h2>
+<ol>
+<li><strong>Don't commit sensitive data</strong>: The <code>.env</code> file contains the Railway password and is gitignored</li>
+<li><strong>CI/CD uses Railway</strong>: GitHub Actions runs migrations against Railway DB via secret</li>
+<li><strong>Mock DB for tests</strong>: Unit tests still use Mock DB for speed and isolation</li>
+<li><strong>Foreign keys enforced</strong>: Railway enforces all Prisma relationship constraints</li>
+<li><strong>Data cleanup</strong>: Old test jobs should be cleaned up periodically to avoid clutter</li>
+</ol>
+<h2 id="troubleshooting">Troubleshooting</h2>
+<h3 id="connection-issues">Connection Issues</h3>
+<p><strong>Problem</strong>: "Can't reach database server"</p>
+<pre><code class="language-bash"># Check if Railway DB is accessible
+node scripts/cleanup-railway-db.js
+</code></pre>
+<p><strong>Solution</strong>: Verify Railway database is running in the Railway dashboard</p>
+<h3 id="migration-issues">Migration Issues</h3>
+<p><strong>Problem</strong>: "Migration failed"</p>
+<pre><code class="language-bash"># Check migration status
+pnpm exec prisma migrate status
+</code></pre>
+<p><strong>Solution</strong>: Ensure DATABASE_URL is correct and database is accessible</p>
+<h3 id="test-failures">Test Failures</h3>
+<p><strong>Problem</strong>: Tests failing with real DB</p>
+<pre><code class="language-bash"># Run tests with Mock DB
+pnpm test
+# (automatically uses USE_MOCK_DB=true)
+</code></pre>
+<p><strong>Solution</strong>: Tests are configured to use Mock DB by default</p>
+<h2 id="next-steps">Next Steps</h2>
+<ul>
+<li>✅ T-008 PostgreSQL Integration: <strong>COMPLETE</strong></li>
+<li>🔄 T-009 History Page: Next task</li>
+<li>🔄 T-010 Error Handling UI: Pending</li>
+<li>🔄 T-011 Basic Monitoring: Pending</li>
+</ul>
+<h2 id="additional-resources">Additional Resources</h2>
+<ul>
+<li><a href="https://railway.app">Railway Dashboard</a></li>
+<li><a href="https://www.prisma.io/docs/concepts/components/prisma-migrate">Prisma Migrate Docs</a></li>
+<li><a href="./instructions/TESTING.md">BridgeFlow Testing Guide</a></li>
+<li><a href="./instructions/UI-TESTING.md">UI Testing Guide</a></li>
+</ul>
+<hr />
+<p><strong>Setup completed</strong>: 2025-12-16
+<strong>Database</strong>: Railway PostgreSQL
+<strong>Status</strong>: ✅ Operational</p>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

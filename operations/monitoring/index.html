@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://bridgeflow.readthedocs.io/operations/monitoring/" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>Monitoring &amp; Metrics — Operations Guide - BridgeFlow Docs</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Monitoring \u0026amp; Metrics \u2014 Operations Guide";
+        var mkdocs_page_input_path = "operations\\monitoring.md";
+        var mkdocs_page_url = "/operations/monitoring/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> BridgeFlow Docs
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../ARCHITECTURE/">Architecture</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Current System</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../current/control-tower/">Control Tower</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../current/control-tower/trl7-validation/">TRL 7 Validation</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../current/control-tower/public-api/">Public API</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../current/control-tower/integration-guide/">Integration Guide</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Future Vision</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../vision/">Vision Archive Index</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../roadmap/future-architecture/">BF-INTEGRATION Roadmap</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Phase 60</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../phase-60-gap-analysis/">Gap Analysis</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">BridgeFlow Docs</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">Monitoring &amp; Metrics — Operations Guide</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="monitoring-metrics-operations-guide">Monitoring &amp; Metrics — Operations Guide</h1>
+<p>Purpose: a concrete monitoring plan and dashboard spec for Phase 37 Week 2 (follow-up to structured logging). Use this as the source of truth for dashboard panels, PromQL examples, and alert rules.</p>
+<h2 id="core-dashboards">Core Dashboards</h2>
+<ol>
+<li>System Health (per service)</li>
+<li>
+<p>Panels:</p>
+<ul>
+<li>CPU usage (avg, 1m, 5m) — PromQL: <code>avg(rate(process_cpu_seconds_total[1m])) by (instance)</code></li>
+<li>Memory usage — <code>process_resident_memory_bytes</code></li>
+<li>Disk usage — node exporter metrics</li>
+<li>Uptime / restarts</li>
+</ul>
+</li>
+<li>
+<p>Job &amp; Worker Health</p>
+</li>
+<li>
+<p>Panels:</p>
+<ul>
+<li>Job queue depth (redis list length) — <code>redis_list_length{queue="onboarding_jobs"}</code></li>
+<li>Job processing rate: <code>rate(onboarding_jobs_processed_total[1m])</code></li>
+<li>Job failure rate: <code>rate(onboarding_jobs_failed_total[5m])</code></li>
+<li>Long-running jobs: <code>histogram_quantile(0.95, sum(rate(onboarding_job_duration_seconds_bucket[5m])) by (le))</code></li>
+</ul>
+</li>
+<li>
+<p>API &amp; Error Metrics</p>
+</li>
+<li>
+<p>Panels:</p>
+<ul>
+<li>API latency (p95/p99): <code>histogram_quantile(0.95, sum(rate(http_request_duration_seconds_bucket[5m])) by (le, handler))</code></li>
+<li>5xx error rate per endpoint: <code>sum(rate(http_requests_total{status=~"5.."}[5m])) by (handler)</code></li>
+<li>Request rate per endpoint</li>
+</ul>
+</li>
+<li>
+<p>Business Metrics (Onboarding)</p>
+</li>
+<li>Panels:<ul>
+<li>Onboarding completion rate (per template): <code>sum(onboarding_completed_total) by (template) / sum(onboarding_started_total) by (template)</code></li>
+<li>Average setup time per template: <code>histogram_quantile(0.5, sum(rate(onboarding_duration_seconds_bucket[1d])) by (le, template))</code></li>
+<li>Provisioning failure reasons: Top error codes/messages (requires instrumented logging and labels)</li>
+</ul>
+</li>
+</ol>
+<h2 id="alerting-rules-examples">Alerting Rules (examples)</h2>
+<ul>
+<li>High failure rate (critical):</li>
+<li><code>rate(onboarding_jobs_failed_total[10m]) / rate(onboarding_jobs_processed_total[10m]) &gt; 0.05</code></li>
+<li>Severity: <code>critical</code></li>
+<li>Escalation: on-call -&gt; manager -&gt; CTO</li>
+<li>Long-running jobs (warning -&gt; critical):</li>
+<li><code>max_over_time(onboarding_job_duration_seconds[15m]) &gt; 600</code> (warning)</li>
+<li><code>max_over_time(onboarding_job_duration_seconds[30m]) &gt; 900</code> (critical)</li>
+<li>Job backlog growing (warning):</li>
+<li><code>increase(redis_list_length{queue="onboarding_jobs"}[5m]) &gt; 10</code></li>
+</ul>
+<h2 id="customer-specific-views">Customer-Specific Views</h2>
+<ul>
+<li>Enable per-organization dashboards (tagged by <code>orgId</code>) for enterprise customers</li>
+<li>Provide read-only links with RBAC: dashboards only accessible if requestor has <code>monitor:*</code> for the org</li>
+</ul>
+<h2 id="data-retention-storage">Data Retention &amp; Storage</h2>
+<ul>
+<li>Default retention: 30 days (Prometheus)</li>
+<li>Enterprise retention option: 90 days</li>
+<li>Long-term trend aggregation: rollup hourly/daily metrics into Postgres/TimescaleDB for 1-year retention</li>
+</ul>
+<h2 id="implementation-notes">Implementation Notes</h2>
+<ul>
+<li>Instrument code to increment counters and record durations (use OpenMetrics conventions)</li>
+<li>Extract metrics from structured logs where direct instrumenting is impractical (e.g., third-party lib timing)</li>
+<li>Correlate metrics with <code>traceId</code> and <code>sessionId</code> for drill-down in dashboards</li>
+<li>Provide direct links from Grafana panels to <code>GET /api/logs/trace/:traceId</code> and <code>GET /api/logs/session/:sessionId</code></li>
+</ul>
+<h2 id="runbook-snippets">Runbook Snippets</h2>
+<ul>
+<li>Triage provisioning failures:</li>
+<li>Check job queue depth and failure rate panel</li>
+<li>Get recent failed job <code>traceId</code> from error panel</li>
+<li><code>GET /api/logs/trace/:traceId</code> to view spans and errors</li>
+<li>If a retriable error, use the admin UI to <code>Retry provisioning</code> and monitor metrics</li>
+</ul>
+<h2 id="next-implementation-tasks-week-2">Next: Implementation Tasks (Week 2)</h2>
+<ul>
+<li>Create Grafana dashboard JSON and import to Grafana workspace</li>
+<li>Add Prometheus exporters/metrics in the API and worker code</li>
+<li>Implement alert rules and subscribe on-call rotation to critical alerts</li>
+<li>Add dashboard links to Admin UI job views and onboarding status pages</li>
+</ul>
+<hr />
+<p>If you'd like, I can generate example Grafana JSON panels and a list of exact PromQL queries for each panel so the SRE team can import them directly.</p>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

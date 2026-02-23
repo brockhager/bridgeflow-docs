@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://bridgeflow.readthedocs.io/Layer3-DataMappingLayer/qbo-mapping/" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>Layer 3 — Data Mapping: QuickBooks Purchase Orders - BridgeFlow Docs</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Layer 3 \u2014 Data Mapping: QuickBooks Purchase Orders";
+        var mkdocs_page_input_path = "Layer3-DataMappingLayer\\qbo-mapping.md";
+        var mkdocs_page_url = "/Layer3-DataMappingLayer/qbo-mapping/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> BridgeFlow Docs
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../ARCHITECTURE/">Architecture</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Current System</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../current/control-tower/">Control Tower</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../current/control-tower/trl7-validation/">TRL 7 Validation</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../current/control-tower/public-api/">Public API</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../current/control-tower/integration-guide/">Integration Guide</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Future Vision</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../vision/">Vision Archive Index</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../roadmap/future-architecture/">BF-INTEGRATION Roadmap</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Phase 60</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../phase-60-gap-analysis/">Gap Analysis</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">BridgeFlow Docs</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">Layer 3 — Data Mapping: QuickBooks Purchase Orders</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="layer-3-data-mapping-quickbooks-purchase-orders">Layer 3 — Data Mapping: QuickBooks Purchase Orders</h1>
+<p>This document explains how QuickBooks Online (QBO) Purchase Orders are mapped into BridgeFlow's Layer 3 Data Mapping Layer.
+It documents the mapping choices, validation, template alignment with CSV mailbox, and suggestions for future mapping extensions.</p>
+<h2 id="goal">Goal</h2>
+<ul>
+<li>Ensure QBO-sourced Purchase Orders are normalized to the same internal schema used by CSV mailbox ingestion so downstream mapping, validation, and delivery pipelines are unified and reusable.</li>
+</ul>
+<h2 id="input-qbo-purchaseorder">Input (QBO PurchaseOrder)</h2>
+<ul>
+<li>Typical relevant fields:</li>
+<li><code>Id</code> (TxnId) — primary identifier</li>
+<li><code>DocNumber</code> — human-facing PO id</li>
+<li><code>EntityRef.value</code> — vendor id</li>
+<li><code>Line[]</code> — line items (various detail types: <code>ItemBasedExpenseLineDetail</code>, <code>SalesItemLineDetail</code>, etc.)</li>
+</ul>
+<h2 id="internal-target-schema-same-as-csv-mailbox">Internal Target Schema (same as CSV mailbox)</h2>
+<ul>
+<li><code>purchaseOrderId</code> (string) — prefer <code>DocNumber</code> when available; fall back to <code>Id</code></li>
+<li><code>vendorId</code> (string) — maps from <code>EntityRef.value</code></li>
+<li><code>lineItems</code> (array of objects):</li>
+<li><code>itemId</code> (string)</li>
+<li><code>quantity</code> (number|null)</li>
+<li><code>unitPrice</code> (number|null)</li>
+</ul>
+<p>Rationale: Aligning with CSV shape means existing mapping templates and validation rules are applied unchanged.</p>
+<h2 id="qbotointernal-mapping-rules">qboToInternal Mapping Rules</h2>
+<ul>
+<li>Use <code>DocNumber</code> as <code>purchaseOrderId</code> when provided, else <code>Id</code></li>
+<li>For each <code>Line</code>:</li>
+<li>If <code>DetailType === 'ItemBasedExpenseLineDetail'</code> and detail exists:<ul>
+<li><code>itemId</code> = <code>ItemBasedExpenseLineDetail.ItemRef.value</code></li>
+<li><code>unitPrice</code> = <code>ItemBasedExpenseLineDetail.UnitPrice || Amount</code></li>
+<li><code>quantity</code> = if <code>UnitPrice</code> and <code>Amount</code> available, compute <code>Amount / UnitPrice</code>, otherwise fallback to <code>Quantity</code> when available</li>
+</ul>
+</li>
+<li>If <code>SalesItemLineDetail</code> present:<ul>
+<li><code>itemId</code> = <code>SalesItemLineDetail.ItemRef.value</code></li>
+<li><code>quantity</code> = <code>SalesItemLineDetail.Qty</code></li>
+<li><code>unitPrice</code> = <code>Amount</code></li>
+</ul>
+</li>
+<li>Otherwise, use best-effort mapping from <code>ItemRef</code>/<code>Quantity</code>/<code>Amount</code></li>
+</ul>
+<h2 id="validation-mapping-templates">Validation &amp; Mapping Templates</h2>
+<ul>
+<li>After mapping, the payload is fed into existing Mapping &amp; Validation layers (Layer 3):</li>
+<li>Reuse CSV mapping templates for <code>purchase_order</code> where possible</li>
+<li>Validation rules apply identically (e.g., required fields, format checks)</li>
+</ul>
+<h2 id="idempotency-interaction">Idempotency Interaction</h2>
+<ul>
+<li>Each mapped PO is assigned an idempotency key <code>qbo_po:&lt;Id&gt;</code> at the producer (Layer 2) before enqueuing to the raw stream.</li>
+<li>Layer 3 mapping/worker components do not need to re-compute idempotency — they rely on Phase 18 deduplication logic and stored IdempotencyKey records.</li>
+</ul>
+<h2 id="extensibility">Extensibility</h2>
+<ul>
+<li>Add support for additional QBO objects (Invoices, Bills) by creating <code>qboToInternal</code> mappers for each object and adding new <code>source</code> fields on the raw stream.</li>
+<li>Consider adding a richer line-level mapping that preserves QBO detail types for advanced mappings in the admin UI.</li>
+</ul>
+<h2 id="testing">Testing</h2>
+<ul>
+<li>Unit tests for <code>qboToInternal</code> must cover: varied line detail types, missing fields, and fallbacks.</li>
+<li>Integration tests should validate end-to-end: QBO response → mapping → enqueue → downstream processing.</li>
+</ul>
+<h2 id="files-references">Files &amp; References</h2>
+<ul>
+<li>Implementation: <code>api/lib/qboToInternal.js</code></li>
+<li>Mapping unit test: <code>test/api/qboToInternal.test.js</code></li>
+<li>Ingestion producer: <code>api/ingest/qboSync.js</code></li>
+<li>Downstream processing: Phase 18 workers and S3 flush worker</li>
+</ul>
+<hr />
+<p>Addendum: If we later add a UI to let operators preview mapping results, ensure the preview UI displays both original QBO fields and mapped output for easier debugging and template tuning.</p>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

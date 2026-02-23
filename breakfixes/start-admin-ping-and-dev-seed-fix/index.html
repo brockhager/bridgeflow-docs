@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://bridgeflow.readthedocs.io/breakfixes/start-admin-ping-and-dev-seed-fix/" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>Breakfix: start-admin ping + dev seeder + dev login fixes (2026-01-08) - BridgeFlow Docs</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Breakfix: start-admin ping + dev seeder + dev login fixes (2026-01-08)";
+        var mkdocs_page_input_path = "breakfixes\\start-admin-ping-and-dev-seed-fix.md";
+        var mkdocs_page_url = "/breakfixes/start-admin-ping-and-dev-seed-fix/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> BridgeFlow Docs
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../ARCHITECTURE/">Architecture</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Current System</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../current/control-tower/">Control Tower</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../current/control-tower/trl7-validation/">TRL 7 Validation</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../current/control-tower/public-api/">Public API</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../current/control-tower/integration-guide/">Integration Guide</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Future Vision</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../vision/">Vision Archive Index</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../roadmap/future-architecture/">BF-INTEGRATION Roadmap</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Phase 60</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../phase-60-gap-analysis/">Gap Analysis</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">BridgeFlow Docs</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">Breakfix: start-admin ping + dev seeder + dev login fixes (2026-01-08)</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="breakfix-start-admin-ping-dev-seeder-dev-login-fixes-2026-01-08">Breakfix: start-admin ping + dev seeder + dev login fixes (2026-01-08)</h1>
+<p><strong>Summary</strong></p>
+<p>This breakfix addresses three related dev-experience issues observed while starting the local admin/dev stack:</p>
+<ul>
+<li><code>start/start-admin.ps1</code> polled <code>/admin-api/_dev/ping</code> using GET which resulted in repeated 404s and a ping timeout. ✅</li>
+<li>The dev seeder endpoint (<code>/admin-api/_dev/ensure-dev-seed</code>) could be invoked against a non-mock DB, risking accidental seeding of a real database. ⚠️</li>
+<li>The Admin UI dev login used a different dev token string than the API expected and the dev stub lacked <code>admin:tenets:*</code> permissions. This caused 401s when attempting Tenet CRUD from the admin UI. 🔐</li>
+</ul>
+<hr />
+<h2 id="symptoms">Symptoms</h2>
+<ul>
+<li><code>start-admin.ps1</code> printed "API did not respond to ping after 30 seconds; continuing without seeding" and logs showed many 404s for <code>/admin-api/_dev/ping</code>.</li>
+<li>On the admin UI, creating a Tenet produced <code>401 Unauthorized</code> responses when sending POST <code>/admin-api/tenets</code>.</li>
+<li>Manual calls to <code>/admin-api/_dev/ensure-dev-seed</code> could fail or succeed incorrectly depending on DB mode (real vs mock).</li>
+</ul>
+<hr />
+<h2 id="root-causes">Root causes</h2>
+<ol>
+<li>The dev ping route is implemented as POST (and expects a JSON body), but the startup script polled it using GET.</li>
+<li><code>/admin-api/_dev/ensure-dev-seed</code> allowed seeding regardless of whether the server was running with the in-process mock DB (unsafe for real DBs).</li>
+<li>Admin UI dev-login used <code>dev-access</code> / <code>dev-refresh</code> while the server recognized <code>dev-access-token</code> / <code>dev-refresh-token</code>. The dev fallback also lacked <code>admin:tenets:create|read|update|delete</code> permissions.</li>
+</ol>
+<hr />
+<h2 id="fixes-implemented">Fixes implemented</h2>
+<ul>
+<li>start/start-admin.ps1</li>
+<li>Polls <code>/admin-api/_dev/ping</code> using <strong>POST</strong> with an empty JSON body (<code>{}</code>), increased timeout and added mid-wait logging.</li>
+<li>
+<p>After a successful ping it calls <code>/admin-api/_dev/ensure-dev-seed</code> to idempotently seed the running process (mock DB only).</p>
+</li>
+<li>
+<p>api/routes/dev.js</p>
+</li>
+<li>
+<p><code>POST /admin-api/_dev/ensure-dev-seed</code> now checks <code>isMock()</code> from <code>api/lib/db.js</code> and returns <code>400 NotMockDb</code> when not running in mock mode to avoid accidental seeding of a real DB.</p>
+</li>
+<li>
+<p>api/handlers/auth.js</p>
+</li>
+<li>
+<p>The dev auth fallback (<code>dev-admin</code>) now includes <code>admin:tenets:read</code>, <code>admin:tenets:create</code>, <code>admin:tenets:update</code>, <code>admin:tenets:delete</code> permissions so dev logins can manage tenets.</p>
+</li>
+<li>
+<p>admin-bridgeflow/src/auth/AuthContext.jsx</p>
+</li>
+<li>
+<p>Dev-login now stores <code>dev-access-token</code> and <code>dev-refresh-token</code> (matching what the server accepts) when using the local dev convenience login.</p>
+</li>
+<li>
+<p>Tests and verification</p>
+</li>
+<li>Ran <code>pnpm run test:api</code> — all tests pass. Added manual smoke verifications (ping, seeder, CTO login, Tenet create).</li>
+</ul>
+<hr />
+<h2 id="how-to-verify-locally">How to verify locally</h2>
+<ol>
+<li>Start the unified dev stack (recommended):</li>
+</ol>
+<p>powershell -NoProfile -ExecutionPolicy Bypass -File .\start\start-admin.ps1</p>
+<ul>
+<li>
+<p>Check the start logs: you should see <code>API ping OK</code> and the seeder response (created dev users/orgs).</p>
+</li>
+<li>
+<p>Manually test ping + seeder (if API is already running):</p>
+</li>
+</ul>
+<p>curl -X POST http://127.0.0.1:4000/admin-api/_dev/ping -H "Content-Type: application/json" -d '{}'
+   curl -X POST http://127.0.0.1:4000/admin-api/_dev/ensure-dev-seed -H "Content-Type: application/json" -d '{}'</p>
+<ol>
+<li>
+<p>Dev-login in Admin UI (localhost):</p>
+</li>
+<li>
+<p>Use: email <code>admin@localhost.dev</code>, password <code>testpass</code> (TOTP <code>123456</code> if prompted). Confirm <code>admin_token</code> in localStorage equals <code>dev-access-token</code>.</p>
+</li>
+<li>
+<p>Create a new Tenet via the TenetProfiles UI. The POST to <code>/admin-api/tenets</code> should succeed (HTTP 200/201).</p>
+</li>
+<li>
+<p>Run tests to ensure nothing regressed:</p>
+</li>
+</ol>
+<p>pnpm run test:api</p>
+<hr />
+<h2 id="notes-follow-ups">Notes &amp; follow-ups</h2>
+<ul>
+<li>The startup script still depends on the API becoming responsive within the configured timeout (30s by default). If your machine is slow to boot the API window, consider increasing the timeout or starting the API in the foreground and running the seeder manually.</li>
+<li>Optionally add a small dev-only smoke test that exercises <code>POST /admin-api/tenets</code> with the <code>dev-access-token</code> to prevent regressions.</li>
+</ul>
+<hr />
+<p>If you'd like, I can add the small dev-smoke-test and open a PR for review. Let me know if you want any wording changes or more examples in this breakfix note.</p>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

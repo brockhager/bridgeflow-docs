@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://bridgeflow.readthedocs.io/phases/phases31-40/phase-32-plan/" />
+      <link rel="shortcut icon" href="../../../img/favicon.ico" />
+    <title>Phase 32 — Bridge Canvas &amp; Blueprints - BridgeFlow Docs</title>
+    <link rel="stylesheet" href="../../../css/theme.css" />
+    <link rel="stylesheet" href="../../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Phase 32 \u2014 Bridge Canvas \u0026amp; Blueprints";
+        var mkdocs_page_input_path = "phases\\phases31-40\\phase-32-plan.md";
+        var mkdocs_page_url = "/phases/phases31-40/phase-32-plan/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../../.." class="icon icon-home"> BridgeFlow Docs
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../..">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../ARCHITECTURE/">Architecture</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Current System</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../current/control-tower/">Control Tower</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../current/control-tower/trl7-validation/">TRL 7 Validation</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../current/control-tower/public-api/">Public API</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../current/control-tower/integration-guide/">Integration Guide</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Future Vision</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../vision/">Vision Archive Index</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../roadmap/future-architecture/">BF-INTEGRATION Roadmap</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Phase 60</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../phase-60-gap-analysis/">Gap Analysis</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../..">BridgeFlow Docs</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../.." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">Phase 32 — Bridge Canvas &amp; Blueprints</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="phase-32-bridge-canvas-blueprints">Phase 32 — Bridge Canvas &amp; Blueprints</h1>
+<p><strong>Planned:</strong> January 2026<br />
+<strong>Effort:</strong> 3-4 days<br />
+<strong>Priority:</strong> High (user experience foundation)</p>
+<h2 id="strategic-context">🎯 Strategic Context</h2>
+<p>Phase 32 is the central user experience of BridgeFlow — a visual, guided environment where customers assemble their integration bridge using pre-defined blueprints and real-time gap detection.</p>
+<p><strong>🔑 Key Insight:</strong> This is not just a UI — it's the orchestration layer that ties together all previous phases (Orgs, Tenets, Connectors, Adapters, Packages) into a cohesive, user-driven workflow.</p>
+<p><strong>📍 Location:</strong> Built within existing <code>canvas-assembly</code> structure, not as a separate section.</p>
+<hr />
+<h2 id="phase-32-core-objective">🎯 Phase 32 Core Objective</h2>
+<p>Enable users to:</p>
+<ol>
+<li><strong>Select a blueprint</strong> (e.g., "Healthcare Payer", "Retail Supplier")</li>
+<li><strong>Visually assemble</strong> their bridge on a canvas</li>
+<li><strong>Receive real-time guidance</strong> for missing pieces</li>
+<li><strong>Deploy a complete, working integration</strong> in minutes</li>
+</ol>
+<p>All while hiding complexity for non-technical users and exposing depth for admins.</p>
+<hr />
+<h2 id="phase-32-deliverables-44">📋 Phase 32 Deliverables (4/4)</h2>
+<h3 id="1-bridge-blueprint-system">✅ 1. Bridge Blueprint System</h3>
+<p><strong>Predefined Templates</strong>: Industry-specific integration patterns
+- <strong>healthcare-payer</strong>: Receive 837s, send 997s
+- <strong>retail-brand</strong>: Send 850s, receive 810s
+- <strong>logistics-carrier</strong>: Receive 210s, send 990s</p>
+<p><strong>Blueprint Metadata Structure</strong>:</p>
+<pre><code class="language-typescript">{
+  id: &quot;healthcare-payer&quot;,
+  name: &quot;Healthcare Payer&quot;,
+  description: &quot;Receive claims from providers, send acknowledgments&quot;,
+  requiredComponents: [&quot;as2-connector&quot;, &quot;x12-837-tenet&quot;, &quot;provider-tp&quot;],
+  optionalComponents: [&quot;sftp-backup&quot;, &quot;database-adapter&quot;],
+  category: &quot;healthcare&quot;,
+  difficulty: &quot;intermediate&quot;,
+  estimatedTime: &quot;30 minutes&quot;
+}
+</code></pre>
+<h3 id="2-interactive-bridge-canvas-within-canvas-assembly">✅ 2. Interactive Bridge Canvas (Within canvas-assembly)</h3>
+<p><strong>Visual Editor</strong>: Drag-and-drop interface for bridge assembly
+- <strong>Bridge Outline</strong>: Shows required vs optional segments
+- <strong>Component Palette</strong>: Organizations, Trading Partners, Connectors, Adapters, Tenets
+- <strong>Real-Time Validation</strong>: Color-coded completion status</p>
+<p><strong>Status Indicators</strong>:
+- ✅ <strong>Green</strong> = Complete and configured
+- ⚠️ <strong>Yellow</strong> = Missing optional components
+- ❌ <strong>Red</strong> = Missing required components</p>
+<h3 id="3-gap-detection-guidance-engine">✅ 3. Gap Detection &amp; Guidance Engine</h3>
+<p><strong>Auto-Analysis</strong>: When user selects blueprint, canvas highlights gaps
+- "You need an AS2 Connector for inbound 837s"
+- "Add Provider Trading Partner to receive from"
+- "Configure HIPAA Tenet for validation"</p>
+<p><strong>Contextual Actions</strong>:
+- "+ Create AS2 Connector" → opens Connector form (Phase 30)
+- "+ Add Trading Partner" → opens TP onboarding flow (Phase 31A)
+- "+ Set Up Network" → opens Firewall guidance (Phase 33)</p>
+<h3 id="4-deployment-workflow">✅ 4. Deployment Workflow</h3>
+<p><strong>"Activate Bridge" Button</strong>: One-click bridge deployment
+- Validates all components
+- Deploys adapters/connectors
+- Generates tokens for TPs
+- Sets up monitoring</p>
+<p><strong>Status Dashboard</strong>:
+- Traffic flow visualization
+- Error rates, success metrics
+- "Bridge Health" score</p>
+<hr />
+<h2 id="architecture-evolution-of-canvas-assembly">🏗️ <strong>Architecture: Evolution of canvas-assembly</strong></h2>
+<h3 id="location-decision"><strong>📍 Location Decision</strong></h3>
+<p><strong>Built within existing <code>canvas-assembly</code> structure:</strong></p>
+<pre><code>src/features/canvas-assembly/
+├── bridge-canvas/               ← Main canvas UI (NEW)
+│   ├── BridgeCanvas.jsx
+│   ├── BridgeOutline.jsx
+│   └── ComponentPalette.jsx
+├── blueprints/                  ← Blueprint system (NEW)
+│   ├── BlueprintGallery.jsx
+│   └── blueprint-templates/     ← JSON definitions
+├── components/                  ← Reusable component cards (NEW)
+│   ├── TradingPartnerCard.jsx
+│   ├── ConnectorCard.jsx
+│   ├── AdapterCard.jsx
+│   └── TenetCard.jsx
+├── gap-detection/               ← Gap detection engine (NEW)
+│   ├── GapDetector.jsx
+│   └── GuidanceEngine.jsx
+└── deployment/                  ← Bridge activation (NEW)
+    ├── BridgeActivator.jsx
+    └── StatusDashboard.jsx
+</code></pre>
+<h3 id="integration-benefits"><strong>🔗 Integration Benefits</strong></h3>
+<ul>
+<li><strong>Route</strong>: <code>/canvas-assembly</code> → loads BridgeCanvas</li>
+<li><strong>State</strong>: Uses existing canvas-assembly Redux/Zustand context</li>
+<li><strong>Permissions</strong>: Inherits org scoping and RBAC from canvas-assembly</li>
+<li><strong>Navigation</strong>: Fits naturally after user selects org/tenet</li>
+</ul>
+<h3 id="why-not-a-new-section"><strong>🚫 Why Not a New Section?</strong></h3>
+<ul>
+<li><strong>Fragmentation</strong>: Users would jump between "assembly" and "bridge builder"</li>
+<li><strong>Duplication</strong>: Rebuild auth, org context, navigation</li>
+<li><strong>Confusion</strong>: "Is the canvas in canvas-assembly or elsewhere?"</li>
+</ul>
+<hr />
+<h2 id="core-components-to-build">🧱 <strong>Core Components to Build</strong></h2>
+<h3 id="a-backend-api"><strong>A. Backend API</strong></h3>
+<pre><code class="language-javascript">// Blueprint management
+api/handlers/admin/blueprints.js    // CRUD for blueprints
+api/handlers/admin/bridge-state.js  // Validate/activate bridge
+api/routes/adminBridge.js           // /admin-api/blueprints, /bridge-state
+
+// Blueprint definitions (static JSON or DB)
+api/data/blueprints/
+  ├── healthcare-payer.json
+  ├── retail-brand.json
+  └── logistics-carrier.json
+</code></pre>
+<h3 id="b-database-models"><strong>B. Database Models</strong></h3>
+<pre><code class="language-prisma">model BridgeBlueprint {
+  id          String @id @default(cuid())
+  name        String
+  description String
+  config      Json   // requiredComponents, optionalComponents
+  category    String
+  difficulty  String
+  isActive    Boolean @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model UserBridge {
+  id             String @id @default(cuid())
+  organizationId String
+  blueprintId    String
+  name           String
+  config         Json   // Component configurations
+  status         String // draft, active, inactive, error
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  organization Organization @relation(fields: [organizationId], references: [id])
+  blueprint     BridgeBlueprint @relation(fields: [blueprintId], references: [id])
+}
+
+model BridgeComponent {
+  id           String @id @default(cuid())
+  userBridgeId String
+  componentType String // connector, adapter, tenet, trading-partner
+  componentId  String  // Reference to actual component
+  config       Json    // Component-specific config
+  status       String // required, optional, missing
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  userBridge UserBridge @relation(fields: [userBridgeId], references: [id])
+}
+</code></pre>
+<h3 id="c-frontend-components"><strong>C. Frontend Components</strong></h3>
+<pre><code class="language-jsx">// Main canvas UI
+src/pages/admin/
+  └── BridgeCanvas.jsx        // Main canvas UI
+
+// Blueprint system
+src/features/canvas-assembly/blueprints/
+  ├── BlueprintGallery.jsx     // Select blueprint
+  └── blueprint-templates/     // JSON definitions
+    ├── healthcare-payer.json
+    ├── retail-brand.json
+    └── logistics-carrier.json
+
+// Canvas components
+src/features/canvas-assembly/bridge-canvas/
+  ├── BridgeCanvas.jsx        // Main canvas interface
+  ├── BridgeOutline.jsx       // Required/optional segments
+  ├── ComponentPalette.jsx    // Drag sources
+  └── ComponentCard.jsx       // Configurable component tile
+
+// Gap detection
+src/features/canvas-assembly/gap-detection/
+  ├── GapDetector.jsx         // Real-time validation
+  └── GuidanceEngine.jsx      // Contextual actions
+
+// Deployment
+src/features/canvas-assembly/deployment/
+  ├── BridgeActivator.jsx     // Bridge activation workflow
+  └── StatusDashboard.jsx     // Post-deployment monitoring
+</code></pre>
+<hr />
+<h2 id="integration-points-all-previous-phases">🔌 <strong>Integration Points (All Previous Phases)</strong></h2>
+<table>
+<thead>
+<tr>
+<th>Component</th>
+<th>How It Appears in Canvas</th>
+<th>Phase Integration</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Organization</strong></td>
+<td>Auto-selected (current org)</td>
+<td>Phase 29</td>
+</tr>
+<tr>
+<td><strong>Trading Partner</strong></td>
+<td>"Add TP" card → triggers TP onboarding</td>
+<td>Phase 31A</td>
+</tr>
+<tr>
+<td><strong>Connector</strong></td>
+<td>"AS2 Connector" tile → opens Phase 30 form</td>
+<td>Phase 30</td>
+</tr>
+<tr>
+<td><strong>Adapter</strong></td>
+<td>"Database Adapter" tile → opens Phase 31B form</td>
+<td>Phase 31B</td>
+</tr>
+<tr>
+<td><strong>Tenet</strong></td>
+<td>"HIPAA Claims Tenet" tile → links to Tenet detail</td>
+<td>Phase 28</td>
+</tr>
+<tr>
+<td><strong>Firewall</strong></td>
+<td>"Network Setup" card → appears when adding Connector</td>
+<td>Phase 33</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="user-experience-flow">🎨 <strong>User Experience Flow</strong></h2>
+<h3 id="step-1-blueprint-selection"><strong>Step 1: Blueprint Selection</strong></h3>
+<ol>
+<li>User lands on <code>/canvas-assembly</code></li>
+<li>Sees blueprint gallery → selects "Healthcare Payer"</li>
+<li>Canvas loads with outline showing required/optional components</li>
+</ol>
+<h3 id="step-2-bridge-assembly"><strong>Step 2: Bridge Assembly</strong></h3>
+<ol>
+<li><strong>Required Components</strong>: [AS2 Connector], [Provider TP], [HIPAA Tenet]</li>
+<li><strong>Optional Components</strong>: [SFTP Backup], [Claims DB Adapter]</li>
+<li>User clicks "+ Add Provider TP" → Free TP onboarding flow starts (Phase 31A)</li>
+<li>User adds AS2 Connector → Canvas shows "Network Setup" card (Phase 33)</li>
+</ol>
+<h3 id="step-3-gap-resolution"><strong>Step 3: Gap Resolution</strong></h3>
+<ol>
+<li>Real-time validation shows completion status</li>
+<li>Contextual guidance appears for missing components</li>
+<li>Each component card opens the appropriate configuration form</li>
+</ol>
+<h3 id="step-4-bridge-activation"><strong>Step 4: Bridge Activation</strong></h3>
+<ol>
+<li>All gaps filled → "Activate Bridge" enabled</li>
+<li>Bridge goes live → Packages flow, dashboard updates</li>
+<li>Status dashboard shows traffic flow and health metrics</li>
+</ol>
+<hr />
+<h2 id="security-scoping">🔐 <strong>Security &amp; Scoping</strong></h2>
+<h3 id="organization-scoping"><strong>Organization Scoping</strong></h3>
+<ul>
+<li>All bridge state scoped to Organization</li>
+<li>Free TPs appear as "managed partners" (sponsored by org)</li>
+<li>Enterprise-only components hidden for free-tier users</li>
+</ul>
+<h3 id="permission-model"><strong>Permission Model</strong></h3>
+<ul>
+<li><strong>View Bridges</strong>: <code>bridge:view</code> permission</li>
+<li><strong>Create Bridges</strong>: <code>bridge:create</code> permission  </li>
+<li><strong>Activate Bridges</strong>: <code>bridge:activate</code> permission</li>
+<li><strong>Manage Blueprints</strong>: <code>blueprint:manage</code> permission (admin only)</li>
+</ul>
+<h3 id="data-security"><strong>Data Security</strong></h3>
+<ul>
+<li>Bridge configurations encrypted at rest</li>
+<li>Component credentials isolated by organization</li>
+<li>Audit trail for all bridge modifications</li>
+</ul>
+<hr />
+<h2 id="phase-32-mvp-scope">🚀 <strong>Phase 32 MVP Scope</strong></h2>
+<h3 id="build-now"><strong>✅ Build Now</strong></h3>
+<ol>
+<li><strong>Blueprint System</strong>: 3 templates (healthcare, retail, logistics)</li>
+<li><strong>BridgeCanvas UI</strong>: Drag-and-drop + gap detection</li>
+<li><strong>Component Cards</strong>: TP, Connector, Adapter, Tenet cards</li>
+<li><strong>Bridge Activation</strong>: Validation → deploy workflow</li>
+<li><strong>Phase 31A/31B Integration</strong>: Open adapter/connector forms</li>
+</ol>
+<h3 id="build-later"><strong>📋 Build Later</strong></h3>
+<ol>
+<li><strong>Custom Blueprints</strong>: User-defined blueprint creation</li>
+<li><strong>Advanced Analytics</strong>: Bridge performance metrics</li>
+<li><strong>Template Marketplace</strong>: Community blueprints</li>
+<li><strong>AI Recommendations</strong>: Suggest components based on usage patterns</li>
+</ol>
+<h3 id="future-hook"><strong>💡 Future Hook</strong></h3>
+<p>Firewall guidance (Phase 33) appears as a card in the canvas — build the hook now, implement details later.</p>
+<hr />
+<h2 id="success-criteria">🧪 <strong>Success Criteria</strong></h2>
+<h3 id="non-technical-user-can"><strong>✅ Non-Technical User Can:</strong></h3>
+<ul>
+<li>Select "Retail Brand" blueprint</li>
+<li>Add 1 Trading Partner (free tier)</li>
+<li>Create AS2 Connector</li>
+<li>See "Bridge Complete" ✅</li>
+<li>Activate → start receiving Packages</li>
+</ul>
+<h3 id="cto-can"><strong>✅ CTO Can:</strong></h3>
+<ul>
+<li>Manage all bridges across orgs</li>
+<li>Create custom blueprints</li>
+<li>Monitor bridge health and performance</li>
+<li>Troubleshoot bridge issues</li>
+</ul>
+<h3 id="system-provides"><strong>✅ System Provides:</strong></h3>
+<ul>
+<li>Real-time gap detection and guidance</li>
+<li>One-click bridge activation</li>
+<li>Visual representation of integration topology</li>
+<li>Seamless integration with all previous phases</li>
+</ul>
+<hr />
+<h2 id="key-principle">📌 <strong>Key Principle</strong></h2>
+<p><strong>Phase 32 turns configuration into storytelling.</strong></p>
+<p>The bridge isn't built by editing settings — it's built by completing a visual narrative. Users don't think in "phases" — they think: "I'm building my bridge in the canvas."</p>
+<hr />
+<h2 id="implementation-priority">🚀 <strong>Implementation Priority</strong></h2>
+<h3 id="day-1-blueprint-system"><strong>Day 1: Blueprint System</strong></h3>
+<ul>
+<li>Define blueprint JSON structure</li>
+<li>Create 3 core blueprints</li>
+<li>Build BlueprintGallery component</li>
+</ul>
+<h3 id="day-2-canvas-ui"><strong>Day 2: Canvas UI</strong></h3>
+<ul>
+<li>Build BridgeCanvas main interface</li>
+<li>Create ComponentPalette</li>
+<li>Implement drag-and-drop</li>
+</ul>
+<h3 id="day-3-gap-detection"><strong>Day 3: Gap Detection</strong></h3>
+<ul>
+<li>Build GapDetector engine</li>
+<li>Create GuidanceEngine for contextual actions</li>
+<li>Integrate with existing components</li>
+</ul>
+<h3 id="day-4-deployment-integration"><strong>Day 4: Deployment &amp; Integration</strong></h3>
+<ul>
+<li>Build BridgeActivator workflow</li>
+<li>Create StatusDashboard</li>
+<li>Integrate with Phase 30/31 forms</li>
+</ul>
+<hr />
+<h2 id="related-documentation">📚 <strong>Related Documentation</strong></h2>
+<p><strong>Canvas-Assembly Evolution:</strong>
+- <a href="../canvas-assembly/README.md">Canvas-Assembly Architecture</a> — Base structure
+- <a href="phase-32.md">Phase 32 Implementation</a> — This document</p>
+<p><strong>Integration Points:</strong>
+- <a href="phase-30.md">Phase 30: Connectors</a> — Connector integration
+- <a href="../phase-31A/">Phase 31A: Adapter Framework</a> — Adapter integration
+- <a href="../phase-31B/">Phase 31B: Document Intelligence</a> — Advanced adapters</p>
+<p><strong>User Experience:</strong>
+- <a href="../ui/admin-guidelines.md">Admin UI Guidelines</a> — UI consistency
+- <a href="../security/permissions.md">Permission System</a> — RBAC integration</p>
+<hr />
+<p><strong>Phase 32 fulfills the original vision for canvas-assembly — a guided, blueprint-driven bridge builder that makes complex B2B integration accessible to non-technical users while providing depth for administrators.</strong></p>
+<hr />
+<p><strong>Last Updated:</strong> January 8, 2026<br />
+<strong>Status:</strong> Planning Complete<br />
+<strong>Next Phase:</strong> Implementation begins with blueprint system</p>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+    
+  </span>
+</div>
+    <script src="../../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../../..";</script>
+    <script src="../../../js/theme_extra.js"></script>
+    <script src="../../../js/theme.js"></script>
+      <script src="../../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

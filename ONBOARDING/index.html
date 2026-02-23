@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://bridgeflow.readthedocs.io/ONBOARDING/" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>🚀 Welcome to BridgeFlow - Developer Onboarding - BridgeFlow Docs</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "\ud83d\ude80 Welcome to BridgeFlow - Developer Onboarding";
+        var mkdocs_page_input_path = "ONBOARDING.md";
+        var mkdocs_page_url = "/ONBOARDING/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href=".." class="icon icon-home"> BridgeFlow Docs
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="..">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../ARCHITECTURE/">Architecture</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Current System</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../current/control-tower/">Control Tower</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../current/control-tower/trl7-validation/">TRL 7 Validation</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../current/control-tower/public-api/">Public API</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../current/control-tower/integration-guide/">Integration Guide</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Future Vision</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../vision/">Vision Archive Index</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../roadmap/future-architecture/">BF-INTEGRATION Roadmap</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Phase 60</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../phase-60-gap-analysis/">Gap Analysis</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">BridgeFlow Docs</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">🚀 Welcome to BridgeFlow - Developer Onboarding</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="welcome-to-bridgeflow-developer-onboarding">🚀 Welcome to BridgeFlow - Developer Onboarding</h1>
+<p><strong>Current Product Version</strong>: Phase 8 (Enhanced Visual Components)
+<strong>Last Updated</strong>: December 21, 2025</p>
+<h2 id="1-project-overview">1. Project Overview</h2>
+<p>BridgeFlow is an integration platform designed to make connecting APIs, Webhooks, and EDI systems accessible to non-technical users. We are currently transitioning from a form-based configuration model to a fully interactive <strong>Visual Bridge Builder</strong>.</p>
+<h3 id="key-value-proposition">Key Value Proposition</h3>
+<ul>
+<li><strong>Visual</strong>: Drag-and-drop canvas to connect Trading Partners and Resources.</li>
+<li><strong>Real-time</strong>: Animated data flow visualization.</li>
+<li><strong>Hybrid</strong>: Supports both simple Webhook-&gt;API bridges and complex EDI workflows.</li>
+</ul>
+<hr />
+<h2 id="2-architecture-tech-stack">2. Architecture &amp; Tech Stack</h2>
+<p>We use a <strong>Lightweight, Standards-Based</strong> stack. No heavy frameworks (React/Vue/Angular) are strictly enforced in the core builder to maintain raw performance and control over the canvas, though we use ESM modules extensively.</p>
+<ul>
+<li><strong>Frontend</strong>: Vanilla JavaScript (ES Modules), CSS Variables, HTML5.</li>
+<li><strong>State Management</strong>: Centralized Pub/Sub Store (<code>src/state/store.js</code>).</li>
+<li><strong>Persistence</strong>: Dual-layer (LocalStorage for draft/offline, API for production).</li>
+<li><strong>Styling</strong>: Modular CSS (<code>canvas-builder.css</code>, <code>uikit.css</code>) + Utility classes.</li>
+</ul>
+<h3 id="key-directories-cjsbridgeflowweb">🏠 Key Directories (<code>c:\JS\bridgeflow\web\</code>)</h3>
+<ul>
+<li><code>src/bridge-builder.ui.js</code>: <strong>The Core</strong>. Logic for Drag-and-drop, Slots, SVG connectors, and the Details Panel.</li>
+<li><code>src/state/store.js</code>: <strong>The Brain</strong>. Singleton class managing Bridges, Partners, and Resources.</li>
+<li><code>src/canvas-controller.js</code>: The main entry point for the Canvas page.</li>
+<li><code>src/bridges.js</code>: The Dashboard logic (Bridge Manager).</li>
+<li><code>css/modules/</code>: Component-specific styles (keep it modular!).</li>
+</ul>
+<hr />
+<h2 id="3-the-visual-builder-phase-8">3. The "Visual Builder" (Phase 8)</h2>
+<p>We just completed <strong>Phase 8</strong>, which introduced the full-screen visual editor.</p>
+<h3 id="how-it-works-under-the-hood">How it Works (Under the Hood)</h3>
+<ol>
+<li><strong>Slots</strong>: We use a 3-slot model: <code>Source</code> -&gt; <code>Connection Logic</code> -&gt; <code>Destination</code>.</li>
+<li><strong>SVG Connectors</strong>: Dynamic SVG paths draw lines between slots. They accept CSS classes like <code>.active</code> to trigger flow animations.</li>
+<li><strong>Data Model</strong>:<ul>
+<li><strong>Legacy Bridges</strong>: Stored as simple objects <code>{ url, method, ... }</code>.</li>
+<li><strong>Visual Bridges</strong>: Stored with <code>type: 'visual-builder'</code> and a <code>config.slots</code> object containing the visual state.</li>
+<li><strong>Persistence</strong>: The <code>store.js</code> handles saving both types transparently.</li>
+</ul>
+</li>
+</ol>
+<h3 id="key-files-for-the-builder">Key Files for the Builder</h3>
+<ul>
+<li><strong>UI Logic</strong>: <code>web/src/bridge-builder.ui.js</code></li>
+<li><strong>Styles</strong>: <code>web/css/modules/canvas-builder.css</code></li>
+</ul>
+<hr />
+<h2 id="4-development-workflow">4. Development Workflow</h2>
+<h3 id="getting-started">Getting Started</h3>
+<ol>
+<li><strong>Serve</strong> the <code>web/</code> directory (e.g., via <code>live-server</code> or <code>python -m http.server</code>).</li>
+<li><strong>Navigate</strong> to <code>http://localhost:8080/canvas-legacy.html</code> to see the Builder (legacy). The original <code>canvas-visual.html</code> has been archived at <code>archive/canvas-visual.html</code>.</li>
+<li><strong>Navigate</strong> to <code>http://localhost:8080/bridges.html</code> to see the Bridge Manager.</li>
+</ol>
+<h3 id="common-tasks">Common Tasks</h3>
+<ul>
+<li><strong>Adding a new Component Type</strong>: Update <code>bridge-builder.ui.js</code> <code>renderSlot</code> logic.</li>
+<li><strong>Modifying State</strong>: Add methods to <code>BridgeFlowStore</code> (<code>store.js</code>) and emit events.</li>
+<li><strong>Styling</strong>: Add new modules to <code>css/modules/</code> and import in the HTML.</li>
+</ul>
+<hr />
+<h2 id="5-current-status-next-steps">5. Current Status &amp; Next Steps</h2>
+<h3 id="completed-phase-8">✅ Completed (Phase 8)</h3>
+<ul>
+<li>Full-screen Expandable Canvas.</li>
+<li>Interactive Data Flow Animations.</li>
+<li>Component Details Panel (Side-bar configuration).</li>
+<li>Unified Bridge Manager (Dashboard).</li>
+</ul>
+<h3 id="upcoming-phase-9-advanced-components">🚧 Upcoming (Phase 9 - Advanced Components)</h3>
+<ul>
+<li><strong>Real Transformation Engine</strong>: Actually executing the JS code written in the details panel.</li>
+<li><strong>Security Layer</strong>: API Key rotation and OAuth flows in the visual builder.</li>
+<li><strong>Monitoring Hub</strong>: Live traffic graphs overlaying the visual connections.</li>
+</ul>
+<hr />
+<h2 id="6-resources">6. Resources</h2>
+<ul>
+<li><strong>Task Board</strong>: <code>docs/task-lists/TASK-LIST-2.md</code></li>
+<li><strong>Product Phases</strong>: <code>docs/phases/readme.md</code></li>
+<li><strong>Recent Walkthrough</strong>: <code>brain/walkthrough.md</code> (Check the artifacts folder)</li>
+</ul>
+<p><em>Welcome to the team! If you see a <code>TODO</code> in the code, it's mostly likely waiting for Phase 9.</em></p>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+    
+  </span>
+</div>
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "..";</script>
+    <script src="../js/theme_extra.js"></script>
+    <script src="../js/theme.js"></script>
+      <script src="../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

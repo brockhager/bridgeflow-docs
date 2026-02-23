@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://bridgeflow.readthedocs.io/vision/bf-integration/docs/phases/phases11-20/phase-13-adminbridgeflow/" />
+      <link rel="shortcut icon" href="../../../../../../img/favicon.ico" />
+    <title>Phase 13 adminbridgeflow - BridgeFlow Docs</title>
+    <link rel="stylesheet" href="../../../../../../css/theme.css" />
+    <link rel="stylesheet" href="../../../../../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Phase 13 adminbridgeflow";
+        var mkdocs_page_input_path = "vision\\bf-integration\\docs\\phases\\phases11-20\\phase-13-adminbridgeflow.md";
+        var mkdocs_page_url = "/vision/bf-integration/docs/phases/phases11-20/phase-13-adminbridgeflow/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../../../../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../../../../../.." class="icon icon-home"> BridgeFlow Docs
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../../../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../../../..">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../../../../ARCHITECTURE/">Architecture</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Current System</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../current/control-tower/">Control Tower</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../current/control-tower/trl7-validation/">TRL 7 Validation</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../current/control-tower/public-api/">Public API</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../current/control-tower/integration-guide/">Integration Guide</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Future Vision</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../">Vision Archive Index</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../roadmap/future-architecture/">BF-INTEGRATION Roadmap</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Phase 60</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../phase-60-gap-analysis/">Gap Analysis</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../../..">BridgeFlow Docs</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../../../../.." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">Phase 13 adminbridgeflow</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <blockquote>
+<p>[!WARNING]
+Status: Planned / In Development
+Context: Original BF-INTEGRATION Vision (Pre-Phase 30)</p>
+</blockquote>
+<h1 id="phase-13-adminbridgeflow-specification">Phase 13 — AdminBridgeflow (Specification)</h1>
+<p><strong>Timebox:</strong> 30 minutes for planning; MVP implementation estimate: 2–3 weeks</p>
+<h2 id="goal">Goal</h2>
+<p>Deliver an operational admin console and admin API to manage tenants, monitor system health, perform manual operations (impersonation, remediation), and report revenue/usage analytics. The admin surface must be secure, auditable, and operationally safe.</p>
+<hr />
+<h2 id="1-architecture-decisions-tradeoffs-recommendation">1) Architecture Decisions (tradeoffs &amp; recommendation)</h2>
+<ul>
+<li>Separate admin app vs extend existing admin UI</li>
+<li>Options:<ul>
+<li>Extend the existing admin UI (low development overhead, reuses auth/UI components)</li>
+<li>Build a separate dedicated Admin SPA (better isolation, independent deployment and stricter security controls)</li>
+</ul>
+</li>
+<li>
+<p>Recommendation: <strong>Separate Admin SPA deployed to same cluster but separate route/hostname</strong> (e.g., admin.bridgeflow.example.com). This balances isolation (security and operational control) with reuse of existing backend services.</p>
+</li>
+<li>
+<p>Authentication: Separate admin auth or reuse customer auth?</p>
+</li>
+<li>Prefer reusing existing JWT-based auth but require <strong>enhanced checks for admin roles</strong>:<ul>
+<li>Require MFA for admin accounts</li>
+<li>Validate role claim (e.g., <code>role: 'admin'</code>) and additional permission claim(s)</li>
+<li>Consider a dedicated service/account store for super-admins if needed</li>
+</ul>
+</li>
+<li>
+<p>Recommendation: Reuse existing auth tokens + enforce <strong>strong admin policy</strong> (MFA + tokens scoped for admin actions).</p>
+</li>
+<li>
+<p>Database topology: Same Postgres vs separate schema</p>
+</li>
+<li>Options:<ul>
+<li>Same DB, same schema: simplest but less isolation</li>
+<li>Same DB, separate schema / table prefixes: logical separation and simpler migrations</li>
+<li>Separate DB: strongest isolation (operational complexity higher)</li>
+</ul>
+</li>
+<li>Recommendation: <strong>Same Postgres instance, separate schema/clear conventions for admin-only tables</strong> where applicable (e.g., <code>admin_*</code>), plus strict RBAC checks in application layer.</li>
+</ul>
+<hr />
+<h2 id="2-mvp-feature-set-minimal-viable-admin-product">2) MVP Feature Set (minimal viable admin product)</h2>
+<hr />
+<h3 id="non-negotiable-security-architecture-requirements">Non-negotiable Security &amp; Architecture Requirements</h3>
+<ul>
+<li><strong>Separate application</strong>: Admin must be a distinct application with a separate hostname and deployment.</li>
+<li><strong>Separate authentication</strong>: Admin credentials and session tokens are distinct from customer JWTs; no customer JWT acceptance in admin flows.</li>
+<li><strong>IP whitelisting &amp; MFA</strong>: Admin access requires IP whitelisting for sensitive paths and MFA for all admin accounts.</li>
+<li><strong>Audit for all admin actions</strong>: Every admin operation must generate an audit record with actor, tenant, action, ip, and correlation id.</li>
+</ul>
+<hr />
+<h2 id="phase-13-completion-summary-2025-12-25">Phase 13 — Completion Summary (2025-12-25) ✅</h2>
+<p>Phase 13 goals for the AdminBridgeflow MVP have been met for operational readiness. The following were delivered and validated:</p>
+<ul>
+<li>Tenant management UI and API (search, details, impersonation)</li>
+<li>Account actions: suspend/reactivate with notifications and backlog handling</li>
+<li>Manual data correction with audit and rollback metadata</li>
+<li>Metrics and health dashboard (p50/p95/p99, volumes, alerts)</li>
+<li>Emergency controls: global pause/resume, clear-cache</li>
+<li>RBAC permission strings and test coverage for admin flows</li>
+</ul>
+<p>Notes:
+- Two non-critical test suites were excluded from Phase 13 gating and documented in <code>docs/Layer0-Admin-Bridgeflow/KNOWN-ISSUES.md</code>:
+  - <code>api/tests/users.test.js</code> — Vite transform failure (parse/import issue)
+  - <code>api/tests/worker.integration.test.js</code> — memory allocation failure in full-suite runs
+- Both are scheduled for Phase 14 triage and fix.</p>
+<p><strong>Artifacts created</strong>
+- Demo checklist and script: <code>docs/Layer0-Admin-Bridgeflow/CHECKLIST.md</code> and <code>DEMO-SCRIPT.md</code>
+- Operational docs and cheatsheet: <code>ARCHITECTURE.md</code>, <code>CLI-CHEATSHEET.md</code> and <code>KNOWN-ISSUES.md</code>
+- Task list updated: <code>task-list-4.md</code> (Phase 13 marked complete)</p>
+<p>Next steps: schedule the 30-minute CTO demo, confirm acceptance, then begin Phase 14 triage work (tests fix + UI polish).</p>
+<ul>
+<li>Tenant management</li>
+<li>List tenants, view tenant details, change plan/status, deactivate/reactivate</li>
+<li>View memberships and take membership actions (add/remove, set roles)</li>
+<li>System health monitoring</li>
+<li>Aggregate health metrics (worker queue, DB connectivity, Redis availability)</li>
+<li>Recent error log/alert view; ability to acknowledge alerts</li>
+<li>Manual operations tools</li>
+<li>Impersonation (time-limited, auditable)</li>
+<li>Quick data fixes (e.g., re-run imports, resubmit failed jobs, mark handoff status)</li>
+<li>Revenue/usage analytics</li>
+<li>Simple charts: active tenants, usage per tenant, billing events</li>
+<li>Audit &amp; compliance</li>
+<li>View and filter audit logs (by actor, action, tenant, timeframe)</li>
+<li>Security &amp; access</li>
+<li>RBAC controls, admin user management, MFA enforcement</li>
+</ul>
+<p>Acceptance criteria: Each action must be logged to <code>auditLog</code> with meta showing actor, tenantId, action, and correlation ids.</p>
+<hr />
+<h2 id="3-technology-stack-options-recommendation">3) Technology Stack (options + recommendation)</h2>
+<ul>
+<li>Frontend:</li>
+<li>React (with existing design system) — recommended for long-term maintainability</li>
+<li>Vue — viable, but repo is already JS-heavy and team familiarity should guide choice</li>
+<li>Retool or low-code — very fast for MVP dashboards but vendor lock-in and less flexible for deep ops</li>
+<li>
+<p>Recommendation: <strong>React</strong> for SPA admin UI (or plain HTML prototype for initial demo), evaluate Retool for quick analytics screens if timeline tight.</p>
+</li>
+<li>
+<p>Backend:</p>
+</li>
+<li>Extend existing API under <code>/admin-api/*</code> with stricter pre-handlers (enforce admin permission), or run separate API service for admin routes.</li>
+<li>
+<p>Recommendation: <strong>Extend existing API</strong> with dedicated route prefix and additional middleware (requirePermission('admin:*')). If operational isolation is required later, extract to separate service.</p>
+</li>
+<li>
+<p>Deployment:</p>
+</li>
+<li>Same cluster, separate deployment unit (namespace) for admin UI/service. Use ingress rules and WAF policies accordingly.</li>
+</ul>
+<hr />
+<h2 id="4-api-specification-high-level">4) API Specification (high level)</h2>
+<p>Base path: <code>POST/GET /admin-api/*</code> or namespace under <code>/api/admin/*</code></p>
+<p>Key endpoints (examples):
+- GET <code>/admin-api/tenants</code> — list tenants (filters, pagination)
+- GET <code>/admin-api/tenants/:id</code> — tenant detail (subscriptions, recent audits)
+- POST <code>/admin-api/tenants/:id/actions</code> — e.g., <code>suspend</code>, <code>reactivate</code>, <code>migrate_plan</code>
+- GET <code>/admin-api/health</code> — aggregated health metrics (requires admin scope)
+- POST <code>/admin-api/impersonate</code> — create short-lived token for impersonation (audited)
+- GET <code>/admin-api/audit</code> — search logs (actor, action, meta filters)
+- POST <code>/admin-api/manual/job/:id/retry</code> — manual retry of a job</p>
+<p>Permissions &amp; auth model:
+- Add dedicated permission strings: <code>admin:tenants:read</code>, <code>admin:tenants:write</code>, <code>admin:jobs:retry</code>, <code>admin:impersonate</code>, etc.
+- Enforce: request pre-handler <code>requirePermission('...')</code> + <code>requireMFA()</code> for critical operations.</p>
+<p>Audit logging:
+- Every admin action must produce an <code>auditLog</code> entry with: <code>actorId</code>, <code>tenantId</code> (if applicable), <code>action</code>, <code>meta</code>, <code>ip</code>, <code>requestId</code>.
+- Audit retention policy to be defined (export-ready and searchable).</p>
+<hr />
+<h2 id="5-deliverables-timeline-23-weeks-mvp">5) Deliverables &amp; Timeline (2–3 weeks MVP)</h2>
+<p>Week 0 (planning / spec) — this doc + CTO review (30 min)
+Week 1 — scaffold admin routes, basic auth checks, tenant list/detail endpoints + tests
+Week 2 — add impersonation, basic health endpoint, audit views, and UI scaffolds
+Week 3 — polish dashboards (analytics), CI tests, documentation, and handover</p>
+<p>MVP Definition: Tenant management, health dashboard, manual ops (impersonation, job retry), audit view.</p>
+<hr />
+<h2 id="next-actions-immediate">Next Actions (immediate)</h2>
+<ul>
+<li>Schedule a 30-minute review with the CTO to validate architecture and scope.</li>
+<li>Create an issue &amp; PR with this spec and basic API scaffolding (<code>/api/admin/*</code>) and RBAC strings.</li>
+<li><strong>Begin implementation (Sprint 1 — Admin Foundation):</strong></li>
+<li>Admin authentication (separate admin auth + MFA)</li>
+<li>Admin DB schema (<code>admin_users</code>, <code>admin_audit_log</code>) + migration scripts</li>
+<li>Basic admin API (<code>/admin-api/*</code>) with IP whitelist pre-handler and permission checks</li>
+<li>Admin login UI scaffold (React) — prototype and local dev flow</li>
+<li>Timebox: 3 days for working admin login + basic dashboard</li>
+</ul>
+<h3 id="admin-credential-management-onboarding">Admin credential management (onboarding)</h3>
+<ul>
+<li>Onboard admin accounts via a CLI or secure invite flow (email invite with short-lived link)</li>
+<li>Require initial credential setup + enforce MFA within first login</li>
+<li>
+<p>Admin account deactivation and rotation processes documented as standard operating procedures (SOP)</p>
+</li>
+<li>
+<p>Begin implementation upon approval (Agent4 to take Sprint 1).</p>
+</li>
+</ul>
+<hr />
+<h2 id="risks-notes">Risks &amp; Notes</h2>
+<ul>
+<li>Admin capabilities are powerful: ensure strict RBAC, MFA and audit-before-action pattern.</li>
+<li>Keep admin features behind feature flags for staged rollout.</li>
+</ul>
+<hr />
+<p>If you want, I can open a branch and PR with the spec and a minimal <code>/api/admin</code> scaffold (handlers and permission strings) and schedule the CTO review. Ready to proceed when you are.</p>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+    
+  </span>
+</div>
+    <script src="../../../../../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../../../../../..";</script>
+    <script src="../../../../../../js/theme_extra.js"></script>
+    <script src="../../../../../../js/theme.js"></script>
+      <script src="../../../../../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

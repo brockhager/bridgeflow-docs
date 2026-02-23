@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://bridgeflow.readthedocs.io/phases/phases31-40/phase-38-plan/" />
+      <link rel="shortcut icon" href="../../../img/favicon.ico" />
+    <title>Phase 38 — Blueprint Templates &amp; Library (Plan) - BridgeFlow Docs</title>
+    <link rel="stylesheet" href="../../../css/theme.css" />
+    <link rel="stylesheet" href="../../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Phase 38 \u2014 Blueprint Templates \u0026amp; Library (Plan)";
+        var mkdocs_page_input_path = "phases\\phases31-40\\phase-38-plan.md";
+        var mkdocs_page_url = "/phases/phases31-40/phase-38-plan/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../../.." class="icon icon-home"> BridgeFlow Docs
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../..">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../ARCHITECTURE/">Architecture</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Current System</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../current/control-tower/">Control Tower</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../current/control-tower/trl7-validation/">TRL 7 Validation</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../current/control-tower/public-api/">Public API</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../current/control-tower/integration-guide/">Integration Guide</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Future Vision</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../vision/">Vision Archive Index</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../roadmap/future-architecture/">BF-INTEGRATION Roadmap</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Phase 60</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../phase-60-gap-analysis/">Gap Analysis</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../..">BridgeFlow Docs</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../.." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">Phase 38 — Blueprint Templates &amp; Library (Plan)</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="phase-38-blueprint-templates-library-plan">Phase 38 — Blueprint Templates &amp; Library (Plan)</h1>
+<p><strong>Goal:</strong> Build a reusable Blueprint Templates library that lets customers save, version, and apply blueprint configurations (connectors, adapters, mappings, and credentials) as reusable templates. Leverage Phase 37's monitoring and Vault integration for secure template provisioning and operational visibility.</p>
+<h2 id="objectives">Objectives</h2>
+<ul>
+<li>Provide a template model and CRUD API for Blueprint Templates</li>
+<li>Allow templates to reference credential IDs (secrets are read from Vault at activation time)</li>
+<li>Enable versioning, validation, and enterprise gating for templates</li>
+<li>Instrument blueprint deployment with monitoring &amp; alerting hooks (success rate, failures, duration)</li>
+<li>Provide UI for template creation, browsing, and applying templates to new bridges</li>
+</ul>
+<h2 id="deliverables-mvp">Deliverables (MVP)</h2>
+<ol>
+<li>Prisma model: <code>BlueprintTemplate { id, blueprintId, name, version, isEnterprise, config, createdBy, createdAt }</code></li>
+<li>API endpoints: CRUD + apply (<code>POST /api/blueprints/:id/apply-template</code>) with RBAC (<code>templates:write</code>, <code>templates:read</code>, <code>templates:admin</code>)</li>
+<li>Template validation: server-side schema validation + dry-run activation endpoint (<code>POST /api/blueprints/:id/validate-template</code>)</li>
+<li>UI components: Template browser, Save-as-template modal, Apply Template flow in Canvas</li>
+<li>Metrics &amp; Alerts: <code>template:apply</code> metrics, alert rule for repeated application failures</li>
+<li>Tests: Unit tests for API, integration tests for apply flow, Playwright E2E for UI</li>
+</ol>
+<h2 id="security-secrets">Security &amp; Secrets</h2>
+<ul>
+<li>Templates may include references to <code>credentialId</code> only — secret values are never embedded in templates.</li>
+<li>On apply/activation, adapters will retrieve secrets from the configured secret backend (Vault/mock) using the <code>credentialId</code> associated with the template.</li>
+<li>RBAC: only users with <code>templates:write</code> and correct org scope can create templates; only <code>templates:admin</code> can delete templates.</li>
+</ul>
+<h2 id="monitoring-alerting">Monitoring &amp; Alerting</h2>
+<ul>
+<li>Emit metrics on <code>template.apply</code> (success/failure, duration)</li>
+<li>Create alert rule: <code>template.apply.failure_rate &gt; 5% over 5m</code> → notify operators</li>
+<li>Add dashboard panels to <code>/admin/metrics</code> for Template usage and health</li>
+</ul>
+<h2 id="timeline-next-steps">Timeline &amp; Next Steps</h2>
+<ul>
+<li>Day 1: Design Prisma model + migrations; scaffold API endpoints</li>
+<li>Day 2: Implement server-side validation and credential references; add tests</li>
+<li>Day 3: Add UI components (Save-as-template / Template browser) and E2E tests</li>
+<li>Day 4: Instrument metrics and create basic Grafana panels; add alert rules</li>
+<li>Day 5: Run full test suite, finalize docs, and prepare release notes</li>
+</ul>
+<h2 id="where-to-document">Where to document</h2>
+<ul>
+<li><code>docs/phases/phases31-40/phase-38-plan.md</code> (this file)</li>
+<li><code>docs/blueprints/</code> — add template UX &amp; API examples</li>
+<li><code>docs/releases/release-&lt;MM&gt;-YYYY.md</code> — include Phase 38 when completed</li>
+</ul>
+<hr />
+<p>Let me know whether to proceed with scaffolding the Prisma model &amp; API handlers for Phase 38 now.</p>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+    
+  </span>
+</div>
+    <script src="../../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../../..";</script>
+    <script src="../../../js/theme_extra.js"></script>
+    <script src="../../../js/theme.js"></script>
+      <script src="../../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

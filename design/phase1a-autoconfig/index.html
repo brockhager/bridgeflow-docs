@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://bridgeflow.readthedocs.io/design/phase1a-autoconfig/" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>Phase 1A — Auto-Configuration Spec: “Magic” Invoice Delivery - BridgeFlow Docs</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Phase 1A \u2014 Auto-Configuration Spec: \u201cMagic\u201d Invoice Delivery";
+        var mkdocs_page_input_path = "design\\phase1a-autoconfig.md";
+        var mkdocs_page_url = "/design/phase1a-autoconfig/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> BridgeFlow Docs
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../ARCHITECTURE/">Architecture</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Current System</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../current/control-tower/">Control Tower</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../current/control-tower/trl7-validation/">TRL 7 Validation</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../current/control-tower/public-api/">Public API</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../current/control-tower/integration-guide/">Integration Guide</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Future Vision</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../vision/">Vision Archive Index</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../roadmap/future-architecture/">BF-INTEGRATION Roadmap</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Phase 60</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../phase-60-gap-analysis/">Gap Analysis</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">BridgeFlow Docs</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">Phase 1A — Auto-Configuration Spec: “Magic” Invoice Delivery</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="phase-1a-auto-configuration-spec-magic-invoice-delivery">Phase 1A — Auto-Configuration Spec: “Magic” Invoice Delivery</h1>
+<p>Purpose: Define the simple, deterministic logic that makes the "Send invoices automatically" wizard truly magical for Phase 1A. The goal is to require zero configuration from the SMB user in normal cases — auto-map CSVs, pick sensible defaults, and recover gracefully with clear business-language messages.</p>
+<p>Contents
+- Default Logic: CSV auto-mapping heuristics and QuickBooks connect behavior
+- Delivery Decision: how the system chooses the delivery method
+- Fallback Flow: retry rules, escalation, and fallback to portal
+- Behind-the-Scenes Narrative: step-by-step story of a job from wizard completion to delivery
+- Observability &amp; Audit: what we log and monitor to ensure "it just works"
+- CTO Decision Points: small list of configurable thresholds and policy choices</p>
+<hr />
+<p>DEFAULT LOGIC — CSV &amp; QuickBooks mapping</p>
+<p>Goals:
+- Auto-map columns with high confidence and require no user intervention for the common case
+- Keep the UI minimal: only ask for confirmation when mapping confidence is low or ambiguous</p>
+<p>Heuristics &amp; Rules
+1) Header normalization and exact matches
+   - Normalize column headers: lowercase, trim whitespace, remove punctuation, collapse spaces
+   - Exact header matches (after normalization) to canonical fields: <code>customer</code>, <code>customer_name</code>, <code>bill_to</code>, <code>email</code>, <code>amount</code>, <code>total</code>, <code>date</code>, <code>invoice_date</code>, <code>invoice_number</code>, <code>description</code>, <code>qty</code>, <code>item</code>.
+   - If all required fields (customer, amount, date) are present by exact match, confidence = 1.0 and auto-map.</p>
+<p>2) Fuzzy header matching
+   - If no exact match, apply fuzzy matching (token overlap + substring + Levenshtein) to suggest candidate columns.
+   - Example: <code>cust name</code> → <code>customer_name</code>, <code>amt</code> → <code>amount</code>.
+   - If best fuzzy match score &gt;= 0.75, accept it automatically.</p>
+<p>3) Data sniffing for ambiguous headers
+   - Sample the first N rows (e.g., 10 rows) and check data type patterns:
+     - Date detection (ISO, MM/DD/YYYY, DD-MM-YYYY)
+     - Currency/amount detection (digits, currency symbols)
+     - Email detection (contains <code>@</code>)
+   - Increase confidence when column values match expected type for a canonical field.</p>
+<p>4) Confidence threshold and UI behavior
+   - Confidence &gt;= 0.8 — auto-map, show a 3-row preview with a note: "We auto-detected fields — review below." No extra screen required unless the user clicks <strong>Edit mappings</strong>.
+   - Confidence between 0.5 and 0.8 — auto-map and show a one-line warning: "We guessed some columns for you — confirm or fix in the next step." Minimal inline confirmation UI (single Confirm button). If user confirms, proceed.
+   - Confidence &lt; 0.5 — show a tiny mapping helper screen (single step) asking the user to confirm mappings (keep it as few clicks as possible: map header X → Customer). Default to helpful suggestions.</p>
+<p>5) Missing required fields
+   - If required fields are missing after attempts, show business-friendly guidance: "We need Customer, Amount, and Date to send invoices. We can try to map columns for you, or you can re-export from QuickBooks." Provide <strong>Auto-map</strong> (attempt again with more flexible rules) or <strong>Re-upload</strong> options.</p>
+<p>QuickBooks API path
+- When the user chooses to connect QuickBooks, the system fetches invoices and customers directly. Standardized field names make mapping deterministic.
+- On QuickBooks connect, still show the 3-row preview to confirm expected customers and fields.</p>
+<p>Default decisions (Phase 1A)
+- Default source selection: CSV upload for speed/reliability
+- Default mapping behavior: auto-map if confidence &gt;= 0.8; otherwise ask one small confirmation step</p>
+<hr />
+<p>DELIVERY DECISION — How the system picks delivery method</p>
+<p>Phase 1A default: <strong>Encrypted email with PDF attachment</strong>
+- Rationale: universal, minimal friction for customers, no partner onboarding required
+- We define "encrypted email" for Phase 1A as: PDF files generated server-side, encrypted at rest (S3 encrypted), and delivered via an industry-grade email provider (e.g., AWS SES) over TLS. Password-protected PDFs or end-to-end email encryption are out-of-scope for Phase 1A.</p>
+<p>When to deviate from default:
+- If the customer selected "Customer portal" explicitly in the wizard, use the portal
+- If configured by operator for a specific partner or customer, allow webhook delivery (Phase 1A should support webhooks in pilot mode only)</p>
+<p>Delivery method summary for Phase 1A:
+1) Preferred: Encrypted email with PDF attachment
+2) Optional: Secure portal (fallback or user choice)
+3) Optional: Partner webhook (pilot/advanced)</p>
+<hr />
+<p>FALLBACK FLOW — If delivery fails</p>
+<p>Principles:
+- Try common-sense automated retries first (transient failures are common)
+- Distinguish between transient and permanent failures
+- Avoid blocking: if repeated failures occur, create a safe fallback (portal) and notify the user in plain language</p>
+<p>Failure classification
+- Transient errors: SMTP timeout, temporary provider errors, network issues
+- Permanent errors: invalid recipient email address, mailbox disabled, permanent bounce</p>
+<p>Retry &amp; fallback policy (recommended defaults)
+1) Immediate test send on setup completion: if test succeeds for at least one recipient, mark job Active.
+2) On transient failure:
+   - Retry schedule:
+     - <strong>Email deliveries</strong>: 1st retry after 1 minute; 2nd retry after 10 minutes; 3rd retry after 60 minutes
+     - <strong>Webhook deliveries</strong>: up to <strong>3 attempts total</strong>, spaced <strong>5 minutes</strong> apart (attempt 1 immediate, retries at +5m and +10m). Each webhook attempt times out after <strong>30 seconds</strong>.
+   - If any retry succeeds, mark delivery succeeded and continue normal operation
+   - Log all attempts and statuses for audit
+3) On permanent failure (e.g., permanent bounce):
+   - Mark that recipient as Failed; do not continuously retry
+   - Immediately create a secure portal entry for that invoice and notify the owner and the recipient (if contact email exists)
+4) After 3 total failed attempts for a recipient (either transient retries exhausted or permanent failure):
+   - System behavior: create portal entry and send a short notification to the SMB user: "We couldn’t deliver invoice #123 to Acme (email bounced). We’ve placed the invoice in a secure download area and will keep trying. You can update the contact or ask us to retry."
+   - Allow manual retry from operator UI or user via dashboard (button: <strong>Retry delivery</strong>)
+5) If a significant number of deliveries in a batch fail (e.g., &gt;5% for the job) — escalate to operator alerts and surface a top-level banner for the user: "We’re having trouble delivering invoices. Our team is investigating."</p>
+<p>Notification &amp; UI
+- Users receive simple updates in a timeline and optionally by email when:
+  - The first invoice is successfully sent
+  - A retry was attempted and succeeded or failed
+  - Final fallback activated (portal) for any invoice
+- All messages are written in business language and include suggested next steps (e.g., "Update customer email" or "Contact support")</p>
+<hr />
+<p>BEHIND-THE-SCENES NARRATIVE (Job lifecycle)</p>
+<p>This is the story from the moment the user clicks <strong>Start sending invoices</strong>.</p>
+<p>1) Wizard completion -&gt; Job creation
+   - System records a <code>DeliveryJob</code> with metadata: source (CSV file ID or QuickBooks connection ID), customers (list), delivery method, options (notifyOnFirstSend), creation timestamp, job owner (tenant/user).
+   - Audit log entry: <code>JOB_CREATED</code> with job id and parameters.</p>
+<p>2) Initial test &amp; parsing
+   - Enqueue <code>ParseJob</code> that reads the CSV (or calls QuickBooks API) and produces normalized <code>Invoice</code> JSON objects. Store a small schema-validated sample (first N invoices) as <code>preview</code> for UI.
+   - For CSV path, run auto-mapping heuristics; persist the mapping result and audit event <code>MAPPING_AUTODETECT</code> with confidence score. If confidence &lt; threshold and user confirmed mapping, record <code>MAPPING_USER_CONFIRMED</code>.</p>
+<p>3) Validation
+   - Validate required fields for each invoice (customer, amount, date). Invalid rows are flagged; where possible, attempt to auto-correct (trim whitespace, parse dates). If errors remain, mark those invoices <code>INVALID</code> and show them in the job UI for operator/user action.</p>
+<p>4) Asset generation
+   - For each valid invoice, generate a PDF (using a template system). Optionally generate a JSON representation for audit.
+   - Store generated PDFs in encrypted storage (S3 with server-side encryption) and record object IDs in DB. Record <code>ASSET_GENERATED</code> audit events.</p>
+<p>5) Delivery bundling &amp; pre-send test
+   - For each customer, create a <code>DeliveryTask</code> (possibly grouped per customer) and send a single test message for the first invoice to verify delivery. If <code>notifyOnFirstSend</code> is set, wait for that confirmation to notify the user.</p>
+<p>6) Delivery attempts
+   - For each <code>DeliveryTask</code>, attempt to send using the selected delivery method (Email via SES or configured provider).
+   - On success, mark <code>DELIVERED</code>, record <code>DELIVERY_SUCCESS</code> audit event, and update job metrics.
+   - On failure, classify error (transient/permanent), schedule retries according to the retry policy, and record <code>DELIVERY_FAILED</code> events.</p>
+<p>7) Post-delivery &amp; cleanup
+   - If delivery succeeded for at least one invoice, mark the job Active and send user notification: "Invoices are now being sent automatically — first invoice sent to Acme Corp."
+   - If any invoice permanently fails, create a portal entry and notify the user with suggested actions.
+   - Keep PDF artifacts for a short retention window (default <strong>24 hours</strong>) in hot storage; core invoice and audit data retained <strong>7 years</strong> for audit/regeneration; optionally archive if required by retention policy</p>
+<p>8) Operations &amp; human-in-the-loop
+   - Operators can view job logs and re-run failed deliveries, edit mappings, and correct customer contact info
+   - All operator actions are recorded in audit logs (who did what and when)</p>
+<hr />
+<p>OBSERVABILITY, LOGGING &amp; METRICS</p>
+<p>Key metrics to track (Phase 1A)
+- <code>jobs.created</code> (per tenant)
+- <code>invoices.parsed</code>, <code>invoices.invalid</code>
+- <code>deliveries.attempted</code>, <code>deliveries.succeeded</code>, <code>deliveries.failed</code>
+- <code>deliveries.retries</code> and <code>deliveries.permanent_failures</code>
+- Test-send success rate</p>
+<p>Alerts &amp; dashboards
+- Alert when <code>deliveries.permanent_failures</code> for a job exceed 1 in 20 invoices (5%) or when overall success rate drops below 95% over 1 hour
+- Dashboard: job list with statuses, success rate, average delivery time, retry counts</p>
+<p>Audit events (write-only) — minimal set for compliance and debugging
+- <code>JOB_CREATED</code>, <code>MAPPING_AUTODETECT</code>, <code>MAPPING_USER_CONFIRMED</code>, <code>INVOICE_PARSED</code>, <code>INVOICE_INVALID</code>, <code>ASSET_GENERATED</code>, <code>DELIVERY_ATTEMPT</code>, <code>DELIVERY_SUCCESS</code>, <code>DELIVERY_FAILED</code>, <code>PORTAL_CREATED</code></p>
+<p>Logging
+- Include <code>requestId</code>, <code>jobId</code>, <code>tenantId</code>, and <code>invoiceId</code> in logs for traceability
+- Keep logs for 90 days in hot storage; archive critical audit events per the 7-year retention policy</p>
+<hr />
+<p>SECURITY &amp; PRIVACY NOTES (Phase 1A minimal)
+- Use HTTPS for all endpoints and TLS for email transport
+- Store generated PDFs in server-side encrypted storage (S3 SSE) with limited lifetime (default 30 days)
+ - Store generated PDFs in server-side encrypted storage (S3 SSE) with limited lifetime (default <strong>24 hours</strong>)
+- Do not perform in-email password sharing or client-side PGP in Phase 1A — mark as Phase 1B enhancement
+- Ensure access to job data and audit history is RBAC-protected (tenant-scoped)</p>
+<hr />
+<p>CTO DECISION POINTS &amp; RECOMMENDATIONS</p>
+<p>1) Auto-map confidence thresholds
+   - Recommend: auto-accept when confidence &gt;= 0.8; simple confirm when between 0.5 and 0.8; prompt mapping when &lt;0.5
+   - Decision needed? Confirm thresholds or request more conservative defaults for pilots.</p>
+<p>2) Retry schedule
+   - Recommend:
+     - Email: retries at 1m, 10m, 60m (three attempts total)
+     - Webhook: <strong>up to 3 attempts</strong>, spaced <strong>5 minutes</strong> apart (immediate, +5m, +10m); 30s timeout per attempt
+   - Decision needed? Confirm or change retry counts/time windows.</p>
+<p>3) Retention for generated PDFs (hot storage)
+   - <strong>Confirmed</strong>: default <strong>24 hours</strong> in hot storage then delete; core invoice and audit data retained <strong>7 years</strong>. This reduces storage costs while keeping auditability.
+   - Decision needed? Increase to 90 days for pilot customers who want more access to history.</p>
+<p>4) Definition of "encrypted email" for Phase 1A
+   - Recommend: server-side encrypted attachments + TLS in transit via email provider (SES). Full E2E encryption (PGP/S/MIME) is out-of-scope for Phase 1A and will be a Phase 1B add-on if needed.
+   - Decision needed? CTO to confirm.</p>
+<p>5) Notification policy for repeated failures
+   - Recommend notifying the SMB user on final fallback, and optionally notify on first failure only if the job has a high failure rate.
+   - Decision needed? Confirm notification thresholds and preferred tone/wording.</p>
+<hr />
+<p>NEXT STEPS
+1. Review and accept auto-map thresholds and retry schedule (CTO decision points).
+2. I will create a Mermaid flow diagram if you want a visual to add into <code>docs/design/</code> (recommended for architecture onboarding). If approved, I’ll also draft a minimal sequence diagram for the job lifecycle.
+3. After sign-off, I will start Task 11: minimal technical architecture (component list, data model for job/invoice/delivery, simple sequence diagram, monitoring endpoints).</p>
+<p>If you want, I can also draft the small one-step mapping confirmation UI (compact and optional) that appears only when confidence is low.</p>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

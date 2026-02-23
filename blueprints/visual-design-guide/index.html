@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://bridgeflow.readthedocs.io/blueprints/visual-design-guide/" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>🌉 Bridge Blueprint Visual Design Guide - BridgeFlow Docs</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "\ud83c\udf09 Bridge Blueprint Visual Design Guide";
+        var mkdocs_page_input_path = "blueprints\\visual-design-guide.md";
+        var mkdocs_page_url = "/blueprints/visual-design-guide/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> BridgeFlow Docs
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../ARCHITECTURE/">Architecture</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Current System</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../current/control-tower/">Control Tower</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../current/control-tower/trl7-validation/">TRL 7 Validation</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../current/control-tower/public-api/">Public API</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../current/control-tower/integration-guide/">Integration Guide</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Future Vision</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../vision/">Vision Archive Index</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../roadmap/future-architecture/">BF-INTEGRATION Roadmap</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Phase 60</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../phase-60-gap-analysis/">Gap Analysis</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">BridgeFlow Docs</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">🌉 Bridge Blueprint Visual Design Guide</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="bridge-blueprint-visual-design-guide">🌉 Bridge Blueprint Visual Design Guide</h1>
+<h2 id="overview">Overview</h2>
+<p>Bridge Blueprints now use a <strong>spatial metaphor</strong> that mirrors real-world integration architecture: Trading Partners as external foundations at the edges, Adapters (transformers) nested internally, and Connectors spanning the bridge. This design provides clear visual hierarchy and guides users through the integration assembly process.</p>
+<h2 id="visual-metaphor">🎨 Visual Metaphor</h2>
+<h3 id="the-spatial-bridge-model">The Spatial Bridge Model</h3>
+<p><strong>Jan 2026 Update</strong>: New layout reflects the true architectural model:</p>
+<pre><code>┌─────────────────────────────────────────────────────┐
+│                    BRIDGE CANVAS                     │
+│                                                     │
+│  ┌──────────┐   ┌──────────┐   ┌──────────┐       │
+│  │  SOURCE  │   │ ADAPTER  │   │  DEST    │       │
+│  │   TP     │◄──┤(Internal)├──►│   TP     │       │
+│  │  🏢      │   │  ⚙️      │   │  📦      │       │
+│  └──────────┘   └──────────┘   └──────────┘       │
+│       │          CONNECTOR          │               │
+│       └──────────[🔌 SECURE]────────┘               │
+│                                                     │
+└─────────────────────────────────────────────────────┘
+</code></pre>
+<p><strong>Key Layout:</strong>
+- <strong>Left Edge</strong>: Source Trading Partner (external system)
+- <strong>Behind Left TP</strong>: Source Adapter (transforms internal → external)
+- <strong>Center Span</strong>: Connector/Bridge (secure transport)
+- <strong>Behind Right TP</strong>: Destination Adapter (transforms external → internal)
+- <strong>Right Edge</strong>: Destination Trading Partner (external partner)</p>
+<p><strong>Visual Logic:</strong>
+- TPs are the <em>foundations</em> — at the edges, solid orange blocks
+- Adapters are <em>internal transformers</em> — nested behind TPs, green slots (z-index behind)
+- Connector is the <em>bridge span</em> — connects across middle, blue slot
+- No center element — the bridge IS the integration, not something separate</p>
+<h2 id="slot-types-positioning">🎯 Slot Types &amp; Positioning</h2>
+<h3 id="trading-partner-blocks-source-destination">Trading Partner Blocks (Source &amp; Destination)</h3>
+<ul>
+<li><strong>Type</strong>: <code>'source-tp'</code>, <code>'dest-tp'</code></li>
+<li><strong>Position</strong>: Left (x:80, y:220), Right (x:720, y:220)</li>
+<li><strong>Dimensions</strong>: 80w × 100h</li>
+<li><strong>Border</strong>: 2px solid <code>#F97316</code> (orange)</li>
+<li><strong>Background</strong>: White, shadow for depth</li>
+<li><strong>Icon</strong>: 🏢</li>
+<li><strong>Label</strong>: "Source System" / "Destination"</li>
+<li><strong>Required</strong>: ✅ Both mandatory</li>
+<li><strong>Meaning</strong>: External partner systems</li>
+</ul>
+<h3 id="adapter-slots-internal-transformers">Adapter Slots (Internal Transformers)</h3>
+<ul>
+<li><strong>Type</strong>: <code>'source-adapter'</code>, <code>'dest-adapter'</code></li>
+<li><strong>Position</strong>: Behind left TP (x:20, y:240), Behind right TP (x:820, y:240)</li>
+<li><strong>Dimensions</strong>: 60w × 40h</li>
+<li><strong>Border</strong>: 2px dashed <code>#10B981</code> (green)</li>
+<li><strong>Background</strong>: White, nested positioning</li>
+<li><strong>Icon</strong>: ⚙️</li>
+<li><strong>Label</strong>: "Data Transformer"</li>
+<li><strong>Required</strong>: First is required, second is optional</li>
+<li><strong>Meaning</strong>: Internal data transformation (X12→JSON, CSV→XML, etc.)</li>
+</ul>
+<h3 id="connector-slot-bridge-span">Connector Slot (Bridge Span)</h3>
+<ul>
+<li><strong>Type</strong>: <code>'bridge-connector'</code></li>
+<li><strong>Position</strong>: Center (x:180, y:250)</li>
+<li><strong>Dimensions</strong>: 500w × 24h (horizontal bar)</li>
+<li><strong>Border</strong>: 2px dashed <code>#3B82F6</code> (blue)</li>
+<li><strong>Background</strong>: White, minimal height for span effect</li>
+<li><strong>Icon</strong>: 🔌</li>
+<li><strong>Label</strong>: "Connection"</li>
+<li><strong>Required</strong>: ✅ Mandatory</li>
+<li><strong>Meaning</strong>: Transport mechanism (AS2, SFTP, HTTP, etc.)</li>
+</ul>
+<h2 id="slot-states-styling">🎨 Slot States &amp; Styling</h2>
+<h3 id="unfilled-required-pulsing">Unfilled (Required) - Pulsing</h3>
+<pre><code class="language-css">.tp-block.slot--required,
+.adapter-slot.slot--required,
+.connector-slot.slot--required {
+  animation: bridge-pulse 2s infinite;
+  border: 2px dashed; /* Orange, Green, or Blue */
+}
+
+@keyframes bridge-pulse {
+  0% { box-shadow: 0 0 0 0 rgba(249, 115, 22, 0.4); }
+  70% { box-shadow: 0 0 0 8px rgba(249, 115, 22, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(249, 115, 22, 0); }
+}
+</code></pre>
+<h3 id="unfilled-optional-static">Unfilled (Optional) - Static</h3>
+<pre><code class="language-css">.adapter-slot:not(.slot--required) {
+  border-color: #D1D5DB;
+  animation: none;
+  opacity: 0.7;
+}
+</code></pre>
+<h3 id="filled-configured">Filled (Configured)</h3>
+<pre><code class="language-css">.slot--filled {
+  border-style: solid;
+  background: #F8FAFC;
+  animation: none;
+}
+</code></pre>
+<h2 id="accessibility-features">♿ Accessibility Features</h2>
+<h3 id="aria-labels-semantic-html">ARIA Labels &amp; Semantic HTML</h3>
+<pre><code class="language-html">&lt;div class=&quot;tp-block&quot;
+     data-slot-key=&quot;source-tp&quot;
+     aria-label=&quot;Add Source System - External trading partner - Required&quot;
+     role=&quot;button&quot;
+     tabindex=&quot;0&quot;&gt;
+  &lt;div class=&quot;slot-icon&quot;&gt;🏢&lt;/div&gt;
+  &lt;div class=&quot;slot-label&quot;&gt;Source System&lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+<h3 id="keyboard-navigation">Keyboard Navigation</h3>
+<ul>
+<li><code>Tab</code> / <code>Shift+Tab</code>: Navigate through slots</li>
+<li><code>Enter</code> / <code>Space</code>: Activate slot → open gap-filling modal</li>
+<li>Visible focus rings on all interactive elements</li>
+<li>High contrast: 4.5:1+ WCAG AA compliant</li>
+</ul>
+<h2 id="responsive-layout-phase-328">� Responsive Layout (Phase 32.8)</h2>
+<h3 id="breakpoint-strategy">Breakpoint Strategy</h3>
+<p><strong>Desktop (&gt;1024px): Percentage-Based</strong></p>
+<pre><code class="language-css">/* Source TP: left edge */
+left: 5%;        width: 12%;     minWidth: 80px;
+
+/* Connector: center span */
+left: 18%;       width: 64%;     minWidth: 300px;
+
+/* Dest TP: right edge */
+right: 5%;       width: 12%;     minWidth: 80px;
+</code></pre>
+<p>→ Adapts to window width, maintains proportions</p>
+<p><strong>Tablet (768–1024px): Compact Fixed</strong></p>
+<pre><code class="language-css">width: 70px;  height: 90px;  /* Smaller than desktop */
+</code></pre>
+<p>→ Fixed pixels, all slots still visible, tighter spacing</p>
+<p><strong>Mobile (&lt;640px): Vertical Stack</strong></p>
+<pre><code class="language-css">position: relative !important;
+margin: 10px auto;
+width: 90% !important;
+</code></pre>
+<p>→ One slot per row, centered, staggered layout</p>
+<h3 id="drag-and-drop-feedback-phase-328">Drag-and-Drop Feedback (Phase 32.8)</h3>
+<p>When dragging a palette item over a slot:</p>
+<pre><code class="language-css">.slot-drag-over {
+  background: rgba(249, 115, 22, 0.15);
+  border-color: #F97316;
+  box-shadow: 0 0 12px rgba(249, 115, 22, 0.3);
+  transform: scale(1.05);
+}
+</code></pre>
+<p><strong>Type Validation:</strong>
+- Each slot declares <code>acceptTypes</code>: <code>['trading-partner']</code>, <code>['adapter']</code>, etc.
+- Dragged component type checked against slot acceptance
+- ✅ Compatible → snap to slot
+- ❌ Incompatible → warning toast, no snap</p>
+<h3 id="implementation-details">Implementation Details</h3>
+<p><strong><a href="web/src/assembly.js#L1875+">setupResponsiveLayoutObserver()</a></strong>
+- Monitors window resize, detects &gt;1024px threshold crossing
+- Re-renders bridge outline when crossing breakpoint
+- Debounced (300ms) to prevent excessive renders</p>
+<p><strong><a href="web/src/assembly.js#L900+">createBridgeSlot() Positioning</a></strong></p>
+<pre><code class="language-javascript">const useResponsive = window.innerWidth &gt; 1024;
+if (useResponsive &amp;&amp; config.responsive) {
+  // Apply percentage-based from config.responsive
+  el.style.left = config.responsive.left;
+  el.style.width = config.responsive.width;
+  // ...
+} else {
+  // Fallback to fixed pixels from config.position
+  el.style.left = config.position.x + 'px';
+}
+</code></pre>
+<p><strong><a href="web/src/assembly.js#L89+">BRIDGE_SLOT_CONFIG Structure</a></strong>
+Each slot now includes both positioning modes:</p>
+<pre><code class="language-javascript">{
+  type: 'tradingPartner',
+  position: { x: 80, y: 220, width: 80, height: 100 },  // Fixed
+  responsive: { left: '5%', width: '12%', ... },         // Percentage
+  acceptTypes: ['trading-partner']                        // Drop validation
+}
+</code></pre>
+<hr />
+<h2 id="user-interaction-flow">🔄 User Interaction Flow</h2>
+<h3 id="1-blueprint-selection-responsive-render">1. Blueprint Selection &amp; Responsive Render</h3>
+<pre><code>User selects &quot;Retail Brand&quot; blueprint
+↓
+Canvas detects screen width &amp; renders:
+  • Desktop (&gt;1024px):   Percentage-based, full layout
+  • Tablet (768–1024px): Compact fixed, all visible
+  • Mobile (&lt;640px):     Vertical stack
+↓
+  • Source TP block (left, orange, pulsing)
+  • Source Adapter slot (behind left, green, pulsing)
+  • Connector span (center, blue, pulsing)
+  • Dest TP block (right, orange, pulsing)
+  • Dest Adapter slot (behind right, gray, static)
+</code></pre>
+<h3 id="2-drag-and-drop-configuration-new-phase-328">2. Drag-and-Drop Configuration (NEW Phase 32.8)</h3>
+<pre><code>User drags &quot;Company CRM&quot; from palette → &quot;Source System&quot; slot
+↓
+On dragover: Slot feedback
+  • Background: Orange tint
+  • Border: Glows orange
+  • Scale: 1.05x
+  • Message: &quot;Drop here!&quot; (visual feedback)
+↓
+On drop:
+  • Validate: Is 'trading-partner' in slot's acceptTypes?
+  • ✅ Yes → Snap to slot, animate back
+  • ❌ No → Warning toast, no snap
+↓
+Result: Slot configured, no longer pulses
+  Toast: &quot;✅ Source System configured: Company CRM&quot;
+</code></pre>
+<h3 id="3-gap-filling-click-fallback">3. Gap Filling (Click Fallback)</h3>
+<pre><code>User clicks &quot;Source System&quot; (if didn't drag-drop)
+↓
+Opens gap-filling modal:
+  Title: &quot;Configure Source System&quot;
+  Hint: &quot;Your internal system&quot;
+  Options: [Select Trading Partner from list]
+↓
+User selects existing TP or creates new
+↓
+Slot fills (border→solid, stops pulsing)
+</code></pre>
+<h3 id="4-progress-visualization">4. Progress Visualization</h3>
+<pre><code>Empty → Pulsing (orange)
+    ↓
+(Drag-drop OR click modal)
+    ↓
+Selection → Slot fills (solid background)
+    ↓
+All filled → &quot;Ready to Activate Bridge&quot; button enabled
+</code></pre>
+<h2 id="design-principles">🎨 Design Principles</h2>
+<h3 id="architecture-as-visual-grammar">Architecture as Visual Grammar</h3>
+<ol>
+<li><strong>Edges = External</strong> (TPs in orange at edges)</li>
+<li><strong>Interior = Internal</strong> (Adapters nested behind TPs)</li>
+<li><strong>Span = Transport</strong> (Connector crossing middle)</li>
+<li><strong>No Center Element</strong> (Bridge IS the connection, not a separate transform layer)</li>
+</ol>
+<h3 id="color-semantics-fixed">Color Semantics (Fixed)</h3>
+<ul>
+<li>🟠 <strong>Orange (#F97316)</strong>: Trading Partners (required, external)</li>
+<li>💚 <strong>Green (#10B981)</strong>: Adapters (required/optional, internal)</li>
+<li>🔵 <strong>Blue (#3B82F6)</strong>: Connectors (required, transport)</li>
+<li>⚪ <strong>Gray (#D1D5DB)</strong>: Optional/secondary slots</li>
+<li>🤍 <strong>White</strong>: Backgrounds, clean canvas</li>
+</ul>
+<h3 id="animation-language">Animation Language</h3>
+<ul>
+<li><strong>Pulse</strong>: Required slots draw attention without distraction</li>
+<li><strong>Duration</strong>: 2s cycle (slow, professional)</li>
+<li><strong>Easing</strong>: Box-shadow expand (smooth)</li>
+<li><strong>Stops on Fill</strong>: Slot animates until configured</li>
+</ul>
+<h3 id="spacing-proportions">Spacing &amp; Proportions</h3>
+<ul>
+<li>TPs: 80×100 (large, prominent)</li>
+<li>Adapters: 60×40 (compact, secondary)</li>
+<li>Connector: 500×24 (wide, thin spanning line)</li>
+<li>Gaps: ~100px between edges and center (breathing room)</li>
+</ul>
+<h2 id="responsive-considerations-phase-328">📱 Responsive Considerations (Phase 32.8+)</h2>
+<h3 id="current-phase-32-fixed-layout">Current (Phase 32): Fixed Layout</h3>
+<pre><code class="language-css">position: absolute;
+left: [fixed px];
+top: [fixed px];
+width: [fixed px];
+height: [fixed px];
+</code></pre>
+<h3 id="future-phase-328-responsive-layout">Future (Phase 32.8): Responsive Layout</h3>
+<pre><code class="language-css">/* Percentage-based or flex-based positioning */
+position: absolute;
+left: 5%;        /* Source TP */
+width: 12%;      /* Responsive width */
+right: 5%;       /* Dest TP */
+/* Adapter positions relative to TPs */
+/* Connector scales with container */
+</code></pre>
+<h3 id="mobile-adaptation-phase-33">Mobile Adaptation (Phase 33+)</h3>
+<ul>
+<li>Stack TPs vertically on mobile</li>
+<li>Rotate connector 90° for vertical flow</li>
+<li>Larger touch targets (48px minimum)</li>
+<li>Maintained visual hierarchy</li>
+</ul>
+<h2 id="implementation-details_1">🚀 Implementation Details</h2>
+<h3 id="core-functions">Core Functions</h3>
+<p><strong><a href="web/src/assembly.js#L21-L87">injectBridgeStyles()</a></strong>
+- Creates <code>&lt;style&gt;</code> tag once (idempotent)
+- Defines all slot classes: <code>.tp-block</code>, <code>.adapter-slot</code>, <code>.connector-slot</code>
+- Includes pulse animation and fill states
+- Sets to <code>bridgeStylesInjected = true</code> (prevents duplicates)</p>
+<p><strong><a href="web/src/assembly.js#L89-L131">BRIDGE_SLOT_CONFIG</a></strong>
+- Centralized metadata: type, label, hint, required, position, className
+- Easy to extend: add Firewall, Policy, or Data Map slots
+- Position format: <code>{ x, y, width, height }</code> (px, future: percentage)</p>
+<p><strong><a href="web/src/assembly.js#L813-L836">renderBridgeOutline(template, workspaceOverride)</a></strong>
+- Clears old markup
+- Creates <code>.bridge-canvas</code> container
+- Iterates <code>BRIDGE_SLOT_CONFIG</code>, renders each slot
+- Reads <code>template.config.slots</code> for pre-filled state</p>
+<p><strong><a href="web/src/assembly.js#L838-L870">createBridgeSlot(slotKey, config, isFilled, blueprintId)</a></strong>
+- Builds individual slot DOM element
+- Applies classes: <code>[config.className]</code> + optional <code>slot--filled</code>/<code>slot--required</code>
+- Positions absolutely from config
+- Attaches click handler → <code>triggerBridgeSlotConfiguration()</code></p>
+<p><strong><a href="web/src/assembly.js#L872-L904">triggerBridgeSlotConfiguration(slotConfig)</a></strong>
+- Receives full slot metadata (type, label, hint, required, position, etc.)
+- Creates ghost component with slot context
+- Calls <code>triggerGapFilling()</code> → opens modal</p>
+<h3 id="integration-points">Integration Points</h3>
+<table>
+<thead>
+<tr>
+<th>Function</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>loadBlueprintToCanvas(template)</code></td>
+<td>Entry point: Load blueprint → render outline</td>
+</tr>
+<tr>
+<td><code>window.loadBlueprintToCanvas</code></td>
+<td>Exported for blueprint gallery modal</td>
+</tr>
+<tr>
+<td><code>renderBridgeOutline()</code></td>
+<td>Main render (new spatial model)</td>
+</tr>
+<tr>
+<td><code>createBridgeSlot()</code></td>
+<td>Slot factory</td>
+</tr>
+<tr>
+<td><code>triggerBridgeSlotConfiguration()</code></td>
+<td>Gap filling entry point</td>
+</tr>
+<tr>
+<td><code>triggerGapFilling(ghostComp)</code></td>
+<td>Modal dispatcher (existing)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="success-metrics">🎯 Success Metrics</h2>
+<h3 id="user-experience">User Experience</h3>
+<ul>
+<li>✅ <strong>Instant clarity</strong>: Bridge spatial layout immediately communicates architecture</li>
+<li>✅ <strong>Reduced clicks</strong>: Fewer modals/steps to understand flow</li>
+<li>✅ <strong>Guided flow</strong>: Pulsing slots show what to configure next</li>
+<li>✅ <strong>Professional UX</strong>: Enterprise-grade visual polish</li>
+</ul>
+<h3 id="business-value">Business Value</h3>
+<ul>
+<li>✅ <strong>Faster onboarding</strong>: New users understand TPs/Adapters/Connectors</li>
+<li>✅ <strong>Higher completion</strong>: Clear progress from empty → filled</li>
+<li>✅ <strong>Extensibility</strong>: Easy to add Firewall/Policy slots</li>
+<li>✅ <strong>Competitive edge</strong>: Unique bridge metaphor differentiates BridgeFlow</li>
+</ul>
+<h2 id="roadmap">🔮 Roadmap</h2>
+<h3 id="phase-32-core-spatial-model">Phase 32 (Core Spatial Model) ✅</h3>
+<ul>
+<li>✅ Spatial layout (TP edges, adapters nested, connector span)</li>
+<li>✅ Slot metadata &amp; configuration</li>
+<li>✅ Gap-filling modal integration</li>
+<li>✅ Idempotent style injection</li>
+<li>✅ Centralized BRIDGE_SLOT_CONFIG</li>
+</ul>
+<h3 id="phase-328-responsive-drag-and-drop-in-progress">Phase 32.8 (Responsive + Drag-and-Drop) 🔨 IN PROGRESS</h3>
+<ul>
+<li>✅ Percentage-based positioning (responsive breakpoints)</li>
+<li>✅ Window resize observer (re-render on threshold crossing)</li>
+<li>✅ Drag-and-drop palette → slot snapping</li>
+<li>✅ Type validation (acceptTypes per slot)</li>
+<li>✅ Drag-over visual feedback (.slot-drag-over)</li>
+<li>📋 Live status indicators (healthy/warning — defer to Phase 33)</li>
+<li>📋 Mobile stack layout polish (Phase 33+)</li>
+</ul>
+<h3 id="phase-33-expansion-polish">Phase 33 (Expansion + Polish)</h3>
+<ul>
+<li>📋 Firewall slot (security policies)</li>
+<li>📋 Data Map slot (field transformation)</li>
+<li>📋 Multi-hop bridges (chained adapters)</li>
+<li>📋 Slot persistence (save filled slots to localStorage)</li>
+<li>📋 Mobile layout optimization</li>
+<li>📋 Animated transitions (slot fill, adapter reveal)</li>
+</ul>
+<h3 id="phase-39-canvas-ux-polish">Phase 39 — Canvas UX Polish ✅</h3>
+<ul>
+<li>✅ Professional color scheme, non-overlapping positioning, visual hierarchy</li>
+<li>✅ <strong>Red outlines</strong> for required elements (static, non-blinking) for clear guidance</li>
+<li>✅ Protocol badges (AS2, SFTP, API, Database) and status bar with connection health and protocol visibility</li>
+<li>✅ Placement guides, dotted drop indicators, and improved empty-state guidance ("Start Building Your Bridge")</li>
+<li>✅ TP duplication fix via <code>MutationObserver</code> with initial cleanup on page load and runtime auto-removal</li>
+<li>✅ Undo/Redo/Save/Deploy toolbar and keyboard shortcuts (Ctrl+Z/Ctrl+Y/Ctrl+S)</li>
+<li>✅ Robust state stack management for reliable undo/redo of complex edits</li>
+<li>✅ 5-second hover tooltips with component &amp; protocol details, auto-dismissed after timeout</li>
+<li>✅ Unit tests: <code>web/tests/canvas-ux.test.js</code></li>
+</ul>
+<hr />
+<p><em>The bridge spatial model is more than aesthetics — it's visual architecture. TPs at edges, adapters nested, connector spanning. This is how users understand integration.</em> 🌉✨</p>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

@@ -45,6 +45,8 @@
               </ul>
               <p class="caption"><span class="caption-text">Products</span></p>
               <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../products/">Overview</a>
+                  </li>
                   <li class="toctree-l1"><a class="reference internal" href="../products/control-tower/">Control Tower</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../products/control-tower/quickstart/">Quickstart</a>
@@ -57,6 +59,31 @@
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../products/control-tower/integration-guide/">Integration Guide</a>
                   </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../products/carrier-portal/">Carrier Portal</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../products/tracking-portal/">Tracking Portal</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Platform</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../platform/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../platform/bf-admin-console/">Admin Console</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../platform/bf-identity/">Identity Service</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../platform/bf-masterdata/">Masterdata Service</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../platform/bf-orders/">Orders Service</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../platform/bf-shipments/">Shipments Service</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../platform/bf-search/">Search Service</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../platform/bf-fintech/">Fintech Service</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../platform/bf-warehouse/">Warehouse Service</a>
+                  </li>
               </ul>
               <ul>
                 <li class="toctree-l1"><a class="reference internal" href="../vision/bf-integration/">Vision</a>
@@ -65,13 +92,15 @@
               <ul class="current">
                 <li class="toctree-l1 current"><a class="reference internal current" href="#">API Reference</a>
     <ul class="current">
-    <li class="toctree-l2"><a class="reference internal" href="#current-live-apis">Current Live APIs</a>
+    <li class="toctree-l2"><a class="reference internal" href="#product-apis">Product APIs</a>
         <ul>
     <li class="toctree-l3"><a class="reference internal" href="#control-tower-product">Control Tower Product</a>
     </li>
         </ul>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#core-endpoints-current">Core Endpoints (Current)</a>
+    <li class="toctree-l2"><a class="reference internal" href="#core-endpoints-current-product-runtime">Core Endpoints (Current Product Runtime)</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#platform-service-apis">Platform Service APIs</a>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#developer-starting-path">Developer Starting Path</a>
     </li>
@@ -103,7 +132,7 @@
               
                 <h1 id="api-reference">API Reference</h1>
 <p>This is the platform-level API entry point for Bridgeflow Docs.</p>
-<h2 id="current-live-apis">Current Live APIs</h2>
+<h2 id="product-apis">Product APIs</h2>
 <h3 id="control-tower-product">Control Tower Product</h3>
 <ul>
 <li>Public status API:
@@ -111,20 +140,31 @@
 <li>Integration and event ingest guide:
 <code>products/control-tower/integration-guide/</code></li>
 </ul>
-<h2 id="core-endpoints-current">Core Endpoints (Current)</h2>
+<h2 id="core-endpoints-current-product-runtime">Core Endpoints (Current Product Runtime)</h2>
 <ul>
 <li><code>GET /api/v1/public/resilience-status</code></li>
 <li><code>POST /api/control/events</code></li>
 </ul>
 <p>Base URL:
 - <code>https://control-tower.up.railway.app</code></p>
+<h2 id="platform-service-apis">Platform Service APIs</h2>
+<p>Service-level API summaries:</p>
+<ul>
+<li>Admin Console module: <code>platform/bf-admin-console/</code></li>
+<li>Identity service: <code>platform/bf-identity/</code></li>
+<li>Masterdata service: <code>platform/bf-masterdata/</code></li>
+<li>Orders service: <code>platform/bf-orders/</code></li>
+<li>Shipments service: <code>platform/bf-shipments/</code></li>
+<li>Search service: <code>platform/bf-search/</code></li>
+<li>Fintech service: <code>platform/bf-fintech/</code></li>
+<li>Warehouse service: <code>platform/bf-warehouse/</code></li>
+</ul>
 <h2 id="developer-starting-path">Developer Starting Path</h2>
 <ol>
 <li>Integration guide: <code>products/control-tower/integration-guide/</code></li>
 <li>Quickstart: <code>products/control-tower/quickstart/</code></li>
 <li>Public/status API behavior: <code>products/control-tower/public-api/</code></li>
 </ol>
-<p>As additional Bridgeflow products ship, their APIs will be indexed here.</p>
               
             </div>
           </div><footer>

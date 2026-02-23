@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://brockhager.github.io/bridgeflow-docs/vision/bf-integration/docs/phases/phases41-50/PHASE-41-COMPLETE-SUMMARY/" />
+      <link rel="shortcut icon" href="../../../../../../img/favicon.ico" />
+    <title>PHASE 41 COMPLETE SUMMARY - BridgeFlow Docs</title>
+    <link rel="stylesheet" href="../../../../../../css/theme.css" />
+    <link rel="stylesheet" href="../../../../../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "PHASE 41 COMPLETE SUMMARY";
+        var mkdocs_page_input_path = "vision\\bf-integration\\docs\\phases\\phases41-50\\PHASE-41-COMPLETE-SUMMARY.md";
+        var mkdocs_page_url = "/bridgeflow-docs/vision/bf-integration/docs/phases/phases41-50/PHASE-41-COMPLETE-SUMMARY/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../../../../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../../../../../.." class="icon icon-home"> BridgeFlow Docs
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../../../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../../../..">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../../../../topics/quickstart/">Quickstart</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../../../../topics/concepts/">Concepts</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../../../../current/control-tower/public-api/">API Reference</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../../../../topics/vision/">Vision</a>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../../..">BridgeFlow Docs</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../../../../.." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">PHASE 41 COMPLETE SUMMARY</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <blockquote>
+<p>[!WARNING]
+Status: Planned / In Development
+Context: Original BF-INTEGRATION Vision (Pre-Phase 30)</p>
+</blockquote>
+<h1 id="phase-41-railway-deployment-configuration-complete-summary">Phase 41 — Railway Deployment Configuration — Complete Summary</h1>
+<p><strong>Status:</strong> ✅ Complete (January 13, 2026)</p>
+<p>Phase 41 focused on making BridgeFlow deployable to Railway with a small set of configuration and operational artifacts, and verifying build and runtime behavior.</p>
+<h2 id="final-configuration">Final Configuration</h2>
+<ul>
+<li><code>railway.json</code></li>
+</ul>
+<pre><code class="language-json">{
+  &quot;build&quot;: {
+    &quot;builder&quot;: &quot;NIXPACKS&quot;,
+    &quot;buildCommand&quot;: &quot;pnpm install &amp;&amp; pnpm prisma generate &amp;&amp; pnpm build&quot;
+  },
+  &quot;deploy&quot;: {
+    &quot;startCommand&quot;: &quot;node api/server.js&quot;,
+    &quot;healthcheckPath&quot;: &quot;/health&quot;
+  }
+}
+</code></pre>
+<ul>
+<li><code>Procfile</code> — <code>web: node api/server.js</code></li>
+<li><code>.env.example</code> — updated with recommended variables for Railway (e.g., <code>DATABASE_URL</code>, <code>JWT_SECRET</code>, optional Vault vars)</li>
+</ul>
+<h2 id="build-verification">Build &amp; Verification</h2>
+<ul>
+<li>pnpm prisma generate — ✅ Prisma client generated</li>
+<li>pnpm build — ✅ Frontend bundled (195.7kb)</li>
+<li>Server startup — ✅ Listening on port 4000</li>
+<li>Static file serving — ✅ Configured in <code>api/server.js</code> (serves <code>web/dist</code>, SPA fallback)</li>
+</ul>
+<h2 id="files-added-updated">Files Added / Updated</h2>
+<ul>
+<li><code>railway.json</code> (root) — Railway build &amp; deploy configuration (Nixpacks builder)</li>
+<li><code>Procfile</code> (root) — Web process definition (<code>web: node api/server.js</code>)</li>
+<li><code>.env.example</code> — includes <code>JWT_SECRET</code>, <code>START_SERVER</code>, <code>DATABASE_URL</code> guidance</li>
+<li><code>docs/deployment/RAILWAY.md</code> — Railway deployment runbook (this file)</li>
+<li><code>docs/phases/phases41-50/PHASE-41-COMPLETE-SUMMARY.md</code> — this summary</li>
+</ul>
+<h2 id="railway-dashboard-setup-runbook">Railway Dashboard Setup (runbook)</h2>
+<ol>
+<li>Connect repository in Railway and select the <code>bridgeflow</code> repo/branch</li>
+<li>Add a PostgreSQL service and attach it (Railway will provide <code>DATABASE_URL</code>)</li>
+<li>Optionally add Redis for rate limiting (<code>REDIS_URL</code>)</li>
+<li>Set environment variables:</li>
+<li><code>JWT_SECRET</code> (generate a strong random string)</li>
+<li><code>START_SERVER=true</code> (optional; Railway auto-starts)</li>
+<li><code>NODE_ENV=production</code></li>
+<li>Optional: <code>SECRET_BACKEND=vault</code>, <code>VAULT_ADDR</code>, <code>VAULT_TOKEN</code></li>
+<li>Deploy → Railway will run the <code>buildCommand</code> and start the server with <code>startCommand</code></li>
+<li>Verify <code>GET /health</code> and that the API serves the SPA at <code>/</code></li>
+</ol>
+<h2 id="strategic-impact">Strategic Impact</h2>
+<ul>
+<li>Simplifies deploy-to-production step for customers evaluating BridgeFlow</li>
+<li>Ensures Prisma generation and frontend build are part of the Railway build pipeline</li>
+<li>No separate static site hosting required — API serves the SPA bundle directly</li>
+</ul>
+<hr />
+<p><em>Notes:</em> Railway config already included in repo root as <code>railway.json</code> and <code>Procfile</code>. This summary documents verification steps and runbook guidance for production operators.</p>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+    
+  </span>
+</div>
+    <script src="../../../../../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../../../../../..";</script>
+    <script src="../../../../../../js/theme_extra.js"></script>
+    <script src="../../../../../../js/theme.js"></script>
+      <script src="../../../../../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

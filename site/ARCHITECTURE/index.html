@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://brockhager.github.io/bridgeflow-docs/ARCHITECTURE/" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>Bridgeflow Live Architecture (Phases 56-58) - BridgeFlow Docs</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Bridgeflow Live Architecture (Phases 56-58)";
+        var mkdocs_page_input_path = "ARCHITECTURE.md";
+        var mkdocs_page_url = "/bridgeflow-docs/ARCHITECTURE/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href=".." class="icon icon-home"> BridgeFlow Docs
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="..">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../topics/quickstart/">Quickstart</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../topics/concepts/">Concepts</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../current/control-tower/public-api/">API Reference</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../topics/vision/">Vision</a>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">BridgeFlow Docs</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">Bridgeflow Live Architecture (Phases 56-58)</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="bridgeflow-live-architecture-phases-56-58">Bridgeflow Live Architecture (Phases 56-58)</h1>
+<p>Last updated: February 23, 2026</p>
+<h2 id="1-system-reality">1. System Reality</h2>
+<p>Bridgeflow currently runs as a live control tower centered on <code>bf-control</code>.</p>
+<p>Production endpoint:
+- <code>https://control-tower.up.railway.app</code></p>
+<p>This single deploy serves:
+- Public web interface (<code>/</code>, <code>/home</code>) from static assets built from <code>bf-control/home/</code>
+- Public status API (<code>/api/v1/public/resilience-status</code>)
+- Ingestion and case APIs (<code>/api/control/*</code>)
+- Background jobs (live weather ingest + escalation watcher)</p>
+<h2 id="2-runtime-components">2. Runtime Components</h2>
+<h3 id="21-bf-control-fastapi-app">2.1 <code>bf-control</code> FastAPI app</h3>
+<p>Core responsibilities:
+- Event ingest and normalization (<code>POST /api/control/events</code>)
+- Policy/risk evaluation
+- Case lifecycle management (<code>/api/control/cases*</code>)
+- Public resilience projection (<code>GET /api/v1/public/resilience-status</code>)
+- Static frontend serving for public map/feed (<code>/</code>, <code>/home</code>)</p>
+<h3 id="22-background-jobs">2.2 Background jobs</h3>
+<ul>
+<li>Live weather ingest loop (Lima pilot / OpenWeatherMap)</li>
+<li>Escalation watcher loop (SLA breach detection)</li>
+</ul>
+<p>Both run in-process via FastAPI lifespan startup.</p>
+<h3 id="23-data-plane">2.3 Data plane</h3>
+<p>Primary stores in Postgres:
+- <code>events</code>
+- <code>cases</code>
+- <code>risk_states</code>
+- <code>action_requests</code></p>
+<p>Isolation model:
+- tenant-scoped processing keyed by <code>tenant_id</code>
+- idempotency on inbound events via <code>(tenant_id, event_id)</code></p>
+<h2 id="3-public-web-api-surface">3. Public Web + API Surface</h2>
+<h3 id="public-ui-no-login-required">Public UI (no login required)</h3>
+<ul>
+<li><code>GET /</code></li>
+<li><code>GET /home</code></li>
+</ul>
+<p>Displays:
+- Callao map marker with risk-driven color
+- weather snapshot
+- anonymized recent activity feed</p>
+<h3 id="public-status-api">Public status API</h3>
+<ul>
+<li><code>GET /api/v1/public/resilience-status</code></li>
+<li>Rate limit: <code>PUBLIC_API_RATE_LIMIT</code> (default <code>60</code> req/min/IP, in-memory per instance)</li>
+<li>Error model includes structured JSON for <code>429</code>/<code>500</code></li>
+</ul>
+<h3 id="ingestion-api">Ingestion API</h3>
+<ul>
+<li><code>POST /api/control/events</code></li>
+<li>Normalized envelope:</li>
+<li><code>event_id</code></li>
+<li><code>tenant_id</code></li>
+<li><code>event_type</code></li>
+<li><code>source</code></li>
+<li><code>occurred_at</code></li>
+<li><code>payload</code></li>
+</ul>
+<h2 id="4-deployment-model">4. Deployment Model</h2>
+<p>Railway deploy:
+- Service: <code>bf-control</code>
+- Builder: Dockerfile
+- Multi-stage build:
+  - Node stage compiles <code>home/</code> static assets
+  - Python stage runs FastAPI and serves compiled assets</p>
+<p>Health endpoint:
+- <code>GET /health</code></p>
+<h2 id="5-trl-7-validation-anchor">5. TRL 7 Validation Anchor</h2>
+<p>Validated live loop milestone:
+- Date: February 20, 2026
+- UTC evidence chain:
+  - <code>conditions_updated</code>
+  - <code>POLICY_TRIGGERED</code>
+  - <code>RISK_SCORE_UPDATED</code>
+  - <code>CASE_CREATED</code>
+- Outcome: autonomous case creation with 4-hour SLA</p>
+<p>Reference:
+- <code>bf-control/docs/phases51-60/README.md</code> (Phase 56 section)</p>
+<h2 id="6-phase-59-architecture-direction">6. Phase 59+ Architecture Direction</h2>
+<p>Planned extensions:
+- <code>bf-connect</code> service for integration credential and webhook management
+- adapter library for ERP/WMS/TMS systems
+- developer portal for self-service onboarding</p>
+<p>Current architecture remains production-safe for:
+- public visibility
+- inbound normalized events
+- tenant-scoped policy execution</p>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+    
+  </span>
+</div>
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "..";</script>
+    <script src="../js/theme_extra.js"></script>
+    <script src="../js/theme.js"></script>
+      <script src="../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

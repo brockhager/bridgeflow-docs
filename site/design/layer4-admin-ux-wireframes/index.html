@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://brockhager.github.io/bridgeflow-docs/design/layer4-admin-ux-wireframes/" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>Layer 4 — Admin UX Wireframes (Security/RBAC/Audit) - BridgeFlow Docs</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Layer 4 \u2014 Admin UX Wireframes (Security/RBAC/Audit)";
+        var mkdocs_page_input_path = "design\\layer4-admin-ux-wireframes.md";
+        var mkdocs_page_url = "/bridgeflow-docs/design/layer4-admin-ux-wireframes/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> BridgeFlow Docs
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../topics/quickstart/">Quickstart</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../topics/concepts/">Concepts</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../current/control-tower/public-api/">API Reference</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../topics/vision/">Vision</a>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">BridgeFlow Docs</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">Layer 4 — Admin UX Wireframes (Security/RBAC/Audit)</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="layer-4-admin-ux-wireframes-securityrbacaudit">Layer 4 — Admin UX Wireframes (Security/RBAC/Audit)</h1>
+<p>Status: Draft</p>
+<p>This is a minimal, implementation-agnostic sketch of the <strong>admin experiences</strong> needed to support the Layer 4 security foundation.</p>
+<p>Note: “Layer 4 / Platform Core” is used only as the end-state architecture location for these capabilities.</p>
+<p>Scope:
+- Tenant-scoped admin (Tenant Admin)
+- Operator/admin (Platform role)</p>
+<hr />
+<h2 id="1-tenant-admin-users">1) Tenant Admin: Users</h2>
+<p>Page: <code>Settings → Users</code></p>
+<p>Layout:</p>
+<pre><code>Users
+---------------------------------------------------------
+[ Invite User ]
+
+Email                Name        Role            Status
+---------------------------------------------------------
+alice@acme.com       Alice       Tenant Admin    Active
+bob@acme.com         Bob         Developer       Active
+carol@acme.com       Carol       Viewer          Invited
+---------------------------------------------------------
+</code></pre>
+<p>Actions:
+- Invite user (email + role)
+- Change role (Admin only)
+- Remove user (Admin only)</p>
+<p>Audit requirements:
+- <code>user.invite</code>, <code>user.role_changed</code>, <code>user.removed</code></p>
+<hr />
+<h2 id="2-tenant-admin-api-keys">2) Tenant Admin: API Keys</h2>
+<p>Page: <code>Settings → API Keys</code></p>
+<p>Layout:</p>
+<pre><code>API Keys
+---------------------------------------------------------
+[ Create API Key ]
+
+Name            Created        Last Used        Actions
+---------------------------------------------------------
+Automation      2025-12-xx     2025-12-xx       Revoke
+---------------------------------------------------------
+</code></pre>
+<p>Rules:
+- Only show raw key material once (at creation).
+- Revoke is irreversible.</p>
+<p>Audit:
+- <code>api_key.created</code>, <code>api_key.revoked</code></p>
+<hr />
+<h2 id="3-tenant-admin-audit-log">3) Tenant Admin: Audit Log</h2>
+<p>Page: <code>Settings → Audit Log</code></p>
+<p>Layout:</p>
+<pre><code>Audit Log
+---------------------------------------------------------
+Time                Actor           Action            Target
+---------------------------------------------------------
+2025-12-xx 12:01    alice@acme.com  bridge.updated    Bridge &quot;Inbound Orders&quot;
+2025-12-xx 12:10    system(worker)  delivery_attempt  Job cjx...
+---------------------------------------------------------
+</code></pre>
+<p>Rules:
+- Read-only.
+- Tenant Admin and Tenant Auditor can access.</p>
+<hr />
+<h2 id="4-resources-operator-first-later-tenant-self-service">4) Resources (Operator-first, later tenant self-service)</h2>
+<p>Page: <code>Resources</code></p>
+<p>Layout:</p>
+<pre><code>Resources
+---------------------------------------------------------
+[ Create Resource ]
+
+Name                 Type             Tenant   Validated
+---------------------------------------------------------
+Acme Webhook (Pilot)  webhook_endpoint Acme    Yes
+Shared Email Sender   email_sender     Global  Yes
+---------------------------------------------------------
+</code></pre>
+<p>Resource detail actions:
+- Edit non-sensitive config
+- Rotate secret (operator)
+- Validate (test send)</p>
+<p>Audit:
+- <code>resource.created</code>, <code>resource.updated</code>, <code>resource.validated</code>
+- <code>secret.accessed</code> (if validation requires secret read)</p>
+<hr />
+<h2 id="5-operator-tenant-support">5) Operator: Tenant Support</h2>
+<p>Page: <code>Operator → Tenants</code></p>
+<p>Layout:</p>
+<pre><code>Tenants
+---------------------------------------------------------
+Tenant     Status    Users  Bridges  Resources  Actions
+---------------------------------------------------------
+Acme       Active    3      5        2          View
+---------------------------------------------------------
+</code></pre>
+<p>Rules:
+- Prefer “scoped support actions” over impersonation.
+- If impersonation exists, it must be time-boxed and fully audited.</p>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

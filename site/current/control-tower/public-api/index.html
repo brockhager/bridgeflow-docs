@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://brockhager.github.io/bridgeflow-docs/current/control-tower/public-api/" />
+      <link rel="shortcut icon" href="../../../img/favicon.ico" />
+    <title>API Reference - BridgeFlow Docs</title>
+    <link rel="stylesheet" href="../../../css/theme.css" />
+    <link rel="stylesheet" href="../../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "API Reference";
+        var mkdocs_page_input_path = "current\\control-tower\\public-api.md";
+        var mkdocs_page_url = "/bridgeflow-docs/current/control-tower/public-api/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../../.." class="icon icon-home"> BridgeFlow Docs
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../..">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../topics/quickstart/">Quickstart</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../topics/concepts/">Concepts</a>
+                </li>
+              </ul>
+              <ul class="current">
+                <li class="toctree-l1 current"><a class="reference internal current" href="#">API Reference</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#1-public-resilience-status">1. Public Resilience Status</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#response-shape">Response shape</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#error-model">Error model</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#2-event-ingestion-api">2. Event Ingestion API</a>
+    </li>
+    </ul>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../topics/vision/">Vision</a>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../..">BridgeFlow Docs</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../.." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">API Reference</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="public-api-current">Public API (Current)</h1>
+<p>Base URL:
+- <code>https://control-tower.up.railway.app</code></p>
+<h2 id="1-public-resilience-status">1. Public Resilience Status</h2>
+<ul>
+<li><strong>Endpoint:</strong> <code>GET /api/v1/public/resilience-status</code></li>
+<li><strong>Auth:</strong> None</li>
+<li><strong>Rate limit:</strong> <code>PUBLIC_API_RATE_LIMIT</code> (default 60 req/min/IP)</li>
+<li><strong>Purpose:</strong> Public-safe resilience snapshot (redacted fields only)</li>
+</ul>
+<h3 id="response-shape">Response shape</h3>
+<pre><code class="language-json">{
+  &quot;system_health&quot;: &quot;OPERATIONAL&quot;,
+  &quot;current_risk_level&quot;: &quot;LOW&quot;,
+  &quot;last_update_utc&quot;: &quot;2026-02-20T04:20:50Z&quot;,
+  &quot;weather&quot;: {
+    &quot;wind_speed_kmh&quot;: 24.08,
+    &quot;temperature_c&quot;: 24.98,
+    &quot;conditions&quot;: &quot;Clouds&quot;
+  },
+  &quot;recent_activity&quot;: [
+    {
+      &quot;event_type_public&quot;: &quot;Autonomous Case Created&quot;,
+      &quot;occurred_at_utc&quot;: &quot;2026-02-20T04:20:50Z&quot;
+    }
+  ]
+}
+</code></pre>
+<h3 id="error-model">Error model</h3>
+<pre><code class="language-json">{
+  &quot;error&quot;: &quot;RATE_LIMIT_EXCEEDED&quot;,
+  &quot;message&quot;: &quot;Too many requests. Please try again in 1 minute.&quot;,
+  &quot;retry_after&quot;: 60
+}
+</code></pre>
+<h2 id="2-event-ingestion-api">2. Event Ingestion API</h2>
+<ul>
+<li><strong>Endpoint:</strong> <code>POST /api/control/events</code></li>
+<li><strong>Auth:</strong> Bearer token integration model (see integration guide)</li>
+<li><strong>Purpose:</strong> Tenant-scoped normalized event ingest for policy/case processing</li>
+</ul>
+<p>Request envelope:</p>
+<pre><code class="language-json">{
+  &quot;event_id&quot;: &quot;evt_erp_20260223_0001&quot;,
+  &quot;tenant_id&quot;: &quot;tenant-acme&quot;,
+  &quot;event_type&quot;: &quot;shipment.created&quot;,
+  &quot;source&quot;: &quot;sap-s4&quot;,
+  &quot;occurred_at&quot;: &quot;2026-02-23T00:30:00Z&quot;,
+  &quot;payload&quot;: {
+    &quot;shipment_id&quot;: &quot;SHP-10001&quot;
+  }
+}
+</code></pre>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../../../topics/concepts/" class="btn btn-neutral float-left" title="Concepts"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../../../topics/vision/" class="btn btn-neutral float-right" title="Vision">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../../../topics/concepts/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../../../topics/vision/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../../..";</script>
+    <script src="../../../js/theme_extra.js"></script>
+    <script src="../../../js/theme.js"></script>
+      <script src="../../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

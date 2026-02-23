@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://brockhager.github.io/bridgeflow-docs/vision/bf-integration/docs/Layer0-Admin-Bridgeflow/CHECKLIST/" />
+      <link rel="shortcut icon" href="../../../../../img/favicon.ico" />
+    <title>CHECKLIST - BridgeFlow Docs</title>
+    <link rel="stylesheet" href="../../../../../css/theme.css" />
+    <link rel="stylesheet" href="../../../../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "CHECKLIST";
+        var mkdocs_page_input_path = "vision\\bf-integration\\docs\\Layer0-Admin-Bridgeflow\\CHECKLIST.md";
+        var mkdocs_page_url = "/bridgeflow-docs/vision/bf-integration/docs/Layer0-Admin-Bridgeflow/CHECKLIST/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../../../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../../../../.." class="icon icon-home"> BridgeFlow Docs
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../../..">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../../../topics/quickstart/">Quickstart</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../../../topics/concepts/">Concepts</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../../../current/control-tower/public-api/">API Reference</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../../../topics/vision/">Vision</a>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../..">BridgeFlow Docs</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../../../.." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">CHECKLIST</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <blockquote>
+<p>[!WARNING]
+Status: Planned / In Development
+Context: Original BF-INTEGRATION Vision (Pre-Phase 30)</p>
+</blockquote>
+<h1 id="admin-bridgeflow-cto-demo-checklist">Admin Bridgeflow CTO Demo Checklist ✅</h1>
+<p>Follow these steps to verify Phase 13 readiness during the live demo.</p>
+<ol>
+<li>Environment &amp; Access</li>
+<li>Start API in secure dev mode (see <code>start/api-start.ps1</code> or <code>pnpm run dev:secure</code>).</li>
+<li>Confirm admin dev account available (use <code>_dev/login</code> or the fallback route for demo).</li>
+<li>
+<p>Ensure <code>REQUIRE_AUTH=true</code> and <code>ENFORCE_RBAC=true</code> for realistic checks.</p>
+</li>
+<li>
+<p>Security first ✅</p>
+</li>
+<li>Login as admin and demonstrate MFA flow (use dev stub: TOTP <code>123456</code>).</li>
+<li>
+<p>Show audit logs are recorded for admin actions.</p>
+</li>
+<li>
+<p>Tenant Management ✅</p>
+</li>
+<li>Search for a tenant in Tenant List.</li>
+<li>
+<p>Use "Login As" to impersonate a user and show a quick audit entry.</p>
+</li>
+<li>
+<p>Account management (critical paths) ✅</p>
+</li>
+<li>Suspend an org (provide a reason), confirm owners receive notification and processing is paused.</li>
+<li>Reactivate the org, schedule backlog processing, confirm <code>backlogProcessingRequested</code> flag and notification.</li>
+<li>
+<p>Demonstrate manual data correction (name/status change) and show rollback metadata in the audit entry.</p>
+</li>
+<li>
+<p>Health &amp; Operations ✅</p>
+</li>
+<li>Open Metrics dashboard (p50/p95/p99 cards, request volume chart, alerts list).</li>
+<li>
+<p>Trigger a simple job via API and show it appearing in Operations; demonstrate retry.</p>
+</li>
+<li>
+<p>Emergency Controls ✅</p>
+</li>
+<li>Perform Global Pause → Resume, show env vars are set/cleared and metrics are reset.</li>
+<li>
+<p>Use Clear Cache (metrics) and show metrics cleared without Redis available.</p>
+</li>
+<li>
+<p>Acceptance Criteria</p>
+</li>
+<li>CTO can perform tenant suspend/reactivate without dev help.</li>
+<li>Metrics/Health show realistic data and alerts.</li>
+<li>All admin flows produce audit entries.</li>
+<li>No crashes or console errors during demo.</li>
+</ol>
+<p>Notes &amp; Known Issues (to mention during demo)
+- We have intentionally excluded two non-critical test suites from Phase 13 gating:
+  - <code>api/tests/users.test.js</code> — Vite transform failure
+  - <code>api/tests/worker.integration.test.js</code> — memory allocation failure in full-run
+- Both items are scheduled for Phase 14 triage and fix.</p>
+<p>If you want, I can generate a short demo script with exact API calls and example payloads to paste into the demo terminal. Want that now?</p>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+    
+  </span>
+</div>
+    <script src="../../../../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../../../../..";</script>
+    <script src="../../../../../js/theme_extra.js"></script>
+    <script src="../../../../../js/theme.js"></script>
+      <script src="../../../../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

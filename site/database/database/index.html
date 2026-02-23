@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://brockhager.github.io/bridgeflow-docs/database/database/" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>Database &amp; Prisma — Local Developer Guide (Windows PowerShell) - BridgeFlow Docs</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Database \u0026amp; Prisma \u2014 Local Developer Guide (Windows PowerShell)";
+        var mkdocs_page_input_path = "database\\database.md";
+        var mkdocs_page_url = "/bridgeflow-docs/database/database/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> BridgeFlow Docs
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../topics/quickstart/">Quickstart</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../topics/concepts/">Concepts</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../current/control-tower/public-api/">API Reference</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../topics/vision/">Vision</a>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">BridgeFlow Docs</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">Database &amp; Prisma — Local Developer Guide (Windows PowerShell)</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="database-prisma-local-developer-guide-windows-powershell">Database &amp; Prisma — Local Developer Guide (Windows PowerShell)</h1>
+<p>This document describes the current state of our databases and how to work with them locally and in CI.</p>
+<hr />
+<h2 id="quick-overview">Quick overview ✅</h2>
+<ul>
+<li><strong>Production database</strong>: PostgreSQL (multi‑schema). We use <em>two</em> schemas: <strong>public</strong> (app data) and <strong>admin</strong> (admin users / audit logs).</li>
+<li><strong>Prisma</strong>: schema in <code>prisma/schema.prisma</code>. Generator uses the <code>multiSchema</code> preview feature and the datasource lists both <code>admin</code> and <code>public</code> schemas.</li>
+<li><strong>Testing</strong>: Integration tests that require a real database use a temporary <strong>SQLite</strong> database created by <code>scripts/setup-sqlite-test-db.js</code> (minimal schema + <code>prisma db push</code>). Unit tests default to a mocked DB (<code>USE_MOCK_DB=true</code>).</li>
+</ul>
+<hr />
+<h2 id="production-local-postgres-recommended-dev-flow">Production / Local Postgres (recommended dev flow) 🔧</h2>
+<p>Prerequisites
+- Node.js (LTS)
+- pnpm
+- A running PostgreSQL instance (local, Docker, or cloud)</p>
+<p>Environment
+- Set <code>DATABASE_URL</code> to point at your Postgres instance. Example (PowerShell):</p>
+<pre><code class="language-powershell">$env:DATABASE_URL = 'postgresql://postgres:postgres@localhost:5432/bridgeflow_dev?schema=public'
+</code></pre>
+<p>Notes
+- The <code>?schema=...</code> query sets the <em>default</em> search_path; Prisma's datasource still declares both <code>admin</code> and <code>public</code> schemas and migrations will create the admin schema objects where models are annotated with <code>@@schema("admin")</code>.
+- The full schema is at <code>prisma/schema.prisma</code> — when adding admin tables use <code>@@schema("admin")</code> on the model.</p>
+<p>Common commands</p>
+<pre><code class="language-powershell">pnpm install
+pnpm run prisma:generate    # regenerate @prisma/client after schema changes
+pnpm run db:migrate         # runs `prisma migrate deploy` to apply migrations
+pnpm run db:seed            # runs seed script to create demo entities/resources
+</code></pre>
+<p>Troubleshooting
+- If <code>pnpm run db:migrate</code> fails: verify <code>DATABASE_URL</code>, DB connectivity, and that the DB user has create/migration privileges.
+- If a new migration fails, run <code>pnpm run prisma:generate</code> locally after editing <code>prisma/schema.prisma</code> and test migrations against a disposable DB first.</p>
+<hr />
+<h2 id="sqlite-test-harness-ci-local-integration">SQLite test harness (CI &amp; local integration) 🧪</h2>
+<p>For quick integration tests in CI (and locally) we use a minimal SQLite schema because the full Postgres schema relies on features not supported by SQLite (multi‑schema, some enums, list types, etc.). The helper script <code>scripts/setup-sqlite-test-db.js</code>:
+- Writes a small SQLite‑compatible Prisma schema (Organization, User, UserOrganization, TradingPartner)
+- Runs <code>prisma db push --schema &lt;tmp_schema&gt; --accept-data-loss</code> to create the DB file under <code>.tmp/</code> (e.g., <code>.tmp/ethereal-test.db</code>)
+- Runs <code>prisma generate</code> for that schema and prints out the DATABASE_URL to set</p>
+<p>Run locally (PowerShell example):</p>
+<pre><code class="language-powershell"># Prepare the SQLite DB and client
+node scripts/setup-sqlite-test-db.js
+$env:DATABASE_URL = &quot;file:.tmp/ethereal-test.db&quot;
+# Enable the integration test switch used by the test file
+$env:RUN_SQLITE_INTEGRATION = 'true'
+# Run the specific integration test(s) that use SQLite
+pnpm exec vitest run test/integration/tradingPartners.persistence.test.js
+</code></pre>
+<p>Important notes
+- The SQLite setup uses <code>prisma db push</code> (not <code>migrate</code>) and includes <code>--accept-data-loss</code> — this is fine for ephemeral test DBs but <strong>do not</strong> use this to overwrite production data.
+- When using SQLite, the Prisma <code>DATABASE_URL</code> must begin with the <code>file:</code> protocol (for example: <code>file:.tmp/ethereal-test.db</code>). The helper script prints both PowerShell and POSIX export commands for convenience.
+- CI runs a dedicated <code>sqlite-integration</code> job that sets <code>RUN_SQLITE_INTEGRATION=true</code> and uses <code>node scripts/setup-sqlite-test-db.js</code> to prepare the DB before running the tests.</p>
+<hr />
+<h2 id="test-flags-expectations">Test flags &amp; expectations 🧩</h2>
+<ul>
+<li>By default <code>pnpm test</code> uses <code>USE_MOCK_DB=true</code> (see <code>package.json</code>) to keep unit tests fast and deterministic.</li>
+<li>Integration tests that exercise the real Prisma client must opt in via <code>RUN_SQLITE_INTEGRATION=true</code> and (internally) the tests set <code>USE_MOCK_DB=false</code>.</li>
+<li>mTLS tests are run separately (<code>pnpm run test:mtls</code>) because they require certs &amp; special setup.</li>
+</ul>
+<hr />
+<h2 id="admin-schema-notes">Admin schema notes 🔐</h2>
+<ul>
+<li>Admin models (e.g., <code>AdminUser</code>, <code>AdminAuditLog</code>) live in the <code>admin</code> schema — they are defined in <code>prisma/schema.prisma</code> with <code>@@schema("admin")</code>.</li>
+<li>Keep admin models minimal and ensure migrations include both <code>admin</code> and <code>public</code> schema changes.</li>
+</ul>
+<hr />
+<h2 id="good-practices-reminders">Good practices &amp; reminders 💡</h2>
+<ul>
+<li>Always run <code>pnpm run prisma:generate</code> after changing <code>prisma/schema.prisma</code>.</li>
+<li>Use a disposable DB when testing migrations locally (e.g., Docker Postgres or SQLite push scripts) before applying to shared/staging databases.</li>
+<li>Do not commit real credentials — use <code>.env</code> and <code>.env.example</code> to document variables.</li>
+</ul>
+<hr />
+<h2 id="useful-file-references">Useful file references 🔗</h2>
+<ul>
+<li>Prisma schema: <code>prisma/schema.prisma</code></li>
+<li>SQLite integration helper: <code>scripts/setup-sqlite-test-db.js</code></li>
+<li>SQLite integration test example: <code>test/integration/tradingPartners.persistence.test.js</code></li>
+<li>Migrations &amp; deploy workflow: <code>.github/workflows/migrate.yml</code></li>
+</ul>
+<p>If you'd like, I can also add a short troubleshooting checklist or an example Docker Compose snippet for a local Postgres instance — want me to add that? 🚀</p>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://brockhager.github.io/bridgeflow-docs/design/security-foundation-plan/" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>Security Foundation Plan (Draft) - BridgeFlow Docs</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Security Foundation Plan (Draft)";
+        var mkdocs_page_input_path = "design\\security-foundation-plan.md";
+        var mkdocs_page_url = "/bridgeflow-docs/design/security-foundation-plan/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> BridgeFlow Docs
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../topics/quickstart/">Quickstart</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../topics/concepts/">Concepts</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../current/control-tower/public-api/">API Reference</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../topics/vision/">Vision</a>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">BridgeFlow Docs</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">Security Foundation Plan (Draft)</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="security-foundation-plan-draft">Security Foundation Plan (Draft)</h1>
+<p>Goal: Implement practical, high-impact security controls now and design for stronger enterprise features later (SOC2/GDPR-ready). This doc outlines what to build now vs. what to design for.</p>
+<h2 id="immediate-build-now">Immediate (Build Now)</h2>
+<ul>
+<li>TLS everywhere: enforce HTTPS for all public endpoints; internal services talk TLS when possible</li>
+<li>Secrets management: <code>@bridgeflow/lib-secrets</code> abstraction; prod uses AWS Secrets Manager + KMS</li>
+<li>Logging &amp; audit: structured logs with <code>requestId</code>, <code>tenantId</code>; <code>audit-service</code> records immutable audit events (7-year retention policy)</li>
+<li>RBAC &amp; least privilege: role model for admin actions; enforce via middleware</li>
+<li>Dependency scanning: enable Dependabot + CodeQL scans and SCA tools in CI</li>
+<li>Key management: use provider KMS (AWS KMS) for data-encryption keys; rotate keys on schedule</li>
+<li>Secure defaults: strict Content Security Policy for UIs; secure HTTP headers via middleware</li>
+</ul>
+<h2 id="design-for-prepare-hooks-extend-later">Design-For (Prepare hooks / extend later)</h2>
+<ul>
+<li>Field-level encryption primitives for highly sensitive fields (PII) — design db helpers and API for encryption-at-rest using envelope keys</li>
+<li>mTLS service-to-service auth — design certificate lifecycle API (use cert manager or AWS ACM)</li>
+<li>Per-tenant CMK option — allow tenants to supply a KMS key identifier for advanced customers (design scoping now)</li>
+<li>WORM storage for audit logs (cold archive with immutability guarantees) — design archiver component</li>
+</ul>
+<h2 id="audit-logging-details">Audit Logging - Details</h2>
+<ul>
+<li>Events to capture (initial set): tenant.create, tenant.delete, tenant.update, user.create, user.delete, permission.change, secret.access, migration.start, migration.complete</li>
+<li>Write path: synchronous append to <code>audit-service</code> (fast path) with async replication to cold storage for long-term retention</li>
+<li>Retention: 7 years for audit events; move to encrypted cold storage after N days</li>
+<li>Querying: admin-only query endpoints with RBAC; export endpoints for evidence collection</li>
+</ul>
+<h2 id="encryption-at-rest">Encryption at Rest</h2>
+<ul>
+<li>Database: enable provider-managed encryption at rest for RDS/managed Postgres</li>
+<li>Column-level / field-level: build an application layer <code>encryptField</code>/<code>decryptField</code> helper in <code>lib-secrets</code> for field-level encryption when required</li>
+<li>Key management: KMS keys &amp; rotation; audit key usage</li>
+</ul>
+<h2 id="encryption-in-transit-certificate-management">Encryption in Transit &amp; Certificate Management</h2>
+<ul>
+<li>External: TLS with provider-managed certificates (e.g., AWS Application Load Balancer + ACM)</li>
+<li>Internal (optional immediate): use A/B encryption for sensitive traffic; long-term: mTLS across service mesh if we adopt one</li>
+<li>Certificate rotation: automate via provider tooling or cert-manager for k8s</li>
+</ul>
+<h2 id="api-security-ddos">API Security &amp; DDoS</h2>
+<ul>
+<li>API Gateway enforces rate limits and per-tenant quotas</li>
+<li>Use WAF (cloud provider feature) to mitigate common web attacks and bots</li>
+<li>Implement RBAC &amp; token expiration; rotate keys and monitor anomalies</li>
+</ul>
+<h2 id="secrets-key-rotation">Secrets &amp; Key Rotation</h2>
+<ul>
+<li>Use Secrets Manager + KMS; wrap getSecret with audit events</li>
+<li>Rotation: schedule key rotation via KMS lifecycle; ensure application code supports re-fetching rotated keys without restarts (cache TTL)</li>
+</ul>
+<h2 id="logging-observability">Logging &amp; Observability</h2>
+<ul>
+<li>All logs structured JSON, include tenantId/requestId/principal</li>
+<li>Use OTEL: traces should propagate request and tenant info</li>
+<li>SLOs: document expected latency; integrate alerts for high error rates and tenant-impacting issues</li>
+</ul>
+<h2 id="cicd-secure-build">CI/CD &amp; Secure Build</h2>
+<ul>
+<li>Build pipeline: lock down node versions, dependency pinning, CodeQL and SCA scans</li>
+<li>Container scanning (if images used): run image scanners; fail build on high severity findings</li>
+<li>Secrets: do not store secrets in CI; use secrets store integrations (GH Secrets, Vault)</li>
+</ul>
+<h2 id="incident-response-ir-runbooks">Incident Response &amp; IR Runbooks</h2>
+<ul>
+<li>Document key runbooks: key compromise, data-leak, audit-evidence requests, restore tests</li>
+<li>Test restore &amp; DR playbooks annually or with major change</li>
+</ul>
+<h2 id="compliance-evidence">Compliance &amp; Evidence</h2>
+<ul>
+<li>Build evidence capture into release processes (artifact storage, migration logs, access logs)</li>
+<li>Maintain mapping of requirements (SOC2/GDPR) to implemented controls and owners</li>
+</ul>
+<hr />
+<p>Next steps
+1. Implement <code>lib-secrets</code> with local dev shim and prod AWS Secrets Manager implementation
+2. Implement <code>lib-audit</code> server that accepts immutable writes and offloads to encrypted, cold storage
+3. Add PR templates and <code>security-checklist.md</code> to enforce security review
+4. Plan for field-level encryption RFC and tenant-CMK requirements once an enterprise customer needs it</p>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

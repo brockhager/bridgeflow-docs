@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://brockhager.github.io/bridgeflow-docs/phases/phases31-40/README-PHASE-33/" />
+      <link rel="shortcut icon" href="../../../img/favicon.ico" />
+    <title>Phase 33: Layer 4 Firewall API — Implementation Complete ✅ - BridgeFlow Docs</title>
+    <link rel="stylesheet" href="../../../css/theme.css" />
+    <link rel="stylesheet" href="../../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Phase 33: Layer 4 Firewall API \u2014 Implementation Complete \u2705";
+        var mkdocs_page_input_path = "phases\\phases31-40\\README-PHASE-33.md";
+        var mkdocs_page_url = "/bridgeflow-docs/phases/phases31-40/README-PHASE-33/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../../.." class="icon icon-home"> BridgeFlow Docs
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../..">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../topics/quickstart/">Quickstart</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../topics/concepts/">Concepts</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../current/control-tower/public-api/">API Reference</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../topics/vision/">Vision</a>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../..">BridgeFlow Docs</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../.." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">Phase 33: Layer 4 Firewall API — Implementation Complete ✅</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="phase-33-layer-4-firewall-api-implementation-complete">Phase 33: Layer 4 Firewall API — Implementation Complete ✅</h1>
+<p><strong>Status:</strong> Ready for Canvas Integration<br />
+<strong>Date:</strong> January 11, 2026<br />
+<strong>Tests:</strong> 20/20 passing  </p>
+<h2 id="quick-start">Quick Start</h2>
+<h3 id="what-was-built">What Was Built</h3>
+<ul>
+<li>✅ Secure firewall CRUD API with IP validation</li>
+<li>✅ Database model with tenancy + RBAC enforcement</li>
+<li>✅ 20 comprehensive tests (all passing)</li>
+<li>✅ Complete integration documentation</li>
+<li>✅ Canvas pattern examples</li>
+</ul>
+<h3 id="for-canvas-developers">For Canvas Developers</h3>
+<ol>
+<li>Read: <a href="../phase-33-firewall-canvas-integration/">phase-33-firewall-canvas-integration.md</a></li>
+<li>Template: Firewall form component code in same file</li>
+<li>Pattern: How to detect <code>?newFirewallId</code> URL parameter</li>
+<li>API Reference: All endpoints documented with examples</li>
+</ol>
+<h3 id="for-backend-developers-part-2">For Backend Developers (Part 2)</h3>
+<ol>
+<li>Implement async provisioning job in worker</li>
+<li>Capture diagnostic metadata</li>
+<li>Apply firewall rules to Layer 4 infrastructure</li>
+<li>See: <a href="../phase-33-firewall-api/#future-work-phase-33-continuation">phase-33-firewall-api.md</a></li>
+</ol>
+<h2 id="api-endpoints">API Endpoints</h2>
+<table>
+<thead>
+<tr>
+<th>Endpoint</th>
+<th>Method</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>/api/firewalls</code></td>
+<td>POST</td>
+<td>Create firewall</td>
+</tr>
+<tr>
+<td><code>/api/firewalls/:id</code></td>
+<td>GET</td>
+<td>Fetch firewall</td>
+</tr>
+<tr>
+<td><code>/api/bridges/:bridgeId/firewalls</code></td>
+<td>GET</td>
+<td>List firewalls</td>
+</tr>
+<tr>
+<td><code>/api/firewalls/:id</code></td>
+<td>DELETE</td>
+<td>Delete firewall</td>
+</tr>
+</tbody>
+</table>
+<p><strong>All endpoints require:</strong>
+- JWT authentication (Bearer token)
+- Organization membership verification
+- RBAC permission checks</p>
+<h2 id="example-flow">Example Flow</h2>
+<pre><code class="language-bash"># 1. Create firewall (returns PROVISIONING status)
+POST /api/firewalls
+{
+  &quot;bridgeId&quot;: &quot;userbridge_123&quot;,
+  &quot;side&quot;: &quot;inbound&quot;,
+  &quot;publicIp&quot;: &quot;203.0.113.45&quot;,
+  &quot;allowedPorts&quot;: [80, 443],
+  &quot;protocol&quot;: &quot;tcp&quot;
+}
+
+# Response (201 Created)
+{
+  &quot;id&quot;: &quot;fw_456&quot;,
+  &quot;status&quot;: &quot;PROVISIONING&quot;
+}
+
+# 2. Canvas redirects to ?newFirewallId=fw_456
+
+# 3. Canvas fetches firewall details
+GET /api/firewalls/fw_456
+
+# 4. Canvas polls every 2 seconds
+GET /api/firewalls/fw_456
+# Status changes: PROVISIONING → ACTIVE
+
+# 5. User sees firewall in palette with ✅ indicator
+</code></pre>
+<h2 id="security-features">Security Features</h2>
+<h3 id="ip-validation">IP Validation</h3>
+<ul>
+<li>✅ Rejects private ranges (10.0.0.0/8, 172.16-31.x, 192.168.x, 127.x)</li>
+<li>✅ Validates IPv4 format</li>
+<li>✅ Octet range checking</li>
+</ul>
+<h3 id="tenancy-enforcement">Tenancy Enforcement</h3>
+<ul>
+<li>✅ Auth middleware verifies org membership</li>
+<li>✅ Tenancy context applied to all queries</li>
+<li>✅ Row-Level Security at DB level</li>
+<li>✅ User can only access own org's bridges</li>
+</ul>
+<h3 id="rbac">RBAC</h3>
+<ul>
+<li>✅ <code>firewalls:write</code> permission required for POST</li>
+<li>✅ <code>firewalls:read</code> permission required for GET</li>
+<li>✅ <code>firewalls:delete</code> permission required for DELETE</li>
+</ul>
+<h3 id="idempotency">Idempotency</h3>
+<ul>
+<li>✅ Optional <code>X-Idempotency-Key</code> header</li>
+<li>✅ Duplicate requests return same firewall ID</li>
+<li>✅ 24-hour TTL on idempotency keys</li>
+</ul>
+<h2 id="test-coverage">Test Coverage</h2>
+<p><strong>All 20 tests passing:</strong>
+- CRUD operations (create, read, list, delete)
+- Unique constraint enforcement
+- Cascade delete on bridge deletion
+- Status transitions (PROVISIONING → ACTIVE → ERROR)
+- Edge cases and error handling</p>
+<p><strong>Run tests:</strong></p>
+<pre><code class="language-bash">$env:DATABASE_URL='postgresql://test:test@localhost:5433/bridgeflow_test'
+pnpm run test:api -- api/tests/firewalls.test.js
+</code></pre>
+<h2 id="files-changed">Files Changed</h2>
+<h3 id="new-files">New Files</h3>
+<ul>
+<li><code>api/handlers/firewalls.js</code> (141 lines) — API handlers</li>
+<li><code>api/validators/firewall.js</code> (113 lines) — IP/port/protocol validators</li>
+<li><code>api/tests/firewalls.test.js</code> (371 lines) — 20 comprehensive tests</li>
+<li><code>docs/phases/.../phase-33-firewall-api.md</code> — API specification</li>
+<li><code>docs/phases/.../phase-33-firewall-canvas-integration.md</code> — Canvas integration guide</li>
+<li><code>docs/phases/.../PHASE-33-COMPLETE-SUMMARY.md</code> — Executive summary</li>
+</ul>
+<h3 id="modified-files">Modified Files</h3>
+<ul>
+<li><code>prisma/schema.prisma</code> — Added Firewall model</li>
+<li><code>api/routes/api.js</code> — Added 4 firewall endpoints</li>
+<li><code>prisma/migrations/...</code> — New migration applied</li>
+</ul>
+<h2 id="integration-checklist-for-canvas">Integration Checklist for Canvas</h2>
+<ul>
+<li>[ ] Implement firewall form component</li>
+<li>[ ] Implement firewall card component</li>
+<li>[ ] Add <code>?newFirewallId</code> URL parameter detection</li>
+<li>[ ] Implement status polling (2s intervals)</li>
+<li>[ ] Show status indicator (🟡 PROVISIONING, 🟢 ACTIVE, 🔴 ERROR)</li>
+<li>[ ] Handle errors gracefully</li>
+<li>[ ] Test full end-to-end flow</li>
+</ul>
+<h2 id="next-steps">Next Steps</h2>
+<h3 id="for-canvas-developers-this-week">For Canvas Developers (This Week)</h3>
+<pre><code class="language-javascript">// 1. Create firewall form
+class FirewallForm {
+  fields = { side, publicIp, allowedPorts, protocol }
+  onSubmit = async (data) =&gt; {
+    const fw = await fetch('/api/firewalls', { 
+      method: 'POST', 
+      body: JSON.stringify({ bridgeId, ...data })
+    }).then(r =&gt; r.json())
+    window.location.search = `?newFirewallId=${fw.id}`
+  }
+}
+
+// 2. Create firewall card
+class FirewallCard {
+  render = () =&gt; html`
+    &lt;div&gt;${this.fw.side} firewall @ ${this.fw.publicIp}&lt;/div&gt;
+    &lt;div&gt;${this.statusIcon()} ${this.fw.status}&lt;/div&gt;
+  `
+}
+
+// 3. Add auto-detection
+const urlParams = new URLSearchParams(window.location.search)
+const newFirewallId = urlParams.get('newFirewallId')
+if (newFirewallId) {
+  const fw = await fetch(`/api/firewalls/${newFirewallId}`).then(r =&gt; r.json())
+  palette.addFirewall(fw, { highlight: true })
+}
+</code></pre>
+<h3 id="for-backend-developers-next">For Backend Developers (Next)</h3>
+<ol>
+<li>Implement async provisioning job</li>
+<li>Apply firewall rules to infrastructure</li>
+<li>Capture diagnostic metadata</li>
+<li>Update status in database</li>
+</ol>
+<h2 id="documentation">Documentation</h2>
+<ul>
+<li><strong>API Spec:</strong> <a href="../phase-33-firewall-api/">phase-33-firewall-api.md</a></li>
+<li><strong>Canvas Guide:</strong> <a href="../phase-33-firewall-canvas-integration/">phase-33-firewall-canvas-integration.md</a></li>
+<li><strong>Components:</strong> <a href="../phase-33-firewall-components/">phase-33-firewall-components.md</a></li>
+<li><strong>Summary:</strong> <a href="../PHASE-33-COMPLETE-SUMMARY/">PHASE-33-COMPLETE-SUMMARY.md</a></li>
+</ul>
+<h2 id="troubleshooting">Troubleshooting</h2>
+<h3 id="400-private-ip-range-100008-not-allowed">400: "Private IP range 10.0.0.0/8 not allowed"</h3>
+<ul>
+<li>Use public IP addresses only (203.0.113.x, 198.51.100.x, etc.)</li>
+<li>Internal IPs are rejected for security</li>
+</ul>
+<h3 id="409-a-inbound-firewall-already-exists-for-this-bridge">409: "A inbound firewall already exists for this bridge"</h3>
+<ul>
+<li>Only one firewall per side per bridge</li>
+<li>Delete existing firewall first to create a new one</li>
+</ul>
+<h3 id="404-firewall-not-found-or-access-denied">404: "Firewall not found or access denied"</h3>
+<ul>
+<li>Verify you're accessing your org's firewall</li>
+<li>Check if firewall was deleted</li>
+</ul>
+<h3 id="401-unauthorized">401: "Unauthorized"</h3>
+<ul>
+<li>JWT token expired or invalid</li>
+<li>Log in again to get fresh token</li>
+</ul>
+<h2 id="support">Support</h2>
+<p>For questions about:
+- <strong>API integration:</strong> See phase-33-firewall-canvas-integration.md
+- <strong>Database schema:</strong> See prisma/schema.prisma
+- <strong>Tests:</strong> See api/tests/firewalls.test.js
+- <strong>Implementation details:</strong> See api/handlers/firewalls.js</p>
+<hr />
+<p><strong>Phase 33 Part 1 (API):</strong> Complete ✅<br />
+<strong>Phase 33 Part 2 (Canvas):</strong> Ready for dev<br />
+<strong>Phase 33 Part 3 (Async Jobs):</strong> Pending</p>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+    
+  </span>
+</div>
+    <script src="../../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../../..";</script>
+    <script src="../../../js/theme_extra.js"></script>
+    <script src="../../../js/theme.js"></script>
+      <script src="../../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

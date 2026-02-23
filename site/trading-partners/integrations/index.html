@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://brockhager.github.io/bridgeflow-docs/trading-partners/integrations/" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>Integrations (QBO, CSV mailbox, Partner Gateway) - BridgeFlow Docs</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Integrations (QBO, CSV mailbox, Partner Gateway)";
+        var mkdocs_page_input_path = "trading-partners\\integrations.md";
+        var mkdocs_page_url = "/bridgeflow-docs/trading-partners/integrations/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> BridgeFlow Docs
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../topics/quickstart/">Quickstart</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../topics/concepts/">Concepts</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../current/control-tower/public-api/">API Reference</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../topics/vision/">Vision</a>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">BridgeFlow Docs</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">Integrations (QBO, CSV mailbox, Partner Gateway)</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="integrations-qbo-csv-mailbox-partner-gateway">Integrations (QBO, CSV mailbox, Partner Gateway)</h1>
+<p>QuickBooks (QBO)
+- Credentials: stored per-organization in <code>IntegrationCredential.encryptedData</code> (AES-256-GCM via <code>api/lib/crypto.js</code>). Decrypted to obtain <code>realmId</code> and token information when performing syncs.
+- Sync behavior: <code>api/lib/qboClient.js</code> fetches PurchaseOrder objects using QBO's API, handles token refresh and persists updated encrypted tokens.
+- UI: <code>GET /api/tp/:id/profile/aggregate</code> shows <code>qbo.connected</code> and <code>realmId</code> when available.</p>
+<p>CSV Mailbox
+- Files are stored in S3 inbox paths (<code>inbox/&lt;orgId&gt;/...</code>) via <code>api/handlers/partnerInbound.js</code> for partner uploads or the CSV upload handler.
+- Phase 21B aggregation can read mock S3 storage locally for simple counts and summary strings.
+- Admin UI shows a static summary string when available (e.g., <code>CSV Upload (purchase_order.csv, invoice.csv)</code>).</p>
+<p>Partner Gateway (Inbound)
+- Partners use <code>X-Partner-Key</code> header and the <code>POST /partner/:partnerId/invoice</code> endpoint to submit invoices.
+- Server validates invoice shape, enqueues payload to <code>partner_inbound:&lt;orgId&gt;</code> stream (Redis) and writes a CSV to S3 inbox for visibility.
+- Idempotency: the handler accepts idempotency keys and uses Redis streams / LPUSH fallback for enqueuing.</p>
+<p>Common patterns
+- Security: partners supply a key that is hashed (sha256) and stored in <code>PartnerApiKey.key</code> — the raw key is shown at creation only.
+- Observability: metrics include counters for <code>partner_invoice_received_total</code> and <code>partner_invoice_failures_total</code>, and QBO sync metrics (<code>qbo_sync_refresh</code>).
+- Processing: workers or stream consumers read from tenant-specific streams and transform or forward messages to delivery jobs.</p>
+<p>References:
+- See <code>api/handlers/partnerInbound.js</code> and <code>api/lib/qboClient.js</code> for implementation details and error handling.</p>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

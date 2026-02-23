@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://brockhager.github.io/bridgeflow-docs/integrations/partner-inbound/" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>Partner Inbound Gateway (Phase 20A/B) - BridgeFlow Docs</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Partner Inbound Gateway (Phase 20A/B)";
+        var mkdocs_page_input_path = "integrations\\partner-inbound.md";
+        var mkdocs_page_url = "/bridgeflow-docs/integrations/partner-inbound/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> BridgeFlow Docs
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../topics/quickstart/">Quickstart</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../topics/concepts/">Concepts</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../current/control-tower/public-api/">API Reference</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../topics/vision/">Vision</a>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">BridgeFlow Docs</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">Partner Inbound Gateway (Phase 20A/B)</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="partner-inbound-gateway-phase-20ab">Partner Inbound Gateway (Phase 20A/B)</h1>
+<p>This document describes the Partner Inbound Gateway contract for partners to post invoices to BridgeFlow.</p>
+<h2 id="endpoint">Endpoint</h2>
+<ul>
+<li>POST /partner/:partnerId/invoice</li>
+<li>Auth: <code>X-Partner-Key: &lt;raw-key&gt;</code> (returned once at creation; server stores sha256 hash only)</li>
+<li>Dev note: Partner API keys are stored in <code>PartnerApiKey</code> model and mapped to <code>organizationId</code> for RLS.</li>
+</ul>
+<h2 id="auth-rls">Auth &amp; RLS</h2>
+<ul>
+<li>Use <code>X-Partner-Key</code> header (or <code>Authorization: Bearer &lt;key&gt;</code>)</li>
+<li>The middleware <code>validatePartnerApiKey</code> validates the header and attaches <code>request.partnerOrgId</code> and <code>request.partnerId</code>.</li>
+<li>If missing or invalid: 401 Unauthorized</li>
+<li>If partnerId in URL does not match key: 403 Forbidden</li>
+</ul>
+<h2 id="payload-invoice-json">Payload (invoice JSON)</h2>
+<p>Required fields (minimal):
+- <code>invoiceId</code> (string)
+- <code>customerId</code> (string)
+- <code>amount</code> (number)
+- <code>currency</code> (string)
+- <code>invoiceDate</code> (ISO date string)</p>
+<p>Example:</p>
+<pre><code>{
+  &quot;invoiceId&quot;: &quot;I-123&quot;,
+  &quot;customerId&quot;: &quot;C-42&quot;,
+  &quot;amount&quot;: 120.50,
+  &quot;currency&quot;: &quot;USD&quot;,
+  &quot;invoiceDate&quot;: &quot;2025-06-01&quot;
+}
+</code></pre>
+<h2 id="idempotency">Idempotency</h2>
+<ul>
+<li>Supports <code>Idempotency-Key</code>/<code>X-Idempotency-Key</code> header.</li>
+<li>Uses existing idempotency middleware (TTL controlled by <code>IDEMPOTENCY_TTL_HOURS</code>).</li>
+<li>Duplicate requests with same idempotency key return stored response and include header <code>x-from-idempotency: true</code>.</li>
+</ul>
+<h2 id="enqueue-delivery">Enqueue &amp; Delivery</h2>
+<ul>
+<li>Partner invoices are enqueued to Redis stream <code>partner_inbound:&lt;organizationId&gt;</code> with fields:</li>
+<li><code>idempotencyKey</code>, <code>payload</code> (JSON string), <code>source: 'partner'</code></li>
+<li>A copy is also converted to CSV and uploaded to S3 inbox path <code>inbox/&lt;orgId&gt;/&lt;uuid&gt;.csv</code> for visibility.</li>
+<li>If <code>TradingPartner.deliveryMethod === 'email'</code>, an email notification can be triggered (via <code>sendInvoiceNotification</code>).</li>
+</ul>
+<h2 id="observability">Observability</h2>
+<ul>
+<li>Metrics added: <code>partner_invoice_received_total</code>, <code>partner_invoice_failures_total</code></li>
+</ul>
+<h2 id="notes-for-frontend-admin">Notes for Frontend / Admin</h2>
+<ul>
+<li>Admin UI (20C) will create and return raw partner API keys; keys are stored as sha256 hashes and are shown <strong>only once</strong> on creation.</li>
+<li>Ensure the partner is associated with a single organization (enforced in UI and validated by gateway).</li>
+</ul>
+<hr />
+<p>If you'd like, I can add a small Postman/cURL example and an end-to-end Playwright test that simulates partner upload and inbox check.</p>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

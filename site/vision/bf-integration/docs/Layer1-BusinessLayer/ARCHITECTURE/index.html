@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://brockhager.github.io/bridgeflow-docs/vision/bf-integration/docs/Layer1-BusinessLayer/ARCHITECTURE/" />
+      <link rel="shortcut icon" href="../../../../../img/favicon.ico" />
+    <title>ARCHITECTURE - BridgeFlow Docs</title>
+    <link rel="stylesheet" href="../../../../../css/theme.css" />
+    <link rel="stylesheet" href="../../../../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "ARCHITECTURE";
+        var mkdocs_page_input_path = "vision\\bf-integration\\docs\\Layer1-BusinessLayer\\ARCHITECTURE.md";
+        var mkdocs_page_url = "/bridgeflow-docs/vision/bf-integration/docs/Layer1-BusinessLayer/ARCHITECTURE/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../../../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../../../../.." class="icon icon-home"> BridgeFlow Docs
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../../..">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../../../topics/quickstart/">Quickstart</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../../../topics/concepts/">Concepts</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../../../current/control-tower/public-api/">API Reference</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../../../topics/vision/">Vision</a>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../..">BridgeFlow Docs</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../../../.." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">ARCHITECTURE</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <blockquote>
+<p>[!WARNING]
+Status: Planned / In Development
+Context: Original BF-INTEGRATION Vision (Pre-Phase 30)</p>
+</blockquote>
+<h1 id="layer-1-architecture-overview">Layer 1 Architecture (Overview)</h1>
+<h2 id="components">Components</h2>
+<ul>
+<li>api/server.js — Fastify server and route registration</li>
+<li>api/handlers/* — Resource-specific handlers (mappings, templates, users, orgs)</li>
+<li>api/lib/* — Shared services: RBAC, rate-limiting, MTLS integration, storage adapters</li>
+<li>api/worker/* — Background worker loops and job processing logic</li>
+<li>prisma/ — DB schema (multi-schema pattern: <code>public</code> + <code>admin</code>), migrations</li>
+<li>tests/ &amp; api/tests/ — Unit and integration tests (Vitest), worker integration tests</li>
+</ul>
+<h2 id="data-flow-high-level">Data flow (high-level)</h2>
+<p>Client -&gt; api/server (preHandlers: auth, rate-limit, mTLS) -&gt; Handler -&gt; Service -&gt; Prisma -&gt; DB</p>
+<p>When jobs are enqueued:
+Handler -&gt; enqueue job -&gt; Worker (separate process) -&gt; execute task -&gt; write audit/events -&gt; update DB</p>
+<h2 id="integration-points">Integration points</h2>
+<ul>
+<li>Database: Postgres via Prisma (multi-schema). Tests may use <code>USE_MOCK_DB=true</code> (mock DB) for fast CI runs.</li>
+<li>Redis: used for rate-limiting and TTL stores; in-memory fallback used in tests when Redis not available.</li>
+<li>mTLS / TLS validation: plugin lives in <code>api/lib/mtls.js</code> and is exercised by Node-only tests (moved to node runner).</li>
+<li>External services: Stripe webhook handler, secrets backends (AWS, Vault), emailer (nodemailer/Ethereal for dev).</li>
+</ul>
+<h2 id="technology-choices">Technology choices</h2>
+<ul>
+<li>Node.js (ESM-only), Fastify (HTTP), Prisma (ORM), Vitest (test runner), pnpm (package manager)</li>
+</ul>
+<h2 id="operational-notes">Operational notes</h2>
+<ul>
+<li>Feature flags and environment variables drive behavior: <code>REQUIRE_AUTH</code>, <code>ENFORCE_RBAC</code>, <code>LOCKDOWN_JOBS</code>, <code>USE_MOCK_DB</code>.</li>
+<li>mTLS-heavy tests are isolated and run under <code>node --test</code> with a memory limit to avoid OOM (see <code>scripts/run-mtls-safely.js</code>).</li>
+</ul>
+<hr />
+<h2 id="todos">TODOs</h2>
+<ul>
+<li>Add component diagrams (SVG/plantuml) for the architecture doc.</li>
+<li>Expand the worker lifecycle section with error handling and retries.</li>
+</ul>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+    
+  </span>
+</div>
+    <script src="../../../../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../../../../..";</script>
+    <script src="../../../../../js/theme_extra.js"></script>
+    <script src="../../../../../js/theme.js"></script>
+      <script src="../../../../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

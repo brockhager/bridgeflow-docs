@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://brockhager.github.io/bridgeflow-docs/packages/package-lifecycle/" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>Package Lifecycle - BridgeFlow Docs</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Package Lifecycle";
+        var mkdocs_page_input_path = "packages\\package-lifecycle.md";
+        var mkdocs_page_url = "/bridgeflow-docs/packages/package-lifecycle/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> BridgeFlow Docs
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../topics/quickstart/">Quickstart</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../topics/concepts/">Concepts</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../current/control-tower/public-api/">API Reference</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../topics/vision/">Vision</a>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">BridgeFlow Docs</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">Package Lifecycle</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="package-lifecycle">Package Lifecycle</h1>
+<p>Every package ingested into BridgeFlow goes through a defined lifecycle managed by the Package Service and Temporal Workflows.</p>
+<h2 id="status-transitions">Status Transitions</h2>
+<ol>
+<li>
+<p><strong><code>RECEIVED</code></strong></p>
+<ul>
+<li>Initial state upon successful POST to <code>/api/packages</code>.</li>
+<li>Payload is validated for basic size and format constraints.</li>
+<li>Persisted to database with <code>payload</code> and <code>metadata</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong><code>PARSING</code></strong></p>
+<ul>
+<li>The processing workflow has picked up the package.</li>
+<li>Parser (X12, Edifact, or JSON) is attempting to extract structured data.</li>
+</ul>
+</li>
+<li>
+<p><strong><code>PROCESSED</code></strong></p>
+<ul>
+<li><strong>EDI</strong>: Content valid, transaction extracted, and routed to the appropriate bridge/handler.</li>
+<li><strong>Bridge Config</strong>: Validation passed, and provisioning workflow trigger (or completed).</li>
+</ul>
+</li>
+<li>
+<p><strong><code>ACK_GENERATED</code> (EDI Only)</strong></p>
+<ul>
+<li>For X12/EDIFACT, a 997/CONTRL acknowledgment has been generated and queued for the sender.</li>
+</ul>
+</li>
+<li>
+<p><strong><code>FAILED</code></strong></p>
+<ul>
+<li>Parsing error, validation failure, or system error.</li>
+<li><code>errorDetails</code> field in the database contains specific diagnostic info.</li>
+</ul>
+</li>
+</ol>
+<h2 id="temporal-integration">Temporal Integration</h2>
+<p>The Package Service emits signals to Temporal workflows to drive these transitions asynchronously, ensuring high throughput and resilience.</p>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

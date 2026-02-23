@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://brockhager.github.io/bridgeflow-docs/blueprints/technical-overview/" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>Blueprints: Technical Overview - BridgeFlow Docs</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Blueprints: Technical Overview";
+        var mkdocs_page_input_path = "blueprints\\technical-overview.md";
+        var mkdocs_page_url = "/bridgeflow-docs/blueprints/technical-overview/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> BridgeFlow Docs
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../topics/quickstart/">Quickstart</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../topics/concepts/">Concepts</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../current/control-tower/public-api/">API Reference</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../topics/vision/">Vision</a>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">BridgeFlow Docs</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">Blueprints: Technical Overview</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="blueprints-technical-overview">Blueprints: Technical Overview</h1>
+<h2 id="data-model">Data Model</h2>
+<p>The <code>BridgeBlueprint</code> model is the core entity. It supports multi-tenancy via <code>organizationId</code>.</p>
+<pre><code class="language-prisma">model BridgeBlueprint {
+  id             String        @id @default(cuid())
+  slug           String
+  name           String
+  description    String?
+  type           String        @default(&quot;bridge&quot;) // new in Phase 38: bridge | integration
+  tier           String        @default(&quot;free&quot;) // free, enterprise
+  config         String        // JSON: components, connections, required maps
+  organizationId String?       // Null = Public, Set = Private
+  category       String?       // e.g., retail, healthcare, logistics
+  difficulty     String?       // beginner, intermediate, advanced
+  estimatedTime  String?       // &quot;30 minutes&quot;, &quot;2 hours&quot;
+  icon           String?       // emoji or icon identifier
+  tags           String[]      // searchable tags
+  isActive        Boolean       @default(true)
+  createdAt       DateTime       @default(now())
+  updatedAt       DateTime       @updatedAt
+
+  @@unique([slug, organizationId]) // Unique slug per scope
+}
+
+// Phase 38 addition: new model to track deployments
+model BlueprintInstance {
+  id            String   @id @default(cuid())
+  blueprintId   String
+  status        String   // PENDING, PROVISIONING, ACTIVE, ERROR
+  createdBy     String?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  metadata      Json?
+}
+</code></pre>
+<h2 id="bridge-visualization-integration">🌉 Bridge Visualization Integration</h2>
+<h3 id="phase-32-bridge-outline-enhancement">Phase 32+ Bridge Outline Enhancement</h3>
+<p>The blueprint system now includes visual configuration for bridge outline rendering:</p>
+<h4 id="required-components-mapping">Required Components Mapping</h4>
+<pre><code class="language-javascript">// Blueprint config structure for bridge visualization
+{
+  &quot;required&quot;: [&quot;trading-partner&quot;, &quot;connector&quot;, &quot;trading-partner&quot;],
+  &quot;definition&quot;: {
+    &quot;requiredConnectors&quot;: [
+      { &quot;type&quot;: &quot;AS2&quot;, &quot;direction&quot;: &quot;EGRESS&quot;, &quot;packageType&quot;: &quot;850&quot; },
+      { &quot;type&quot;: &quot;AS2&quot;, &quot;direction&quot;: &quot;INGRESS&quot;, &quot;packageType&quot;: &quot;810&quot; }
+    ]
+  }
+}
+</code></pre>
+<h4 id="visual-slot-determination">Visual Slot Determination</h4>
+<ul>
+<li><strong>Required slots</strong>: Orange dashed circles with pulse animation</li>
+<li><strong>Optional slots</strong>: Gray dashed circles (static)</li>
+<li><strong>Slot mapping</strong>: Based on blueprint <code>required</code> array and component types</li>
+</ul>
+<h2 id="api-architecture">API Architecture</h2>
+<p>We strictly separate Public (Catalog) and Private (Management) access to ensure security.</p>
+<h3 id="public-api-get-apiblueprints">Public API (<code>GET /api/blueprints</code>)</h3>
+<ul>
+<li><strong>Purpose</strong>: Power the "Browse Blueprints" UI for all users.</li>
+<li><strong>Behavior</strong>: Returns <strong>only</strong> public blueprints (<code>organizationId: null</code>).</li>
+<li><strong>Security</strong>: Authenticated users only. Enterprise users view the global public catalog here. They do <em>not</em> see their private blueprints mixed in.</li>
+</ul>
+<h3 id="admin-api-admin-apiblueprints">Admin API (<code>/admin-api/blueprints</code>)</h3>
+<ul>
+<li><strong>Purpose</strong>: Manage private blueprints for organizations.</li>
+<li><strong>Behavior</strong>: Scoped to the user's organization.</li>
+<li><strong>endpoints</strong>:</li>
+<li><code>POST /</code>: Create a new blueprint. (BF Admins -&gt; Public, Org Admins -&gt; Private).</li>
+<li><code>GET /</code>: List blueprints belonging to the user's organization.</li>
+</ul>
+<h2 id="bridge-outline-technical-implementation">🔧 Bridge Outline Technical Implementation</h2>
+<h3 id="frontend-rendering-pipeline">Frontend Rendering Pipeline</h3>
+<ol>
+<li><strong>Blueprint Selection</strong> → <code>loadBlueprintToCanvas(template)</code></li>
+<li><strong>Visual Processing</strong> → <code>renderBridgeOutline(template)</code></li>
+<li><strong>Slot Creation</strong> → Interactive circles positioned at bridge integration points</li>
+<li><strong>Gap Filling</strong> → <code>triggerBridgeSlotConfiguration(slotType, isRequired, blueprint)</code></li>
+</ol>
+<h3 id="data-flow-integration">Data Flow Integration</h3>
+<pre><code class="language-javascript">// Blueprint → Bridge Outline mapping
+const requiredItems = template.config?.required || template.required || [];
+
+// Slot type determination
+const isRequired = requiredItems.some(req =&gt; 
+  req.toLowerCase().includes(slot.type) || 
+  (slot.type === 'source' &amp;&amp; req.toLowerCase().includes('trading-partner')) ||
+  (slot.type === 'destination' &amp;&amp; req.toLowerCase().includes('trading-partner'))
+);
+</code></pre>
+<h3 id="css-animation-classes">CSS Animation Classes</h3>
+<pre><code class="language-css">.bridge-slot {
+  /* Required slot styling */
+  border: 3px dashed #F97316;
+  animation: pulse 2s infinite;
+}
+
+.bridge-slot.optional {
+  /* Optional slot styling */
+  border: 3px dashed #D1D5DB;
+  animation: none;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+</code></pre>
+<h2 id="security-rbac">Security &amp; RBAC</h2>
+<ul>
+<li><strong>Free Users</strong>: Can view Public Catalog. Cannot create blueprints.</li>
+<li><strong>Customer Admins</strong>: Can view Public Catalog. Can create/manage their own Private Blueprints via Admin API.</li>
+<li><strong>BridgeFlow Admins</strong>: Can create/manage Public Blueprints.</li>
+</ul>
+<h2 id="visual-design-system">🎨 Visual Design System</h2>
+<h3 id="color-semantics">Color Semantics</h3>
+<ul>
+<li><strong>Orange (<code>#F97316</code>)</strong>: Required components (attention/action needed)</li>
+<li><strong>Gray (<code>#D1D5DB</code>)</strong>: Optional components (less prominent)</li>
+<li><strong>White (<code>rgba(255, 255, 255, 0.9)</code>)</strong>: Background for slots</li>
+<li><strong>Blue (<code>#3B82F6</code>)</strong>: Completed/active states</li>
+</ul>
+<h3 id="accessibility-standards">Accessibility Standards</h3>
+<ul>
+<li><strong>ARIA Labels</strong>: "Add Source System - Required component"</li>
+<li><strong>Keyboard Navigation</strong>: <code>tabindex="0"</code> on all interactive slots</li>
+<li><strong>High Contrast</strong>: 4.5:1 ratio maintained</li>
+<li><strong>Screen Reader</strong>: Semantic <code>role="button"</code> usage</li>
+</ul>
+<hr />
+<p><em>The bridge outline visualization transforms blueprints from static templates into interactive building experiences, making the integration process intuitive and visually engaging.</em> 🌉</p>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

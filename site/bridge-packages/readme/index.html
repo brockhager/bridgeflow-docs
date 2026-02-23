@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://brockhager.github.io/bridgeflow-docs/bridge-packages/readme/" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>Bridge Packages — Overview - BridgeFlow Docs</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Bridge Packages \u2014 Overview";
+        var mkdocs_page_input_path = "bridge-packages\\readme.md";
+        var mkdocs_page_url = "/bridgeflow-docs/bridge-packages/readme/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> BridgeFlow Docs
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../topics/quickstart/">Quickstart</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../topics/concepts/">Concepts</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../current/control-tower/public-api/">API Reference</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../topics/vision/">Vision</a>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">BridgeFlow Docs</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">Bridge Packages — Overview</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="bridge-packages-overview">Bridge Packages — Overview</h1>
+<p>Purpose
+- Bridge Packages are reusable, deployable integration templates that represent one side of a bridge (Trading Partner + Map + Connector + optional adapters).
+- They capture integration intent as a single JSON <code>config</code> and are intended to be paired (left + right) in later phases.</p>
+<p>Quick summary
+- Prisma model: <code>BridgePackage</code> (see <code>prisma/schema.prisma</code>) with fields: <code>id</code>, <code>name</code> (unique), <code>description</code>, <code>config: Json?</code>, <code>organizationId?</code>, <code>createdAt</code>, <code>updatedAt</code>.
+- Migration applied: <code>20260116082917_add_bridgepackage_config</code> (dev Railway DB).
+- Admin API endpoints (RBAC protected):
+  - GET /admin-api/bridge-packages — list (requires <code>admin:organizations:read</code>)
+  - GET /admin-api/bridge-packages/:id — get one
+  - POST /admin-api/bridge-packages — create (requires <code>admin:bridge-packages:manage</code>)
+  - DELETE /admin-api/bridge-packages/:id — delete (requires <code>admin:bridge-packages:manage</code>)</p>
+<p>Validation rules (Phase 42)
+- <code>config</code> must include at least: <code>tradingPartner</code>, <code>connector</code>, and <code>map</code>.
+- <code>config</code> is stored as JSON in the <code>BridgePackage.config</code> field.</p>
+<p>Admin UI
+- New Admin page: <strong>Bridge Packages</strong>
+  - Route: <code>/bf-admin-app/packages</code>
+  - Create modal: Name, Description, Config (JSON textarea in Part 1)
+  - Delete with confirmation</p>
+<p>Canvas Integration
+- Canvas palette loads Bridge Packages via: <code>GET /admin-api/bridge-packages?limit=100</code> and renders <code>.palette-package</code> items.
+- Left-side drop zone (<code>.package-drop-zone</code>) accepts a package drop and instantiates module placeholders from <code>package.config</code>.
+- Right-side pairing is planned for Phase 43.</p>
+<p>Verification &amp; testing
+- Unit tests: API handlers (<code>api/handlers/admin/bridgePackages.js</code>) include validation tests.
+- Quick verification script: <code>scripts/verify-bridgepackage.js</code> (creates a test org, creates/reads/deletes a BridgePackage). Run via:</p>
+<p>pnpm run verify:bridgepackage</p>
+<ul>
+<li>Playwright e2e: <code>web/e2e/canvas-visual.spec.ts</code> includes canvas presence checks and screenshot capture (visual smoke).</li>
+</ul>
+<p>Operational notes
+- Permission scopes: <code>admin:bridge-packages:manage</code> (create/delete), <code>admin:organizations:read</code> (list/read).
+- The model is intentionally simple (config JSON) to iterate quickly in Phase 42 while preserving compatibility with future normalization.</p>
+<p>Links &amp; files
+- Prisma model: <code>prisma/schema.prisma</code> (model <code>BridgePackage</code>)
+- Migration: <code>migrations/20260116082917_add_bridgepackage_config/migration.sql</code>
+- API handlers: <code>api/handlers/admin/bridgePackages.js</code>
+- API routes: <code>api/routes/adminPackages.js</code>
+- Admin UI: <code>admin-bridgeflow/src/pages/PackageManager.jsx</code> (now labeled "Bridge Packages")
+- Canvas integration: <code>web/src/assembly.js</code>
+- Verify script: <code>scripts/verify-bridgepackage.js</code> (run with <code>pnpm run verify:bridgepackage</code>)</p>
+<p>If you want this doc expanded into an operator runbook (rollback steps, backup guidance, CI checks), tell me which sections to add and I will extend it.</p>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://brockhager.github.io/bridgeflow-docs/vision/bf-integration/docs/phases/phases31-40/phase-32-9-testing-guide/" />
+      <link rel="shortcut icon" href="../../../../../../img/favicon.ico" />
+    <title>Phase 32 9 testing guide - BridgeFlow Docs</title>
+    <link rel="stylesheet" href="../../../../../../css/theme.css" />
+    <link rel="stylesheet" href="../../../../../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Phase 32 9 testing guide";
+        var mkdocs_page_input_path = "vision\\bf-integration\\docs\\phases\\phases31-40\\phase-32-9-testing-guide.md";
+        var mkdocs_page_url = "/bridgeflow-docs/vision/bf-integration/docs/phases/phases31-40/phase-32-9-testing-guide/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../../../../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../../../../../.." class="icon icon-home"> BridgeFlow Docs
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../../../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../../../..">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../../../../topics/quickstart/">Quickstart</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../../../../topics/concepts/">Concepts</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../../../../current/control-tower/public-api/">API Reference</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../../../../topics/vision/">Vision</a>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../../..">BridgeFlow Docs</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../../../../.." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">Phase 32 9 testing guide</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <blockquote>
+<p>[!WARNING]
+Status: Planned / In Development
+Context: Original BF-INTEGRATION Vision (Pre-Phase 30)</p>
+</blockquote>
+<h1 id="phase-329-quick-start-testing-guide">Phase 32.9 — Quick Start Testing Guide</h1>
+<h2 id="getting-started">🚀 Getting Started</h2>
+<h3 id="step-1-start-the-development-server">Step 1: Start the Development Server</h3>
+<pre><code class="language-powershell">cd c:\JS\bridgeflow
+pnpm run web:dev
+</code></pre>
+<p><strong>Expected Output:</strong></p>
+<pre><code>✅ Initial build succeeded — bundled to C:\JS\bridgeflow\web\dist
+🚀 Dev server running at http://localhost:3000
+</code></pre>
+<h3 id="step-2-open-bridge-assembly-page">Step 2: Open Bridge Assembly Page</h3>
+<p>Navigate to: <code>http://localhost:3000/canvas-assembly</code></p>
+<h3 id="step-3-load-test-data">Step 3: Load Test Data</h3>
+<p>The page will auto-load trading partners from the API. If the TP list is empty:
+1. Seed test data: <code>pnpm run db:seed</code>
+2. Refresh the page</p>
+<hr />
+<h2 id="testing-the-three-fixes">🧪 Testing the Three Fixes</h2>
+<h3 id="test-1-canvas-panning-biztalk-style">TEST #1: Canvas Panning (BizTalk-Style)</h3>
+<h4 id="setup">Setup</h4>
+<ol>
+<li>Open Browser DevTools Console (F12 → Console tab)</li>
+<li>Create some components on canvas:</li>
+<li>Drag "Trading Partner" from left palette to canvas</li>
+<li>Drag "FTP" connector</li>
+<li>Drag another "Trading Partner"</li>
+<li>This creates a larger canvas area</li>
+</ol>
+<h4 id="test-middle-mouse-button">Test Middle Mouse Button</h4>
+<ol>
+<li><strong>Position</strong>: Move mouse over canvas center</li>
+<li><strong>Action</strong>: Press middle mouse button (scroll wheel button)</li>
+<li><strong>Expected</strong>: Cursor changes from pointer to <code>grab</code></li>
+<li><strong>Drag</strong>: While holding middle button, drag the mouse</li>
+<li><strong>Expected</strong>: Canvas moves smoothly, components move with it</li>
+<li><strong>Release</strong>: Release middle button</li>
+<li><strong>Expected</strong>: Cursor returns to normal</li>
+</ol>
+<h4 id="test-ctrl-left-click">Test Ctrl + Left Click</h4>
+<ol>
+<li><strong>Position</strong>: Move mouse over empty canvas area (not on component)</li>
+<li><strong>Hold</strong>: Press and hold Ctrl key</li>
+<li><strong>Click</strong>: Left-click mouse button (while holding Ctrl)</li>
+<li><strong>Expected</strong>: Cursor changes to <code>grabbing</code></li>
+<li><strong>Drag</strong>: Drag mouse while holding Ctrl + left button</li>
+<li><strong>Expected</strong>: Canvas pans smoothly</li>
+<li><strong>Release</strong>: Release mouse button</li>
+<li><strong>Expected</strong>: Normal cursor returns</li>
+</ol>
+<h4 id="test-double-click-reset">Test Double-Click Reset</h4>
+<ol>
+<li><strong>Pan</strong>: Use any method above to pan the canvas away from origin</li>
+<li><strong>Double-Click</strong>: Double-click on canvas (not on component)</li>
+<li><strong>Expected</strong>: Canvas snaps back to origin (0, 0)</li>
+<li><strong>Verify</strong>: Components are in original positions</li>
+</ol>
+<h4 id="verify-non-interference">Verify Non-Interference</h4>
+<ol>
+<li><strong>Drag Component</strong>: Left-click on component → drag normally</li>
+<li><strong>Expected</strong>: Component moves with mouse, not entire canvas</li>
+<li><strong>Drag Palette Item</strong>: Left-click TP in left palette → drag to canvas</li>
+<li><strong>Expected</strong>: Palette item creates new component, not canvas pan</li>
+</ol>
+<hr />
+<h3 id="test-2-sidebar-slide-off-animation">TEST #2: Sidebar Slide-Off Animation</h3>
+<h4 id="setup_1">Setup</h4>
+<ol>
+<li>Open page: <code>http://localhost:3000/canvas-assembly</code></li>
+<li>DevTools open (F12) for console visibility</li>
+<li>Check both sidebars are visible</li>
+</ol>
+<h4 id="test-left-sidebar-collapse">Test Left Sidebar Collapse</h4>
+<ol>
+<li><strong>Locate</strong>: Find left sidebar (Component Palette)</li>
+<li><strong>Find Button</strong>: Look for toggle arrow <code>◀</code> at top-right of sidebar header</li>
+<li><strong>Click</strong>: Click the arrow button</li>
+<li><strong>Animation</strong>: Sidebar should smoothly slide LEFT off-screen (0.3s animation)</li>
+<li><strong>Arrow Visible</strong>: After collapse, arrow <code>→</code> should be visible outside canvas edge</li>
+<li><strong>Canvas</strong>: Canvas should expand to full width (minus right sidebar)</li>
+</ol>
+<h4 id="test-left-sidebar-expand">Test Left Sidebar Expand</h4>
+<ol>
+<li><strong>Locate</strong>: Find the floating arrow <code>→</code> outside left canvas edge</li>
+<li><strong>Click</strong>: Click the arrow</li>
+<li><strong>Animation</strong>: Sidebar should smoothly slide back RIGHT into view (0.3s)</li>
+<li><strong>Header</strong>: Sidebar title and content should be visible again</li>
+<li><strong>Arrow</strong>: Arrow changes back to <code>◀</code></li>
+</ol>
+<h4 id="test-right-sidebar-collapse">Test Right Sidebar Collapse</h4>
+<ol>
+<li><strong>Locate</strong>: Find right sidebar (Configuration)</li>
+<li><strong>Find Button</strong>: Look for toggle arrow <code>▶</code> at top-left of sidebar header</li>
+<li><strong>Click</strong>: Click the arrow</li>
+<li><strong>Animation</strong>: Sidebar should smoothly slide RIGHT off-screen</li>
+<li><strong>Arrow Visible</strong>: Arrow <code>◀</code> visible outside right canvas edge</li>
+<li><strong>Canvas</strong>: Canvas expands left</li>
+</ol>
+<h4 id="test-right-sidebar-expand">Test Right Sidebar Expand</h4>
+<ol>
+<li><strong>Locate</strong>: Find floating arrow <code>◀</code> outside right edge</li>
+<li><strong>Click</strong>: Arrow</li>
+<li><strong>Animation</strong>: Sidebar slides back LEFT</li>
+<li><strong>Arrow Changes</strong>: Back to <code>▶</code></li>
+</ol>
+<h4 id="test-collapse-both-sidebars">Test Collapse Both Sidebars</h4>
+<ol>
+<li><strong>Collapse Left</strong>: Click left toggle</li>
+<li><strong>Collapse Right</strong>: Click right toggle</li>
+<li><strong>Expected</strong>: Full-screen canvas with only two small arrow buttons visible</li>
+<li><strong>Expand</strong>: Click each arrow to restore sidebars</li>
+</ol>
+<h4 id="verify-connection-updates">Verify Connection Updates</h4>
+<ol>
+<li><strong>Create Bridge</strong>: Add 2+ components with connections</li>
+<li><strong>Collapse Sidebar</strong>: Click toggle</li>
+<li><strong>Console</strong>: Check DevTools console (F12 → Console)</li>
+<li><strong>Expected</strong>: No errors, connections should still render correctly</li>
+<li><strong>Expand</strong>: Restore sidebar</li>
+<li><strong>Expected</strong>: Layout correct, connections still valid</li>
+</ol>
+<hr />
+<h3 id="test-3-trading-partner-loading">TEST #3: Trading Partner Loading</h3>
+<h4 id="verify-tp-count-display">Verify TP Count Display</h4>
+<ol>
+<li><strong>Open</strong>: <code>http://localhost:3000/canvas-assembly</code></li>
+<li><strong>Wait</strong>: Page loads (2-3 seconds for API sync)</li>
+<li><strong>Locate</strong>: Left sidebar → "Trading Partners" folder</li>
+<li><strong>Check</strong>: Display should show <code>(n)</code> where n &gt; 0</li>
+<li>Example: <code>(4)</code> or <code>(7)</code></li>
+<li><strong>If 0</strong>: </li>
+<li>Check browser console for errors (F12 → Console)</li>
+<li>Verify API is running: <code>http://localhost:4000/api/trading-partners</code></li>
+<li>Check database seeding: <code>pnpm run db:seed</code></li>
+</ol>
+<h4 id="verify-tp-list-populated">Verify TP List Populated</h4>
+<ol>
+<li><strong>Open</strong>: Trading Partners folder (should show <code>(n)</code> items)</li>
+<li><strong>Look For</strong>: Draggable TP items with:</li>
+<li>Icon (e.g., 🏢)</li>
+<li>Name (e.g., "Acme Corp")</li>
+<li>Status indicator (● color-coded)</li>
+<li><strong>Count</strong>: Verify number of items matches count <code>(n)</code></li>
+</ol>
+<h4 id="test-tp-dragging">Test TP Dragging</h4>
+<ol>
+<li><strong>Click &amp; Hold</strong>: On a TP item in palette</li>
+<li><strong>Drag</strong>: Move to canvas area</li>
+<li><strong>Expected</strong>: Component appears on canvas with TP branding</li>
+<li><strong>Release</strong>: Component locks to grid position</li>
+<li><strong>Verify</strong>: Component appears in canvas, not in palette</li>
+</ol>
+<h4 id="test-tp-add">Test TP Add</h4>
+<ol>
+<li><strong>Locate</strong>: "+ Add Trading Partner" button in Trading Partners folder</li>
+<li><strong>Click</strong>: Button</li>
+<li><strong>Navigation</strong>: Should navigate to <code>/create-tp</code> page</li>
+<li><strong>Create</strong>: Fill form and create a test TP</li>
+<li><strong>Return</strong>: After creation, should return to canvas-assembly</li>
+<li><strong>Verify</strong>: New TP appears in palette</li>
+<li><strong>Count</strong>: Count should increment</li>
+</ol>
+<h4 id="test-auto-sync-on-navigation">Test Auto-Sync on Navigation</h4>
+<ol>
+<li><strong>Add TP</strong>: From <code>/create-tp</code> route</li>
+<li><strong>Return</strong>: Navigate back to canvas</li>
+<li><strong>Expected</strong>: New TP in palette without page refresh</li>
+<li><strong>Count</strong>: Updated to include new TP</li>
+</ol>
+<hr />
+<h2 id="debugging-tips">🔍 Debugging Tips</h2>
+<h3 id="canvas-panning-not-working">Canvas Panning Not Working</h3>
+<ol>
+<li><strong>Check Console</strong>: F12 → Console (should be clean)</li>
+<li><strong>Verify Viewport</strong>: Inspect element → canvas-viewport (should exist)</li>
+<li><strong>Mouse Button</strong>: Ensure middle mouse/Ctrl+click works in your browser</li>
+<li><strong>Browser Test</strong>: Try different browser (Chrome, Firefox, etc.)</li>
+</ol>
+<h3 id="sidebar-animation-choppy">Sidebar Animation Choppy</h3>
+<ol>
+<li><strong>DevTools Performance</strong>: F12 → Performance tab</li>
+<li><strong>Record</strong>: Record sidebar collapse</li>
+<li><strong>Analyze</strong>: Look for layout thrashing or repaints</li>
+<li><strong>CPU</strong>: High CPU usage? Check for loops in setupPanelToggles</li>
+</ol>
+<h3 id="tp-count-shows-zero">TP Count Shows Zero</h3>
+<ol>
+<li><strong>API Status</strong>: Check <code>http://localhost:4000/api/health</code></li>
+<li><strong>API Route</strong>: Verify <code>/api/trading-partners</code> returns data</li>
+<li><strong>Store Debug</strong>: In console: <code>console.log(store.partners)</code></li>
+<li><strong>API Fetch</strong>: Check browser Network tab (F12 → Network) for <code>/trading-partners</code> request</li>
+<li><strong>Database</strong>: Run <code>pnpm run db:seed</code> to populate test data</li>
+</ol>
+<h3 id="no-toggle-arrows-visible-when-collapsed">No Toggle Arrows Visible When Collapsed</h3>
+<ol>
+<li><strong>CSS</strong>: Check DevTools → Styles (F12 → Elements → Styles)</li>
+<li><strong>z-index</strong>: Should be <code>41</code> (visible on top)</li>
+<li><strong>Position</strong>: Should be <code>absolute</code> with <code>right: -35px</code> or <code>left: -35px</code></li>
+<li><strong>Visibility</strong>: Check <code>opacity: 1</code> and <code>pointer-events: auto</code></li>
+</ol>
+<hr />
+<h2 id="expected-performance">📊 Expected Performance</h2>
+<table>
+<thead>
+<tr>
+<th>Operation</th>
+<th>Time</th>
+<th>Expected</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Page Load</td>
+<td>1-2s</td>
+<td>Trading partners loaded from API</td>
+</tr>
+<tr>
+<td>Canvas Pan</td>
+<td>Real-time</td>
+<td>Smooth 60 FPS (GPU-accelerated)</td>
+</tr>
+<tr>
+<td>Sidebar Animation</td>
+<td>0.3s</td>
+<td>Smooth easing</td>
+</tr>
+<tr>
+<td>TP Palette Render</td>
+<td>&lt;100ms</td>
+<td>All TPs visible immediately</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="acceptance-criteria">✅ Acceptance Criteria</h2>
+<ul>
+<li>[x] Canvas pans smoothly with middle mouse / Ctrl+click</li>
+<li>[x] Double-click resets pan to origin</li>
+<li>[x] Sidebars slide off-canvas with visible arrows</li>
+<li>[x] Canvas expands to fill freed space</li>
+<li>[x] TP count &gt; 0 when page loads</li>
+<li>[x] TP items draggable to canvas</li>
+<li>[x] No console errors</li>
+<li>[x] No layout thrashing or performance degradation</li>
+</ul>
+<hr />
+<h2 id="notes">📝 Notes</h2>
+<ul>
+<li><strong>First Load</strong>: TP API call takes 1-2 seconds. Count will update when response arrives.</li>
+<li><strong>Hot Reload</strong>: Changes to assembly.js or CSS auto-reload in dev mode</li>
+<li><strong>Local Storage</strong>: TP list cached; clear if stale: DevTools → Application → Local Storage → Clear</li>
+<li><strong>Mobile</strong>: Panning works on touch devices with middle button emulation (varies by browser)</li>
+</ul>
+<hr />
+<h2 id="need-help">🆘 Need Help?</h2>
+<p>If tests fail:
+1. Check console (F12 → Console) for JavaScript errors
+2. Check Network tab (F12 → Network) for API failures
+3. Verify database is seeded: <code>pnpm run db:seed</code>
+4. Restart dev server: <code>pnpm run web:dev</code>
+5. Clear browser cache: Ctrl+Shift+Delete</p>
+<hr />
+<p><strong>Last Updated:</strong> January 2026
+<strong>Phase:</strong> 32.9 — Enterprise UX Polish</p>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+    
+  </span>
+</div>
+    <script src="../../../../../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../../../../../..";</script>
+    <script src="../../../../../../js/theme_extra.js"></script>
+    <script src="../../../../../../js/theme.js"></script>
+      <script src="../../../../../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://brockhager.github.io/bridgeflow-docs/phase-60-gap-analysis/" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>Phase 60 Gap Analysis and Update Plan - BridgeFlow Docs</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Phase 60 Gap Analysis and Update Plan";
+        var mkdocs_page_input_path = "phase-60-gap-analysis.md";
+        var mkdocs_page_url = "/bridgeflow-docs/phase-60-gap-analysis/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href=".." class="icon icon-home"> BridgeFlow Docs
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="..">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../topics/quickstart/">Quickstart</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../topics/concepts/">Concepts</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../current/control-tower/public-api/">API Reference</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../topics/vision/">Vision</a>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">BridgeFlow Docs</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">Phase 60 Gap Analysis and Update Plan</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="phase-60-gap-analysis-and-update-plan">Phase 60 Gap Analysis and Update Plan</h1>
+<p>Date: February 23, 2026</p>
+<h2 id="executive-summary">Executive Summary</h2>
+<p>The docs repository currently mixes:
+- legacy BF-INTEGRATION vision material (pre-Phase 30),
+- older marketing docs,
+- and partial architecture docs that do not reflect Phases 56-58 live reality.</p>
+<p>Revised strategy:
+- <strong>Preserve all BF-INTEGRATION content</strong>
+- <strong>Re-label and relocate it as Future Vision</strong>
+- <strong>Add a new Current System section for live Control Tower</strong></p>
+<h2 id="1-what-is-live-vs-what-is-missing">1. What Is Live vs What Is Missing</h2>
+<h3 id="live-system-facts-present-in-code-missingunderrepresented-in-docs">Live system facts (present in code, missing/underrepresented in docs)</h3>
+<ul>
+<li>TRL 7 validation (Phase 56 live loop)</li>
+<li>Unified <code>bf-control</code> deployment serving both API and public frontend (<code>home/</code>)</li>
+<li>Public resilience API: <code>GET /api/v1/public/resilience-status</code></li>
+<li>Ingestion API: <code>POST /api/control/events</code></li>
+<li>Customer-facing integration onboarding guide</li>
+</ul>
+<h3 id="missing-sections-must-add">Missing sections (must add)</h3>
+<ul>
+<li><code>Current System</code> section documenting live Control Tower</li>
+<li>TRL 7 proof/evidence summary for February 20, 2026 validation</li>
+<li>Updated architecture for single-service <code>bf-control + home/</code></li>
+<li>Public API references for live endpoints</li>
+<li>Integration Guide for external developers</li>
+<li>Fresh screenshots from <code>https://control-tower.up.railway.app/</code></li>
+</ul>
+<h2 id="2-legacy-content-to-preserve-and-re-index">2. Legacy Content To Preserve and Re-Index</h2>
+<p>This content is <strong>not obsolete</strong>, but currently unlabeled and hard to distinguish from live-state docs:</p>
+<ul>
+<li><code>docs/phases/phases1-10/</code> (18 files)</li>
+<li><code>docs/phases/phases11-20/</code> (19 files)</li>
+<li><code>docs/phases/phases21-30/</code> (12 files)</li>
+<li><code>web/</code> (13 files)</li>
+<li><code>getting-started/</code> (3 files)</li>
+<li><code>guides/</code> (3 files)</li>
+<li><code>api-reference/</code> (1 file)</li>
+<li><code>troubleshooting/</code> (2 files)</li>
+<li>Layered architecture sets:</li>
+<li><code>docs/Layer0-Admin-Bridgeflow/</code></li>
+<li><code>docs/Layer1-BusinessLayer/</code></li>
+<li><code>docs/Layer2-ConnectionLayer/</code></li>
+<li><code>docs/Layer3-DataMappingLayer/</code></li>
+<li><code>docs/Layer4-PlatformCoreLayer/</code></li>
+<li><code>docs/Layer5-InfrastructureLayer/</code></li>
+</ul>
+<h2 id="3-reorganization-plan">3. Reorganization Plan</h2>
+<h3 id="track-a-current-system-live">Track A: Current System (Live)</h3>
+<p>Create and maintain:
+- <code>docs/current/control-tower/README.md</code>
+- <code>docs/current/control-tower/trl7-validation.md</code>
+- <code>docs/current/control-tower/public-api.md</code>
+- <code>docs/current/control-tower/integration-guide.md</code></p>
+<h3 id="track-b-future-vision-preserved">Track B: Future Vision (Preserved)</h3>
+<p>Create a future-vision index and route existing design docs through it:
+- <code>docs/roadmap/future-architecture/README.md</code></p>
+<p>Then migrate or mirror legacy docs into:
+- <code>docs/vision/bf-integration/</code> (target folder)</p>
+<p>with explicit labels:
+- <code>Planned</code>
+- <code>Historical</code>
+- <code>Superseded by current implementation</code> (when applicable)</p>
+<h2 id="4-drafts-completed-in-this-pass">4. Drafts Completed in This Pass</h2>
+<ul>
+<li>Root narrative rewrite: <code>README.md</code> (Today vs Tomorrow framing)</li>
+<li>New current-system section scaffolding:</li>
+<li><code>docs/current/control-tower/README.md</code></li>
+<li><code>docs/current/control-tower/trl7-validation.md</code></li>
+<li><code>docs/current/control-tower/public-api.md</code></li>
+<li><code>docs/current/control-tower/integration-guide.md</code></li>
+<li>Future-vision preservation index:</li>
+<li><code>docs/roadmap/future-architecture/README.md</code></li>
+<li>Live screenshot captured:</li>
+<li><code>docs/images/phase-60-control-tower-home.png</code></li>
+</ul>
+<h2 id="5-next-actions-execution-order">5. Next Actions (Execution Order)</h2>
+<ol>
+<li>Add navigation/index links in MkDocs to both Current and Future sections.</li>
+<li>Migrate top-priority legacy files into <code>docs/vision/bf-integration/</code> with labels.</li>
+<li>Replace root <code>docs/index.md</code> content to point users to Current vs Future pathways.</li>
+<li>Publish docs on GitHub Pages.</li>
+</ol>
+<h2 id="6-hosting-setup-proposal-github-pages">6. Hosting Setup Proposal (GitHub Pages)</h2>
+<p>From repository root:</p>
+<pre><code class="language-bash"># if gh CLI is installed
+gh repo edit --enable-pages --pages-source=main --pages-path=/
+</code></pre>
+<p>If configuring manually:
+1. GitHub -&gt; Settings -&gt; Pages
+2. Source: <code>Deploy from a branch</code>
+3. Branch: <code>main</code> / folder: <code>/ (root)</code>
+4. Save</p>
+<p>If we decide to publish MkDocs output instead:</p>
+<pre><code class="language-bash">pip install mkdocs
+mkdocs gh-deploy
+</code></pre>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+    
+  </span>
+</div>
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "..";</script>
+    <script src="../js/theme_extra.js"></script>
+    <script src="../js/theme.js"></script>
+      <script src="../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

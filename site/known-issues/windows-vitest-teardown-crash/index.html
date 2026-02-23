@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://brockhager.github.io/bridgeflow-docs/known-issues/windows-vitest-teardown-crash/" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>Windows Vitest Teardown Crash (ACCESS_VIOLATION / exit code -1073741819) - BridgeFlow Docs</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Windows Vitest Teardown Crash (ACCESS_VIOLATION / exit code -1073741819)";
+        var mkdocs_page_input_path = "known-issues\\windows-vitest-teardown-crash.md";
+        var mkdocs_page_url = "/bridgeflow-docs/known-issues/windows-vitest-teardown-crash/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> BridgeFlow Docs
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../topics/quickstart/">Quickstart</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../topics/concepts/">Concepts</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../current/control-tower/public-api/">API Reference</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../topics/vision/">Vision</a>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">BridgeFlow Docs</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">Windows Vitest Teardown Crash (ACCESS_VIOLATION / exit code -1073741819)</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="windows-vitest-teardown-crash-access_violation-exit-code-1073741819">Windows Vitest Teardown Crash (ACCESS_VIOLATION / exit code -1073741819)</h1>
+<p>Severity: Low
+Platform: Windows (observed on developer workstation / CI Windows runners)</p>
+<h2 id="summary">Summary</h2>
+<p>During full test runs with Vitest on Windows we intermittently observe process exits with return codes like <code>-1073741819</code> (0xC0000005 / ACCESS_VIOLATION). The test suites themselves generally pass (unit and integration tests), but the Vitest process sometimes terminates with this native crash during teardown.</p>
+<h2 id="observed-behavior-logs">Observed behavior / logs</h2>
+<ul>
+<li>Vitest test output shows all tests passing, followed by a non-zero exit:</li>
+<li>Example: <code>⠙[test-setup] process.exit called, code= -1073741819 unhandledSeen= false</code></li>
+<li>Exit code <code>-1073741819</code> corresponds to <code>0xC0000005</code> (ACCESS_VIOLATION) — a native OS-level crash.</li>
+<li>Symptoms point to native teardown code (Prisma client disconnect or underlying C/C++ library) running during <code>process.on('beforeExit')</code> or <code>process.on('exit')</code> handlers.</li>
+</ul>
+<h2 id="likely-cause">Likely cause</h2>
+<ul>
+<li>Interaction between Prisma's native engine and Windows in-process teardown. Disconnecting Prisma client in certain Windows environments has previously been observed to cause access violations (threadpool / engine teardown race). The crash appears environmental rather than a JavaScript error.</li>
+</ul>
+<h2 id="repro-steps">Repro steps</h2>
+<ol>
+<li>Run full test suite on a Windows machine using the repository's test command:
+   <code>bash
+   pnpm test</code></li>
+<li>Observe: tests pass but process exits with an access violation code and the CI job reports failure.</li>
+</ol>
+<h2 id="temporary-mitigation-implemented">Temporary mitigation (implemented)</h2>
+<ul>
+<li>The repository includes a test setup file (<code>test/setup-unhandled.js</code>) that now implements a <strong>refined Windows teardown guard</strong>. Behavior:</li>
+<li>If running on <strong>Windows</strong> and <strong>no unhandled errors were observed</strong>, the setup forces an <strong>early clean exit</strong> (<code>process.exit(0)</code>) to avoid native teardown code (Prisma disconnect, etc.) from running and potentially causing an access violation.</li>
+<li>If <strong>unhandled errors were observed</strong>, the setup <strong>skips the known Prisma disconnect</strong> (a known crash source) but allows the test runner to exit with a failing status so real test failures are visible.</li>
+</ul>
+<p>Example (simplified):
+  <code>js
+  if (process.platform === 'win32') {
+    if (!global._bridgeflow_unhandledSeen) {
+      // Force a clean exit before native libs run
+      process.exit(0)
+    }
+    // else: skip Prisma disconnect but allow failing exit status
+  } else {
+    await prisma.$disconnect()
+  }</code>
+- Additionally, the setup file logs unhandled rejections and uncaught exceptions so true test failures still fail the CI run.</p>
+<h2 id="recommended-next-steps">Recommended next steps</h2>
+<ul>
+<li>Continue running full test suite in CI (Linux) for authoritative verification (Linux/macOS are unaffected by this native crash).</li>
+<li>Open an issue with Prisma (or the underlying native engine) with logs if the crash can be reliably reproduced on a Windows runner.</li>
+<li>If future work demands Windows stability, consider using a separate Node/Prisma version matrix or running tests in WSL (Ubuntu) instead of pure Windows host.</li>
+</ul>
+<h2 id="notes-references">Notes / References</h2>
+<ul>
+<li>Exit codes: <code>-1073741819</code> == <code>0xC0000005</code> (ACCESS_VIOLATION). Native errors like this should be treated as runtime environment bugs, not JavaScript logic bugs.</li>
+</ul>
+<hr />
+<p>Documented by automated test maintenance changes on branch merging to <code>main</code>.</p>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

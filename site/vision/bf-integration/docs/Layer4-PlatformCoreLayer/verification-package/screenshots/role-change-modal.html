@@ -1,0 +1,14 @@
+<!doctype html>
+<html>
+<head><meta charset="utf-8"><title>Role Change Modal Snapshot</title><style>body{font-family:Arial;margin:16px}.modal{border:1px solid #ccc;padding:12px;max-width:400px}.field{margin-bottom:8px}</style></head>
+<body>
+<!-- Status: Planned / In Development | Context: Original BF-INTEGRATION Vision (Pre-Phase 30) -->
+<div style="background:#fff3cd;border:1px solid #ffecb5;color:#664d03;padding:10px;margin:8px;font-family:Arial,sans-serif;font-size:14px;"><strong>Status:</strong> Planned / In Development | <strong>Context:</strong> Original BF-INTEGRATION Vision (Pre-Phase 30)</div>
+  <h2>Change Role</h2>
+  <div class="modal" role="dialog" aria-modal="true">
+    <div class="field"><label>Role: <select id="modalRole"><option value="user">User</option><option value="operator">Operator</option><option value="admin" selected>Admin</option></select></label></div>
+    <div class="field"><button id="modalConfirm">Confirm</button> <button id="modalCancel">Cancel</button></div>
+  </div>
+  <div aria-live="polite" id="aria-live-region" style="position:absolute;left:-9999px">User role updated successfully</div>
+</body>
+</html>

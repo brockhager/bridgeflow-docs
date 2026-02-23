@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://brockhager.github.io/bridgeflow-docs/instructions/TESTING/" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>Local Testing Guide — Mock DB + Ethereal - BridgeFlow Docs</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Local Testing Guide \u2014 Mock DB + Ethereal";
+        var mkdocs_page_input_path = "instructions\\TESTING.md";
+        var mkdocs_page_url = "/bridgeflow-docs/instructions/TESTING/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> BridgeFlow Docs
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../topics/quickstart/">Quickstart</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../topics/concepts/">Concepts</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../current/control-tower/public-api/">API Reference</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../topics/vision/">Vision</a>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">BridgeFlow Docs</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">Local Testing Guide — Mock DB + Ethereal</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="local-testing-guide-mock-db-ethereal">Local Testing Guide — Mock DB + Ethereal</h1>
+<p>This document describes how to run the end-to-end email delivery validation using the in-memory Mock DB and Ethereal (disposable SMTP).</p>
+<p>Why use this flow
+- No Docker or local Postgres required — works on Windows, macOS, Linux
+- No real SMTP credentials needed (Ethereal provides ephemeral inboxes)
+- Repeatable and isolated using the Mock DB</p>
+<p>Files
+- <code>scripts/test-email-flow.js</code> — test runner that creates a test <code>email_sender</code> Resource, creates a <code>SEND_INVOICE</code> job, runs the worker, and validates invoice creation.
+- <code>api/lib/emailSender.js</code> — nodemailer-based transport that returns preview URLs for Ethereal.
+- <code>api/worker/simulatedWorker.js</code> — worker which writes preview URL and subject/body into <code>AuditLog.meta</code> for test visibility.</p>
+<p>Env vars (recommended for PowerShell)</p>
+<pre><code class="language-powershell">$env:USE_MOCK_DB=&quot;true&quot;
+$env:USE_ETHEREAL=&quot;true&quot;
+$env:EMAIL_FROM=&quot;bridgeflow-test@example.com&quot;
+$env:EMAIL_TO=&quot;brockhager@gmail.com&quot;
+$env:CLEANUP=&quot;true&quot;   # default; set to false to keep records for debugging
+node scripts/test-email-flow.js
+</code></pre>
+<p>Run steps
+1. Ensure dependencies are installed: <code>pnpm install</code>
+2. Run the test as shown above.
+3. The script will print a preview URL (Ethereal) and a small email summary (subject and truncated body). Open the preview link to view the message.</p>
+<p>Cleanup
+- By default <code>CLEANUP=true</code> and the script will reset the mock DB or delete created records (best-effort) when running against a real DB.
+- To keep artifacts for debugging, set <code>CLEANUP=false</code>.</p>
+<p>Troubleshooting
+- If the script errors with missing DB: ensure <code>USE_MOCK_DB=true</code> or set <code>DATABASE_URL</code> to a reachable Postgres instance.
+- If Ethereal preview doesn't appear in audit logs, ensure <code>USE_ETHEREAL=true</code> and that the worker processed the job (the script will run the worker several times to allow retries/backoff).</p>
+<p>Notes
+- This approach validates the full delivery stack (job creation, worker lifecycle, email transport) safely.
+- For Postgres-based testing or CI integration, see developer runbooks or contact the platform team to provision a test DB or fix Docker on Windows.</p>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

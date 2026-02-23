@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://brockhager.github.io/bridgeflow-docs/vision/bf-integration/docs/phases/phases31-40/phase-37-foundation/" />
+      <link rel="shortcut icon" href="../../../../../../img/favicon.ico" />
+    <title>Phase 37 foundation - BridgeFlow Docs</title>
+    <link rel="stylesheet" href="../../../../../../css/theme.css" />
+    <link rel="stylesheet" href="../../../../../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Phase 37 foundation";
+        var mkdocs_page_input_path = "vision\\bf-integration\\docs\\phases\\phases31-40\\phase-37-foundation.md";
+        var mkdocs_page_url = "/bridgeflow-docs/vision/bf-integration/docs/phases/phases31-40/phase-37-foundation/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../../../../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../../../../../.." class="icon icon-home"> BridgeFlow Docs
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../../../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../../../..">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../../../../topics/quickstart/">Quickstart</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../../../../topics/concepts/">Concepts</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../../../../current/control-tower/public-api/">API Reference</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../../../../topics/vision/">Vision</a>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../../..">BridgeFlow Docs</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../../../../.." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">Phase 37 foundation</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <blockquote>
+<p>[!WARNING]
+Status: Planned / In Development
+Context: Original BF-INTEGRATION Vision (Pre-Phase 30)</p>
+</blockquote>
+<h1 id="phase-37-week-1-system-logs-structured-logging-complete">Phase 37 — Week 1: System Logs &amp; Structured Logging (Complete)</h1>
+<p><strong>Status:</strong> ✅ Week 1 Complete — Structured Logging implemented (January 11, 2026)</p>
+<h2 id="summary">Summary</h2>
+<p>Week 1 delivered a structured logging system and log query APIs. This provides traceability across onboarding jobs, provisioning flows, and general platform operations and prepares the ground for Week 2 (monitoring &amp; metrics dashboards, alerts).</p>
+<h3 id="files-created-modified">Files Created / Modified</h3>
+<ul>
+<li><code>api/lib/logger.js</code> — Enhanced structured logger (traceId, spanId, parentSpanId, sessionId, userId, organizationId)</li>
+<li><code>api/handlers/logs.js</code> — Log query and export handlers</li>
+<li><code>api/routes/logs.js</code> — Exposes logs API routes with RBAC protection</li>
+<li><code>api/handlers/onboardingJobs.js</code> — Integrated structured logging and trace propagation into provisioning jobs</li>
+<li><code>api/routes/api.js</code> — Mounted <code>/api/logs</code> routes</li>
+</ul>
+<h2 id="week-1-accomplishments-enterprise-grade">Week 1 — Accomplishments (Enterprise-Grade)</h2>
+<ul>
+<li><strong>Complete Observability Infrastructure:</strong> Correlation IDs allow full traceability from onboarding session → provisioning job → individual steps ✅</li>
+<li><strong>Context Enrichment:</strong> Every log includes <code>userId</code>, <code>organizationId</code>, <code>sessionId</code> for fast triage ✅</li>
+<li><strong>Security-first:</strong> Auto-masking of sensitive data prevents credential leaks ✅</li>
+<li><strong>Production-ready Output:</strong> JSON logs for container stdout and colored console output in development ✅</li>
+<li><strong>Operational Excellence:</strong> Comprehensive API (query, summary, trace, export) with RBAC enforced; onboarding jobs now fully observable; size limits prevent log explosion ✅</li>
+</ul>
+<h2 id="week-2-monitoring-metrics-plan-core-deliverables">Week 2 — Monitoring &amp; Metrics Plan (Core Deliverables)</h2>
+<p>Objective: turn logs into actionable metrics, dashboards, and alerts so operators and the CTO can see system health and business KPIs at a glance.</p>
+<p>1) System Health Dashboard (Grafana/Datadog)
+   - CPU / Memory / Disk usage (per service)
+   - Job queue depth and processing rate (per job type)
+   - API response times and 5xx error rates
+   - Worker pool utilization and worker error counts</p>
+<p>2) Business Metrics Dashboard
+   - Onboarding completion rate by template (percent complete within target SLA)
+   - Average setup time per template (Simple File vs X12 EDI Hub)
+   - Failed provisioning analysis (rate, top reasons)
+   - Per-organization provisioning metrics for enterprise customers</p>
+<p>3) Alerting System
+   - Threshold alerts: failed jobs &gt; 5% rolling window, long-running jobs (&gt;10 minutes), job backlogs &gt; X
+   - Integration with notification system (Slack, email, paging)
+   - Escalation policy: on-call → manager → CTO for critical incidents</p>
+<p>4) Customer-Specific Views
+   - Organization-level dashboards (enterprise customers) with role-based access
+   - Historical trend analysis (30/90 day views)</p>
+<p>Key Technical Components
+- Metrics collection: Prometheus-style counters/gauges; instrumented from logs and code (trace/session labels)
+- Dashboard UI: Grafana or Datadog live panels with drill-down links to traces/logs
+- Alert rules engine: configurable thresholds and suppressions
+- Data retention: 30 days standard, extendable to 90 days for enterprise</p>
+<p>Success Criteria
+- CTO can see real-time system health and immediately identify if onboarding is experiencing issues
+- Alerts trigger actionable playbooks and reduce mean time to detection</p>
+<p>Implementation Recommendations
+- Parse structured JSON logs to extract counters (success/failure, durations) and histograms (latency)
+- Use <code>traceId</code> / <code>sessionId</code> to correlate dashboard alerts with logs and traces
+- Surface <code>traceId</code> and <code>sessionId</code> links in Grafana panels to jump to trace/log views
+- Reuse RBAC for dashboard access control; limit org-level views to enterprise customers</p>
+<p>Strategic Impact
+- Proactive issue detection and performance optimization
+- Business insights: which templates succeed fastest and where customers struggle
+- Customer trust: enterprise customers get transparent visibility into their onboarding</p>
+<h2 id="week-3-vault-integration-credential-storage-secret-management-complete">Week 3 — Vault Integration: Credential Storage &amp; Secret Management (Complete)</h2>
+<p><strong>Status:</strong> ✅ Week 3 Complete — Vault-backed credential management implemented (January 11, 2026)</p>
+<p><strong>Summary:</strong>
+Week 3 added enterprise-grade credential storage and secret management. Credential metadata is stored in the DB while secret values are stored and retrieved from a secret backend (Vault is supported; a mock backend remains the default for local dev/CI). Adapters (DatabaseAdapter, APIAdapter) were updated to fetch connection strings and authentication secrets via the secret backend.</p>
+<p><strong>Files Created</strong>
+- <code>api/handlers/credentials.js</code> — CRUD operations and Vault proxy handlers
+- <code>api/routes/credentials.js</code> — RBAC-protected routes
+- <code>api/handlers/credentials.test.js</code> — unit tests for credentials</p>
+<p><strong>Files Modified</strong>
+- <code>prisma/schema.prisma</code> — added <code>Credential</code> model (plus <code>AlertRule</code>, <code>AlertEvent</code> changes)
+- <code>api/routes/api.js</code> — mounted credentials routes
+- <code>api/lib/adapter/adapters/DatabaseAdapter.ts</code> — Vault integration for connection strings
+- <code>api/lib/adapter/adapters/APIAdapter.ts</code> — Vault integration for authentication
+- <code>api/handlers/monitor.js</code> — fixed 1-hour suppression crash loop</p>
+<p><strong>New API Endpoints</strong>
+- GET    /api/credentials              - List credentials
+- GET    /api/credentials/:id          - Get credential metadata
+- POST   /api/credentials              - Create credential
+- PATCH  /api/credentials/:id          - Update credential
+- DELETE /api/credentials/:id          - Delete credential
+- GET    /api/credentials/:id/secret   - Get secret value from vault
+- PUT    /api/credentials/:id/secret   - Update secret value
+- GET    /api/vault/health             - Check vault health
+- GET    /api/vault/secrets            - List vault secrets</p>
+<p><strong>RBAC Permissions</strong>
+- <code>credential:read</code> — View credentials and secrets
+- <code>credential:write</code> — Create/update credentials and secrets
+- <code>credential:admin</code> — Delete credentials</p>
+<p><strong>Usage</strong>
+- Apply migrations: <code>pnpm run migrate:alerts</code>
+- Generate client: <code>pnpm run prisma:generate</code>
+- Start server: <code>pnpm run api:start</code></p>
+<p><strong>Configuration</strong>
+- Vault settings (optional — defaults to mock):
+  - <code>SECRET_BACKEND=vault</code>
+  - <code>VAULT_ADDR=https://vault.example.com</code>
+  - <code>VAULT_TOKEN=your-token</code></p>
+<p><strong>Notes:</strong>
+- Adapters now look up secrets via the secret backend; default mock backend keeps local developer experience simple.
+- Phase 37 now includes structured logging, metrics &amp; alerts planning, and Vault-backed credential management — Phase 37 is complete for enterprise monitoring and secrets management.</p>
+<hr />
+<p>If you'd like, I can now:
+(A) Generate a monitoring dashboard spec (Grafana JSON panels + PromQL examples + alert rules) or
+(B) Create an operator playbook for triage (step-by-step, with example queries and runbook steps).
+Which would you like me to prepare for Week 2?</p>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+    
+  </span>
+</div>
+    <script src="../../../../../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../../../../../..";</script>
+    <script src="../../../../../../js/theme_extra.js"></script>
+    <script src="../../../../../../js/theme.js"></script>
+      <script src="../../../../../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

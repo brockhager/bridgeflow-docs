@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://brockhager.github.io/bridgeflow-docs/breakfixes/test-suite-stabilization/" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>Test Suite Stabilization (January 2026) - BridgeFlow Docs</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Test Suite Stabilization (January 2026)";
+        var mkdocs_page_input_path = "breakfixes\\test-suite-stabilization.md";
+        var mkdocs_page_url = "/bridgeflow-docs/breakfixes/test-suite-stabilization/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> BridgeFlow Docs
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../topics/quickstart/">Quickstart</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../topics/concepts/">Concepts</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../current/control-tower/public-api/">API Reference</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../topics/vision/">Vision</a>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">BridgeFlow Docs</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">Test Suite Stabilization (January 2026)</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="test-suite-stabilization-january-2026">Test Suite Stabilization (January 2026)</h1>
+<p><strong>Status</strong>: In Progress<br />
+<strong>Priority</strong>: Critical<br />
+<strong>Phase</strong>: Pre-Phase 32 (blocking feature work)</p>
+<h2 id="overview">Overview</h2>
+<p>The BridgeFlow test suite is experiencing widespread failures across ~40+ test files. Root cause analysis reveals two primary patterns:
+1. Incorrect Prisma schema usage in handlers (field type mismatches)
+2. Test isolation issues (missing database seeding, hardcoded user IDs)</p>
+<p>This document tracks identified issues and fixes applied.</p>
+<hr />
+<h2 id="issues-identified">Issues Identified</h2>
+<h3 id="issue-1-userorganization-role-type-mismatch-fixed">Issue 1: UserOrganization Role Type Mismatch ✅ FIXED</h3>
+<p><strong>Problem</strong>: Handlers were passing <code>role</code> as string (<code>'OWNER'</code>, <code>'MEMBER'</code>) to <code>userOrganization.create()</code>, but Prisma schema expects <code>String[]</code> (array).</p>
+<p><strong>Error Message</strong>:</p>
+<pre><code>Argument `role`: Invalid value provided. Expected UserOrganizationCreateroleInput or String[], provided String.
+</code></pre>
+<p><strong>Root Cause</strong>: Schema defines <code>role String[]</code> but code was using single string values.</p>
+<p><strong>Files Affected</strong>:
+- <code>api/handlers/organizations.js</code> (2 locations)
+- <code>api/handlers/organizationsMembers.js</code> (2 locations + ensureOwner function)
+- <code>api/handlers/partnerRegistrations.js</code></p>
+<p><strong>Fix Applied</strong>: 
+- Changed all instances from <code>role: 'OWNER'</code> → <code>role: ['OWNER']</code>
+- Changed <code>role: role || 'MEMBER'</code> → <code>role: role ? [role] : ['MEMBER']</code>
+- Updated ensureOwner to check array: <code>role: { has: 'OWNER' }</code></p>
+<p><strong>Commit Reference</strong>: Direct push to main</p>
+<hr />
+<h3 id="issue-2-isdocumentstuck-logic-incomplete-fixed">Issue 2: isDocumentStuck() Logic Incomplete ✅ FIXED</h3>
+<p><strong>Problem</strong>: Dashboard health tests failing because <code>isDocumentStuck()</code> didn't handle explicit <code>status === 'STUCK'</code> documents.</p>
+<p><strong>Behavior</strong>:
+- Function only checked if <code>status !== 'RECEIVED'</code> and age &gt; 2 min
+- Ignored packages with explicit <code>status: 'STUCK'</code>
+- Result: Dashboard health stayed 'OK' instead of 'WARNING' when stuck docs present</p>
+<p><strong>File</strong>: <code>api/handlers/alerts.js</code></p>
+<p><strong>Fix Applied</strong>:</p>
+<pre><code class="language-javascript">// OLD: Only checked age-based detection
+if (doc.status !== 'RECEIVED') return false
+// ... age check logic
+
+// NEW: Handle explicit STUCK status first
+if (doc.status === 'STUCK') return true
+if (doc.status !== 'RECEIVED') return false
+// ... age check logic for RECEIVED only
+</code></pre>
+<p><strong>Impact</strong>: Dashboard tests now 2/4 passing (up from 0/4)</p>
+<hr />
+<h3 id="issue-3-healthjs-invalid-deliveryjob-field-fixed">Issue 3: Health.js Invalid DeliveryJob Field ✅ FIXED</h3>
+<p><strong>Problem</strong>: Health check handler selecting non-existent <code>state</code> field from DeliveryJob model.</p>
+<p><strong>Error Message</strong>:</p>
+<pre><code>Unknown field `state` for select statement on model `DeliveryJob`. Available options are marked with ?.
+</code></pre>
+<p><strong>Files Affected</strong>:
+- <code>api/handlers/health.js</code> (2 locations)</p>
+<p><strong>Fix Applied</strong>:
+- Changed <code>select: { state: true }</code> → <code>select: { status: true }</code>
+- Updated response mapping from <code>state: job.state</code> → <code>status: job.status</code></p>
+<p><strong>Commit Reference</strong>: Direct push to main</p>
+<hr />
+<h3 id="issue-4-test-isolation-missing-database-seeding-in-progress">Issue 4: Test Isolation - Missing Database Seeding 🚧 IN PROGRESS</h3>
+<p><strong>Problem</strong>: ~40 test files use hardcoded user IDs (<code>'userA'</code>, <code>'u1'</code>, <code>'admin@example.com'</code>) that don't exist in PostgreSQL test database.</p>
+<p><strong>Symptoms</strong>:
+- Auth middleware returns 401 instead of 201/400/404
+- Tests expect specific status codes but get auth rejection
+- UserOrganization lookups fail, failing tenant-aware auth</p>
+<p><strong>Affected Test Files</strong> (partial list):
+- <code>api/tests/templates.integration.test.js</code> (0/4 passing)
+- <code>api/tests/organizations.test.js</code> (501 errors on org creation)
+- <code>api/tests/membership.test.js</code> (401 instead of 201)
+- <code>api/tests/mappings.rbac.test.js</code> (403/401 mix)
+- <code>api/tests/tradingPartners.test.js</code> (3 failures)
+- <code>api/tests/monitor.test.js</code> (3 failures)
+- <code>api/tests/secrets.test.js</code> (4 failures)
+- <code>api/tests/devSeeds.test.js</code> (2 failures)
+- <code>api/tests/validation-rules.test.js</code> (1 failure)
+- <code>api/tests/rate-limit.test.js</code> (1 failure)
+- And many more...</p>
+<p><strong>Root Cause</strong>: Tests assume pre-seeded data or use mock DB patterns. Real PostgreSQL integration tests need:
+1. Each test creates isolated org with unique slug
+2. Users created via Prisma with generated IDs (not hardcoded)
+3. UserOrganization membership entries linking user → org → role array
+4. Database reset per file via <code>resetTestDatabase()</code></p>
+<p><strong>Solution Pattern</strong> (proven in <code>users.test.js</code>):</p>
+<pre><code class="language-javascript">import { getPrisma } from '../../api/lib/db.js'
+import { resetTestDatabase } from '../../test/utils/resetDb.js'
+
+// Reset before tests run
+resetTestDatabase()
+
+let prisma
+
+beforeAll(async () =&gt; {
+  prisma = await getPrisma()
+})
+
+describe('My Feature', () =&gt; {
+  it('test name', async () =&gt; {
+    // Create isolated org with unique identifier
+    const org = await prisma.organization.create({
+      data: { 
+        name: `Test Org ${Date.now()}`, 
+        slug: `test-${Date.now()}` 
+      }
+    })
+
+    // Create user (real Prisma ID, not hardcoded)
+    const user = await prisma.user.create({
+      data: { 
+        email: `test-${Date.now()}@example.com`, 
+        password: 'hash' 
+      }
+    })
+
+    // Link user to org with role array
+    await prisma.userOrganization.create({
+      data: { 
+        userId: user.id, 
+        organizationId: org.id, 
+        role: ['ADMIN'] 
+      }
+    })
+
+    // Use real ID in JWT/auth
+    const token = await app.jwt.sign({ userId: user.id, email: user.email, role: 'admin' })
+
+    // Test with authenticated request using real DB data
+    const res = await app.inject({
+      method: 'POST',
+      url: '/api/something',
+      headers: { Authorization: `Bearer ${token}` }
+    })
+
+    expect(res.statusCode).toBe(201)
+  })
+})
+</code></pre>
+<p><strong>Status</strong>: Not yet applied to failing tests</p>
+<hr />
+<h3 id="issue-5-process-exit-code-3221225477-windows-memory-error-investigating">Issue 5: Process Exit Code 3221225477 (Windows Memory Error) 🔍 INVESTIGATING</h3>
+<p><strong>Problem</strong>: Test process crashes at end with exit code 3221225477 (0xC0000005 = ACCESS_VIOLATION).</p>
+<p><strong>Occurs</strong>: After all tests complete successfully, during process cleanup.</p>
+<p><strong>Likely Cause</strong>: Native library cleanup issue with Prisma library engine on Windows, possible unbounded connection handling.</p>
+<p><strong>Current Workaround</strong>: Errors are semantic (auth/logic), not infrastructure - fixing test isolation will likely resolve cascading failures.</p>
+<p><strong>Status</strong>: Will investigate after test seeding issues resolved.</p>
+<hr />
+<h2 id="test-results-summary">Test Results Summary</h2>
+<h3 id="passing">Passing ✅</h3>
+<ul>
+<li><code>api/tests/users.test.js</code>: 5/5</li>
+<li><code>api/tests/alerts.unit.test.js</code>: 3/3</li>
+<li><code>api/tests/audit.test.js</code>: 10/10</li>
+<li><code>api/tests/secretManager.test.js</code>: 9/9</li>
+<li><code>api/tests/dashboard.integration.test.js</code>: 3/3</li>
+</ul>
+<h3 id="partially-passing">Partially Passing 🟡</h3>
+<ul>
+<li><code>api/tests/dashboard.unit.test.js</code>: 4/5</li>
+<li>✓ should return OK health with no stuck or failed documents</li>
+<li>✓ should return WARNING health with stuck documents  </li>
+<li>✓ should return CRITICAL health with many stuck documents</li>
+<li>✗ should show system-wide stats for BF employees (expected ≥2 recent activity, got 1)</li>
+</ul>
+<h3 id="failing">Failing ❌</h3>
+<ul>
+<li><code>api/tests/templates.integration.test.js</code>: 0/4 (all 401 auth errors)</li>
+<li><code>api/tests/tradingPartners.test.js</code>: 0/3 (500 org creation, 401 auth)</li>
+<li><code>api/tests/organizations.test.js</code>: 0/2 (500 org creation)</li>
+<li>And ~30+ more files with similar patterns</li>
+</ul>
+<hr />
+<h2 id="critical-pattern-discovery">Critical Pattern Discovery</h2>
+<h3 id="prisma-connection-pool-visibility-issue-production-grade-anomaly">Prisma Connection Pool Visibility Issue (Production-Grade Anomaly)</h3>
+<p><strong>ROOT CAUSE:</strong> Import-time <code>resetTestDatabase()</code> calls in EVERY test file create race conditions when vitest loads files for dependency analysis, even with <code>VITEST_POOL=single</code>.</p>
+<p><strong>Symptoms:</strong>
+- Same Prisma client, same org ID, same process
+- <code>prisma.package.count()</code> returns 6
+- Immediately after: <code>prisma.package.findMany()</code> returns 0-3 records
+- Intermittent: sometimes 0, sometimes 3, sometimes 6 packages visible</p>
+<p><strong>Diagnosis (confirmed):</strong>
+1. Test creates org, user, 6 packages using <code>await prisma.package.create()</code> in loop
+2. Test verifies: <code>await prisma.package.count({ where: { organizationId } })</code> → 6 ✓
+3. Test calls handler: <code>await getDashboardHealth(request, reply)</code>
+4. Handler queries: <code>await prisma.package.findMany({ where: { organizationId } })</code> → 0 ✗</p>
+<p><strong>Why it happens:</strong>
+- Every test file calls <code>resetTestDatabase()</code> at module scope (import time)
+- Vitest imports ALL test files when running ANY test (for dependency graph)
+- Each import truncates all tables via <code>prisma.$transaction([...truncates...])</code>
+- Race condition: Test A creates data → Test B import wipes DB → Test A handler queries → sees 0 rows
+- Even with <code>VITEST_POOL=single</code>, file imports are not serialized</p>
+<p><strong>Evidence:</strong>
+- grep shows 40+ test files with import-time <code>resetTestDatabase()</code>
+- Debug logs show package count=6, then findMany=0 for same orgId
+- Adding 10ms delay helped 2/5 dashboard tests, but insufficient for stuck-detection tests</p>
+<p><strong>Solutions explored:</strong>
+1. ✗ 10ms delay: Partial fix (2/5 tests pass), unreliable for complex queries
+2. ⚠️ Transaction-based: Requires monkey-patching <code>getPrisma()</code> per test
+3. ✅ <strong>Per-test reset (PROVEN):</strong> Move <code>resetTestDatabase()</code> from module scope to <code>beforeAll</code> → <strong>5/5 dashboard tests pass</strong></p>
+<p><strong>Phase 1 Complete (dashboard.unit.test.js):</strong></p>
+<pre><code class="language-javascript">// BEFORE (import-time side effect):
+resetTestDatabase()
+
+// AFTER (synchronous lifecycle hook):
+beforeAll(async () =&gt; {
+  await resetTestDatabase()
+  prisma = await getPrisma()
+})
+</code></pre>
+<p><strong>Result:</strong> ALL 5 tests pass in 550ms without ANY timing delays:
+- ✓ "should return OK health with no stuck or failed documents"
+- ✓ "should return WARNING health with stuck documents"
+- ✓ "should return CRITICAL health with many stuck documents"<br />
+- ✓ "should show system-wide stats for BF employees"
+- ✓ "should return total partners and documents"</p>
+<p><strong>Impact:</strong>
+- Dashboard: <strong>5/5 passing</strong> (100% success rate) when isolated from import-time interference
+- Pattern proven: Zero flakiness, zero timing hacks, deterministic execution
+- Ready for batch application to remaining 40+ test files</p>
+<p><strong>Long-term fix:</strong>
+- Refactor: Move all <code>resetTestDatabase()</code> calls from module scope to <code>beforeEach()</code> hooks
+- Ensures DB reset happens synchronously before each test, not at random import time
+- Pattern: Tests should NEVER have side effects at import/module level</p>
+<hr />
+<h3 id="userorganization-role-type-cascade">UserOrganization Role Type Cascade</h3>
+<p>This was THE critical issue multiplying across the codebase. The Prisma schema defines <code>role</code> as <code>String[]</code> (array), but code was treating it as a single string in THREE contexts:</p>
+<ol>
+<li><strong>Creating</strong> UserOrganization: <code>role: 'OWNER'</code> → MUST be <code>role: ['OWNER']</code></li>
+<li><strong>Querying</strong> for OWNER: <code>where: { role: 'OWNER' }</code> → MUST be <code>where: { role: { has: 'OWNER' } }</code></li>
+<li><strong>Testing</strong> with explicit roles: Test code created <code>role: ['ADMIN']</code> correctly, but handlers didn't match</li>
+</ol>
+<p><strong>Root Files Fixed:</strong>
+- <code>api/handlers/organizations.js</code> (2 create locations)
+- <code>api/handlers/organizationsMembers.js</code> (1 create + ensureOwner check)
+- <code>api/handlers/partnerRegistrations.js</code>
+- <code>api/lib/stores/TradingPartnerStore.js</code> (3 query locations)
+- <code>api/handlers/billing.js</code></p>
+<p><strong>Lesson:</strong> Schema enforcement in Prisma is strict. ANY mismatch between type and usage causes PrismaClientValidationError, cascading failures downstream.</p>
+<hr />
+<table>
+<thead>
+<tr>
+<th>Date</th>
+<th>Issue</th>
+<th>File(s)</th>
+<th>Change</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2026-01-09</td>
+<td>Issue 1</td>
+<td>organizations.js, organizationsMembers.js, partnerRegistrations.js</td>
+<td>Role type: string → array <code>['OWNER']</code></td>
+<td>✅</td>
+</tr>
+<tr>
+<td>2026-01-09</td>
+<td>Issue 2</td>
+<td>alerts.js</td>
+<td>isDocumentStuck: add STUCK status check + Date handling</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>2026-01-09</td>
+<td>Issue 3</td>
+<td>health.js</td>
+<td>DeliveryJob: state → status field</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>2026-01-09</td>
+<td>Issue 1b</td>
+<td>TradingPartnerStore.js (3x), billing.js</td>
+<td>Role queries: string → array filter <code>{ has: 'OWNER' }</code></td>
+<td>✅</td>
+</tr>
+<tr>
+<td>2026-01-09</td>
+<td>Issue 2b</td>
+<td>alerts.js</td>
+<td>isDocumentStuck: Handle Date objects + ISO strings</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>2026-01-09</td>
+<td>Test Isolation</td>
+<td>test/utils/testOrgUser.js</td>
+<td>Created 3 factory helper functions</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>2026-01-09</td>
+<td><strong>Phase 1 Complete</strong></td>
+<td><strong>dashboard.unit.test.js</strong></td>
+<td><strong>Moved resetTestDatabase() to beforeAll, removed all timing delays</strong></td>
+<td><strong>✅ 5/5 PASS</strong></td>
+</tr>
+<tr>
+<td>2026-01-09</td>
+<td><strong>Phase 2 Batch 1</strong></td>
+<td><strong>templates, organizations, tradingPartners, mappings.rbac, membership</strong></td>
+<td><strong>5 high-priority files refactored</strong></td>
+<td><strong>✅ 5/5</strong></td>
+</tr>
+<tr>
+<td>2026-01-09</td>
+<td><strong>Phase 2 Batch 2</strong></td>
+<td><strong>users, auth.flow, auth.register, audit</strong></td>
+<td><strong>4 infrastructure files refactored</strong></td>
+<td><strong>✅ 4/4</strong></td>
+</tr>
+<tr>
+<td>2026-01-09</td>
+<td><strong>Phase 2 Batch 3</strong></td>
+<td><strong>mappings.integration, billing</strong></td>
+<td><strong>2 mapping/billing files refactored</strong></td>
+<td><strong>✅ 2/2</strong></td>
+</tr>
+<tr>
+<td>TBD</td>
+<td>Phase 2 Remaining</td>
+<td>26 test files</td>
+<td>Batch-apply beforeAll pattern</td>
+<td>🚧 IN PROGRESS</td>
+</tr>
+<tr>
+<td>TBD</td>
+<td>Process</td>
+<td>Investigate exit code 3221225477</td>
+<td>Windows Prisma cleanup issue</td>
+<td>🔍</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="next-steps">Next Steps</h2>
+<h3 id="phase-1-complete-dashboard-test-isolation-proven">✅ Phase 1 Complete: Dashboard Test Isolation Proven</h3>
+<ul>
+<li><strong>dashboard.unit.test.js</strong>: 5/5 passing (100% success rate)</li>
+<li>Pattern proven: <code>beforeAll(() =&gt; resetTestDatabase())</code> eliminates import-time race conditions</li>
+<li>Zero timing delays, zero flakiness, deterministic execution</li>
+<li>Execution time: 550ms for all 5 tests</li>
+</ul>
+<h3 id="priority-1-phase-2-batch-apply-pattern-to-all-test-files">Priority 1: Phase 2 - Batch Apply Pattern to All Test Files</h3>
+<p><strong>Target:</strong> Refactor 40+ test files to move <code>resetTestDatabase()</code> from module scope to <code>beforeAll()</code></p>
+<p><strong>High-Priority Files</strong> (blocking features):
+1. templates.integration.test.js (0/4 passing)
+2. organizations.test.js (org creation auth failures)
+3. tradingPartners.test.js (3 failures)
+4. mappings.rbac.test.js (role/permission setup issues)
+5. membership.test.js (401 auth errors)</p>
+<p><strong>Refactor Pattern:</strong></p>
+<pre><code class="language-javascript">// REMOVE: Module-scope side effect
+resetTestDatabase()  // ← DELETE THIS
+
+// ADD: Lifecycle hook
+beforeAll(async () =&gt; {
+  await resetTestDatabase()  // ← Synchronous, isolated
+  prisma = await getPrisma()
+})
+</code></pre>
+<p><strong>Decision:</strong> Use <code>beforeAll()</code> for files where each test creates isolated data (org/user). Use <code>beforeEach()</code> if tests share/modify entities.</p>
+<h3 id="priority-2-test-factory-integration">Priority 2: Test Factory Integration</h3>
+<ul>
+<li>Apply <code>testOrgUser.js</code> helpers to new tests</li>
+<li>Pattern: <code>const { org, user } = await createTestOrgUser(prisma, options)</code></li>
+<li>Eliminates hardcoded user IDs, ensures UserOrganization membership</li>
+</ul>
+<h3 id="priority-3-eliminate-remaining-infrastructure-bugs">Priority 3: Eliminate Remaining Infrastructure Bugs</h3>
+<ul>
+<li>Monitor test suite for new flakiness after Phase 2 refactor</li>
+<li>Track Windows exit code 3221225477 (low priority - doesn't affect test semantics)</li>
+<li>Target: &lt;5% overall failure rate before Phase 32 feature work</li>
+</ul>
+<h3 id="priority-4-fix-mappingsvalidation-tests">Priority 4: Fix Mappings/Validation Tests</h3>
+<ul>
+<li>[ ] mappings.rbac.test.js (10+ failures)</li>
+<li>[ ] validation-rules.test.js</li>
+<li>Add: Role/permission seeding + org membership</li>
+</ul>
+<h3 id="priority-5-fix-monitorsecretsrate-limit-tests">Priority 5: Fix Monitor/Secrets/Rate-Limit Tests</h3>
+<ul>
+<li>[ ] monitor.test.js</li>
+<li>[ ] secrets.test.js</li>
+<li>[ ] rate-limit.test.js</li>
+<li>Pattern: Replace hardcoded IDs with real Prisma-seeded users</li>
+</ul>
+<h3 id="success-criteria">Success Criteria</h3>
+<ul>
+<li>[ ] All unit tests pass locally (0 failures)</li>
+<li>[ ] All integration tests pass against PostgreSQL (0 failures)</li>
+<li>[ ] Test suite runs without exit code 3221225477</li>
+<li>[ ] <code>pnpm run test:api</code> reports &lt;5% failure rate</li>
+<li>[ ] Ready to proceed with Phase 32 feature work</li>
+</ul>
+<hr />
+<h2 id="references">References</h2>
+<ul>
+<li><strong>Auth Middleware</strong>: <code>api/handlers/auth.js</code> - Validates user.orgIds, assigns UserOrganization records</li>
+<li><strong>Test Pattern (Proven)</strong>: <code>api/tests/users.test.js</code> - Implements seedUsers() with full isolation</li>
+<li><strong>Reset Utility</strong>: <code>test/utils/resetDb.js</code> - resetTestDatabase() truncates tables per file</li>
+<li><strong>Copilot Instructions</strong>: <code>docs/breakfixes/</code> - Detailed Phase 32 readiness criteria</li>
+</ul>
+<hr />
+<h2 id="notes">Notes</h2>
+<ul>
+<li>All fixes maintain backward compatibility</li>
+<li>Fixes are schema-aligned (no migrations needed)</li>
+<li>Test seeding follows idempotent pattern (upserts where applicable)</li>
+<li>Focus: Deterministic, isolated tests that work on real PostgreSQL</li>
+</ul>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

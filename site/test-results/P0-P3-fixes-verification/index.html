@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://brockhager.github.io/bridgeflow-docs/test-results/P0-P3-fixes-verification/" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>P0-P3 Fixes Verification Checklist - BridgeFlow Docs</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "P0-P3 Fixes Verification Checklist";
+        var mkdocs_page_input_path = "test-results\\P0-P3-fixes-verification.md";
+        var mkdocs_page_url = "/bridgeflow-docs/test-results/P0-P3-fixes-verification/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> BridgeFlow Docs
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../topics/quickstart/">Quickstart</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../topics/concepts/">Concepts</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../current/control-tower/public-api/">API Reference</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../topics/vision/">Vision</a>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">BridgeFlow Docs</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">P0-P3 Fixes Verification Checklist</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="p0-p3-fixes-verification-checklist">P0-P3 Fixes Verification Checklist</h1>
+<p><strong>Date:</strong> 2024-12-21<br />
+<strong>Testing Phase:</strong> Post-Fix Validation<br />
+<strong>Commits:</strong> 4df0c57, 2ce3c18, f3cf384, dba9ab8</p>
+<h2 id="p0-critical-fixes">P0 Critical Fixes</h2>
+<h3 id="p0-1-entity-duplication-bug">✅ P0-1: Entity Duplication Bug</h3>
+<p><strong>Issue:</strong> Entities (TPs, Resources, Bridges) were duplicating on save<br />
+<strong>Root Cause:</strong> Multiple addEventListener('submit') registrations in canvas-controller.js<br />
+<strong>Fix:</strong> Added dataset._tpBound, _resBound, _bridgeBound guards to prevent duplicate listeners</p>
+<p><strong>Test Steps:</strong>
+1. Open Canvas page (canvas-legacy.html)
+2. Open DevTools → Application → Local Storage
+3. Create a new Trading Partner (name: "Test TP")
+4. Check localStorage.bridgeflow_partners - verify only ONE "Test TP" entry
+5. Create a new Resource (name: "Test Resource", type: "API")
+6. Check localStorage.bridgeflow_resources - verify only ONE "Test Resource" entry
+7. Drag partner→resource to create bridge, fill form, save
+8. Check localStorage.bridgeflow_bridges - verify only ONE bridge created</p>
+<p><strong>Expected Result:</strong> Each entity appears exactly once in localStorage after save<br />
+<strong>Status:</strong> ⏳ NEEDS TESTING</p>
+<hr />
+<h3 id="p0-2-drag-functionality-broken">✅ P0-2: Drag Functionality Broken</h3>
+<p><strong>Issue:</strong> Nodes in Bridge Builder were not draggable<br />
+<strong>Root Cause:</strong> SVG lines being cleared during redraws, missing user-select:none<br />
+<strong>Fix:</strong> 
+- Added 'drag-line' class to active drag lines
+- Modified renderExistingBridges to preserve drag-line elements
+- Changed cursor from pointer to grab/grabbing
+- Added user-select:none to prevent text selection</p>
+<p><strong>Test Steps:</strong>
+1. Open Canvas page
+2. Verify at least one TP and one Resource exist (create if needed)
+3. Scroll to "Bridge Builder" section
+4. Mouse down on a Partner node (should show grabbing cursor)
+5. Drag toward a Resource node (should see blue line following cursor)
+6. Release on Resource node (should open bridge config modal)</p>
+<p><strong>Expected Result:</strong> Smooth drag-and-drop with visual feedback<br />
+<strong>Status:</strong> ⏳ NEEDS TESTING</p>
+<hr />
+<h2 id="p1-priority-fixes">P1 Priority Fixes</h2>
+<h3 id="p1-entities-not-clickable">✅ P1: Entities Not Clickable</h3>
+<p><strong>Issue:</strong> Could not click entities to edit them<br />
+<strong>Fix:</strong> 
+- Added click handlers to TP folder headers → trading-partners/manage.html?id=xyz
+- Added click handlers to resource rows → resources/create.html?id=xyz
+- Added cursor:pointer styling</p>
+<p><strong>Test Steps:</strong>
+1. Open Canvas page
+2. In left "Partners" section, click on a partner name (not the toggle button)
+3. Verify navigates to trading-partners/manage.html with ?id parameter
+4. Go back to Canvas
+5. In right "Resources" section, click on a resource row
+6. Verify navigates to resources/create.html with ?id parameter</p>
+<p><strong>Expected Result:</strong> Clicking entities navigates to their edit pages<br />
+<strong>Status:</strong> ⏳ NEEDS TESTING</p>
+<hr />
+<h2 id="p2-nice-to-have-fixes">P2 Nice-to-Have Fixes</h2>
+<h3 id="p2-1-menu-missing-on-bridge-formhtml">✅ P2-1: Menu Missing on bridge-form.html</h3>
+<p><strong>Issue:</strong> Navigation menu disappeared on bridge-form page<br />
+<strong>Fix:</strong> Added full navigation header with nav links to bridge-form.html</p>
+<p><strong>Test Steps:</strong>
+1. Navigate to bridge-form.html
+2. Verify top navigation bar appears with: Canvas, Bridges, Transactions, Docs links
+3. Verify "Bridges" is highlighted as current page
+4. Click "Canvas" link - verify navigates to canvas-legacy.html</p>
+<p><strong>Expected Result:</strong> Full navigation menu present and functional<br />
+<strong>Status:</strong> ⏳ NEEDS TESTING</p>
+<hr />
+<h3 id="p2-2-missing-canvas-home-button">✅ P2-2: Missing Canvas Home Button</h3>
+<p><strong>Issue:</strong> No way to get back to Canvas from entity pages<br />
+<strong>Status:</strong> ALREADY EXISTS - trading-partners/manage.html and resources/create.html both have Canvas links in their nav</p>
+<p><strong>Test Steps:</strong>
+1. Navigate to trading-partners/manage.html
+2. Verify "Canvas" link exists in header nav
+3. Navigate to resources/create.html
+4. Verify "Canvas" link exists in header nav</p>
+<p><strong>Expected Result:</strong> Canvas link present on all entity pages<br />
+<strong>Status:</strong> ✅ VERIFIED (already implemented)</p>
+<hr />
+<h3 id="p2-3-cancel-button-placement">✅ P2-3: Cancel Button Placement</h3>
+<p><strong>Issue:</strong> Cancel buttons at top instead of bottom<br />
+<strong>Status:</strong> ALREADY CORRECT - All modals have cancel buttons at bottom next to Save button</p>
+<p><strong>Test Steps:</strong>
+1. Open Canvas page
+2. Click "+ New Resource" - verify Cancel button is at bottom right of form
+3. Click "+ Add TP" - verify Cancel button is at bottom right of form
+4. Drag to create bridge connector - verify Cancel button is at bottom right of form</p>
+<p><strong>Expected Result:</strong> Cancel buttons consistently placed at bottom of all forms<br />
+<strong>Status:</strong> ✅ VERIFIED (already correct)</p>
+<hr />
+<h2 id="p3-display-issues">P3 Display Issues</h2>
+<h3 id="p3-bridge-count-showing-double">✅ P3: Bridge Count Showing Double</h3>
+<p><strong>Issue:</strong> Bridge count showing 2 when only 1 created<br />
+<strong>Root Cause:</strong> Likely caused by duplicate event listeners (now fixed)<br />
+<strong>Fix:</strong> Same fix as P0-1 duplication bug</p>
+<p><strong>Test Steps:</strong>
+1. Clear localStorage: <code>localStorage.clear()</code>
+2. Reload Canvas page
+3. Create 1 bridge using visual connector
+4. Count bridge cards displayed on Canvas
+5. Check localStorage.bridgeflow_bridges - verify array length is 1</p>
+<p><strong>Expected Result:</strong> Bridge count matches number of bridges created<br />
+<strong>Status:</strong> ⏳ NEEDS TESTING</p>
+<hr />
+<h2 id="e2e-validation-checklist">E2E Validation Checklist</h2>
+<h3 id="complete-bridge-creation-flow">Complete Bridge Creation Flow</h3>
+<ul>
+<li>[ ] Create Trading Partner "Walmart" (Retail, Active)</li>
+<li>[ ] Create Trading Partner "Amazon" (Marketplace, Active)</li>
+<li>[ ] Create Resource "Orders API" (type: API)</li>
+<li>[ ] Create Resource "Invoices Folder" (type: Folder)</li>
+<li>[ ] Use Bridge Builder to drag Walmart → Orders API</li>
+<li>[ ] Fill bridge config: Name="Walmart Orders", Protocol=API, Transform="map order_id to id"</li>
+<li>[ ] Save bridge - verify modal closes</li>
+<li>[ ] Verify bridge appears in Bridge Builder as green line</li>
+<li>[ ] Verify bridge card appears in main Canvas area</li>
+<li>[ ] Refresh page - verify bridge persists</li>
+<li>[ ] Click partner name - verify navigates to edit page</li>
+<li>[ ] Click resource name - verify navigates to edit page</li>
+<li>[ ] Click bridge line - verify shows bridge detail modal</li>
+</ul>
+<h3 id="data-integrity-check">Data Integrity Check</h3>
+<ul>
+<li>[ ] Check DevTools console for errors</li>
+<li>[ ] Verify no duplicate entries in localStorage.bridgeflow_partners</li>
+<li>[ ] Verify no duplicate entries in localStorage.bridgeflow_resources</li>
+<li>[ ] Verify no duplicate entries in localStorage.bridgeflow_bridges</li>
+<li>[ ] Verify bridge IDs are unique</li>
+</ul>
+<hr />
+<h2 id="test-environment">Test Environment</h2>
+<ul>
+<li><strong>Browser:</strong> Chrome/Edge/Firefox (test in primary browser)</li>
+<li><strong>URL:</strong> http://localhost:8080/web/canvas-visual.html (or your dev server)</li>
+<li><strong>Clear Storage Before Testing:</strong> <code>localStorage.clear()</code></li>
+</ul>
+<hr />
+<h2 id="pass-criteria">Pass Criteria</h2>
+<p>All P0 and P1 items must pass. P2/P3 are nice-to-have but should be verified.</p>
+<h2 id="notes">Notes</h2>
+<ul>
+<li>If any test fails, document the exact steps and browser console errors</li>
+<li>Take screenshots of any visual issues</li>
+<li>Verify in both mouse and touch modes if testing on touch device</li>
+</ul>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

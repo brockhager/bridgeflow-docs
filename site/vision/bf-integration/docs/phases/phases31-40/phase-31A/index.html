@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://brockhager.github.io/bridgeflow-docs/vision/bf-integration/docs/phases/phases31-40/phase-31A/" />
+      <link rel="shortcut icon" href="../../../../../../img/favicon.ico" />
+    <title>phase 31A - BridgeFlow Docs</title>
+    <link rel="stylesheet" href="../../../../../../css/theme.css" />
+    <link rel="stylesheet" href="../../../../../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "phase 31A";
+        var mkdocs_page_input_path = "vision\\bf-integration\\docs\\phases\\phases31-40\\phase-31A.md";
+        var mkdocs_page_url = "/bridgeflow-docs/vision/bf-integration/docs/phases/phases31-40/phase-31A/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../../../../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../../../../../.." class="icon icon-home"> BridgeFlow Docs
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../../../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../../../..">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../../../../topics/quickstart/">Quickstart</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../../../../topics/concepts/">Concepts</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../../../../current/control-tower/public-api/">API Reference</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../../../../topics/vision/">Vision</a>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../../..">BridgeFlow Docs</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../../../../.." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">phase 31A</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <blockquote>
+<p>[!WARNING]
+Status: Planned / In Development
+Context: Original BF-INTEGRATION Vision (Pre-Phase 30)</p>
+</blockquote>
+<h1 id="phase-31a-unified-adapter-framework">Phase 31A — Unified Adapter Framework</h1>
+<p><strong>Completed:</strong> January 8, 2026<br />
+<strong>Effort:</strong> 2-3 hours<br />
+<strong>Priority:</strong> High (customer integration foundation)</p>
+<h2 id="objective">🎯 Objective</h2>
+<p>Establish the foundational Layer 3 adapter framework with symmetric architecture, enabling both enterprise and free tier adapters to run from the same codebase with capabilities controlled by token permissions.</p>
+<h2 id="core-deliverables-44">📋 Core Deliverables (4/4)</h2>
+<h3 id="1-bridgeflowadapter-interface">✅ 1. BridgeFlowAdapter Interface</h3>
+<p><strong>Unified Interface</strong>: Same interface for all adapter types
+- <strong>Common Lifecycle</strong>: <code>validateConfig</code>, <code>authenticate</code>, <code>initialize</code>, <code>healthCheck</code>
+- <strong>Onramp Methods</strong>: <code>onramp</code>, <code>monitorSource</code>, <code>stopMonitoring</code>
+- <strong>Offramp Methods</strong>: <code>offramp</code>, <code>batchOfframp</code>
+- <strong>Transformation</strong>: <code>transform</code>, <code>validate</code>
+- <strong>Utility</strong>: <code>getStatistics</code>, <code>cleanup</code></p>
+<p><strong>BaseAdapter Class</strong>: Common functionality for all adapters
+- <strong>Permission Helper</strong>: <code>hasPermission</code>, <code>requirePermission</code>, <code>getTier</code>
+- <strong>Default Implementations</strong>: Monitoring, batch processing, cleanup
+- <strong>Error Handling</strong>: Consistent error patterns across all adapters
+- <strong>Logging</strong>: Unified logging for all tiers</p>
+<h3 id="2-permissionmanager-system">✅ 2. PermissionManager System</h3>
+<p><strong>Token-Based Authentication</strong>: Unified authentication for all tiers
+- <strong>Token Validation</strong>: JWT parsing and validation
+- <strong>Permission Checking</strong>: Capability gating based on token permissions
+- <strong>Tier Management</strong>: Enterprise vs free tier capabilities
+- <strong>Sponsor Relationships</strong>: Free tier adapter sponsorship
+- <strong>Upgrade System</strong>: Token-based upgrade from free to enterprise</p>
+<p><strong>Permission Structure</strong>:</p>
+<pre><code class="language-typescript">// Enterprise Token
+{
+  &quot;orgId&quot;: &quot;cust_a&quot;, 
+  &quot;tier&quot;: &quot;enterprise&quot;, 
+  &quot;permissions&quot;: [&quot;onramp:*&quot;, &quot;offramp:*&quot;, &quot;transform:*&quot;]
+}
+
+// Free TP Token  
+{
+  &quot;orgId&quot;: &quot;cust_a&quot;, 
+  &quot;tier&quot;: &quot;free&quot;, 
+  &quot;permissions&quot;: [&quot;offramp:file&quot;], 
+  &quot;sponsorId&quot;: &quot;cust_a&quot;
+}
+</code></pre>
+<h3 id="3-fileadapter-implementation">✅ 3. FileAdapter Implementation</h3>
+<p><strong>Symmetric Deployment</strong>: Same binary works for both tiers
+- <strong>Free Tier</strong>: File offramp only, basic validation
+- <strong>Enterprise</strong>: Full onramp/offramp with monitoring, custom transforms
+- <strong>File Processing</strong>: EDI, JSON, CSV, XML support
+- <strong>Monitoring</strong>: File watching (enterprise) vs basic delivery (free)
+- <strong>Permission Gating</strong>: Features controlled by token permissions</p>
+<p><strong>Capability Matrix</strong>:
+| Feature | Free Tier | Enterprise |
+|---------|-----------|------------|
+| File Offramp | ✅ | ✅ |
+| File Onramp | ❌ | ✅ |
+| File Monitoring | ❌ | ✅ |
+| Custom Transforms | ❌ | ✅ |
+| Advanced Validation | ❌ | ✅ |</p>
+<h3 id="4-database-schema-foundation">✅ 4. Database Schema Foundation</h3>
+<p><strong>Unified Adapter Models</strong>: Support for all tiers in single schema
+- <strong>Adapter Model</strong>: Unified adapter registration
+- <strong>AdapterToken Model</strong>: Token-based authentication and permissions
+- <strong>SponsorRelationship Model</strong>: Free tier to enterprise sponsor relationships
+- <strong>AdapterCapability Model</strong>: Tier-specific capability tracking
+- <strong>AdapterLog Model</strong>: Unified logging for all tiers
+- <strong>RLS Policies</strong>: Multi-tenant security with CTO access</p>
+<h2 id="technical-architecture">🏗️ <strong>Technical Architecture</strong></h2>
+<h3 id="symmetric-architecture-principle"><strong>Symmetric Architecture Principle</strong></h3>
+<pre><code>┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
+│   Customer A   │    │  BridgeFlow    │    │   Trading      │
+│   (Enterprise) │    │  Core         │    │   Partner      │
+│               │    │               │    │   (Free)       │
+│ ┌───────────┐ │    │ ┌───────────┐ │    │ ┌───────────┐ │
+│ │ Adapter   │ │    │ │   Package  │ │    │ │ Adapter   │ │
+│ │ (Same)    │────┼────│ │   Entity  │────┼────│ │ (Same)    │ │
+│ └───────────┘ │    │ └───────────┘ │    │ └───────────┘ │
+└─────────────────┘    └─────────────────┘    └─────────────────┘
+</code></pre>
+<h3 id="permission-based-capability-gating"><strong>Permission-Based Capability Gating</strong></h3>
+<pre><code class="language-typescript">class BridgeFlowAdapter {
+  async onramp(source: DataSource): Promise&lt;PackagePayload&gt; {
+    if (!this.hasPermission('onramp:*')) {
+      throw new Error('Onramp not available in current tier');
+    }
+    // Implementation works for all tiers
+  }
+}
+</code></pre>
+<h3 id="token-driven-feature-control"><strong>Token-Driven Feature Control</strong></h3>
+<ul>
+<li><strong>No Code Branching</strong>: Same codebase for all tiers</li>
+<li><strong>Runtime Capability</strong>: Features enabled/disabled by token permissions</li>
+<li><strong>Zero Reinstall</strong>: Upgrade by issuing new token</li>
+<li><strong>Unified Deployment</strong>: Single binary for all customers</li>
+</ul>
+<h2 id="security-model">🔐 <strong>Security Model</strong></h2>
+<h3 id="multi-tenant-architecture"><strong>Multi-Tenant Architecture</strong></h3>
+<ul>
+<li><strong>Organization Scoping</strong>: All adapters scoped to organization</li>
+<li><strong>RLS Policies</strong>: Database-level tenant isolation</li>
+<li><strong>CTO Access</strong>: Global view across all organizations</li>
+<li><strong>Audit Trail</strong>: Complete adapter activity logging</li>
+</ul>
+<h3 id="permission-system"><strong>Permission System</strong></h3>
+<ul>
+<li><strong>Granular Permissions</strong>: <code>onramp:file</code>, <code>offramp:api</code>, <code>transform:custom</code></li>
+<li><strong>Wildcard Support</strong>: <code>onramp:*</code> grants all onramp capabilities</li>
+<li><strong>Tier Restrictions</strong>: Free tier limited to file offramp</li>
+<li><strong>Sponsor Binding</strong>: Free TPs bound to enterprise sponsors</li>
+</ul>
+<h3 id="token-security"><strong>Token Security</strong></h3>
+<ul>
+<li><strong>JWT Tokens</strong>: Secure token format with expiration</li>
+<li><strong>Permission Claims</strong>: Capabilities encoded in token</li>
+<li><strong>Sponsor Claims</strong>: Free tier sponsorship relationships</li>
+<li><strong>Version Control</strong>: Token versioning for compatibility</li>
+</ul>
+<h2 id="adapter-capabilities">📊 <strong>Adapter Capabilities</strong></h2>
+<h3 id="free-tier-capabilities"><strong>Free Tier Capabilities</strong></h3>
+<pre><code class="language-typescript">const freePermissions = [
+  'offramp:file',
+  'validate:basic',
+  'monitor:file'
+];
+</code></pre>
+<h3 id="enterprise-tier-capabilities"><strong>Enterprise Tier Capabilities</strong></h3>
+<pre><code class="language-typescript">const enterprisePermissions = [
+  'onramp:*',
+  'offramp:*', 
+  'transform:*',
+  'validate:*',
+  'monitor:*',
+  'batch:*'
+];
+</code></pre>
+<h3 id="permission-examples"><strong>Permission Examples</strong></h3>
+<ul>
+<li><strong>File Operations</strong>: <code>onramp:file</code>, <code>offramp:file</code></li>
+<li><strong>Database Operations</strong>: <code>onramp:database</code>, <code>offramp:database</code></li>
+<li><strong>API Operations</strong>: <code>onramp:api</code>, <code>offramp:api</code></li>
+<li><strong>Transformations</strong>: <code>transform:basic</code>, <code>transform:custom</code></li>
+<li><strong>Monitoring</strong>: <code>monitor:file</code>, <code>monitor:database</code>, <code>monitor:api</code></li>
+</ul>
+<h2 id="integration-points">🔄 <strong>Integration Points</strong></h2>
+<h3 id="phase-30-integration"><strong>Phase 30 Integration</strong></h3>
+<ul>
+<li><strong>Package Creation</strong>: Adapters create standardized packages</li>
+<li><strong>Protocol Processing</strong>: Connectors handle Layer 2 processing</li>
+<li><strong>Package Delivery</strong>: Both tiers receive processed packages</li>
+<li><strong>Status Tracking</strong>: End-to-end package lifecycle</li>
+</ul>
+<h3 id="phase-28-integration"><strong>Phase 28 Integration</strong></h3>
+<ul>
+<li><strong>Tenet Application</strong>: Business rules during package creation</li>
+<li><strong>Package Management</strong>: Unified package lifecycle for all tiers</li>
+<li><strong>Statistics</strong>: Tier-aware statistics and monitoring</li>
+<li><strong>Admin Experience</strong>: Enterprise customers manage all adapters</li>
+</ul>
+<h3 id="phase-29-integration"><strong>Phase 29 Integration</strong></h3>
+<ul>
+<li><strong>Organization Scoping</strong>: Enterprise customers manage their free TPs</li>
+<li><strong>Multi-Tenancy</strong>: Proper data isolation across tiers</li>
+<li><strong>CTO Access</strong>: Global view of all adapters and tiers</li>
+<li><strong>Security</strong>: Unified RBAC across enterprise and free tiers</li>
+</ul>
+<h2 id="files-delivered">📁 <strong>Files Delivered</strong></h2>
+<h3 id="core-framework"><strong>Core Framework</strong></h3>
+<ul>
+<li><code>api/lib/adapter/BridgeFlowAdapter.ts</code> - Unified adapter interface</li>
+<li><code>api/lib/adapter/PermissionManager.ts</code> - Token-based permission system</li>
+<li><code>api/lib/adapter/BaseAdapter.ts</code> - Base adapter implementation</li>
+</ul>
+<h3 id="adapter-implementations"><strong>Adapter Implementations</strong></h3>
+<ul>
+<li><code>api/lib/adapter/adapters/FileAdapter.ts</code> - File system adapter (both tiers)</li>
+</ul>
+<h3 id="database-schema"><strong>Database Schema</strong></h3>
+<ul>
+<li><code>api/migrations/phase31-migration.sql</code> - Unified adapter database schema</li>
+</ul>
+<h3 id="models-added"><strong>Models Added</strong></h3>
+<ul>
+<li><strong>Adapter</strong> - Unified adapter registration</li>
+<li><strong>AdapterToken</strong> - Token-based authentication</li>
+<li><strong>SponsorRelationship</strong> - Free tier sponsor relationships</li>
+<li><strong>AdapterCapability</strong> - Tier-specific capabilities</li>
+<li><strong>AdapterLog</strong> - Activity logging</li>
+<li><strong>AdapterStatistics</strong> - Performance metrics</li>
+</ul>
+<h2 id="success-criteria">🎯 <strong>Success Criteria</strong></h2>
+<h3 id="unified-architecture">✅ <strong>Unified Architecture</strong></h3>
+<ul>
+<li>[x] Single adapter binary works for both enterprise and free tiers</li>
+<li>[x] Token permissions control feature availability (no code branching)</li>
+<li>[x] Same connector runtime supports bidirectional and receive-only modes</li>
+<li>[x] Configuration schema supports all tiers with optional fields</li>
+<li>[x] Logging and metrics work identically on both sides</li>
+</ul>
+<h3 id="tier-management">✅ <strong>Tier Management</strong></h3>
+<ul>
+<li>[x] Free trading partners can onboard with zero cost</li>
+<li>[x] Enterprise customers can manage free TP tokens via admin UI</li>
+<li>[x] Upgrade path from free to enterprise requires only token swap</li>
+<li>[x] Feature discovery shows available capabilities based on token</li>
+<li>[x] Sponsor relationships properly enforced for free TPs</li>
+</ul>
+<h3 id="developer-experience">✅ <strong>Developer Experience</strong></h3>
+<ul>
+<li>[x] Adapter SDK with unified interface for all tiers</li>
+<li>[x] Clear documentation for enterprise vs free tier capabilities</li>
+<li>[x] Testing framework works for both tiers</li>
+<li>[x] Deployment is identical for all tiers</li>
+<li>[x] Performance monitoring works across all tiers</li>
+</ul>
+<h2 id="real-world-impact">🚀 <strong>Real-World Impact</strong></h2>
+<h3 id="customer-onboarding"><strong>Customer Onboarding</strong></h3>
+<pre><code>Enterprise Customer: &quot;Add Partner&quot; → auto-issue free-tier token → send download link
+Free Trading Partner: Download agent → configure file drop → immediate value
+</code></pre>
+<h3 id="seamless-upgrades"><strong>Seamless Upgrades</strong></h3>
+<pre><code>Free TP: File drop only
+↓ (Token swap)
+Enterprise: Full database/API integration with custom transforms
+</code></pre>
+<h3 id="operational-efficiency"><strong>Operational Efficiency</strong></h3>
+<ul>
+<li><strong>Zero Reinstall</strong>: Same binary for all tiers</li>
+<li><strong>Unified Support</strong>: Single codebase to maintain</li>
+<li><strong>Consistent Experience</strong>: Same logging, monitoring, error handling</li>
+<li><strong>Scalable Architecture</strong>: Add new capabilities without new deployments</li>
+</ul>
+<h2 id="next-steps">📈 <strong>Next Steps</strong></h2>
+<p>Phase 31A establishes the foundation. Phase 31B will build intelligence on top:</p>
+<ul>
+<li><strong>Advanced Adapters</strong>: DatabaseAdapter, APIAdapter (enterprise only)</li>
+<li><strong>Document Intelligence</strong>: Type detection, parsing, validation</li>
+<li><strong>Transformation Engine</strong>: Rule-based mapping and conversion</li>
+<li><strong>Admin Integration</strong>: UI for adapter management and transformation building</li>
+</ul>
+<hr />
+<p><strong>Phase 31A delivers the critical unified adapter foundation that enables BridgeFlow to scale from free trading partners to enterprise customers through token-based capability gates. This is how you build a scalable, defensible, two-sided platform.</strong></p>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+    
+  </span>
+</div>
+    <script src="../../../../../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../../../../../..";</script>
+    <script src="../../../../../../js/theme_extra.js"></script>
+    <script src="../../../../../../js/theme.js"></script>
+      <script src="../../../../../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

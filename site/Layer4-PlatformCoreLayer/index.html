@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://brockhager.github.io/bridgeflow-docs/Layer4-PlatformCoreLayer/" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>Layer 4 — Platform Core (Overview) - BridgeFlow Docs</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Layer 4 \u2014 Platform Core (Overview)";
+        var mkdocs_page_input_path = "Layer4-PlatformCoreLayer\\README.md";
+        var mkdocs_page_url = "/bridgeflow-docs/Layer4-PlatformCoreLayer/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href=".." class="icon icon-home"> BridgeFlow Docs
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="..">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../topics/quickstart/">Quickstart</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../topics/concepts/">Concepts</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../current/control-tower/public-api/">API Reference</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../topics/vision/">Vision</a>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">BridgeFlow Docs</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">Layer 4 — Platform Core (Overview)</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="layer-4-platform-core-overview">Layer 4 — Platform Core (Overview)</h1>
+<p><strong>Status:</strong> ✅ Phase 17 Complete — Foundation (RBAC, Test Hardening, Admin Tests)
+<strong>Last Updated:</strong> Dec 29, 2025</p>
+<p><strong>Phase 17 Summary:</strong> Phase 17 completed the RBAC foundation, hardened tests (migrated brittle DB-heavy admin tests into fast handler-level unit tests), added mock DB safety, and improved test harness stability. All verification checks passed and the CTO signed off on Dec 29, 2025.</p>
+<p><strong>Phase 18 Kickoff (Customer API Platform):</strong> Phase 18 begins: customer API keys, <code>/ingest</code> router, per-customer rate limiting (Redis), metrics instrumentation, and CI-gated E2E tests. See <code>docs/issues/phase-18-*</code> for initial issue drafts and the project board for assigned owners.</p>
+<p>This folder collects documentation for Layer 4 (Platform Core): the security, administrative, and customer-facing foundation for the BridgeFlow commercial SaaS platform (RBAC, audit, user management, authentication, billing, multi-tenancy).</p>
+<p>Contents:
+- <code>Security-Foundation.md</code> — design and implementation notes for RBAC, authentication, audit
+- <code>Admin-Interfaces.md</code> — UI design and usage for Audit and User Management pages
+- <code>Accessibility-Spec.md</code> — accessibility decisions (ARIA, focus, live region)
+- <code>API-Endpoints.md</code> — Layer 4 API reference (endpoints, query params, permissions)
+- <code>Verification-Checklist.md</code> — CTO verification script, agenda, success criteria
+- <code>Deployment-Guide.md</code> — environment flags and rollout guidance
+- <code>screenshots/</code> — screenshots and small assets for demos</p>
+<p>Phase 33 (Firewall Security) — New Docs
+- See Phase 31-40 overview: <a href="../phases/phases31-40/">../phases/phases31-40/README.md</a>
+- Firewall API spec: <a href="../phases/phases31-40/phase-33-firewall-api/">../phases/phases31-40/phase-33-firewall-api.md</a>
+- Canvas integration guide: <a href="../phases/phases31-40/phase-33-firewall-canvas-integration/">../phases/phases31-40/phase-33-firewall-canvas-integration.md</a>
+- Complete summary: <a href="../phases/phases31-40/PHASE-33-COMPLETE-SUMMARY/">../phases/phases31-40/PHASE-33-COMPLETE-SUMMARY.md</a>
+- Quick start: <a href="../phases/phases31-40/README-PHASE-33/">../phases/phases31-40/README-PHASE-33.md</a></p>
+<h2 id="phase-39-super-admin-canvas-authentication">Phase 39 — Super-Admin &amp; Canvas Authentication</h2>
+<p>Phase 39 included critical authentication and authorization fixes relevant to Layer 4 responsibilities:</p>
+<ul>
+<li>Added <code>SUPER_ADMINS</code> environment variable (email list) to grant system-wide admin privileges to trusted operators (e.g., CTO). See: <code>docs/deployment/SUPER_ADMINS.md</code>.</li>
+<li>Login JWTs now include <code>isSuperAdmin: true</code> when matching <code>SUPER_ADMINS</code>, enabling global operations such as creating public blueprints (<code>organizationId: null</code>). See: <code>api/handlers/auth.js</code> and <code>test/integration/super-admin-create-blueprint.test.js</code>.</li>
+<li>Impact: Allows safe, auditable system-level administration while preserving tenant isolation and RBAC.</li>
+</ul>
+<p>(Also see overall Phase summary: <code>docs/phases/phases31-40/PHASE-39-COMPLETE-SUMMARY.md</code>)</p>
+<p><strong>Phase 11 Additions (Customer Core):</strong>
+- Authentication system: JWT-based auth, session management, password hashing
+- Organization/Tenancy: Multi-tenant architecture, membership roles, tenant isolation
+- Billing Integration: Stripe checkout, plan management, subscription lifecycle
+- Webhook processing: Automated subscription activation
+- API Endpoints: <code>/api/auth/*</code>, <code>/api/organizations/*</code>, <code>/api/billing/*</code>, <code>/api/webhooks/stripe</code>
+- Test Coverage: <code>api/tests/auth.test.js</code>, <code>api/tests/billing.test.js</code></p>
+<p>How to use
+1. Read <code>README.md</code> and <code>Security-Foundation.md</code> for context.
+2. Run through the <code>Verification-Checklist.md</code> to validate readiness with the CTO (Phase 17 completed).
+3. Refer to <code>API-Endpoints.md</code> when integrating or testing APIs.
+4. For Phase 18: check <code>docs/issues/phase-18-*</code> and the project board for kickoff tasks and PRs.</p>
+<p>Notes
+- The canonical security design is also referenced at <code>docs/design/layer4-platform-core-security.md</code> (legacy design doc) and has been migrated and summarized into these documents.</p>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+    
+  </span>
+</div>
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "..";</script>
+    <script src="../js/theme_extra.js"></script>
+    <script src="../js/theme.js"></script>
+      <script src="../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

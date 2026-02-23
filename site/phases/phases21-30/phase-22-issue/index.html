@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://brockhager.github.io/bridgeflow-docs/phases/phases21-30/phase-22-issue/" />
+      <link rel="shortcut icon" href="../../../img/favicon.ico" />
+    <title>Issue: Phase 22 — Trading Partner Registration (Tracking) - BridgeFlow Docs</title>
+    <link rel="stylesheet" href="../../../css/theme.css" />
+    <link rel="stylesheet" href="../../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Issue: Phase 22 \u2014 Trading Partner Registration (Tracking)";
+        var mkdocs_page_input_path = "phases\\phases21-30\\phase-22-issue.md";
+        var mkdocs_page_url = "/bridgeflow-docs/phases/phases21-30/phase-22-issue/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../../.." class="icon icon-home"> BridgeFlow Docs
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../..">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../topics/quickstart/">Quickstart</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../topics/concepts/">Concepts</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../current/control-tower/public-api/">API Reference</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../topics/vision/">Vision</a>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../..">BridgeFlow Docs</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../.." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">Issue: Phase 22 — Trading Partner Registration (Tracking)</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="issue-phase-22-trading-partner-registration-tracking">Issue: Phase 22 — Trading Partner Registration (Tracking)</h1>
+<p><strong>Status:</strong> Ready to start (Agent4 to confirm)<br />
+<strong>Owner:</strong> Agent4<br />
+<strong>Docs:</strong> docs/phases/phase-22-spec.md</p>
+<h2 id="goal">Goal</h2>
+<p>Track and coordinate Phase 22 work (22A → 22B → 22C). Use this document as the single source of truth for tasks, check-ins, and acceptance criteria.</p>
+<h2 id="acceptance-checklist">Acceptance Checklist</h2>
+<ul>
+<li>[ ] Agent4 confirms understanding of Agent10 directives (RLS-first, extend /api/auth/register, Organization.type usage)</li>
+<li>[ ] 22A: Public sign-up UI + registration flow implemented and tested (USE_MOCK_DB=true)</li>
+<li>[ ] 22B: Admin approval queue + approval workflow + email notifications</li>
+<li>[ ] 22C: Onboarding wizard + limited partner dashboard</li>
+<li>[ ] Prisma migration added for PartnerRegistration model and Organization fields</li>
+<li>[ ] RLS policies added/updated via migration and smoke tests added</li>
+<li>[ ] Docs updated with any policy/migration notes</li>
+</ul>
+<h2 id="notes-constraints">Notes / Constraints</h2>
+<ul>
+<li>Security: RLS must remain the sole gatekeeper — <code>accessLevel</code> is UI-only.</li>
+<li>Auth: Extend existing /api/auth/register (type='partner'). No new auth endpoints.</li>
+<li>Data lifecycle: On approval, create Organization(type='partner', accessLevel='limited') and link the User; archive the PartnerRegistration record.</li>
+</ul>
+<h2 id="how-to-mark-done">How to mark done</h2>
+<ul>
+<li>Merge PRs for 22A, 22B, and 22C, and close each checklist item with links to PRs.</li>
+<li>Post final status in #engineering and tag Agent10 &amp; Agent2.</li>
+</ul>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+    
+  </span>
+</div>
+    <script src="../../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../../..";</script>
+    <script src="../../../js/theme_extra.js"></script>
+    <script src="../../../js/theme.js"></script>
+      <script src="../../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

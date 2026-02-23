@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://brockhager.github.io/bridgeflow-docs/operator-runbook-entities/" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>Operator Runbook — Entities &amp; Resources (Phase 1A) - BridgeFlow Docs</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Operator Runbook \u2014 Entities \u0026amp; Resources (Phase 1A)";
+        var mkdocs_page_input_path = "operator-runbook-entities.md";
+        var mkdocs_page_url = "/bridgeflow-docs/operator-runbook-entities/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href=".." class="icon icon-home"> BridgeFlow Docs
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="..">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../topics/quickstart/">Quickstart</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../topics/concepts/">Concepts</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../current/control-tower/public-api/">API Reference</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../topics/vision/">Vision</a>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">BridgeFlow Docs</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">Operator Runbook — Entities &amp; Resources (Phase 1A)</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="operator-runbook-entities-resources-phase-1a">Operator Runbook — Entities &amp; Resources (Phase 1A)</h1>
+<p>Purpose: Quick operational steps for pilot operators to create, validate, and manage Resource Entities used by the Invoice Delivery flow.</p>
+<p>Prerequisites
+- Access to the production database or a secure operator tool that can create <code>Entity</code> and <code>Resource</code> records
+- Knowledge of the tenant for which the resource applies (tenant_id optional for Phase 1A)
+- Access to <code>lib-secrets</code> or the secret manager to store sensitive keys/secrets</p>
+<p>Important: In Phase 1A, Resource creation is operator-only. Do not expose these steps to tenants until Phase 1B is implemented.</p>
+<hr />
+<p>1) Create a Resource Entity (via SQL)</p>
+<p>Example: Create a webhook endpoint resource</p>
+<pre><code class="language-sql">INSERT INTO &quot;Entity&quot; (&quot;name&quot;, &quot;type&quot;, &quot;tags&quot;) VALUES ('Acme Webhook (Pilot)', 'resource', ARRAY['env:pilot','type:webhook']) RETURNING id;
+-- take the returned id (ENTITY_ID)
+
+INSERT INTO &quot;Resource&quot; (&quot;entityId&quot;, &quot;resourceType&quot;, &quot;config&quot;, &quot;status&quot;)
+VALUES ('ENTITY_ID', 'webhook', '{&quot;endpoint&quot;:&quot;https://acme.example/webhook&quot;,&quot;auth&quot;:&quot;hmac&quot;}', 'validating');
+</code></pre>
+<p>Note: Keep secrets out of <code>config</code> (do not store shared secret values directly in DB). Instead, store in the secret manager and reference via <code>secret_id</code> once your secrets manager tooling is in place.</p>
+<p>2) Validate the Resource (test send)</p>
+<ul>
+<li>Use the internal operator UI or run a test-send command (CLI) to post a test invoice payload to the webhook endpoint.</li>
+<li>Confirm the remote service returns <code>200</code> and that the payload is processed.</li>
+<li>If successful, update the Resource status to <code>active</code> and record <code>validatedAt</code>:</li>
+</ul>
+<pre><code class="language-sql">UPDATE &quot;Resource&quot; SET status = 'active', validatedAt = now() WHERE entityId = 'ENTITY_ID';
+</code></pre>
+<ul>
+<li>If the endpoint fails, inspect lastError and logs. If it's a transient error, retry after making adjustments. If the endpoint rejects the signature, confirm secrets and HMAC signing configuration.</li>
+</ul>
+<p>3) Deactivate or Swap Resource</p>
+<ul>
+<li>To deactivate:</li>
+</ul>
+<pre><code class="language-sql">UPDATE &quot;Resource&quot; SET status = 'inactive', lastError = 'Manually deactivated by operator' WHERE entityId = 'ENTITY_ID';
+</code></pre>
+<ul>
+<li>To swap Resource for an active job or tenant:</li>
+<li>Create the new Resource (follow step 1)</li>
+<li>Validate it (step 2)</li>
+<li>Update the DeliveryJob/tenant configuration to point to the new Resource (or update operator configuration to prefer the new one)</li>
+</ul>
+<p>4) Audit &amp; Logging</p>
+<ul>
+<li>All operator actions should be recorded in <code>audit-service</code> with the operator id and timestamp (JOB_CREATED, RESOURCE_CREATED, RESOURCE_VALIDATED, RESOURCE_DEACTIVATED).</li>
+<li>Keep records of validation attempts and results for compliance evidence.</li>
+</ul>
+<p>5) Troubleshooting</p>
+<ul>
+<li>If test sends fail with a 4xx code, inspect the response body for authentication or payload errors; confirm HMAC secret and timestamp windows.</li>
+<li>If test sends time out, check network accessibility and DNS for the endpoint; ensure firewall rules allow outbound traffic from our worker hosts.</li>
+<li>If the remote system is flaky, consider setting Resource status to <code>validating</code> until stable.</li>
+</ul>
+<hr />
+<p>Notes for future automation
+- In Phase 1B, automate validation with a standard test payload and add a short-lived validation token that the remote system can echo back.
+- Add an operator UI that stores secrets securely in <code>lib-secrets</code> and references them via <code>secret_id</code> on the Resource record.</p>
+<hr />
+<p>Contact
+- If you need assistance, contact the on-call platform engineer or the CTO.</p>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+    
+  </span>
+</div>
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "..";</script>
+    <script src="../js/theme_extra.js"></script>
+    <script src="../js/theme.js"></script>
+      <script src="../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

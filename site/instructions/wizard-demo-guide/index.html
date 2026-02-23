@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://brockhager.github.io/bridgeflow-docs/instructions/wizard-demo-guide/" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>Wizard demo guide - BridgeFlow Docs</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Wizard demo guide";
+        var mkdocs_page_input_path = "instructions\\wizard-demo-guide.md";
+        var mkdocs_page_url = "/bridgeflow-docs/instructions/wizard-demo-guide/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> BridgeFlow Docs
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../topics/quickstart/">Quickstart</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../topics/concepts/">Concepts</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../current/control-tower/public-api/">API Reference</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../topics/vision/">Vision</a>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">BridgeFlow Docs</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">Wizard demo guide</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h2 id="phase-1a-wizard-demo-guide">Phase 1A Wizard — Demo Guide</h2>
+<h2 id="purpose">Purpose</h2>
+<p>This is the Phase 1A "Magic Toll Booth" wizard for invoice delivery. The demo demonstrates the 5‑minute setup flow (Welcome → Source → Customer → Delivery → Review) and shows the end-to-end happy path plus error recovery.</p>
+<h2 id="status">Status</h2>
+<p>APPROVED
+Approved by CTO: 2025-12-15</p>
+<h2 id="how-to-run-quick">How to run (quick)</h2>
+<p>Run a simple static server from the project root and open the prototype in a browser:</p>
+<pre><code class="language-bash">npx http-server web -p 3000
+# then open http://localhost:3000 in your browser
+</code></pre>
+<h2 id="demo-script-step-by-step">Demo script (step-by-step)</h2>
+<ol>
+<li>Start on the <strong>Welcome</strong> screen. Click <strong>Start setup</strong>.</li>
+<li>On <strong>Source</strong>, select <strong>Upload invoice CSV</strong> (default). Note keyboard navigation: use Tab to move focus and Enter to select cards.</li>
+<li>On <strong>Customer</strong>, observe the auto-detected customer list in the CSV preview. Default: <strong>All customers</strong>. Select <strong>All customers</strong>.</li>
+<li>On <strong>Delivery</strong>, leave defaults (Encrypted email) and keep <strong>Notify me</strong> as-is. Click <strong>Next</strong>.</li>
+<li>On <strong>Review</strong>, confirm the summary shows Source, Customers, and Delivery. To demo error recovery, check <strong>Simulate failure (demo)</strong> and click <strong>Start sending invoices</strong>.</li>
+<li>Observe the <strong>progress stepper</strong> modal; it will fail (simulated). Click <strong>Retry</strong> (uncheck Simulate failure first) to run again and observe a successful completion.</li>
+<li>On success, the modal shows a fake job ID and the Success screen: <strong>Success — First invoice sent</strong>. Click <strong>View status</strong> or <strong>Done</strong>.</li>
+</ol>
+<h2 id="key-features-to-highlight-business-language">Key features to highlight (business-language)</h2>
+<ul>
+<li><strong>5-minute promise</strong>: wizard delivers a focused path to get invoice automation running quickly.</li>
+<li><strong>Friendly progress visibility</strong>: stepper shows clear progress across Import → Prepare → Send → Complete.</li>
+<li><strong>Error recovery</strong>: demo shows automatic retries and a clear path to retry or change settings without losing state.</li>
+<li><strong>Accessibility &amp; keyboard support</strong>: full keyboard navigation (Tab/Enter/Escape) and accessible stepper messaging.</li>
+</ul>
+<h2 id="screenshot">Screenshot</h2>
+<p>Please include a screenshot of the Review screen in this guide. Save the image as <code>docs/images/wizard-review.png</code> and include it next to this file.</p>
+<p>If you want, paste the screenshot or a link here and I will embed it into the guide and commit it.</p>
+<h2 id="notes-for-demo-presenter">Notes for demo presenter</h2>
+<ul>
+<li>Keep the demo fast: follow the happy path first, then exercise the error scenario.</li>
+<li>Mention the mock job ID is a demo artifact; after UI sign-off we will integrate with the backend job orchestrator to return real job IDs and statuses.</li>
+</ul>
+<h2 id="decision">Decision</h2>
+<p>Decision: "Yes, approved" — Approved by CTO
+Date: 2025-12-15</p>
+<p>CTO Review conducted on 2025-12-15. Feedback: "Demo was good. Design could be better - but overall it works and makes sense." The requested visual polish, live progress percentage, and invoice access were implemented and approved.</p>
+<p>CTO requested changes (2025-12-15):
+1. Improve visual design to make the app feel like a demo product (the plain white background is too plain).
+2. Add live percentage progress during the sending step (e.g., "10% complete...").
+3. Provide an access point to the sent invoice after the job completes (e.g., a link to view/download the invoice PDF).</p>
+<p>Update (2025-12-15): The requested changes have been implemented:
+- Live percentage progress during the Sending step in the job modal.
+- "View Sent Invoice" button on success that opens a mock invoice page.
+- Visual polish applied (subtle gradient, refined spacing, brand color accents).</p>
+<p>Please review the updated demo and reply with either "Yes, approved" or "No, make these changes: ...".</p>
+<h2 id="formal-approval">Formal Approval</h2>
+<p>CTO approval granted on 2025-12-15. 'I approve the demo.'</p>
+<h2 id="appendix-run-locally-optional">Appendix: Run locally (optional)</h2>
+<ul>
+<li>Start a local static server: <code>npx http-server web -p 3000</code>.</li>
+<li>Open <code>http://localhost:3000</code> and walk through the wizard.</li>
+</ul>
+<hr />
+<p>Prepared by: Agent4
+Date: 2025-12-15</p>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

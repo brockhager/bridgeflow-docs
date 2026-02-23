@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://brockhager.github.io/bridgeflow-docs/vision/bf-integration/docs/Layer4-PlatformCoreLayer/API-Endpoints/" />
+      <link rel="shortcut icon" href="../../../../../img/favicon.ico" />
+    <title>API Endpoints - BridgeFlow Docs</title>
+    <link rel="stylesheet" href="../../../../../css/theme.css" />
+    <link rel="stylesheet" href="../../../../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "API Endpoints";
+        var mkdocs_page_input_path = "vision\\bf-integration\\docs\\Layer4-PlatformCoreLayer\\API-Endpoints.md";
+        var mkdocs_page_url = "/bridgeflow-docs/vision/bf-integration/docs/Layer4-PlatformCoreLayer/API-Endpoints/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../../../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../../../../.." class="icon icon-home"> BridgeFlow Docs
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../../..">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../../../topics/quickstart/">Quickstart</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../../../topics/concepts/">Concepts</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../../../current/control-tower/public-api/">API Reference</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../../../topics/vision/">Vision</a>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../..">BridgeFlow Docs</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../../../.." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">API Endpoints</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <blockquote>
+<p>[!WARNING]
+Status: Planned / In Development
+Context: Original BF-INTEGRATION Vision (Pre-Phase 30)</p>
+</blockquote>
+<h1 id="layer-4-api-reference-summary">Layer 4 API Reference (summary)</h1>
+<h2 id="firewall-security-phase-33">Firewall Security (Phase 33)</h2>
+<p>POST /api/firewalls
+- Description: Create a firewall rule set for an Integration Bridge (Layer 4 security)
+- Payload: <code>{ bridgeId, side: 'inbound'|'outbound', publicIp, allowedPorts: number[], protocol: 'tcp'|'udp'|'both' }</code>
+- Pre-handlers: <code>authMiddleware</code>, <code>idempotencyMiddleware</code>, <code>requirePermission('firewalls:write')</code>
+- Response: <code>201 { id, bridgeId, side, publicIp, allowedPorts, protocol, status: 'PROVISIONING'|'ACTIVE'|'ERROR' }</code></p>
+<p>GET /api/firewalls/:id
+- Description: Fetch a single firewall rule set
+- Pre-handlers: <code>authMiddleware</code>, <code>requirePermission('firewalls:read')</code>
+- Response: <code>{ id, bridgeId, side, publicIp, allowedPorts, protocol, status, createdAt }</code></p>
+<p>GET /api/bridges/:bridgeId/firewalls
+- Description: List all firewall rule sets for a bridge (usually 0-2)
+- Pre-handlers: <code>authMiddleware</code>, <code>requirePermission('firewalls:read')</code>
+- Response: <code>{ firewalls: [ { id, side, publicIp, allowedPorts, protocol, status, createdAt } ] }</code></p>
+<p>DELETE /api/firewalls/:id
+- Description: Delete a firewall rule set (triggers async teardown; DB cascade on bridge delete)
+- Pre-handlers: <code>authMiddleware</code>, <code>requirePermission('firewalls:delete')</code>
+- Response: <code>204 No Content</code></p>
+<p>References
+- Spec: <a href="../../phases/phases31-40/phase-33-firewall-api/">../phases/phases31-40/phase-33-firewall-api.md</a>
+- Canvas guide: <a href="../../phases/phases31-40/phase-33-firewall-canvas-integration/">../phases/phases31-40/phase-33-firewall-canvas-integration.md</a></p>
+<h2 id="audit">Audit</h2>
+<p>GET /api/audit
+- Description: Query audit events
+- Params: <code>limit</code>, <code>offset</code>, <code>jobId</code>, <code>level</code>, <code>search</code>, <code>dateFrom</code>, <code>dateTo</code>, <code>actionType</code>, <code>actorId</code>, <code>targetId</code>
+- Permissions: <code>audit:read</code>
+- Response: `{ audit: [ ... ], total, limit, offset, filters }</p>
+<h2 id="user-management">User Management</h2>
+<p>GET /api/users
+- Description: List users with filters/pagination
+- Params: <code>limit</code>, <code>offset</code>, <code>role</code>, <code>search</code>, <code>disabled</code>
+- Permissions: <code>users:read</code>
+- Response: `{ users: [ ... ], total, limit, offset }</p>
+<p>POST /api/users
+- Description: Create user (admin-only)
+- Payload: <code>{ email, name, role }</code> (password flow separate)
+- Permissions: <code>users:write</code></p>
+<p>PATCH /api/users/:id/role
+- Description: Change user role
+- Payload: <code>{ role }</code>
+- Permissions: <code>users:role</code></p>
+<p>PATCH /api/users/:id/enable
+- Description: Enable/disable user
+- Payload: <code>{ disabled: true|false }</code>
+- Permissions: <code>users:write</code></p>
+<h2 id="mapping-version-control-layer-3-enterprise">Mapping Version Control (Layer 3 Enterprise)</h2>
+<p>GET /api/mappings
+- Description: List all mappings
+- Permissions: <code>mapping:view</code>
+- Response: <code>{ success: true, mappings: [ ... ] }</code></p>
+<p>POST /api/mappings
+- Description: Create new mapping
+- Payload: <code>{ name, description }</code>
+- Permissions: <code>mapping:create</code>
+- Response: <code>{ success: true, mapping: { id, name, ... } }</code></p>
+<p>POST /api/mappings/:id/versions
+- Description: Create new version of mapping
+- Payload: <code>{ content, message }</code>
+- Permissions: <code>mapping:version:create</code>
+- Response: <code>{ success: true, version: { id, content, authorId, ... } }</code></p>
+<p>GET /api/mappings/:id/versions
+- Description: List all versions for a mapping
+- Permissions: <code>mapping:view</code>
+- Response: <code>{ success: true, versions: [ ... ] }</code></p>
+<p>POST /api/mappings/:id/versions/restore
+- Description: Restore a previous version (creates new version)
+- Payload: <code>{ versionId }</code>
+- Permissions: <code>mapping:version:restore</code>
+- Response: <code>{ success: true, restored: { id, content, ... } }</code></p>
+<p>GET /api/mappings/:id/versions/:versionId/diff
+- Description: View diff between version and latest
+- Permissions: <code>mapping:view</code>
+- Response: <code>{ success: true, diff: [ ... ] }</code></p>
+<h2 id="monitoring-alerting">Monitoring &amp; Alerting</h2>
+<h2 id="customer-api-phase-18">Customer API (Phase 18)</h2>
+<p>POST /api/customer/:org/api-keys
+- Description: Create an API key for the given organization (owner/admin available via auth). Returns a plaintext key once at creation.
+- Payload: <code>{ metadata?: object }</code> (optional metadata like name)
+- Permissions: <code>auth required</code> (owner/admin role or operator)
+- Response: <code>201 { apiKey: { id, key, metadata, createdAt } }</code> (key plaintext only at creation)</p>
+<p>GET /api/customer/:org/api-keys
+- Description: List API keys associated with an organization (no plaintext keys returned).
+- Permissions: <code>auth required</code> (owner/admin role)
+- Response: `{ apiKeys: [ { id, metadata, createdAt, revokedAt, rotatedAt } ] }</p>
+<p>POST /api/customer/:org/api-keys/:id/revoke
+- Description: Revoke an API key
+- Permissions: <code>auth required</code> (owner/admin)
+- Response: <code>200 { ok: true }</code></p>
+<p>POST /api/customer/:org/api-keys/:id/rotate
+- Description: Rotate an API key (creates a new key material and updates hash, returns new plaintext key)
+- Permissions: <code>auth required</code> (owner/admin)
+- Response: <code>201 { apiKey: { id, key, rotatedAt } }</code></p>
+<h2 id="ingest">Ingest</h2>
+<p>POST /ingest/:customer_id/:endpoint_slug
+- Description: Public ingestion endpoint for customers to POST payloads to.
+- Auth: <code>x-api-key</code> header (plaintext API key generated via <code>/api/customer/:org/api-keys</code>) — keys are stored hashed using bcrypt and validated by middleware.
+- Rate limiting: per-customer token-bucket implemented in Redis; env controls: <code>INGEST_RATE_LIMIT_PER_MIN</code>, <code>INGEST_RATE_LIMIT_WINDOW_SECONDS</code>, <code>REDIS_URL</code>.
+- Responses:
+  - <code>200</code> or <code>202</code> — accepted/processed
+  - <code>401</code> — invalid or missing API key
+  - <code>429</code> — rate limited
+  - <code>500</code> — internal errors (rare; rate-limiter fails open on Redis outage)
+- Observability: counters emitted as <code>ingest_requests_total</code> with labels <code>{ org_id, status: allowed|rate_limited|rejected }</code> to facilitate E2E verification.</p>
+<h2 id="connectors-eg-qbo">Connectors (e.g., QBO)</h2>
+<p>POST /api/qbo/sync
+- Description: Trigger a QuickBooks Online (QBO) sync for the calling organization (fetch Purchase Orders and enqueue into ingest pipeline).
+- Auth: <code>x-api-key</code> header (customer API key) — maps to <code>organizationId</code> via <code>validateCustomerApiKey</code>.
+- Pre-handlers: rate limiting (same per-org limiting as ingest endpoints).
+- Behavior: calls <code>syncQboPurchaseOrders(organizationId)</code> which fetches POs, maps to internal payloads, enqueues to <code>raw_payloads:&lt;organizationId&gt;</code> with <code>idempotencyKey</code> (<code>qbo_po:&lt;TxnId&gt;</code>), and records idempotency keys.
+- Responses:
+  - <code>200</code> — <code>{ status: 'sync completed', organizationId, enqueued: &lt;n&gt; }</code>
+  - <code>401</code> — invalid API key
+  - <code>429</code> — rate limited
+  - <code>500</code> — sync failed
+- Observability: emit <code>qbo.sync.enqueued_total</code>, <code>qbo.sync.failures</code>, and <code>qbo.sync.refreshes</code> as appropriate.</p>
+<p>Notes on channels
+- <code>channels</code> may include <code>webhook</code> objects (<code>{ type: 'webhook', url }</code>) or <code>email</code> objects (<code>{ type: 'email', to }</code>).
+- Notifications are best-effort with retry/backoff; the system currently implements in-process retries and a JSON (non-delivery) transport if <code>SMTP_URL</code> is not configured.</p>
+<p>Notes
+- All admin endpoints are protected by <code>authMiddleware</code> and enforced by <code>requirePermission(...)</code> when rollout flags are enabled.
+- Audit writes are performed via <code>writeAudit()</code> for alert lifecycle events (e.g., <code>alert.created</code>, <code>alert.triggered</code>, <code>alert.resolved</code>, <code>alert.deleted</code>).
+GET /api/monitor/metrics
+- Description: Return current platform metrics (dev sampler in-process)
+- Query params: <code>names=system,api,jobs,db</code> to select subsets (optional)
+- Permissions: <code>monitor:read</code>
+- Response: `{ metrics: { system, api, jobs, db }, timestamp }</p>
+<p>GET /api/monitor/alerts
+- Description: List configured alert rules
+- Permissions: <code>monitor:read</code>
+- Response: <code>{ alerts: [ AlertRule ] }</code></p>
+<p>POST /api/monitor/alerts
+- Description: Create an alert rule
+- Payload: <code>{ name, metric, threshold, comparison = (gt|gte|lt|lte), channels = [ { type: 'webhook'|'email', url?, to? } ], createdBy }</code>
+- Permissions: <code>monitor:write</code>
+- Response: <code>201 { rule }</code></p>
+<p>DELETE /api/monitor/alerts/:id
+- Description: Delete an alert rule
+- Permissions: <code>monitor:write</code>
+- Response: <code>{ ok: true }</code></p>
+<p>GET /api/monitor/events
+- Description: List alert events (triggered/resolved), sorted by <code>triggeredAt</code>
+- Permissions: <code>monitor:read</code>
+- Response: <code>{ events: [ AlertEvent ] }</code></p>
+<p>POST /api/monitor/events/:id/resolve
+- Description: Manually resolve an active event
+- Permissions: <code>monitor:write</code>
+- Response: <code>{ ok: true }</code></p>
+<p>Notes on channels
+- <code>channels</code> may include <code>webhook</code> objects (<code>{ type: 'webhook', url }</code>) or <code>email</code> objects (<code>{ type: 'email', to }</code>).
+- Notifications are best-effort with retry/backoff; the system currently implements in-process retries and a JSON (non-delivery) transport if <code>SMTP_URL</code> is not configured.</p>
+<p>Notes
+- All admin endpoints are protected by <code>authMiddleware</code> and enforced by <code>requirePermission(...)</code> when rollout flags are enabled.
+- Audit writes are performed via <code>writeAudit()</code> for alert lifecycle events (e.g., <code>alert.created</code>, <code>alert.triggered</code>, <code>alert.resolved</code>, <code>alert.deleted</code>).</p>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+    
+  </span>
+</div>
+    <script src="../../../../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../../../../..";</script>
+    <script src="../../../../../js/theme_extra.js"></script>
+    <script src="../../../../../js/theme.js"></script>
+      <script src="../../../../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

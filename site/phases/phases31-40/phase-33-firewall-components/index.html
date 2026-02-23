@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://brockhager.github.io/bridgeflow-docs/phases/phases31-40/phase-33-firewall-components/" />
+      <link rel="shortcut icon" href="../../../img/favicon.ico" />
+    <title>Phase 33: Bridge Firewall Components (Layer 4) - BridgeFlow Docs</title>
+    <link rel="stylesheet" href="../../../css/theme.css" />
+    <link rel="stylesheet" href="../../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Phase 33: Bridge Firewall Components (Layer 4)";
+        var mkdocs_page_input_path = "phases\\phases31-40\\phase-33-firewall-components.md";
+        var mkdocs_page_url = "/bridgeflow-docs/phases/phases31-40/phase-33-firewall-components/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../../.." class="icon icon-home"> BridgeFlow Docs
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../..">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../topics/quickstart/">Quickstart</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../topics/concepts/">Concepts</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../current/control-tower/public-api/">API Reference</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../topics/vision/">Vision</a>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../..">BridgeFlow Docs</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../.." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">Phase 33: Bridge Firewall Components (Layer 4)</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="phase-33-bridge-firewall-components-layer-4">Phase 33: Bridge Firewall Components (Layer 4)</h1>
+<p><strong>Status</strong>: 🚀 In Progress — Layer 1 Canvas Styling Complete
+<strong>Date</strong>: 2026-01-10
+<strong>Current Phase</strong>: Layer 1 Canvas implementation + static red indicator styling
+<strong>Next</strong>: Layer 4 Firewall Builder page, API integration, full workflow automation</p>
+<h2 id="overview">Overview</h2>
+<p>Phase 33 implements dual firewall components as structural bridge-edge elements, positioned between the Adapter and Connector on each side of the bridge. Firewalls serve as Layer 4 (Network/Transport) security gates, allowing configuration of public IPs, allowed ports, and TCP/UDP protocols. The phase emphasizes a <strong>layered, progressive-disclosure workflow</strong>: Canvas (Layer 1) displays required slots in static red; clicking opens a focused Layer 4 builder form; returning to Canvas auto-adds the component to the palette.</p>
+<h2 id="design-principles">Design Principles</h2>
+<h3 id="visual-clarity-no-motion-distractions">🎨 Visual Clarity (No Motion Distractions)</h3>
+<ul>
+<li><strong>Static red dashed border</strong> (<code>#ef4444</code>) for required empty firewall slots — no blinking or animation</li>
+<li><strong>Light red background</strong> (<code>#fef2f2</code>) for emphasis and accessibility</li>
+<li><strong>Clear status indicators</strong>: 🔴 (red dot for empty), 🟢 (green dot for filled)</li>
+<li><strong>Professional hover effects</strong>: Smooth 120ms transition with subtle shadow lift on interaction</li>
+<li>Goal: Users instantly recognize "required but missing" without animation fatigue</li>
+</ul>
+<h3 id="layered-workflow-progressive-disclosure">🧠 Layered Workflow (Progressive Disclosure)</h3>
+<p>Instead of an all-in-one form on Canvas:
+1. <strong>Layer 1 (Canvas)</strong>: Display firewall slots with red required indicator. Click → navigate to builder.
+2. <strong>Layer 4 (Firewall Builder)</strong>: Focused, single-purpose form with only Layer 4 fields (public IP, allowed ports, protocol).
+3. <strong>Return to Canvas</strong>: Detect <code>?newFirewallId=...</code> in URL, auto-add firewall to palette, highlight it.</p>
+<p>This separation keeps Canvas clean and focused while enabling deeper configuration without cognitive overload.</p>
+<h3 id="security-data-boundaries">🔐 Security &amp; Data Boundaries</h3>
+<ul>
+<li><strong>Public IP Only</strong> on Layer 4 (no internal IPs, no sensitive data in UI)</li>
+<li><strong>Allowed Ports</strong> as a simple list or range (user-friendly)</li>
+<li><strong>TCP/UDP Protocol</strong> selector (not a complex rule engine)</li>
+<li><strong>No Rule IDs or Internal References</strong> exposed to users (future Layer 5 concern)</li>
+</ul>
+<h2 id="current-implementation-layers-1-4">Current Implementation (Layers 1 &amp; 4)</h2>
+<h3 id="layer-1-canvas-styling-assemblyjs">✅ Layer 1: Canvas Styling (assembly.js)</h3>
+<pre><code class="language-css">/* Static red border + background for required empty firewall slots */
+.firewall-slot.firewall--required {
+  border: 2px dashed #ef4444;
+  background: #fef2f2;
+  box-shadow: 0 0 0 0;
+  animation: none;  /* Static, no motion */
+}
+
+.firewall-slot.firewall--required:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(239, 68, 68, 0.12);
+  border-color: #dc2626;
+}
+
+/* Filled firewall slot (grey) */
+.firewall-slot.firewall--filled {
+  border-color: #cbd5e1;
+  background: #f8fafc;
+}
+</code></pre>
+<h3 id="dom-structure-firewalljs">✅ DOM Structure (firewall.js)</h3>
+<pre><code class="language-javascript">export function createFirewallSlot(slotKey, config, isFilled, blueprintId) {
+  // Returns a complete &lt;div class=&quot;firewall-slot&quot;&gt; element
+  // with:
+  //   - Shield icon (🛡️)
+  //   - Status dot (🔴 empty or 🟢 filled)
+  //   - Label (&quot;Source Firewall&quot; / &quot;Dest Firewall&quot;)
+  //   - Click handler → navigate to Layer 4 builder
+  //   - 5s hover guidance tooltip
+  //   - Accessibility (role=button, tabindex=0, keyboard support)
+}
+</code></pre>
+<h3 id="hover-guidance">✅ Hover Guidance</h3>
+<ul>
+<li><strong>Delay</strong>: 5 seconds before tooltip appears (prevents accidental triggers)</li>
+<li><strong>Message</strong>: "Add firewall configuration to enable secure connection" (generic, applies to both sides)</li>
+<li><strong>Indicator</strong>: Hidden <code>.firewall-missing</code> div reveals on 5s hover with text "Required"</li>
+</ul>
+<h3 id="tests-firewallstatic-redtestjs">✅ Tests (firewall.static-red.test.js)</h3>
+<p>8 comprehensive DOM-focused tests covering:
+- Static red styling for required empty slots
+- Grey styling for filled slots
+- Tooltip 5s delay and message correctness
+- Missing indicator visibility on 5s hover
+- Click handler and keyboard activation (Enter/Space)
+- Accessibility attributes (<code>role=button</code>, <code>tabindex=0</code>, keyboard support)</p>
+<p><strong>Test Status</strong>: ✅ 8/8 passed; All 87 web tests passing (38 test files)</p>
+<h2 id="planned-implementation-layers-4-1-integration">Planned Implementation (Layers 4 &amp; 1 Integration)</h2>
+<h3 id="layer-4-firewall-builder-page">Layer 4: Firewall Builder Page</h3>
+<p><strong>File</strong>: <code>web/firewall-builder/builder.html</code> and <code>builder.js</code></p>
+<p><strong>Form Fields</strong>:
+- <strong>Public IP</strong> (text input, validation: valid IPv4/IPv6)
+- <strong>Allowed Ports</strong> (text input, comma-separated or range notation)
+- <strong>Protocol</strong> (radio buttons or select: TCP, UDP, Both)
+- <strong>Save Button</strong> → API call to persist
+- <strong>Cancel Button</strong> → return to Canvas without saving</p>
+<p><strong>UX Flow</strong>:</p>
+<pre><code>1. User sees red firewall slot on Canvas
+2. Clicks slot → navigates to /firewall-builder?side=source|dest&amp;returnTo=/canvas-assembly
+3. Fills form (public IP, ports, protocol)
+4. Clicks Save → POST /api/firewall { bridgeId, side, config }
+5. Redirect: /canvas-assembly?newFirewallId={id}
+6. Canvas detects ?newFirewallId, adds to palette, highlights briefly
+</code></pre>
+<h3 id="api-integration">API Integration</h3>
+<p><strong>Endpoints</strong> (to be implemented in <code>api/handlers/firewall.js</code>):
+- <code>POST /api/firewall</code> — Create/update firewall config
+  - Auth: user must own bridge's org
+  - Payload: <code>{ bridgeId, side: 'source|dest', config: { publicIp, allowedPorts, protocol } }</code>
+  - Response: <code>{ id, bridgeId, side, config, createdAt }</code>
+- <code>GET /api/firewall/:id</code> — Retrieve firewall config
+- <code>DELETE /api/firewall/:id</code> — Remove firewall (soft delete, preserve audit trail)</p>
+<p><strong>Database</strong> (Prisma schema addition):</p>
+<pre><code class="language-prisma">model Firewall {
+  id String @id @default(cuid())
+  bridgeId String
+  bridge Bridge @relation(fields: [bridgeId], references: [id], onDelete: Cascade)
+  side String // 'source' | 'dest'
+  publicIp String
+  allowedPorts String // &quot;80,443&quot; or &quot;8000-9000&quot;
+  protocol String // &quot;TCP&quot; | &quot;UDP&quot; | &quot;BOTH&quot;
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([bridgeId, side]) // One firewall per side per bridge
+  @@index([bridgeId])
+}
+</code></pre>
+<h3 id="canvas-integration-assemblyjs">Canvas Integration (assembly.js)</h3>
+<p><strong>Update <code>BRIDGE_SLOT_CONFIG</code></strong>:</p>
+<pre><code class="language-javascript">const BRIDGE_SLOT_CONFIG = {
+  'source-firewall': {
+    type: 'firewall',
+    label: 'Source Firewall',
+    hint: 'Firewall for inbound traffic',
+    required: true,
+    position: { x: 80, y: 120, width: 70, height: 50 }
+  },
+  'dest-firewall': {
+    type: 'firewall',
+    label: 'Dest Firewall',
+    hint: 'Firewall for outbound traffic',
+    required: true,
+    position: { x: 650, y: 120, width: 70, height: 50 }
+  },
+  // ... existing slots
+}
+</code></pre>
+<p><strong>Render Firewall Slots</strong>:</p>
+<pre><code class="language-javascript">function renderFirewalls(bridge, canvas) {
+  const sourceFirewall = bridge.firewalls.find(f =&gt; f.side === 'source')
+  const destFirewall = bridge.firewalls.find(f =&gt; f.side === 'dest')
+
+  const sourceSlot = createFirewallSlot(
+    'source-firewall',
+    BRIDGE_SLOT_CONFIG['source-firewall'],
+    !!sourceFirewall,
+    bridge.blueprintId
+  )
+  const destSlot = createFirewallSlot(
+    'dest-firewall',
+    BRIDGE_SLOT_CONFIG['dest-firewall'],
+    !!destFirewall,
+    bridge.blueprintId
+  )
+
+  canvas.appendChild(sourceSlot)
+  canvas.appendChild(destSlot)
+}
+</code></pre>
+<p><strong>Return from Builder</strong>:</p>
+<pre><code class="language-javascript">// In initAssembly(), detect ?newFirewallId parameter
+const params = new URLSearchParams(window.location.search)
+const newFirewallId = params.get('newFirewallId')
+if (newFirewallId) {
+  // Fetch firewall, add to palette (like TPs)
+  const fw = await firewallBuilderApi.getFirewall(newFirewallId)
+  store.state.firewalls = store.state.firewalls || []
+  store.state.firewalls.push(fw)
+  highlightFirewallInPalette(newFirewallId, 2500) // 2.5s highlight
+}
+</code></pre>
+<h2 id="acceptance-criteria-layer-1-complete">Acceptance Criteria (Layer 1 — Complete)</h2>
+<ul>
+<li>[x] Static red dashed border (<code>#ef4444</code>) on required empty firewall slots</li>
+<li>[x] Light red background (<code>#fef2f2</code>) for emphasis</li>
+<li>[x] No animation or blinking — clean, professional appearance</li>
+<li>[x] Hover effect: smooth 120ms transition with subtle shadow</li>
+<li>[x] Status indicators: 🔴 (empty), 🟢 (filled)</li>
+<li>[x] 5s hover tooltip: "Add firewall configuration to enable secure connection"</li>
+<li>[x] Missing indicator reveals on 5s hover</li>
+<li>[x] Click slot → navigates to <code>/firewall-builder?side={source|dest}&amp;returnTo=/canvas-assembly</code></li>
+<li>[x] Keyboard accessibility: Enter/Space activates slot</li>
+<li>[x] DOM rendering tests (8 tests, all passing)</li>
+<li>[x] All 87 web tests passing</li>
+</ul>
+<h2 id="acceptance-criteria-layer-4-complete">Acceptance Criteria (Layer 4 — Complete)</h2>
+<ul>
+<li>[x] Layer 4 firewall builder page created and styled (<code>web/firewall-builder/builder.html</code>, <code>builder.js</code>)</li>
+<li>[x] Form fields with validation:</li>
+<li>[x] Public IP (IPv4/IPv6) with strict validation</li>
+<li>[x] Allowed Ports (single, ranges, comma-separated) with port range validation</li>
+<li>[x] Protocol (TCP, UDP, BOTH) selector</li>
+<li>[x] Clean, focused UI: gradient background, centered card, professional styling</li>
+<li>[x] Error handling: form validation errors inline, API errors in error banner</li>
+<li>[x] Loading states: form hidden during save, spinner visible, buttons disabled</li>
+<li>[x] URL parameters: <code>?side=source|dest&amp;returnTo=/canvas-assembly</code></li>
+<li>[x] Accessibility: focus states, keyboard support, form labels, error messages</li>
+<li>[x] Save button: navigates to builder, forms data, returns with <code>?newFirewallId={id}</code></li>
+<li>[x] Cancel button: returns to Canvas without saving</li>
+<li>[x] 25 comprehensive tests (IP, ports, protocol, form validation, DOM interaction, loading states)</li>
+<li>[x] All 112 web tests passing (39 test files)</li>
+<li>[x] API wrapper: <code>firewallBuilderApi.js</code> with CRUD methods</li>
+</ul>
+<h2 id="acceptance-criteria-canvas-integration-return-flow-pending">Acceptance Criteria (Canvas Integration &amp; Return Flow — Pending)</h2>
+<ul>
+<li>[ ] Canvas integration: Update <code>BRIDGE_SLOT_CONFIG</code>, render firewall slots</li>
+<li>[ ] API endpoints: <code>POST /api/firewall</code>, <code>GET /api/firewall/:id</code>, <code>DELETE /api/firewall/:id</code></li>
+<li>[ ] Prisma schema: Add <code>Firewall</code> model with unique constraint on <code>[bridgeId, side]</code></li>
+<li>[ ] Return-flow detection: <code>?newFirewallId=...</code> auto-adds to palette</li>
+<li>[ ] Palette highlight animation on new firewall (2.5s)</li>
+<li>[ ] E2E tests: full workflow (Canvas → Builder → Save → Canvas with highlight)</li>
+<li>[ ] All tests passing (web + API integration)</li>
+</ul>
+<h2 id="files-changed-layers-1-4">Files Changed (Layers 1 &amp; 4)</h2>
+<p><strong>Layer 1 (Canvas Styling)</strong>:
+- <strong>web/src/assembly.js</strong>: Added firewall slot CSS (static red styling, hover effects)
+- <strong>web/src/assembly/firewall.js</strong>: Firewall slot DOM factory function</p>
+<p><strong>Layer 4 (Builder Page)</strong>:
+- <strong>web/firewall-builder/builder.html</strong>: Form UI with gradient background, centered card, clean styling
+- <strong>web/firewall-builder/builder.js</strong>: Form logic, validation, API integration, error handling
+- <strong>web/src/firewallBuilderApi.js</strong>: API wrapper with CRUD methods</p>
+<p><strong>Tests</strong>:
+- <strong>web/tests/assembly/firewall.static-red.test.js</strong>: 8 DOM rendering tests (Layer 1)
+- <strong>web/tests/firewall-builder.test.js</strong>: 25 validation and integration tests (Layer 4)</p>
+<p><strong>Commits</strong>:
+1. <code>feat(phase-33): implement static red styling for required firewall slots</code>
+2. <code>feat(phase-33): implement Layer 4 firewall builder page</code></p>
+<h2 id="next-steps-in-order">Next Steps (In Order)</h2>
+<ol>
+<li><strong>Implement API endpoints</strong> (<code>api/handlers/firewall.js</code>, Prisma schema update)</li>
+<li><strong>Canvas integration</strong>: Update <code>BRIDGE_SLOT_CONFIG</code>, render firewall slots in bridge view</li>
+<li><strong>Return-flow logic</strong>: Detect <code>?newFirewallId=...</code>, auto-add to palette, highlight</li>
+<li><strong>E2E tests</strong>: Full workflow (Canvas → Builder → Save → Canvas with highlight)</li>
+<li><strong>Documentation &amp; code review</strong>: Update README, API docs, test coverage</li>
+</ol>
+<h2 id="technical-notes">Technical Notes</h2>
+<h3 id="dom-structure">DOM Structure</h3>
+<p>Each firewall slot is a <code>&lt;div class="firewall-slot firewall--required|firewall--filled"&gt;</code> containing:
+- <code>.firewall-icon</code> (🛡️ shield emoji)
+- <code>.firewall-status</code> (🔴 or 🟢 status dot)
+- <code>.firewall-label</code> ("Source Firewall" / "Dest Firewall")
+- <code>.firewall-missing</code> (hidden until 5s hover, displays "Required")</p>
+<h3 id="styling-strategy">Styling Strategy</h3>
+<ul>
+<li>Base <code>.firewall-slot</code> has default grey border (#d1d5db)</li>
+<li><code>.firewall--required</code> overrides with red dashed border (#ef4444) + light red background</li>
+<li><code>.firewall--filled</code> uses grey border + light grey background</li>
+<li>Hover states smooth-transition (120ms) border color and box shadow</li>
+<li>No animations to keep UI clean and professional</li>
+</ul>
+<h3 id="accessibility">Accessibility</h3>
+<ul>
+<li><code>role="button"</code> for semantic meaning</li>
+<li><code>tabindex="0"</code> for keyboard navigation</li>
+<li><code>title</code> attribute for tooltip fallback</li>
+<li>Keyboard support: Enter and Space keys trigger click handler</li>
+<li>Hidden <code>.firewall-missing</code> indicator uses <code>aria-hidden="true"</code> (decorative)</li>
+</ul>
+<h2 id="risk-mitigation">Risk Mitigation</h2>
+<h3 id="risk-users-confused-by-separate-forms">Risk: Users Confused by Separate Forms</h3>
+<p><strong>Mitigation</strong>: Clear tooltip guidance ("Add firewall configuration to enable secure connection") + visual red indicator + highlighted navigation flow in Layer 4 builder</p>
+<h3 id="risk-form-validation-errors">Risk: Form Validation Errors</h3>
+<p><strong>Mitigation</strong>: Client-side validation (IP format, port range) before API call; server-side validation enforces constraints; clear error messages</p>
+<h3 id="risk-palette-duplication-like-tp-issue-in-phase-32">Risk: Palette Duplication (like TP issue in Phase 32)</h3>
+<p><strong>Mitigation</strong>: Track firewall IDs in store, deduplicate on return-flow like we did for TPs</p>
+<h3 id="risk-permissiontenancy-boundary-violations">Risk: Permission/Tenancy Boundary Violations</h3>
+<p><strong>Mitigation</strong>: API enforces org scoping; Prisma schema ties Firewall to Bridge to Organization; RLS at DB level</p>
+<h2 id="performance-considerations">Performance Considerations</h2>
+<ul>
+<li><strong>DOM rendering</strong>: Firewall slots are small, static elements (no heavy SVG or animation)</li>
+<li><strong>API calls</strong>: Single POST to create, GET to fetch (no polling or streams)</li>
+<li><strong>Styling</strong>: Pure CSS, no JavaScript-driven animations</li>
+<li><strong>Palette update</strong>: Minimal — just add firewall object to store array and highlight 2.5s</li>
+</ul>
+<h2 id="phase-33-timeline-estimate">Phase 33 Timeline (Estimate)</h2>
+<ul>
+<li><strong>Layer 1 (Canvas UI)</strong>: ✅ Complete (2-3 hours)</li>
+<li><strong>Layer 4 (Builder + API)</strong>: 4-5 hours</li>
+<li><strong>Canvas integration + return-flow</strong>: 2-3 hours</li>
+<li><strong>E2E tests + refinement</strong>: 2-3 hours</li>
+<li><strong>Total</strong>: ~10-14 hours (assuming no major blockers)</li>
+</ul>
+<h2 id="status-dashboard">Status Dashboard</h2>
+<table>
+<thead>
+<tr>
+<th>Component</th>
+<th>Status</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Static red styling (CSS)</td>
+<td>✅ Complete</td>
+<td>Assembly.js, firewall.js, 8 tests passing</td>
+</tr>
+<tr>
+<td>5s hover tooltip</td>
+<td>✅ Complete</td>
+<td>Message: "Add firewall configuration to enable secure connection"</td>
+</tr>
+<tr>
+<td>Canvas DOM rendering</td>
+<td>✅ Complete</td>
+<td>firewall.js factory, accessibility verified</td>
+</tr>
+<tr>
+<td>Layer 4 builder page</td>
+<td>✅ Complete</td>
+<td>HTML form, CSS styling, JS validation/API integration</td>
+</tr>
+<tr>
+<td>Form validation</td>
+<td>✅ Complete</td>
+<td>IP (IPv4/IPv6), ports (single/ranges), protocol (TCP/UDP/BOTH)</td>
+</tr>
+<tr>
+<td>Error handling</td>
+<td>✅ Complete</td>
+<td>Inline validation errors, API error banner, dismissible</td>
+</tr>
+<tr>
+<td>Loading states</td>
+<td>✅ Complete</td>
+<td>Form hidden, spinner visible, buttons disabled during save</td>
+</tr>
+<tr>
+<td>Builder tests</td>
+<td>✅ Complete</td>
+<td>25 tests (validation, DOM, integration, loading states)</td>
+</tr>
+<tr>
+<td>API wrapper</td>
+<td>✅ Complete</td>
+<td>saveFirewall, getFirewall, getFirewallsForBridge, deleteFirewall</td>
+</tr>
+<tr>
+<td>All web tests</td>
+<td>✅ Complete</td>
+<td>112/112 passing (39 test files)</td>
+</tr>
+<tr>
+<td>API endpoints</td>
+<td>⏳ Pending</td>
+<td>POST, GET, DELETE firewall configs in api/handlers/</td>
+</tr>
+<tr>
+<td>Prisma schema</td>
+<td>⏳ Pending</td>
+<td>Firewall model with unique [bridgeId, side] constraint</td>
+</tr>
+<tr>
+<td>Canvas integration</td>
+<td>⏳ Pending</td>
+<td>Render firewall slots in BRIDGE_SLOT_CONFIG</td>
+</tr>
+<tr>
+<td>Return-flow logic</td>
+<td>⏳ Pending</td>
+<td>Detect ?newFirewallId, auto-add to palette</td>
+</tr>
+<tr>
+<td>Palette highlight</td>
+<td>⏳ Pending</td>
+<td>2.5s animation on new firewall</td>
+</tr>
+<tr>
+<td>E2E tests</td>
+<td>⏳ Pending</td>
+<td>Full workflow Canvas → Builder → Save → Canvas</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="references">References</h2>
+<ul>
+<li><a href="../phase-32-summary/">Phase 32 Summary</a> — Canvas assembly foundation</li>
+<li><a href="../phase-31-plan/">Phase 31 Plan</a> — Blueprint data model</li>
+<li><a href="../../../ARCHITECTURE/">ARCHITECTURE.md</a> — 5-layer conceptual model</li>
+<li><a href="../../blueprints/">docs/blueprints/</a> — Blueprint integration specs</li>
+</ul>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+    
+  </span>
+</div>
+    <script src="../../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../../..";</script>
+    <script src="../../../js/theme_extra.js"></script>
+    <script src="../../../js/theme.js"></script>
+      <script src="../../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

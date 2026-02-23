@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://brockhager.github.io/bridgeflow-docs/phases/phases21-30/PHASE_29_SPEC/" />
+      <link rel="shortcut icon" href="../../../img/favicon.ico" />
+    <title>Phase 29: Organizations &amp; Tenets Specification - BridgeFlow Docs</title>
+    <link rel="stylesheet" href="../../../css/theme.css" />
+    <link rel="stylesheet" href="../../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Phase 29: Organizations \u0026amp; Tenets Specification";
+        var mkdocs_page_input_path = "phases\\phases21-30\\PHASE_29_SPEC.md";
+        var mkdocs_page_url = "/bridgeflow-docs/phases/phases21-30/PHASE_29_SPEC/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../../.." class="icon icon-home"> BridgeFlow Docs
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../..">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../topics/quickstart/">Quickstart</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../topics/concepts/">Concepts</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../current/control-tower/public-api/">API Reference</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../topics/vision/">Vision</a>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../..">BridgeFlow Docs</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../.." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">Phase 29: Organizations &amp; Tenets Specification</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="phase-29-organizations-tenets-specification">Phase 29: Organizations &amp; Tenets Specification</h1>
+<h2 id="executive-summary">🎯 Executive Summary</h2>
+<p>Phase 29 establishes the core organizational model and tenet enforcement that underpins the entire BridgeFlow platform. This is a foundational architectural layer that ensures proper data isolation, security, and scalability.</p>
+<h2 id="core-tenets-non-negotiable">🔑 Core Tenets (Non-Negotiable)</h2>
+<table>
+<thead>
+<tr>
+<th>Tenet</th>
+<th>Enforcement Layer</th>
+<th>Implementation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Regular users belong to exactly one org</td>
+<td>DB constraint + API validation</td>
+<td><code>isBfEmployee=false</code> → single UserOrganization record</td>
+</tr>
+<tr>
+<td>bf_employees can belong to many orgs</td>
+<td>Flexible join table + special RBAC</td>
+<td><code>isBfEmployee=true</code> → multiple UserOrganization records</td>
+</tr>
+<tr>
+<td>All data queries scoped to org(s)</td>
+<td>Middleware + Prisma filters</td>
+<td>Automatic org filtering in all data access</td>
+</tr>
+<tr>
+<td>Org isolation is default</td>
+<td>Architecture, not opt-in</td>
+<td>Default-deny, explicit allow per org</td>
+</tr>
+</tbody>
+</table>
+<h2 id="data-model-changes">📊 Data Model Changes</h2>
+<h3 id="prisma-schema-updates">Prisma Schema Updates</h3>
+<pre><code class="language-prisma">model User {
+  id               String    @id @default(cuid())
+  email            String    @unique
+  name             String?
+  password         String
+  isBfEmployee     Boolean   @default(false) // 🔑 Critical flag
+  isActive         Boolean   @default(true)
+  createdAt        DateTime  @default(now())
+  updatedAt        DateTime  @updatedAt
+
+  // Relations
+  userOrganizations UserOrganization[]
+  userRoles         UserRole[]
+  createdTps        TradingPartner[] @relation(&quot;TpCreator&quot;)
+  auditLogs         AuditLog[]
+
+  @@map(&quot;users&quot;)
+}
+
+model UserOrganization {
+  id             String   @id @default(cuid())
+  userId         String
+  organizationId String
+  role           UserRole @default(MEMBER)
+  isActive       Boolean  @default(true)
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  // Relations
+  user         User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  organization Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, organizationId]) // One membership per user per org
+  @@map(&quot;user_organizations&quot;)
+}
+
+model Organization {
+  id          String   @id @default(cuid())
+  name        String
+  slug        String   @unique
+  isActive    Boolean  @default(true)
+  isInternal  Boolean  @default(false) // BridgeFlow internal orgs
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // Relations
+  userOrganizations UserOrganization[]
+  tradingPartners   TradingPartner[]
+  auditLogs         AuditLog[]
+
+  @@map(&quot;organizations&quot;)
+}
+
+enum UserRole {
+  OWNER
+  ADMIN
+  MEMBER
+}
+</code></pre>
+<h2 id="authentication-middleware-architecture">🔐 Authentication &amp; Middleware Architecture</h2>
+<h3 id="enhanced-auth-middleware">Enhanced Auth Middleware</h3>
+<pre><code class="language-javascript">// lib/authMiddleware.js
+export async function authMiddleware(request, reply) {
+  const token = extractToken(request)
+  if (!token) return reply.status(401).send({ error: 'Unauthorized' })
+
+  const user = await verifyToken(token)
+  if (!user || !user.isActive) {
+    return reply.status(401).send({ error: 'Invalid or inactive user' })
+  }
+
+  // 🔑 Critical: Resolve user's accessible organizations
+  if (user.isBfEmployee) {
+    // bf_employees can access multiple orgs
+    user.accessibleOrgs = await prisma.userOrganization.findMany({
+      where: { userId: user.id, isActive: true },
+      include: { organization: true }
+    })
+  } else {
+    // Regular users get exactly one org
+    const userOrg = await prisma.userOrganization.findFirst({
+      where: { userId: user.id, isActive: true },
+      include: { organization: true }
+    })
+
+    if (!userOrg) {
+      return reply.status(403).send({ error: 'User not assigned to any organization' })
+    }
+
+    user.accessibleOrgs = [userOrg]
+  }
+
+  request.user = user
+  request.orgIds = user.accessibleOrgs.map(uo =&gt; uo.organizationId)
+}
+</code></pre>
+<h3 id="org-scoping-middleware">Org Scoping Middleware</h3>
+<pre><code class="language-javascript">// lib/orgScope.js
+export function addOrgScope(prisma, orgIds) {
+  return {
+    ...prisma,
+    tradingPartner: {
+      ...prisma.tradingPartner,
+      findMany: (args) =&gt; prisma.tradingPartner.findMany({
+        ...args,
+        where: { 
+          ...args.where, 
+          organizationId: { in: orgIds }
+        }
+      }),
+      findUnique: (args) =&gt; prisma.tradingPartner.findUnique({
+        ...args,
+        where: { 
+          ...args.where, 
+          organizationId: { in: orgIds }
+        }
+      }),
+      create: (args) =&gt; prisma.tradingPartner.create({
+        ...args,
+        data: {
+          ...args.data,
+          organizationId: orgIds[0] // For bf_employees, require explicit org selection
+        }
+      })
+    }
+  }
+}
+</code></pre>
+<h2 id="api-changes">🏗️ API Changes</h2>
+<h3 id="updated-endpoints">Updated Endpoints</h3>
+<table>
+<thead>
+<tr>
+<th>Endpoint</th>
+<th>Change</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>POST /api/auth/login</code></td>
+<td>Enhanced</td>
+<td>Returns <code>isBfEmployee</code> flag and org context</td>
+</tr>
+<tr>
+<td><code>GET /api/auth/me</code></td>
+<td>Enhanced</td>
+<td>Returns user's accessible organizations</td>
+</tr>
+<tr>
+<td><code>GET /api/trading-partners</code></td>
+<td>Scoped</td>
+<td>Automatically filtered by user's orgs</td>
+</tr>
+<tr>
+<td><code>POST /api/trading-partners</code></td>
+<td>Scoped</td>
+<td>Requires explicit <code>organizationId</code> for bf_employees</td>
+</tr>
+<tr>
+<td><code>GET /api/organizations</code></td>
+<td>New</td>
+<td>List orgs (bf_employees only)</td>
+</tr>
+<tr>
+<td><code>POST /api/organizations</code></td>
+<td>Admin</td>
+<td>Create new organization</td>
+</tr>
+</tbody>
+</table>
+<h3 id="example-scoped-trading-partners">Example: Scoped Trading Partners</h3>
+<pre><code class="language-javascript">// handlers/tradingPartners.js
+export async function listTradingPartners(request, reply) {
+  const scopedPrisma = addOrgScope(prisma, request.orgIds)
+
+  const partners = await scopedPrisma.tradingPartner.findMany({
+    include: { organization: true }
+  })
+
+  return reply.send({ partners })
+}
+</code></pre>
+<h2 id="uiux-changes">🎨 UI/UX Changes</h2>
+<h3 id="enhanced-admin-panel">Enhanced Admin Panel</h3>
+<h4 id="regular-user-org-management">Regular User Org Management</h4>
+<pre><code class="language-jsx">// Single org assignment for regular users
+function UserOrgAssignment({ user }) {
+  return (
+    &lt;div&gt;
+      &lt;label&gt;Organization Assignment&lt;/label&gt;
+      &lt;select value={user.organizationId} onChange={handleOrgChange}&gt;
+        {organizations.map(org =&gt; (
+          &lt;option key={org.id} value={org.id}&gt;{org.name}&lt;/option&gt;
+        ))}
+      &lt;/select&gt;
+    &lt;/div&gt;
+  )
+}
+</code></pre>
+<h4 id="bf_employee-org-management">bf_employee Org Management</h4>
+<pre><code class="language-jsx">// Multi-org assignment for bf_employees
+function BfEmployeeOrgAssignment({ user }) {
+  return (
+    &lt;div&gt;
+      &lt;label&gt;Organization Access&lt;/label&gt;
+      &lt;MultiSelect
+        options={organizations}
+        selected={user.organizationIds}
+        onChange={handleMultiOrgChange}
+        placeholder=&quot;Select organizations...&quot;
+      /&gt;
+    &lt;/div&gt;
+  )
+}
+</code></pre>
+<h3 id="user-type-detection">User Type Detection</h3>
+<pre><code class="language-jsx">// Dynamic UI based on user type
+function UserManagement() {
+  const { user } = useAuth()
+
+  return (
+    &lt;div&gt;
+      {user.isBfEmployee ? (
+        &lt;BfEmployeeOrgAssignment user={user} /&gt;
+      ) : (
+        &lt;RegularUserOrgAssignment user={user} /&gt;
+      )}
+    &lt;/div&gt;
+  )
+}
+</code></pre>
+<h2 id="testing-strategy">🧪 Testing Strategy</h2>
+<h3 id="core-test-scenarios">Core Test Scenarios</h3>
+<ol>
+<li><strong>Regular User Org Isolation</strong></li>
+<li>User can only see their own org's data</li>
+<li>Cannot access other orgs' trading partners</li>
+<li>
+<p>Cannot be assigned to multiple orgs</p>
+</li>
+<li>
+<p><strong>bf_employee Multi-Org Access</strong></p>
+</li>
+<li>Can access all assigned orgs</li>
+<li>Can switch between org contexts</li>
+<li>
+<p>Cannot access unassigned orgs</p>
+</li>
+<li>
+<p><strong>Data Scoping Validation</strong></p>
+</li>
+<li>All API endpoints properly filter by org</li>
+<li>No data leakage between orgs</li>
+<li>
+<p>Audit logs properly scoped</p>
+</li>
+<li>
+<p><strong>Migration Compatibility</strong></p>
+</li>
+<li>Existing users properly categorized</li>
+<li>Data integrity maintained</li>
+<li>No breaking changes to existing functionality</li>
+</ol>
+<h2 id="implementation-plan">📋 Implementation Plan</h2>
+<h3 id="phase-291-data-model-migration-2-days">Phase 29.1: Data Model &amp; Migration (2 days)</h3>
+<ul>
+<li>[ ] Update Prisma schema</li>
+<li>[ ] Create migration script</li>
+<li>[ ] Add <code>isBfEmployee</code> flag to existing users</li>
+<li>[ ] Migrate existing user-org relationships</li>
+</ul>
+<h3 id="phase-292-auth-middleware-2-days">Phase 29.2: Auth Middleware (2 days)</h3>
+<ul>
+<li>[ ] Implement enhanced auth middleware</li>
+<li>[ ] Add org scoping utilities</li>
+<li>[ ] Update token verification</li>
+<li>[ ] Add user type detection</li>
+</ul>
+<h3 id="phase-293-api-updates-3-days">Phase 29.3: API Updates (3 days)</h3>
+<ul>
+<li>[ ] Update all data endpoints with org scoping</li>
+<li>[ ] Add organization management endpoints</li>
+<li>[ ] Update authentication responses</li>
+<li>[ ] Add bf_employee specific endpoints</li>
+</ul>
+<h3 id="phase-294-uiux-updates-2-days">Phase 29.4: UI/UX Updates (2 days)</h3>
+<ul>
+<li>[ ] Update admin panel for org management</li>
+<li>[ ] Add user type indicators</li>
+<li>[ ] Implement multi-org selection</li>
+<li>[ ] Update navigation and permissions</li>
+</ul>
+<h3 id="phase-295-testing-validation-2-days">Phase 29.5: Testing &amp; Validation (2 days)</h3>
+<ul>
+<li>[ ] Comprehensive test suite</li>
+<li>[ ] Security validation</li>
+<li>[ ] Performance testing</li>
+<li>[ ] Documentation updates</li>
+</ul>
+<h2 id="migration-strategy">🚨 Migration Strategy</h2>
+<h3 id="existing-user-migration">Existing User Migration</h3>
+<pre><code class="language-javascript">// Migration script for existing users
+async function migrateExistingUsers(prisma) {
+  // 1. Add isBfEmployee flag
+  await prisma.user.updateMany({
+    data: { isBfEmployee: false }
+  })
+
+  // 2. Mark known bf_employees
+  await prisma.user.updateMany({
+    where: { 
+      email: { 
+        endsWith: '@bridgeflow.test' 
+      } 
+    },
+    data: { isBfEmployee: true }
+  })
+
+  // 3. Ensure single org for regular users
+  const regularUsers = await prisma.user.findMany({
+    where: { isBfEmployee: false }
+  })
+
+  for (const user of regularUsers) {
+    const existingOrgs = await prisma.userOrganization.findMany({
+      where: { userId: user.id }
+    })
+
+    if (existingOrgs.length &gt; 1) {
+      // Keep only the first org, archive others
+      await prisma.userOrganization.deleteMany({
+        where: {
+          userId: user.id,
+          organizationId: { not: existingOrgs[0].organizationId }
+        }
+      })
+    }
+  }
+}
+</code></pre>
+<h2 id="success-metrics">📊 Success Metrics</h2>
+<ul>
+<li>[ ] 100% of API endpoints properly scoped by organization</li>
+<li>[ ] Zero data leakage between organizations</li>
+<li>[ ] All existing functionality preserved</li>
+<li>[ ] bf_employees can access multiple organizations</li>
+<li>[ ] Regular users restricted to single organization</li>
+<li>[ ] Performance impact &lt; 5% on query execution</li>
+</ul>
+<h2 id="rollback-plan">🔄 Rollback Plan</h2>
+<p>If critical issues arise:
+1. Database backup before migration
+2. Feature flags to disable org scoping
+3. Revert to previous auth middleware
+4. Restore from backup if necessary</p>
+<hr />
+<p><strong>Total Estimated Effort: 11 days</strong>
+<strong>Priority: Critical (Blocks Phase 28)</strong>
+<strong>Risk Level: Medium (Database changes)</strong></p>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+    
+  </span>
+</div>
+    <script src="../../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../../..";</script>
+    <script src="../../../js/theme_extra.js"></script>
+    <script src="../../../js/theme.js"></script>
+      <script src="../../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

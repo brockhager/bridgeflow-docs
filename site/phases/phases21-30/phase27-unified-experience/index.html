@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://brockhager.github.io/bridgeflow-docs/phases/phases21-30/phase27-unified-experience/" />
+      <link rel="shortcut icon" href="../../../img/favicon.ico" />
+    <title>Phase 27: Enterprise Workflow Unification - BridgeFlow Docs</title>
+    <link rel="stylesheet" href="../../../css/theme.css" />
+    <link rel="stylesheet" href="../../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Phase 27: Enterprise Workflow Unification";
+        var mkdocs_page_input_path = "phases\\phases21-30\\phase27-unified-experience.md";
+        var mkdocs_page_url = "/bridgeflow-docs/phases/phases21-30/phase27-unified-experience/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../../.." class="icon icon-home"> BridgeFlow Docs
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../..">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../topics/quickstart/">Quickstart</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../topics/concepts/">Concepts</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../current/control-tower/public-api/">API Reference</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../topics/vision/">Vision</a>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../..">BridgeFlow Docs</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../.." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">Phase 27: Enterprise Workflow Unification</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="phase-27-enterprise-workflow-unification">Phase 27: Enterprise Workflow Unification</h1>
+<p><strong>Goal:</strong> Transform disconnected tools into a seamless, end-to-end B2B integration platform experience.</p>
+<p><strong>Status:</strong> In Progress<br />
+<strong>Started:</strong> January 3, 2026</p>
+<hr />
+<h2 id="core-problem-fragmented-user-journey">🔗 Core Problem: Fragmented User Journey</h2>
+<p><strong>Current State:</strong>
+- User creates Trading Partner in <code>/create-tp</code>
+- Goes to Canvas to visualize connections
+- Sends EDI 210 → document appears in <code>/alerts</code> if stuck
+- Manually retries failed documents
+- <strong>Problem:</strong> User jumps between disconnected contexts with no unified view</p>
+<p><strong>Desired State:</strong>
+- Single coherent platform where all actions flow naturally
+- Live status updates in primary workspace (Canvas)
+- Proactive system health monitoring on homepage
+- Unified activity timeline across all operations</p>
+<hr />
+<h2 id="phase-27-deliverables">✅ Phase 27 Deliverables</h2>
+<h3 id="1-system-health-summary-homepage-dashboard">1. System Health Summary (Homepage Dashboard)</h3>
+<p><strong>Route:</strong> <code>/</code> (existing route enhanced)<br />
+<strong>Purpose:</strong> First thing user sees — proactive system status</p>
+<p><strong>Features:</strong>
+- <strong>Health Badge:</strong> "✅ All systems normal" or "⚠️ Action needed"
+- <strong>Recent Activity Metrics:</strong> "12 docs processed in last hour"
+- <strong>Action Items:</strong> "1 stuck document" with direct link to <code>/alerts</code>
+- <strong>Quick Actions:</strong> Links to Canvas, Create TP, View Activity</p>
+<p><strong>RBAC:</strong>
+- <strong>Customers (Layer 1-4):</strong> See their org's health only
+- <strong>BF Employees (Layer 0):</strong> See system-wide metrics + tenant breakdown</p>
+<p><strong>API Endpoint:</strong>
+- <code>GET /api/dashboard/health</code> → returns:
+  <code>json
+  {
+    "health": "OK" | "WARNING" | "CRITICAL",
+    "recentActivityCount": 12,
+    "actionItems": [
+      {
+        "type": "STUCK_DOCUMENT",
+        "count": 1,
+        "link": "/alerts"
+      }
+    ],
+    "uptime": "99.8%"
+  }</code></p>
+<hr />
+<h3 id="2-contextual-document-tracking-in-canvas">2. Contextual Document Tracking in Canvas</h3>
+<p><strong>Route:</strong> <code>/canvas</code> (existing route enhanced)<br />
+<strong>Purpose:</strong> Live operational status for each Trading Partner</p>
+<p><strong>Visual Indicators:</strong>
+- ✅ <strong>Green dot:</strong> "All flows healthy" (no stuck/failed docs in last 24h)
+- ⚠️ <strong>Yellow dot:</strong> "1 pending document" (doc in RECEIVED/PARSING state)
+- ❌ <strong>Red dot:</strong> "Alert: 210 stuck" (document &gt; 2 min in RECEIVED state)</p>
+<p><strong>Interaction:</strong>
+- Click TP node → Popover shows:
+  - Recent documents (last 5)
+  - Doc status counts (3 healthy, 1 stuck)
+  - "View Alerts" button (deep link to <code>/alerts?partnerId=&lt;id&gt;</code>)</p>
+<p><strong>API Endpoint:</strong>
+- <code>GET /api/trading-partners/:id/doc-status</code> → returns:
+  <code>json
+  {
+    "partnerId": "tp_abc123",
+    "partnerName": "LOGISTICS_INC",
+    "docCounts": {
+      "healthy": 3,
+      "pending": 0,
+      "stuck": 1
+    },
+    "recentDocs": [
+      {
+        "id": "doc_123",
+        "docType": "210",
+        "status": "ACK_GENERATED",
+        "createdAt": "2026-01-03T10:02:00Z"
+      }
+    ],
+    "healthStatus": "WARNING"
+  }</code></p>
+<hr />
+<h3 id="3-unified-activity-stream">3. Unified Activity Stream</h3>
+<p><strong>Route:</strong> <code>/activity</code> (new SPA route)<br />
+<strong>Purpose:</strong> Timeline view of all B2B operations</p>
+<p><strong>Timeline Events:</strong>
+- "May 3, 10:02 AM — Received 210 from LOGISTICS_INC"
+- "May 3, 10:03 AM — Generated 997 (ACK)"
+- "May 3, 10:05 AM — Alert: 210 processing failed → Retried"</p>
+<p><strong>Filters:</strong>
+- By Trading Partner (dropdown)
+- By Document Type (210, 997, etc.)
+- By Status (received, ack_generated, failed)
+- By Date Range</p>
+<p><strong>RBAC:</strong>
+- <strong>Customers:</strong> See only their org's events
+- <strong>BF Employees:</strong> See all events across all tenants</p>
+<p><strong>API Endpoint:</strong>
+- <code>GET /api/activity?partnerId=&lt;id&gt;&amp;docType=210&amp;status=FAILED</code> → returns:
+  <code>json
+  {
+    "events": [
+      {
+        "timestamp": "2026-05-03T10:02:00Z",
+        "type": "DOCUMENT_RECEIVED",
+        "partnerId": "tp_abc123",
+        "partnerName": "LOGISTICS_INC",
+        "docType": "210",
+        "docId": "doc_123",
+        "status": "RECEIVED",
+        "details": "Received 210 with 3 shipments"
+      },
+      {
+        "timestamp": "2026-05-03T10:03:00Z",
+        "type": "ACK_GENERATED",
+        "partnerId": "tp_abc123",
+        "partnerName": "LOGISTICS_INC",
+        "docType": "997",
+        "parentDocId": "doc_123",
+        "details": "Generated 997 acknowledgment"
+      }
+    ],
+    "totalCount": 47
+  }</code></p>
+<hr />
+<h3 id="4-smart-default-workflows">4. Smart Default Workflows</h3>
+<p><strong>Purpose:</strong> Reduce manual steps with intelligent suggestions</p>
+<p><strong>Auto-Suggestions:</strong>
+- When user creates TP → Modal: "Add a 210 mapping?" (link to mapper)
+- When user creates TP → Modal: "Configure AS2 connection?" (link to connection setup)
+- When 210 arrives with unknown sender → Auto-create TP (if org rules allow)</p>
+<p><strong>Implementation:</strong>
+- On <code>/create-tp</code> success → redirect to Canvas with TP pre-added
+- Add <code>autoCreatePartner</code> boolean to Organization model (default false)
+- Update ingest handler to create TP when <code>autoCreatePartner=true</code> and sender unknown</p>
+<hr />
+<h3 id="5-end-to-end-test-scenario">5. End-to-End Test Scenario</h3>
+<p><strong>Purpose:</strong> Validate full unified experience in test suite</p>
+<p><strong>Test Flow:</strong>
+1. Create Trading Partner via POST <code>/api/trading-partners</code>
+2. Send EDI 210 via POST <code>/ingest/:customer_id/:endpoint_slug</code>
+3. Verify 997 ACK generated (GET <code>/api/documents/:id/ack</code>)
+4. Simulate processing failure (force status=FAILED)
+5. Check alert appears in GET <code>/api/alerts</code>
+6. Retry document via POST <code>/api/documents/:id/retry</code>
+7. Verify success (status=ACK_GENERATED)</p>
+<p><strong>Test File:</strong> <code>api/tests/integration/phase27-unified-flow.test.js</code></p>
+<hr />
+<h2 id="technical-integration-points">🛠 Technical Integration Points</h2>
+<table>
+<thead>
+<tr>
+<th>Gap</th>
+<th>Fix</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>TP created, but no mapping</td>
+<td>On <code>/create-tp</code> success, redirect to Canvas with TP pre-added</td>
+</tr>
+<tr>
+<td>Docs processed, but user doesn't know</td>
+<td>Add real-time updates via SSE or polling in Canvas</td>
+</tr>
+<tr>
+<td>Alerts exist, but not linked to TP</td>
+<td>Add <code>partnerId</code> to Document → join in UI</td>
+</tr>
+<tr>
+<td>No "big picture" view</td>
+<td>Add homepage dashboard with health + activity</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="data-model-changes">🏗 Data Model Changes</h2>
+<h3 id="document-model">Document Model</h3>
+<pre><code class="language-prisma">model Document {
+  // ... existing fields
+  partnerId String?  // NEW: Link to TradingPartner.id
+
+  // Relation
+  partner TradingPartner? @relation(fields: [partnerId], references: [id])
+}
+</code></pre>
+<h3 id="tradingpartner-model">TradingPartner Model</h3>
+<pre><code class="language-prisma">model TradingPartner {
+  // ... existing fields
+  status String @default(&quot;ACTIVE&quot;)  // NEW: ACTIVE | ONBOARDING | SUSPENDED
+
+  // Relation
+  documents Document[]  // NEW: One-to-many with Documents
+}
+</code></pre>
+<h3 id="organization-model-optional">Organization Model (Optional)</h3>
+<pre><code class="language-prisma">model Organization {
+  // ... existing fields
+  autoCreatePartner Boolean @default(false)  // NEW: Auto-create TP when unknown sender
+}
+</code></pre>
+<hr />
+<h2 id="ux-principle-progressive-disclosure">🎨 UX Principle: Progressive Disclosure</h2>
+<p><strong>New User:</strong>
+- Homepage shows: "Add your first trading partner" (guided onboarding)
+- Canvas is empty with "+ Add Partner" prompt</p>
+<p><strong>Experienced User:</strong>
+- Homepage shows: Health dashboard + recent activity metrics
+- Canvas shows: All TPs with live status indicators</p>
+<p><strong>BF Employee:</strong>
+- Homepage shows: System-wide alerts + tenant metrics
+- Alerts page shows: All tenants' stuck documents</p>
+<hr />
+<h2 id="success-criteria">✅ Success Criteria</h2>
+<p><strong>End-to-End User Flow:</strong>
+1. New customer logs in → sees homepage dashboard
+2. Creates Trading Partner
+3. Sends EDI 210 (via curl or file upload)
+4. Sees auto-generated 997 ACK in Canvas status
+5. If 210 fails → sees alert indicator on TP node in Canvas
+6. Clicks TP → "View Alerts" button → retries document
+7. Document succeeds → green dot appears on TP</p>
+<p><strong>No context switching. No log checking. One unified platform.</strong></p>
+<hr />
+<h2 id="implementation-checklist">📋 Implementation Checklist</h2>
+<h3 id="phase-271-homepage-dashboard-highest-priority">Phase 27.1: Homepage Dashboard (Highest Priority)</h3>
+<ul>
+<li>[ ] Create <code>GET /api/dashboard/health</code> endpoint</li>
+<li>[ ] Return health status (OK/WARNING/CRITICAL)</li>
+<li>[ ] Count recent activity (docs processed in last hour)</li>
+<li>[ ] List action items (stuck docs count)</li>
+<li>[ ] Update <code>/</code> route frontend</li>
+<li>[ ] Fetch dashboard health on load</li>
+<li>[ ] Show health badge with color coding</li>
+<li>[ ] Display recent activity metrics</li>
+<li>[ ] Add quick action links (Canvas, Create TP, Alerts)</li>
+<li>[ ] Add RBAC: customers see org-only, BF employees see system-wide</li>
+<li>[ ] Test: Unit test for health calculation, integration test for API</li>
+</ul>
+<h3 id="phase-272-canvas-tp-status-indicators">Phase 27.2: Canvas TP Status Indicators</h3>
+<ul>
+<li>[ ] Database: Add <code>partnerId</code> to Document model, run migration</li>
+<li>[ ] Database: Add <code>status</code> to TradingPartner model, run migration</li>
+<li>[ ] Create <code>GET /api/trading-partners/:id/doc-status</code> endpoint</li>
+<li>[ ] Count docs by status (healthy, pending, stuck)</li>
+<li>[ ] Fetch recent documents (last 5)</li>
+<li>[ ] Calculate health status (green/yellow/red)</li>
+<li>[ ] Update Canvas frontend</li>
+<li>[ ] Fetch doc status for each TP on render</li>
+<li>[ ] Add status dot SVG overlays (green/yellow/red)</li>
+<li>[ ] Add tooltip on hover (doc counts)</li>
+<li>[ ] Add click handler → show popover with recent docs + "View Alerts" button</li>
+<li>[ ] Update ingest handler to set <code>partnerId</code> on created Document</li>
+<li>[ ] Test: Integration test for doc-status endpoint, E2E test for Canvas indicators</li>
+</ul>
+<h3 id="phase-273-unified-activity-stream">Phase 27.3: Unified Activity Stream</h3>
+<ul>
+<li>[ ] Create <code>GET /api/activity</code> endpoint</li>
+<li>[ ] Query Documents with joins (partner, org)</li>
+<li>[ ] Format as timeline events (received, ack_generated, retried)</li>
+<li>[ ] Support filters (partnerId, docType, status, dateRange)</li>
+<li>[ ] Create <code>/activity</code> SPA route</li>
+<li>[ ] Fetch activity timeline on load</li>
+<li>[ ] Render events with timestamps and partner names</li>
+<li>[ ] Add filter UI (dropdowns, date picker)</li>
+<li>[ ] Add RBAC guard (customers see org-only, BF sees all)</li>
+<li>[ ] Test: Unit test for event formatting, integration test for filters</li>
+</ul>
+<h3 id="phase-274-smart-default-workflows">Phase 27.4: Smart Default Workflows</h3>
+<ul>
+<li>[ ] Update <code>/create-tp</code> success handler</li>
+<li>[ ] Show modal: "Add a 210 mapping?" with link</li>
+<li>[ ] Redirect to Canvas with TP pre-selected</li>
+<li>[ ] Database: Add <code>autoCreatePartner</code> to Organization model</li>
+<li>[ ] Update ingest handler</li>
+<li>[ ] If unknown sender + autoCreatePartner=true → create TP</li>
+<li>[ ] Set partnerId on Document</li>
+<li>[ ] Test: Integration test for auto-create TP flow</li>
+</ul>
+<h3 id="phase-275-end-to-end-integration-test">Phase 27.5: End-to-End Integration Test</h3>
+<ul>
+<li>[ ] Create <code>api/tests/integration/phase27-unified-flow.test.js</code></li>
+<li>[ ] Test: Create TP → send 210 → verify ACK → fail doc → alert → retry → success</li>
+<li>[ ] Assert: partnerId set on Document</li>
+<li>[ ] Assert: alert appears in GET /api/alerts</li>
+<li>[ ] Assert: retryCount increments</li>
+<li>[ ] Create Playwright test for full UI flow</li>
+<li>[ ] Test: Login → homepage health → create TP → Canvas status indicator</li>
+</ul>
+<hr />
+<h2 id="why-this-matters">🚀 Why This Matters</h2>
+<p><strong>What enterprise buyers pay for:</strong></p>
+<blockquote>
+<p>"We don't want 5 tools. We want one system that works."</p>
+</blockquote>
+<p><strong>Phase 27 is not about adding features — it's about delivering outcomes.</strong></p>
+<p>You're creating a platform where every action flows naturally into the next. Users see their entire B2B ecosystem at a glance, with proactive alerts and one-click resolution.</p>
+<p>This is what turns a collection of microservices into a <strong>product people trust</strong>.</p>
+<hr />
+<p><strong>Next Steps:</strong> Begin with homepage dashboard and Canvas TP status indicators — the highest-leverage integration that ties everything together in the user's primary workspace.</p>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+    
+  </span>
+</div>
+    <script src="../../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../../..";</script>
+    <script src="../../../js/theme_extra.js"></script>
+    <script src="../../../js/theme.js"></script>
+      <script src="../../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://brockhager.github.io/bridgeflow-docs/design/local-dev-no-docker/" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>Local Development Without Docker - BridgeFlow Docs</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Local Development Without Docker";
+        var mkdocs_page_input_path = "design\\local-dev-no-docker.md";
+        var mkdocs_page_url = "/bridgeflow-docs/design/local-dev-no-docker/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> BridgeFlow Docs
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../topics/quickstart/">Quickstart</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../topics/concepts/">Concepts</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../current/control-tower/public-api/">API Reference</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../topics/vision/">Vision</a>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">BridgeFlow Docs</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">Local Development Without Docker</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="local-development-without-docker">Local Development Without Docker</h1>
+<p>Goals
+- Developers should be able to run services locally without requiring Docker.
+- Local setup should be simple and documented for Windows (and cross-platform).</p>
+<p>Recommended approaches</p>
+<p>1) Managed dev DB (recommended)
+- Provision a shared dev database (e.g., Supabase) that developers can connect to via credentials.
+- Provide a <code>dev</code> database user with limited permissions and a dedicated <code>dev</code> schema per developer.
+- Advantages: no Docker required; consistent environment across developers.</p>
+<p>2) Local Postgres installation
+- On Windows: use the official Postgres installer (https://www.postgresql.org/download/windows/) or WSL + apt install postgresql
+- Scripts in <code>libs/db</code> to create DBs and run migrations automatically (e.g., <code>pnpm -w run db:setup</code>)</p>
+<p>3) In-memory DB for unit tests
+- Use <code>pg-mem</code> for unit tests that need fast Postgres behavior without an external DB.
+- Use test containers or separate CI jobs for integration tests against a real Postgres.</p>
+<p>Typical developer workflow
+- Copy <code>.env.example</code> to <code>.env.development</code> and set <code>DATABASE_URL</code> to your dev DB
+- Run <code>pnpm -w run migrate:dev</code> to apply migrations
+- Start services selectively e.g. <code>pnpm --filter services/api-gateway dev</code> or run all services with <code>pnpm -w run dev</code></p>
+<p>Optional helpers (developer convenience)
+- <code>scripts/dev-setup.ps1</code> - Windows PowerShell script that: verifies local Postgres, creates DBs, runs migrations
+- We will not require Docker but can provide an optional <code>docker-compose.dev.yml</code> for users who prefer containerized local environments.</p>
+<p>Note: For reproducible CI tests, use Docker in CI only, not mandated for local dev.</p>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

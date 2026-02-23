@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://brockhager.github.io/bridgeflow-docs/api/BRIDGE-API/" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>Bridge API Documentation - BridgeFlow Docs</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Bridge API Documentation";
+        var mkdocs_page_input_path = "api\\BRIDGE-API.md";
+        var mkdocs_page_url = "/bridgeflow-docs/api/BRIDGE-API/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> BridgeFlow Docs
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../topics/quickstart/">Quickstart</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../topics/concepts/">Concepts</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../current/control-tower/public-api/">API Reference</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../topics/vision/">Vision</a>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">BridgeFlow Docs</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">Bridge API Documentation</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="bridge-api-documentation">Bridge API Documentation</h1>
+<h2 id="overview">Overview</h2>
+<p>The Bridge API provides endpoints for managing API integrations with external partners. Bridges enable both inbound (webhook receiving) and outbound (HTTP requests) communication.</p>
+<p><strong>Base URL</strong>: <code>https://your-domain.com</code> or <code>http://localhost:4000</code> (development)</p>
+<h2 id="bridge-resource">Bridge Resource</h2>
+<p>A Bridge represents a configured integration endpoint with the following properties:</p>
+<pre><code class="language-typescript">interface Bridge {
+  id: string              // Unique identifier
+  name: string            // Human-readable name
+  type: string            // 'api' | 'edi' | 'database'
+  direction: string       // 'inbound' | 'outbound' | 'both'
+
+  // API Configuration
+  url?: string            // Target URL for outbound requests
+  method?: string         // 'GET' | 'POST' | 'PUT' | 'DELETE'
+  authMethod?: string     // 'api_key' | 'oauth' | 'basic' | 'none'
+  authConfig?: object     // Authentication configuration
+
+  // Retry Configuration
+  retryAttempts: number   // Number of retry attempts (default: 3)
+  retryDelay: number      // Delay between retries in ms (default: 1000)
+  timeout: number         // Request timeout in ms (default: 30000)
+
+  status: string          // 'active' | 'inactive' | 'error'
+  createdAt: string       // ISO 8601 timestamp
+  updatedAt: string       // ISO 8601 timestamp
+}
+</code></pre>
+<hr />
+<h2 id="bridge-endpoints">Bridge Endpoints</h2>
+<h3 id="create-bridge">Create Bridge</h3>
+<p>Create a new bridge configuration.</p>
+<p><strong>Endpoint</strong>: <code>POST /api/bridges</code></p>
+<p><strong>Request Body</strong>:</p>
+<pre><code class="language-json">{
+  &quot;name&quot;: &quot;Partner API Integration&quot;,
+  &quot;type&quot;: &quot;api&quot;,
+  &quot;direction&quot;: &quot;outbound&quot;,
+  &quot;url&quot;: &quot;https://partner.com/api/v1/orders&quot;,
+  &quot;method&quot;: &quot;POST&quot;,
+  &quot;authMethod&quot;: &quot;api_key&quot;,
+  &quot;authConfig&quot;: {
+    &quot;headerName&quot;: &quot;X-API-Key&quot;,
+    &quot;apiKey&quot;: &quot;your-api-key-here&quot;
+  },
+  &quot;retryAttempts&quot;: 3,
+  &quot;retryDelay&quot;: 1000,
+  &quot;timeout&quot;: 30000
+}
+</code></pre>
+<p><strong>Response</strong> (201 Created):</p>
+<pre><code class="language-json">{
+  &quot;success&quot;: true,
+  &quot;bridge&quot;: {
+    &quot;id&quot;: &quot;clxyz123abc&quot;,
+    &quot;name&quot;: &quot;Partner API Integration&quot;,
+    &quot;type&quot;: &quot;api&quot;,
+    &quot;direction&quot;: &quot;outbound&quot;,
+    &quot;url&quot;: &quot;https://partner.com/api/v1/orders&quot;,
+    &quot;method&quot;: &quot;POST&quot;,
+    &quot;authMethod&quot;: &quot;api_key&quot;,
+    &quot;authConfig&quot;: { &quot;headerName&quot;: &quot;X-API-Key&quot;, &quot;apiKey&quot;: &quot;***&quot; },
+    &quot;retryAttempts&quot;: 3,
+    &quot;retryDelay&quot;: 1000,
+    &quot;timeout&quot;: 30000,
+    &quot;status&quot;: &quot;active&quot;,
+    &quot;createdAt&quot;: &quot;2025-12-17T05:30:00.000Z&quot;,
+    &quot;updatedAt&quot;: &quot;2025-12-17T05:30:00.000Z&quot;
+  }
+}
+</code></pre>
+<hr />
+<h3 id="list-bridges">List Bridges</h3>
+<p>Get all bridges with optional filtering.</p>
+<p><strong>Endpoint</strong>: <code>GET /api/bridges</code></p>
+<p><strong>Query Parameters</strong>:
+- <code>type</code> (optional): Filter by type ('api', 'edi', 'database')
+- <code>status</code> (optional): Filter by status ('active', 'inactive', 'error')
+- <code>direction</code> (optional): Filter by direction ('inbound', 'outbound', 'both')</p>
+<p><strong>Response</strong> (200 OK):</p>
+<pre><code class="language-json">{
+  &quot;success&quot;: true,
+  &quot;count&quot;: 2,
+  &quot;bridges&quot;: [
+    {
+      &quot;id&quot;: &quot;clxyz123abc&quot;,
+      &quot;name&quot;: &quot;Partner API Integration&quot;,
+      &quot;type&quot;: &quot;api&quot;,
+      &quot;direction&quot;: &quot;outbound&quot;,
+      &quot;status&quot;: &quot;active&quot;,
+      &quot;_count&quot;: {
+        &quot;transactions&quot;: 145
+      }
+    },
+    {
+      &quot;id&quot;: &quot;clxyz456def&quot;,
+      &quot;name&quot;: &quot;Webhook Receiver&quot;,
+      &quot;type&quot;: &quot;api&quot;,
+      &quot;direction&quot;: &quot;inbound&quot;,
+      &quot;status&quot;: &quot;active&quot;,
+      &quot;_count&quot;: {
+        &quot;transactions&quot;: 89
+      }
+    }
+  ]
+}
+</code></pre>
+<hr />
+<h3 id="get-bridge">Get Bridge</h3>
+<p>Get detailed information about a specific bridge.</p>
+<p><strong>Endpoint</strong>: <code>GET /api/bridges/:id</code></p>
+<p><strong>Response</strong> (200 OK):</p>
+<pre><code class="language-json">{
+  &quot;success&quot;: true,
+  &quot;bridge&quot;: {
+    &quot;id&quot;: &quot;clxyz123abc&quot;,
+    &quot;name&quot;: &quot;Partner API Integration&quot;,
+    &quot;type&quot;: &quot;api&quot;,
+    &quot;direction&quot;: &quot;outbound&quot;,
+    &quot;url&quot;: &quot;https://partner.com/api/v1/orders&quot;,
+    &quot;method&quot;: &quot;POST&quot;,
+    &quot;authMethod&quot;: &quot;api_key&quot;,
+    &quot;status&quot;: &quot;active&quot;,
+    &quot;createdAt&quot;: &quot;2025-12-17T05:30:00.000Z&quot;,
+    &quot;updatedAt&quot;: &quot;2025-12-17T05:30:00.000Z&quot;,
+    &quot;transactions&quot;: [
+      // Last 10 transactions
+    ],
+    &quot;_count&quot;: {
+      &quot;transactions&quot;: 145
+    }
+  }
+}
+</code></pre>
+<hr />
+<h3 id="update-bridge">Update Bridge</h3>
+<p>Update bridge configuration.</p>
+<p><strong>Endpoint</strong>: <code>PUT /api/bridges/:id</code></p>
+<p><strong>Request Body</strong> (all fields optional):</p>
+<pre><code class="language-json">{
+  &quot;name&quot;: &quot;Updated Bridge Name&quot;,
+  &quot;status&quot;: &quot;inactive&quot;,
+  &quot;retryAttempts&quot;: 5
+}
+</code></pre>
+<p><strong>Response</strong> (200 OK):</p>
+<pre><code class="language-json">{
+  &quot;success&quot;: true,
+  &quot;bridge&quot;: {
+    // Updated bridge object
+  }
+}
+</code></pre>
+<hr />
+<h3 id="delete-bridge">Delete Bridge</h3>
+<p>Delete a bridge and all associated transactions.</p>
+<p><strong>Endpoint</strong>: <code>DELETE /api/bridges/:id</code></p>
+<p><strong>Response</strong> (200 OK):</p>
+<pre><code class="language-json">{
+  &quot;success&quot;: true,
+  &quot;message&quot;: &quot;Bridge deleted successfully&quot;,
+  &quot;id&quot;: &quot;clxyz123abc&quot;
+}
+</code></pre>
+<hr />
+<h3 id="test-bridge">Test Bridge</h3>
+<p>Test bridge connectivity and authentication.</p>
+<p><strong>Endpoint</strong>: <code>POST /api/bridges/:id/test</code></p>
+<p><strong>Response</strong> (200 OK):</p>
+<pre><code class="language-json">{
+  &quot;success&quot;: true,
+  &quot;message&quot;: &quot;Bridge connection test successful&quot;,
+  &quot;transactionId&quot;: &quot;clxyz789ghi&quot;,
+  &quot;status&quot;: 200
+}
+</code></pre>
+<hr />
+<h2 id="webhook-endpoints">Webhook Endpoints</h2>
+<h3 id="receive-webhook">Receive Webhook</h3>
+<p>Receive incoming webhook from external partner.</p>
+<p><strong>Endpoint</strong>: <code>POST /api/webhooks/:bridgeId</code></p>
+<p><strong>Request Body</strong>: Any JSON payload</p>
+<p><strong>Response</strong> (200 OK):</p>
+<pre><code class="language-json">{
+  &quot;success&quot;: true,
+  &quot;transactionId&quot;: &quot;clxyz789ghi&quot;,
+  &quot;message&quot;: &quot;Webhook received and queued for processing&quot;
+}
+</code></pre>
+<hr />
+<h3 id="get-webhook-url">Get Webhook URL</h3>
+<p>Get the webhook URL for a bridge.</p>
+<p><strong>Endpoint</strong>: <code>GET /api/webhooks/:bridgeId/url</code></p>
+<p><strong>Response</strong> (200 OK):</p>
+<pre><code class="language-json">{
+  &quot;bridgeId&quot;: &quot;clxyz456def&quot;,
+  &quot;bridgeName&quot;: &quot;Webhook Receiver&quot;,
+  &quot;webhookUrl&quot;: &quot;https://your-domain.com/api/webhooks/clxyz456def&quot;,
+  &quot;method&quot;: &quot;POST&quot;,
+  &quot;headers&quot;: {
+    &quot;Content-Type&quot;: &quot;application/json&quot;
+  }
+}
+</code></pre>
+<hr />
+<h2 id="transaction-endpoints">Transaction Endpoints</h2>
+<h3 id="list-transactions">List Transactions</h3>
+<p>Get all transactions with filtering and pagination.</p>
+<p><strong>Endpoint</strong>: <code>GET /api/transactions</code></p>
+<p><strong>Query Parameters</strong>:
+- <code>bridgeId</code> (optional): Filter by bridge ID
+- <code>status</code> (optional): Filter by status ('pending', 'success', 'failed')
+- <code>direction</code> (optional): Filter by direction ('inbound', 'outbound')
+- <code>limit</code> (optional): Results per page (default: 50, max: 100)
+- <code>offset</code> (optional): Pagination offset (default: 0)
+- <code>orderBy</code> (optional): Order field ('createdAt', 'completedAt', 'status')
+- <code>order</code> (optional): Order direction ('asc', 'desc')</p>
+<p><strong>Response</strong> (200 OK):</p>
+<pre><code class="language-json">{
+  &quot;success&quot;: true,
+  &quot;count&quot;: 50,
+  &quot;total&quot;: 234,
+  &quot;limit&quot;: 50,
+  &quot;offset&quot;: 0,
+  &quot;transactions&quot;: [
+    {
+      &quot;id&quot;: &quot;clxyz789ghi&quot;,
+      &quot;bridgeId&quot;: &quot;clxyz123abc&quot;,
+      &quot;direction&quot;: &quot;outbound&quot;,
+      &quot;method&quot;: &quot;POST&quot;,
+      &quot;url&quot;: &quot;https://partner.com/api/v1/orders&quot;,
+      &quot;status&quot;: &quot;success&quot;,
+      &quot;responseStatus&quot;: 200,
+      &quot;createdAt&quot;: &quot;2025-12-17T05:35:00.000Z&quot;,
+      &quot;completedAt&quot;: &quot;2025-12-17T05:35:01.234Z&quot;,
+      &quot;bridge&quot;: {
+        &quot;id&quot;: &quot;clxyz123abc&quot;,
+        &quot;name&quot;: &quot;Partner API Integration&quot;,
+        &quot;type&quot;: &quot;api&quot;
+      }
+    }
+  ]
+}
+</code></pre>
+<hr />
+<h3 id="get-transaction">Get Transaction</h3>
+<p>Get detailed information about a specific transaction.</p>
+<p><strong>Endpoint</strong>: <code>GET /api/transactions/:id</code></p>
+<p><strong>Response</strong> (200 OK):</p>
+<pre><code class="language-json">{
+  &quot;success&quot;: true,
+  &quot;transaction&quot;: {
+    &quot;id&quot;: &quot;clxyz789ghi&quot;,
+    &quot;bridgeId&quot;: &quot;clxyz123abc&quot;,
+    &quot;direction&quot;: &quot;outbound&quot;,
+    &quot;method&quot;: &quot;POST&quot;,
+    &quot;url&quot;: &quot;https://partner.com/api/v1/orders&quot;,
+    &quot;requestHeaders&quot;: {
+      &quot;Content-Type&quot;: &quot;application/json&quot;,
+      &quot;X-API-Key&quot;: &quot;***&quot;
+    },
+    &quot;requestBody&quot;: &quot;{\&quot;orderId\&quot;:\&quot;12345\&quot;}&quot;,
+    &quot;responseStatus&quot;: 200,
+    &quot;responseHeaders&quot;: {
+      &quot;content-type&quot;: &quot;application/json&quot;
+    },
+    &quot;responseBody&quot;: &quot;{\&quot;success\&quot;:true,\&quot;id\&quot;:\&quot;67890\&quot;}&quot;,
+    &quot;status&quot;: &quot;success&quot;,
+    &quot;error&quot;: null,
+    &quot;createdAt&quot;: &quot;2025-12-17T05:35:00.000Z&quot;,
+    &quot;completedAt&quot;: &quot;2025-12-17T05:35:01.234Z&quot;,
+    &quot;bridge&quot;: {
+      // Full bridge object
+    }
+  }
+}
+</code></pre>
+<hr />
+<h3 id="get-transaction-stats">Get Transaction Stats</h3>
+<p>Get transaction statistics.</p>
+<p><strong>Endpoint</strong>: <code>GET /api/transactions/stats</code></p>
+<p><strong>Query Parameters</strong>:
+- <code>bridgeId</code> (optional): Filter by bridge ID
+- <code>startDate</code> (optional): Start date (ISO 8601)
+- <code>endDate</code> (optional): End date (ISO 8601)</p>
+<p><strong>Response</strong> (200 OK):</p>
+<pre><code class="language-json">{
+  &quot;success&quot;: true,
+  &quot;stats&quot;: {
+    &quot;total&quot;: 234,
+    &quot;byStatus&quot;: {
+      &quot;pending&quot;: 5,
+      &quot;success&quot;: 215,
+      &quot;failed&quot;: 14
+    },
+    &quot;byDirection&quot;: {
+      &quot;inbound&quot;: 123,
+      &quot;outbound&quot;: 111
+    },
+    &quot;successRate&quot;: 91.88
+  },
+  &quot;recent&quot;: [
+    // Last 10 transactions
+  ]
+}
+</code></pre>
+<hr />
+<h3 id="retry-transaction">Retry Transaction</h3>
+<p>Retry a failed outbound transaction.</p>
+<p><strong>Endpoint</strong>: <code>POST /api/transactions/:id/retry</code></p>
+<p><strong>Response</strong> (200 OK):</p>
+<pre><code class="language-json">{
+  &quot;success&quot;: true,
+  &quot;message&quot;: &quot;Transaction retried successfully&quot;,
+  &quot;originalTransactionId&quot;: &quot;clxyz789ghi&quot;,
+  &quot;newTransactionId&quot;: &quot;clxyz999xyz&quot;
+}
+</code></pre>
+<hr />
+<h2 id="authentication-methods">Authentication Methods</h2>
+<h3 id="api-key">API Key</h3>
+<pre><code class="language-json">{
+  &quot;authMethod&quot;: &quot;api_key&quot;,
+  &quot;authConfig&quot;: {
+    &quot;headerName&quot;: &quot;X-API-Key&quot;,
+    &quot;apiKey&quot;: &quot;your-api-key-here&quot;
+  }
+}
+</code></pre>
+<h3 id="bearer-token">Bearer Token</h3>
+<pre><code class="language-json">{
+  &quot;authMethod&quot;: &quot;bearer&quot;,
+  &quot;authConfig&quot;: {
+    &quot;token&quot;: &quot;your-bearer-token-here&quot;
+  }
+}
+</code></pre>
+<h3 id="basic-authentication">Basic Authentication</h3>
+<pre><code class="language-json">{
+  &quot;authMethod&quot;: &quot;basic&quot;,
+  &quot;authConfig&quot;: {
+    &quot;username&quot;: &quot;your-username&quot;,
+    &quot;password&quot;: &quot;your-password&quot;
+  }
+}
+</code></pre>
+<h3 id="oauth2">OAuth2</h3>
+<pre><code class="language-json">{
+  &quot;authMethod&quot;: &quot;oauth&quot;,
+  &quot;authConfig&quot;: {
+    &quot;accessToken&quot;: &quot;your-access-token-here&quot;
+  }
+}
+</code></pre>
+<h3 id="no-authentication">No Authentication</h3>
+<pre><code class="language-json">{
+  &quot;authMethod&quot;: &quot;none&quot;
+}
+</code></pre>
+<hr />
+<h2 id="error-responses">Error Responses</h2>
+<p>All endpoints return standard error responses:</p>
+<p><strong>400 Bad Request</strong>:</p>
+<pre><code class="language-json">{
+  &quot;error&quot;: &quot;Missing required fields&quot;,
+  &quot;required&quot;: [&quot;name&quot;, &quot;type&quot;, &quot;direction&quot;]
+}
+</code></pre>
+<p><strong>404 Not Found</strong>:</p>
+<pre><code class="language-json">{
+  &quot;error&quot;: &quot;Bridge not found&quot;,
+  &quot;id&quot;: &quot;clxyz123abc&quot;
+}
+</code></pre>
+<p><strong>500 Internal Server Error</strong>:</p>
+<pre><code class="language-json">{
+  &quot;error&quot;: &quot;Failed to create bridge&quot;,
+  &quot;message&quot;: &quot;Database connection error&quot;
+}
+</code></pre>
+<hr />
+<h2 id="usage-examples">Usage Examples</h2>
+<h3 id="example-1-outbound-api-integration">Example 1: Outbound API Integration</h3>
+<pre><code class="language-javascript">// Create outbound bridge
+const bridge = await fetch('http://localhost:4000/api/bridges', {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify({
+    name: 'Shopify Orders',
+    type: 'api',
+    direction: 'outbound',
+    url: 'https://myshop.myshopify.com/admin/api/2024-01/orders.json',
+    method: 'POST',
+    authMethod: 'api_key',
+    authConfig: {
+      headerName: 'X-Shopify-Access-Token',
+      apiKey: process.env.SHOPIFY_TOKEN
+    }
+  })
+})
+
+const { bridge: { id } } = await bridge.json()
+
+// Test connection
+await fetch(`http://localhost:4000/api/bridges/${id}/test`, {
+  method: 'POST'
+})
+</code></pre>
+<h3 id="example-2-inbound-webhook-receiver">Example 2: Inbound Webhook Receiver</h3>
+<pre><code class="language-javascript">// Create inbound bridge
+const bridge = await fetch('http://localhost:4000/api/bridges', {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify({
+    name: 'Stripe Webhooks',
+    type: 'api',
+    direction: 'inbound',
+    status: 'active'
+  })
+})
+
+const { bridge: { id } } = await bridge.json()
+
+// Get webhook URL
+const urlResponse = await fetch(`http://localhost:4000/api/webhooks/${id}/url`)
+const { webhookUrl } = await urlResponse.json()
+
+console.log('Configure this URL in Stripe:', webhookUrl)
+</code></pre>
+<hr />
+<h2 id="rate-limiting">Rate Limiting</h2>
+<p>BridgeFlow enforces rate limiting globally and per-route.</p>
+<ul>
+<li><strong>Global</strong>: 100 req/min per IP by default. Override with <code>RATE_LIMIT_GLOBAL_MAX</code> and <code>RATE_LIMIT_GLOBAL_WINDOW</code>.</li>
+<li><strong>Per-route</strong>: Auth (5 attempts / 15 min per email+IP) and inbound webhooks (60 req/min per bridge) keep their tighter policies.</li>
+<li><strong>Backend</strong>: Redis (<code>REDIS_URL</code> or <code>REDIS_HOST</code>/<code>REDIS_PORT</code>) with automatic in-memory fallback when Redis is absent.</li>
+<li><strong>Headers</strong>: <code>RateLimit-Limit</code>, <code>RateLimit-Remaining</code>, <code>RateLimit-Reset</code> plus <code>X-RateLimit-*</code> legacy headers are returned on limited routes. <code>Retry-After</code> is sent on blocks.</li>
+<li><strong>IP controls</strong>: Allow/Deny lists accept IP or CIDR via env (<code>RATE_LIMIT_ALLOW_LIST</code>, <code>RATE_LIMIT_DENY_LIST</code>) and admin API.</li>
+<li><strong>Anomaly detection</strong>: automatic blocking for 404 bursts (&gt;20/min per IP) and auth failures (&gt;10/min on <code>/api/auth/*</code>). Defaults are tunable via env.</li>
+<li><strong>Admin API</strong> (mTLS + auth + permission):</li>
+<li><code>GET /api/rate-limits/status</code></li>
+<li><code>POST|DELETE /api/rate-limits/allow { cidr }</code></li>
+<li><code>POST|DELETE /api/rate-limits/deny { cidr }</code></li>
+<li><code>DELETE /api/rate-limits/blocks { ip }</code></li>
+</ul>
+<p>See docs/design/rate-limiting.md for full configuration surface and runbook notes.</p>
+<hr />
+<h2 id="changelog">Changelog</h2>
+<p><strong>Unreleased</strong> (2026-01-06)
+- fix(auth): restrict BRIDGEFLOW_DEV_ADMIN fallback to UI routes only; API routes always require authentication
+- fix(rate-limit): ensure enforcement is active during tests and respect RATE_LIMIT_ENABLED only when explicitly set</p>
+<p><strong>v1.0.0</strong> (2025-12-17)
+- Initial release
+- Bridge CRUD operations
+- Webhook receiver
+- Transaction logging and querying
+- HTTP client with retry logic
+- Support for API Key, Bearer, Basic, and OAuth2 authentication</p>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

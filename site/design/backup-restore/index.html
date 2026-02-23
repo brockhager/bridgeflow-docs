@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://brockhager.github.io/bridgeflow-docs/design/backup-restore/" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>Backup &amp; Restore (Phase 12) — Design Draft - BridgeFlow Docs</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Backup \u0026amp; Restore (Phase 12) \u2014 Design Draft";
+        var mkdocs_page_input_path = "design\\backup-restore.md";
+        var mkdocs_page_url = "/bridgeflow-docs/design/backup-restore/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> BridgeFlow Docs
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../topics/quickstart/">Quickstart</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../topics/concepts/">Concepts</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../current/control-tower/public-api/">API Reference</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../topics/vision/">Vision</a>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">BridgeFlow Docs</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">Backup &amp; Restore (Phase 12) — Design Draft</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="backup-restore-phase-12-design-draft">Backup &amp; Restore (Phase 12) — Design Draft</h1>
+<h2 id="goal">Goal</h2>
+<p>Provide a reliable Backup &amp; Restore system for BridgeFlow configuration and tenant data (mappings, bridges, templates, organizations, and essential DB state) to support point-in-time recovery and migration across environments.</p>
+<h2 id="scope-mvp">Scope (MVP)</h2>
+<ul>
+<li>Export/import of tenant-level configuration as JSON (mappings, mappingVersions, bridges, templates, organizations, validation rules).</li>
+<li>Scheduled full backups of the database schema + key tables (Prisma-supported snapshot/export) to a configurable storage backend (S3 or local file for MVP).</li>
+<li>Restore flow to rehydrate a target environment from backup (manual/CLI for MVP).</li>
+<li>Basic integrity checks (schema consistency, optional dry-run verification).</li>
+</ul>
+<h2 id="non-goals-mvp">Non-Goals (MVP)</h2>
+<ul>
+<li>Continuous incremental backups or WAL-based point-in-time recovery (PITR) — left for future iterations.</li>
+<li>Cross-region replication.</li>
+</ul>
+<h2 id="requirements">Requirements</h2>
+<ul>
+<li>Must be usable in both mock/test and production setups.</li>
+<li>Backups should be stored encrypted when using S3 (KMS optional) or local encrypted archive.</li>
+<li>Admin-only endpoints and CLI tools; require operator role and mTLS when in production.</li>
+</ul>
+<h2 id="components">Components</h2>
+<ol>
+<li>CLI script: <code>scripts/backup.js</code> and <code>scripts/restore.js</code> (Node): export/import JSON, optional S3 upload/download.</li>
+<li>Admin API endpoints (protected):</li>
+<li>POST <code>/api/admin/backups</code> — create and optionally upload backup</li>
+<li>GET <code>/api/admin/backups</code> — list backups (from storage metadata)</li>
+<li>POST <code>/api/admin/backups/:id/restore</code> — restore backup to current DB (with dry-run option)</li>
+<li>Storage adapters: local FS, S3 (pluggable via env vars).</li>
+<li>Tests: unit tests for exporter/importer; integration tests using <code>USE_MOCK_DB=true</code>.</li>
+</ol>
+<h2 id="security-operational-notes">Security &amp; Operational Notes</h2>
+<ul>
+<li>Backup files contain tenant PII; require encryption and limited access.</li>
+<li>Restoration should be manually-confirmed (no automated restores on production without safeguards).</li>
+<li>Provide <code>--dry-run</code> to validate compatibility.</li>
+</ul>
+<h2 id="next-steps-short-term">Next Steps (short term)</h2>
+<ol>
+<li>Create design doc (this file) and add task entry in TASK-LIST-3 (done).</li>
+<li>Add CLI stub <code>scripts/backup.js</code> and <code>scripts/restore.js</code> with a no-op implementation and tests.</li>
+<li>Implement JSON exporter (<code>prisma</code> read-only) and importer.</li>
+<li>Add admin endpoints and RBAC guards.</li>
+</ol>
+<hr />
+<p>Progress: Drafted (Dec 24, 2025). Next: implement CLI stubs and exporter (in-progress).</p>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

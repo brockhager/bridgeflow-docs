@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://brockhager.github.io/bridgeflow-docs/design/rate-limiting/" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>Rate Limiting &amp; DDoS Plan - BridgeFlow Docs</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Rate Limiting \u0026amp; DDoS Plan";
+        var mkdocs_page_input_path = "design\\rate-limiting.md";
+        var mkdocs_page_url = "/bridgeflow-docs/design/rate-limiting/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> BridgeFlow Docs
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../topics/quickstart/">Quickstart</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../topics/concepts/">Concepts</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../current/control-tower/public-api/">API Reference</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../topics/vision/">Vision</a>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">BridgeFlow Docs</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">Rate Limiting &amp; DDoS Plan</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="rate-limiting-ddos-plan">Rate Limiting &amp; DDoS Plan</h1>
+<h2 id="goals">Goals</h2>
+<ul>
+<li>Redis-backed global/route rate limits with in-memory fallback for tests/local.</li>
+<li>IP allow/deny (single IP or CIDR), dynamic blocks from anomaly detection, admin controls to view/unblock.</li>
+<li>Standard <code>RateLimit-*</code> + legacy <code>X-RateLimit-*</code> headers on all limited routes.</li>
+<li>Anomaly rules: excessive 404s (&gt;20/min per IP) and auth failures (&gt;10/min on /api/auth/*). Offenders auto-blocked with TTL.</li>
+<li>Admin UI (reuse admin pages) to inspect blocks and manage allow/deny entries.</li>
+</ul>
+<h2 id="components">Components</h2>
+<ul>
+<li><strong>RateLimitManager</strong> (new): wraps store, allow/deny checks, anomaly tracking, dynamic blocks. Exposes Fastify hooks and plugin options.</li>
+<li><strong>Store selection</strong>: <code>ioredis</code> client when <code>REDIS_URL</code> (or host/port) is set; otherwise in-memory map. Both expose counters, sets (allow/deny), and block registry with TTL.</li>
+<li><strong>Fastify plugin config</strong>: global=true, defaults 100 req/min; env overrides <code>RATE_LIMIT_GLOBAL_MAX</code>, <code>RATE_LIMIT_GLOBAL_WINDOW</code>. Uses custom <code>allowList</code> + <code>keyGenerator</code> to respect CIDR allowlist and dynamic blocks.</li>
+<li><strong>Headers</strong>: enable <code>RateLimit-Limit</code>, <code>RateLimit-Remaining</code>, <code>RateLimit-Reset</code>, <code>X-RateLimit-*</code> for legacy, plus <code>Retry-After</code> on block.</li>
+</ul>
+<h2 id="policy">Policy</h2>
+<ul>
+<li><strong>Global</strong>: per-IP (post-normalization) unless allowlisted.</li>
+<li><strong>Per-route</strong>: existing auth/webhook limits kept; route configs can override max/window/key.</li>
+<li><strong>Allow/Deny</strong>: static via env (<code>RATE_LIMIT_ALLOW_LIST</code>, <code>RATE_LIMIT_DENY_LIST</code>, comma-separated IP/CIDR); dynamic via admin API (stored in store sets).</li>
+<li><strong>Blocks</strong>: anomaly-triggered blocks stored with reason, ttl, and firstSeen; enforced at <code>onRequest</code> before Fastify handlers.</li>
+</ul>
+<h2 id="anomaly-detection">Anomaly Detection</h2>
+<ul>
+<li>Hook on response to record patterns:</li>
+<li>404 bursts: key <code>anomaly:404:&lt;ip&gt;</code>; threshold 20/min (env <code>RATE_LIMIT_404_THRESHOLD</code>, <code>RATE_LIMIT_404_WINDOW</code>), block TTL default 15m (<code>RATE_LIMIT_BLOCK_TTL</code>).</li>
+<li>Auth failures: status 401 on <code>/api/auth/*</code>; key <code>anomaly:authfail:&lt;ip&gt;</code>; threshold 10/min (env <code>RATE_LIMIT_AUTHFAIL_THRESHOLD</code>, <code>RATE_LIMIT_AUTHFAIL_WINDOW</code>), block TTL default 30m.</li>
+<li>When threshold exceeded, add block entry <code>{ reason, ttlSeconds, until }</code> and log event.</li>
+</ul>
+<h2 id="admin-surface">Admin Surface</h2>
+<ul>
+<li><strong>API</strong> under <code>/api/rate-limits</code> (mTLS + auth + permission):</li>
+<li><code>GET /status</code> → config + active blocks + allow/deny lists + backend type (redis|memory).</li>
+<li><code>POST /allow</code> <code>{ cidr }</code>, <code>DELETE /allow/:cidr</code></li>
+<li><code>POST /deny</code> <code>{ cidr }</code>, <code>DELETE /deny/:cidr</code></li>
+<li><code>DELETE /blocks/:ip</code> → unblock.</li>
+<li><strong>UI</strong>: new admin page listing backend, current limits, allow/deny entries, active blocks, and quick actions (allow, deny, unblock). Uses existing admin styling/components.</li>
+</ul>
+<h2 id="environment-surface">Environment Surface</h2>
+<ul>
+<li><code>REDIS_URL</code> or <code>REDIS_HOST</code>/<code>REDIS_PORT</code> for backend; fallback to memory when absent or failing.</li>
+<li><code>RATE_LIMIT_GLOBAL_MAX</code> (default 100), <code>RATE_LIMIT_GLOBAL_WINDOW</code> (default 1 minute).</li>
+<li><code>RATE_LIMIT_ALLOW_LIST</code>, <code>RATE_LIMIT_DENY_LIST</code> (comma-separated IP or CIDR).</li>
+<li>Anomaly tunables: <code>RATE_LIMIT_404_THRESHOLD</code> (default 20), <code>RATE_LIMIT_404_WINDOW</code> (60s), <code>RATE_LIMIT_AUTHFAIL_THRESHOLD</code> (10), <code>RATE_LIMIT_AUTHFAIL_WINDOW</code> (60s), <code>RATE_LIMIT_BLOCK_TTL</code> (900s default for 404, 1800s for auth failures unless overridden per rule).</li>
+</ul>
+<h2 id="testing-strategy">Testing Strategy</h2>
+<ul>
+<li>Use in-memory store for Vitest by omitting Redis env.</li>
+<li>Set tiny thresholds/windows in tests (e.g., global=2) to hit limits quickly.</li>
+<li>Assertions: headers present, allowlist bypass, denylist 403/429, anomaly triggers block, route-specific limits still apply, admin endpoints mutate sets/blocks.</li>
+</ul>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

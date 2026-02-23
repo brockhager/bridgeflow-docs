@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://brockhager.github.io/bridgeflow-docs/breakfixes/documents-ingestion-route-fix/" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>Documents ingestion route — breakfix (2026-01-07) ✅ - BridgeFlow Docs</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Documents ingestion route \u2014 breakfix (2026-01-07) \u2705";
+        var mkdocs_page_input_path = "breakfixes\\documents-ingestion-route-fix.md";
+        var mkdocs_page_url = "/bridgeflow-docs/breakfixes/documents-ingestion-route-fix/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> BridgeFlow Docs
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../topics/quickstart/">Quickstart</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../topics/concepts/">Concepts</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../current/control-tower/public-api/">API Reference</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../topics/vision/">Vision</a>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">BridgeFlow Docs</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">Documents ingestion route — breakfix (2026-01-07) ✅</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="documents-ingestion-route-breakfix-2026-01-07">Documents ingestion route — breakfix (2026-01-07) ✅</h1>
+<h2 id="summary">Summary 🔧</h2>
+<p>A failing integration test (<code>api/tests/integration/documents.integration.test.js</code>) was caused by the ingestion endpoint returning 404. Root cause: the <code>POST /api/documents</code> route was not registered in <code>api/server.js</code>, so document ingestion requests were unhandled.</p>
+<h2 id="impact">Impact 🚨</h2>
+<ul>
+<li>Integration test: <strong>"POST /api/documents applies mapping if exists"</strong> returned <strong>404</strong> instead of <strong>201</strong>.</li>
+<li>Blocked documents ingestion pipeline and related integration tests (documents ACK, unified flow, dashboard health).</li>
+<li>Affects Phase 28 demo scenarios where documents must be ingested and mapped.</li>
+</ul>
+<h2 id="root-cause-analysis">Root cause analysis 🔍</h2>
+<ul>
+<li>The <code>createDocument</code> handler existed at <code>api/handlers/documents.js</code>, but the route for <code>POST /api/documents</code> was not registered in <code>api/server.js</code> (only GETs were registered).</li>
+<li>Tests run with <code>USE_MOCK_DB=true</code> and seeding created required mapping(s), but requests hit a 404 before handler logic executed.</li>
+</ul>
+<h2 id="fix-implemented">Fix implemented ✅</h2>
+<ul>
+<li>Registered the ingestion route in <code>api/server.js</code>:</li>
+<li><code>app.post('/api/documents', { preHandler: [authMiddlewareForRoutes] }, (r, reply) =&gt; import('./handlers/documents.js').then(m =&gt; m.createDocument(r, reply)) )</code></li>
+<li>Added targeted diagnostics:</li>
+<li>Test logging in <code>api/tests/integration/documents.integration.test.js</code> to print DB state before test and confirm seeding.</li>
+<li>Test-only debug log in <code>api/handlers/documents.js</code> to show incoming payload and calling user during tests.</li>
+</ul>
+<h2 id="files-changed">Files changed ✏️</h2>
+<ul>
+<li><code>api/server.js</code> — added <code>POST /api/documents</code> route (with <code>authMiddlewareForRoutes</code> preHandler)</li>
+<li><code>api/handlers/documents.js</code> — added test-only debug log for <code>createDocument</code></li>
+<li><code>api/tests/integration/documents.integration.test.js</code> — added DB-state + creation logs to aid debugging</li>
+</ul>
+<h2 id="verification-results">Verification &amp; Results ✅</h2>
+<ul>
+<li>Ran isolated test with verbose output:</li>
+<li>Command: <code>pnpm vitest run api/tests/integration/documents.integration.test.js --reporter=verbose</code></li>
+<li>Observed logs:<ul>
+<li>"🔍 TEST SETUP - DB state BEFORE test: TPs= 0 Mappings= 0"</li>
+<li>"✅ Organization created: <id>"</li>
+<li>"✅ Mapping created: <id>"</li>
+<li>"📥 INCOMING REQUEST: POST /api/documents"</li>
+<li>"[DOC TEST] createDocument called, body: {...} user: u1"</li>
+</ul>
+</li>
+<li>Result: Test passed (201 response, mapping applied)</li>
+</ul>
+<h2 id="notes-next-steps">Notes / Next steps 💡</h2>
+<ul>
+<li>The route fix unblocks the documents tests, but there remain a few other failing integration tests (trading-partners migration, dashboard/alerts flows). Those appear to be <strong>seed/setup</strong> issues rather than RBAC regressions.</li>
+<li>Recommended triage plan for remaining failures:</li>
+<li>Run each failing integration test in isolation with similar DB-state and handler logs.</li>
+<li>Ensure <code>resetMockDb()</code> is called at the correct times and seeds run after reset.</li>
+<li>Add minimal seeding helpers in tests where appropriate.</li>
+</ul>
+<hr />
+<p>If you want, I can continue by triaging the next-highest failing test (<code>trading-partners.migration.test.js</code>) and follow the same approach (add DB-state logs → run in isolation → fix seeds or route).</p>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

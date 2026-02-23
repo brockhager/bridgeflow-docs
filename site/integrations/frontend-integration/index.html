@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://brockhager.github.io/bridgeflow-docs/integrations/frontend-integration/" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>Frontend Integration Guide ✅ - BridgeFlow Docs</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Frontend Integration Guide \u2705";
+        var mkdocs_page_input_path = "integrations\\frontend-integration.md";
+        var mkdocs_page_url = "/bridgeflow-docs/integrations/frontend-integration/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> BridgeFlow Docs
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../topics/quickstart/">Quickstart</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../topics/concepts/">Concepts</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../current/control-tower/public-api/">API Reference</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../topics/vision/">Vision</a>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">BridgeFlow Docs</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">Frontend Integration Guide ✅</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="frontend-integration-guide">Frontend Integration Guide ✅</h1>
+<p>This guide helps frontend engineers integrate with the BridgeFlow CSV mailbox and QBO sync APIs during development.</p>
+<h2 id="authentication-headers">Authentication &amp; Headers 🔐</h2>
+<ul>
+<li>Use <code>X-API-Key</code> header (case-insensitive) or <code>Authorization: Bearer &lt;key&gt;</code>.</li>
+<li>The API key maps to an <code>organizationId</code> via <code>validateCustomerApiKey</code> middleware and must be included on every request.</li>
+</ul>
+<p>Example header:</p>
+<p><code>X-API-Key: &lt;your-api-key&gt;</code></p>
+<h2 id="cors">CORS ⚠️</h2>
+<ul>
+<li>The API allows the following local origins by default:</li>
+<li><code>http://localhost:3000</code>, <code>https://localhost:3000</code></li>
+<li><code>http://localhost:3001</code>, <code>https://localhost:3001</code></li>
+<li><code>http://localhost:4000</code>, <code>https://localhost:4000</code>, <code>http://localhost:4001</code>, <code>https://localhost:4001</code></li>
+</ul>
+<p>If your dev UI runs on another port, update <code>api/server.js</code> <code>fastifyCors</code> allowed origins accordingly.</p>
+<h2 id="debugging-dev-only-endpoint">Debugging: Dev-only endpoint 🔧</h2>
+<ul>
+<li><code>GET /api/debug/customer-context</code> (development only)</li>
+<li>Requires <code>X-API-Key</code> and returns a minimal JSON object showing mapped identity to aid debugging:</li>
+</ul>
+<p>Response example:</p>
+<pre><code>{
+  &quot;environment&quot;: &quot;development&quot;,
+  &quot;customerOrgId&quot;: &quot;org-123&quot;,
+  &quot;customerApiKeyId&quot;: &quot;key-abc&quot;,
+  &quot;apiKeyProvided&quot;: true
+}
+</code></pre>
+<blockquote>
+<p>Note: The endpoint intentionally does NOT return the API key value for safety.</p>
+</blockquote>
+<h2 id="csv-upload-mailbox-endpoint">CSV Upload (Mailbox) — Endpoint 📤</h2>
+<ul>
+<li><code>POST /api/upload/csv</code></li>
+<li>Headers: <code>X-API-Key</code>, <code>Content-Type: text/csv</code></li>
+<li>Body: the CSV payload (text/csv)</li>
+</ul>
+<p>Successful response:</p>
+<pre><code>{ &quot;success&quot;: true, &quot;message&quot;: &quot;Enqueued for processing&quot; }
+</code></pre>
+<h3 id="common-error-responses-and-suggested-ui-messages">Common error responses and suggested UI messages</h3>
+<ul>
+<li>401 Unauthorized</li>
+<li>{ error: 'Unauthorized', message: 'API key required' }</li>
+<li>UI: "Missing or invalid API key"</li>
+<li>400 Bad Request — invalid content type</li>
+<li>{ error: 'Bad Request', message: 'Expected text/csv' }</li>
+<li>UI: "Please upload a CSV file"</li>
+<li>413 Payload Too Large</li>
+<li>UI: "File too large"</li>
+<li>422 Unprocessable Entity — template/mapping issues</li>
+<li>{ error: 'Invalid Template', message: 'Missing required columns: [purchaseOrderId, vendorId]' }</li>
+<li>UI: "CSV is missing required columns"</li>
+</ul>
+<h2 id="sample-csv-minimal">Sample CSV (minimal)</h2>
+<ul>
+<li>Location: <code>docs/examples/sample_purchase_orders.csv</code></li>
+</ul>
+<p>Columns expected by the platform mapping (at minimum):
+- <code>purchaseOrderId</code>, <code>vendorId</code>, <code>orderDate</code>, <code>amount</code>, <code>currency</code></p>
+<p>Sample row:</p>
+<pre><code>purchaseOrderId,vendorId,orderDate,amount,currency
+PO-123,VEN-10,2025-06-01,120.50,USD
+</code></pre>
+<h2 id="curl-examples">cURL examples 🧪</h2>
+<p>Upload CSV:</p>
+<pre><code>curl -X POST https://api.local.test/api/upload/csv \
+  -H &quot;X-API-Key: &lt;your-key&gt;&quot; \
+  -H &quot;Content-Type: text/csv&quot; \
+  --data-binary @docs/examples/sample_purchase_orders.csv
+</code></pre>
+<p>Get debug context (dev-only):</p>
+<pre><code>curl -X GET https://api.local.test/api/debug/customer-context -H &quot;X-API-Key: &lt;your-key&gt;&quot;
+</code></pre>
+<h2 id="tips-for-frontend-engineers">Tips for frontend engineers 💡</h2>
+<ul>
+<li>Use the dev debug endpoint to verify your key is mapped to the expected organization before testing uploads.</li>
+<li>Check CORS origin if you see preflight (OPTIONS) failures.</li>
+<li>If you get an <code>Invalid Template</code> error, download the last failed payload from the inbox to inspect column names.</li>
+</ul>
+<hr />
+<p>If you'd like, I can add a quick UI test (Playwright) that exercises the upload flow and asserts error messages — say the word and I’ll add it. </p>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

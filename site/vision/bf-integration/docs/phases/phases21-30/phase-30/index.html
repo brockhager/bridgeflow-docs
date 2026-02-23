@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://brockhager.github.io/bridgeflow-docs/vision/bf-integration/docs/phases/phases21-30/phase-30/" />
+      <link rel="shortcut icon" href="../../../../../../img/favicon.ico" />
+    <title>Phase 30 - BridgeFlow Docs</title>
+    <link rel="stylesheet" href="../../../../../../css/theme.css" />
+    <link rel="stylesheet" href="../../../../../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Phase 30";
+        var mkdocs_page_input_path = "vision\\bf-integration\\docs\\phases\\phases21-30\\phase-30.md";
+        var mkdocs_page_url = "/bridgeflow-docs/vision/bf-integration/docs/phases/phases21-30/phase-30/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../../../../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../../../../../.." class="icon icon-home"> BridgeFlow Docs
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../../../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../../../..">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../../../../topics/quickstart/">Quickstart</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../../../../topics/concepts/">Concepts</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../../../../current/control-tower/public-api/">API Reference</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../../../../topics/vision/">Vision</a>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../../..">BridgeFlow Docs</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../../../../.." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">Phase 30</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <blockquote>
+<p>[!WARNING]
+Status: Planned / In Development
+Context: Original BF-INTEGRATION Vision (Pre-Phase 30)</p>
+</blockquote>
+<h1 id="phase-30-layer-2-core-entities">Phase 30 — Layer 2 Core Entities ✅</h1>
+<p><strong>Completed:</strong> January 8, 2026<br />
+<strong>Effort:</strong> 2-3 hours<br />
+<strong>Priority:</strong> High (protocol integration foundation)</p>
+<h2 id="objective">🎯 Objective</h2>
+<p>Implement Layer 2 Core Entities (Connectors and Endpoints) to provide the critical scaffolding for real protocol integration. This phase establishes the foundation for AS2, SFTP, API, and EMAIL protocols while maintaining proper multi-tenant architecture and admin management capabilities.</p>
+<h2 id="core-deliverables-44">📋 Core Deliverables (4/4)</h2>
+<h3 id="1-prisma-schema-implementation">✅ 1. Prisma Schema Implementation</h3>
+<p><strong>Connector Model</strong>: Protocol-specific communication channels owned by organizations</p>
+<pre><code class="language-sql">model Connector {
+  id             String    @id @default(cuid())
+  name           String    // &quot;Acme AS2&quot;, &quot;Retail SFTP Inbound&quot;
+  type           String    // &quot;AS2&quot;, &quot;SFTP&quot;, &quot;API&quot;, &quot;EMAIL&quot;
+  organizationId String
+  isActive       Boolean   @default(true)
+  description    String?
+  config         Json?     // Protocol-specific config
+  organization   Organization @relation(fields: [organizationId], references: [id])
+  endpoints      Endpoint[]
+  tradingPartners TradingPartnerConnector[]
+}
+</code></pre>
+<p><strong>Endpoint Model</strong>: Directional data flow with tenet binding</p>
+<pre><code class="language-sql">model Endpoint {
+  id             String    @id @default(cuid())
+  name           String    // &quot;Inbound 837 Claims&quot;, &quot;Outbound 850 POs&quot;
+  direction      String    // &quot;INGRESS&quot; | &quot;EGRESS&quot;
+  connectorId    String
+  tenetId        String?   // Auto-apply this tenet on INGRESS
+  packageType    String?   // &quot;837&quot;, &quot;850&quot;, &quot;210&quot;, &quot;997&quot;, etc.
+  isActive       Boolean   @default(true)
+  config         Json?     // Protocol-specific endpoint config
+  connector      Connector @relation(fields: [connectorId], references: [id])
+  tenet          Tenet?     @relation(fields: [tenetId], references: [id])
+  packages       Package[]
+}
+</code></pre>
+<p><strong>Tenet Model</strong>: Business rule sets for package processing</p>
+<pre><code class="language-sql">model Tenet {
+  id              String       @id @default(cuid())
+  name            String
+  slug            String?      @unique
+  description     String?
+  isActive        Boolean      @default(true)
+  organizationId   String       // Tenets belong to organizations
+  userId          String       // Created by user
+  organization     Organization @relation(fields: [organizationId], references: [id])
+  user            User         @relation(fields: [userId], references: [id])
+  endpoints       Endpoint[]   // Endpoints that auto-apply this tenet
+  packages        Package[]    // Packages that use this tenet
+}
+</code></pre>
+<h3 id="2-admin-api-endpoints">✅ 2. Admin API Endpoints</h3>
+<p><strong>Connector Management</strong>: Full CRUD with organization scoping
+- <code>POST /admin-api/connectors</code> - Create connector with validation
+- <code>GET /admin-api/connectors</code> - List connectors with filtering
+- <code>GET /admin-api/connectors/:id</code> - Get connector with details
+- <code>PATCH /admin-api/connectors/:id</code> - Update connector
+- <code>DELETE /admin-api/connectors/:id</code> - Delete connector
+- <code>GET /admin-api/connectors/stats</code> - Connector statistics</p>
+<p><strong>Endpoint Management</strong>: Complete endpoint lifecycle management
+- <code>POST /admin-api/endpoints</code> - Create endpoint with tenet binding
+- <code>GET /admin-api/endpoints</code> - List endpoints with filtering
+- <code>GET /admin-api/endpoints/:id</code> - Get endpoint with details
+- <code>PATCH /admin-api/endpoints/:id</code> - Update endpoint
+- <code>DELETE /admin-api/endpoints/:id</code> - Delete endpoint
+- <code>GET /admin-api/endpoints/stats</code> - Endpoint statistics</p>
+<p><strong>Security Features</strong>:
+- RBAC enforcement (bf_employees only)
+- Organization scoping
+- Config field masking (sensitive data hidden)
+- Protocol-specific validation</p>
+<h3 id="3-admin-ui-foundations">✅ 3. Admin UI Foundations</h3>
+<p><strong>Connector Management Interface</strong>: Professional admin experience
+- <strong>List View</strong>: Searchable, filterable connector listing
+- <strong>Type Selection</strong>: Dynamic forms based on connector type (AS2, SFTP, API, EMAIL)
+- <strong>Configuration Fields</strong>: Type-specific config forms with validation
+- <strong>Organization Integration</strong>: Proper org selection and scoping
+- <strong>Status Management</strong>: Active/inactive toggle with visual indicators
+- <strong>Trading Partner Links</strong>: Associate connectors with trading partners</p>
+<p><strong>Dynamic Form System</strong>: Type-specific configuration</p>
+<pre><code class="language-javascript">// AS2 Connector Fields
+- AS2 URL (required)
+- AS2 ID (required)  
+- Private Key (secure field)
+- Certificate (secure field)
+
+// SFTP Connector Fields  
+- Host (required)
+- Port (default: 22)
+- Username (required)
+- Password/Private Key (secure field)
+
+// API Connector Fields
+- Base URL (required)
+- API Key (secure field)
+- Auth Type selection
+
+// EMAIL Connector Fields
+- SMTP Host (required)
+- Email Address (required)
+- SMTP Configuration
+</code></pre>
+<h3 id="4-protocol-handler-stubs">✅ 4. Protocol Handler Stubs</h3>
+<p><strong>AS2 Handler</strong>: EDI over HTTP/HTTPS protocol</p>
+<pre><code class="language-javascript">// api/handlers/protocols/as2.js
+export {
+  validateConfig(config),    // Validate AS2 configuration
+  receive(payload, endpoint), // Receive AS2 messages
+  send(package, connector),  // Send AS2 messages
+  testConnection(config),    // Test AS2 connectivity
+  getMessageStatus(id, config) // Check message status
+}
+</code></pre>
+<p><strong>SFTP Handler</strong>: File transfer protocol</p>
+<pre><code class="language-javascript">// api/handlers/protocols/sftp.js
+export {
+  validateConfig(config),    // Validate SFTP configuration
+  receive(payload, endpoint), // Monitor SFTP directories
+  send(package, connector),  // Upload files via SFTP
+  testConnection(config),    // Test SFTP connectivity
+  listFiles(config, path),    // List directory contents
+  downloadFile(config, path), // Download files
+  uploadFile(config, path, content) // Upload files
+}
+</code></pre>
+<p><strong>API Handler</strong>: RESTful web service protocol</p>
+<pre><code class="language-javascript">// api/handlers/protocols/api.js
+export {
+  validateConfig(config),    // Validate API configuration
+  receive(payload, endpoint), // Handle webhook requests
+  send(package, connector),  // Make HTTP requests
+  testConnection(config),    // Test API connectivity
+  makeRequest(config, method, endpoint, data, headers), // Make HTTP requests
+  getRateLimitStatus(config), // Check rate limits
+  validateWebhookSignature(config, payload, signature, headers) // Validate signatures
+}
+</code></pre>
+<h2 id="technical-architecture">🏗️ <strong>Technical Architecture</strong></h2>
+<h3 id="layer-2-data-flow"><strong>Layer 2 Data Flow</strong></h3>
+<pre><code>Organization → Connector → Endpoint → Package
+     ↓              ↓           ↓
+   Org Owner    Protocol    Direction
+   Scoping      Channel    Data Flow
+</code></pre>
+<h3 id="real-world-example"><strong>Real-World Example</strong></h3>
+<pre><code>Org: BridgeFlow Group
+├── Connector: SFTP - Inbound Claims (type: SFTP)
+│   └── Endpoint: Inbound 837 (direction: INGRESS, tenetId: hipaa-claims-tenet)
+│       ↓
+│       When file lands in SFTP folder → System creates Package
+│       ↓
+│       Package attributes:
+│       - organizationId = BridgeFlow Group
+│       - tenetId = hipaa-claims-tenet  
+│       - endpointId = endpoint.id
+│       - Enters Phase 28 processing
+│
+└── Connector: AS2 - Outbound Invoices (type: AS2)
+    └── Endpoint: Egress 810 (direction: EGRESS)
+</code></pre>
+<h3 id="multi-tenant-security"><strong>Multi-Tenant Security</strong></h3>
+<ul>
+<li><strong>Organization Scoping</strong>: All connectors bound to organizations</li>
+<li><strong>Tenet Binding</strong>: INGRESS endpoints auto-apply business rules</li>
+<li><strong>RBAC Enforcement</strong>: Only bf_employees can manage connectors</li>
+<li><strong>Config Security</strong>: Sensitive fields masked in API responses</li>
+</ul>
+<h2 id="admin-capabilities">📊 <strong>Admin Capabilities</strong></h2>
+<h3 id="connector-management"><strong>Connector Management</strong></h3>
+<ul>
+<li><strong>Create</strong>: Add new connectors with protocol-specific configuration</li>
+<li><strong>Edit</strong>: Update connector settings and trading partner associations</li>
+<li><strong>Delete</strong>: Remove connectors (prevents deletion with active endpoints)</li>
+<li><strong>View</strong>: Detailed connector information with endpoint counts</li>
+<li><strong>Statistics</strong>: Usage analytics and organization breakdown</li>
+</ul>
+<h3 id="endpoint-management"><strong>Endpoint Management</strong></h3>
+<ul>
+<li><strong>Create</strong>: Define data flow directions with tenet binding</li>
+<li><strong>Configure</strong>: Protocol-specific endpoint settings</li>
+<li><strong>Monitor</strong>: Track package processing and status</li>
+<li><strong>Statistics</strong>: Endpoint usage and performance metrics</li>
+</ul>
+<h3 id="protocol-support"><strong>Protocol Support</strong></h3>
+<ul>
+<li><strong>AS2</strong>: EDI over HTTP/HTTPS with MDN support</li>
+<li><strong>SFTP</strong>: File transfer with directory monitoring</li>
+<li><strong>API</strong>: RESTful webhooks and HTTP requests</li>
+<li><strong>EMAIL</strong>: SMTP-based communication</li>
+</ul>
+<h2 id="security-validation">🔐 <strong>Security &amp; Validation</strong></h2>
+<h3 id="protocol-configuration-validation"><strong>Protocol Configuration Validation</strong></h3>
+<pre><code class="language-javascript">// AS2 Validation
+required: ['url', 'as2Id']
+url: Must be valid HTTPS URL
+as2Id: Must be non-empty string
+
+// SFTP Validation  
+required: ['host', 'username']
+host: Must be valid hostname
+port: Must be 1-65535 if provided
+
+// API Validation
+required: ['baseUrl']
+baseUrl: Must be valid URL
+
+// EMAIL Validation
+required: ['smtpHost', 'email']
+smtpHost: Must be valid hostname
+email: Must be valid email address
+</code></pre>
+<h3 id="data-protection"><strong>Data Protection</strong></h3>
+<ul>
+<li><strong>Config Masking</strong>: Sensitive fields masked in API responses</li>
+<li><strong>Secure Storage</strong>: Protocol credentials stored as encrypted JSON</li>
+<li><strong>Access Control</strong>: RBAC prevents unauthorized access</li>
+<li><strong>Audit Trail</strong>: All changes logged and tracked</li>
+</ul>
+<h2 id="implementation-details">🚀 <strong>Implementation Details</strong></h2>
+<h3 id="database-schema-updates"><strong>Database Schema Updates</strong></h3>
+<ul>
+<li><strong>New Models</strong>: Connector, Endpoint, Tenet, TradingPartnerConnector</li>
+<li><strong>Relations</strong>: Proper foreign key relationships with cascading deletes</li>
+<li><strong>Indexes</strong>: Optimized for performance and querying</li>
+<li><strong>Constraints</strong>: Unique constraints and data validation</li>
+</ul>
+<h3 id="api-implementation"><strong>API Implementation</strong></h3>
+<ul>
+<li><strong>Handlers</strong>: Complete CRUD operations with validation</li>
+<li><strong>Routes</strong>: RESTful API endpoints with proper HTTP methods</li>
+<li><strong>Middleware</strong>: RBAC, authentication, and request validation</li>
+<li><strong>Error Handling</strong>: Comprehensive error responses and logging</li>
+</ul>
+<h3 id="frontend-implementation"><strong>Frontend Implementation</strong></h3>
+<ul>
+<li><strong>React Components</strong>: Professional admin interface with dynamic forms</li>
+<li><strong>State Management</strong>: Efficient data fetching and caching</li>
+<li><strong>User Experience</strong>: Intuitive navigation and visual feedback</li>
+<li><strong>Responsive Design</strong>: Works across all admin devices</li>
+</ul>
+<h2 id="success-criteria">📈 <strong>Success Criteria</strong></h2>
+<h3 id="core-functionality">✅ <strong>Core Functionality</strong></h3>
+<ul>
+<li>[x] Create connectors for all protocol types</li>
+<li>[x] Define endpoints with proper direction and tenet binding</li>
+<li>[x] Associate connectors with trading partners</li>
+<li>[x] View connector and endpoint statistics</li>
+<li>[x] Manage connector lifecycle (create, read, update, delete)</li>
+</ul>
+<h3 id="security-scoping">✅ <strong>Security &amp; Scoping</strong></h3>
+<ul>
+<li>[x] Organization-based access control</li>
+<li>[x] RBAC enforcement for admin operations</li>
+<li>[x] Sensitive data masking in API responses</li>
+<li>[x] Protocol-specific configuration validation</li>
+<li>[x] Tenet binding for INGRESS endpoints</li>
+</ul>
+<h3 id="admin-experience">✅ <strong>Admin Experience</strong></h3>
+<ul>
+<li>[x] Professional connector management UI</li>
+<li>[x] Dynamic forms for different protocol types</li>
+<li>[x] Search and filtering capabilities</li>
+<li>[x] Real-time statistics and analytics</li>
+<li>[x] Visual indicators for status and health</li>
+</ul>
+<h3 id="protocol-handler-foundation">✅ <strong>Protocol Handler Foundation</strong></h3>
+<ul>
+<li>[x] Stub implementations for AS2, SFTP, API, EMAIL</li>
+<li>[x] Configuration validation for each protocol</li>
+<li>[x] Connectivity testing capabilities</li>
+<li>[x] Extensible architecture for real implementation</li>
+<li>[x] Error handling and logging</li>
+</ul>
+<h2 id="next-steps">🎯 <strong>Next Steps</strong></h2>
+<h3 id="phase-31-real-protocol-implementation"><strong>Phase 31+</strong>: Real Protocol Implementation</h3>
+<p>The Layer 2 foundation is now ready for real protocol integration:</p>
+<ol>
+<li><strong>AS2 Implementation</strong>: Real AS2 message processing</li>
+<li><strong>SFTP Implementation</strong>: File monitoring and transfer</li>
+<li><strong>API Implementation</strong>: Webhook handling and HTTP requests</li>
+<li><strong>EMAIL Implementation</strong>: SMTP communication and processing</li>
+</ol>
+<h3 id="integration-points"><strong>Integration Points</strong></h3>
+<ul>
+<li><strong>Package Processing</strong>: Connect endpoints to Phase 28 package workflow</li>
+<li><strong>Trading Partners</strong>: Link connectors to partner management</li>
+<li><strong>Tenet Rules</strong>: Apply business rules via endpoint binding</li>
+<li><strong>Monitoring</strong>: Track protocol health and performance</li>
+</ul>
+<h2 id="files-createdmodified">📁 <strong>Files Created/Modified</strong></h2>
+<h3 id="database-schema"><strong>Database Schema</strong></h3>
+<ul>
+<li><code>prisma/schema.prisma</code> - Added Connector, Endpoint, Tenet models</li>
+</ul>
+<h3 id="api-implementation_1"><strong>API Implementation</strong></h3>
+<ul>
+<li><code>api/handlers/admin/connectors.js</code> - Connector CRUD handlers</li>
+<li><code>api/handlers/admin/endpoints.js</code> - Endpoint CRUD handlers</li>
+<li><code>api/routes/adminConnectors.js</code> - Connector route registration</li>
+<li><code>api/routes/adminEndpoints.js</code> - Endpoint route registration</li>
+<li><code>api/server.js</code> - Route registration in main server</li>
+</ul>
+<h3 id="frontend-ui"><strong>Frontend UI</strong></h3>
+<ul>
+<li><code>admin-bridgeflow/src/pages/Connectors.jsx</code> - Connector management interface</li>
+</ul>
+<h3 id="protocol-handlers"><strong>Protocol Handlers</strong></h3>
+<ul>
+<li><code>api/handlers/protocols/as2.js</code> - AS2 protocol stub</li>
+<li><code>api/handlers/protocols/sftp.js</code> - SFTP protocol stub</li>
+<li><code>api/handlers/protocols/api.js</code> - API protocol stub</li>
+</ul>
+<h2 id="phase-30-status-complete">🎉 <strong>Phase 30 Status: COMPLETE</strong></h2>
+<p>Phase 30 successfully delivers the critical Layer 2 foundation for protocol integration. The system now has:</p>
+<ul>
+<li><strong>Complete Data Model</strong>: Connectors and endpoints with proper relations</li>
+<li><strong>Admin Management</strong>: Full CRUD with security and validation</li>
+<li><strong>Protocol Stubs</strong>: Ready for real AS2/SFTP/API implementation</li>
+<li><strong>Scalable Architecture</strong>: Multi-tenant with proper org/tenet scoping</li>
+</ul>
+<p>The BridgeFlow platform is now equipped with the infrastructure needed to implement real protocol handlers while maintaining security, scalability, and professional admin experience.</p>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+    
+  </span>
+</div>
+    <script src="../../../../../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../../../../../..";</script>
+    <script src="../../../../../../js/theme_extra.js"></script>
+    <script src="../../../../../../js/theme.js"></script>
+      <script src="../../../../../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

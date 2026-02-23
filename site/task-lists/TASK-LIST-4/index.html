@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://brockhager.github.io/bridgeflow-docs/task-lists/TASK-LIST-4/" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>BridgeFlow Task List #4 (Current) - BridgeFlow Docs</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "BridgeFlow Task List #4 (Current)";
+        var mkdocs_page_input_path = "task-lists\\TASK-LIST-4.md";
+        var mkdocs_page_url = "/bridgeflow-docs/task-lists/TASK-LIST-4/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> BridgeFlow Docs
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../topics/quickstart/">Quickstart</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../topics/concepts/">Concepts</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../current/control-tower/public-api/">API Reference</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../topics/vision/">Vision</a>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">BridgeFlow Docs</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">BridgeFlow Task List #4 (Current)</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="bridgeflow-task-list-4-current">BridgeFlow Task List #4 (Current)</h1>
+<h2 id="starting-december-23-2025"><em>Starting: December 23, 2025</em></h2>
+<h2 id="in-progress">📋 IN PROGRESS</h2>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Title</th>
+<th>Status</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>PH-16</strong></td>
+<td>Phase 16 — Persistent Storage</td>
+<td>In Progress</td>
+<td>SQLite integration test &amp; CI job added; client-sync &amp; update-sync tests implemented; monitoring CI for stability</td>
+</tr>
+<tr>
+<td><strong>T-072</strong></td>
+<td>Phase 13: AdminBridgeflow</td>
+<td>In Progress</td>
+<td>Control Panel Navigation, Admin login UI, tenant management tasks in active sprint</td>
+</tr>
+<tr>
+<td><strong>T-067</strong></td>
+<td>Control Panel Navigation System</td>
+<td>Active</td>
+<td>Version History UI and control-panel framework work ongoing</td>
+</tr>
+<tr>
+<td><strong>T-064</strong></td>
+<td>Customer Dashboard MVP</td>
+<td>Next</td>
+<td>Sprint-ready, awaiting prioritization and design input</td>
+</tr>
+</tbody>
+</table>
+<h3 id="phase-13-sprint-1-admin-foundation">Phase 13 — Sprint 1 (Admin Foundation)</h3>
+<ul>
+<li>Admin authentication (separate admin auth, MFA, session policy)</li>
+<li>Admin DB schema &amp; migration (admin_users, admin_audit_log)</li>
+<li>Basic admin API scaffolding (<code>/admin-api/*</code>) with IP whitelist pre-handler</li>
+<li>Admin login UI scaffold (React) — 3-day timebox</li>
+<li>Owner: Agent4 (kickoff now)</li>
+</ul>
+<hr />
+<h2 id="phase-14-trading-partner-management-complete">🎯 PHASE 14 — TRADING PARTNER MANAGEMENT — COMPLETE</h2>
+<p><strong>Status:</strong> ✅ Complete (2025-12-26)
+<strong>Deliverables:</strong> DB model, CRUD API, migration endpoint, migration UI (banner + modal), frontend dual-write fallback, top-level navigation item
+<strong>Verification:</strong> <code>docs/Phase-14-Demo-Script.md</code> (10-minute CTO demo)
+<strong>Notes:</strong> Credentials are stored plain-text in MVP; Phase 15 will address secret management</p>
+<h2 id="active-backlog">🗂️ ACTIVE BACKLOG</h2>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Title</th>
+<th>Priority</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>T-037</strong></td>
+<td>Bridge Viability Checks</td>
+<td>P1</td>
+<td>Pre-deploy checks for keys/endpoints/circular deps</td>
+</tr>
+<tr>
+<td><strong>T-038</strong></td>
+<td>Performance &amp; Cost Estimation</td>
+<td>P2</td>
+<td>Cost/latency estimation for high-volume configs</td>
+</tr>
+<tr>
+<td><strong>T-039</strong></td>
+<td>Mapping Template Library</td>
+<td>P2</td>
+<td>Build reusable mapping templates for common scenarios</td>
+</tr>
+<tr>
+<td><strong>T-042</strong></td>
+<td>Configuration Import/Export</td>
+<td>P1</td>
+<td>Improve import/apply UX and add enhancements (dry-run, conflict resolution)</td>
+</tr>
+<tr>
+<td><strong>T-043</strong></td>
+<td>Bridge Template System</td>
+<td>P1</td>
+<td>Save bridges as templates and add search/categories</td>
+</tr>
+<tr>
+<td><strong>T-044</strong></td>
+<td>In-App Documentation &amp; Help</td>
+<td>P1</td>
+<td>Contextual help, tooltips, and tutorials</td>
+</tr>
+<tr>
+<td><strong>BACKLOG-001</strong></td>
+<td>Fix Fastify onSend race conditions</td>
+<td>Low</td>
+<td>Low-priority fix and follow-up tests</td>
+</tr>
+<tr>
+<td><strong>T-049</strong></td>
+<td>Mapper Performance Optimization</td>
+<td>P2</td>
+<td>Technical debt task for rendering optimizations</td>
+</tr>
+<tr>
+<td><strong>T-061</strong></td>
+<td>Diagnose &amp; Fix onSend Header Race (ERR_HTTP_HEADERS_SENT)</td>
+<td>Parked</td>
+<td>Investigate onSend hooks, add deterministic tracing/tests, harden handlers</td>
+</tr>
+<tr>
+<td><strong>T-069</strong></td>
+<td>Testing Framework for Mappings</td>
+<td>Parked</td>
+<td>Test-authoring UI and execution flow; deferred until mapping features stable</td>
+</tr>
+</tbody>
+</table>
+<h2 id="completed">✅ COMPLETED</h2>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Title</th>
+<th style="text-align: right;">Completed On</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>T-071</strong></td>
+<td>Backup &amp; Restore System (Phase 12)</td>
+<td style="text-align: right;">2025-12-23</td>
+<td>Export ✅, Import ✅ (dry-run, skip/overwrite/rename, audit logs), CLI ✅; Full test-suite green</td>
+</tr>
+<tr>
+<td><strong>T-073</strong></td>
+<td>Startup Scripts &amp; start-all tooling</td>
+<td style="text-align: right;">2025-12-24</td>
+<td><code>start-all</code> supports <code>--no-admin</code>; README updated</td>
+</tr>
+<tr>
+<td><strong>PH-14</strong></td>
+<td>Trading Partner Management</td>
+<td style="text-align: right;">2025-12-26</td>
+<td>DB model, CRUD API, migration endpoint &amp; UI completed</td>
+</tr>
+<tr>
+<td><strong>CI-01</strong></td>
+<td>CI pnpm fix &amp; docs</td>
+<td style="text-align: right;">2025-12-27</td>
+<td>Removed <code>cache: 'pnpm'</code>, standardized <code>pnpm/action-setup@v4</code>, added <code>docs/CI-SETUP.md</code> and <code>docs/GITHUB-ACTIONS-SECRETS.md</code></td>
+</tr>
+<tr>
+<td><strong>PH-16</strong></td>
+<td>Phase 16 initial artifacts</td>
+<td style="text-align: right;">2025-12-27</td>
+<td>SQLite test, minimal SQLite Prisma schema, client sync + update sync tests added</td>
+</tr>
+</tbody>
+</table>
+<h2 id="4-notes-logs">4) NOTES &amp; LOGS</h2>
+<ul>
+<li><strong>Phase 12 deliverables:</strong> Version Control with RBAC; Templates/Reusable Components; Validation Rules Engine; AI-Assisted Mapping; Backup &amp; Restore System.</li>
+<li><strong>Tests &amp; Docs:</strong> All related tests added and passing; documentation (docs/) and task list updated.</li>
+<li><strong>Next steps:</strong> Phase 13 Planning (AdminBridgeflow) — architecture design, tech selection, API spec (timebox: 30 minutes).</li>
+</ul>
+<hr />
+<h2 id="full-details-logs">FULL DETAILS &amp; LOGS</h2>
+<h2 id="week-1-dashboard-mvp-agent4">✅ WEEK 1 DASHBOARD MVP (Agent4)</h2>
+<p>Timebox: 3 days — Owner: Agent4</p>
+<h3 id="day-1-admin-foundation-login-december-23-2025-completed">Day 1: Admin Foundation &amp; Login (December 23, 2025) — Completed</h3>
+<ul>
+<li>[x] Secure admin authentication (bcrypt + TOTP MFA)</li>
+<li>[x] IP whitelisting middleware</li>
+<li>[x] Separate admin database schema</li>
+<li>[x] React admin dashboard scaffolding</li>
+<li>[x] Login page with MFA flow</li>
+<li>[x] Session management (remember me)</li>
+<li>[x] Development tooling &amp; test credentials</li>
+<li>[x] Comprehensive security tests</li>
+</ul>
+<h3 id="day-2-tenant-management-dashboard-in-progress-december-25-2025">Day 2: Tenant Management Dashboard — In Progress (December 25, 2025)</h3>
+<ul>
+<li>[x] Tenant list table with real data</li>
+<li>[x] Search, filtering, pagination</li>
+<li>[x] API integration (<code>/admin-api/tenants</code> with RBAC)</li>
+<li>[x] Loading states &amp; error handling</li>
+<li>[x] Responsive design with Tailwind CSS</li>
+<li>[ ] Admin user management UI (next)</li>
+<li>[ ] System health widgets (next)</li>
+</ul>
+<h3 id="day-3-system-health-alerts-planned">Day 3: System health &amp; alerts — Planned</h3>
+<ul>
+<li>System health widgets &amp; alerts/notifications</li>
+</ul>
+<p>Tech: React + Vite (scaffolded), Tailwind CSS, integrate with <code>/admin-api/*</code>
+Notes: Startup scripts are COMPLETE (see Completed section); focus shifted from tooling to admin interface.</p>
+<h2 id="weekly-updates">�📝 WEEKLY UPDATES</h2>
+<ul>
+<li>2025-12-23 — Backup &amp; Restore export implemented; import dry-run and apply added; AI-Assisted Mapping delivered; Backup &amp; Restore (Phase 12) completed; full test-suite green.</li>
+<li>Note: <code>TASK-LIST-3.md</code> kept as archive of completed work; <code>TASK-LIST-4.md</code> is the current working board.</li>
+<li>Next: <strong>Phase 13 Planning (AdminBridgeflow)</strong> — architecture design session, technology selection, and API specification for admin endpoints (timebox: 30 minutes).</li>
+</ul>
+<hr />
+<h2 id="phase-13-complete-deployed">🎉 PHASE 13 - COMPLETE &amp; DEPLOYED</h2>
+<p><strong>Status:</strong> Committed to main, ready for CTO verification<br />
+<strong>Verification Method:</strong> Self-service demo package<br />
+<strong>Completion Time:</strong> December 26, 2025<br />
+<strong>Next Phase:</strong> Layer 1 Canvas polish (awaiting CTO approval)</p>
+<h3 id="complete">✅ COMPLETE</h3>
+<ul>
+<li>[x] Tenant Management Dashboard</li>
+<li>[x] System Health Dashboard (critical metrics)</li>
+<li>[x] Admin auth tests (pause/resume, org suspend/reactivate)</li>
+<li>[x] MockDb organization.status fix</li>
+<li>[x] clearMetrics() + Redis dynamic imports</li>
+<li>[x] reply.status(200).send() handler consistency</li>
+</ul>
+<h3 id="blocked-vitememory-issues-deferred-to-phase-14">🚧 BLOCKED (Vite/Memory Issues - Deferred to Phase 14)</h3>
+<ul>
+<li>[ ] api/tests/users.test.js → Vite transform failure</li>
+<li>[ ] api/tests/worker.integration.test.js → 2TB memory explosion</li>
+<li>[ ] Full suite without exclusions</li>
+</ul>
+<h3 id="communication-readiness">📊 COMMUNICATION READINESS</h3>
+<p><strong>When CTO Asks "Is Phase 13 Ready?"</strong></p>
+<p><em>One-Liner Response:</em><br />
+Phase 13 complete. Admin system operational. Self-service demo package at <code>/docs/Layer0-Admin-Bridgeflow/</code>. Test login, search, suspend/reactivate. Approve when ready for Phase 14.</p>
+<p><strong>Documentation Location:</strong></p>
+<pre><code>📁 Complete Demo Package:
+/docs/Layer0-Admin-Bridgeflow/
+  ├── CTO-ONLY-QUICKSTART.md (10-min verification)
+  ├── DEMO-SCRIPT.md (detailed walkthrough)
+  ├── CHECKLIST.md (pre-launch items)
+  └── KNOWN-ISSUES.md (Phase 14 backlog)
+</code></pre>
+<h3 id="risk-management">🛡️ RISK MANAGEMENT</h3>
+<ul>
+<li><strong>Risk:</strong> CTO delays verification<br />
+<strong>Mitigation:</strong> Package is self-service, zero scheduling overhead</li>
+<li><strong>Risk:</strong> CTO finds issues we missed<br />
+<strong>Mitigation:</strong> Known issues documented, 2-hour SLA for fixes</li>
+</ul>
+<h3 id="phase-14-readiness">🎪 PHASE 14 READINESS</h3>
+<p>While waiting for CTO verification, we can:
+- Review customer feedback on Layer 1 Canvas
+- Prepare Phase 14 backlog items (Recipe library, Customer timeline view)
+- Document onboarding sequence for first customers
+- Investigate and fix Vite transform / users &amp; worker tests</p>
+<h2 id="phase-15-tp-canvas-integration-part-1">PHASE 15 — TP CANVAS INTEGRATION — PART 1 ✅</h2>
+<p><strong>Status:</strong> Implemented (2025-12-26)</p>
+<p><strong>Summary:</strong> Added a <strong>+TP</strong> quick-add to the Assembly Canvas which opens a TP selection modal and inserts the selected Trading Partner as a draggable node on the canvas. This feature reuses <code>store.partners</code> (permission-filtered) and uses grid-based placement to avoid overlap.</p>
+<p><strong>Files changed:</strong>
+- <code>web/canvas-assembly.html</code> — added <code>#add-tp-btn</code> and <code>#tp-select-modal</code>
+- <code>web/test/assembly.tp.test.js</code> — basic jsdom smoke test for the flow</p>
+<p><strong>Manual smoke test:</strong>
+1. Open the Assembly Canvas page.
+2. Click <strong>+TP</strong> in the top toolbar.
+3. Select a Trading Partner from the modal; it should add to the canvas and be draggable.
+4. Verify no console errors.</p>
+<p><strong>Next:</strong> Phase 15 Part 2 — inline TP creation from modal, auto-connection hints, and additional tests.</p>
+<hr />
+<h2 id="phase-16-persistent-storage-kickoff-in-progress">🎯 PHASE 16 — PERSISTENT STORAGE (KICKOFF &amp; IN PROGRESS)</h2>
+<p><strong>Status:</strong> In progress (2025-12-27) — Foundation validated, CI green ✅</p>
+<p><strong>Summary:</strong> Began Phase 16 (persistent storage hardening for Trading Partners &amp; Bridges). Short-term goal: verify "Create TP → Save to database" end-to-end using SQLite for CI/local dev and Postgres in production.</p>
+<p><strong>Completed so far:</strong>
+- Added SQLite-based integration test validating TP persistence: <code>test/integration/tradingPartners.persistence.test.js</code> (uses <code>scripts/setup-sqlite-test-db.js</code>) ✅
+- CI job added: <code>sqlite-integration</code> in <code>.github/workflows/ci-tests.yml</code> to run the persistence test ✅
+- <code>scripts/setup-sqlite-test-db.js</code> updated to generate a <strong>minimal SQLite-compatible</strong> Prisma schema for test-time (Organization, User, UserOrganization, TradingPartner) ✅
+- Added local dev docs for SQLite: <code>docs/phases/PHASE-16-LOCAL-DEV.md</code> ✅
+- Added client-focused integration tests for optimistic sync:
+  - <code>test/integration/tp-client-sync.test.js</code> (temp → canonical ID replacement) ✅
+  - <code>test/integration/tp-update-sync.test.js</code> (optimistic update + failure handling) ✅
+- Documented a CI gotcha and fix in <code>docs/CI-SETUP.md</code> and <code>docs/GITHUB-ACTIONS-SECRETS.md</code> (pnpm cache pitfall and secrets handling guidance) ✅</p>
+<p><strong>In-progress / Next:</strong>
+- Monitor next 2–3 CI runs for the <code>sqlite-integration</code> job and overall pipeline stability (watch for flakiness) — assigned and in progress
+- Harden <code>scripts/setup-sqlite-test-db.js</code> (error handling, caching generated client, smoke test) — tech-debt
+- Long-term: plan migration/backfill strategy, parity tests between SQLite and Postgres, and UI end-to-end Playwright tests</p>
+<p><strong>Acceptance criteria (MVP):</strong> Create TP via API and confirm it persists in SQLite (CI); client sync reliably replaces temporary IDs with canonical IDs and handles failures gracefully.</p>
+<hr />
+<h2 id="recent-operations-fixes">🛠️ RECENT OPERATIONS &amp; FIXES</h2>
+<ul>
+<li>CI blocker resolved: removed <code>cache: 'pnpm'</code> from workflows that triggered premature pnpm usage; standardized on <code>pnpm/action-setup@v4</code> and added <code>Verify pnpm</code> checks. All workflows are GREEN (2025-12-27). ✅</li>
+<li>Added <code>docs/CI-SETUP.md</code> and <code>docs/GITHUB-ACTIONS-SECRETS.md</code> to record the pattern and prevent future regressions.</li>
+</ul>
+<hr />
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

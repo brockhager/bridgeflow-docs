@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://brockhager.github.io/bridgeflow-docs/deployment/SUPER_ADMINS/" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>Super Admin Configuration - BridgeFlow Docs</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Super Admin Configuration";
+        var mkdocs_page_input_path = "deployment\\SUPER_ADMINS.md";
+        var mkdocs_page_url = "/bridgeflow-docs/deployment/SUPER_ADMINS/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> BridgeFlow Docs
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../topics/quickstart/">Quickstart</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../topics/concepts/">Concepts</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../current/control-tower/public-api/">API Reference</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../topics/vision/">Vision</a>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">BridgeFlow Docs</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">Super Admin Configuration</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="super-admin-configuration">Super Admin Configuration</h1>
+<h2 id="overview">Overview</h2>
+<p>Super admins bypass organization membership requirements and can perform global administrative tasks (e.g., creating public blueprints, system configuration).</p>
+<h2 id="configuration">Configuration</h2>
+<p>Set the <code>SUPER_ADMINS</code> environment variable with a comma-separated list of email addresses:</p>
+<pre><code class="language-bash"># Single super admin
+SUPER_ADMINS=cto@bridgeflow.test
+
+# Multiple super admins
+SUPER_ADMINS=cto@bridgeflow.test,admin@company.com,ops@bridgeflow.io
+</code></pre>
+<h2 id="capabilities">Capabilities</h2>
+<p>Super admins can:</p>
+<ul>
+<li>✅ Create global blueprints (organizationId: null)</li>
+<li>✅ Access system-level APIs without org membership</li>
+<li>✅ Bypass RBAC permission checks (when ENFORCE_RBAC is off)</li>
+<li>✅ Manage organizations they're not members of (with proper permissions)</li>
+</ul>
+<h2 id="security">Security</h2>
+<ul>
+<li><strong>Email-based</strong>: Super admin status is determined by email match against <code>SUPER_ADMINS</code> list</li>
+<li><strong>Case-insensitive</strong>: Email matching is case-insensitive</li>
+<li><strong>Environment-only</strong>: Cannot be set via API or UI; must be configured in environment</li>
+<li><strong>No database</strong>: Super admin list is not stored in the database</li>
+</ul>
+<h2 id="jwt-token">JWT Token</h2>
+<p>Super admins receive a JWT token with:</p>
+<pre><code class="language-json">{
+  &quot;userId&quot;: &quot;...&quot;,
+  &quot;email&quot;: &quot;cto@bridgeflow.test&quot;,
+  &quot;isSuperAdmin&quot;: true,
+  &quot;isBfEmployee&quot;: true,
+  &quot;role&quot;: &quot;bf_employee&quot;
+}
+</code></pre>
+<h2 id="legacy-compatibility">Legacy Compatibility</h2>
+<p>The <code>BRIDGEFLOW_OPERATOR_EMAILS</code> environment variable has been removed. Use <code>SUPER_ADMINS</code> for all deployments.</p>
+<h2 id="testing">Testing</h2>
+<p>Use the integration test to verify super admin functionality:</p>
+<pre><code class="language-bash">pnpm run test -- test/integration/super-admin.test.js
+</code></pre>
+<h2 id="deployment-examples">Deployment Examples</h2>
+<h3 id="docker-compose">Docker Compose</h3>
+<pre><code class="language-yaml">services:
+  api:
+    environment:
+      - SUPER_ADMINS=cto@bridgeflow.test,admin@company.com
+</code></pre>
+<h3 id="kubernetes">Kubernetes</h3>
+<pre><code class="language-yaml">apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: bridgeflow-config
+data:
+  SUPER_ADMINS: &quot;cto@bridgeflow.test,admin@company.com&quot;
+</code></pre>
+<h3 id="railway">Railway</h3>
+<p>Set environment variable in Railway dashboard:</p>
+<pre><code>SUPER_ADMINS=cto@bridgeflow.test
+</code></pre>
+<h2 id="best-practices">Best Practices</h2>
+<ol>
+<li><strong>Limit access</strong>: Only assign super admin to trusted personnel</li>
+<li><strong>Use work emails</strong>: Prefer organizational email addresses over personal</li>
+<li><strong>Audit regularly</strong>: Review super admin list quarterly</li>
+<li><strong>Separate from dev</strong>: Don't use super admin in development (use BRIDGEFLOW_DEV_ADMIN instead)</li>
+<li><strong>Document</strong>: Maintain a list of super admins in your internal documentation</li>
+</ol>
+<h2 id="related">Related</h2>
+<ul>
+<li><a href="../auth/README.md">Authentication</a></li>
+<li><a href="../rbac/README.md">RBAC</a></li>
+<li><a href="../../development/">Development Mode</a></li>
+</ul>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

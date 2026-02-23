@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://brockhager.github.io/bridgeflow-docs/vision/bf-integration/docs/Layer4-PlatformCoreLayer/Verification-Checklist/" />
+      <link rel="shortcut icon" href="../../../../../img/favicon.ico" />
+    <title>Verification Checklist - BridgeFlow Docs</title>
+    <link rel="stylesheet" href="../../../../../css/theme.css" />
+    <link rel="stylesheet" href="../../../../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Verification Checklist";
+        var mkdocs_page_input_path = "vision\\bf-integration\\docs\\Layer4-PlatformCoreLayer\\Verification-Checklist.md";
+        var mkdocs_page_url = "/bridgeflow-docs/vision/bf-integration/docs/Layer4-PlatformCoreLayer/Verification-Checklist/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../../../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../../../../.." class="icon icon-home"> BridgeFlow Docs
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../../..">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../../../topics/quickstart/">Quickstart</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../../../topics/concepts/">Concepts</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../../../current/control-tower/public-api/">API Reference</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../../../topics/vision/">Vision</a>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../..">BridgeFlow Docs</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../../../.." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">Verification Checklist</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <blockquote>
+<p>[!WARNING]
+Status: Planned / In Development
+Context: Original BF-INTEGRATION Vision (Pre-Phase 30)</p>
+</blockquote>
+<h1 id="verification-checklist-session-script">Verification Checklist &amp; Session Script</h1>
+<p>Purpose: A short, actionable checklist and script for CTO verification of Layer 4.</p>
+<p>Session (30 minutes)
+1. Goals recap (2 min)
+2. Live demo (8 min)
+   - Audit UI: apply filters, search, paginate, export CSV
+   - Users UI: create user, change role, disable user
+   - Monitoring: show metrics, create a rule that triggers, show event created and resolved in UI
+3. Accessibility checks (6 min)
+   - Keyboard navigation, Escape to close modals
+   - Screen reader announcements (live region)
+4. Security checks (6 min)
+   - Confirm non-admin cannot modify roles
+   - Confirm audit events recorded and visible in Audit UI
+   - Confirm non-operator cannot view monitoring UI
+5. Wrap-up (4 min)</p>
+<p>Checklist (technical)
+- [ ] All frontend tests pass locally (<code>pnpm -s test</code>) ✅
+- [ ] RBAC enforcement verified (server returns 403 for unauthorized) ✅
+- [ ] Audit writes observed for user changes ✅
+- [ ] Accessibility checks: focus/aria/live-region ✅
+- [ ] Export operation triggers announcements and completes ✅
+- [ ] Alert persistence exists (check DB tables <code>AlertRule</code> and <code>AlertEvent</code>) ✅
+- [ ] Evaluator triggers events (create a rule with <code>threshold: 0</code> and confirm an <code>AlertEvent</code> with <code>status: triggered</code>) ✅
+- [ ] Audit entries for lifecycle events exist (<code>alert.created</code>, <code>alert.triggered</code>, <code>alert.resolved</code>, <code>alert.deleted</code>) ✅
+- [ ] Notification delivery sanity check (create a rule with a webhook pointing to a test receiver and confirm delivery/retries) ✅
+- [ ] UI: events appear in active list; manual resolve changes state and is reflected in history ✅</p>
+<p>Success criteria
+- No critical accessibility or security issues found
+- All key flows work and evidence (logs/tests) available</p>
+<p>Phase 17 verification status
+- ✅ Phase 17 (RBAC foundation, test hardening) verified and CTO-signed off on Dec 29, 2025.
+- Key evidence: Green test suite locally (unit + integration), RBAC fallback tested, admin UI flows verified.</p>
+<p>Phase 18 verification checklist (kickoff)
+- [ ] Create Phase 18 GH issues from <code>docs/issues/phase-18-*.md</code> and assign owners
+- [ ] Add CI job to run integration/E2E tests gated to main/PR branches
+- [ ] Implement <code>customer_api_keys</code> schema + handlers and add unit tests
+- [ ] Implement <code>/ingest/:customer_id/:endpoint</code> router, wire API-key middleware and per-org rate limiter
+- [ ] Add an E2E test that creates API keys via public API, posts to <code>/ingest</code>, validates metrics and rate-limit behavior</p>
+<p>Artifacts to deliver for Phase 18 kickoff
+- Links to newly opened issues and PRs
+- E2E CI run showing Redis + SQLite test passing
+- Short runbook for API-key rotation &amp; revocation (documented in <code>docs/</code> or <code>docs/issues/</code> drafts)</p>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+    
+  </span>
+</div>
+    <script src="../../../../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../../../../..";</script>
+    <script src="../../../../../js/theme_extra.js"></script>
+    <script src="../../../../../js/theme.js"></script>
+      <script src="../../../../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

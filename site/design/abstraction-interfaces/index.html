@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://brockhager.github.io/bridgeflow-docs/design/abstraction-interfaces/" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>Abstraction Interfaces (TypeScript) — Draft - BridgeFlow Docs</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Abstraction Interfaces (TypeScript) \u2014 Draft";
+        var mkdocs_page_input_path = "design\\abstraction-interfaces.md";
+        var mkdocs_page_url = "/bridgeflow-docs/design/abstraction-interfaces/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> BridgeFlow Docs
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../topics/quickstart/">Quickstart</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../topics/concepts/">Concepts</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../current/control-tower/public-api/">API Reference</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../topics/vision/">Vision</a>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">BridgeFlow Docs</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">Abstraction Interfaces (TypeScript) — Draft</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="abstraction-interfaces-typescript-draft">Abstraction Interfaces (TypeScript) — Draft</h1>
+<p>Purpose: Provide clear, testable interfaces that enable evolving the tenancy model and swapping implementations (e.g., secrets backends, audit sink) without major code rewrites.</p>
+<p>All interfaces are intentionally minimal and focused on contracts. Implementations must instrument observability and enforce RBAC.</p>
+<hr />
+<h2 id="common-types">Common types</h2>
+<pre><code class="language-ts">export type Result&lt;T&gt; = { ok: true; value: T } | { ok: false; error: Error; code?: string };
+
+export interface Paging { limit?: number; offset?: number; cursor?: string }
+
+export interface Principal { id: string; roles: string[]; email?: string }
+
+export interface TraceContext { traceId?: string; spanId?: string }
+</code></pre>
+<h2 id="requestcontext">RequestContext</h2>
+<pre><code class="language-ts">export interface RequestContext {
+  requestId: string; // correlation id
+  principal?: Principal;
+  tenantId?: string; // resolved tenant id for request
+  tenant?: TenantDescriptor; // resolved descriptor when available
+  trace?: TraceContext;
+  authMethod?: 'api_key' | 'oauth2' | 'mtls' | 'none';
+  hasRole(role: string): boolean;
+}
+</code></pre>
+<h2 id="tenantdescriptor-manager">TenantDescriptor &amp; Manager</h2>
+<pre><code class="language-ts">export type TenantIsolationMode = 'shared-schema' | 'schema-per-tenant' | 'db-per-tenant'
+
+export interface TenantDescriptor {
+  id: string;
+  name?: string;
+  isolation: TenantIsolationMode;
+  region?: string;
+  createdAt: string;
+  metadata?: Record&lt;string, any&gt;;
+}
+
+export interface ITenantManager {
+  resolveTenant(ctx: RequestContext): Promise&lt;Result&lt;TenantDescriptor | null&gt;&gt;;
+  getTenant(tenantId: string): Promise&lt;Result&lt;TenantDescriptor | null&gt;&gt;;
+  listTenants(filter?: any): Promise&lt;Result&lt;TenantDescriptor[]&gt;&gt;;
+  createTenant(input: { name: string; isolation?: TenantIsolationMode; metadata?: Record&lt;string, any&gt; }): Promise&lt;Result&lt;TenantDescriptor&gt;&gt;;
+  setIsolation(tenantId: string, isolation: TenantIsolationMode): Promise&lt;Result&lt;void&gt;&gt;;
+  getConnectionInfo(tenant: TenantDescriptor): Promise&lt;Result&lt;ConnectionInfo&gt;&gt;;
+}
+
+export interface ConnectionInfo { connectionString: string; schema?: string }
+</code></pre>
+<h2 id="tenantdataaccess-the-critical-abstraction">TenantDataAccess (The critical abstraction)</h2>
+<ul>
+<li>Purpose: Abstracts data access such that code using tenant-scoped data does not need to know whether we run shared-schema, schema-per-tenant, or db-per-tenant.</li>
+</ul>
+<pre><code class="language-ts">export interface TenantDataAccess&lt;T, ID = string&gt; {
+  findById(ctx: RequestContext, id: ID): Promise&lt;Result&lt;T | null&gt;&gt;;
+  findAll(ctx: RequestContext, filters?: Record&lt;string, any&gt;, paging?: Paging): Promise&lt;Result&lt;T[]&gt;&gt;;
+  create(ctx: RequestContext, entity: Partial&lt;T&gt;): Promise&lt;Result&lt;T&gt;&gt;;
+  update(ctx: RequestContext, id: ID, patch: Partial&lt;T&gt;): Promise&lt;Result&lt;T&gt;&gt;;
+  delete(ctx: RequestContext, id: ID): Promise&lt;Result&lt;void&gt;&gt;;
+  transaction&lt;R&gt;(ctx: RequestContext, callback: (tx: TransactionScope) =&gt; Promise&lt;Result&lt;R&gt;&gt;): Promise&lt;Result&lt;R&gt;&gt;;
+}
+
+// Implementations:
+//  - SharedSchemaTenantDataAccess (adds tenant filters automatically)
+//  - SchemaPerTenantDataAccess (resolves schema and uses schema-scoped connections)
+//  - DbPerTenantDataAccess (resolves tenant-specific connection strings)
+</code></pre>
+<h2 id="secrets-manager-isecretsmanager">Secrets Manager (ISecretsManager)</h2>
+<ul>
+<li>Purpose: Abstract access to secrets. Production impls use KMS + Secrets Manager, dev can use file-based or env-based shim.</li>
+</ul>
+<pre><code class="language-ts">export interface SecretMetadata { createdAt: string; version?: string }
+
+export interface ISecretsManager {
+  getSecret&lt;T = string&gt;(ctx: RequestContext, path: string): Promise&lt;Result&lt;T&gt;&gt;;
+  listSecrets(ctx: RequestContext, prefix: string): Promise&lt;Result&lt;Record&lt;string, string&gt;&gt;&gt;;
+  putSecret?(ctx: RequestContext, path: string, value: string): Promise&lt;Result&lt;void&gt;&gt;;
+  getMetadata?(ctx: RequestContext, path: string): Promise&lt;Result&lt;SecretMetadata | null&gt;&gt;;
+}
+</code></pre>
+<p>Requirements:
+- Calls must be audited
+- Cached with short TTL locally
+- Support for rotation and version metadata</p>
+<h2 id="audit-logger">Audit Logger</h2>
+<ul>
+<li>Purpose: Immutable, append-only logging for compliance with retention and queryability</li>
+</ul>
+<pre><code class="language-ts">export type AuditEventType = 'TENANT_CREATED' | 'TENANT_UPDATED' | 'USER_LOGIN' | 'CONFIG_CHANGE' | string;
+
+export interface AuditEvent {
+  id: string; // UUID
+  occurredAt: string;
+  tenantId?: string;
+  principalId?: string;
+  type: AuditEventType;
+  payload: any; // structured JSON
+}
+
+export interface IAuditLogger {
+  record(ctx: RequestContext, event: AuditEvent): Promise&lt;Result&lt;void&gt;&gt;;
+  // Optional: query/stream for operator tools (not used for write path to keep write fast)
+  listEvents?(filter: { tenantId?: string; type?: string; from?: string; to?: string }): Promise&lt;Result&lt;AuditEvent[]&gt;&gt;;
+}
+</code></pre>
+<p>Requirements:
+- Write path should be highly available and append-only
+- Event immutability guaranteed by service (write-once semantics)
+- Retention policy enforced by the <code>audit-service</code> (e.g., move older logs to cold encrypted storage after 90 days)</p>
+<h2 id="servicediscovery">ServiceDiscovery</h2>
+<ul>
+<li>Purpose: Simple, lightweight discovery for services in the microservice architecture without forcing heavy orchestration</li>
+</ul>
+<pre><code class="language-ts">export interface IServiceInfo { name: string; baseUrl: string; metadata?: Record&lt;string, any&gt; }
+
+export interface IServiceDiscovery {
+  getService(name: string): Promise&lt;Result&lt;IServiceInfo | null&gt;&gt;;
+  listServices(): Promise&lt;Result&lt;IServiceInfo[]&gt;&gt;;
+  registerService?(info: IServiceInfo): Promise&lt;Result&lt;void&gt;&gt;; // optional for simple setups
+}
+</code></pre>
+<hr />
+<h2 id="example-usage-patterns">Example usage patterns</h2>
+<ul>
+<li>Business logic should accept a <code>TenantDataAccess&lt;T&gt;</code> (constructor injection) and <code>RequestContext</code> on each request</li>
+<li>Tests can provide an in-memory <code>TenantDataAccess</code> or mock to assert tenant filtering</li>
+<li>Secrets retrieval is via <code>ISecretsManager.getSecret(ctx, path)</code> — never read raw envs for production creds</li>
+</ul>
+<hr />
+<h2 id="notes-next-steps">Notes &amp; Next Steps</h2>
+<ul>
+<li>These interfaces are intentionally small; refine with the team and implement small dev shims for local usage</li>
+<li>Add TypeScript <code>index.d.ts</code> and example implementations in <code>@bridgeflow/lib-db</code> and <code>@bridgeflow/lib-secrets</code></li>
+<li>Enforce strict TS configuration: no <code>any</code> in security-critical modules</li>
+</ul>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

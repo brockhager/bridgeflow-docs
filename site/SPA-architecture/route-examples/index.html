@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://brockhager.github.io/bridgeflow-docs/SPA-architecture/route-examples/" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>Route Module Examples - BridgeFlow Docs</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Route Module Examples";
+        var mkdocs_page_input_path = "SPA-architecture\\route-examples.md";
+        var mkdocs_page_url = "/bridgeflow-docs/SPA-architecture/route-examples/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> BridgeFlow Docs
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../topics/quickstart/">Quickstart</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../topics/concepts/">Concepts</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../current/control-tower/public-api/">API Reference</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../topics/vision/">Vision</a>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">BridgeFlow Docs</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">Route Module Examples</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="route-module-examples">Route Module Examples</h1>
+<p>This document provides real-world examples of route modules from BridgeFlow.</p>
+<h2 id="simple-static-route">Simple Static Route</h2>
+<p><strong>File:</strong> <code>web/src/routes/admin-partner-queue.js</code></p>
+<pre><code class="language-javascript">export function render() {
+  return `
+    &lt;h1&gt;Partner Queue&lt;/h1&gt;
+    &lt;p&gt;Coming soon — partner onboarding queue.&lt;/p&gt;
+  `
+}
+
+export function init() {}
+export function cleanup() {}
+</code></pre>
+<p><strong>Use case:</strong> Placeholder page with no interactivity.</p>
+<hr />
+<h2 id="route-with-api-data">Route with API Data</h2>
+<p><strong>File:</strong> <code>web/src/routes/infrastructure.js</code></p>
+<pre><code class="language-javascript">export function render() {
+  return `
+    &lt;h1&gt;5. Infrastructure&lt;/h1&gt;
+    &lt;div id=&quot;infra-stats&quot;&gt;Loading...&lt;/div&gt;
+    &lt;button id=&quot;refresh-infra&quot;&gt;Refresh Stats&lt;/button&gt;
+  `
+}
+
+export function init() {
+  const statsDiv = document.getElementById('infra-stats')
+  const refreshBtn = document.getElementById('refresh-infra')
+
+  async function fetchStats() {
+    statsDiv.textContent = 'Loading...'
+    try {
+      const res = await fetch('/api/infra/health')
+      if (!res.ok) throw new Error('Forbidden or error')
+      const data = await res.json()
+      statsDiv.textContent = JSON.stringify(data, null, 2)
+    } catch (e) {
+      statsDiv.textContent = 'Error loading stats.'
+    }
+  }
+
+  refreshBtn.addEventListener('click', fetchStats)
+  fetchStats()
+}
+</code></pre>
+<p><strong>Use case:</strong> Fetch and display data from API, with refresh button.</p>
+<hr />
+<h2 id="route-with-dynamic-imports">Route with Dynamic Imports</h2>
+<p><strong>File:</strong> <code>web/src/routes/canvas-assembly.js</code></p>
+<pre><code class="language-javascript">export function render() {
+  return `
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;/css/assembly.css&quot;&gt;
+    &lt;div class=&quot;canvas-container&quot;&gt;
+      &lt;div class=&quot;canvas-palette&quot;&gt;
+        &lt;h3&gt;Components&lt;/h3&gt;
+        &lt;!-- Palette UI --&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;assembly-area&quot;&gt;
+        &lt;div id=&quot;assembly-workspace&quot; class=&quot;assembly-workspace&quot;&gt;
+          &lt;!-- Canvas workspace --&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;canvas-config&quot;&gt;
+        &lt;!-- Configuration panel --&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  `
+}
+
+export async function init() {
+  // Dynamically import heavy module only when needed
+  try {
+    const assemblyModule = await import('../assembly.js')
+    console.log('[canvas-assembly] Assembly module loaded')
+  } catch (e) {
+    console.error('[canvas-assembly] Failed to load assembly.js:', e)
+  }
+}
+
+export function cleanup() {
+  console.log('[canvas-assembly] Cleanup called')
+}
+</code></pre>
+<p><strong>Use case:</strong> Large feature that should only load when page is accessed.</p>
+<p><strong>Benefits:</strong>
+- Reduces initial bundle size
+- Loads functionality on-demand
+- Better performance for users who never visit this page</p>
+<hr />
+<h2 id="route-with-parameters">Route with Parameters</h2>
+<p><strong>File:</strong> <code>web/src/routes/tp-profile.js</code></p>
+<pre><code class="language-javascript">export function render(tpId) {
+  return `
+    &lt;div class=&quot;tp-profile&quot;&gt;
+      &lt;h1&gt;Trading Partner Profile&lt;/h1&gt;
+      &lt;div id=&quot;tp-details&quot;&gt;Loading profile for ${tpId}...&lt;/div&gt;
+    &lt;/div&gt;
+  `
+}
+
+export async function init(tpId) {
+  const detailsDiv = document.getElementById('tp-details')
+
+  try {
+    const res = await fetch(`/api/trading-partners/${tpId}`)
+    if (!res.ok) throw new Error('Not found')
+
+    const partner = await res.json()
+    detailsDiv.innerHTML = `
+      &lt;h2&gt;${partner.name}&lt;/h2&gt;
+      &lt;p&gt;Status: ${partner.status}&lt;/p&gt;
+      &lt;p&gt;Contact: ${partner.contact_email}&lt;/p&gt;
+    `
+  } catch (e) {
+    detailsDiv.textContent = 'Error loading partner profile.'
+  }
+}
+</code></pre>
+<p><strong>Router registration:</strong></p>
+<pre><code class="language-javascript">// In web/src/router.js
+const tpMatch = path.match(/^\/tp\/(.+?)\/profile$/)
+if (tpMatch) {
+  const id = decodeURIComponent(tpMatch[1])
+  app.innerHTML = tpProfileRoute.render(id)
+  if (tpProfileRoute.init) await tpProfileRoute.init(id)
+  currentCleanup = tpProfileRoute.cleanup
+  return
+}
+</code></pre>
+<p><strong>Use case:</strong> Detail pages with dynamic IDs in URL.</p>
+<hr />
+<h2 id="route-with-complex-state">Route with Complex State</h2>
+<p><strong>File:</strong> <code>web/src/routes/trading-partners.js</code></p>
+<pre><code class="language-javascript">// Module-level state
+let partners = []
+let filters = { search: '', status: 'all' }
+
+export function render() {
+  return `
+    &lt;div class=&quot;tp-list&quot;&gt;
+      &lt;h1&gt;Trading Partners&lt;/h1&gt;
+      &lt;div class=&quot;filters&quot;&gt;
+        &lt;input id=&quot;search-input&quot; placeholder=&quot;Search...&quot; value=&quot;${filters.search}&quot;&gt;
+        &lt;select id=&quot;status-filter&quot;&gt;
+          &lt;option value=&quot;all&quot; ${filters.status === 'all' ? 'selected' : ''}&gt;All&lt;/option&gt;
+          &lt;option value=&quot;active&quot; ${filters.status === 'active' ? 'selected' : ''}&gt;Active&lt;/option&gt;
+          &lt;option value=&quot;inactive&quot; ${filters.status === 'inactive' ? 'selected' : ''}&gt;Inactive&lt;/option&gt;
+        &lt;/select&gt;
+        &lt;button id=&quot;clear-filters&quot;&gt;Clear&lt;/button&gt;
+      &lt;/div&gt;
+      &lt;div id=&quot;partner-list&quot;&gt;&lt;/div&gt;
+    &lt;/div&gt;
+  `
+}
+
+export async function init() {
+  await loadPartners()
+  renderPartnerList()
+
+  // Attach filter listeners
+  document.getElementById('search-input').addEventListener('input', (e) =&gt; {
+    filters.search = e.target.value
+    renderPartnerList()
+  })
+
+  document.getElementById('status-filter').addEventListener('change', (e) =&gt; {
+    filters.status = e.target.value
+    renderPartnerList()
+  })
+
+  document.getElementById('clear-filters').addEventListener('click', () =&gt; {
+    filters = { search: '', status: 'all' }
+    document.getElementById('search-input').value = ''
+    document.getElementById('status-filter').value = 'all'
+    renderPartnerList()
+  })
+}
+
+async function loadPartners() {
+  const res = await fetch('/api/trading-partners')
+  partners = await res.json()
+}
+
+function renderPartnerList() {
+  const filtered = partners.filter(p =&gt; {
+    const matchesSearch = p.name.toLowerCase().includes(filters.search.toLowerCase())
+    const matchesStatus = filters.status === 'all' || p.status === filters.status
+    return matchesSearch &amp;&amp; matchesStatus
+  })
+
+  const listEl = document.getElementById('partner-list')
+  listEl.innerHTML = filtered
+    .map(p =&gt; `
+      &lt;div class=&quot;partner-card&quot;&gt;
+        &lt;h3&gt;${p.name}&lt;/h3&gt;
+        &lt;p&gt;${p.status}&lt;/p&gt;
+        &lt;a href=&quot;/tp/${p.id}/profile&quot;&gt;View Profile&lt;/a&gt;
+      &lt;/div&gt;
+    `)
+    .join('')
+}
+
+export function cleanup() {
+  // Reset state when leaving page
+  partners = []
+  filters = { search: '', status: 'all' }
+}
+</code></pre>
+<p><strong>Use case:</strong> List page with filtering, search, and local state management.</p>
+<hr />
+<h2 id="route-with-modal">Route with Modal</h2>
+<p><strong>File:</strong> <code>web/src/routes/admin-users.js</code></p>
+<pre><code class="language-javascript">let currentModal = null
+
+export function render() {
+  return `
+    &lt;div class=&quot;admin-users&quot;&gt;
+      &lt;h1&gt;User Management&lt;/h1&gt;
+      &lt;button id=&quot;new-user-btn&quot;&gt;+ New User&lt;/button&gt;
+      &lt;div id=&quot;user-list&quot;&gt;&lt;/div&gt;
+
+      &lt;!-- Modal structure --&gt;
+      &lt;div id=&quot;user-modal&quot; class=&quot;modal hidden&quot;&gt;
+        &lt;div class=&quot;modal-content&quot;&gt;
+          &lt;h2 id=&quot;modal-title&quot;&gt;&lt;/h2&gt;
+          &lt;div id=&quot;modal-body&quot;&gt;&lt;/div&gt;
+          &lt;div class=&quot;modal-actions&quot;&gt;
+            &lt;button id=&quot;modal-cancel&quot;&gt;Cancel&lt;/button&gt;
+            &lt;button id=&quot;modal-confirm&quot;&gt;Save&lt;/button&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  `
+}
+
+export async function init() {
+  await loadUsers()
+
+  document.getElementById('new-user-btn').addEventListener('click', () =&gt; {
+    showUserModal(null) // null = new user
+  })
+}
+
+async function loadUsers() {
+  const res = await fetch('/api/admin/users')
+  const users = await res.json()
+
+  const listEl = document.getElementById('user-list')
+  listEl.innerHTML = users
+    .map(u =&gt; `
+      &lt;div class=&quot;user-row&quot;&gt;
+        &lt;span&gt;${u.email}&lt;/span&gt;
+        &lt;span&gt;${u.role}&lt;/span&gt;
+        &lt;button onclick=&quot;window.editUser('${u.id}')&quot;&gt;Edit&lt;/button&gt;
+      &lt;/div&gt;
+    `)
+    .join('')
+}
+
+function showUserModal(userId) {
+  const modal = document.getElementById('user-modal')
+  const title = document.getElementById('modal-title')
+  const body = document.getElementById('modal-body')
+
+  if (userId) {
+    title.textContent = 'Edit User'
+    // Load user data and populate form
+  } else {
+    title.textContent = 'New User'
+    body.innerHTML = `
+      &lt;input id=&quot;user-email&quot; placeholder=&quot;Email&quot;&gt;
+      &lt;select id=&quot;user-role&quot;&gt;
+        &lt;option&gt;customer_admin&lt;/option&gt;
+        &lt;option&gt;bf_employee&lt;/option&gt;
+      &lt;/select&gt;
+    `
+  }
+
+  modal.classList.remove('hidden')
+
+  // Wire up modal buttons
+  document.getElementById('modal-cancel').onclick = () =&gt; {
+    modal.classList.add('hidden')
+  }
+
+  document.getElementById('modal-confirm').onclick = async () =&gt; {
+    // Save user logic
+    await saveUser()
+    modal.classList.add('hidden')
+    await loadUsers() // Refresh list
+  }
+}
+
+async function saveUser() {
+  const email = document.getElementById('user-email').value
+  const role = document.getElementById('user-role').value
+
+  await fetch('/api/admin/users', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ email, role })
+  })
+}
+
+// Expose for onclick handlers
+window.editUser = (id) =&gt; showUserModal(id)
+
+export function cleanup() {
+  delete window.editUser
+}
+</code></pre>
+<p><strong>Use case:</strong> CRUD interface with modal dialogs.</p>
+<hr />
+<h2 id="route-with-main-menu">Route with Main Menu</h2>
+<p><strong>File:</strong> <code>web/src/routes/main-menu.js</code></p>
+<pre><code class="language-javascript">import { apiFetch } from '../apiClient.js'
+
+export function render() {
+  // Returns menu structure - called by router for root path
+  const layers = getMenuItemsForRole(window.currentUser?.role)
+
+  return `
+    &lt;div class=&quot;main-menu&quot;&gt;
+      &lt;h1&gt;BridgeFlow&lt;/h1&gt;
+      ${layers.map(layer =&gt; `
+        &lt;details open&gt;
+          &lt;summary&gt;${layer.layer}&lt;/summary&gt;
+          &lt;div class=&quot;menu-items&quot;&gt;
+            ${layer.items.map(item =&gt; `
+              &lt;a href=&quot;${item.path}&quot; class=&quot;menu-button&quot;&gt;
+                ${layer.short} ${item.label}
+              &lt;/a&gt;
+            `).join('')}
+          &lt;/div&gt;
+        &lt;/details&gt;
+      `).join('')}
+    &lt;/div&gt;
+  `
+}
+
+export async function init() {
+  // Fetch current user for RBAC
+  try {
+    const res = await fetch('/api/auth/me')
+    if (res.ok) {
+      window.currentUser = await res.json()
+    }
+  } catch (e) {
+    console.error('Failed to fetch user:', e)
+  }
+}
+
+export function cleanup() {
+  delete window.currentUser
+}
+
+function getMenuItemsForRole(role) {
+  const menuItems = [
+    {
+      layer: 'Layer 0 (Admin)',
+      short: '0. Admin',
+      roles: ['bf_employee'],
+      items: [/* ... */]
+    },
+    // ... more layers
+  ]
+
+  return menuItems.filter(layer =&gt; {
+    if (layer.roles.length === 0) return true
+    return layer.roles.includes(role)
+  })
+}
+</code></pre>
+<p><strong>Use case:</strong> Home page that adapts to user's role.</p>
+<hr />
+<h2 id="key-patterns">Key Patterns</h2>
+<h3 id="pattern-1-loading-states">Pattern 1: Loading States</h3>
+<pre><code class="language-javascript">export function render() {
+  return `&lt;div id=&quot;content&quot;&gt;Loading...&lt;/div&gt;`
+}
+
+export async function init() {
+  const el = document.getElementById('content')
+  el.textContent = 'Loading...'
+
+  const data = await fetchData()
+  el.innerHTML = renderData(data)
+}
+</code></pre>
+<h3 id="pattern-2-error-handling">Pattern 2: Error Handling</h3>
+<pre><code class="language-javascript">export async function init() {
+  try {
+    const res = await fetch('/api/endpoint')
+    if (!res.ok) throw new Error(`HTTP ${res.status}`)
+    const data = await res.json()
+    renderSuccess(data)
+  } catch (err) {
+    renderError(err.message)
+  }
+}
+
+function renderError(message) {
+  document.getElementById('content').innerHTML = `
+    &lt;div class=&quot;error&quot;&gt;
+      &lt;p&gt;⚠️ ${message}&lt;/p&gt;
+      &lt;button onclick=&quot;window.location.reload()&quot;&gt;Retry&lt;/button&gt;
+    &lt;/div&gt;
+  `
+}
+</code></pre>
+<h3 id="pattern-3-progressive-enhancement">Pattern 3: Progressive Enhancement</h3>
+<pre><code class="language-javascript">export function render() {
+  // Render basic content immediately
+  return `
+    &lt;h1&gt;My Page&lt;/h1&gt;
+    &lt;div id=&quot;static-content&quot;&gt;
+      &lt;p&gt;This content works without JavaScript&lt;/p&gt;
+    &lt;/div&gt;
+    &lt;div id=&quot;dynamic-content&quot;&gt;&lt;/div&gt;
+  `
+}
+
+export async function init() {
+  // Enhance with dynamic data
+  const data = await fetchData()
+  document.getElementById('dynamic-content').innerHTML = renderDynamic(data)
+}
+</code></pre>
+<h3 id="pattern-4-event-delegation">Pattern 4: Event Delegation</h3>
+<pre><code class="language-javascript">export function init() {
+  // Instead of attaching listener to each item
+  document.getElementById('item-list').addEventListener('click', (e) =&gt; {
+    const item = e.target.closest('.item')
+    if (!item) return
+
+    const id = item.dataset.id
+    handleItemClick(id)
+  })
+}
+</code></pre>
+<h3 id="pattern-5-cleanup">Pattern 5: Cleanup</h3>
+<pre><code class="language-javascript">let intervalId = null
+
+export function init() {
+  // Start polling
+  intervalId = setInterval(async () =&gt; {
+    await refreshData()
+  }, 5000)
+}
+
+export function cleanup() {
+  // Stop polling when leaving page
+  if (intervalId) {
+    clearInterval(intervalId)
+    intervalId = null
+  }
+}
+</code></pre>
+<hr />
+<h2 id="common-mistakes">Common Mistakes</h2>
+<h3 id="forgetting-to-export-functions">❌ Forgetting to export functions</h3>
+<pre><code class="language-javascript">function render() { /* ... */ } // Missing 'export'
+</code></pre>
+<p><strong>Fix:</strong></p>
+<pre><code class="language-javascript">export function render() { /* ... */ }
+</code></pre>
+<h3 id="not-handling-missing-elements">❌ Not handling missing elements</h3>
+<pre><code class="language-javascript">export function init() {
+  document.getElementById('btn').addEventListener('click', handler)
+  // Error if #btn doesn't exist!
+}
+</code></pre>
+<p><strong>Fix:</strong></p>
+<pre><code class="language-javascript">export function init() {
+  const btn = document.getElementById('btn')
+  if (btn) btn.addEventListener('click', handler)
+}
+</code></pre>
+<h3 id="memory-leaks-from-event-listeners">❌ Memory leaks from event listeners</h3>
+<pre><code class="language-javascript">export function init() {
+  window.addEventListener('resize', handleResize)
+  // Never removed!
+}
+</code></pre>
+<p><strong>Fix:</strong></p>
+<pre><code class="language-javascript">export function init() {
+  window.addEventListener('resize', handleResize)
+}
+
+export function cleanup() {
+  window.removeEventListener('resize', handleResize)
+}
+</code></pre>
+<h3 id="modifying-global-scope">❌ Modifying global scope</h3>
+<pre><code class="language-javascript">export function init() {
+  window.myData = []
+  // Pollutes global scope
+}
+</code></pre>
+<p><strong>Fix:</strong></p>
+<pre><code class="language-javascript">let myData = [] // Module-scoped
+
+export function cleanup() {
+  myData = [] // Reset when leaving
+}
+</code></pre>
+<hr />
+<h2 id="testing-route-modules">Testing Route Modules</h2>
+<pre><code class="language-javascript">// test/routes/example.test.js
+import { describe, it, expect } from 'vitest'
+import * as exampleRoute from '../../web/src/routes/example.js'
+
+describe('Example Route', () =&gt; {
+  it('renders HTML', () =&gt; {
+    const html = exampleRoute.render()
+    expect(html).toContain('&lt;h1&gt;Example&lt;/h1&gt;')
+  })
+
+  it('initializes without errors', async () =&gt; {
+    document.body.innerHTML = exampleRoute.render()
+    await expect(exampleRoute.init()).resolves.not.toThrow()
+  })
+})
+</code></pre>
+<hr />
+<p><strong>See also:</strong>
+- <a href="../">README.md</a> - SPA architecture overview
+- <a href="../router-internals/">router-internals.md</a> - How the router works</p>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

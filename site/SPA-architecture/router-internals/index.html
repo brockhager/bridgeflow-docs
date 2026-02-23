@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://brockhager.github.io/bridgeflow-docs/SPA-architecture/router-internals/" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>Router Internals - BridgeFlow Docs</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Router Internals";
+        var mkdocs_page_input_path = "SPA-architecture\\router-internals.md";
+        var mkdocs_page_url = "/bridgeflow-docs/SPA-architecture/router-internals/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> BridgeFlow Docs
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../topics/quickstart/">Quickstart</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../topics/concepts/">Concepts</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../current/control-tower/public-api/">API Reference</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../topics/vision/">Vision</a>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">BridgeFlow Docs</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">Router Internals</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="router-internals">Router Internals</h1>
+<p>Deep dive into how BridgeFlow's router works under the hood.</p>
+<h2 id="router-lifecycle">Router Lifecycle</h2>
+<pre><code>Page Load
+    ↓
+main.js executes
+    ↓
+router.init() called
+    ↓
+Read window.location.pathname
+    ↓
+Match path to route
+    ↓
+Call route.render()
+    ↓
+Inject HTML into #app
+    ↓
+Call route.init()
+    ↓
+User clicks link
+    ↓
+Click intercepted
+    ↓
+Prevent default navigation
+    ↓
+Update #app with new content
+    ↓
+Push new URL to history
+    ↓
+Call new route.init()
+</code></pre>
+<h2 id="core-functions">Core Functions</h2>
+<h3 id="routepatharg"><code>route(pathArg)</code></h3>
+<p>Main routing function that matches URLs to route handlers.</p>
+<pre><code class="language-javascript">export async function route(pathArg) {
+  // Run cleanup for previous page
+  if (typeof currentCleanup === 'function') {
+    try { 
+      currentCleanup() 
+    } catch (e) { 
+      console.warn('router: cleanup failed', e) 
+    }
+    currentCleanup = null
+  }
+
+  // Get and normalize path
+  const path = typeof pathArg === 'string' ? pathArg : window.location.pathname
+  const normalized = (path || '').replace(/\/$/, '').replace(/\.html$/, '')
+
+  // Get app container
+  const app = document.getElementById('app') || document.body
+
+  try {
+    // Root path - show main menu
+    if (normalized === '' || normalized === '/') {
+      // Check auth first
+      const res = await fetch('/api/auth/me')
+      if (!res.ok) {
+        window.location.href = '/login.html'
+        return
+      }
+
+      app.innerHTML = renderMainMenu()
+      if (typeof initMainMenu === 'function') initMainMenu()
+      currentCleanup = typeof cleanupMainMenu === 'function' ? cleanupMainMenu : null
+      return
+    }
+
+    // Match specific routes
+    if (normalized === '/canvas-assembly') {
+      app.innerHTML = canvasAssembly.render()
+      if (canvasAssembly.init) await canvasAssembly.init()
+      currentCleanup = canvasAssembly.cleanup
+      return
+    }
+
+    // ... more route handlers
+
+  } catch (err) {
+    console.error('router: failed to route', err)
+  }
+}
+</code></pre>
+<p><strong>Key features:</strong>
+- Cleanup previous route before loading new one
+- Normalize URLs (remove trailing slash, strip <code>.html</code>)
+- Auth check for protected routes
+- Async support for routes that load data
+- Error handling</p>
+<hr />
+<h3 id="navigatetopath"><code>navigateTo(path)</code></h3>
+<p>Programmatic navigation helper.</p>
+<pre><code class="language-javascript">export function navigateTo(path) {
+  const next = path || '/'
+
+  // Update URL without reload
+  window.history.pushState({}, '', next)
+
+  // Render new route
+  route(next)
+}
+</code></pre>
+<p><strong>Usage:</strong></p>
+<pre><code class="language-javascript">// From any route or component
+window.router.navigateTo('/admin/users')
+</code></pre>
+<hr />
+<h3 id="init"><code>init()</code></h3>
+<p>Initialize router on page load.</p>
+<pre><code class="language-javascript">export async function init() {
+  return route(window.location.pathname + window.location.search)
+}
+</code></pre>
+<p>Called automatically by <code>main.js</code> on <code>DOMContentLoaded</code>.</p>
+<hr />
+<h2 id="link-interception">Link Interception</h2>
+<p>Router intercepts all same-origin link clicks to enable SPA navigation.</p>
+<pre><code class="language-javascript">document.addEventListener('click', (e) =&gt; {
+  try {
+    // Ignore if default already prevented
+    if (e.defaultPrevented) return
+
+    // Only handle left-clicks with no modifiers
+    if (e.button !== 0 || e.metaKey || e.ctrlKey || e.altKey || e.shiftKey) return
+
+    // Find closest &lt;a&gt; element
+    const link = e.target.closest &amp;&amp; e.target.closest('a[href]')
+    if (!link) return
+
+    // Skip special links
+    if (link.target === '_blank' || 
+        link.hasAttribute('download') || 
+        link.getAttribute('href')?.startsWith('mailto:')) return
+
+    const href = link.getAttribute('href')
+    if (!href) return
+
+    // Parse URL
+    let url
+    try { 
+      url = new URL(href, window.location.origin) 
+    } catch (err) { 
+      return 
+    }
+
+    // Only intercept same-origin links
+    if (url.origin !== window.location.origin) return
+
+    // Prevent full page reload
+    e.preventDefault()
+
+    // Navigate via router
+    navigateTo(url.pathname + url.search)
+  } catch (err) { 
+    // Fail silently - let browser handle normally
+  }
+})
+</code></pre>
+<p><strong>What gets intercepted:</strong>
+- ✅ <code>&lt;a href="/canvas-assembly"&gt;Canvas&lt;/a&gt;</code>
+- ✅ <code>&lt;a href="/admin/users?page=2"&gt;Users&lt;/a&gt;</code>
+- ✅ <code>&lt;a href="http://localhost:4000/bridges"&gt;Bridges&lt;/a&gt;</code> (same origin)</p>
+<p><strong>What gets ignored:</strong>
+- ❌ <code>&lt;a href="https://google.com"&gt;External&lt;/a&gt;</code> (different origin)
+- ❌ <code>&lt;a href="/file.pdf" download&gt;Download&lt;/a&gt;</code> (download attribute)
+- ❌ <code>&lt;a href="mailto:user@example.com"&gt;Email&lt;/a&gt;</code> (mailto:)
+- ❌ <code>&lt;a href="/page" target="_blank"&gt;New Tab&lt;/a&gt;</code> (target="_blank")
+- ❌ Ctrl+Click, Cmd+Click (open in new tab/window)</p>
+<hr />
+<h2 id="history-api-integration">History API Integration</h2>
+<p>Router uses the browser's History API for URL management.</p>
+<h3 id="forward-navigation">Forward Navigation</h3>
+<pre><code class="language-javascript">// User clicks link or calls navigateTo()
+window.history.pushState({}, '', '/new-path')
+route('/new-path')
+</code></pre>
+<p><strong>Effect:</strong>
+- URL changes to <code>/new-path</code>
+- Browser history updated (back button works)
+- Page does not reload</p>
+<h3 id="backforward-navigation">Back/Forward Navigation</h3>
+<pre><code class="language-javascript">window.addEventListener('popstate', () =&gt; {
+  route(window.location.pathname + window.location.search)
+})
+</code></pre>
+<p><strong>When triggered:</strong>
+- User clicks browser back button
+- User clicks browser forward button
+- <code>history.back()</code> or <code>history.forward()</code> called</p>
+<p><strong>Effect:</strong>
+- Router re-renders appropriate route
+- No page reload
+- State preserved</p>
+<hr />
+<h2 id="path-normalization">Path Normalization</h2>
+<p>Router normalizes URLs for consistent matching:</p>
+<pre><code class="language-javascript">const normalized = (path || '')
+  .replace(/\/$/, '')        // Remove trailing slash
+  .replace(/\.html$/, '')    // Remove .html extension
+</code></pre>
+<p><strong>Examples:</strong>
+- <code>/canvas-assembly/</code> → <code>/canvas-assembly</code>
+- <code>/canvas-assembly.html</code> → <code>/canvas-assembly</code>
+- <code>/admin/users/</code> → <code>/admin/users</code>
+- <code>/</code> → `` (empty string for root)</p>
+<p><strong>Why normalize?</strong>
+- Users may type URLs with or without trailing slash
+- Legacy links may include <code>.html</code>
+- Consistent matching prevents duplicate route handlers</p>
+<hr />
+<h2 id="route-registration-patterns">Route Registration Patterns</h2>
+<h3 id="simple-route">Simple Route</h3>
+<pre><code class="language-javascript">if (normalized === '/my-route') {
+  app.innerHTML = myRoute.render()
+  if (myRoute.init) await myRoute.init()
+  currentCleanup = myRoute.cleanup
+  return
+}
+</code></pre>
+<h3 id="parameterized-route">Parameterized Route</h3>
+<pre><code class="language-javascript">// Match pattern: /tp/123/profile
+const tpMatch = path.match(/^\/tp\/(.+?)\/profile$/)
+if (tpMatch) {
+  const id = decodeURIComponent(tpMatch[1])
+  app.innerHTML = tpProfileRoute.render(id)
+  if (tpProfileRoute.init) await tpProfileRoute.init(id)
+  currentCleanup = tpProfileRoute.cleanup
+  return
+}
+</code></pre>
+<h3 id="dynamic-import-route">Dynamic Import Route</h3>
+<pre><code class="language-javascript">if (normalized === '/bridges') {
+  const mod = await import('../src/bridges.js')
+  app.innerHTML = mod.render ? mod.render() : ''
+  if (mod.init) await mod.init()
+  currentCleanup = mod.cleanup
+  return
+}
+</code></pre>
+<p><strong>When to use dynamic imports:</strong>
+- Large modules (e.g., charting libraries)
+- Rarely-accessed pages
+- Feature-specific code</p>
+<p><strong>Benefits:</strong>
+- Smaller initial bundle
+- Faster initial load
+- Code splitting</p>
+<hr />
+<h2 id="cleanup-mechanism">Cleanup Mechanism</h2>
+<p>Router calls cleanup before navigating to new route:</p>
+<pre><code class="language-javascript">let currentCleanup = null
+
+export async function route(pathArg) {
+  // Call previous cleanup
+  if (typeof currentCleanup === 'function') {
+    try { 
+      currentCleanup() 
+    } catch (e) { 
+      console.warn('router: cleanup failed', e) 
+    }
+    currentCleanup = null
+  }
+
+  // ... route to new page
+
+  // Store new cleanup function
+  currentCleanup = newRoute.cleanup
+}
+</code></pre>
+<p><strong>Cleanup use cases:</strong>
+- Remove event listeners: <code>window.removeEventListener('resize', handler)</code>
+- Clear intervals: <code>clearInterval(intervalId)</code>
+- Abort fetch requests: <code>controller.abort()</code>
+- Reset global state: <code>delete window.myVar</code></p>
+<hr />
+<h2 id="error-handling">Error Handling</h2>
+<p>Router catches errors to prevent crashes:</p>
+<pre><code class="language-javascript">try {
+  // Route matching logic
+} catch (err) {
+  console.error('router: failed to route', err)
+  // Page remains at current route
+}
+</code></pre>
+<p><strong>Best practices:</strong>
+- Route modules should handle their own errors
+- Display user-friendly error messages
+- Log errors for debugging</p>
+<pre><code class="language-javascript">export async function init() {
+  try {
+    const data = await fetchData()
+    renderData(data)
+  } catch (err) {
+    console.error('Failed to load data:', err)
+    document.getElementById('content').innerHTML = `
+      &lt;div class=&quot;error&quot;&gt;
+        &lt;p&gt;⚠️ Failed to load page&lt;/p&gt;
+        &lt;button onclick=&quot;location.reload()&quot;&gt;Retry&lt;/button&gt;
+      &lt;/div&gt;
+    `
+  }
+}
+</code></pre>
+<hr />
+<h2 id="global-router-object">Global Router Object</h2>
+<p>Router exposes itself globally for convenience:</p>
+<pre><code class="language-javascript">window.router = { 
+  navigateTo, 
+  init,
+  route  // Optional: expose for debugging
+}
+</code></pre>
+<p><strong>Usage from anywhere:</strong></p>
+<pre><code class="language-javascript">// In route modules
+window.router.navigateTo('/new-page')
+
+// In event handlers
+button.onclick = () =&gt; window.router.navigateTo('/dashboard')
+
+// From browser console (debugging)
+window.router.route('/admin/users')
+</code></pre>
+<hr />
+<h2 id="authentication-flow">Authentication Flow</h2>
+<p>Router handles auth at the root route:</p>
+<pre><code class="language-javascript">if (normalized === '' || normalized === '/') {
+  // Check if user is authenticated
+  try {
+    const res = await fetch('/api/auth/me')
+    if (!res.ok) {
+      // Not authenticated - redirect to login
+      window.location.href = '/login.html'
+      return
+    }
+  } catch (e) {
+    // Network error - redirect to login
+    window.location.href = '/login.html'
+    return
+  }
+
+  // Authenticated - show menu
+  app.innerHTML = renderMainMenu()
+  initMainMenu()
+  return
+}
+</code></pre>
+<p><strong>Flow:</strong>
+1. User loads <code>http://localhost:4000/</code>
+2. Router checks <code>/api/auth/me</code>
+3. If 401 → redirect to <code>/login.html</code>
+4. If 200 → render main menu</p>
+<p><strong>Individual routes</strong> can also check auth:</p>
+<pre><code class="language-javascript">export async function init() {
+  const res = await fetch('/api/auth/me')
+  if (!res.ok) {
+    window.location.href = '/login.html'
+    return
+  }
+  // Continue with page logic
+}
+</code></pre>
+<hr />
+<h2 id="fallback-handling">Fallback Handling</h2>
+<p>Fastify server serves <code>index.html</code> for all unmatched routes:</p>
+<pre><code class="language-javascript">// api/server.js
+app.setNotFoundHandler((req, reply) =&gt; {
+  if (req.method === 'GET' &amp;&amp; !req.url.startsWith('/api/')) {
+    reply.sendFile('index.html')
+  } else {
+    reply.code(404).send({ error: 'Not Found' })
+  }
+})
+</code></pre>
+<p><strong>Effect:</strong>
+- <code>/canvas-assembly</code> → serves <code>index.html</code>
+- Router reads URL, renders canvas-assembly route
+- Works for direct URL access and browser refresh</p>
+<hr />
+<h2 id="debugging">Debugging</h2>
+<h3 id="enable-router-logging">Enable router logging</h3>
+<pre><code class="language-javascript">// Temporarily add to router.js
+export async function route(pathArg) {
+  console.log('[ROUTER] Routing to:', pathArg)
+
+  if (typeof currentCleanup === 'function') {
+    console.log('[ROUTER] Calling cleanup')
+    currentCleanup()
+  }
+
+  // ... rest of function
+}
+</code></pre>
+<h3 id="inspect-current-route">Inspect current route</h3>
+<pre><code class="language-javascript">// In browser console
+console.log(window.location.pathname)
+</code></pre>
+<h3 id="manually-trigger-route">Manually trigger route</h3>
+<pre><code class="language-javascript">// In browser console
+window.router.route('/admin/users')
+</code></pre>
+<h3 id="view-app-container">View app container</h3>
+<pre><code class="language-javascript">// In browser console
+console.log(document.getElementById('app').innerHTML)
+</code></pre>
+<hr />
+<h2 id="performance-considerations">Performance Considerations</h2>
+<h3 id="bundle-size">Bundle Size</h3>
+<p>Router is included in main bundle (~80KB total).</p>
+<p><strong>Optimization strategies:</strong>
+- Use dynamic imports for large features
+- Code splitting per route (future enhancement)
+- Tree shaking unused route modules</p>
+<h3 id="navigation-speed">Navigation Speed</h3>
+<p>SPA navigation is ~10-50ms (vs 200-500ms for full page load).</p>
+<p><strong>Bottlenecks:</strong>
+- Large <code>render()</code> functions → use templates
+- Slow <code>init()</code> → defer non-critical work
+- Heavy DOM manipulation → batch updates</p>
+<h3 id="memory-management">Memory Management</h3>
+<p><strong>Potential leaks:</strong>
+- Event listeners not removed in <code>cleanup()</code>
+- Global variables not reset
+- Intervals/timeouts not cleared</p>
+<p><strong>Prevention:</strong>
+- Always implement <code>cleanup()</code> for routes with listeners
+- Use module-scoped variables instead of globals
+- Clear timers before navigating away</p>
+<hr />
+<h2 id="future-enhancements">Future Enhancements</h2>
+<h3 id="planned-improvements">Planned improvements:</h3>
+<ol>
+<li>
+<p><strong>Route guards</strong>
+   <code>javascript
+   routes.add('/admin/*', { requireRole: 'bf_employee' })</code></p>
+</li>
+<li>
+<p><strong>Route metadata</strong>
+   <code>javascript
+   export const meta = {
+     title: 'Canvas Assembly',
+     requireAuth: true
+   }</code></p>
+</li>
+<li>
+<p><strong>Nested routes</strong>
+   <code>javascript
+   /admin
+     /admin/users
+     /admin/metrics</code></p>
+</li>
+<li>
+<p><strong>Lazy-loaded route config</strong>
+   <code>javascript
+   const routes = {
+     '/canvas-assembly': () =&gt; import('./routes/canvas-assembly.js')
+   }</code></p>
+</li>
+<li>
+<p><strong>Route transitions</strong>
+   <code>javascript
+   app.classList.add('fade-out')
+   await delay(200)
+   app.innerHTML = newContent
+   app.classList.add('fade-in')</code></p>
+</li>
+</ol>
+<hr />
+<p><strong>See also:</strong>
+- <a href="../">README.md</a> - SPA architecture overview
+- <a href="../route-examples/">route-examples.md</a> - Real-world route examples</p>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

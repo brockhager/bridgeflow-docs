@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://brockhager.github.io/bridgeflow-docs/phases/phases31-40/phase-33-firewall-api/" />
+      <link rel="shortcut icon" href="../../../img/favicon.ico" />
+    <title>Phase 33: Firewall API Integration (Layer 4 Security) - BridgeFlow Docs</title>
+    <link rel="stylesheet" href="../../../css/theme.css" />
+    <link rel="stylesheet" href="../../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Phase 33: Firewall API Integration (Layer 4 Security)";
+        var mkdocs_page_input_path = "phases\\phases31-40\\phase-33-firewall-api.md";
+        var mkdocs_page_url = "/bridgeflow-docs/phases/phases31-40/phase-33-firewall-api/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../../.." class="icon icon-home"> BridgeFlow Docs
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../..">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../topics/quickstart/">Quickstart</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../topics/concepts/">Concepts</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../current/control-tower/public-api/">API Reference</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../topics/vision/">Vision</a>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../..">BridgeFlow Docs</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../.." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">Phase 33: Firewall API Integration (Layer 4 Security)</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="phase-33-firewall-api-integration-layer-4-security">Phase 33: Firewall API Integration (Layer 4 Security)</h1>
+<p><strong>Date Completed:</strong> January 11, 2026<br />
+<strong>Status:</strong> ✅ Complete and tested</p>
+<h2 id="overview">Overview</h2>
+<p>Implemented Layer 4 security firewall configuration API for UserBridge activation in Phase 32 Canvas assembly. This enables users to define inbound/outbound firewall rules when activating integration bridges.</p>
+<h2 id="architecture">Architecture</h2>
+<h3 id="key-components">Key Components</h3>
+<p><strong>1. Prisma Model (<code>prisma/schema.prisma</code>)</strong></p>
+<pre><code class="language-prisma">model Firewall {
+  id            String     @id @default(cuid())
+  bridgeId      String
+  side          String     // &quot;inbound&quot; or &quot;outbound&quot;
+  publicIp      String     // External IP address (validated against internal ranges)
+  allowedPorts  Int[]      // Array of port numbers
+  protocol      String     @default(&quot;tcp&quot;) // &quot;tcp&quot;, &quot;udp&quot;, or &quot;both&quot;
+  status        String     @default(&quot;PROVISIONING&quot;) // PROVISIONING, ACTIVE, ERROR, DELETED
+  createdAt     DateTime   @default(now())
+  updatedAt     DateTime   @updatedAt
+  bridge        UserBridge @relation(fields: [bridgeId], references: [id], onDelete: Cascade)
+
+  @@unique([bridgeId, side])
+  @@index([bridgeId])
+  @@index([status])
+}
+</code></pre>
+<p><strong>Relationship:</strong> Each <code>UserBridge</code> can have 0-1 inbound and 0-1 outbound firewall rules (enforced by unique constraint on <code>[bridgeId, side]</code>).</p>
+<p><strong>2. API Endpoints</strong> (<code>api/handlers/firewalls.js</code>)</p>
+<table>
+<thead>
+<tr>
+<th>Endpoint</th>
+<th>Method</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>/api/firewalls</code></td>
+<td><code>POST</code></td>
+<td>Create firewall rule set</td>
+</tr>
+<tr>
+<td><code>/api/firewalls/:id</code></td>
+<td><code>GET</code></td>
+<td>Fetch single firewall</td>
+</tr>
+<tr>
+<td><code>/api/bridges/:bridgeId/firewalls</code></td>
+<td><code>GET</code></td>
+<td>List all firewalls for a bridge</td>
+</tr>
+<tr>
+<td><code>/api/firewalls/:id</code></td>
+<td><code>DELETE</code></td>
+<td>Delete firewall rule set</td>
+</tr>
+</tbody>
+</table>
+<p><strong>3. Validation</strong> (<code>api/validators/firewall.js</code>)</p>
+<p>Security-first validators prevent common bypass attacks:</p>
+<ul>
+<li><strong>IP Validation:</strong> Rejects private/internal ranges:</li>
+<li>10.0.0.0/8 (Class A private)</li>
+<li>172.16.0.0/12 (Class B private)</li>
+<li>192.168.0.0/16 (Class C private)</li>
+<li>127.0.0.1/8 (Loopback)</li>
+<li>
+<p>0.0.0.0, 255.255.255.255 (Invalid)</p>
+</li>
+<li>
+<p><strong>Port Validation:</strong> 1-65535, warns on privileged ports (1-1024)</p>
+</li>
+<li>
+<p><strong>Protocol Validation:</strong> <code>tcp</code>, <code>udp</code>, or <code>both</code></p>
+</li>
+</ul>
+<h2 id="security-protocol">Security Protocol</h2>
+<h3 id="request-flow">Request Flow</h3>
+<ol>
+<li><strong>Auth:</strong> <code>authMiddleware</code> verifies JWT + org membership</li>
+<li><strong>Idempotency:</strong> <code>idempotencyMiddleware</code> ensures duplicate requests return same result</li>
+<li><strong>Validation:</strong> <code>validateIP()</code>, <code>validatePort()</code>, <code>validateProtocol()</code> reject malicious inputs</li>
+<li><strong>Tenancy:</strong> RLS + middleware ensure user only accesses own org's bridges</li>
+<li><strong>Uniqueness:</strong> Unique constraint prevents duplicate inbound/outbound rules per bridge</li>
+</ol>
+<h3 id="ip-validation-logic">IP Validation Logic</h3>
+<pre><code class="language-javascript">// Reject private ranges to prevent internal network bypass
+if (a === 10) return 'Private IP range 10.0.0.0/8 not allowed'
+if (a === 172 &amp;&amp; b &gt;= 16 &amp;&amp; b &lt;= 31) return 'Private IP range 172.16.0.0/12 not allowed'
+if (a === 192 &amp;&amp; b === 168) return 'Private IP range 192.168.0.0/16 not allowed'
+if (a === 127) return 'Loopback IP range 127.0.0.1/8 not allowed'
+</code></pre>
+<h2 id="integration-points">Integration Points</h2>
+<h3 id="canvas-assembly-flow-phase-32">Canvas Assembly Flow (Phase 32)</h3>
+<ol>
+<li>User activates bridge in Canvas UI</li>
+<li>System detects <code>?newFirewallId=xyz</code> in URL (similar to TP/Connector pattern)</li>
+<li>Canvas auto-adds firewall to palette, highlights for 2.5s</li>
+<li>Firewall status shown alongside bridge components (provisioning dot, status indicator)</li>
+<li>Async provisioning job updates status: <code>PROVISIONING</code> → <code>ACTIVE</code> or <code>ERROR</code></li>
+</ol>
+<h3 id="example-bridge-activation-with-firewall">Example: Bridge Activation with Firewall</h3>
+<pre><code class="language-javascript">// Canvas detects ?newFirewallId parameter
+const urlParams = new URLSearchParams(window.location.search)
+const newFirewallId = urlParams.get('newFirewallId')
+
+if (newFirewallId) {
+  // Fetch firewall details
+  const fw = await fetch(`/api/firewalls/${newFirewallId}`).then(r =&gt; r.json())
+
+  // Add to palette with highlight animation
+  palette.addFirewall(fw, { highlight: true })
+
+  // Poll status until ACTIVE
+  pollUntilActive(newFirewallId, { interval: 2000, maxAttempts: 30 })
+}
+</code></pre>
+<h2 id="database-changes">Database Changes</h2>
+<p><strong>Migration:</strong> <code>prisma/migrations/20260111034233_firewall_layer4_security/</code></p>
+<p>Creates <code>public.Firewall</code> table with:
+- Primary key: <code>id</code>
+- Foreign key: <code>bridgeId</code> → <code>public.UserBridge(id)</code> (cascade delete)
+- Unique constraint: <code>[bridgeId, side]</code>
+- Indexes: <code>bridgeId</code>, <code>status</code></p>
+<h2 id="testing">Testing</h2>
+<p><strong>Test File:</strong> <code>api/tests/firewalls.test.js</code></p>
+<p><strong>Test Coverage:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Scenario</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Create inbound firewall</td>
+<td>✅ Pass</td>
+</tr>
+<tr>
+<td>Create outbound firewall</td>
+<td>✅ Pass</td>
+</tr>
+<tr>
+<td>Enforce unique [bridgeId, side]</td>
+<td>✅ Pass</td>
+</tr>
+<tr>
+<td>Fetch firewall by ID</td>
+<td>✅ Pass</td>
+</tr>
+<tr>
+<td>Return null for non-existent firewall</td>
+<td>✅ Pass</td>
+</tr>
+<tr>
+<td>List all firewalls for bridge</td>
+<td>✅ Pass</td>
+</tr>
+<tr>
+<td>Return empty list for bridge with no firewalls</td>
+<td>✅ Pass</td>
+</tr>
+<tr>
+<td>Delete firewall by ID</td>
+<td>✅ Pass</td>
+</tr>
+<tr>
+<td>Cascade delete when bridge deleted</td>
+<td>✅ Pass</td>
+</tr>
+<tr>
+<td>Track PROVISIONING status</td>
+<td>✅ Pass</td>
+</tr>
+<tr>
+<td>Transition to ACTIVE</td>
+<td>✅ Pass</td>
+</tr>
+<tr>
+<td>Track ERROR status</td>
+<td>✅ Pass</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Run Tests:</strong></p>
+<pre><code class="language-bash">$env:DATABASE_URL='postgresql://test:test@localhost:5433/bridgeflow_test'
+pnpm run test:api -- api/tests/firewalls.test.js
+</code></pre>
+<p><strong>Result:</strong> 20/20 tests passing</p>
+<h2 id="status-transitions">Status Transitions</h2>
+<pre><code>PROVISIONING → ACTIVE    (async job completes successfully)
+PROVISIONING → ERROR     (async job fails, user must delete and retry)
+ACTIVE → DELETED         (user deletion, triggers cascade cleanup)
+</code></pre>
+<h2 id="future-work-phase-33-continuation">Future Work (Phase 33 Continuation)</h2>
+<ol>
+<li><strong>Async Provisioning Job:</strong> Enqueue connector provisioning in Layer 4 infrastructure</li>
+<li>Validate IP routing, DNS, firewall rules</li>
+<li>Apply rules to cloud infrastructure (AWS, Azure, GCP)</li>
+<li>
+<p>Update status to ACTIVE on success</p>
+</li>
+<li>
+<p><strong>Firewall Rules Engine:</strong> Implement port allowlist/blocklist logic</p>
+</li>
+<li>Inbound: restrictive by default (allow only specified ports)</li>
+<li>
+<p>Outbound: permissive by default (block specific destinations)</p>
+</li>
+<li>
+<p><strong>Diagnostic Metadata:</strong> Capture provisioning diagnostics</p>
+</li>
+<li>IP reachability test results</li>
+<li>Port connectivity test results</li>
+<li>DNS resolution logs</li>
+<li>
+<p>Rule application timestamps</p>
+</li>
+<li>
+<p><strong>Canvas Integration:</strong> Full UI rendering in <code>web/src/assembly.js</code></p>
+</li>
+<li>Firewall card with status indicator</li>
+<li>Port list display with protocol icons</li>
+<li>Edit/delete actions</li>
+<li>Inline validation feedback</li>
+</ol>
+<h2 id="security-checklist">Security Checklist</h2>
+<ul>
+<li>✅ No private IP ranges accepted</li>
+<li>✅ Port range validation (1-65535)</li>
+<li>✅ Protocol enumeration (no string injection)</li>
+<li>✅ Tenancy enforcement via middleware + RLS</li>
+<li>✅ Unique constraint prevents duplicate rules</li>
+<li>✅ Idempotency prevents duplicate processing</li>
+<li>✅ Cascade delete maintains referential integrity</li>
+<li>✅ Validation at API layer (don't trust frontend)</li>
+</ul>
+<h2 id="files-modified">Files Modified</h2>
+<table>
+<thead>
+<tr>
+<th>File</th>
+<th>Changes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>prisma/schema.prisma</code></td>
+<td>Added Firewall model, relation to UserBridge</td>
+</tr>
+<tr>
+<td><code>api/routes/api.js</code></td>
+<td>Added 4 firewall endpoints</td>
+</tr>
+<tr>
+<td><code>api/handlers/firewalls.js</code></td>
+<td>Created (new file) - POST/GET/DELETE handlers</td>
+</tr>
+<tr>
+<td><code>api/validators/firewall.js</code></td>
+<td>Created (new file) - IP/port/protocol validators</td>
+</tr>
+<tr>
+<td><code>api/tests/firewalls.test.js</code></td>
+<td>Created (new file) - 20 comprehensive tests</td>
+</tr>
+<tr>
+<td><code>prisma/migrations/...</code></td>
+<td>Created firewall table migration</td>
+</tr>
+</tbody>
+</table>
+<h2 id="deployment-checklist">Deployment Checklist</h2>
+<ul>
+<li>[x] Schema updated with Firewall model</li>
+<li>[x] Migration created and applied</li>
+<li>[x] API handlers implemented with validation</li>
+<li>[x] Tenancy + RBAC enforced</li>
+<li>[x] Tests passing (20/20)</li>
+<li>[x] Idempotency integrated</li>
+<li>[x] Documentation complete</li>
+<li>[ ] Canvas UI integration (Phase 32 final push)</li>
+<li>[ ] Async provisioning jobs (Phase 33)</li>
+<li>[ ] Diagnostic metadata capture (Phase 33)</li>
+</ul>
+<h2 id="references">References</h2>
+<ul>
+<li><strong>Glossary:</strong> <a href="../../../glossary/">docs/glossary/README.md</a> — Terminology enforcement</li>
+<li><strong>Phase 32 Plan:</strong> <a href="../phase-32-plan/">docs/phases/phases31-40/phase-32-plan.md</a> — Bridge Canvas assembly</li>
+<li><strong>Phase 33 Spec:</strong> <a href="../../phases/phases31-40/phase-33-plan.md">docs/phases/phases31-40/phase-33-plan.md</a> — Layer 4+ security (in progress)</li>
+</ul>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+    
+  </span>
+</div>
+    <script src="../../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../../..";</script>
+    <script src="../../../js/theme_extra.js"></script>
+    <script src="../../../js/theme.js"></script>
+      <script src="../../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

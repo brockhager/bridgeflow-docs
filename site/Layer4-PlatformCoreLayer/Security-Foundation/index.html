@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://brockhager.github.io/bridgeflow-docs/Layer4-PlatformCoreLayer/Security-Foundation/" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>Security Foundation — Layer 4 - BridgeFlow Docs</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Security Foundation \u2014 Layer 4";
+        var mkdocs_page_input_path = "Layer4-PlatformCoreLayer\\Security-Foundation.md";
+        var mkdocs_page_url = "/bridgeflow-docs/Layer4-PlatformCoreLayer/Security-Foundation/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> BridgeFlow Docs
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../topics/quickstart/">Quickstart</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../topics/concepts/">Concepts</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../current/control-tower/public-api/">API Reference</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../topics/vision/">Vision</a>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">BridgeFlow Docs</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">Security Foundation — Layer 4</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="security-foundation-layer-4">Security Foundation — Layer 4</h1>
+<p>Summary
+- RBAC-first approach with roles → permission mapping.
+- Audit-first event model: all high-value changes write audit entries.
+- Token-based auth (JWT) and rollout flags control enforcement (<code>REQUIRE_AUTH</code>, <code>ENFORCE_RBAC</code>, <code>LOCKDOWN_JOBS</code>).</p>
+<p>Key Files
+- Implementation: <code>api/lib/rbac.js</code>, <code>api/handlers/auth.js</code>, <code>api/handlers/audit.js</code>, <code>api/lib/audit.js</code>
+- Mock DB support for tests: <code>api/lib/mockDb.js</code></p>
+<p>Roles &amp; Permissions
+- Roles: <code>user</code>, <code>operator</code>, <code>admin</code> (mapped to a set of permissions)
+- Permissions include: <code>jobs:read|write|retry|status</code>, <code>bridges:read|write|delete|test</code>, <code>firewalls:read|write|delete</code>, <code>audit:read|write</code>, <code>users:read|write|role</code>.</p>
+<p>Audit
+- Use <code>writeAudit({ request, message, meta, jobId, level })</code> to add events.
+- GET <code>/api/audit</code> supports filters: <code>search</code>, <code>dateFrom</code>, <code>dateTo</code>, <code>actionType</code>, <code>actorId</code>, <code>targetId</code>, <code>jobId</code>, <code>level</code>, <code>limit</code>, <code>offset</code>.</p>
+<p>Rollout Flags
+- <code>REQUIRE_AUTH</code> — enforce global auth
+- <code>ENFORCE_RBAC</code> — make <code>requirePermission</code> enforced
+- <code>LOCKDOWN_JOBS</code> — require auth for <code>/api/jobs*</code></p>
+<p>Phase 17 updates
+- RBAC hardening: DB-backed permission lookup is defensive — on DB errors we now fallback to token-derived role permissions (returns 403 when appropriate rather than 500). See <code>api/lib/rbac.js</code> for details.
+- Dev-stub token behavior: <code>dev-access-token</code> grants an explicit admin-like user when <code>BRIDGEFLOW_ENV=development</code> or <code>BRIDGEFLOW_DEV_ADMIN=true</code> to enable local dev flows while preserving RBAC behavior.
+- Mock DB: <code>api/lib/mockDb.js</code> supports missing RBAC tables and synthetic <code>userOrganization</code> owner fallbacks for tests.</p>
+<p>Phase 18 planned items
+- Customer API keys: store hashed keys (bcrypt), rotate/revoke, and expose create/list endpoints under <code>/api/customer/:org/api-keys</code> (owner/admin endpoints).
+- Ingest Router: <code>/ingest/:customer_id/:endpoint</code> will accept POSTed payloads authenticated with <code>x-api-key</code> header and will be rate-limited per-customer (Redis token-bucket style) with metrics instrumented.
+- Rate limiting: Redis-backed runtime; fail-open behaviour for Redis outages and metrics instrumentation to observe allowed/rate_limited events.</p>
+<p>Phase 33 additions (Firewall Security)
+- Firewall endpoints available under Layer 4 for rule management (create/read/list/delete) with RBAC and tenancy enforcement.
+- Idempotency integrated on firewall creation to prevent duplicate provisioning requests.
+- See Phase 33 docs: <a href="../../phases/phases31-40/phase-33-firewall-api/">../phases/phases31-40/phase-33-firewall-api.md</a> and <a href="../../phases/phases31-40/phase-33-firewall-canvas-integration/">../phases/phases31-40/phase-33-firewall-canvas-integration.md</a></p>
+<p>Dev verification
+- Start a secure dev server (script references in repo) and run <code>pnpm -s test</code>. Ensure RBAC tests (both in-memory mock and DB-backed) pass and that fallback paths are exercised in unit tests.</p>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://brockhager.github.io/bridgeflow-docs/beginner-docs/" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>BridgeFlow — Beginner Guide - BridgeFlow Docs</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "BridgeFlow \u2014 Beginner Guide";
+        var mkdocs_page_input_path = "beginner-docs\\README.md";
+        var mkdocs_page_url = "/bridgeflow-docs/beginner-docs/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href=".." class="icon icon-home"> BridgeFlow Docs
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="..">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../topics/quickstart/">Quickstart</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../topics/concepts/">Concepts</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../current/control-tower/public-api/">API Reference</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../topics/vision/">Vision</a>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">BridgeFlow Docs</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">BridgeFlow — Beginner Guide</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="bridgeflow-beginner-guide">BridgeFlow — Beginner Guide</h1>
+<p>Welcome! This short guide helps a new developer get started quickly with the BridgeFlow codebase. It covers the minimal steps to run the app and tests on your machine and links to deeper docs for advanced topics.</p>
+<p>Who are you? Choose your quick path below:</p>
+<ul>
+<li><strong>Developer (bf_employee)</strong> — hands-on developer tasks and environment setup: see <code>developer/README.md</code>.</li>
+<li><strong>Customer Admin</strong> — manage blueprints, packages, and admin workflows: see <code>customer-admin/README.md</code>.</li>
+<li><strong>End User</strong> — UI-focused demo steps for creating trading partners and activating blueprints: see <code>user/README.md</code>.</li>
+</ul>
+<p>Pick the link that matches your role and follow the short steps there.</p>
+<h2 id="prerequisites">Prerequisites</h2>
+<ul>
+<li>Node.js (recommend LTS) and pnpm. Install pnpm: <code>npm i -g pnpm</code></li>
+<li>A Railway PostgreSQL database account (the project uses Railway-hosted Postgres exclusively).</li>
+<li>(Optional) Docker if you prefer local service emulation for Redis / other services.</li>
+</ul>
+<h2 id="quick-start-minimal-steps">Quick start — minimal steps</h2>
+<ol>
+<li>Clone the repo and change into it:
+   <code>bash
+   git clone &lt;repo-url&gt;
+   cd bridgeflow</code></li>
+<li>Install dependencies:
+   <code>bash
+   pnpm install</code></li>
+<li>
+<p>Provision/verify the Railway test DB and env variables:
+   <code>bash
+   pnpm run railway:setup</code>
+   This sets or verifies the <code>DATABASE_URL</code> used by the project (the test DB is typically named <code>bridgeflow_test</code>).</p>
+</li>
+<li>
+<p>Start the backend API (port 4000):
+   <code>bash
+   pnpm run api:start</code></p>
+</li>
+<li>
+<p>Start the frontend dev server (bundles + dev proxy) in another terminal (port 3000 by default):
+   <code>bash
+   pnpm run web:dev</code></p>
+</li>
+<li>
+<p>Visit the app at http://localhost:3000 (the dev server proxies <code>/api</code> to <code>localhost:4000</code>).</p>
+</li>
+</ol>
+<blockquote>
+<p>Tip: On Windows PowerShell set env vars like:
+$env:DATABASE_URL = 'postgresql://user:pass@host:port/bridgeflow_test'</p>
+</blockquote>
+<h2 id="running-tests">Running tests</h2>
+<ul>
+<li>All tests require a real Railway PostgreSQL database (NO SQLite). The project enforces this to avoid flaky test behavior.</li>
+<li>Run the full test suite:
+  <code>bash
+  pnpm test</code></li>
+<li>Run API tests only:
+  <code>bash
+  pnpm run test:api</code></li>
+<li>Important: Every test file must call <code>await resetTestDatabase()</code> (see <code>test/utils/resetDb.js</code>) to ensure isolation and a clean state.</li>
+</ul>
+<h2 id="seeding-dev-data">Seeding dev data</h2>
+<ul>
+<li>The repo includes utilities to seed development data:</li>
+<li><code>pnpm run db:seed</code> or <code>pnpm run db:seed:blueprints</code> (see <code>scripts/</code>)</li>
+<li>In dev, the admin dev endpoint <code>/admin-api/_dev/ensure-dev-seed</code> can create test users and sample blueprints.</li>
+</ul>
+<h2 id="common-developer-tasks">Common developer tasks</h2>
+<ul>
+<li>Generate Prisma client after schema changes:
+  <code>bash
+  pnpm run prisma:generate</code></li>
+<li>Run a background worker (examples):
+  <code>bash
+  pnpm run worker:s3-flush:once
+  pnpm run worker:metrics-aggregator</code></li>
+</ul>
+<h2 id="project-conventions-gotchas">Project conventions &amp; gotchas</h2>
+<ul>
+<li>ESM-only: use <code>import</code> / <code>export</code> (no CommonJS <code>require</code>/<code>module.exports</code>).</li>
+<li>Database: Railway-hosted PostgreSQL is the canonical DB for dev/test/CI (do not add SQLite fallbacks).</li>
+<li>Tenant isolation: code uses AsyncLocalStorage + Prisma middleware. See <code>api/lib/tenantContext.js</code> for details.</li>
+<li>Do NOT enable <code>BRIDGEFLOW_DEV_ADMIN</code> in CI — it masks real auth issues.</li>
+</ul>
+<h2 id="where-to-go-next-advanced-docs">Where to go next (advanced docs)</h2>
+<ul>
+<li>Architecture overview: <code>docs/ARCHITECTURE.md</code></li>
+<li>Onboarding &amp; dev orientation: <code>docs/ONBOARDING.md</code></li>
+<li>Glossary (terms &amp; naming): <code>docs/glossary/README.md</code></li>
+<li>Tests and DB reset details: <code>test/utils/resetDb.js</code> and <code>test/setup.js</code></li>
+<li>Phase-specific guides (e.g., Bridge Canvas): <code>docs/phases/</code> (see <code>phases31-40</code> for Phase 32)</li>
+<li>Copilot / agent guidance: <code>.github/copilot-instructions.md</code></li>
+</ul>
+<h2 id="need-help-contacts">Need help / contacts</h2>
+<ul>
+<li>If something is unclear or you hit a blocker, open an issue or contact the repo owner/CTO listed in the project <code>docs/ONBOARDING.md</code>.</li>
+</ul>
+<hr />
+<p>This README is intentionally short; if you'd like I can expand sections (development workflow, debugging tips, CI notes) or add platform-specific steps (Windows/macOS/Linux).</p>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+    
+  </span>
+</div>
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "..";</script>
+    <script src="../js/theme_extra.js"></script>
+    <script src="../js/theme.js"></script>
+      <script src="../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

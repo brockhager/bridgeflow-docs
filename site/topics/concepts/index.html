@@ -5,14 +5,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://brockhager.github.io/bridgeflow-docs/topics/concepts/" />
       <link rel="shortcut icon" href="../../img/favicon.ico" />
-    <title>Concepts - BridgeFlow Docs</title>
+    <title>Moved - BridgeFlow Docs</title>
     <link rel="stylesheet" href="../../css/theme.css" />
     <link rel="stylesheet" href="../../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
     
       <script>
         // Current page data
-        var mkdocs_page_name = "Concepts";
+        var mkdocs_page_name = "Moved";
         var mkdocs_page_input_path = "topics\\concepts.md";
         var mkdocs_page_url = "/bridgeflow-docs/topics/concepts/";
       </script>
@@ -43,32 +43,27 @@
                 <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
                 </li>
               </ul>
+              <p class="caption"><span class="caption-text">Products</span></p>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../quickstart/">Quickstart</a>
-                </li>
-              </ul>
-              <ul class="current">
-                <li class="toctree-l1 current"><a class="reference internal current" href="#">Concepts</a>
-    <ul class="current">
-    <li class="toctree-l2"><a class="reference internal" href="#events">Events</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#policies">Policies</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#cases">Cases</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#how-they-work-together">How They Work Together</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#related-references">Related References</a>
-    </li>
-    </ul>
-                </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../products/control-tower/">Control Tower</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../products/control-tower/quickstart/">Quickstart</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../products/control-tower/concepts/">Concepts</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../products/control-tower/trl7-validation/">TRL 7 Validation</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../products/control-tower/public-api/">Public API</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../products/control-tower/integration-guide/">Integration Guide</a>
+                  </li>
               </ul>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../../current/control-tower/public-api/">API Reference</a>
+                <li class="toctree-l1"><a class="reference internal" href="../../vision/bf-integration/">Vision</a>
                 </li>
               </ul>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../vision/">Vision</a>
+                <li class="toctree-l1"><a class="reference internal" href="../../api-reference/">API Reference</a>
                 </li>
               </ul>
       </div>
@@ -85,7 +80,7 @@
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
     <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
-      <li class="breadcrumb-item active">Concepts</li>
+      <li class="breadcrumb-item active">Moved</li>
     <li class="wy-breadcrumbs-aside">
     </li>
   </ul>
@@ -94,56 +89,14 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <h1 id="core-concepts">Core Concepts</h1>
-<p>This page explains Bridgeflow without implementation detail.</p>
-<h2 id="events">Events</h2>
-<p>Events are normalized operational signals from external systems (ERP, WMS, TMS, carriers, sensors).</p>
-<p>Examples:
-- <code>shipment.created</code>
-- <code>shipment.delayed</code>
-- <code>shipment.delivered</code></p>
-<p>Every event includes:
-- who it belongs to (<code>tenant_id</code>)
-- what happened (<code>event_type</code>)
-- when it happened (<code>occurred_at</code>)
-- business context (<code>payload</code>)</p>
-<h2 id="policies">Policies</h2>
-<p>Policies convert raw events into decisions.</p>
-<p>Examples:
-- If delay exceeds 4 hours, trigger an exception.
-- If weather risk is high, elevate case priority.</p>
-<p>Policy output typically updates risk state and may trigger downstream actions.</p>
-<h2 id="cases">Cases</h2>
-<p>Cases are actionable exception records created when policies indicate intervention is needed.</p>
-<p>A case captures:
-- the triggering condition
-- severity and SLA target
-- ownership and lifecycle status</p>
-<p>In the live Control Tower, cases are created autonomously when configured policy thresholds are crossed.</p>
-<h2 id="how-they-work-together">How They Work Together</h2>
-<ol>
-<li>Event arrives from a connected system.</li>
-<li>Policy engine evaluates event + context.</li>
-<li>Risk score/state updates.</li>
-<li>Case is created or updated when action is required.</li>
-</ol>
-<p>Result: teams do not need to manually monitor every signal. Bridgeflow surfaces and prioritizes what needs attention.</p>
-<h2 id="related-references">Related References</h2>
+                <h1 id="moved">Moved</h1>
+<p>This page moved to:</p>
 <ul>
-<li>Architecture:
-<code>../ARCHITECTURE/</code></li>
-<li>Current system overview:
-<code>../current/control-tower/</code></li>
-<li>Public API:
-<code>../current/control-tower/public-api/</code></li>
+<li><code>../products/control-tower/concepts/</code></li>
 </ul>
               
             </div>
           </div><footer>
-    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
-        <a href="../quickstart/" class="btn btn-neutral float-left" title="Quickstart"><span class="icon icon-circle-arrow-left"></span> Previous</a>
-        <a href="../../current/control-tower/public-api/" class="btn btn-neutral float-right" title="API Reference">Next <span class="icon icon-circle-arrow-right"></span></a>
-    </div>
 
   <hr/>
 
@@ -165,10 +118,6 @@
   <span class="rst-current-version" data-toggle="rst-current-version">
     
     
-      <span><a href="../quickstart/" style="color: #fcfcfc">&laquo; Previous</a></span>
-    
-    
-      <span><a href="../../current/control-tower/public-api/" style="color: #fcfcfc">Next &raquo;</a></span>
     
   </span>
 </div>

@@ -21,6 +21,10 @@
          <lastmod>2026-02-23</lastmod>
     </url>
     <url>
+         <loc>https://brockhager.github.io/bridgeflow-docs/api-reference/</loc>
+         <lastmod>2026-02-23</lastmod>
+    </url>
+    <url>
          <loc>https://brockhager.github.io/bridgeflow-docs/development/</loc>
          <lastmod>2026-02-23</lastmod>
     </url>
@@ -914,6 +918,30 @@
     </url>
     <url>
          <loc>https://brockhager.github.io/bridgeflow-docs/ports/readme/</loc>
+         <lastmod>2026-02-23</lastmod>
+    </url>
+    <url>
+         <loc>https://brockhager.github.io/bridgeflow-docs/products/control-tower/</loc>
+         <lastmod>2026-02-23</lastmod>
+    </url>
+    <url>
+         <loc>https://brockhager.github.io/bridgeflow-docs/products/control-tower/concepts/</loc>
+         <lastmod>2026-02-23</lastmod>
+    </url>
+    <url>
+         <loc>https://brockhager.github.io/bridgeflow-docs/products/control-tower/integration-guide/</loc>
+         <lastmod>2026-02-23</lastmod>
+    </url>
+    <url>
+         <loc>https://brockhager.github.io/bridgeflow-docs/products/control-tower/public-api/</loc>
+         <lastmod>2026-02-23</lastmod>
+    </url>
+    <url>
+         <loc>https://brockhager.github.io/bridgeflow-docs/products/control-tower/quickstart/</loc>
+         <lastmod>2026-02-23</lastmod>
+    </url>
+    <url>
+         <loc>https://brockhager.github.io/bridgeflow-docs/products/control-tower/trl7-validation/</loc>
          <lastmod>2026-02-23</lastmod>
     </url>
     <url>

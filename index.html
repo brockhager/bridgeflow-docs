@@ -42,37 +42,40 @@
               <ul class="current">
                 <li class="toctree-l1 current"><a class="reference internal current" href="#">Home</a>
     <ul class="current">
-    <li class="toctree-l2"><a class="reference internal" href="#1-start-here-new-users-and-partners">1. Start Here (New Users and Partners)</a>
+    <li class="toctree-l2"><a class="reference internal" href="#1-live-products">1. Live Products</a>
         <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#live-demo">Live Demo</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#key-capabilities">Key Capabilities</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#why-it-matters-lima-pilot">Why It Matters: Lima Pilot</a>
+    <li class="toctree-l3"><a class="reference internal" href="#control-tower-live-pilot">Control Tower (Live Pilot)</a>
     </li>
         </ul>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#2-developer-quickstart-integrators">2. Developer Quickstart (Integrators)</a>
+    <li class="toctree-l2"><a class="reference internal" href="#2-future-vision">2. Future Vision</a>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#3-deep-dives-architecture-and-vision">3. Deep Dives (Architecture and Vision)</a>
+    <li class="toctree-l2"><a class="reference internal" href="#3-developer-hub">3. Developer Hub</a>
     </li>
     </ul>
                 </li>
               </ul>
+              <p class="caption"><span class="caption-text">Products</span></p>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="topics/quickstart/">Quickstart</a>
+                  <li class="toctree-l1"><a class="reference internal" href="products/control-tower/">Control Tower</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="products/control-tower/quickstart/">Quickstart</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="products/control-tower/concepts/">Concepts</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="products/control-tower/trl7-validation/">TRL 7 Validation</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="products/control-tower/public-api/">Public API</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="products/control-tower/integration-guide/">Integration Guide</a>
+                  </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="vision/bf-integration/">Vision</a>
                 </li>
               </ul>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="topics/concepts/">Concepts</a>
-                </li>
-              </ul>
-              <ul>
-                <li class="toctree-l1"><a class="reference internal" href="current/control-tower/public-api/">API Reference</a>
-                </li>
-              </ul>
-              <ul>
-                <li class="toctree-l1"><a class="reference internal" href="topics/vision/">Vision</a>
+                <li class="toctree-l1"><a class="reference internal" href="api-reference/">API Reference</a>
                 </li>
               </ul>
       </div>
@@ -98,46 +101,36 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <h1 id="bridgeflow-control-tower-docs">Bridgeflow Control Tower Docs</h1>
-<p>Bridgeflow is a logistics runtime that enforces policy across distributed systems. You keep your ERP/WMS/TMS; Bridgeflow ingests events, applies rules, and coordinates exception handling in real time.</p>
-<h2 id="1-start-here-new-users-and-partners">1. Start Here (New Users and Partners)</h2>
-<h3 id="live-demo">Live Demo</h3>
+                <h1 id="bridgeflow-the-policy-first-logistics-runtime">Bridgeflow: The Policy-First Logistics Runtime</h1>
+<p>Bridgeflow is a policy enforcement layer for logistics operations.<br />
+Core model: <strong>Event -&gt; Policy -&gt; Action</strong>.</p>
+<p>Teams keep their ERP/WMS/TMS systems, while Bridgeflow ingests operational signals, evaluates policy, and coordinates action automatically.</p>
+<h2 id="1-live-products">1. Live Products</h2>
+<h3 id="control-tower-live-pilot">Control Tower (Live Pilot)</h3>
+<p>See the Lima/Callao pilot in production:</p>
 <ul>
-<li>Public Control Tower: <a href="https://control-tower.up.railway.app/">control-tower.up.railway.app</a></li>
+<li>Product docs: <code>products/control-tower/</code></li>
+<li>Live demo: <a href="https://control-tower.up.railway.app/">control-tower.up.railway.app</a></li>
 </ul>
 <p><img alt="Bridgeflow Control Tower live view" src="images/phase-60-control-tower-home.png" /></p>
-<h3 id="key-capabilities">Key Capabilities</h3>
+<h2 id="2-future-vision">2. Future Vision</h2>
+<p>Bridgeflow's long-term architecture is preserved in the BF-INTEGRATION vision archive:</p>
 <ul>
-<li>TRL 7 validated live loop (Event -&gt; Policy -&gt; Risk -&gt; Case).</li>
-<li>Autonomous case creation with SLA assignment.</li>
-<li>Live risk scoring and public resilience visibility.</li>
+<li>Vision deep dive: <code>vision/bf-integration/</code></li>
+<li>Vision index and migration map: <code>vision/</code></li>
 </ul>
-<h3 id="why-it-matters-lima-pilot">Why It Matters: Lima Pilot</h3>
-<p>In the Callao/Lima pilot, Bridgeflow moved from mock data to live weather ingestion and autonomous response. On February 20, 2026, the system completed the full chain from live signal to policy execution and case creation, proving production-ready operations.</p>
-<h2 id="2-developer-quickstart-integrators">2. Developer Quickstart (Integrators)</h2>
-<p>Goal: connect your system and send your first event.</p>
-<ol>
-<li>Get an API key/token:
-<code>current/control-tower/integration-guide/</code></li>
-<li>Send your first event in under 5 minutes:
-<code>topics/quickstart/</code></li>
-<li>Verify and monitor through the API:
-<code>current/control-tower/public-api/</code></li>
-</ol>
-<h2 id="3-deep-dives-architecture-and-vision">3. Deep Dives (Architecture and Vision)</h2>
+<h2 id="3-developer-hub">3. Developer Hub</h2>
+<p>Start integrating without choosing a product first:</p>
 <ul>
-<li>Current System: how the Control Tower works today (events, policy engine, cases):
-<code>topics/concepts/</code></li>
-<li>Future Vision (BF-INTEGRATION): enterprise roadmap and archived design vision:
-<code>topics/vision/</code></li>
-<li>TRL 7 validation details:
-<code>current/control-tower/trl7-validation/</code></li>
+<li>API reference hub: <code>api-reference/</code></li>
+<li>Integration guide: <code>products/control-tower/integration-guide/</code></li>
+<li>First event quickstart: <code>products/control-tower/quickstart/</code></li>
 </ul>
               
             </div>
           </div><footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
-        <a href="topics/quickstart/" class="btn btn-neutral float-right" title="Quickstart">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="products/control-tower/" class="btn btn-neutral float-right" title="Control Tower">Next <span class="icon icon-circle-arrow-right"></span></a>
     </div>
 
   <hr/>
@@ -161,7 +154,7 @@
     
     
     
-      <span><a href="topics/quickstart/" style="color: #fcfcfc">Next &raquo;</a></span>
+      <span><a href="products/control-tower/" style="color: #fcfcfc">Next &raquo;</a></span>
     
   </span>
 </div>
@@ -181,5 +174,5 @@
 
 <!--
 MkDocs version : 1.6.1
-Build Date UTC : 2026-02-23 04:33:45.282511+00:00
+Build Date UTC : 2026-02-23 04:44:24.902803+00:00
 -->

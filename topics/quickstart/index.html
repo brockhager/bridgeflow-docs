@@ -5,14 +5,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://brockhager.github.io/bridgeflow-docs/topics/quickstart/" />
       <link rel="shortcut icon" href="../../img/favicon.ico" />
-    <title>Quickstart - BridgeFlow Docs</title>
+    <title>Moved - BridgeFlow Docs</title>
     <link rel="stylesheet" href="../../css/theme.css" />
     <link rel="stylesheet" href="../../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
     
       <script>
         // Current page data
-        var mkdocs_page_name = "Quickstart";
+        var mkdocs_page_name = "Moved";
         var mkdocs_page_input_path = "topics\\quickstart.md";
         var mkdocs_page_url = "/bridgeflow-docs/topics/quickstart/";
       </script>
@@ -43,32 +43,27 @@
                 <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
                 </li>
               </ul>
-              <ul class="current">
-                <li class="toctree-l1 current"><a class="reference internal current" href="#">Quickstart</a>
-    <ul class="current">
-    <li class="toctree-l2"><a class="reference internal" href="#step-1-get-an-api-key">Step 1: Get an API Key</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#step-2-send-your-first-event">Step 2: Send Your First Event</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#step-3-view-public-resilience-data">Step 3: View Public Resilience Data</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#event-types-you-can-start-with">Event Types You Can Start With</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#next">Next</a>
-    </li>
-    </ul>
+              <p class="caption"><span class="caption-text">Products</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../products/control-tower/">Control Tower</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../products/control-tower/quickstart/">Quickstart</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../products/control-tower/concepts/">Concepts</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../products/control-tower/trl7-validation/">TRL 7 Validation</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../products/control-tower/public-api/">Public API</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../products/control-tower/integration-guide/">Integration Guide</a>
+                  </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../vision/bf-integration/">Vision</a>
                 </li>
               </ul>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../concepts/">Concepts</a>
-                </li>
-              </ul>
-              <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../../current/control-tower/public-api/">API Reference</a>
-                </li>
-              </ul>
-              <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../vision/">Vision</a>
+                <li class="toctree-l1"><a class="reference internal" href="../../api-reference/">API Reference</a>
                 </li>
               </ul>
       </div>
@@ -85,7 +80,7 @@
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
     <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
-      <li class="breadcrumb-item active">Quickstart</li>
+      <li class="breadcrumb-item active">Moved</li>
     <li class="wy-breadcrumbs-aside">
     </li>
   </ul>
@@ -94,58 +89,14 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <h1 id="developer-quickstart">Developer Quickstart</h1>
-<p>Use this page if your goal is: "I want to connect my system quickly."</p>
-<p>Estimated time: 5-10 minutes.</p>
-<h2 id="step-1-get-an-api-key">Step 1: Get an API Key</h2>
-<p>Bridgeflow currently provisions integration tokens during onboarding.</p>
+                <h1 id="moved">Moved</h1>
+<p>This page moved to:</p>
 <ul>
-<li>Auth model: <code>Authorization: Bearer &lt;INTEGRATION_TOKEN&gt;</code></li>
-<li>Full onboarding and token details:
-<code>../current/control-tower/integration-guide/</code></li>
+<li><code>../products/control-tower/quickstart/</code></li>
 </ul>
-<h2 id="step-2-send-your-first-event">Step 2: Send Your First Event</h2>
-<p>Send a normalized event to the ingest endpoint:
-- <code>POST https://control-tower.up.railway.app/api/control/events</code></p>
-<pre><code class="language-bash">curl -X POST &quot;https://control-tower.up.railway.app/api/control/events&quot; \
-  -H &quot;Content-Type: application/json&quot; \
-  -H &quot;Authorization: Bearer &lt;INTEGRATION_TOKEN&gt;&quot; \
-  -d '{
-    &quot;event_id&quot;: &quot;evt_demo_20260223_0001&quot;,
-    &quot;tenant_id&quot;: &quot;tenant-acme&quot;,
-    &quot;event_type&quot;: &quot;shipment.delayed&quot;,
-    &quot;source&quot;: &quot;customer-wms&quot;,
-    &quot;occurred_at&quot;: &quot;2026-02-23T18:00:00Z&quot;,
-    &quot;payload&quot;: {
-      &quot;shipment_id&quot;: &quot;SHP-10001&quot;,
-      &quot;reason&quot;: &quot;Port congestion&quot;,
-      &quot;delay_minutes&quot;: 240
-    }
-  }'
-</code></pre>
-<h2 id="step-3-view-public-resilience-data">Step 3: View Public Resilience Data</h2>
-<p>Check the public resilience endpoint:
-- <code>GET https://control-tower.up.railway.app/api/v1/public/resilience-status</code></p>
-<p>Reference:
-- <code>../current/control-tower/public-api/</code></p>
-<h2 id="event-types-you-can-start-with">Event Types You Can Start With</h2>
-<ul>
-<li><code>shipment.created</code></li>
-<li><code>shipment.delayed</code></li>
-<li><code>shipment.delivered</code></li>
-<li><code>shipment.delivery_failed</code></li>
-<li><code>shipment.tracking_stale</code></li>
-</ul>
-<h2 id="next">Next</h2>
-<p>For full schema and integration details:
-- <code>../current/control-tower/integration-guide/</code></p>
               
             </div>
           </div><footer>
-    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
-        <a href="../.." class="btn btn-neutral float-left" title="Home"><span class="icon icon-circle-arrow-left"></span> Previous</a>
-        <a href="../concepts/" class="btn btn-neutral float-right" title="Concepts">Next <span class="icon icon-circle-arrow-right"></span></a>
-    </div>
 
   <hr/>
 
@@ -167,10 +118,6 @@
   <span class="rst-current-version" data-toggle="rst-current-version">
     
     
-      <span><a href="../.." style="color: #fcfcfc">&laquo; Previous</a></span>
-    
-    
-      <span><a href="../concepts/" style="color: #fcfcfc">Next &raquo;</a></span>
     
   </span>
 </div>

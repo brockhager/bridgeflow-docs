@@ -3,12 +3,25 @@ site_url: https://brockhager.github.io/bridgeflow-docs/
 nav:
   - Home: index.md
   - Products:
+      - Overview: products/README.md
       - Control Tower: products/control-tower/README.md
       - Quickstart: products/control-tower/quickstart.md
       - Concepts: products/control-tower/concepts.md
       - TRL 7 Validation: products/control-tower/trl7-validation.md
       - Public API: products/control-tower/public-api.md
       - Integration Guide: products/control-tower/integration-guide.md
+      - Carrier Portal: products/carrier-portal.md
+      - Tracking Portal: products/tracking-portal.md
+  - Platform:
+      - Overview: platform/README.md
+      - Admin Console: platform/bf-admin-console.md
+      - Identity Service: platform/bf-identity.md
+      - Masterdata Service: platform/bf-masterdata.md
+      - Orders Service: platform/bf-orders.md
+      - Shipments Service: platform/bf-shipments.md
+      - Search Service: platform/bf-search.md
+      - Fintech Service: platform/bf-fintech.md
+      - Warehouse Service: platform/bf-warehouse.md
   - Vision: vision/bf-integration/README.md
   - API Reference: api-reference.md
 theme: readthedocs

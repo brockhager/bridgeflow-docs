@@ -4,7 +4,8 @@ Bridgeflow is a logistics runtime that enforces policy across distributed system
 
 Documentation is organized as a platform-centric portal:
 - `Home`: Bridgeflow platform overview
-- `Products`: live product documentation (Control Tower)
+- `Products`: end-user applications and runtimes
+- `Platform`: core services and internal modules
 - `Vision`: BF-INTEGRATION future architecture archive
 - `API Reference`: developer entry point across products
 

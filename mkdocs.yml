@@ -2,5 +2,16 @@ site_name: BridgeFlow Docs
 site_url: https://bridgeflow.readthedocs.io/
 nav:
   - Home: index.md
+  - Architecture: ARCHITECTURE.md
+  - Current System:
+      - Control Tower: current/control-tower/README.md
+      - TRL 7 Validation: current/control-tower/trl7-validation.md
+      - Public API: current/control-tower/public-api.md
+      - Integration Guide: current/control-tower/integration-guide.md
+  - Future Vision:
+      - Vision Archive Index: vision/README.md
+      - BF-INTEGRATION Roadmap: roadmap/future-architecture/README.md
+  - Phase 60:
+      - Gap Analysis: phase-60-gap-analysis.md
 theme: readthedocs
 

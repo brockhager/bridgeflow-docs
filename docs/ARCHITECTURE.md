@@ -1,51 +1,113 @@
-# BridgeFlow Architecture
+# Bridgeflow Live Architecture (Phases 56-58)
 
-## 5-Layer Design Pattern
+Last updated: February 23, 2026
 
-BridgeFlow follows the CTO-defined 5-layer conceptual model (Admin BridgeFlow + 5 functional layers). The conceptual model remains the project's design target, but the live implementation (Phases 18–21) follows pragmatic patterns that prioritize security, simplicity, and operability.
+## 1. System Reality
 
-### Conceptual model (for planning)
-- **Layer 0 — Admin BridgeFlow**: Admin portal and internal operations UI (admin-bridgeflow/).
-- **Layer 1 — Business Layer**: Domain logic, workflows, and high-level invariants (intended place for business services).
-- **Layer 2 — Communication Layer**: Protocol adapters, bridge wizards, integrations (QuickBooks, partner gateways, CSV ingest).
-- **Layer 3 — Data Mapping Layer**: Mapping rules and transform engines (optional until needed).
-- **Layer 4 — Platform Core**: Auth, monitoring, jobs, rate limiting, security primitives.
-- **Layer 5 — Infrastructure**: Persistence, Prisma, Redis, S3, deployments.
+Bridgeflow currently runs as a live control tower centered on `bf-control`.
 
----
+Production endpoint:
+- `https://control-tower.up.railway.app`
 
-## Implementation reality (Phases 18–21)
+This single deploy serves:
+- Public web interface (`/`, `/home`) from static assets built from `bf-control/home/`
+- Public status API (`/api/v1/public/resilience-status`)
+- Ingestion and case APIs (`/api/control/*`)
+- Background jobs (live weather ingest + escalation watcher)
 
-**Short summary:** The current codebase implements a pragmatic, route-handler-centric architecture where **business logic lives primarily in API route handlers (`api/handlers/*`) and calls Prisma directly**, and **tenant isolation is enforced via PostgreSQL Row-Level Security (RLS)**. The `api/lib/stores/` location is historical/optional and should not be treated as the canonical place for all business logic unless the team elects to perform a stores-first refactor.
+## 2. Runtime Components
 
-Key points:
-- Business logic: `api/handlers/*` (e.g., `tradingPartners.js`, `tpProfile.js`) orchestrate validation, Prisma queries, and responses.
-- Security: Tenancy is enforced by **RLS** in the DB; handlers and Prisma queries are written with RLS assumptions (see `scripts/check-rls.js`).
-- Frontend stores: `web/src/stores/*` are purely UI state and should never contain DB logic.
-- Communication adapters (QBO, partner gateway, CSV) live as handler modules and/or adapter files under `api/handlers/*` and `api/lib/*` as appropriate.
+### 2.1 `bf-control` FastAPI app
 
-### Mapping (conceptual layer → implementation)
-- Layer 0 (Admin): `admin-bridgeflow/`
-- Layer 1 (Business): `api/handlers/*` (route handlers) — business logic lives here today
-- Layer 2 (Communication): `api/handlers/bridges.js`, `handlers/qbo.js`, `handlers/partnerInbound.js`, upload handlers
-- Layer 3 (Data Mapping): Minimal / not present — per-adapter normalization happens in handlers
-- Layer 4 (Platform Core): `api/lib/rbac.js`, `lib/mtls.js`, `lib/rateLimiter.js`, auth handlers `handlers/auth.js` — **RLS is the primary tenancy control**
-- Layer 5 (Infrastructure): `prisma/`, `api/lib/db.js`, `lib/redis.js`, `certs/`, deploy scripts
+Core responsibilities:
+- Event ingest and normalization (`POST /api/control/events`)
+- Policy/risk evaluation
+- Case lifecycle management (`/api/control/cases*`)
+- Public resilience projection (`GET /api/v1/public/resilience-status`)
+- Static frontend serving for public map/feed (`/`, `/home`)
 
----
+### 2.2 Background jobs
 
-## Guidance / Best Practices
-- Do **not** reintroduce `api/lib/stores/` as the canonical business-logic boundary without an explicit refactor plan. If the team decides to move to a stores/services model, follow a dedicated migration plan and update docs accordingly.
-- Prefer small, well-tested service modules (e.g., `api/services/*`) for complex logic extracted from handlers. Keep route handlers thin (validate, auth, call service, return response).
-- Continue to rely on RLS for tenancy; add a small suite of RLS smoke tests (see `scripts/check-rls.js`) that ensure policies behave as expected.
-- Only add a shared mapping engine if multiple adapters require runtime mapping; otherwise keep adapter-specific normalization local to those handlers.
-- Add a short “Refactor Checklist” when extracting logic to services (tests, RLS-awareness, idempotency, metrics).
+- Live weather ingest loop (Lima pilot / OpenWeatherMap)
+- Escalation watcher loop (SLA breach detection)
 
----
+Both run in-process via FastAPI lifespan startup.
 
-## Store Separation Rule (updated)
-1. **Frontend stores** (`web/src/stores/*`) MUST only handle UI state and API interactions.
-2. **Backend data/service modules** (preferred) should live under `api/services/*` or remain as small, well-documented helper modules when appropriate.
-3. The legacy `api/lib/stores/*` path is **deprecated** as the canonical source of truth; treat existing modules there as historical and migrate them when extracting service boundaries.
+### 2.3 Data plane
 
-(If your change touches tenancy or data access, add an RLS smoke test and link it to `scripts/check-rls.js`.)
+Primary stores in Postgres:
+- `events`
+- `cases`
+- `risk_states`
+- `action_requests`
+
+Isolation model:
+- tenant-scoped processing keyed by `tenant_id`
+- idempotency on inbound events via `(tenant_id, event_id)`
+
+## 3. Public Web + API Surface
+
+### Public UI (no login required)
+
+- `GET /`
+- `GET /home`
+
+Displays:
+- Callao map marker with risk-driven color
+- weather snapshot
+- anonymized recent activity feed
+
+### Public status API
+
+- `GET /api/v1/public/resilience-status`
+- Rate limit: `PUBLIC_API_RATE_LIMIT` (default `60` req/min/IP, in-memory per instance)
+- Error model includes structured JSON for `429`/`500`
+
+### Ingestion API
+
+- `POST /api/control/events`
+- Normalized envelope:
+  - `event_id`
+  - `tenant_id`
+  - `event_type`
+  - `source`
+  - `occurred_at`
+  - `payload`
+
+## 4. Deployment Model
+
+Railway deploy:
+- Service: `bf-control`
+- Builder: Dockerfile
+- Multi-stage build:
+  - Node stage compiles `home/` static assets
+  - Python stage runs FastAPI and serves compiled assets
+
+Health endpoint:
+- `GET /health`
+
+## 5. TRL 7 Validation Anchor
+
+Validated live loop milestone:
+- Date: February 20, 2026
+- UTC evidence chain:
+  - `conditions_updated`
+  - `POLICY_TRIGGERED`
+  - `RISK_SCORE_UPDATED`
+  - `CASE_CREATED`
+- Outcome: autonomous case creation with 4-hour SLA
+
+Reference:
+- `bf-control/docs/phases51-60/README.md` (Phase 56 section)
+
+## 6. Phase 59+ Architecture Direction
+
+Planned extensions:
+- `bf-connect` service for integration credential and webhook management
+- adapter library for ERP/WMS/TMS systems
+- developer portal for self-service onboarding
+
+Current architecture remains production-safe for:
+- public visibility
+- inbound normalized events
+- tenant-scoped policy execution

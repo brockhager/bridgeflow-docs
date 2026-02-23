@@ -1,11 +1,21 @@
-# BridgeFlow Documentation
+# Bridgeflow Documentation
 
-Welcome to BridgeFlow API platform documentation.
+Bridgeflow documentation is split into two tracks:
 
-## Getting Started
-1. [Try BridgeFlow Free](/)
-2. [API Reference](#)
-3. [Guides](#)
+1. **Current System (Live):** what is operational today in production.
+2. **Future Vision (BF-INTEGRATION):** preserved roadmap architecture and legacy design docs.
 
-*Documentation is being actively developed.*
+## Start Here
+
+- Current live platform:
+  - `docs/current/control-tower/README.md`
+- Live architecture:
+  - `docs/ARCHITECTURE.md`
+- Phase 60 gap analysis and migration plan:
+  - `docs/phase-60-gap-analysis.md`
+- Future-vision index:
+  - `docs/roadmap/future-architecture/README.md`
+
+Live production URL:
+- `https://control-tower.up.railway.app/`
 

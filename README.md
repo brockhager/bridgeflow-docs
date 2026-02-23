@@ -1,15 +1,39 @@
-# BridgeFlow Documentation & Marketing
+# Bridgeflow Documentation
 
-This repository contains the marketing landing and pricing pages, and lightweight documentation for BridgeFlow — an API integration platform for SMBs.
+Bridgeflow documentation is now organized as a phased narrative:
 
-Contents
-- `web/` — Landing page (`index.html`), pricing page (`pricing.html`), styles and minimal JS for local preview.
-- `getting-started/`, `guides/`, `api-reference/`, `troubleshooting/` — Documentation content and guides.
+- **Today (Live):** Bridgeflow Control Tower is operational in production.
+- **Tomorrow (Vision):** BF-INTEGRATION remains the long-term enterprise runtime architecture.
 
-Quick start (local)
-1. Open `web/index.html` in a browser to preview the landing page.
-2. Open `web/pricing.html` to preview the pricing page.
+Phase 60 objective is to document both clearly without deleting historical design work.
 
-Notes
-- Images are placeholders and will be replaced with production assets later.
-- This repo is primarily documentation and static marketing assets; it is not a full website build pipeline.
+## Today: Current System (Live)
+
+As of February 20, 2026:
+- Phase 56 TRL 7 live-loop validation is complete.
+- Phase 57 public backend API is complete.
+- Phase 58 public frontend is complete and served by `bf-control`.
+
+Live endpoints:
+- Control Tower UI: `https://control-tower.up.railway.app/`
+- Public resilience API: `GET /api/v1/public/resilience-status`
+- Event ingest API: `POST /api/control/events`
+
+Start here:
+- `docs/current/control-tower/README.md`
+- `docs/ARCHITECTURE.md`
+
+## Tomorrow: Future Vision (BF-INTEGRATION)
+
+Legacy and roadmap architecture content is preserved and being re-indexed as planned/future material, not removed.
+
+Future-vision index:
+- `docs/roadmap/future-architecture/README.md`
+
+## Phase 60 Tracking
+
+- Gap analysis and update plan: `docs/phase-60-gap-analysis.md`
+
+## Hosting Recommendation
+
+Recommended immediate public hosting: GitHub Pages, then optional custom domain once structure stabilizes.

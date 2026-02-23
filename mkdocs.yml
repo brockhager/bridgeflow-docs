@@ -10,6 +10,7 @@ nav:
       - TRL 7 Validation: products/control-tower/trl7-validation.md
       - Public API: products/control-tower/public-api.md
       - Integration Guide: products/control-tower/integration-guide.md
+      - Coords App: products/coords-app.md
       - Carrier Portal: products/carrier-portal.md
       - Tracking Portal: products/tracking-portal.md
   - Platform:

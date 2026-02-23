@@ -20,6 +20,12 @@ These repos are not positioned as standalone customer products, but they are cri
 | `bf-fintech` | Platform Service | Invoicing and payment workflows | Development | Service endpoint not yet documented |
 | `bf-warehouse` | Platform Service | Inventory and pick task flows | Development | Service endpoint not yet documented |
 
+## BF Umbrella Companion Apps
+
+| App | Role | Status | Primary Endpoint |
+|---|---|---|---|
+| `coordsapp` | Spatial identity and coordination companion app (spec/core/cloud) | Active Development | `https://coords.up.railway.app` (from local docs) |
+
 ## Service Pages
 
 - Admin Console: `bf-admin-console/`

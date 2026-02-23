@@ -19,6 +19,7 @@ See the Lima/Callao pilot in production:
 Other product repos in workspace:
 - `products/carrier-portal/`
 - `products/tracking-portal/`
+- `products/coords-app/`
 
 ## 2. Platform Stack
 

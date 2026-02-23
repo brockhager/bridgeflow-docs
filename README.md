@@ -9,6 +9,8 @@ Documentation is organized as a platform-centric portal:
 - `Vision`: BF-INTEGRATION future architecture archive
 - `API Reference`: developer entry point across products
 
+BF umbrella companion apps (such as `coordsapp`) are documented under `Products` and referenced from `Platform` inventory.
+
 Live docs:
 - `https://brockhager.github.io/bridgeflow-docs/`
 

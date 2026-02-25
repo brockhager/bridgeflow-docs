@@ -23,6 +23,19 @@ nav:
       - Search Service: platform/bf-search.md
       - Fintech Service: platform/bf-fintech.md
       - Warehouse Service: platform/bf-warehouse.md
+  - Features:
+      - Overview: features/README.md
+      - Shipments: features/SHIPMENTS.md
+      - Admin Console: features/ADMIN_CONSOLE.md
+      - Control Tower: features/CONTROL_TOWER.md
+      - Identity: features/IDENTITY.md
+      - Masterdata: features/MASTERDATA.md
+      - Orders: features/ORDERS.md
+      - Warehouse: features/WAREHOUSE.md
+      - Search: features/SEARCH.md
+      - Fintech: features/FINTECH.md
+      - Carrier Portal: features/CARRIER_PORTAL.md
+      - Tracking Portal: features/TRACKING_PORTAL.md
   - Vision: vision/bf-integration/README.md
   - API Reference: api-reference.md
 theme: readthedocs

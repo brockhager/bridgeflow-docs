@@ -58,3 +58,7 @@ Start integrating without choosing a product first:
 - Integration guide: `products/control-tower/integration-guide/`
 - First event quickstart: `products/control-tower/quickstart/`
 
+## 5. Feature Catalog
+
+- App-by-app feature index: [features/README.md](features/README.md)
+

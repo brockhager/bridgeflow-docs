@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="../../css/theme.css" />
     <link rel="stylesheet" href="../../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../../stylesheets/extra.css" rel="stylesheet" />
     
       <script>
         // Current page data
@@ -43,7 +44,16 @@
                 <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
                 </li>
               </ul>
-              <p class="caption"><span class="caption-text">Products</span></p>
+              <p class="caption"><span class="caption-text">Start Here</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../ONBOARDING/">Onboarding</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../ARCHITECTURE/">Architecture</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../api-reference/">API Reference Hub</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Product Suite</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../products/">Overview</a>
                   </li>
@@ -66,7 +76,7 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../products/tracking-portal/">Tracking Portal</a>
                   </li>
               </ul>
-              <p class="caption"><span class="caption-text">Platform</span></p>
+              <p class="caption"><span class="caption-text">Platform Services</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../platform/">Overview</a>
                   </li>
@@ -87,12 +97,35 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../platform/bf-warehouse/">Warehouse Service</a>
                   </li>
               </ul>
+              <p class="caption"><span class="caption-text">Capability Catalog</span></p>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../../vision/bf-integration/">Vision</a>
-                </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/SHIPMENTS/">Shipments</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/ADMIN_CONSOLE/">Admin Console</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/CONTROL_TOWER/">Control Tower</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/IDENTITY/">Identity</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/MASTERDATA/">Masterdata</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/ORDERS/">Orders</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/WAREHOUSE/">Warehouse</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/SEARCH/">Search</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/FINTECH/">Fintech</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/CARRIER_PORTAL/">Carrier Portal</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/TRACKING_PORTAL/">Tracking Portal</a>
+                  </li>
               </ul>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../../api-reference/">API Reference</a>
+                <li class="toctree-l1"><a class="reference internal" href="../../vision/bf-integration/">Vision Archive</a>
                 </li>
               </ul>
       </div>
@@ -118,15 +151,15 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <h1 id="end-to-end-email-flow-test-real-smtp">End-to-End Email Flow Test (Real SMTP)</h1>
+                <h1 id="end-to-end-email-flow-test-real-smtp">End-to-End Email Flow Test (Real SMTP)<a class="headerlink" href="#end-to-end-email-flow-test-real-smtp" title="Permanent link">&para;</a></h1>
 <p>Use this guide to validate real email delivery through the Job Orchestrator. This runs locally (not CI) with disposable SMTP credentials and sends to <code>brockhager@gmail.com</code>.</p>
-<h2 id="prerequisites">Prerequisites</h2>
+<h2 id="prerequisites">Prerequisites<a class="headerlink" href="#prerequisites" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Postgres reachable with <code>DATABASE_URL</code> set (non-mock).</li>
 <li>Node/pnpm installed.</li>
 <li>A test SMTP account (e.g., Gmail app password or Ethereal). Do <strong>not</strong> commit credentials.</li>
 </ul>
-<h2 id="required-environment">Required environment</h2>
+<h2 id="required-environment">Required environment<a class="headerlink" href="#required-environment" title="Permanent link">&para;</a></h2>
 <pre><code>DATABASE_URL=postgresql://user:pass@host:5432/db?schema=public
 USE_MOCK_DB=false
 EMAIL_HOST=smtp.gmail.com
@@ -141,7 +174,7 @@ EMAIL_TO=brockhager@gmail.com
 - <code>CLEANUP=true|false</code> (default <code>true</code>) — whether the script should delete the created test records after a successful run.
 - <code>USE_EMAIL_SIMULATION=true</code> — force simulation instead of real SMTP (helps debugging without sending mail).
 Optional: <code>USE_EMAIL_SIMULATION=true</code> to skip real send.</p>
-<h2 id="run-the-test">Run the test</h2>
+<h2 id="run-the-test">Run the test<a class="headerlink" href="#run-the-test" title="Permanent link">&para;</a></h2>
 <pre><code class="language-powershell">$env:DATABASE_URL=&quot;postgresql://...&quot;
 $env:USE_MOCK_DB=&quot;false&quot;
 $env:EMAIL_HOST=&quot;smtp.gmail.com&quot;
@@ -153,18 +186,18 @@ $env:EMAIL_FROM=&quot;bridgeflow-test@yourdomain.com&quot;
 $env:EMAIL_TO=&quot;brockhager@gmail.com&quot;
 node scripts/test-email-flow.js
 </code></pre>
-<h2 id="what-the-script-does">What the script does</h2>
+<h2 id="what-the-script-does">What the script does<a class="headerlink" href="#what-the-script-does" title="Permanent link">&para;</a></h2>
 <p>1) Creates or reuses an active <code>email_sender</code> Resource with the provided SMTP config.
 2) Creates a <code>SEND_INVOICE</code> job with one task to <code>EMAIL_TO</code>.
 3) Runs the worker once to process the job.
 4) Prints job state, invoice record, and audit logs. The script fails if the job is not <code>SUCCEEDED</code>.</p>
-<h2 id="expected-outcome">Expected outcome</h2>
+<h2 id="expected-outcome">Expected outcome<a class="headerlink" href="#expected-outcome" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Console shows <code>✅ Email flow test completed — check inbox for delivery</code>.</li>
 <li>An email arrives at <code>brockhager@gmail.com</code>.</li>
 <li>Invoice record exists and audit logs show send/completion events.</li>
 </ul>
-<h2 id="safety-notes">Safety notes</h2>
+<h2 id="safety-notes">Safety notes<a class="headerlink" href="#safety-notes" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Use disposable or test-only SMTP credentials; prefer app passwords.</li>
 <li>Never commit <code>.env</code> files with secrets.</li>

@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="../../../css/theme.css" />
     <link rel="stylesheet" href="../../../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../../../stylesheets/extra.css" rel="stylesheet" />
     
       <script>
         // Current page data
@@ -43,7 +44,16 @@
                 <li class="toctree-l1"><a class="reference internal" href="../../..">Home</a>
                 </li>
               </ul>
-              <p class="caption"><span class="caption-text">Products</span></p>
+              <p class="caption"><span class="caption-text">Start Here</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../ONBOARDING/">Onboarding</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../ARCHITECTURE/">Architecture</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../api-reference/">API Reference Hub</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Product Suite</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../../products/">Overview</a>
                   </li>
@@ -66,7 +76,7 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../../products/tracking-portal/">Tracking Portal</a>
                   </li>
               </ul>
-              <p class="caption"><span class="caption-text">Platform</span></p>
+              <p class="caption"><span class="caption-text">Platform Services</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../../platform/">Overview</a>
                   </li>
@@ -87,12 +97,35 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../../platform/bf-warehouse/">Warehouse Service</a>
                   </li>
               </ul>
+              <p class="caption"><span class="caption-text">Capability Catalog</span></p>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../../../vision/bf-integration/">Vision</a>
-                </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../features/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../features/SHIPMENTS/">Shipments</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../features/ADMIN_CONSOLE/">Admin Console</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../features/CONTROL_TOWER/">Control Tower</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../features/IDENTITY/">Identity</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../features/MASTERDATA/">Masterdata</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../features/ORDERS/">Orders</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../features/WAREHOUSE/">Warehouse</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../features/SEARCH/">Search</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../features/FINTECH/">Fintech</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../features/CARRIER_PORTAL/">Carrier Portal</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../features/TRACKING_PORTAL/">Tracking Portal</a>
+                  </li>
               </ul>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../../../api-reference/">API Reference</a>
+                <li class="toctree-l1"><a class="reference internal" href="../../../vision/bf-integration/">Vision Archive</a>
                 </li>
               </ul>
       </div>
@@ -118,10 +151,10 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <h1 id="phase-20-partner-inbound-gateway-inbox-delivery-20a-20b-20c">Phase 20 — Partner Inbound Gateway &amp; Inbox Delivery (20A / 20B / 20C) ✅</h1>
+                <h1 id="phase-20-partner-inbound-gateway-inbox-delivery-20a-20b-20c">Phase 20 — Partner Inbound Gateway &amp; Inbox Delivery (20A / 20B / 20C) ✅<a class="headerlink" href="#phase-20-partner-inbound-gateway-inbox-delivery-20a-20b-20c" title="Permanent link">&para;</a></h1>
 <p><strong>Status:</strong> Completed and pushed to <code>main</code> (backend + admin UI + tests + docs). 🎉</p>
 <hr />
-<h2 id="executive-summary">Executive summary 🔍</h2>
+<h2 id="executive-summary">Executive summary 🔍<a class="headerlink" href="#executive-summary" title="Permanent link">&para;</a></h2>
 <p>Phase 20 delivered the Partner Inbound Gateway (20A) and Inbox Delivery (20B), and the Admin Partner Management UI (20C). This completes end-to-end partner onboarding and invoice ingestion: partners can be issued API keys via the admin UI, post invoice JSON to the Partner Gateway, and those invoices are enqueued and recorded in the S3 inbox for downstream processing.</p>
 <p>Key outcomes:
 - Secure partner API key model with RLS awareness (sha256-stored keys)
@@ -130,7 +163,7 @@
 - Minimal Admin UI to create/list/revoke partner keys
 - Tests (unit &amp; integration) and documentation updates</p>
 <hr />
-<h2 id="what-was-implemented-high-level">What was implemented (high-level) ✅</h2>
+<h2 id="what-was-implemented-high-level">What was implemented (high-level) ✅<a class="headerlink" href="#what-was-implemented-high-level" title="Permanent link">&para;</a></h2>
 <ul>
 <li>20A — Partner Inbound Gateway</li>
 <li>POST /partner/:partnerId/invoice (auth via X-Partner-Key)</li>
@@ -156,7 +189,7 @@
 <li>UI shows raw API key once in a dismissible banner and never persists/logs it</li>
 </ul>
 <hr />
-<h2 id="files-added-changed-representative">Files added / changed (representative) 🗂️</h2>
+<h2 id="files-added-changed-representative">Files added / changed (representative) 🗂️<a class="headerlink" href="#files-added-changed-representative" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Prisma / DB</li>
 <li>
@@ -195,7 +228,7 @@
 <li><code>docs/phases/phase-20-completion.md</code> (this file)</li>
 </ul>
 <hr />
-<h2 id="contracts-usage-examples">Contracts &amp; usage examples 🧾</h2>
+<h2 id="contracts-usage-examples">Contracts &amp; usage examples 🧾<a class="headerlink" href="#contracts-usage-examples" title="Permanent link">&para;</a></h2>
 <p>Create partner (admin):</p>
 <ul>
 <li>POST /api/admin/partner</li>
@@ -235,13 +268,13 @@
   --data '{&quot;invoiceId&quot;:&quot;I1&quot;,&quot;customerId&quot;:&quot;C1&quot;,&quot;amount&quot;:120.5,&quot;currency&quot;:&quot;USD&quot;,&quot;invoiceDate&quot;:&quot;2025-06-01&quot;}'
 </code></pre>
 <hr />
-<h2 id="testing-validation">Testing &amp; validation ✅</h2>
+<h2 id="testing-validation">Testing &amp; validation ✅<a class="headerlink" href="#testing-validation" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Unit &amp; integration tests added and run locally (Vitest): middleware, handlers, and admin page tests.</li>
 <li>Manual runs validated: idempotency behavior, redis enqueue (via in-memory redis stub), S3 inbox writes (via s3 mock), and admin UI flows (JSDOM tests).</li>
 </ul>
 <hr />
-<h2 id="security-operational-notes">Security &amp; operational notes 🔒</h2>
+<h2 id="security-operational-notes">Security &amp; operational notes 🔒<a class="headerlink" href="#security-operational-notes" title="Permanent link">&para;</a></h2>
 <ul>
 <li>API keys are stored only as SHA-256 hashes in <code>PartnerApiKey</code> — raw keys are shown only once on creation and not logged or persisted.</li>
 <li>RLS-compatible: <code>PartnerApiKey.organizationId</code> is denormalized to support tenant-scoped queries without costly joins.</li>
@@ -249,7 +282,7 @@
 <li>Rate limiting and RBAC applied: partner gateway is secured via <code>X-Partner-Key</code>; admin endpoints require admin permissions (<code>requirePermission('admin:partners:manage')</code>).</li>
 </ul>
 <hr />
-<h2 id="next-steps-optional-backlog">Next steps (optional backlog) ▶️</h2>
+<h2 id="next-steps-optional-backlog">Next steps (optional backlog) ▶️<a class="headerlink" href="#next-steps-optional-backlog" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Email delivery pipeline: implement <code>sendInvoiceNotification(orgId, s3Key)</code> and templating (deferred intentionally).</li>
 <li>End-to-end Playwright tests that run the full flow using a test server (create partner via UI, post invoice, assert S3 inbox entry).</li>

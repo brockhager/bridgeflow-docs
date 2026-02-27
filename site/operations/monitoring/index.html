@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="../../css/theme.css" />
     <link rel="stylesheet" href="../../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../../stylesheets/extra.css" rel="stylesheet" />
     
       <script>
         // Current page data
@@ -43,7 +44,16 @@
                 <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
                 </li>
               </ul>
-              <p class="caption"><span class="caption-text">Products</span></p>
+              <p class="caption"><span class="caption-text">Start Here</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../ONBOARDING/">Onboarding</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../ARCHITECTURE/">Architecture</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../api-reference/">API Reference Hub</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Product Suite</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../products/">Overview</a>
                   </li>
@@ -66,7 +76,7 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../products/tracking-portal/">Tracking Portal</a>
                   </li>
               </ul>
-              <p class="caption"><span class="caption-text">Platform</span></p>
+              <p class="caption"><span class="caption-text">Platform Services</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../platform/">Overview</a>
                   </li>
@@ -87,12 +97,35 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../platform/bf-warehouse/">Warehouse Service</a>
                   </li>
               </ul>
+              <p class="caption"><span class="caption-text">Capability Catalog</span></p>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../../vision/bf-integration/">Vision</a>
-                </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/SHIPMENTS/">Shipments</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/ADMIN_CONSOLE/">Admin Console</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/CONTROL_TOWER/">Control Tower</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/IDENTITY/">Identity</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/MASTERDATA/">Masterdata</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/ORDERS/">Orders</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/WAREHOUSE/">Warehouse</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/SEARCH/">Search</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/FINTECH/">Fintech</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/CARRIER_PORTAL/">Carrier Portal</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/TRACKING_PORTAL/">Tracking Portal</a>
+                  </li>
               </ul>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../../api-reference/">API Reference</a>
+                <li class="toctree-l1"><a class="reference internal" href="../../vision/bf-integration/">Vision Archive</a>
                 </li>
               </ul>
       </div>
@@ -118,9 +151,9 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <h1 id="monitoring-metrics-operations-guide">Monitoring &amp; Metrics — Operations Guide</h1>
+                <h1 id="monitoring-metrics-operations-guide">Monitoring &amp; Metrics — Operations Guide<a class="headerlink" href="#monitoring-metrics-operations-guide" title="Permanent link">&para;</a></h1>
 <p>Purpose: a concrete monitoring plan and dashboard spec for Phase 37 Week 2 (follow-up to structured logging). Use this as the source of truth for dashboard panels, PromQL examples, and alert rules.</p>
-<h2 id="core-dashboards">Core Dashboards</h2>
+<h2 id="core-dashboards">Core Dashboards<a class="headerlink" href="#core-dashboards" title="Permanent link">&para;</a></h2>
 <ol>
 <li>System Health (per service)</li>
 <li>
@@ -165,7 +198,7 @@
 </ul>
 </li>
 </ol>
-<h2 id="alerting-rules-examples">Alerting Rules (examples)</h2>
+<h2 id="alerting-rules-examples">Alerting Rules (examples)<a class="headerlink" href="#alerting-rules-examples" title="Permanent link">&para;</a></h2>
 <ul>
 <li>High failure rate (critical):</li>
 <li><code>rate(onboarding_jobs_failed_total[10m]) / rate(onboarding_jobs_processed_total[10m]) &gt; 0.05</code></li>
@@ -177,25 +210,25 @@
 <li>Job backlog growing (warning):</li>
 <li><code>increase(redis_list_length{queue="onboarding_jobs"}[5m]) &gt; 10</code></li>
 </ul>
-<h2 id="customer-specific-views">Customer-Specific Views</h2>
+<h2 id="customer-specific-views">Customer-Specific Views<a class="headerlink" href="#customer-specific-views" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Enable per-organization dashboards (tagged by <code>orgId</code>) for enterprise customers</li>
 <li>Provide read-only links with RBAC: dashboards only accessible if requestor has <code>monitor:*</code> for the org</li>
 </ul>
-<h2 id="data-retention-storage">Data Retention &amp; Storage</h2>
+<h2 id="data-retention-storage">Data Retention &amp; Storage<a class="headerlink" href="#data-retention-storage" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Default retention: 30 days (Prometheus)</li>
 <li>Enterprise retention option: 90 days</li>
 <li>Long-term trend aggregation: rollup hourly/daily metrics into Postgres/TimescaleDB for 1-year retention</li>
 </ul>
-<h2 id="implementation-notes">Implementation Notes</h2>
+<h2 id="implementation-notes">Implementation Notes<a class="headerlink" href="#implementation-notes" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Instrument code to increment counters and record durations (use OpenMetrics conventions)</li>
 <li>Extract metrics from structured logs where direct instrumenting is impractical (e.g., third-party lib timing)</li>
 <li>Correlate metrics with <code>traceId</code> and <code>sessionId</code> for drill-down in dashboards</li>
 <li>Provide direct links from Grafana panels to <code>GET /api/logs/trace/:traceId</code> and <code>GET /api/logs/session/:sessionId</code></li>
 </ul>
-<h2 id="runbook-snippets">Runbook Snippets</h2>
+<h2 id="runbook-snippets">Runbook Snippets<a class="headerlink" href="#runbook-snippets" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Triage provisioning failures:</li>
 <li>Check job queue depth and failure rate panel</li>
@@ -203,7 +236,7 @@
 <li><code>GET /api/logs/trace/:traceId</code> to view spans and errors</li>
 <li>If a retriable error, use the admin UI to <code>Retry provisioning</code> and monitor metrics</li>
 </ul>
-<h2 id="next-implementation-tasks-week-2">Next: Implementation Tasks (Week 2)</h2>
+<h2 id="next-implementation-tasks-week-2">Next: Implementation Tasks (Week 2)<a class="headerlink" href="#next-implementation-tasks-week-2" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Create Grafana dashboard JSON and import to Grafana workspace</li>
 <li>Add Prometheus exporters/metrics in the API and worker code</li>

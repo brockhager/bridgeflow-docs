@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="../../css/theme.css" />
     <link rel="stylesheet" href="../../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../../stylesheets/extra.css" rel="stylesheet" />
     
       <script>
         // Current page data
@@ -43,7 +44,16 @@
                 <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
                 </li>
               </ul>
-              <p class="caption"><span class="caption-text">Products</span></p>
+              <p class="caption"><span class="caption-text">Start Here</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../ONBOARDING/">Onboarding</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../ARCHITECTURE/">Architecture</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../api-reference/">API Reference Hub</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Product Suite</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../products/">Overview</a>
                   </li>
@@ -66,7 +76,7 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../products/tracking-portal/">Tracking Portal</a>
                   </li>
               </ul>
-              <p class="caption"><span class="caption-text">Platform</span></p>
+              <p class="caption"><span class="caption-text">Platform Services</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../platform/">Overview</a>
                   </li>
@@ -87,12 +97,35 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../platform/bf-warehouse/">Warehouse Service</a>
                   </li>
               </ul>
+              <p class="caption"><span class="caption-text">Capability Catalog</span></p>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../../vision/bf-integration/">Vision</a>
-                </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/SHIPMENTS/">Shipments</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/ADMIN_CONSOLE/">Admin Console</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/CONTROL_TOWER/">Control Tower</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/IDENTITY/">Identity</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/MASTERDATA/">Masterdata</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/ORDERS/">Orders</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/WAREHOUSE/">Warehouse</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/SEARCH/">Search</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/FINTECH/">Fintech</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/CARRIER_PORTAL/">Carrier Portal</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/TRACKING_PORTAL/">Tracking Portal</a>
+                  </li>
               </ul>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../../api-reference/">API Reference</a>
+                <li class="toctree-l1"><a class="reference internal" href="../../vision/bf-integration/">Vision Archive</a>
                 </li>
               </ul>
       </div>
@@ -118,11 +151,11 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <h1 id="dataservice-single-source-of-truth-rfc">DataService — Single Source of Truth (RFC)</h1>
+                <h1 id="dataservice-single-source-of-truth-rfc">DataService — Single Source of Truth (RFC)<a class="headerlink" href="#dataservice-single-source-of-truth-rfc" title="Permanent link">&para;</a></h1>
 <p>Status: Draft — Requesting architecture review from @Agent10</p>
-<h2 id="summary">Summary</h2>
+<h2 id="summary">Summary<a class="headerlink" href="#summary" title="Permanent link">&para;</a></h2>
 <p>Make <code>DataService</code> the canonical client-side sync hub for entity data (TradingPartner, Bridge, Platform entities). Start with the existing UI file <code>web/src/core/DataService.js</code>, lock the interface, and add tests that prove cross-store consistency. This RFC documents method signatures, event model, error types, and migration steps.</p>
-<h2 id="proposed-interface">Proposed Interface</h2>
+<h2 id="proposed-interface">Proposed Interface<a class="headerlink" href="#proposed-interface" title="Permanent link">&para;</a></h2>
 <p>Example API (JSDoc style):</p>
 <pre><code class="language-javascript">class DataService {
   constructor({ baseUrl, authProvider })
@@ -143,34 +176,34 @@
   unsubscribe(entityType, event, callback)
 }
 </code></pre>
-<h2 id="events">Events</h2>
+<h2 id="events">Events<a class="headerlink" href="#events" title="Permanent link">&para;</a></h2>
 <ul>
 <li><code>'created'</code>, <code>'updated'</code>, <code>'deleted'</code> — entity lifecycle</li>
 <li><code>'synced'</code> — outbox items successfully synced</li>
 <li><code>'sync:error'</code> — error during sync</li>
 <li><code>'rbac:denied'</code> — RBAC permission denial (403) surfaced as event</li>
 </ul>
-<h2 id="error-types">Error types</h2>
+<h2 id="error-types">Error types<a class="headerlink" href="#error-types" title="Permanent link">&para;</a></h2>
 <ul>
 <li><code>RBACError</code> (403) — contains { code: 'rbac', permission, message }</li>
 <li><code>SyncError</code> — contains sync details and original error</li>
 <li><code>ValidationError</code> — payload validation failures</li>
 </ul>
 <p>Errors should be thrown as typed Error-like objects (or rejected Promises). The UI store should catch and handle <code>RBACError</code> gracefully (show user message; do not crash).</p>
-<h2 id="persistence-outbox">Persistence &amp; Outbox</h2>
+<h2 id="persistence-outbox">Persistence &amp; Outbox<a class="headerlink" href="#persistence-outbox" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Keep <code>localStorage</code> outbox (key: <code>dataService:outbox</code>) — tests rely on this.</li>
 <li>Retry strategy: <code>syncOutbox()</code> manual trigger + automatic background retry every 1 minute.</li>
 <li>Full exponential backoff deferred to Phase 18.</li>
 </ul>
-<h2 id="auth-rbac">Auth &amp; RBAC</h2>
+<h2 id="auth-rbac">Auth &amp; RBAC<a class="headerlink" href="#auth-rbac" title="Permanent link">&para;</a></h2>
 <ul>
 <li><code>DataService</code> must use injected <code>authProvider</code> to attach JWT headers automatically.</li>
 <li>On 403 responses, emit <code>'rbac:denied'</code> and throw <code>RBACError</code> so stores can react.</li>
 </ul>
-<h2 id="data-flow">Data Flow</h2>
+<h2 id="data-flow">Data Flow<a class="headerlink" href="#data-flow" title="Permanent link">&para;</a></h2>
 <p>UI Store → DataService → (Auth + RBAC) → Backend store layer (store classes) → DB</p>
-<h2 id="migration-plan">Migration Plan</h2>
+<h2 id="migration-plan">Migration Plan<a class="headerlink" href="#migration-plan" title="Permanent link">&para;</a></h2>
 <ol>
 <li>Lock DataService interface via tests (update <code>test/integration/DataService.integration.test.js</code> and <code>DataService.cross-store.test.js</code>)</li>
 <li>Migrate <code>web/src/stores/TradingPartnerStore.js</code> to delegate to DataService (prefer DataService when present; fall back to existing adapter)</li>
@@ -178,17 +211,17 @@
 <li>Repeat for <code>BridgeStore</code></li>
 <li>Introduce <code>PlatformStore</code> skeleton (inherits EntityStore pattern) and connect via DataService</li>
 </ol>
-<h2 id="tests-acceptance">Tests &amp; Acceptance</h2>
+<h2 id="tests-acceptance">Tests &amp; Acceptance<a class="headerlink" href="#tests-acceptance" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Use <code>USE_MOCK_DB=true</code> for CI speed; add one SQLite integration test for cross-store validation.</li>
 <li>Tests should assert: create/update/get/list/delete behavior; outbox enqueue/sync; <code>'rbac:denied'</code> event firing.</li>
 <li>Maintain &gt;85% coverage for DataService-related code.</li>
 </ul>
-<h2 id="rollout-notes">Rollout notes</h2>
+<h2 id="rollout-notes">Rollout notes<a class="headerlink" href="#rollout-notes" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Start in UI-only mode (no backend DataService migration). If cross-repo server work is needed later, extract shared logic to <code>api/lib/DataService.js</code> and add server-side handlers.</li>
 </ul>
-<h2 id="request-for-review-action-items">Request for Review (Action Items)</h2>
+<h2 id="request-for-review-action-items">Request for Review (Action Items)<a class="headerlink" href="#request-for-review-action-items" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Please review method signatures, event names, and error types.</li>
 <li>Confirm background retry interval (1 minute OK for now).</li>

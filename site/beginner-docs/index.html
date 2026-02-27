@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="../css/theme.css" />
     <link rel="stylesheet" href="../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../stylesheets/extra.css" rel="stylesheet" />
     
       <script>
         // Current page data
@@ -43,7 +44,16 @@
                 <li class="toctree-l1"><a class="reference internal" href="..">Home</a>
                 </li>
               </ul>
-              <p class="caption"><span class="caption-text">Products</span></p>
+              <p class="caption"><span class="caption-text">Start Here</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../ONBOARDING/">Onboarding</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../ARCHITECTURE/">Architecture</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../api-reference/">API Reference Hub</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Product Suite</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../products/">Overview</a>
                   </li>
@@ -66,7 +76,7 @@
                   <li class="toctree-l1"><a class="reference internal" href="../products/tracking-portal/">Tracking Portal</a>
                   </li>
               </ul>
-              <p class="caption"><span class="caption-text">Platform</span></p>
+              <p class="caption"><span class="caption-text">Platform Services</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../platform/">Overview</a>
                   </li>
@@ -87,12 +97,35 @@
                   <li class="toctree-l1"><a class="reference internal" href="../platform/bf-warehouse/">Warehouse Service</a>
                   </li>
               </ul>
+              <p class="caption"><span class="caption-text">Capability Catalog</span></p>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../vision/bf-integration/">Vision</a>
-                </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../features/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../features/SHIPMENTS/">Shipments</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../features/ADMIN_CONSOLE/">Admin Console</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../features/CONTROL_TOWER/">Control Tower</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../features/IDENTITY/">Identity</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../features/MASTERDATA/">Masterdata</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../features/ORDERS/">Orders</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../features/WAREHOUSE/">Warehouse</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../features/SEARCH/">Search</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../features/FINTECH/">Fintech</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../features/CARRIER_PORTAL/">Carrier Portal</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../features/TRACKING_PORTAL/">Tracking Portal</a>
+                  </li>
               </ul>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../api-reference/">API Reference</a>
+                <li class="toctree-l1"><a class="reference internal" href="../vision/bf-integration/">Vision Archive</a>
                 </li>
               </ul>
       </div>
@@ -118,7 +151,7 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <h1 id="bridgeflow-beginner-guide">BridgeFlow — Beginner Guide</h1>
+                <h1 id="bridgeflow-beginner-guide">BridgeFlow — Beginner Guide<a class="headerlink" href="#bridgeflow-beginner-guide" title="Permanent link">&para;</a></h1>
 <p>Welcome! This short guide helps a new developer get started quickly with the BridgeFlow codebase. It covers the minimal steps to run the app and tests on your machine and links to deeper docs for advanced topics.</p>
 <p>Who are you? Choose your quick path below:</p>
 <ul>
@@ -127,13 +160,13 @@
 <li><strong>End User</strong> — UI-focused demo steps for creating trading partners and activating blueprints: see <code>user/README.md</code>.</li>
 </ul>
 <p>Pick the link that matches your role and follow the short steps there.</p>
-<h2 id="prerequisites">Prerequisites</h2>
+<h2 id="prerequisites">Prerequisites<a class="headerlink" href="#prerequisites" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Node.js (recommend LTS) and pnpm. Install pnpm: <code>npm i -g pnpm</code></li>
 <li>A Railway PostgreSQL database account (the project uses Railway-hosted Postgres exclusively).</li>
 <li>(Optional) Docker if you prefer local service emulation for Redis / other services.</li>
 </ul>
-<h2 id="quick-start-minimal-steps">Quick start — minimal steps</h2>
+<h2 id="quick-start-minimal-steps">Quick start — minimal steps<a class="headerlink" href="#quick-start-minimal-steps" title="Permanent link">&para;</a></h2>
 <ol>
 <li>Clone the repo and change into it:
    <code>bash
@@ -166,7 +199,7 @@
 <p>Tip: On Windows PowerShell set env vars like:
 $env:DATABASE_URL = 'postgresql://user:pass@host:port/bridgeflow_test'</p>
 </blockquote>
-<h2 id="running-tests">Running tests</h2>
+<h2 id="running-tests">Running tests<a class="headerlink" href="#running-tests" title="Permanent link">&para;</a></h2>
 <ul>
 <li>All tests require a real Railway PostgreSQL database (NO SQLite). The project enforces this to avoid flaky test behavior.</li>
 <li>Run the full test suite:
@@ -177,13 +210,13 @@ $env:DATABASE_URL = 'postgresql://user:pass@host:port/bridgeflow_test'</p>
   pnpm run test:api</code></li>
 <li>Important: Every test file must call <code>await resetTestDatabase()</code> (see <code>test/utils/resetDb.js</code>) to ensure isolation and a clean state.</li>
 </ul>
-<h2 id="seeding-dev-data">Seeding dev data</h2>
+<h2 id="seeding-dev-data">Seeding dev data<a class="headerlink" href="#seeding-dev-data" title="Permanent link">&para;</a></h2>
 <ul>
 <li>The repo includes utilities to seed development data:</li>
 <li><code>pnpm run db:seed</code> or <code>pnpm run db:seed:blueprints</code> (see <code>scripts/</code>)</li>
 <li>In dev, the admin dev endpoint <code>/admin-api/_dev/ensure-dev-seed</code> can create test users and sample blueprints.</li>
 </ul>
-<h2 id="common-developer-tasks">Common developer tasks</h2>
+<h2 id="common-developer-tasks">Common developer tasks<a class="headerlink" href="#common-developer-tasks" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Generate Prisma client after schema changes:
   <code>bash
@@ -193,14 +226,14 @@ $env:DATABASE_URL = 'postgresql://user:pass@host:port/bridgeflow_test'</p>
   pnpm run worker:s3-flush:once
   pnpm run worker:metrics-aggregator</code></li>
 </ul>
-<h2 id="project-conventions-gotchas">Project conventions &amp; gotchas</h2>
+<h2 id="project-conventions-gotchas">Project conventions &amp; gotchas<a class="headerlink" href="#project-conventions-gotchas" title="Permanent link">&para;</a></h2>
 <ul>
 <li>ESM-only: use <code>import</code> / <code>export</code> (no CommonJS <code>require</code>/<code>module.exports</code>).</li>
 <li>Database: Railway-hosted PostgreSQL is the canonical DB for dev/test/CI (do not add SQLite fallbacks).</li>
 <li>Tenant isolation: code uses AsyncLocalStorage + Prisma middleware. See <code>api/lib/tenantContext.js</code> for details.</li>
 <li>Do NOT enable <code>BRIDGEFLOW_DEV_ADMIN</code> in CI — it masks real auth issues.</li>
 </ul>
-<h2 id="where-to-go-next-advanced-docs">Where to go next (advanced docs)</h2>
+<h2 id="where-to-go-next-advanced-docs">Where to go next (advanced docs)<a class="headerlink" href="#where-to-go-next-advanced-docs" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Architecture overview: <code>docs/ARCHITECTURE.md</code></li>
 <li>Onboarding &amp; dev orientation: <code>docs/ONBOARDING.md</code></li>
@@ -209,7 +242,7 @@ $env:DATABASE_URL = 'postgresql://user:pass@host:port/bridgeflow_test'</p>
 <li>Phase-specific guides (e.g., Bridge Canvas): <code>docs/phases/</code> (see <code>phases31-40</code> for Phase 32)</li>
 <li>Copilot / agent guidance: <code>.github/copilot-instructions.md</code></li>
 </ul>
-<h2 id="need-help-contacts">Need help / contacts</h2>
+<h2 id="need-help-contacts">Need help / contacts<a class="headerlink" href="#need-help-contacts" title="Permanent link">&para;</a></h2>
 <ul>
 <li>If something is unclear or you hit a blocker, open an issue or contact the repo owner/CTO listed in the project <code>docs/ONBOARDING.md</code>.</li>
 </ul>

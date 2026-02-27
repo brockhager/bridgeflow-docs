@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="../../css/theme.css" />
     <link rel="stylesheet" href="../../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../../stylesheets/extra.css" rel="stylesheet" />
     
       <script>
         // Current page data
@@ -43,7 +44,16 @@
                 <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
                 </li>
               </ul>
-              <p class="caption"><span class="caption-text">Products</span></p>
+              <p class="caption"><span class="caption-text">Start Here</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../ONBOARDING/">Onboarding</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../ARCHITECTURE/">Architecture</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../api-reference/">API Reference Hub</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Product Suite</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../products/">Overview</a>
                   </li>
@@ -66,7 +76,7 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../products/tracking-portal/">Tracking Portal</a>
                   </li>
               </ul>
-              <p class="caption"><span class="caption-text">Platform</span></p>
+              <p class="caption"><span class="caption-text">Platform Services</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../platform/">Overview</a>
                   </li>
@@ -87,12 +97,35 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../platform/bf-warehouse/">Warehouse Service</a>
                   </li>
               </ul>
+              <p class="caption"><span class="caption-text">Capability Catalog</span></p>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../../vision/bf-integration/">Vision</a>
-                </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/SHIPMENTS/">Shipments</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/ADMIN_CONSOLE/">Admin Console</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/CONTROL_TOWER/">Control Tower</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/IDENTITY/">Identity</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/MASTERDATA/">Masterdata</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/ORDERS/">Orders</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/WAREHOUSE/">Warehouse</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/SEARCH/">Search</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/FINTECH/">Fintech</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/CARRIER_PORTAL/">Carrier Portal</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/TRACKING_PORTAL/">Tracking Portal</a>
+                  </li>
               </ul>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../../api-reference/">API Reference</a>
+                <li class="toctree-l1"><a class="reference internal" href="../../vision/bf-integration/">Vision Archive</a>
                 </li>
               </ul>
       </div>
@@ -118,7 +151,7 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <h1 id="layer-4-platform-core-security-design-rbac-first">Layer 4 (Platform Core) — Security Design (RBAC-first)</h1>
+                <h1 id="layer-4-platform-core-security-design-rbac-first">Layer 4 (Platform Core) — Security Design (RBAC-first)<a class="headerlink" href="#layer-4-platform-core-security-design-rbac-first" title="Permanent link">&para;</a></h1>
 <p>Status: Draft</p>
 <blockquote>
 <p>Note: a curated and summarized version of this design has been moved to <code>docs/Layer4-PlatformCoreLayer/Security-Foundation.md</code> for operational docs and verification materials.</p>
@@ -133,7 +166,7 @@
 - <a href="docs/design/phase1a-architecture.md">docs/design/phase1a-architecture.md</a>
 - <a href="docs/design/phase1a-evolution-resources.md">docs/design/phase1a-evolution-resources.md</a></p>
 <hr />
-<h2 id="goals">Goals</h2>
+<h2 id="goals">Goals<a class="headerlink" href="#goals" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Enforce <strong>tenant isolation</strong> across all API reads/writes.</li>
 <li>Provide <strong>RBAC</strong> that is simple enough to ship, but extensible.</li>
@@ -144,21 +177,21 @@
 <li>worker/queue execution</li>
 <li>resource resolution (connector credentials)</li>
 </ul>
-<h2 id="non-goals-for-this-design-pass">Non-goals (for this design pass)</h2>
+<h2 id="non-goals-for-this-design-pass">Non-goals (for this design pass)<a class="headerlink" href="#non-goals-for-this-design-pass" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Implement Layer 3 mapper features (paused).</li>
 <li>Full enterprise SSO/MFA implementation (design hooks only).</li>
 <li>Full policy-as-code engine (start with role checks + explicit permissions).</li>
 </ul>
 <hr />
-<h2 id="core-concepts">Core concepts</h2>
-<h3 id="principal">Principal</h3>
+<h2 id="core-concepts">Core concepts<a class="headerlink" href="#core-concepts" title="Permanent link">&para;</a></h2>
+<h3 id="principal">Principal<a class="headerlink" href="#principal" title="Permanent link">&para;</a></h3>
 <p>A <strong>principal</strong> is the authenticated identity making a request.</p>
 <p>Principal types:
 - <code>user</code>: a human user (browser or API)
 - <code>service</code>: internal service account (worker, automation)
 - <code>api_key</code>: long-lived key used by integrations (optional; can be deferred)</p>
-<h3 id="tenant">Tenant</h3>
+<h3 id="tenant">Tenant<a class="headerlink" href="#tenant" title="Permanent link">&para;</a></h3>
 <p>A <strong>tenant</strong> is the unit of isolation. Every business object is tenant-scoped unless explicitly global.</p>
 <p>Tenant-scoped objects (initial):
 - Users (membership in a tenant)
@@ -169,15 +202,15 @@
 <p>Global objects (allowed, tightly controlled):
 - System configuration
 - Platform operators/admins</p>
-<h3 id="role-vs-permission">Role vs permission</h3>
+<h3 id="role-vs-permission">Role vs permission<a class="headerlink" href="#role-vs-permission" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Roles</strong> are human-friendly bundles (Admin/Developer/Viewer/Operator).</li>
 <li><strong>Permissions</strong> are the actual checks enforced in code.</li>
 </ul>
 <p>This design starts with role checks, but defines permissions so we can evolve toward a granular model without refactoring every endpoint.</p>
 <hr />
-<h2 id="authentication-authn">Authentication (AuthN)</h2>
-<h3 id="current-baseline-in-repo">Current baseline in repo</h3>
+<h2 id="authentication-authn">Authentication (AuthN)<a class="headerlink" href="#authentication-authn" title="Permanent link">&para;</a></h2>
+<h3 id="current-baseline-in-repo">Current baseline in repo<a class="headerlink" href="#current-baseline-in-repo" title="Permanent link">&para;</a></h3>
 <p>The API already supports:
 - JWT tokens via <code>@fastify/jwt</code>
 - Cookie-based sessions (httpOnly <code>token</code> cookie)
@@ -192,21 +225,21 @@
   &quot;auth&quot;: { &quot;method&quot;: &quot;cookie&quot; }
 }
 </code></pre>
-<h3 id="token-contents-minimum">Token contents (minimum)</h3>
+<h3 id="token-contents-minimum">Token contents (minimum)<a class="headerlink" href="#token-contents-minimum" title="Permanent link">&para;</a></h3>
 <ul>
 <li><code>sub</code> or <code>userId</code></li>
 <li><code>tenantId</code> (selected tenant; see multi-tenant UX below)</li>
 <li><code>roles</code> (tenant role + optional operator role)</li>
 <li><code>iat</code>, <code>exp</code></li>
 </ul>
-<h3 id="multi-tenant-ux-selection">Multi-tenant UX (selection)</h3>
+<h3 id="multi-tenant-ux-selection">Multi-tenant UX (selection)<a class="headerlink" href="#multi-tenant-ux-selection" title="Permanent link">&para;</a></h3>
 <p>If a user belongs to multiple tenants:
 - browser session selects an active <code>tenantId</code> (stored server-side or in token)
 - API requires explicit tenant context for tenant-scoped endpoints</p>
 <p>Simplest MVP: require one tenant per user initially; later add membership + tenant switcher.</p>
 <hr />
-<h2 id="authorization-authz">Authorization (AuthZ)</h2>
-<h3 id="enforcement-points">Enforcement points</h3>
+<h2 id="authorization-authz">Authorization (AuthZ)<a class="headerlink" href="#authorization-authz" title="Permanent link">&para;</a></h2>
+<h3 id="enforcement-points">Enforcement points<a class="headerlink" href="#enforcement-points" title="Permanent link">&para;</a></h3>
 <ol>
 <li><strong>HTTP request preHandler</strong></li>
 <li>Verify principal</li>
@@ -233,7 +266,7 @@
 </li>
 <li>Any <code>getSecret(...)</code> requires a principal and emits audit</li>
 </ol>
-<h3 id="roles-initial">Roles (initial)</h3>
+<h3 id="roles-initial">Roles (initial)<a class="headerlink" href="#roles-initial" title="Permanent link">&para;</a></h3>
 <p>Tenant roles:
 - <code>tenant_admin</code>: full tenant control
 - <code>tenant_developer</code>: can create/update bridges/resources, view logs
@@ -242,7 +275,7 @@
 <p>Platform roles:
 - <code>operator</code>: can support tenants, validate resources
 - <code>platform_admin</code>: full system control</p>
-<h3 id="permission-catalog-initial">Permission catalog (initial)</h3>
+<h3 id="permission-catalog-initial">Permission catalog (initial)<a class="headerlink" href="#permission-catalog-initial" title="Permanent link">&para;</a></h3>
 <p>This is the smallest stable set that maps cleanly to endpoints.</p>
 <ul>
 <li><code>users:read</code>, <code>users:write</code></li>
@@ -254,7 +287,7 @@
 <li><code>audit:read</code>, <code>audit:write</code></li>
 <li><code>secrets:read</code> (never exposed directly to tenant users; used by services)</li>
 </ul>
-<h3 id="role-permissions-mapping-mvp">Role → permissions mapping (MVP)</h3>
+<h3 id="role-permissions-mapping-mvp">Role → permissions mapping (MVP)<a class="headerlink" href="#role-permissions-mapping-mvp" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
 <tr>
@@ -427,17 +460,17 @@
 - “internal” means only services/worker write audit; user-facing endpoints do not write directly.
 - <code>secrets:read</code> should not grant raw secret material to humans by default; prefer “test resource” operations.</p>
 <hr />
-<h2 id="data-model-proposed">Data model (proposed)</h2>
+<h2 id="data-model-proposed">Data model (proposed)<a class="headerlink" href="#data-model-proposed" title="Permanent link">&para;</a></h2>
 <p>This is a design-only proposal to enable tenant isolation + RBAC.</p>
-<h3 id="tenant_1">Tenant</h3>
+<h3 id="tenant_1">Tenant<a class="headerlink" href="#tenant_1" title="Permanent link">&para;</a></h3>
 <ul>
 <li><code>Tenant { id, name, status, createdAt }</code></li>
 </ul>
-<h3 id="membership">Membership</h3>
+<h3 id="membership">Membership<a class="headerlink" href="#membership" title="Permanent link">&para;</a></h3>
 <ul>
 <li><code>TenantMembership { id, tenantId, userId, role, createdAt }</code></li>
 </ul>
-<h3 id="audit-event">Audit event</h3>
+<h3 id="audit-event">Audit event<a class="headerlink" href="#audit-event" title="Permanent link">&para;</a></h3>
 <p>Either extend <code>AuditLog</code> or add an append-only <code>AuditEvent</code> table.</p>
 <p>Minimum fields:
 - <code>id</code>
@@ -449,8 +482,8 @@
 - <code>meta</code> (JSON)
 - <code>createdAt</code></p>
 <hr />
-<h2 id="audit-logging-whowhatwhen">Audit logging (who/what/when)</h2>
-<h3 id="events-initial">Events (initial)</h3>
+<h2 id="audit-logging-whowhatwhen">Audit logging (who/what/when)<a class="headerlink" href="#audit-logging-whowhatwhen" title="Permanent link">&para;</a></h2>
+<h3 id="events-initial">Events (initial)<a class="headerlink" href="#events-initial" title="Permanent link">&para;</a></h3>
 <p>Tenant-scoped:
 - <code>user.invite</code>, <code>user.role_changed</code>, <code>user.removed</code>
 - <code>bridge.created</code>, <code>bridge.updated</code>, <code>bridge.deleted</code>, <code>bridge.tested</code>
@@ -459,26 +492,26 @@
 <p>System/platform:
 - <code>operator.impersonation_started</code>, <code>operator.impersonation_ended</code>
 - <code>secret.accessed</code> (always)</p>
-<h3 id="immutable-write-path">Immutable write path</h3>
+<h3 id="immutable-write-path">Immutable write path<a class="headerlink" href="#immutable-write-path" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Audit writes must not be “best effort logs”; they are part of the platform contract.</li>
 <li>If audit write fails for a high-value action, default to <strong>fail closed</strong> (block the action) unless explicitly marked low-risk.</li>
 </ul>
 <hr />
-<h2 id="secrets-management">Secrets management</h2>
-<h3 id="rules">Rules</h3>
+<h2 id="secrets-management">Secrets management<a class="headerlink" href="#secrets-management" title="Permanent link">&para;</a></h2>
+<h3 id="rules">Rules<a class="headerlink" href="#rules" title="Permanent link">&para;</a></h3>
 <ul>
 <li>No plaintext secrets in DB (<code>secret_id</code> pointers only).</li>
 <li>Secret reads must be attributed to a principal and audited.</li>
 <li>Prefer “capability endpoints” over “show secret” (e.g., validate webhook).</li>
 </ul>
-<h3 id="interfaces">Interfaces</h3>
+<h3 id="interfaces">Interfaces<a class="headerlink" href="#interfaces" title="Permanent link">&para;</a></h3>
 <p>Introduce a Layer 4 interface:
 - <code>secrets.get(secretId, principal)</code>
 - <code>secrets.put(secretId, value, principal)</code></p>
 <hr />
-<h2 id="cross-layer-interaction-diagrams">Cross-layer interaction diagrams</h2>
-<h3 id="api-request-auth-authz">API request auth + authz</h3>
+<h2 id="cross-layer-interaction-diagrams">Cross-layer interaction diagrams<a class="headerlink" href="#cross-layer-interaction-diagrams" title="Permanent link">&para;</a></h2>
+<h3 id="api-request-auth-authz">API request auth + authz<a class="headerlink" href="#api-request-auth-authz" title="Permanent link">&para;</a></h3>
 <pre><code class="language-mermaid">sequenceDiagram
   participant Browser
   participant API as API Server (Layer 4)
@@ -495,7 +528,7 @@
   Audit--&gt;&gt;Auth: ok
   Auth--&gt;&gt;Browser: 200 / 403
 </code></pre>
-<h3 id="worker-job-execution">Worker job execution</h3>
+<h3 id="worker-job-execution">Worker job execution<a class="headerlink" href="#worker-job-execution" title="Permanent link">&para;</a></h3>
 <pre><code class="language-mermaid">sequenceDiagram
   participant Worker as Worker (Layer 4)
   participant DB as Database
@@ -513,7 +546,7 @@
   Worker-&gt;&gt;DB: persist attempt + nextRunAt
 </code></pre>
 <hr />
-<h2 id="lock-down-strategy-minimum-viable">“Lock down” strategy (minimum viable)</h2>
+<h2 id="lock-down-strategy-minimum-viable">“Lock down” strategy (minimum viable)<a class="headerlink" href="#lock-down-strategy-minimum-viable" title="Permanent link">&para;</a></h2>
 <p>Phase 1: Protect everything behind auth
 - Require <code>authMiddleware</code> for all <code>/api/*</code> except:
   - <code>/api/auth/login</code>, <code>/api/auth/register</code>
@@ -528,7 +561,7 @@
 <p>Phase 4: Operator workflows
 - Add operator-only endpoints for validating resources and support.</p>
 <hr />
-<h2 id="rollout-flags-implemented">Rollout flags (implemented)</h2>
+<h2 id="rollout-flags-implemented">Rollout flags (implemented)<a class="headerlink" href="#rollout-flags-implemented" title="Permanent link">&para;</a></h2>
 <p>Environment variables used by the current implementation:
 - <code>REQUIRE_AUTH=true|false</code>
   - When <code>true</code>, API endpoints wired with <code>requireAuthIfEnabled()</code> require a valid JWT (cookie or Bearer).
@@ -543,7 +576,7 @@
 <p>Notes:
 - Audit visibility (<code>GET /api/audit</code>) is always protected by auth middleware.
 - Recommended rollout: <code>LOCKDOWN_JOBS=true</code> first, then <code>REQUIRE_AUTH=true</code> for full coverage.</p>
-<h2 id="dev-verification-steps">Dev verification steps</h2>
+<h2 id="dev-verification-steps">Dev verification steps<a class="headerlink" href="#dev-verification-steps" title="Permanent link">&para;</a></h2>
 <ol>
 <li>Start secure dev API (Windows):</li>
 </ol>
@@ -572,7 +605,7 @@
 <li>If all checks pass, proceed to schedule CTO verification session and optionally enable <code>REQUIRE_AUTH=true</code> globally.</li>
 </ol>
 <hr />
-<h2 id="open-questions-for-cto-alignment">Open questions (for CTO alignment)</h2>
+<h2 id="open-questions-for-cto-alignment">Open questions (for CTO alignment)<a class="headerlink" href="#open-questions-for-cto-alignment" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Tenant model: one-tenant-per-user initially vs membership now?</li>
 <li>Do we need <code>tenant_auditor</code> as a first-class role immediately?</li>

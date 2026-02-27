@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="../../../css/theme.css" />
     <link rel="stylesheet" href="../../../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../../../stylesheets/extra.css" rel="stylesheet" />
     
       <script>
         // Current page data
@@ -43,7 +44,16 @@
                 <li class="toctree-l1"><a class="reference internal" href="../../..">Home</a>
                 </li>
               </ul>
-              <p class="caption"><span class="caption-text">Products</span></p>
+              <p class="caption"><span class="caption-text">Start Here</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../ONBOARDING/">Onboarding</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../ARCHITECTURE/">Architecture</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../api-reference/">API Reference Hub</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Product Suite</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../../products/">Overview</a>
                   </li>
@@ -66,7 +76,7 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../../products/tracking-portal/">Tracking Portal</a>
                   </li>
               </ul>
-              <p class="caption"><span class="caption-text">Platform</span></p>
+              <p class="caption"><span class="caption-text">Platform Services</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../../platform/">Overview</a>
                   </li>
@@ -87,12 +97,35 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../../platform/bf-warehouse/">Warehouse Service</a>
                   </li>
               </ul>
+              <p class="caption"><span class="caption-text">Capability Catalog</span></p>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../../../vision/bf-integration/">Vision</a>
-                </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../features/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../features/SHIPMENTS/">Shipments</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../features/ADMIN_CONSOLE/">Admin Console</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../features/CONTROL_TOWER/">Control Tower</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../features/IDENTITY/">Identity</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../features/MASTERDATA/">Masterdata</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../features/ORDERS/">Orders</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../features/WAREHOUSE/">Warehouse</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../features/SEARCH/">Search</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../features/FINTECH/">Fintech</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../features/CARRIER_PORTAL/">Carrier Portal</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../features/TRACKING_PORTAL/">Tracking Portal</a>
+                  </li>
               </ul>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../../../api-reference/">API Reference</a>
+                <li class="toctree-l1"><a class="reference internal" href="../../../vision/bf-integration/">Vision Archive</a>
                 </li>
               </ul>
       </div>
@@ -118,14 +151,14 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <h1 id="phase-328-responsive-layout-drag-and-drop-implementation-validation">✅ Phase 32.8: Responsive Layout + Drag-and-Drop — Implementation Validation</h1>
+                <h1 id="phase-328-responsive-layout-drag-and-drop-implementation-validation">✅ Phase 32.8: Responsive Layout + Drag-and-Drop — Implementation Validation<a class="headerlink" href="#phase-328-responsive-layout-drag-and-drop-implementation-validation" title="Permanent link">&para;</a></h1>
 <p><strong>Date</strong>: January 10, 2026<br />
 <strong>Status</strong>: 🚀 <strong>READY FOR MERGE</strong><br />
 <strong>Branch</strong>: <code>main</code><br />
 <strong>Changes</strong>: Web frontend responsive positioning &amp; slot snapping</p>
 <hr />
-<h2 id="phase-328-deliverables">🎯 Phase 32.8 Deliverables</h2>
-<h3 id="responsive-positioning">Responsive Positioning</h3>
+<h2 id="phase-328-deliverables">🎯 Phase 32.8 Deliverables<a class="headerlink" href="#phase-328-deliverables" title="Permanent link">&para;</a></h2>
+<h3 id="responsive-positioning">Responsive Positioning<a class="headerlink" href="#responsive-positioning" title="Permanent link">&para;</a></h3>
 <p><strong>Multi-Breakpoint Strategy</strong></p>
 <table>
 <thead>
@@ -181,7 +214,7 @@ if (useResponsive &amp;&amp; config.responsive) {
 - Re-renders bridge outline when crossing breakpoint
 - Prevents excessive re-renders with <code>lastWidth</code> tracking</p>
 <hr />
-<h3 id="drag-and-drop-slot-snapping">Drag-and-Drop Slot Snapping</h3>
+<h3 id="drag-and-drop-slot-snapping">Drag-and-Drop Slot Snapping<a class="headerlink" href="#drag-and-drop-slot-snapping" title="Permanent link">&para;</a></h3>
 <p><strong>Drop Zone Setup</strong></p>
 <p><strong><a href="web/src/assembly.js#L933-L975">setupSlotDropZone()</a></strong>
 - Makes each slot receptive to drag-and-drop
@@ -207,7 +240,7 @@ acceptTypes: ['connection', 'connector']  // bridge-connector
 - Re-renders canvas
 - Shows success toast</p>
 <hr />
-<h2 id="visual-feedback-phase-328">🎨 Visual Feedback (Phase 32.8)</h2>
+<h2 id="visual-feedback-phase-328">🎨 Visual Feedback (Phase 32.8)<a class="headerlink" href="#visual-feedback-phase-328" title="Permanent link">&para;</a></h2>
 <p><strong>Drag-Over Animation</strong></p>
 <pre><code class="language-css">.slot-drag-over {
   background: rgba(249, 115, 22, 0.15) !important;
@@ -221,8 +254,8 @@ acceptTypes: ['connection', 'connector']  // bridge-connector
 - <strong>Drag-Over</strong>: Glows, scales, tints
 - <strong>Configured</strong>: Solid border, no animation</p>
 <hr />
-<h2 id="validation-checklist">🧪 Validation Checklist</h2>
-<h3 id="code-quality">Code Quality</h3>
+<h2 id="validation-checklist">🧪 Validation Checklist<a class="headerlink" href="#validation-checklist" title="Permanent link">&para;</a></h2>
+<h3 id="code-quality">Code Quality<a class="headerlink" href="#code-quality" title="Permanent link">&para;</a></h3>
 <ul>
 <li>[x] No syntax errors</li>
 <li>[x] Responsive logic correctly branches on window width</li>
@@ -230,7 +263,7 @@ acceptTypes: ['connection', 'connector']  // bridge-connector
 <li>[x] Debouncing prevents excessive re-renders</li>
 <li>[x] Fallback to fixed positioning on small screens</li>
 </ul>
-<h3 id="architecture">Architecture</h3>
+<h3 id="architecture">Architecture<a class="headerlink" href="#architecture" title="Permanent link">&para;</a></h3>
 <ul>
 <li>[x] Responsive config decoupled from positioning logic</li>
 <li>[x] Drop zone setup isolated from slot rendering</li>
@@ -238,7 +271,7 @@ acceptTypes: ['connection', 'connector']  // bridge-connector
 <li>[x] No breaking changes to existing API</li>
 <li>[x] Backward compatible with click-to-configure</li>
 </ul>
-<h3 id="user-experience">User Experience</h3>
+<h3 id="user-experience">User Experience<a class="headerlink" href="#user-experience" title="Permanent link">&para;</a></h3>
 <ul>
 <li>[x] Desktop: Percentage-based layout adapts smoothly</li>
 <li>[x] Tablet: Compact fixed fallback works</li>
@@ -247,14 +280,14 @@ acceptTypes: ['connection', 'connector']  // bridge-connector
 <li>[x] Drop snapping is instant (no lag)</li>
 <li>[x] Toast feedback on success/error</li>
 </ul>
-<h3 id="accessibility">Accessibility</h3>
+<h3 id="accessibility">Accessibility<a class="headerlink" href="#accessibility" title="Permanent link">&para;</a></h3>
 <ul>
 <li>[x] Keyboard navigation unchanged (click fallback)</li>
 <li>[x] Drag-and-drop is enhancement (not required)</li>
 <li>[x] Screen readers still announce slots</li>
 <li>[x] Touch targets remain 44px+</li>
 </ul>
-<h3 id="browser-compatibility">Browser Compatibility</h3>
+<h3 id="browser-compatibility">Browser Compatibility<a class="headerlink" href="#browser-compatibility" title="Permanent link">&para;</a></h3>
 <ul>
 <li>[x] Flexbox support (align-items, justify-content)</li>
 <li>[x] CSS media queries (&gt;1024px breakpoint)</li>
@@ -262,22 +295,22 @@ acceptTypes: ['connection', 'connector']  // bridge-connector
 <li>[x] RequestAnimationFrame via debounce</li>
 </ul>
 <hr />
-<h2 id="responsive-positioning-test-cases">📊 Responsive Positioning Test Cases</h2>
-<h3 id="desktop-1024px">Desktop (&gt;1024px)</h3>
+<h2 id="responsive-positioning-test-cases">📊 Responsive Positioning Test Cases<a class="headerlink" href="#responsive-positioning-test-cases" title="Permanent link">&para;</a></h2>
+<h3 id="desktop-1024px">Desktop (&gt;1024px)<a class="headerlink" href="#desktop-1024px" title="Permanent link">&para;</a></h3>
 <pre><code>Expected:
   • Source TP: left=5%, width=12%
   • Connector: left=18%, width=64%
   • Dest TP: right=5%, width=12%
   • All slots visible, proportional spacing
 </code></pre>
-<h3 id="tablet-7681024px">Tablet (768–1024px)</h3>
+<h3 id="tablet-7681024px">Tablet (768–1024px)<a class="headerlink" href="#tablet-7681024px" title="Permanent link">&para;</a></h3>
 <pre><code>Expected:
   • Fallback to fixed pixels (Phase 32 values)
   • TPs: 70×90 (compact)
   • Connector: 300px wide
   • All slots still visible, tighter
 </code></pre>
-<h3 id="mobile-640px">Mobile (&lt;640px)</h3>
+<h3 id="mobile-640px">Mobile (&lt;640px)<a class="headerlink" href="#mobile-640px" title="Permanent link">&para;</a></h3>
 <pre><code>Expected (via CSS media query):
   • position: relative (remove absolute)
   • margin: 10px auto (center)
@@ -285,8 +318,8 @@ acceptTypes: ['connection', 'connector']  // bridge-connector
   • Stacked vertically
 </code></pre>
 <hr />
-<h2 id="drag-and-drop-test-cases">🔌 Drag-and-Drop Test Cases</h2>
-<h3 id="valid-drag">Valid Drag</h3>
+<h2 id="drag-and-drop-test-cases">🔌 Drag-and-Drop Test Cases<a class="headerlink" href="#drag-and-drop-test-cases" title="Permanent link">&para;</a></h2>
+<h3 id="valid-drag">Valid Drag<a class="headerlink" href="#valid-drag" title="Permanent link">&para;</a></h3>
 <pre><code>Precondition: &quot;Company CRM&quot; (trading-partner) palette item exists
 Action: Drag onto &quot;Source System&quot; slot (accepts: ['trading-partner'])
 Expected: 
@@ -296,7 +329,7 @@ Expected:
   • Toast: &quot;✅ Source System configured: Company CRM&quot;
   • Slot border changes to solid
 </code></pre>
-<h3 id="invalid-drag">Invalid Drag</h3>
+<h3 id="invalid-drag">Invalid Drag<a class="headerlink" href="#invalid-drag" title="Permanent link">&para;</a></h3>
 <pre><code>Precondition: &quot;AS2 Transport&quot; (connector) palette item exists
 Action: Drag onto &quot;Source System&quot; slot (accepts: ['trading-partner'])
 Expected:
@@ -306,7 +339,7 @@ Expected:
   • Component NOT added
   • Slot returns to normal state
 </code></pre>
-<h3 id="fallback-click-to-configure">Fallback: Click-to-Configure</h3>
+<h3 id="fallback-click-to-configure">Fallback: Click-to-Configure<a class="headerlink" href="#fallback-click-to-configure" title="Permanent link">&para;</a></h3>
 <pre><code>Precondition: No palette item dragged
 Action: Click slot directly
 Expected:
@@ -315,8 +348,8 @@ Expected:
   • Backward compatible
 </code></pre>
 <hr />
-<h2 id="implementation-functions">📚 Implementation Functions</h2>
-<h3 id="core-additions">Core Additions</h3>
+<h2 id="implementation-functions">📚 Implementation Functions<a class="headerlink" href="#implementation-functions" title="Permanent link">&para;</a></h2>
+<h3 id="core-additions">Core Additions<a class="headerlink" href="#core-additions" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
 <tr>
@@ -343,7 +376,7 @@ Expected:
 </tr>
 </tbody>
 </table>
-<h3 id="modified-functions">Modified Functions</h3>
+<h3 id="modified-functions">Modified Functions<a class="headerlink" href="#modified-functions" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
 <tr>
@@ -370,7 +403,7 @@ Expected:
 </tr>
 </tbody>
 </table>
-<h3 id="configuration-updates">Configuration Updates</h3>
+<h3 id="configuration-updates">Configuration Updates<a class="headerlink" href="#configuration-updates" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
 <tr>
@@ -386,32 +419,32 @@ Expected:
 </tbody>
 </table>
 <hr />
-<h2 id="known-limitations-phase-328">🚀 Known Limitations (Phase 32.8)</h2>
-<h3 id="mobile-stack-layout">Mobile Stack Layout</h3>
+<h2 id="known-limitations-phase-328">🚀 Known Limitations (Phase 32.8)<a class="headerlink" href="#known-limitations-phase-328" title="Permanent link">&para;</a></h2>
+<h3 id="mobile-stack-layout">Mobile Stack Layout<a class="headerlink" href="#mobile-stack-layout" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Current CSS media query applies basic stacking</li>
 <li>Future Phase 33: Polish animations, optimize touch targets</li>
 <li>Vertical layout not yet visually optimized (functional, not pretty)</li>
 </ul>
-<h3 id="no-slot-persistence">No Slot Persistence</h3>
+<h3 id="no-slot-persistence">No Slot Persistence<a class="headerlink" href="#no-slot-persistence" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Dragged/configured components not yet saved to localStorage</li>
 <li>Refresh clears slot state (Phase 33 task)</li>
 <li>Gap-filling modal saves via existing bridge save logic</li>
 </ul>
-<h3 id="no-status-indicators">No Status Indicators</h3>
+<h3 id="no-status-indicators">No Status Indicators<a class="headerlink" href="#no-status-indicators" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Drag-and-drop doesn't show "healthy/warning" badges yet (Phase 33)</li>
 <li>Visual feedback is drag-over glow only</li>
 </ul>
-<h3 id="adapter-type-not-in-palette">Adapter Type Not in Palette</h3>
+<h3 id="adapter-type-not-in-palette">Adapter Type Not in Palette<a class="headerlink" href="#adapter-type-not-in-palette" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Adapter components exist as slot types but not in palette yet</li>
 <li>Users can't drag adapters until palette updated (Phase 32.7 task, deferred)</li>
 <li>Adapters can still be configured via click-to-configure modal</li>
 </ul>
 <hr />
-<h2 id="documentation-updates">📖 Documentation Updates</h2>
+<h2 id="documentation-updates">📖 Documentation Updates<a class="headerlink" href="#documentation-updates" title="Permanent link">&para;</a></h2>
 <p><strong><a href="docs/blueprints/visual-design-guide.md">docs/blueprints/visual-design-guide.md</a></strong>
 - ✅ Added "📱 Responsive Layout (Phase 32.8)" section
 - ✅ Documented breakpoint strategy (Desktop/Tablet/Mobile)
@@ -420,8 +453,8 @@ Expected:
 - ✅ Updated user interaction flow (4 steps with Phase 32.8 drag-and-drop)
 - ✅ Updated roadmap: Phase 32 ✅, Phase 32.8 IN PROGRESS, Phase 33 planned</p>
 <hr />
-<h2 id="integration-points">🔄 Integration Points</h2>
-<h3 id="with-existing-canvas">With Existing Canvas</h3>
+<h2 id="integration-points">🔄 Integration Points<a class="headerlink" href="#integration-points" title="Permanent link">&para;</a></h2>
+<h3 id="with-existing-canvas">With Existing Canvas<a class="headerlink" href="#with-existing-canvas" title="Permanent link">&para;</a></h3>
 <p><strong>Palette Drag-and-Drop:</strong>
 - Existing <code>setupDraggable()</code> on palette items unchanged
 - <code>dragstart</code> emits <code>application/json</code> with component data
@@ -434,8 +467,8 @@ Expected:
 - Not affected by Phase 32.8
 - Connections still work post-snap</p>
 <hr />
-<h2 id="merge-readiness">✅ Merge Readiness</h2>
-<h3 id="pre-merge-checklist">Pre-Merge Checklist</h3>
+<h2 id="merge-readiness">✅ Merge Readiness<a class="headerlink" href="#merge-readiness" title="Permanent link">&para;</a></h2>
+<h3 id="pre-merge-checklist">Pre-Merge Checklist<a class="headerlink" href="#pre-merge-checklist" title="Permanent link">&para;</a></h3>
 <ul>
 <li>[x] Code compiles without errors</li>
 <li>[x] No console warnings</li>
@@ -446,10 +479,10 @@ Expected:
 <li>[x] Documentation updated</li>
 <li>[x] No breaking changes</li>
 </ul>
-<h3 id="safe-to-deploy">Safe to Deploy</h3>
+<h3 id="safe-to-deploy">Safe to Deploy<a class="headerlink" href="#safe-to-deploy" title="Permanent link">&para;</a></h3>
 <p>✅ <strong>Yes.</strong> All changes are additive. Existing click-to-configure flow unchanged. Drag-and-drop is enhancement.</p>
 <hr />
-<h2 id="success-criteria">🎯 Success Criteria</h2>
+<h2 id="success-criteria">🎯 Success Criteria<a class="headerlink" href="#success-criteria" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
@@ -501,15 +534,15 @@ Expected:
 </tbody>
 </table>
 <hr />
-<h2 id="phase-329-roadmap">🔮 Phase 32.9+ Roadmap</h2>
-<h3 id="immediate-phase-33">Immediate (Phase 33)</h3>
+<h2 id="phase-329-roadmap">🔮 Phase 32.9+ Roadmap<a class="headerlink" href="#phase-329-roadmap" title="Permanent link">&para;</a></h2>
+<h3 id="immediate-phase-33">Immediate (Phase 33)<a class="headerlink" href="#immediate-phase-33" title="Permanent link">&para;</a></h3>
 <ul>
 <li>[ ] Add Adapter to palette (currently missing)</li>
 <li>[ ] Slot persistence (save filled slots)</li>
 <li>[ ] Mobile layout polish (animations, touch targets)</li>
 <li>[ ] Status indicators (healthy/warning badges)</li>
 </ul>
-<h3 id="near-term-phase-33">Near-Term (Phase 33+)</h3>
+<h3 id="near-term-phase-33">Near-Term (Phase 33+)<a class="headerlink" href="#near-term-phase-33" title="Permanent link">&para;</a></h3>
 <ul>
 <li>[ ] Firewall slot (security policies)</li>
 <li>[ ] Data Map slot (field transformation)</li>
@@ -517,7 +550,7 @@ Expected:
 <li>[ ] Visual animations on slot fill</li>
 </ul>
 <hr />
-<h2 id="summary">💬 Summary</h2>
+<h2 id="summary">💬 Summary<a class="headerlink" href="#summary" title="Permanent link">&para;</a></h2>
 <p>Phase 32.8 transforms BridgeFlow's canvas into a <strong>responsive, drag-enabled visual assembly platform</strong>:</p>
 <p>✨ <strong>What Users Get:</strong>
 - <strong>Desktop</strong>: Full proportional layout, drag-and-drop from palette

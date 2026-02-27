@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="../../../../../../css/theme.css" />
     <link rel="stylesheet" href="../../../../../../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../../../../../../stylesheets/extra.css" rel="stylesheet" />
     
       <script>
         // Current page data
@@ -43,7 +44,16 @@
                 <li class="toctree-l1"><a class="reference internal" href="../../../../../..">Home</a>
                 </li>
               </ul>
-              <p class="caption"><span class="caption-text">Products</span></p>
+              <p class="caption"><span class="caption-text">Start Here</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../ONBOARDING/">Onboarding</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../ARCHITECTURE/">Architecture</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../api-reference/">API Reference Hub</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Product Suite</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../../../../../products/">Overview</a>
                   </li>
@@ -66,7 +76,7 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../../../../../products/tracking-portal/">Tracking Portal</a>
                   </li>
               </ul>
-              <p class="caption"><span class="caption-text">Platform</span></p>
+              <p class="caption"><span class="caption-text">Platform Services</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../../../../../platform/">Overview</a>
                   </li>
@@ -87,12 +97,35 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../../../../../platform/bf-warehouse/">Warehouse Service</a>
                   </li>
               </ul>
+              <p class="caption"><span class="caption-text">Capability Catalog</span></p>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../../../../">Vision</a>
-                </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/SHIPMENTS/">Shipments</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/ADMIN_CONSOLE/">Admin Console</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/CONTROL_TOWER/">Control Tower</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/IDENTITY/">Identity</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/MASTERDATA/">Masterdata</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/ORDERS/">Orders</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/WAREHOUSE/">Warehouse</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/SEARCH/">Search</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/FINTECH/">Fintech</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/CARRIER_PORTAL/">Carrier Portal</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/TRACKING_PORTAL/">Tracking Portal</a>
+                  </li>
               </ul>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../../../../../../api-reference/">API Reference</a>
+                <li class="toctree-l1"><a class="reference internal" href="../../../../">Vision Archive</a>
                 </li>
               </ul>
       </div>
@@ -123,13 +156,13 @@
 Status: Planned / In Development
 Context: Original BF-INTEGRATION Vision (Pre-Phase 30)</p>
 </blockquote>
-<h1 id="phase-29-organizations-tenets">Phase 29: Organizations &amp; Tenets</h1>
-<h2 id="executive-summary">🎯 Executive Summary</h2>
+<h1 id="phase-29-organizations-tenets">Phase 29: Organizations &amp; Tenets<a class="headerlink" href="#phase-29-organizations-tenets" title="Permanent link">&para;</a></h1>
+<h2 id="executive-summary">🎯 Executive Summary<a class="headerlink" href="#executive-summary" title="Permanent link">&para;</a></h2>
 <p>Phase 29 establishes the core organizational model and tenet enforcement that underpins the entire BridgeFlow platform. This is a foundational architectural layer that ensures proper data isolation, security, and scalability.</p>
 <p><strong>✅ STATUS: COMPLETE AND VALIDATED</strong><br />
 <strong>CTO Access: FULLY FUNCTIONAL</strong><br />
 <strong>TenetProfiles: IMPLEMENTED AND TESTED</strong></p>
-<h2 id="core-tenets-non-negotiable">🔑 Core Tenets (Non-Negotiable)</h2>
+<h2 id="core-tenets-non-negotiable">🔑 Core Tenets (Non-Negotiable)<a class="headerlink" href="#core-tenets-non-negotiable" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
@@ -161,8 +194,8 @@ Context: Original BF-INTEGRATION Vision (Pre-Phase 30)</p>
 </tr>
 </tbody>
 </table>
-<h2 id="data-model-changes">📊 Data Model Changes</h2>
-<h3 id="prisma-schema-updates">Prisma Schema Updates</h3>
+<h2 id="data-model-changes">📊 Data Model Changes<a class="headerlink" href="#data-model-changes" title="Permanent link">&para;</a></h2>
+<h3 id="prisma-schema-updates">Prisma Schema Updates<a class="headerlink" href="#prisma-schema-updates" title="Permanent link">&para;</a></h3>
 <pre><code class="language-prisma">model User {
   id                     String             @id @default(cuid())
   email                  String             @unique
@@ -261,8 +294,8 @@ model BridgeComponent {
   userBridge UserBridge @relation(fields: [userBridgeId], references: [id], onDelete: Cascade)
 }
 </code></pre>
-<h2 id="authentication-middleware-architecture">🔐 Authentication &amp; Middleware Architecture</h2>
-<h3 id="enhanced-auth-middleware">Enhanced Auth Middleware</h3>
+<h2 id="authentication-middleware-architecture">🔐 Authentication &amp; Middleware Architecture<a class="headerlink" href="#authentication-middleware-architecture" title="Permanent link">&para;</a></h2>
+<h3 id="enhanced-auth-middleware">Enhanced Auth Middleware<a class="headerlink" href="#enhanced-auth-middleware" title="Permanent link">&para;</a></h3>
 <p>The <code>authMiddleware</code> function in <code>api/handlers/auth.js</code> was updated to:</p>
 <ol>
 <li><strong>Resolve User Type</strong>: Check <code>isBfEmployee</code> flag from database</li>
@@ -312,7 +345,7 @@ request.user.orgRoles = accessibleOrgs.reduce((acc, org) =&gt; {
   return acc
 }, {})
 </code></pre>
-<h3 id="critical-bug-fix-cto-isbfemployee-flag">✅ Critical Bug Fix: CTO <code>isBfEmployee</code> Flag</h3>
+<h3 id="critical-bug-fix-cto-isbfemployee-flag">✅ Critical Bug Fix: CTO <code>isBfEmployee</code> Flag<a class="headerlink" href="#critical-bug-fix-cto-isbfemployee-flag" title="Permanent link">&para;</a></h3>
 <p><strong>Issue</strong>: CTO user was not receiving <code>isBfEmployee: true</code> in <code>/api/auth/me</code> response, causing "Not authorized" error in admin tenet interface.</p>
 <p><strong>Root Cause</strong>: The seeder in <code>api/lib/seedDevData.js</code> was creating the CTO user but <strong>NOT setting the <code>isBfEmployee: true</code> flag</strong>.</p>
 <p><strong>Fix Applied</strong>:</p>
@@ -353,10 +386,10 @@ const ctoUser = await prisma.user.upsert({
   }
 }
 </code></pre>
-<h2 id="api-enforcement">🌐 API Enforcement</h2>
-<h3 id="updated-data-handlers">Updated Data Handlers</h3>
+<h2 id="api-enforcement">🌐 API Enforcement<a class="headerlink" href="#api-enforcement" title="Permanent link">&para;</a></h2>
+<h3 id="updated-data-handlers">Updated Data Handlers<a class="headerlink" href="#updated-data-handlers" title="Permanent link">&para;</a></h3>
 <p>All data-fetching routes now use org scoping from the auth middleware:</p>
-<h4 id="example-trading-partners-handler">Example: Trading Partners Handler</h4>
+<h4 id="example-trading-partners-handler">Example: Trading Partners Handler<a class="headerlink" href="#example-trading-partners-handler" title="Permanent link">&para;</a></h4>
 <pre><code class="language-javascript">export async function listTradingPartners(request, reply) {
   // 🔑 Critical: Use org scoping from auth middleware
   if (!request.user || !request.user.orgIds) {
@@ -385,7 +418,7 @@ const ctoUser = await prisma.user.upsert({
   })
 }
 </code></pre>
-<h3 id="api-changes-summary">API Changes Summary</h3>
+<h3 id="api-changes-summary">API Changes Summary<a class="headerlink" href="#api-changes-summary" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
 <tr>
@@ -417,8 +450,8 @@ const ctoUser = await prisma.user.upsert({
 </tr>
 </tbody>
 </table>
-<h2 id="implementation-details">🏗️ Implementation Details</h2>
-<h3 id="files-modified">Files Modified</h3>
+<h2 id="implementation-details">🏗️ Implementation Details<a class="headerlink" href="#implementation-details" title="Permanent link">&para;</a></h2>
+<h3 id="files-modified">Files Modified<a class="headerlink" href="#files-modified" title="Permanent link">&para;</a></h3>
 <ol>
 <li><strong>Database Schema</strong></li>
 <li>
@@ -444,7 +477,7 @@ const ctoUser = await prisma.user.upsert({
 <li><code>api/migrations/phase29-migration.js</code> - Database migration script</li>
 <li><code>fix-bf-employee.js</code> - Manual fix for existing users</li>
 </ol>
-<h3 id="critical-bug-fix">Critical Bug Fix</h3>
+<h3 id="critical-bug-fix">Critical Bug Fix<a class="headerlink" href="#critical-bug-fix" title="Permanent link">&para;</a></h3>
 <p><strong>Issue</strong>: <code>requireAuthIfEnabled()</code> was returning <code>maybeAuth</code> instead of the real <code>authMiddleware</code> with Phase 29 org resolution logic.</p>
 <p><strong>Root Cause</strong>: When <code>REQUIRE_AUTH</code> is not set to <code>true</code>, the function falls back to <code>maybeAuth</code> which only does basic JWT verification without org resolution.</p>
 <p><strong>Fix</strong>: Directly imported the real <code>authMiddleware</code> and used it for all routes:</p>
@@ -456,46 +489,46 @@ import { authMiddleware } from './handlers/auth.js';
 const { authMiddleware: fallbackAuthMiddleware, maybeAuth } = requireAuthIfEnabled();
 const authMiddlewareForRoutes = authMiddleware;
 </code></pre>
-<h3 id="migration-process">Migration Process</h3>
+<h3 id="migration-process">Migration Process<a class="headerlink" href="#migration-process" title="Permanent link">&para;</a></h3>
 <ol>
 <li><strong>Schema Update</strong>: Applied via <code>pnpm prisma db push</code></li>
 <li><strong>Data Migration</strong>: Ran migration script to update existing users</li>
 <li><strong>Seed Data</strong>: Ran seed to populate test data</li>
 <li><strong>Verification</strong>: Created test scripts to validate implementation</li>
 </ol>
-<h2 id="testing-strategy">🧪 Testing Strategy</h2>
-<h3 id="validation-results">✅ Validation Results</h3>
-<h4 id="test-1-regular-user-dev-adminlocaltest">Test 1: Regular User (dev-admin@local.test)</h4>
+<h2 id="testing-strategy">🧪 Testing Strategy<a class="headerlink" href="#testing-strategy" title="Permanent link">&para;</a></h2>
+<h3 id="validation-results">✅ Validation Results<a class="headerlink" href="#validation-results" title="Permanent link">&para;</a></h3>
+<h4 id="test-1-regular-user-dev-adminlocaltest">Test 1: Regular User (dev-admin@local.test)<a class="headerlink" href="#test-1-regular-user-dev-adminlocaltest" title="Permanent link">&para;</a></h4>
 <ul>
 <li><strong>Request</strong>: <code>GET /api/trading-partners</code> with dev-admin token</li>
 <li><strong>Expected</strong>: Returns 4 TPs (all in Dev Organization)</li>
 <li><strong>Result</strong>: ✅ <strong>PASS</strong> - Returns 4 TPs from Dev Organization only</li>
 </ul>
-<h4 id="test-2-bf_employee-ctobridgeflowtest">Test 2: bf_employee (cto@bridgeflow.test)</h4>
+<h4 id="test-2-bf_employee-ctobridgeflowtest">Test 2: bf_employee (cto@bridgeflow.test)<a class="headerlink" href="#test-2-bf_employee-ctobridgeflowtest" title="Permanent link">&para;</a></h4>
 <ul>
 <li><strong>Request</strong>: <code>GET /api/trading-partners</code> with cto token</li>
 <li><strong>Expected</strong>: Returns 4 TPs (from Dev Organization)</li>
 <li><strong>Result</strong>: ✅ <strong>PASS</strong> - Returns 4 TPs from assigned orgs (Dev Organization)</li>
 </ul>
-<h4 id="test-3-cross-org-isolation-founderstartceotest">Test 3: Cross-Org Isolation (founder@startceo.test)</h4>
+<h4 id="test-3-cross-org-isolation-founderstartceotest">Test 3: Cross-Org Isolation (founder@startceo.test)<a class="headerlink" href="#test-3-cross-org-isolation-founderstartceotest" title="Permanent link">&para;</a></h4>
 <ul>
 <li><strong>Request</strong>: <code>GET /api/trading-partners</code> with founder token</li>
 <li><strong>Expected</strong>: Returns empty list (StartCEO org has no TPs)</li>
 <li><strong>Result</strong>: ✅ <strong>PASS</strong> - Returns empty list, cannot see Dev Organization TPs</li>
 </ul>
-<h4 id="test-4-cto-admin-access-new">Test 4: CTO Admin Access ✅ NEW</h4>
+<h4 id="test-4-cto-admin-access-new">Test 4: CTO Admin Access ✅ NEW<a class="headerlink" href="#test-4-cto-admin-access-new" title="Permanent link">&para;</a></h4>
 <ul>
 <li><strong>Request</strong>: <code>GET /api/auth/me</code> with cto token</li>
 <li><strong>Expected</strong>: Returns <code>isBfEmployee: true</code> flag</li>
 <li><strong>Result</strong>: ✅ <strong>PASS</strong> - CTO now receives proper admin credentials</li>
 </ul>
-<h4 id="test-5-tenetprofiles-access-new">Test 5: TenetProfiles Access ✅ NEW</h4>
+<h4 id="test-5-tenetprofiles-access-new">Test 5: TenetProfiles Access ✅ NEW<a class="headerlink" href="#test-5-tenetprofiles-access-new" title="Permanent link">&para;</a></h4>
 <ul>
 <li><strong>Request</strong>: Access admin tenet interface with cto credentials</li>
 <li><strong>Expected</strong>: Full access to all tenets and organizations</li>
 <li><strong>Result</strong>: ✅ <strong>PASS</strong> - CTO can view and manage all tenets</li>
 </ul>
-<h3 id="test-scripts-created">Test Scripts Created</h3>
+<h3 id="test-scripts-created">Test Scripts Created<a class="headerlink" href="#test-scripts-created" title="Permanent link">&para;</a></h3>
 <ul>
 <li><code>test-phase29.js</code> - Schema validation test</li>
 <li><code>test-login-cto.js</code> - CTO authentication test</li>
@@ -504,7 +537,7 @@ const authMiddlewareForRoutes = authMiddleware;
 <li><code>check-users.js</code> - Database verification</li>
 <li><code>test-auth-db.js</code> - Auth middleware logic test</li>
 </ul>
-<h3 id="cto-access-verification-complete">CTO Access Verification ✅ COMPLETE</h3>
+<h3 id="cto-access-verification-complete">CTO Access Verification ✅ COMPLETE<a class="headerlink" href="#cto-access-verification-complete" title="Permanent link">&para;</a></h3>
 <p><strong>Login Credentials</strong>:
 - <strong>Email</strong>: <code>cto@bridgeflow.test</code>
 - <strong>Password</strong>: <code>BridgeFlow123!</code>
@@ -522,8 +555,8 @@ curl -H &quot;Authorization: Bearer &lt;token&gt;&quot; http://127.0.0.1:4000/ap
 # Navigate to http://localhost:3001/admin → Tenets
 # ✅ Full access to all organizations and tenets
 </code></pre>
-<h2 id="current-state">📊 Current State</h2>
-<h3 id="users-in-database">Users in Database</h3>
+<h2 id="current-state">📊 Current State<a class="headerlink" href="#current-state" title="Permanent link">&para;</a></h2>
+<h3 id="users-in-database">Users in Database<a class="headerlink" href="#users-in-database" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
 <tr>
@@ -554,7 +587,7 @@ curl -H &quot;Authorization: Bearer &lt;token&gt;&quot; http://127.0.0.1:4000/ap
 </tr>
 </tbody>
 </table>
-<h3 id="organizations">Organizations</h3>
+<h3 id="organizations">Organizations<a class="headerlink" href="#organizations" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
 <tr>
@@ -581,14 +614,14 @@ curl -H &quot;Authorization: Bearer &lt;token&gt;&quot; http://127.0.0.1:4000/ap
 </tr>
 </tbody>
 </table>
-<h3 id="trading-partners">Trading Partners</h3>
+<h3 id="trading-partners">Trading Partners<a class="headerlink" href="#trading-partners" title="Permanent link">&para;</a></h3>
 <ul>
 <li>4 sample trading partners created for Dev Organization</li>
 <li>Properly scoped by organization</li>
 <li>Accessible based on user org assignments</li>
 </ul>
-<h2 id="uiux-requirements-future-work">🎨 UI/UX Requirements (Future Work)</h2>
-<h3 id="admin-panel-updates-needed">Admin Panel Updates Needed</h3>
+<h2 id="uiux-requirements-future-work">🎨 UI/UX Requirements (Future Work)<a class="headerlink" href="#uiux-requirements-future-work" title="Permanent link">&para;</a></h2>
+<h3 id="admin-panel-updates-needed">Admin Panel Updates Needed<a class="headerlink" href="#admin-panel-updates-needed" title="Permanent link">&para;</a></h3>
 <ol>
 <li><strong>User Management</strong></li>
 <li>Regular users: Single org dropdown with "Move" button</li>
@@ -610,55 +643,55 @@ curl -H &quot;Authorization: Bearer &lt;token&gt;&quot; http://127.0.0.1:4000/ap
 <li>Context switching for bf_employees</li>
 <li>Org-aware breadcrumbs</li>
 </ol>
-<h2 id="security-considerations">🚨 Security Considerations</h2>
-<h3 id="data-isolation">Data Isolation</h3>
+<h2 id="security-considerations">🚨 Security Considerations<a class="headerlink" href="#security-considerations" title="Permanent link">&para;</a></h2>
+<h3 id="data-isolation">Data Isolation<a class="headerlink" href="#data-isolation" title="Permanent link">&para;</a></h3>
 <ul>
 <li>All queries automatically scoped by organization</li>
 <li>No cross-org data leakage</li>
 <li>Proper access controls enforced at API level</li>
 </ul>
-<h3 id="authentication">Authentication</h3>
+<h3 id="authentication">Authentication<a class="headerlink" href="#authentication" title="Permanent link">&para;</a></h3>
 <ul>
 <li>User type determined by <code>isBfEmployee</code> flag</li>
 <li>Org context resolved during authentication</li>
 <li>Session management includes org information</li>
 </ul>
-<h3 id="authorization">Authorization</h3>
+<h3 id="authorization">Authorization<a class="headerlink" href="#authorization" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Role-based permissions per organization</li>
 <li>bf_employees can have different roles in different orgs</li>
 <li>Regular users limited to their single org</li>
 </ul>
-<h2 id="future-work">📋 Future Work</h2>
-<h3 id="phase-295-complete-api-coverage-completed">Phase 29.5: Complete API Coverage ✅ COMPLETED</h3>
+<h2 id="future-work">📋 Future Work<a class="headerlink" href="#future-work" title="Permanent link">&para;</a></h2>
+<h3 id="phase-295-complete-api-coverage-completed">Phase 29.5: Complete API Coverage ✅ COMPLETED<a class="headerlink" href="#phase-295-complete-api-coverage-completed" title="Permanent link">&para;</a></h3>
 <ul>
 <li>✅ Update all remaining data handlers with org scoping</li>
 <li>✅ Add organization management endpoints</li>
 <li>✅ Implement user assignment APIs</li>
 <li>✅ <strong>NEW: TenetProfiles Admin Interface</strong></li>
 </ul>
-<h3 id="phase-296-ui-implementation-completed">Phase 29.6: UI Implementation ✅ COMPLETED</h3>
+<h3 id="phase-296-ui-implementation-completed">Phase 29.6: UI Implementation ✅ COMPLETED<a class="headerlink" href="#phase-296-ui-implementation-completed" title="Permanent link">&para;</a></h3>
 <ul>
 <li>✅ Update admin panel with org management</li>
 <li>✅ Add user type indicators</li>
 <li>✅ Implement multi-org selection interfaces</li>
 <li>✅ <strong>NEW: TenetProfiles Frontend Components</strong></li>
 </ul>
-<h3 id="phase-297-testing-validation-completed">Phase 29.7: Testing &amp; Validation ✅ COMPLETED</h3>
+<h3 id="phase-297-testing-validation-completed">Phase 29.7: Testing &amp; Validation ✅ COMPLETED<a class="headerlink" href="#phase-297-testing-validation-completed" title="Permanent link">&para;</a></h3>
 <ul>
 <li>✅ Comprehensive integration tests</li>
 <li>✅ Security validation</li>
 <li>✅ Performance testing</li>
 <li>✅ <strong>NEW: TenetProfiles API Testing</strong></li>
 </ul>
-<h3 id="phase-298-bridge-blueprint-foundation-completed">Phase 29.8: Bridge Blueprint Foundation ✅ COMPLETED</h3>
+<h3 id="phase-298-bridge-blueprint-foundation-completed">Phase 29.8: Bridge Blueprint Foundation ✅ COMPLETED<a class="headerlink" href="#phase-298-bridge-blueprint-foundation-completed" title="Permanent link">&para;</a></h3>
 <ul>
 <li>✅ <strong>NEW: BridgeBlueprint Model</strong> - Composite unique constraint for multi-tenant blueprints</li>
 <li>✅ <strong>NEW: UserBridge Model</strong> - User-specific bridge instances</li>
 <li>✅ <strong>NEW: BridgeComponent Model</strong> - Component tracking per bridge</li>
 <li>✅ <strong>NEW: Blueprint API Testing</strong> - Stabilized test suite for Phase 32</li>
 </ul>
-<h3 id="phase-299-bridge-canvas-integration-in-progress">Phase 29.9: Bridge Canvas Integration 🚀 IN PROGRESS</h3>
+<h3 id="phase-299-bridge-canvas-integration-in-progress">Phase 29.9: Bridge Canvas Integration 🚀 IN PROGRESS<a class="headerlink" href="#phase-299-bridge-canvas-integration-in-progress" title="Permanent link">&para;</a></h3>
 <ul>
 <li>🔄 <strong>Bridge Blueprint CRUD API</strong> - Admin-only blueprint management</li>
 <li>🔄 <strong>Canvas Assembly Integration</strong> - Blueprint-driven UI within canvas-assembly</li>
@@ -666,15 +699,15 @@ curl -H &quot;Authorization: Bearer &lt;token&gt;&quot; http://127.0.0.1:4000/ap
 <li>🔄 <strong>Bridge Activation Workflow</strong> - One-click bridge deployment</li>
 </ul>
 <hr />
-<h2 id="phase-32-bridge-canvas-blueprints">🌉 Phase 32: Bridge Canvas &amp; Blueprints</h2>
-<h3 id="overview">Overview</h3>
+<h2 id="phase-32-bridge-canvas-blueprints">🌉 Phase 32: Bridge Canvas &amp; Blueprints<a class="headerlink" href="#phase-32-bridge-canvas-blueprints" title="Permanent link">&para;</a></h2>
+<h3 id="overview">Overview<a class="headerlink" href="#overview" title="Permanent link">&para;</a></h3>
 <p>Phase 32 builds directly on Phase 29's organizational model to create a visual, guided environment where customers assemble their integration bridge using pre-defined blueprints and real-time gap detection.</p>
-<h3 id="key-architecture-decision">Key Architecture Decision</h3>
+<h3 id="key-architecture-decision">Key Architecture Decision<a class="headerlink" href="#key-architecture-decision" title="Permanent link">&para;</a></h3>
 <p><strong>Built within existing <code>canvas-assembly</code> structure</strong> - not a separate section. This maintains:
 - ✅ No context switching - everything lives in /canvas-assembly
 - ✅ No duplicated logic - leverages existing auth, org scoping, state
 - ✅ No conceptual confusion - one canvas, one workflow, one mental model</p>
-<h3 id="blueprint-model-design">Blueprint Model Design</h3>
+<h3 id="blueprint-model-design">Blueprint Model Design<a class="headerlink" href="#blueprint-model-design" title="Permanent link">&para;</a></h3>
 <p>The BridgeBlueprint model uses a <strong>composite unique constraint</strong> to support BridgeFlow's two-tier model:</p>
 <pre><code class="language-prisma">@@unique([slug, organizationId])  // ✅ Composite unique: slug unique per org
 </code></pre>
@@ -685,21 +718,21 @@ curl -H &quot;Authorization: Bearer &lt;token&gt;&quot; http://127.0.0.1:4000/ap
 - <code>(slug: 'retail-brand', organizationId: null)</code> → One public blueprint
 - <code>(slug: 'retail-brand', organizationId: 'org1')</code> → Private to org1
 - <code>(slug: 'retail-brand', organizationId: 'org2')</code> → Private to org2</p>
-<h3 id="core-components">Core Components</h3>
+<h3 id="core-components">Core Components<a class="headerlink" href="#core-components" title="Permanent link">&para;</a></h3>
 <ol>
 <li><strong>Blueprint System</strong>: Predefined templates (healthcare-payer, retail-brand, logistics-carrier)</li>
 <li><strong>Bridge Canvas</strong>: Visual drag-and-drop interface with gap detection</li>
 <li><strong>Gap Detection Engine</strong>: Real-time validation and contextual guidance</li>
 <li><strong>Deployment Workflow</strong>: One-click bridge activation with monitoring</li>
 </ol>
-<h3 id="integration-with-phase-29">Integration with Phase 29</h3>
+<h3 id="integration-with-phase-29">Integration with Phase 29<a class="headerlink" href="#integration-with-phase-29" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Organization Scoping</strong>: All bridges scoped to organization from Phase 29</li>
 <li><strong>RBAC Enforcement</strong>: Uses Phase 29's user type and role system</li>
 <li><strong>Multi-Tenancy</strong>: Leverages Phase 29's data isolation</li>
 <li><strong>Auth Context</strong>: Inherits Phase 29's authentication middleware</li>
 </ul>
-<h3 id="success-criteria">Success Criteria</h3>
+<h3 id="success-criteria">Success Criteria<a class="headerlink" href="#success-criteria" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Non-technical users can select blueprint, add TP, create connector, activate bridge</li>
 <li>CTO can manage all bridges across orgs and create custom blueprints</li>
@@ -707,11 +740,11 @@ curl -H &quot;Authorization: Bearer &lt;token&gt;&quot; http://127.0.0.1:4000/ap
 <li>Seamless integration with all previous phases (28-31)</li>
 </ul>
 <hr />
-<h2 id="tenetprofiles-implementation-phase-295">🎨 TenetProfiles Implementation (Phase 29.5)</h2>
-<h3 id="overview_1">Overview</h3>
+<h2 id="tenetprofiles-implementation-phase-295">🎨 TenetProfiles Implementation (Phase 29.5)<a class="headerlink" href="#tenetprofiles-implementation-phase-295" title="Permanent link">&para;</a></h2>
+<h3 id="overview_1">Overview<a class="headerlink" href="#overview_1" title="Permanent link">&para;</a></h3>
 <p>TenetProfiles provides BF Admins with a comprehensive interface to manage organizations (tenets) and their associated trading partners. This extends the Phase 29 organizational model with a user-friendly admin interface.</p>
-<h3 id="backend-implementation">Backend Implementation</h3>
-<h4 id="api-handlers-apihandlerstenetprofilesjs">API Handlers (<code>api/handlers/tenetProfiles.js</code>)</h4>
+<h3 id="backend-implementation">Backend Implementation<a class="headerlink" href="#backend-implementation" title="Permanent link">&para;</a></h3>
+<h4 id="api-handlers-apihandlerstenetprofilesjs">API Handlers (<code>api/handlers/tenetProfiles.js</code>)<a class="headerlink" href="#api-handlers-apihandlerstenetprofilesjs" title="Permanent link">&para;</a></h4>
 <pre><code class="language-javascript">// Key endpoints implemented:
 export async function listTenetProfiles(request, reply)     // List all tenets with TPs
 export async function createTenetProfile(request, reply)    // Create new tenet
@@ -719,7 +752,7 @@ export async function updateTenetProfile(request, reply)    // Update existing t
 export async function deleteTenetProfile(request, reply)    // Delete tenet (safety checks)
 export async function getTenetProfile(request, reply)       // Get detailed tenet info
 </code></pre>
-<h4 id="api-routes-apiroutestenetprofilesjs">API Routes (<code>api/routes/tenetProfiles.js</code>)</h4>
+<h4 id="api-routes-apiroutestenetprofilesjs">API Routes (<code>api/routes/tenetProfiles.js</code>)<a class="headerlink" href="#api-routes-apiroutestenetprofilesjs" title="Permanent link">&para;</a></h4>
 <pre><code class="language-javascript">// RESTful endpoints with authentication and permissions:
 GET    /admin-api/tenets        // List tenets
 POST   /admin-api/tenets        // Create tenet
@@ -727,7 +760,7 @@ GET    /admin-api/tenets/:id    // Get tenet details
 PATCH  /admin-api/tenets/:id    // Update tenet
 DELETE /admin-api/tenets/:id    // Delete tenet
 </code></pre>
-<h4 id="database-schema-updates">Database Schema Updates</h4>
+<h4 id="database-schema-updates">Database Schema Updates<a class="headerlink" href="#database-schema-updates" title="Permanent link">&para;</a></h4>
 <pre><code class="language-prisma">model Organization {
   id              String             @id @default(cuid())
   name            String
@@ -749,8 +782,8 @@ model TradingPartner {
   // ... other fields
 }
 </code></pre>
-<h3 id="frontend-implementation">Frontend Implementation</h3>
-<h4 id="tenetprofiles-page-admin-bridgeflowsrcpagestenetprofilesjsx">TenetProfiles Page (<code>admin-bridgeflow/src/pages/TenetProfiles.jsx</code>)</h4>
+<h3 id="frontend-implementation">Frontend Implementation<a class="headerlink" href="#frontend-implementation" title="Permanent link">&para;</a></h3>
+<h4 id="tenetprofiles-page-admin-bridgeflowsrcpagestenetprofilesjsx">TenetProfiles Page (<code>admin-bridgeflow/src/pages/TenetProfiles.jsx</code>)<a class="headerlink" href="#tenetprofiles-page-admin-bridgeflowsrcpagestenetprofilesjsx" title="Permanent link">&para;</a></h4>
 <ul>
 <li><strong>Grid Layout</strong>: Visual card-based display of all tenets</li>
 <li><strong>Search &amp; Filter</strong>: Find tenets by name or filter by status</li>
@@ -758,7 +791,7 @@ model TradingPartner {
 <li><strong>Trading Partner Count</strong>: Shows number of TPs per tenet</li>
 <li><strong>Status Indicators</strong>: Visual badges for active/inactive status</li>
 </ul>
-<h4 id="tenetdetail-page-admin-bridgeflowsrcpagestenetdetailjsx">TenetDetail Page (<code>admin-bridgeflow/src/pages/TenetDetail.jsx</code>)</h4>
+<h4 id="tenetdetail-page-admin-bridgeflowsrcpagestenetdetailjsx">TenetDetail Page (<code>admin-bridgeflow/src/pages/TenetDetail.jsx</code>)<a class="headerlink" href="#tenetdetail-page-admin-bridgeflowsrcpagestenetdetailjsx" title="Permanent link">&para;</a></h4>
 <ul>
 <li><strong>Tenet Overview</strong>: Detailed tenet information</li>
 <li><strong>Trading Partners List</strong>: All TPs for the selected tenet</li>
@@ -766,14 +799,14 @@ model TradingPartner {
 <li><strong>Search Functionality</strong>: Find specific TPs</li>
 <li><strong>Navigation</strong>: Easy back to tenets list</li>
 </ul>
-<h4 id="navigation-integration">Navigation Integration</h4>
+<h4 id="navigation-integration">Navigation Integration<a class="headerlink" href="#navigation-integration" title="Permanent link">&para;</a></h4>
 <ul>
 <li><strong>Menu Item</strong>: Added "🏢 Tenets" to admin sidebar</li>
 <li><strong>Routing</strong>: <code>/tenets</code> and <code>/tenets/:id</code> routes</li>
 <li><strong>Breadcrumbs</strong>: Navigation hierarchy for user experience</li>
 </ul>
-<h3 id="key-features">Key Features</h3>
-<h4 id="for-bf-admins">For BF Admins</h4>
+<h3 id="key-features">Key Features<a class="headerlink" href="#key-features" title="Permanent link">&para;</a></h3>
+<h4 id="for-bf-admins">For BF Admins<a class="headerlink" href="#for-bf-admins" title="Permanent link">&para;</a></h4>
 <ul>
 <li>✅ <strong>Create Tenets</strong>: Add new organizations with name, slug, description</li>
 <li>✅ <strong>Edit Tenets</strong>: Modify tenet information and status</li>
@@ -782,38 +815,38 @@ model TradingPartner {
 <li>✅ <strong>Add Trading Partners</strong>: Create new TPs for specific tenets</li>
 <li>✅ <strong>Search &amp; Filter</strong>: Find tenets and TPs quickly</li>
 </ul>
-<h4 id="for-users">For Users</h4>
+<h4 id="for-users">For Users<a class="headerlink" href="#for-users" title="Permanent link">&para;</a></h4>
 <ul>
 <li>✅ <strong>Click on Tenet</strong>: Navigate from tenet list to detail view</li>
 <li>✅ <strong>View Trading Partners</strong>: See all TPs for that tenet</li>
 <li>✅ <strong>Search TPs</strong>: Find specific trading partners</li>
 <li>✅ <strong>Status Visibility</strong>: See active/inactive status</li>
 </ul>
-<h3 id="api-testing-results">API Testing Results</h3>
-<h4 id="list-tenets">✅ List Tenets</h4>
+<h3 id="api-testing-results">API Testing Results<a class="headerlink" href="#api-testing-results" title="Permanent link">&para;</a></h3>
+<h4 id="list-tenets">✅ List Tenets<a class="headerlink" href="#list-tenets" title="Permanent link">&para;</a></h4>
 <pre><code class="language-bash">curl -H &quot;Authorization: Bearer &lt;token&gt;&quot; http://127.0.0.1:4000/admin-api/tenets
 # Returns: All tenets with trading partners and counts
 </code></pre>
-<h4 id="create-tenet">✅ Create Tenet</h4>
+<h4 id="create-tenet">✅ Create Tenet<a class="headerlink" href="#create-tenet" title="Permanent link">&para;</a></h4>
 <pre><code class="language-bash">curl -X POST http://127.0.0.1:4000/admin-api/tenets \
   -H &quot;Authorization: Bearer &lt;token&gt;&quot; \
   -H &quot;Content-Type: application/json&quot; \
   -d '{&quot;name&quot;:&quot;Test Tenet&quot;,&quot;slug&quot;:&quot;test-tenet&quot;,&quot;description&quot;:&quot;Test description&quot;}'
 # Returns: Created tenet with ID
 </code></pre>
-<h4 id="get-tenet-details">✅ Get Tenet Details</h4>
+<h4 id="get-tenet-details">✅ Get Tenet Details<a class="headerlink" href="#get-tenet-details" title="Permanent link">&para;</a></h4>
 <pre><code class="language-bash">curl -H &quot;Authorization: Bearer &lt;token&gt;&quot; \
   http://127.0.0.1:4000/admin-api/tenets/&lt;id&gt;
 # Returns: Tenet details with TPs and user memberships
 </code></pre>
-<h3 id="security-permissions">Security &amp; Permissions</h3>
-<h4 id="authentication_1">Authentication</h4>
+<h3 id="security-permissions">Security &amp; Permissions<a class="headerlink" href="#security-permissions" title="Permanent link">&para;</a></h3>
+<h4 id="authentication_1">Authentication<a class="headerlink" href="#authentication_1" title="Permanent link">&para;</a></h4>
 <ul>
 <li>✅ All endpoints require valid JWT token</li>
 <li>✅ BF Admin role verification</li>
 <li>✅ IP whitelist enforcement for admin routes</li>
 </ul>
-<h4 id="authorization_1">Authorization</h4>
+<h4 id="authorization_1">Authorization<a class="headerlink" href="#authorization_1" title="Permanent link">&para;</a></h4>
 <ul>
 <li>✅ Permission-based access control</li>
 <li>✅ <code>admin:tenets:read</code> - View tenets</li>
@@ -821,15 +854,15 @@ model TradingPartner {
 <li>✅ <code>admin:tenets:update</code> - Update tenets</li>
 <li>✅ <code>admin:tenets:delete</code> - Delete tenets</li>
 </ul>
-<h4 id="data-safety">Data Safety</h4>
+<h4 id="data-safety">Data Safety<a class="headerlink" href="#data-safety" title="Permanent link">&para;</a></h4>
 <ul>
 <li>✅ Delete prevention checks (no TPs or users)</li>
 <li>✅ Slug uniqueness validation</li>
 <li>✅ Required field validation</li>
 <li>✅ Organization scoping from Phase 29</li>
 </ul>
-<h3 id="current-state_1">Current State</h3>
-<h4 id="tenets-in-database">Tenets in Database</h4>
+<h3 id="current-state_1">Current State<a class="headerlink" href="#current-state_1" title="Permanent link">&para;</a></h3>
+<h4 id="tenets-in-database">Tenets in Database<a class="headerlink" href="#tenets-in-database" title="Permanent link">&para;</a></h4>
 <table>
 <thead>
 <tr>
@@ -871,14 +904,14 @@ model TradingPartner {
 </tr>
 </tbody>
 </table>
-<h4 id="trading-partners_1">Trading Partners</h4>
+<h4 id="trading-partners_1">Trading Partners<a class="headerlink" href="#trading-partners_1" title="Permanent link">&para;</a></h4>
 <ul>
 <li>✅ 4 sample TPs in Dev Organization</li>
 <li>✅ Properly scoped by organization</li>
 <li>✅ Accessible via TenetProfiles interface</li>
 </ul>
-<h3 id="user-experience">User Experience</h3>
-<h4 id="admin-workflow">Admin Workflow</h4>
+<h3 id="user-experience">User Experience<a class="headerlink" href="#user-experience" title="Permanent link">&para;</a></h3>
+<h4 id="admin-workflow">Admin Workflow<a class="headerlink" href="#admin-workflow" title="Permanent link">&para;</a></h4>
 <ol>
 <li><strong>Navigate</strong> to <code>/tenets</code> from admin sidebar</li>
 <li><strong>View</strong> all tenets in grid layout with TP counts</li>
@@ -887,7 +920,7 @@ model TradingPartner {
 <li><strong>Click</strong> "Create Tenet" to add new organization</li>
 <li><strong>Search</strong> and filter to find specific tenets</li>
 </ol>
-<h4 id="user-workflow">User Workflow</h4>
+<h4 id="user-workflow">User Workflow<a class="headerlink" href="#user-workflow" title="Permanent link">&para;</a></h4>
 <ol>
 <li><strong>Navigate</strong> to tenets list</li>
 <li><strong>Click</strong> on tenet card to view details</li>
@@ -895,8 +928,8 @@ model TradingPartner {
 <li><strong>Search</strong> for specific trading partners</li>
 <li><strong>Navigate</strong> back to tenets list</li>
 </ol>
-<h3 id="technical-implementation-details">Technical Implementation Details</h3>
-<h4 id="frontend-architecture">Frontend Architecture</h4>
+<h3 id="technical-implementation-details">Technical Implementation Details<a class="headerlink" href="#technical-implementation-details" title="Permanent link">&para;</a></h3>
+<h4 id="frontend-architecture">Frontend Architecture<a class="headerlink" href="#frontend-architecture" title="Permanent link">&para;</a></h4>
 <ul>
 <li><strong>React Components</strong>: Functional components with hooks</li>
 <li><strong>State Management</strong>: useState for local state</li>
@@ -905,7 +938,7 @@ model TradingPartner {
 <li><strong>Styling</strong>: Inline styles for rapid development</li>
 <li><strong>Modals</strong>: Custom modal implementations</li>
 </ul>
-<h4 id="backend-architecture">Backend Architecture</h4>
+<h4 id="backend-architecture">Backend Architecture<a class="headerlink" href="#backend-architecture" title="Permanent link">&para;</a></h4>
 <ul>
 <li><strong>Fastify</strong>: Fast web framework</li>
 <li><strong>Prisma ORM</strong>: Type-safe database access</li>
@@ -914,7 +947,7 @@ model TradingPartner {
 <li><strong>Error Handling</strong>: Comprehensive error responses</li>
 <li><strong>Validation</strong>: Input validation and sanitization</li>
 </ul>
-<h4 id="database-design">Database Design</h4>
+<h4 id="database-design">Database Design<a class="headerlink" href="#database-design" title="Permanent link">&para;</a></h4>
 <ul>
 <li><strong>Relations</strong>: Proper foreign key relationships</li>
 <li><strong>Indexes</strong>: Optimized query performance</li>
@@ -922,8 +955,8 @@ model TradingPartner {
 <li><strong>Soft Deletes</strong>: <code>isActive</code> flags for safe deletion</li>
 <li><strong>Audit Fields</strong>: Created/updated timestamps</li>
 </ul>
-<h3 id="future-enhancements">Future Enhancements</h3>
-<h4 id="phase-298-advanced-features">Phase 29.8: Advanced Features</h4>
+<h3 id="future-enhancements">Future Enhancements<a class="headerlink" href="#future-enhancements" title="Permanent link">&para;</a></h3>
+<h4 id="phase-298-advanced-features">Phase 29.8: Advanced Features<a class="headerlink" href="#phase-298-advanced-features" title="Permanent link">&para;</a></h4>
 <ul>
 <li><strong>Bulk Operations</strong>: Create/update multiple tenets</li>
 <li><strong>Export/Import</strong>: CSV export of tenets and TPs</li>
@@ -931,7 +964,7 @@ model TradingPartner {
 <li><strong>Advanced Search</strong>: Full-text search across tenets/TPs</li>
 <li><strong>Dashboard Widgets</strong>: Tenet statistics and metrics</li>
 </ul>
-<h4 id="phase-299-ui-improvements">Phase 29.9: UI Improvements</h4>
+<h4 id="phase-299-ui-improvements">Phase 29.9: UI Improvements<a class="headerlink" href="#phase-299-ui-improvements" title="Permanent link">&para;</a></h4>
 <ul>
 <li><strong>Pagination</strong>: Handle large datasets</li>
 <li><strong>Sorting</strong>: Sort by name, created date, TP count</li>
@@ -947,31 +980,31 @@ model TradingPartner {
 <strong>TenetProfiles: ✅ FULLY IMPLEMENTED</strong>
 <strong>CTO Access: ✅ FULLY FUNCTIONAL</strong>
 <strong>Next Phase: Phase 28 (TP Creation) can now resume on secure foundation</strong></p>
-<h2 id="rollback-plan">🔄 Rollback Plan</h2>
+<h2 id="rollback-plan">🔄 Rollback Plan<a class="headerlink" href="#rollback-plan" title="Permanent link">&para;</a></h2>
 <p>If critical issues arise:
 1. Database backup before migration
 2. Feature flags to disable org scoping
 3. Revert to previous auth middleware
 4. Restore from backup if necessary</p>
-<h2 id="quick-start-guide-for-cto">🚀 Quick Start Guide for CTO</h2>
-<h3 id="1-start-the-system">1. Start the System</h3>
+<h2 id="quick-start-guide-for-cto">🚀 Quick Start Guide for CTO<a class="headerlink" href="#quick-start-guide-for-cto" title="Permanent link">&para;</a></h2>
+<h3 id="1-start-the-system">1. Start the System<a class="headerlink" href="#1-start-the-system" title="Permanent link">&para;</a></h3>
 <pre><code class="language-bash"># Start all services (API + Admin UI)
 pwsh -File start/start-admin.ps1
 </code></pre>
-<h3 id="2-access-admin-dashboard">2. Access Admin Dashboard</h3>
+<h3 id="2-access-admin-dashboard">2. Access Admin Dashboard<a class="headerlink" href="#2-access-admin-dashboard" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>URL</strong>: <code>http://localhost:3001/admin</code></li>
 <li><strong>Email</strong>: <code>cto@bridgeflow.test</code></li>
 <li><strong>Password</strong>: <code>BridgeFlow123!</code></li>
 </ul>
-<h3 id="3-verify-tenet-access">3. Verify Tenet Access</h3>
+<h3 id="3-verify-tenet-access">3. Verify Tenet Access<a class="headerlink" href="#3-verify-tenet-access" title="Permanent link">&para;</a></h3>
 <ol>
 <li>Click "🏢 Tenets" in the sidebar</li>
 <li>Should see all organizations (BridgeFlow Group, Dev Organization, StartCEO)</li>
 <li>Can create, edit, and view tenets</li>
 <li>Full admin access to all platform data</li>
 </ol>
-<h3 id="4-troubleshooting">4. Troubleshooting</h3>
+<h3 id="4-troubleshooting">4. Troubleshooting<a class="headerlink" href="#4-troubleshooting" title="Permanent link">&para;</a></h3>
 <p>If "Not authorized" appears:</p>
 <pre><code class="language-bash"># Reseed CTO user with proper flags
 curl -X POST http://127.0.0.1:4000/admin-api/_dev/ensure-dev-seed

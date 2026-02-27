@@ -1,23 +1,16 @@
-# Product: Tracking Portal
+# Tracking Portal
 
-## Purpose
-
-Shipment tracking experience for operational visibility.
+Customer and partner tracking experience for shipment visibility.
 
 ## Status
 
-Development.
+Development (no stable public endpoint documented yet).
 
-## Primary Endpoint
+## Integrations
 
-Not yet documented as a stable public deployment endpoint.
+- Shipment tracking data from `bf-shipments`
+- Resilience/anomaly context from `bf-control`
 
 ## Repository
 
-- `https://github.com/brockhager/bf-tracking-portal`
-
-## Notes
-
-Repository code references:
-- shipment data from `bf-shipments`
-- anomaly context from `bf-control`
+- https://github.com/brockhager/bf-tracking-portal

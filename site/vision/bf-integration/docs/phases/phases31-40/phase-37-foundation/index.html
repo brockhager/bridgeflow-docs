@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="../../../../../../css/theme.css" />
     <link rel="stylesheet" href="../../../../../../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../../../../../../stylesheets/extra.css" rel="stylesheet" />
     
       <script>
         // Current page data
@@ -43,7 +44,16 @@
                 <li class="toctree-l1"><a class="reference internal" href="../../../../../..">Home</a>
                 </li>
               </ul>
-              <p class="caption"><span class="caption-text">Products</span></p>
+              <p class="caption"><span class="caption-text">Start Here</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../ONBOARDING/">Onboarding</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../ARCHITECTURE/">Architecture</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../api-reference/">API Reference Hub</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Product Suite</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../../../../../products/">Overview</a>
                   </li>
@@ -66,7 +76,7 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../../../../../products/tracking-portal/">Tracking Portal</a>
                   </li>
               </ul>
-              <p class="caption"><span class="caption-text">Platform</span></p>
+              <p class="caption"><span class="caption-text">Platform Services</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../../../../../platform/">Overview</a>
                   </li>
@@ -87,12 +97,35 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../../../../../platform/bf-warehouse/">Warehouse Service</a>
                   </li>
               </ul>
+              <p class="caption"><span class="caption-text">Capability Catalog</span></p>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../../../../">Vision</a>
-                </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/SHIPMENTS/">Shipments</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/ADMIN_CONSOLE/">Admin Console</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/CONTROL_TOWER/">Control Tower</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/IDENTITY/">Identity</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/MASTERDATA/">Masterdata</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/ORDERS/">Orders</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/WAREHOUSE/">Warehouse</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/SEARCH/">Search</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/FINTECH/">Fintech</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/CARRIER_PORTAL/">Carrier Portal</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/TRACKING_PORTAL/">Tracking Portal</a>
+                  </li>
               </ul>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../../../../../../api-reference/">API Reference</a>
+                <li class="toctree-l1"><a class="reference internal" href="../../../../">Vision Archive</a>
                 </li>
               </ul>
       </div>
@@ -123,11 +156,11 @@
 Status: Planned / In Development
 Context: Original BF-INTEGRATION Vision (Pre-Phase 30)</p>
 </blockquote>
-<h1 id="phase-37-week-1-system-logs-structured-logging-complete">Phase 37 — Week 1: System Logs &amp; Structured Logging (Complete)</h1>
+<h1 id="phase-37-week-1-system-logs-structured-logging-complete">Phase 37 — Week 1: System Logs &amp; Structured Logging (Complete)<a class="headerlink" href="#phase-37-week-1-system-logs-structured-logging-complete" title="Permanent link">&para;</a></h1>
 <p><strong>Status:</strong> ✅ Week 1 Complete — Structured Logging implemented (January 11, 2026)</p>
-<h2 id="summary">Summary</h2>
+<h2 id="summary">Summary<a class="headerlink" href="#summary" title="Permanent link">&para;</a></h2>
 <p>Week 1 delivered a structured logging system and log query APIs. This provides traceability across onboarding jobs, provisioning flows, and general platform operations and prepares the ground for Week 2 (monitoring &amp; metrics dashboards, alerts).</p>
-<h3 id="files-created-modified">Files Created / Modified</h3>
+<h3 id="files-created-modified">Files Created / Modified<a class="headerlink" href="#files-created-modified" title="Permanent link">&para;</a></h3>
 <ul>
 <li><code>api/lib/logger.js</code> — Enhanced structured logger (traceId, spanId, parentSpanId, sessionId, userId, organizationId)</li>
 <li><code>api/handlers/logs.js</code> — Log query and export handlers</li>
@@ -135,7 +168,7 @@ Context: Original BF-INTEGRATION Vision (Pre-Phase 30)</p>
 <li><code>api/handlers/onboardingJobs.js</code> — Integrated structured logging and trace propagation into provisioning jobs</li>
 <li><code>api/routes/api.js</code> — Mounted <code>/api/logs</code> routes</li>
 </ul>
-<h2 id="week-1-accomplishments-enterprise-grade">Week 1 — Accomplishments (Enterprise-Grade)</h2>
+<h2 id="week-1-accomplishments-enterprise-grade">Week 1 — Accomplishments (Enterprise-Grade)<a class="headerlink" href="#week-1-accomplishments-enterprise-grade" title="Permanent link">&para;</a></h2>
 <ul>
 <li><strong>Complete Observability Infrastructure:</strong> Correlation IDs allow full traceability from onboarding session → provisioning job → individual steps ✅</li>
 <li><strong>Context Enrichment:</strong> Every log includes <code>userId</code>, <code>organizationId</code>, <code>sessionId</code> for fast triage ✅</li>
@@ -143,7 +176,7 @@ Context: Original BF-INTEGRATION Vision (Pre-Phase 30)</p>
 <li><strong>Production-ready Output:</strong> JSON logs for container stdout and colored console output in development ✅</li>
 <li><strong>Operational Excellence:</strong> Comprehensive API (query, summary, trace, export) with RBAC enforced; onboarding jobs now fully observable; size limits prevent log explosion ✅</li>
 </ul>
-<h2 id="week-2-monitoring-metrics-plan-core-deliverables">Week 2 — Monitoring &amp; Metrics Plan (Core Deliverables)</h2>
+<h2 id="week-2-monitoring-metrics-plan-core-deliverables">Week 2 — Monitoring &amp; Metrics Plan (Core Deliverables)<a class="headerlink" href="#week-2-monitoring-metrics-plan-core-deliverables" title="Permanent link">&para;</a></h2>
 <p>Objective: turn logs into actionable metrics, dashboards, and alerts so operators and the CTO can see system health and business KPIs at a glance.</p>
 <p>1) System Health Dashboard (Grafana/Datadog)
    - CPU / Memory / Disk usage (per service)
@@ -179,7 +212,7 @@ Context: Original BF-INTEGRATION Vision (Pre-Phase 30)</p>
 - Proactive issue detection and performance optimization
 - Business insights: which templates succeed fastest and where customers struggle
 - Customer trust: enterprise customers get transparent visibility into their onboarding</p>
-<h2 id="week-3-vault-integration-credential-storage-secret-management-complete">Week 3 — Vault Integration: Credential Storage &amp; Secret Management (Complete)</h2>
+<h2 id="week-3-vault-integration-credential-storage-secret-management-complete">Week 3 — Vault Integration: Credential Storage &amp; Secret Management (Complete)<a class="headerlink" href="#week-3-vault-integration-credential-storage-secret-management-complete" title="Permanent link">&para;</a></h2>
 <p><strong>Status:</strong> ✅ Week 3 Complete — Vault-backed credential management implemented (January 11, 2026)</p>
 <p><strong>Summary:</strong>
 Week 3 added enterprise-grade credential storage and secret management. Credential metadata is stored in the DB while secret values are stored and retrieved from a secret backend (Vault is supported; a mock backend remains the default for local dev/CI). Adapters (DatabaseAdapter, APIAdapter) were updated to fetch connection strings and authentication secrets via the secret backend.</p>

@@ -1,0 +1,33 @@
+h1 {
+  border-bottom: 2px solid #e8eef6;
+  padding-bottom: 0.35rem;
+  margin-bottom: 1rem;
+}
+
+h2 {
+  margin-top: 1.8rem;
+  border-left: 4px solid #dbe8f8;
+  padding-left: 0.6rem;
+}
+
+h3 {
+  margin-top: 1.2rem;
+}
+
+.rst-content .section ul li,
+.rst-content .section ol li {
+  margin-bottom: 0.2rem;
+}
+
+.rst-content table.docutils {
+  border-collapse: collapse;
+}
+
+.rst-content table.docutils td,
+.rst-content table.docutils th {
+  padding: 0.45rem 0.6rem;
+}
+
+.rst-content code {
+  border-radius: 3px;
+}

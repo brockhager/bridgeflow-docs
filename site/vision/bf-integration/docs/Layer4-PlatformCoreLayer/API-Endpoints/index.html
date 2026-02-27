@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="../../../../../css/theme.css" />
     <link rel="stylesheet" href="../../../../../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../../../../../stylesheets/extra.css" rel="stylesheet" />
     
       <script>
         // Current page data
@@ -43,7 +44,16 @@
                 <li class="toctree-l1"><a class="reference internal" href="../../../../..">Home</a>
                 </li>
               </ul>
-              <p class="caption"><span class="caption-text">Products</span></p>
+              <p class="caption"><span class="caption-text">Start Here</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../ONBOARDING/">Onboarding</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../ARCHITECTURE/">Architecture</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../api-reference/">API Reference Hub</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Product Suite</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../../../../products/">Overview</a>
                   </li>
@@ -66,7 +76,7 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../../../../products/tracking-portal/">Tracking Portal</a>
                   </li>
               </ul>
-              <p class="caption"><span class="caption-text">Platform</span></p>
+              <p class="caption"><span class="caption-text">Platform Services</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../../../../platform/">Overview</a>
                   </li>
@@ -87,12 +97,35 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../../../../platform/bf-warehouse/">Warehouse Service</a>
                   </li>
               </ul>
+              <p class="caption"><span class="caption-text">Capability Catalog</span></p>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../../../">Vision</a>
-                </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../features/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../features/SHIPMENTS/">Shipments</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../features/ADMIN_CONSOLE/">Admin Console</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../features/CONTROL_TOWER/">Control Tower</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../features/IDENTITY/">Identity</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../features/MASTERDATA/">Masterdata</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../features/ORDERS/">Orders</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../features/WAREHOUSE/">Warehouse</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../features/SEARCH/">Search</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../features/FINTECH/">Fintech</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../features/CARRIER_PORTAL/">Carrier Portal</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../features/TRACKING_PORTAL/">Tracking Portal</a>
+                  </li>
               </ul>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../../../../../api-reference/">API Reference</a>
+                <li class="toctree-l1"><a class="reference internal" href="../../../">Vision Archive</a>
                 </li>
               </ul>
       </div>
@@ -123,8 +156,8 @@
 Status: Planned / In Development
 Context: Original BF-INTEGRATION Vision (Pre-Phase 30)</p>
 </blockquote>
-<h1 id="layer-4-api-reference-summary">Layer 4 API Reference (summary)</h1>
-<h2 id="firewall-security-phase-33">Firewall Security (Phase 33)</h2>
+<h1 id="layer-4-api-reference-summary">Layer 4 API Reference (summary)<a class="headerlink" href="#layer-4-api-reference-summary" title="Permanent link">&para;</a></h1>
+<h2 id="firewall-security-phase-33">Firewall Security (Phase 33)<a class="headerlink" href="#firewall-security-phase-33" title="Permanent link">&para;</a></h2>
 <p>POST /api/firewalls
 - Description: Create a firewall rule set for an Integration Bridge (Layer 4 security)
 - Payload: <code>{ bridgeId, side: 'inbound'|'outbound', publicIp, allowedPorts: number[], protocol: 'tcp'|'udp'|'both' }</code>
@@ -145,13 +178,13 @@ Context: Original BF-INTEGRATION Vision (Pre-Phase 30)</p>
 <p>References
 - Spec: <a href="../../phases/phases31-40/phase-33-firewall-api/">../phases/phases31-40/phase-33-firewall-api.md</a>
 - Canvas guide: <a href="../../phases/phases31-40/phase-33-firewall-canvas-integration/">../phases/phases31-40/phase-33-firewall-canvas-integration.md</a></p>
-<h2 id="audit">Audit</h2>
+<h2 id="audit">Audit<a class="headerlink" href="#audit" title="Permanent link">&para;</a></h2>
 <p>GET /api/audit
 - Description: Query audit events
 - Params: <code>limit</code>, <code>offset</code>, <code>jobId</code>, <code>level</code>, <code>search</code>, <code>dateFrom</code>, <code>dateTo</code>, <code>actionType</code>, <code>actorId</code>, <code>targetId</code>
 - Permissions: <code>audit:read</code>
 - Response: `{ audit: [ ... ], total, limit, offset, filters }</p>
-<h2 id="user-management">User Management</h2>
+<h2 id="user-management">User Management<a class="headerlink" href="#user-management" title="Permanent link">&para;</a></h2>
 <p>GET /api/users
 - Description: List users with filters/pagination
 - Params: <code>limit</code>, <code>offset</code>, <code>role</code>, <code>search</code>, <code>disabled</code>
@@ -169,7 +202,7 @@ Context: Original BF-INTEGRATION Vision (Pre-Phase 30)</p>
 - Description: Enable/disable user
 - Payload: <code>{ disabled: true|false }</code>
 - Permissions: <code>users:write</code></p>
-<h2 id="mapping-version-control-layer-3-enterprise">Mapping Version Control (Layer 3 Enterprise)</h2>
+<h2 id="mapping-version-control-layer-3-enterprise">Mapping Version Control (Layer 3 Enterprise)<a class="headerlink" href="#mapping-version-control-layer-3-enterprise" title="Permanent link">&para;</a></h2>
 <p>GET /api/mappings
 - Description: List all mappings
 - Permissions: <code>mapping:view</code>
@@ -197,8 +230,8 @@ Context: Original BF-INTEGRATION Vision (Pre-Phase 30)</p>
 - Description: View diff between version and latest
 - Permissions: <code>mapping:view</code>
 - Response: <code>{ success: true, diff: [ ... ] }</code></p>
-<h2 id="monitoring-alerting">Monitoring &amp; Alerting</h2>
-<h2 id="customer-api-phase-18">Customer API (Phase 18)</h2>
+<h2 id="monitoring-alerting">Monitoring &amp; Alerting<a class="headerlink" href="#monitoring-alerting" title="Permanent link">&para;</a></h2>
+<h2 id="customer-api-phase-18">Customer API (Phase 18)<a class="headerlink" href="#customer-api-phase-18" title="Permanent link">&para;</a></h2>
 <p>POST /api/customer/:org/api-keys
 - Description: Create an API key for the given organization (owner/admin available via auth). Returns a plaintext key once at creation.
 - Payload: <code>{ metadata?: object }</code> (optional metadata like name)
@@ -216,7 +249,7 @@ Context: Original BF-INTEGRATION Vision (Pre-Phase 30)</p>
 - Description: Rotate an API key (creates a new key material and updates hash, returns new plaintext key)
 - Permissions: <code>auth required</code> (owner/admin)
 - Response: <code>201 { apiKey: { id, key, rotatedAt } }</code></p>
-<h2 id="ingest">Ingest</h2>
+<h2 id="ingest">Ingest<a class="headerlink" href="#ingest" title="Permanent link">&para;</a></h2>
 <p>POST /ingest/:customer_id/:endpoint_slug
 - Description: Public ingestion endpoint for customers to POST payloads to.
 - Auth: <code>x-api-key</code> header (plaintext API key generated via <code>/api/customer/:org/api-keys</code>) — keys are stored hashed using bcrypt and validated by middleware.
@@ -227,7 +260,7 @@ Context: Original BF-INTEGRATION Vision (Pre-Phase 30)</p>
   - <code>429</code> — rate limited
   - <code>500</code> — internal errors (rare; rate-limiter fails open on Redis outage)
 - Observability: counters emitted as <code>ingest_requests_total</code> with labels <code>{ org_id, status: allowed|rate_limited|rejected }</code> to facilitate E2E verification.</p>
-<h2 id="connectors-eg-qbo">Connectors (e.g., QBO)</h2>
+<h2 id="connectors-eg-qbo">Connectors (e.g., QBO)<a class="headerlink" href="#connectors-eg-qbo" title="Permanent link">&para;</a></h2>
 <p>POST /api/qbo/sync
 - Description: Trigger a QuickBooks Online (QBO) sync for the calling organization (fetch Purchase Orders and enqueue into ingest pipeline).
 - Auth: <code>x-api-key</code> header (customer API key) — maps to <code>organizationId</code> via <code>validateCustomerApiKey</code>.

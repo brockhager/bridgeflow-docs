@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="../../../../../../css/theme.css" />
     <link rel="stylesheet" href="../../../../../../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../../../../../../stylesheets/extra.css" rel="stylesheet" />
     
       <script>
         // Current page data
@@ -43,7 +44,16 @@
                 <li class="toctree-l1"><a class="reference internal" href="../../../../../..">Home</a>
                 </li>
               </ul>
-              <p class="caption"><span class="caption-text">Products</span></p>
+              <p class="caption"><span class="caption-text">Start Here</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../ONBOARDING/">Onboarding</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../ARCHITECTURE/">Architecture</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../api-reference/">API Reference Hub</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Product Suite</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../../../../../products/">Overview</a>
                   </li>
@@ -66,7 +76,7 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../../../../../products/tracking-portal/">Tracking Portal</a>
                   </li>
               </ul>
-              <p class="caption"><span class="caption-text">Platform</span></p>
+              <p class="caption"><span class="caption-text">Platform Services</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../../../../../platform/">Overview</a>
                   </li>
@@ -87,12 +97,35 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../../../../../platform/bf-warehouse/">Warehouse Service</a>
                   </li>
               </ul>
+              <p class="caption"><span class="caption-text">Capability Catalog</span></p>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../../../../">Vision</a>
-                </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/SHIPMENTS/">Shipments</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/ADMIN_CONSOLE/">Admin Console</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/CONTROL_TOWER/">Control Tower</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/IDENTITY/">Identity</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/MASTERDATA/">Masterdata</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/ORDERS/">Orders</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/WAREHOUSE/">Warehouse</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/SEARCH/">Search</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/FINTECH/">Fintech</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/CARRIER_PORTAL/">Carrier Portal</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/TRACKING_PORTAL/">Tracking Portal</a>
+                  </li>
               </ul>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../../../../../../api-reference/">API Reference</a>
+                <li class="toctree-l1"><a class="reference internal" href="../../../../">Vision Archive</a>
                 </li>
               </ul>
       </div>
@@ -123,13 +156,13 @@
 Status: Planned / In Development
 Context: Original BF-INTEGRATION Vision (Pre-Phase 30)</p>
 </blockquote>
-<h1 id="issue-phase-22-trading-partner-registration-tracking">Issue: Phase 22 — Trading Partner Registration (Tracking)</h1>
+<h1 id="issue-phase-22-trading-partner-registration-tracking">Issue: Phase 22 — Trading Partner Registration (Tracking)<a class="headerlink" href="#issue-phase-22-trading-partner-registration-tracking" title="Permanent link">&para;</a></h1>
 <p><strong>Status:</strong> Ready to start (Agent4 to confirm)<br />
 <strong>Owner:</strong> Agent4<br />
 <strong>Docs:</strong> docs/phases/phase-22-spec.md</p>
-<h2 id="goal">Goal</h2>
+<h2 id="goal">Goal<a class="headerlink" href="#goal" title="Permanent link">&para;</a></h2>
 <p>Track and coordinate Phase 22 work (22A → 22B → 22C). Use this document as the single source of truth for tasks, check-ins, and acceptance criteria.</p>
-<h2 id="acceptance-checklist">Acceptance Checklist</h2>
+<h2 id="acceptance-checklist">Acceptance Checklist<a class="headerlink" href="#acceptance-checklist" title="Permanent link">&para;</a></h2>
 <ul>
 <li>[ ] Agent4 confirms understanding of Agent10 directives (RLS-first, extend /api/auth/register, Organization.type usage)</li>
 <li>[ ] 22A: Public sign-up UI + registration flow implemented and tested (USE_MOCK_DB=true)</li>
@@ -139,13 +172,13 @@ Context: Original BF-INTEGRATION Vision (Pre-Phase 30)</p>
 <li>[ ] RLS policies added/updated via migration and smoke tests added</li>
 <li>[ ] Docs updated with any policy/migration notes</li>
 </ul>
-<h2 id="notes-constraints">Notes / Constraints</h2>
+<h2 id="notes-constraints">Notes / Constraints<a class="headerlink" href="#notes-constraints" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Security: RLS must remain the sole gatekeeper — <code>accessLevel</code> is UI-only.</li>
 <li>Auth: Extend existing /api/auth/register (type='partner'). No new auth endpoints.</li>
 <li>Data lifecycle: On approval, create Organization(type='partner', accessLevel='limited') and link the User; archive the PartnerRegistration record.</li>
 </ul>
-<h2 id="how-to-mark-done">How to mark done</h2>
+<h2 id="how-to-mark-done">How to mark done<a class="headerlink" href="#how-to-mark-done" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Merge PRs for 22A, 22B, and 22C, and close each checklist item with links to PRs.</li>
 <li>Post final status in #engineering and tag Agent10 &amp; Agent2.</li>

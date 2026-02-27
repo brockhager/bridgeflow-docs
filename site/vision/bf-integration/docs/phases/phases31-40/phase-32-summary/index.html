@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="../../../../../../css/theme.css" />
     <link rel="stylesheet" href="../../../../../../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../../../../../../stylesheets/extra.css" rel="stylesheet" />
     
       <script>
         // Current page data
@@ -43,7 +44,16 @@
                 <li class="toctree-l1"><a class="reference internal" href="../../../../../..">Home</a>
                 </li>
               </ul>
-              <p class="caption"><span class="caption-text">Products</span></p>
+              <p class="caption"><span class="caption-text">Start Here</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../ONBOARDING/">Onboarding</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../ARCHITECTURE/">Architecture</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../api-reference/">API Reference Hub</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Product Suite</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../../../../../products/">Overview</a>
                   </li>
@@ -66,7 +76,7 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../../../../../products/tracking-portal/">Tracking Portal</a>
                   </li>
               </ul>
-              <p class="caption"><span class="caption-text">Platform</span></p>
+              <p class="caption"><span class="caption-text">Platform Services</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../../../../../platform/">Overview</a>
                   </li>
@@ -87,12 +97,35 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../../../../../platform/bf-warehouse/">Warehouse Service</a>
                   </li>
               </ul>
+              <p class="caption"><span class="caption-text">Capability Catalog</span></p>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../../../../">Vision</a>
-                </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/SHIPMENTS/">Shipments</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/ADMIN_CONSOLE/">Admin Console</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/CONTROL_TOWER/">Control Tower</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/IDENTITY/">Identity</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/MASTERDATA/">Masterdata</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/ORDERS/">Orders</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/WAREHOUSE/">Warehouse</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/SEARCH/">Search</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/FINTECH/">Fintech</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/CARRIER_PORTAL/">Carrier Portal</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/TRACKING_PORTAL/">Tracking Portal</a>
+                  </li>
               </ul>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../../../../../../api-reference/">API Reference</a>
+                <li class="toctree-l1"><a class="reference internal" href="../../../../">Vision Archive</a>
                 </li>
               </ul>
       </div>
@@ -123,35 +156,35 @@
 Status: Planned / In Development
 Context: Original BF-INTEGRATION Vision (Pre-Phase 30)</p>
 </blockquote>
-<h1 id="phase-32-summary-bridge-canvas-implementation">Phase 32 Summary: Bridge Canvas Implementation</h1>
+<h1 id="phase-32-summary-bridge-canvas-implementation">Phase 32 Summary: Bridge Canvas Implementation<a class="headerlink" href="#phase-32-summary-bridge-canvas-implementation" title="Permanent link">&para;</a></h1>
 <p><strong>Status</strong>: ✅ Complete and Verified (Phase 32 closed)
 <strong>Date</strong>: 2026-01-10
 <strong>Final Resolution</strong>: All core Canvas UX and stability items are implemented and tested; Phase 32 is complete.</p>
-<h2 id="overview">Overview</h2>
+<h2 id="overview">Overview<a class="headerlink" href="#overview" title="Permanent link">&para;</a></h2>
 <p>Phase 32 delivered the Canvas Assembly experience, enabling users to visually construct integration bridges from Blueprints and resolve gaps through an interactive wizard. The work spanned backend schema support, frontend assembly UI, gap-filling flows, and a focused set of UX improvements that close the loop for non-technical users.</p>
-<h2 id="critical-issues-resolved">Critical Issues Resolved</h2>
-<h3 id="authentication-fix">🔧 Authentication Fix</h3>
+<h2 id="critical-issues-resolved">Critical Issues Resolved<a class="headerlink" href="#critical-issues-resolved" title="Permanent link">&para;</a></h2>
+<h3 id="authentication-fix">🔧 Authentication Fix<a class="headerlink" href="#authentication-fix" title="Permanent link">&para;</a></h3>
 <p><strong>Problem</strong>: Blueprint catalog returning "No public integration blueprints found" with 403 errors
 <strong>Root Cause</strong>: API client resolving to wrong port for local dev
 <strong>Solution</strong>: Fixed <code>web/src/apiClient.js</code> to resolve the correct API base in dev and test environments (no longer points to a broken port).</p>
-<h3 id="database-consistency-fix">🗄️ Database Consistency Fix</h3>
+<h3 id="database-consistency-fix">🗄️ Database Consistency Fix<a class="headerlink" href="#database-consistency-fix" title="Permanent link">&para;</a></h3>
 <p><strong>Problem</strong>: SQLite fallbacks causing Prisma schema/engine mismatch
 <strong>Root Cause</strong>: Development scripts defaulting to SQLite in some environments
 <strong>Solution</strong>: Removed all SQLite fallbacks and enforced PostgreSQL-only usage across dev/test scripts and seeds.</p>
-<h3 id="connection-guidance-final-ux-piece">✅ Connection Guidance (final UX piece)</h3>
+<h3 id="connection-guidance-final-ux-piece">✅ Connection Guidance (final UX piece)<a class="headerlink" href="#connection-guidance-final-ux-piece" title="Permanent link">&para;</a></h3>
 <p><strong>Problem</strong>: Users needed in-canvas guidance for missing components and connections
 <strong>Solution</strong>:
 - Added <strong>long-hover guidance</strong> on required-but-empty slots: hover for <strong>5 seconds</strong> to show a context tooltip (e.g., "Add Source System here") and reveal a subtle <code>.slot-missing</code> indicator.
 - Added inline <strong>missing indicators</strong> for required slots to persist guidance while the tooltip is visible.
 - Ensured placeholder labels are not shown on empty required slots (no floating placeholder boxes).</p>
-<h2 id="key-deliverables">Key Deliverables</h2>
-<h3 id="1-blueprint-engine-backend">1. Blueprint Engine (Backend) ✅</h3>
+<h2 id="key-deliverables">Key Deliverables<a class="headerlink" href="#key-deliverables" title="Permanent link">&para;</a></h2>
+<h3 id="1-blueprint-engine-backend">1. Blueprint Engine (Backend) ✅<a class="headerlink" href="#1-blueprint-engine-backend" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Data Model</strong>: <code>BridgeBlueprint</code> schema with multi-tenancy (<code>organizationId</code> scoping) and composite uniqueness</li>
 <li><strong>RBAC</strong>: Public catalog endpoints vs admin management endpoints</li>
 <li><strong>Traceability</strong>: <code>blueprintId</code> recorded in activated packages</li>
 </ul>
-<h3 id="2-canvas-ui-frontend">2. Canvas UI (Frontend) ✅</h3>
+<h3 id="2-canvas-ui-frontend">2. Canvas UI (Frontend) ✅<a class="headerlink" href="#2-canvas-ui-frontend" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Canvas visuals</strong>: Towers (with crown/pillar), Deck + cables, Connector on-ramps, and dotted guide line</li>
 <li><strong>Strict spatial model</strong>: Two TP towers at edges, connectors as on-ramps, empty middle area</li>
@@ -159,12 +192,12 @@ Context: Original BF-INTEGRATION Vision (Pre-Phase 30)</p>
 <li><strong>Connection guidance</strong>: 5s long-hover tooltips + slot missing indicators</li>
 <li><strong>TP creation flow</strong>: Redirect back to Canvas with palette highlight and deduplication in sidebar</li>
 </ul>
-<h3 id="3-stability-tests">3. Stability &amp; Tests ✅</h3>
+<h3 id="3-stability-tests">3. Stability &amp; Tests ✅<a class="headerlink" href="#3-stability-tests" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Web test suite</strong>: All web tests pass locally — <strong>79/79</strong> passed (including new tooltip and dedup tests)</li>
 <li><strong>Refactors</strong>: Improved modularity (e.g., <code>viewport</code> extraction) to aid testability and future work</li>
 </ul>
-<h2 id="final-validation-checklist-sketch-implementation">Final Validation Checklist (Sketch → Implementation)</h2>
+<h2 id="final-validation-checklist-sketch-implementation">Final Validation Checklist (Sketch → Implementation)<a class="headerlink" href="#final-validation-checklist-sketch-implementation" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Towers at edges with crown/pillar: ✅</li>
 <li>Bridge deck + decorative cables: ✅</li>
@@ -176,27 +209,27 @@ Context: Original BF-INTEGRATION Vision (Pre-Phase 30)</p>
 <li>TP creation → redirect → palette highlight (no auto-add): ✅</li>
 <li>No TP duplication in sidebar: ✅</li>
 </ul>
-<h2 id="production-readiness">Production Readiness</h2>
+<h2 id="production-readiness">Production Readiness<a class="headerlink" href="#production-readiness" title="Permanent link">&para;</a></h2>
 <ul>
 <li><strong>Blueprint Catalog</strong>: Public catalog loads correctly and is permission-aware</li>
 <li><strong>Multi-Tenancy</strong>: Enforced via RLS and schema constraints</li>
 <li><strong>Error Handling &amp; UX</strong>: Clear messages for permission/auth failures; tooltip guidance for users</li>
 <li><strong>Performance</strong>: Visuals and interactions are responsive and lightweight for client-side rendering</li>
 </ul>
-<h2 id="scope-guardrails-explicit">Scope &amp; Guardrails (explicit)</h2>
+<h2 id="scope-guardrails-explicit">Scope &amp; Guardrails (explicit)<a class="headerlink" href="#scope-guardrails-explicit" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Phase 32 is complete and intentionally scoped. No further UX changes, new tooltips, or stylistic tweaks will be added in this phase. Specifically:</li>
 <li>No additional tooltips for connection dots</li>
 <li>No further <code>.slot-missing</code> styling tweaks in this phase</li>
 <li>No E2E TP creation Playwright tests will be added now (deferred)</li>
 </ul>
-<h2 id="next-steps-phase-33-postponed-until-approved">Next Steps (Phase 33 — postponed until approved)</h2>
+<h2 id="next-steps-phase-33-postponed-until-approved">Next Steps (Phase 33 — postponed until approved)<a class="headerlink" href="#next-steps-phase-33-postponed-until-approved" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Address technical debt &amp; modularization (split assembly responsibilities further into indicators/towers modules)</li>
 <li>Implement backend processor for <code>BRIDGE_CONFIG</code> packages and runtime provisioning</li>
 <li>Add targeted Playwright E2E tests after Phase 33 scoping</li>
 </ul>
-<h2 id="impact">Impact</h2>
+<h2 id="impact">Impact<a class="headerlink" href="#impact" title="Permanent link">&para;</a></h2>
 <p>Phase 32 delivers a complete, test-verified Canvas Assembly UX. Users can build, validate, and activate Integration Bridges without deep technical knowledge — closing the core product loop for visual integration assembly.</p>
 <p><strong>Status:</strong> Phase 32 is closed and on hold for further feature work until Phase 33 is approved.</p>
               

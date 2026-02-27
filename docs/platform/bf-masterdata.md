@@ -1,22 +1,22 @@
-# Service: bf-masterdata
+# Masterdata Service (`bf-masterdata`)
 
-## Purpose
-
-Reference data service for locations and carriers used by operational services.
-
-## API Endpoint
-
-- Base deployment endpoint not yet documented.
-- Core endpoints:
-  - `GET /locations/{id}`
-  - `GET /locations/xref/w3s/{w3s_id}`
-  - `GET /carriers/{id}`
-  - `GET /health`
+Reference data service for locations, carriers, and shared operational records.
 
 ## Status
 
 Active.
 
+## Endpoint
+
+- Stable public base endpoint not documented yet.
+
+## Key Routes
+
+- `GET /locations/{id}`
+- `GET /locations/xref/w3s/{w3s_id}`
+- `GET /carriers/{id}`
+- `GET /health`
+
 ## Repository
 
-- `https://github.com/brockhager/bf-masterdata`
+- https://github.com/brockhager/bf-masterdata

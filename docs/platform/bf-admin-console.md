@@ -1,21 +1,21 @@
-# Module: bf-admin-console
+# Admin Console Service (`bf-admin-console`)
 
-## Purpose
-
-Internal admin interface and API proxy layer for authenticated operations and cross-service aggregation.
-
-## API Endpoint
-
-- Historical deployment: `https://bf-admin.up.railway.app`
-- Backend routes include:
-  - `POST /api/auth/login`
-  - `GET /api/health/all`
-  - `GET /api/public/resilience-status`
+Internal admin interface and API proxy layer for cross-service operations.
 
 ## Status
 
 Active (internal platform module).
 
+## Endpoint
+
+- https://bf-admin.up.railway.app
+
+## Key Routes
+
+- `POST /api/auth/login`
+- `GET /api/health/all`
+- `GET /api/public/resilience-status`
+
 ## Repository
 
-- `https://github.com/brockhager/bf-admin-console`
+- https://github.com/brockhager/bf-admin-console

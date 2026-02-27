@@ -1,39 +1,32 @@
-# API Reference
+# API Reference Hub
 
-This is the platform-level API entry point for Bridgeflow Docs.
+Use this page as the API starting point across BridgeFlow products and services.
 
-## Product APIs
+## Control Tower APIs
 
-### Control Tower Product
+- Public/status API docs: `products/control-tower/public-api.md`
+- Integration/event ingest guide: `products/control-tower/integration-guide.md`
 
-- Public status API:
-`products/control-tower/public-api/`
-- Integration and event ingest guide:
-`products/control-tower/integration-guide/`
-
-## Core Endpoints (Current Product Runtime)
+### Current Runtime Endpoints
 
 - `GET /api/v1/public/resilience-status`
 - `POST /api/control/events`
 
-Base URL:
-- `https://control-tower.up.railway.app`
+Base URL: `https://control-tower.up.railway.app`
 
-## Platform Service APIs
+## Platform Service API Pages
 
-Service-level API summaries:
+- Admin Console: `platform/bf-admin-console.md`
+- Identity: `platform/bf-identity.md`
+- Masterdata: `platform/bf-masterdata.md`
+- Orders: `platform/bf-orders.md`
+- Shipments: `platform/bf-shipments.md`
+- Search: `platform/bf-search.md`
+- Fintech: `platform/bf-fintech.md`
+- Warehouse: `platform/bf-warehouse.md`
 
-- Admin Console module: `platform/bf-admin-console/`
-- Identity service: `platform/bf-identity/`
-- Masterdata service: `platform/bf-masterdata/`
-- Orders service: `platform/bf-orders/`
-- Shipments service: `platform/bf-shipments/`
-- Search service: `platform/bf-search/`
-- Fintech service: `platform/bf-fintech/`
-- Warehouse service: `platform/bf-warehouse/`
+## Recommended Developer Path
 
-## Developer Starting Path
-
-1. Integration guide: `products/control-tower/integration-guide/`
-2. Quickstart: `products/control-tower/quickstart/`
-3. Public/status API behavior: `products/control-tower/public-api/`
+1. `products/control-tower/integration-guide.md`
+2. `products/control-tower/quickstart.md`
+3. `products/control-tower/public-api.md`

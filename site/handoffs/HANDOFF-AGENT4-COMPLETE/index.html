@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="../../css/theme.css" />
     <link rel="stylesheet" href="../../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../../stylesheets/extra.css" rel="stylesheet" />
     
       <script>
         // Current page data
@@ -43,7 +44,16 @@
                 <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
                 </li>
               </ul>
-              <p class="caption"><span class="caption-text">Products</span></p>
+              <p class="caption"><span class="caption-text">Start Here</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../ONBOARDING/">Onboarding</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../ARCHITECTURE/">Architecture</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../api-reference/">API Reference Hub</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Product Suite</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../products/">Overview</a>
                   </li>
@@ -66,7 +76,7 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../products/tracking-portal/">Tracking Portal</a>
                   </li>
               </ul>
-              <p class="caption"><span class="caption-text">Platform</span></p>
+              <p class="caption"><span class="caption-text">Platform Services</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../platform/">Overview</a>
                   </li>
@@ -87,12 +97,35 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../platform/bf-warehouse/">Warehouse Service</a>
                   </li>
               </ul>
+              <p class="caption"><span class="caption-text">Capability Catalog</span></p>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../../vision/bf-integration/">Vision</a>
-                </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/SHIPMENTS/">Shipments</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/ADMIN_CONSOLE/">Admin Console</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/CONTROL_TOWER/">Control Tower</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/IDENTITY/">Identity</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/MASTERDATA/">Masterdata</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/ORDERS/">Orders</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/WAREHOUSE/">Warehouse</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/SEARCH/">Search</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/FINTECH/">Fintech</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/CARRIER_PORTAL/">Carrier Portal</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/TRACKING_PORTAL/">Tracking Portal</a>
+                  </li>
               </ul>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../../api-reference/">API Reference</a>
+                <li class="toctree-l1"><a class="reference internal" href="../../vision/bf-integration/">Vision Archive</a>
                 </li>
               </ul>
       </div>
@@ -118,11 +151,11 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <h1 id="agent4-handoff-canvas-wizard-integration-complete">Agent4 Handoff — Canvas + Wizard Integration Complete</h1>
-<h2 id="summary">Summary</h2>
+                <h1 id="agent4-handoff-canvas-wizard-integration-complete">Agent4 Handoff — Canvas + Wizard Integration Complete<a class="headerlink" href="#agent4-handoff-canvas-wizard-integration-complete" title="Permanent link">&para;</a></h1>
+<h2 id="summary">Summary<a class="headerlink" href="#summary" title="Permanent link">&para;</a></h2>
 <p>All planned tasks for T-002 (Wizard UI) and T-003 (Job Orchestrator) have been completed and validated. The BridgeFlow platform now has a fully functional end-to-end flow from UI to email delivery.</p>
-<h2 id="what-was-completed">What Was Completed</h2>
-<h3 id="1-canvas-landing-page">1. Canvas Landing Page ✅</h3>
+<h2 id="what-was-completed">What Was Completed<a class="headerlink" href="#what-was-completed" title="Permanent link">&para;</a></h2>
+<h3 id="1-canvas-landing-page">1. Canvas Landing Page ✅<a class="headerlink" href="#1-canvas-landing-page" title="Permanent link">&para;</a></h3>
 <p><strong>Files Created:</strong>
 - <a href="web/canvas.html">web/canvas.html</a> - Canvas page entry point
 - <a href="web/src/canvas.js">web/src/canvas.js</a> - Canvas page logic and modal integration
@@ -134,7 +167,7 @@
 - Wizard loads in an iframe within the modal
 - Backdrop click and ESC key support for closing
 - Success notifications when workflow is set up</p>
-<h3 id="2-wizard-backend-integration">2. Wizard → Backend Integration ✅</h3>
+<h3 id="2-wizard-backend-integration">2. Wizard → Backend Integration ✅<a class="headerlink" href="#2-wizard-backend-integration" title="Permanent link">&para;</a></h3>
 <p><strong>Files Modified:</strong>
 - <a href="web/src/wizard.js">web/src/wizard.js</a> - Wired to backend API</p>
 <p><strong>Features:</strong>
@@ -144,7 +177,7 @@
 - Success/error handling with retry logic
 - PostMessage communication between iframe and parent window
 - Proper job ID handoff and display</p>
-<h3 id="3-backend-api-enhancements">3. Backend API Enhancements ✅</h3>
+<h3 id="3-backend-api-enhancements">3. Backend API Enhancements ✅<a class="headerlink" href="#3-backend-api-enhancements" title="Permanent link">&para;</a></h3>
 <p><strong>Files Modified:</strong>
 - <a href="api/server.js">api/server.js</a> - Added @fastify/static for serving web UI</p>
 <p><strong>Features:</strong>
@@ -152,7 +185,7 @@
 - All existing API routes working (<code>/api/jobs</code>, <code>/api/jobs/:id</code>, etc.)
 - Dev worker auto-starts in development mode
 - Serves UI at <code>http://localhost:4000/canvas.html</code></p>
-<h3 id="4-e2e-testing-validation">4. E2E Testing Validation ✅</h3>
+<h3 id="4-e2e-testing-validation">4. E2E Testing Validation ✅<a class="headerlink" href="#4-e2e-testing-validation" title="Permanent link">&para;</a></h3>
 <p><strong>Test Results:</strong>
 - ✅ All 6 unit/integration tests pass (<code>pnpm test</code>)
 - ✅ E2E email flow test succeeds with Ethereal
@@ -168,7 +201,7 @@
 - Invoice generated
 - Audit logs written with Ethereal preview URL
 - Email visible at: https://ethereal.email/message/...</p>
-<h3 id="5-documentation">5. Documentation ✅</h3>
+<h3 id="5-documentation">5. Documentation ✅<a class="headerlink" href="#5-documentation" title="Permanent link">&para;</a></h3>
 <p><strong>Files Created:</strong>
 - <a href="docs/instructions/UI-TESTING.md">docs/instructions/UI-TESTING.md</a> - Complete UI testing guide</p>
 <p><strong>Content Includes:</strong>
@@ -177,20 +210,20 @@
 - Architecture notes (UI → Backend → Worker flow)
 - Troubleshooting guide
 - Next steps and related docs</p>
-<h2 id="how-to-test-everything-right-now">How to Test Everything Right Now</h2>
-<h3 id="option-1-quick-ui-test-recommended">Option 1: Quick UI Test (Recommended)</h3>
+<h2 id="how-to-test-everything-right-now">How to Test Everything Right Now<a class="headerlink" href="#how-to-test-everything-right-now" title="Permanent link">&para;</a></h2>
+<h3 id="option-1-quick-ui-test-recommended">Option 1: Quick UI Test (Recommended)<a class="headerlink" href="#option-1-quick-ui-test-recommended" title="Permanent link">&para;</a></h3>
 <pre><code class="language-bash"># PowerShell
 $env:USE_MOCK_DB=&quot;true&quot;
 $env:NODE_ENV=&quot;development&quot;
 node api/server.js
 </code></pre>
 <p>Then open http://localhost:4000/canvas.html and click "Setup now" to run through the wizard.</p>
-<h3 id="option-2-e2e-backend-test">Option 2: E2E Backend Test</h3>
+<h3 id="option-2-e2e-backend-test">Option 2: E2E Backend Test<a class="headerlink" href="#option-2-e2e-backend-test" title="Permanent link">&para;</a></h3>
 <pre><code class="language-bash">pnpm exec cross-env USE_MOCK_DB=true USE_ETHEREAL=true EMAIL_FROM=bridgeflow@test.ethereal.email EMAIL_TO=test@example.com node scripts/test-email-flow.js
 </code></pre>
 <p>This creates a job, processes it, and prints the Ethereal preview URL.</p>
-<h2 id="architecture-summary">Architecture Summary</h2>
-<h3 id="ui-layer-layer-1-abstraction">UI Layer (Layer 1 - Abstraction)</h3>
+<h2 id="architecture-summary">Architecture Summary<a class="headerlink" href="#architecture-summary" title="Permanent link">&para;</a></h2>
+<h3 id="ui-layer-layer-1-abstraction">UI Layer (Layer 1 - Abstraction)<a class="headerlink" href="#ui-layer-layer-1-abstraction" title="Permanent link">&para;</a></h3>
 <pre><code>Canvas Page (canvas.html)
   ↓
   Opens Modal with Wizard (index.html in iframe)
@@ -203,7 +236,7 @@ node api/server.js
   ↓
   Wizard displays success + invoice link
 </code></pre>
-<h3 id="backend-layer-layer-4-platform-core">Backend Layer (Layer 4 - Platform Core)</h3>
+<h3 id="backend-layer-layer-4-platform-core">Backend Layer (Layer 4 - Platform Core)<a class="headerlink" href="#backend-layer-layer-4-platform-core" title="Permanent link">&para;</a></h3>
 <pre><code>API Server (server.js)
   ↓
   POST /api/jobs → createJobHandler (jobs.js)
@@ -220,7 +253,7 @@ node api/server.js
   ↓
   Worker updates job state, creates invoice, writes audit logs
 </code></pre>
-<h3 id="data-flow">Data Flow</h3>
+<h3 id="data-flow">Data Flow<a class="headerlink" href="#data-flow" title="Permanent link">&para;</a></h3>
 <pre><code>Wizard State (browser)
   → { customers: [...], delivery: 'email', source: 'csv' }
   → POST /api/jobs
@@ -232,8 +265,8 @@ node api/server.js
   → Wizard polls and sees SUCCEEDED
   → Success screen shown
 </code></pre>
-<h2 id="task-status">Task Status</h2>
-<h3 id="completed">Completed ✅</h3>
+<h2 id="task-status">Task Status<a class="headerlink" href="#task-status" title="Permanent link">&para;</a></h2>
+<h3 id="completed">Completed ✅<a class="headerlink" href="#completed" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>T-003</strong>: Job Orchestrator Core — <strong>Done &amp; Validated</strong></li>
 <li>Mock DB + Ethereal validation complete</li>
@@ -250,7 +283,7 @@ node api/server.js
 <li>Real job polling and progress updates</li>
 <li>Success flow validated end-to-end</li>
 </ul>
-<h3 id="next-steps-not-started">Next Steps (Not Started)</h3>
+<h3 id="next-steps-not-started">Next Steps (Not Started)<a class="headerlink" href="#next-steps-not-started" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>T-004</strong>: Email &amp; Webhook Connectors (Layer 2)</li>
 <li>Currently using direct emailSender abstraction</li>
@@ -264,7 +297,7 @@ node api/server.js
 <li><strong>Real-time Updates</strong>: Replace polling with WebSockets/SSE</li>
 <li><strong>Automated UI Tests</strong>: Add Playwright or Cypress tests</li>
 </ul>
-<h2 id="known-issues-limitations">Known Issues / Limitations</h2>
+<h2 id="known-issues-limitations">Known Issues / Limitations<a class="headerlink" href="#known-issues-limitations" title="Permanent link">&para;</a></h2>
 <ol>
 <li><strong>Customer Emails</strong>: Currently hardcoded in wizard (mock data)</li>
 <li>
@@ -293,22 +326,22 @@ node api/server.js
 </li>
 <li>Solution: Add GET /api/jobs listing endpoint and history view</li>
 </ol>
-<h2 id="files-changed-in-this-session">Files Changed in This Session</h2>
-<h3 id="new-files">New Files</h3>
+<h2 id="files-changed-in-this-session">Files Changed in This Session<a class="headerlink" href="#files-changed-in-this-session" title="Permanent link">&para;</a></h2>
+<h3 id="new-files">New Files<a class="headerlink" href="#new-files" title="Permanent link">&para;</a></h3>
 <ul>
 <li><code>web/canvas.html</code> - Canvas landing page</li>
 <li><code>web/src/canvas.js</code> - Canvas page logic</li>
 <li><code>docs/instructions/UI-TESTING.md</code> - UI testing guide</li>
 <li><code>HANDOFF-AGENT4-COMPLETE.md</code> - This file</li>
 </ul>
-<h3 id="modified-files">Modified Files</h3>
+<h3 id="modified-files">Modified Files<a class="headerlink" href="#modified-files" title="Permanent link">&para;</a></h3>
 <ul>
 <li><code>web/src/wizard.js</code> - Added backend API integration, polling, and postMessage</li>
 <li><code>web/styles.css</code> - Added Canvas and modal styles</li>
 <li><code>api/server.js</code> - Added @fastify/static for web UI serving</li>
 <li><code>package.json</code> - Added @fastify/static dependency</li>
 </ul>
-<h3 id="no-changes-working-as-documented">No Changes (Working as Documented)</h3>
+<h3 id="no-changes-working-as-documented">No Changes (Working as Documented)<a class="headerlink" href="#no-changes-working-as-documented" title="Permanent link">&para;</a></h3>
 <ul>
 <li><code>api/handlers/jobs.js</code> - Already supports POST /api/jobs</li>
 <li><code>api/worker/simulatedWorker.js</code> - Already processes jobs and sends email</li>
@@ -316,18 +349,18 @@ node api/server.js
 <li><code>api/lib/mockDb.js</code> - Already supports in-memory testing</li>
 <li><code>scripts/test-email-flow.js</code> - Already validates E2E flow</li>
 </ul>
-<h2 id="performance-notes">Performance Notes</h2>
+<h2 id="performance-notes">Performance Notes<a class="headerlink" href="#performance-notes" title="Permanent link">&para;</a></h2>
 <ul>
 <li><strong>Wizard → Job Creation</strong>: &lt; 500ms (local)</li>
 <li><strong>Worker Processing</strong>: 1-5 seconds (depends on retry logic)</li>
 <li><strong>Email Sending (Ethereal)</strong>: 1-2 seconds per email</li>
 <li><strong>Job Polling</strong>: 1 second intervals, max 30 polls (30s timeout)</li>
 </ul>
-<h2 id="dependencies-added">Dependencies Added</h2>
+<h2 id="dependencies-added">Dependencies Added<a class="headerlink" href="#dependencies-added" title="Permanent link">&para;</a></h2>
 <ul>
 <li><code>@fastify/static@8.3.0</code> - For serving web UI from API server</li>
 </ul>
-<h2 id="recommendations-for-next-agent">Recommendations for Next Agent</h2>
+<h2 id="recommendations-for-next-agent">Recommendations for Next Agent<a class="headerlink" href="#recommendations-for-next-agent" title="Permanent link">&para;</a></h2>
 <ol>
 <li><strong>Start with UI Polish</strong>:</li>
 <li>Add CSV upload input in wizard</li>
@@ -365,7 +398,7 @@ node api/server.js
 <li>Test job creation and polling</li>
 <li>Test modal open/close behavior</li>
 </ol>
-<h2 id="acceptance-criteria-met">Acceptance Criteria Met ✅</h2>
+<h2 id="acceptance-criteria-met">Acceptance Criteria Met ✅<a class="headerlink" href="#acceptance-criteria-met" title="Permanent link">&para;</a></h2>
 <p>From original task list (T-002 and T-003):</p>
 <ul>
 <li>✅ Canvas landing page displays workflow cards</li>
@@ -381,7 +414,7 @@ node api/server.js
 <li>✅ Modal can be closed via X, ESC, or backdrop click</li>
 <li>✅ E2E flow validated with mock DB + Ethereal</li>
 </ul>
-<h2 id="contact-questions">Contact / Questions</h2>
+<h2 id="contact-questions">Contact / Questions<a class="headerlink" href="#contact-questions" title="Permanent link">&para;</a></h2>
 <p>If you have questions about this implementation:
 - See <a href="docs/instructions/UI-TESTING.md">UI-TESTING.md</a> for detailed testing guide
 - See <a href="docs/instructions/TESTING.md">TESTING.md</a> for backend testing

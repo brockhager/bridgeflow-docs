@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="../../css/theme.css" />
     <link rel="stylesheet" href="../../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../../stylesheets/extra.css" rel="stylesheet" />
     
       <script>
         // Current page data
@@ -43,7 +44,16 @@
                 <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
                 </li>
               </ul>
-              <p class="caption"><span class="caption-text">Products</span></p>
+              <p class="caption"><span class="caption-text">Start Here</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../ONBOARDING/">Onboarding</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../ARCHITECTURE/">Architecture</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../api-reference/">API Reference Hub</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Product Suite</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../products/">Overview</a>
                   </li>
@@ -66,7 +76,7 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../products/tracking-portal/">Tracking Portal</a>
                   </li>
               </ul>
-              <p class="caption"><span class="caption-text">Platform</span></p>
+              <p class="caption"><span class="caption-text">Platform Services</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../platform/">Overview</a>
                   </li>
@@ -87,12 +97,35 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../platform/bf-warehouse/">Warehouse Service</a>
                   </li>
               </ul>
+              <p class="caption"><span class="caption-text">Capability Catalog</span></p>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../../vision/bf-integration/">Vision</a>
-                </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/SHIPMENTS/">Shipments</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/ADMIN_CONSOLE/">Admin Console</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/CONTROL_TOWER/">Control Tower</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/IDENTITY/">Identity</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/MASTERDATA/">Masterdata</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/ORDERS/">Orders</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/WAREHOUSE/">Warehouse</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/SEARCH/">Search</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/FINTECH/">Fintech</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/CARRIER_PORTAL/">Carrier Portal</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/TRACKING_PORTAL/">Tracking Portal</a>
+                  </li>
               </ul>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../../api-reference/">API Reference</a>
+                <li class="toctree-l1"><a class="reference internal" href="../../vision/bf-integration/">Vision Archive</a>
                 </li>
               </ul>
       </div>
@@ -118,8 +151,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <h1 id="idempotency-production-deployment">Idempotency: Production Deployment</h1>
-<h2 id="kubernetes-cronjob">Kubernetes CronJob</h2>
+                <h1 id="idempotency-production-deployment">Idempotency: Production Deployment<a class="headerlink" href="#idempotency-production-deployment" title="Permanent link">&para;</a></h1>
+<h2 id="kubernetes-cronjob">Kubernetes CronJob<a class="headerlink" href="#kubernetes-cronjob" title="Permanent link">&para;</a></h2>
 <p>Deploy the pruning job with:</p>
 <pre><code class="language-bash">kubectl apply -f k8s/prune-idempotency-cronjob.yaml
 </code></pre>
@@ -128,7 +161,7 @@
 kubectl get jobs -n bridgeflow-production --selector=job-name=prune-idempotency-keys- -o wide
 kubectl logs -l job-name=&lt;prune-job-name&gt; -n bridgeflow-production
 </code></pre>
-<h2 id="enabling-metrics-scraping-staging">Enabling Metrics Scraping (Staging)</h2>
+<h2 id="enabling-metrics-scraping-staging">Enabling Metrics Scraping (Staging)<a class="headerlink" href="#enabling-metrics-scraping-staging" title="Permanent link">&para;</a></h2>
 <p>We provide a kustomize overlay for staging which enables the metrics exporter and exposes the metrics port via the Service.</p>
 <pre><code class="language-bash"># Apply the staging overlay (from repo root)
 kubectl apply -k k8s/overlays/staging -n staging
@@ -140,7 +173,7 @@ kubectl apply -k k8s/overlays/staging -n staging
 - Apply the <code>ServiceMonitor</code> (so Prometheus will scrape <code>/metrics</code>)
 - Patch the <code>bridgeflow-api</code> Deployment in <code>staging</code> to set <code>EXPOSE_METRICS=true</code> and <code>METRICS_PORT=3000</code>
 - Port-forward to verify <code>/metrics</code> locally</p>
-<h2 id="production-overlay">Production overlay</h2>
+<h2 id="production-overlay">Production overlay<a class="headerlink" href="#production-overlay" title="Permanent link">&para;</a></h2>
 <p>A production overlay is available at <code>k8s/overlays/production</code> and includes:
 - Production security hardening (non-root, read-only filesystem, dropped capabilities)
 - ServiceAccount with IAM annotation (EKS example)
@@ -152,19 +185,19 @@ export REDIS_URL=&quot;redis://prod-redis:6379&quot;
 export JWT_SECRET=&quot;&lt;secure-secret&gt;&quot;
 ./scripts/deploy-production.sh bridgeflow-production
 </code></pre>
-<h3 id="environment">Environment</h3>
+<h3 id="environment">Environment<a class="headerlink" href="#environment" title="Permanent link">&para;</a></h3>
 <ul>
 <li><code>DATABASE_URL</code> is read from <code>bridgeflow-secrets.database-url</code> (Kubernetes Secret)</li>
 <li><code>IDEMPOTENCY_TTL_HOURS</code> defaults to <code>24</code> if unset</li>
 </ul>
-<h2 id="prometheus-alerting">Prometheus Alerting</h2>
+<h2 id="prometheus-alerting">Prometheus Alerting<a class="headerlink" href="#prometheus-alerting" title="Permanent link">&para;</a></h2>
 <p>Apply rule:</p>
 <pre><code class="language-bash">kubectl apply -f k8s/prune-idempotency-alerts.yaml
 </code></pre>
 <p>Alert rules included:
 - <code>IdempotencyPruneJobFailed</code>: fires when <code>idempotency_prune_job_errors</code> increases by &gt;=3 in 24h
 - <code>ExcessiveIdempotencyKeys</code>: fires when <code>idempotency_keys_total &gt; 10000</code></p>
-<h2 id="database-indexes-recommended">Database Indexes (recommended)</h2>
+<h2 id="database-indexes-recommended">Database Indexes (recommended)<a class="headerlink" href="#database-indexes-recommended" title="Permanent link">&para;</a></h2>
 <p>Run during maintenance window and use CONCURRENTLY when supported:</p>
 <pre><code class="language-sql">CREATE INDEX CONCURRENTLY idx_idempotency_created_at 
 ON idempotency_keys (created_at);
@@ -172,13 +205,13 @@ ON idempotency_keys (created_at);
 CREATE INDEX CONCURRENTLY idx_idempotency_tenant_created 
 ON idempotency_keys (tenant_id, created_at);
 </code></pre>
-<h2 id="monitoring-alerts">Monitoring &amp; Alerts</h2>
+<h2 id="monitoring-alerts">Monitoring &amp; Alerts<a class="headerlink" href="#monitoring-alerts" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Warning: &gt;10,000 unpruned idempotency keys</li>
 <li>Critical: prune job fails 3 consecutive times</li>
 <li>Metrics to track: <code>idempotency.keys_pruned</code>, <code>idempotency.prune_job.errors</code>, <code>idempotency.ttl_hours</code>, <code>idempotency.lookup_time_ms</code></li>
 </ul>
-<h2 id="notes">Notes</h2>
+<h2 id="notes">Notes<a class="headerlink" href="#notes" title="Permanent link">&para;</a></h2>
 <ul>
 <li>The prune job is lightweight and intended to run once daily at 03:00 UTC; adjust schedule if needed.</li>
 <li>Ensure your monitoring system (Prometheus) is scraping the metrics exporter that exposes the idempotency counters/gauges.</li>

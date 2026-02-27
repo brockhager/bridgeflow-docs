@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="../../css/theme.css" />
     <link rel="stylesheet" href="../../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../../stylesheets/extra.css" rel="stylesheet" />
     
       <script>
         // Current page data
@@ -43,7 +44,16 @@
                 <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
                 </li>
               </ul>
-              <p class="caption"><span class="caption-text">Products</span></p>
+              <p class="caption"><span class="caption-text">Start Here</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../ONBOARDING/">Onboarding</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../ARCHITECTURE/">Architecture</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../api-reference/">API Reference Hub</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Product Suite</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../products/">Overview</a>
                   </li>
@@ -66,7 +76,7 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../products/tracking-portal/">Tracking Portal</a>
                   </li>
               </ul>
-              <p class="caption"><span class="caption-text">Platform</span></p>
+              <p class="caption"><span class="caption-text">Platform Services</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../platform/">Overview</a>
                   </li>
@@ -87,12 +97,35 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../platform/bf-warehouse/">Warehouse Service</a>
                   </li>
               </ul>
+              <p class="caption"><span class="caption-text">Capability Catalog</span></p>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../../vision/bf-integration/">Vision</a>
-                </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/SHIPMENTS/">Shipments</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/ADMIN_CONSOLE/">Admin Console</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/CONTROL_TOWER/">Control Tower</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/IDENTITY/">Identity</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/MASTERDATA/">Masterdata</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/ORDERS/">Orders</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/WAREHOUSE/">Warehouse</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/SEARCH/">Search</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/FINTECH/">Fintech</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/CARRIER_PORTAL/">Carrier Portal</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/TRACKING_PORTAL/">Tracking Portal</a>
+                  </li>
               </ul>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../../api-reference/">API Reference</a>
+                <li class="toctree-l1"><a class="reference internal" href="../../vision/bf-integration/">Vision Archive</a>
                 </li>
               </ul>
       </div>
@@ -118,15 +151,15 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <h1 id="breakfix-auto-seed-cto-user-in-devmock-db-ctobridgeflowtest">Breakfix: Auto-seed CTO user in dev/mock DB (cto@bridgeflow.test)</h1>
-<h2 id="summary">Summary ✅</h2>
+                <h1 id="breakfix-auto-seed-cto-user-in-devmock-db-ctobridgeflowtest">Breakfix: Auto-seed CTO user in dev/mock DB (cto@bridgeflow.test)<a class="headerlink" href="#breakfix-auto-seed-cto-user-in-devmock-db-ctobridgeflowtest" title="Permanent link">&para;</a></h1>
+<h2 id="summary">Summary ✅<a class="headerlink" href="#summary" title="Permanent link">&para;</a></h2>
 <p>The running development server in mock/test mode did not include an always-available <code>cto@bridgeflow.test</code> user out-of-the-box. This caused manual login attempts (and the admin UI dev flows) to receive 401 Unauthorized because the mock DB is process-local and typically empty unless explicitly seeded by tests.</p>
-<h2 id="root-cause">Root cause 🔍</h2>
+<h2 id="root-cause">Root cause 🔍<a class="headerlink" href="#root-cause" title="Permanent link">&para;</a></h2>
 <ul>
 <li>The mock DB is reset per-run and tests seed users on-demand within their test processes.</li>
 <li>A separately started server process (e.g., <code>node api/server.js</code>) therefore had no named dev users like <code>cto@bridgeflow.test</code>.</li>
 </ul>
-<h2 id="fix-implemented">Fix implemented ✅</h2>
+<h2 id="fix-implemented">Fix implemented ✅<a class="headerlink" href="#fix-implemented" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Auto-seed behavior for dev/mock DB: when the running server is using the mock DB, it now runs the dev seeder to create named dev users and sample data (including <code>cto@bridgeflow.test</code> with role <code>bf_employee</code>).</li>
 <li>Added a dev-only HTTP endpoint to seed the running server on demand:</li>
@@ -139,7 +172,7 @@
 - Added: <code>api/routes/dev.js</code> — endpoint <code>/admin-api/_dev/ensure-dev-seed</code>
 - Added: <code>scripts/run-seed-mock.mjs</code> — run seeded mock easily
 - Existing: <code>api/lib/seedDevData.js</code> — seeder used (idempotent)</p>
-<h2 id="how-to-verify">How to verify ✔️</h2>
+<h2 id="how-to-verify">How to verify ✔️<a class="headerlink" href="#how-to-verify" title="Permanent link">&para;</a></h2>
 <ol>
 <li>Start the server in mock mode and seed automatically:</li>
 <li>Windows (cmd): <code>cmd /c "set USE_MOCK_DB=true &amp;&amp; node api/server.js"</code></li>
@@ -163,12 +196,12 @@
    node scripts/run-seed-mock.mjs</code></p>
 </li>
 </ol>
-<h2 id="security-safety">Security &amp; Safety ⚠️</h2>
+<h2 id="security-safety">Security &amp; Safety ⚠️<a class="headerlink" href="#security-safety" title="Permanent link">&para;</a></h2>
 <ul>
 <li><strong>Dev-only:</strong> All seeding is guarded and intended for development/test workflows only. No automatic seeding runs in production.</li>
 <li>The ensure-seed endpoint is a dev route and only available when dev routes are enabled (by design).</li>
 </ul>
-<h2 id="notes-troubleshooting">Notes &amp; troubleshooting 💡</h2>
+<h2 id="notes-troubleshooting">Notes &amp; troubleshooting 💡<a class="headerlink" href="#notes-troubleshooting" title="Permanent link">&para;</a></h2>
 <ul>
 <li>If your server is using a <em>real</em> DB (e.g., SQLite or Postgres) and the schema/migrations have not been applied, the seeder will <em>not</em> auto-run on startup to avoid accidental DB changes; instead use <code>node scripts/run-seed.js</code> after applying migrations.</li>
 <li>If curl cannot connect, confirm the server is listening on port 4000 and the server process is the same one you seeded (mock DB is per-process).</li>

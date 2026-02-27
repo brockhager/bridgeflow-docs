@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="../../../../../../css/theme.css" />
     <link rel="stylesheet" href="../../../../../../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../../../../../../stylesheets/extra.css" rel="stylesheet" />
     
       <script>
         // Current page data
@@ -43,7 +44,16 @@
                 <li class="toctree-l1"><a class="reference internal" href="../../../../../..">Home</a>
                 </li>
               </ul>
-              <p class="caption"><span class="caption-text">Products</span></p>
+              <p class="caption"><span class="caption-text">Start Here</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../ONBOARDING/">Onboarding</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../ARCHITECTURE/">Architecture</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../api-reference/">API Reference Hub</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Product Suite</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../../../../../products/">Overview</a>
                   </li>
@@ -66,7 +76,7 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../../../../../products/tracking-portal/">Tracking Portal</a>
                   </li>
               </ul>
-              <p class="caption"><span class="caption-text">Platform</span></p>
+              <p class="caption"><span class="caption-text">Platform Services</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../../../../../platform/">Overview</a>
                   </li>
@@ -87,12 +97,35 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../../../../../platform/bf-warehouse/">Warehouse Service</a>
                   </li>
               </ul>
+              <p class="caption"><span class="caption-text">Capability Catalog</span></p>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../../../../">Vision</a>
-                </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/SHIPMENTS/">Shipments</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/ADMIN_CONSOLE/">Admin Console</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/CONTROL_TOWER/">Control Tower</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/IDENTITY/">Identity</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/MASTERDATA/">Masterdata</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/ORDERS/">Orders</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/WAREHOUSE/">Warehouse</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/SEARCH/">Search</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/FINTECH/">Fintech</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/CARRIER_PORTAL/">Carrier Portal</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/TRACKING_PORTAL/">Tracking Portal</a>
+                  </li>
               </ul>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../../../../../../api-reference/">API Reference</a>
+                <li class="toctree-l1"><a class="reference internal" href="../../../../">Vision Archive</a>
                 </li>
               </ul>
       </div>
@@ -123,10 +156,10 @@
 Status: Planned / In Development
 Context: Original BF-INTEGRATION Vision (Pre-Phase 30)</p>
 </blockquote>
-<h1 id="phase-40-layer-2-connection-reliability-self-service-complete-summary">Phase 40 — Layer 2 Connection Reliability &amp; Self-Service — Complete Summary</h1>
+<h1 id="phase-40-layer-2-connection-reliability-self-service-complete-summary">Phase 40 — Layer 2 Connection Reliability &amp; Self-Service — Complete Summary<a class="headerlink" href="#phase-40-layer-2-connection-reliability-self-service-complete-summary" title="Permanent link">&para;</a></h1>
 <p><strong>Status:</strong> ✅ Complete (January 13, 2026)</p>
 <p>Phase 40 focused on connection observability, reliability, and self-service tooling for operations teams and integrators. It introduced connection health models, runtime routes for connection health &amp; testing, and a UI dashboard to inspect and act on connection health issues.</p>
-<h2 id="files-created-modified">Files Created / Modified</h2>
+<h2 id="files-created-modified">Files Created / Modified<a class="headerlink" href="#files-created-modified" title="Permanent link">&para;</a></h2>
 <ul>
 <li><code>api/server.js</code> — Registered Connection Health routes (import + registration)</li>
 <li><code>api/handlers/protocols/</code> — (stubs) protocol test handlers (placeholders for test/retry actions)</li>
@@ -134,7 +167,7 @@ Context: Original BF-INTEGRATION Vision (Pre-Phase 30)</p>
 <li><code>web/src/routes/connections.js</code> — Connections dashboard UI (summary cards, list with badges, test/retry buttons, protocol/TLS info)</li>
 <li><code>docs/deployment/CREDENTIAL_SECURITY.md</code> — Deployment runbook and enforcement notes for Vault credential compliance</li>
 </ul>
-<h2 id="features-implemented">Features Implemented</h2>
+<h2 id="features-implemented">Features Implemented<a class="headerlink" href="#features-implemented" title="Permanent link">&para;</a></h2>
 <ol>
 <li><strong>Connection Health Models &amp; Storage</strong></li>
 <li><code>ConnectionHealth</code> summarizes latest status, lastCheckedAt, lastError, and active test results.</li>
@@ -168,40 +201,40 @@ Context: Original BF-INTEGRATION Vision (Pre-Phase 30)</p>
 <li>Hooks for credential retrieval (Vault) when integrating protocol test handlers</li>
 <li>RBAC checks (admin/operator permissions required to run tests/retries)</li>
 </ol>
-<h2 id="validation-checklist-results">Validation Checklist Results</h2>
+<h2 id="validation-checklist-results">Validation Checklist Results<a class="headerlink" href="#validation-checklist-results" title="Permanent link">&para;</a></h2>
 <ul>
 <li><strong>Vault Enforcement:</strong> ✅ All protocol handlers registered; startup check enforces compliance</li>
 <li><strong>RBAC Isolation:</strong> ✅ Handler filters by <code>request.user.orgIds</code></li>
 <li><strong>Error Clarity:</strong> ✅ Error messages are user-friendly and avoid stack traces</li>
 <li><strong>Performance:</strong> ✅ List endpoints use efficient Prisma queries with pagination</li>
 </ul>
-<h2 id="security-flow">Security Flow</h2>
+<h2 id="security-flow">Security Flow<a class="headerlink" href="#security-flow" title="Permanent link">&para;</a></h2>
 <ol>
 <li>Server Startup</li>
 <li><code>enforceCredentialSecurity()</code> runs during launcher startup</li>
 <li>Protocol handlers (SFTP, AS2, API) register via <code>registerHandler()</code> and must call <code>markVaultCompliant()</code> when credentials are fetched or tested</li>
 <li>If any handler is non-compliant in production, startup will be blocked with a clear error</li>
 </ol>
-<h2 id="expected-output">Expected Output</h2>
+<h2 id="expected-output">Expected Output<a class="headerlink" href="#expected-output" title="Permanent link">&para;</a></h2>
 <p>When server starts with <code>START_SERVER=true</code>:</p>
 <pre><code>🔐 Running credential security enforcement...
    Registered 3 protocol handler(s): SFTP, AS2, API
 ✅ Credential security enforcement passed
 </code></pre>
-<h2 id="next-steps-recommended">Next Steps (recommended)</h2>
+<h2 id="next-steps-recommended">Next Steps (recommended)<a class="headerlink" href="#next-steps-recommended" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Implement protocol test handlers under <code>api/handlers/protocols/</code> for AS2, SFTP, API and ensure secure credential fetching from Vault.</li>
 <li>Add automatic scheduled health checks (worker) to populate <code>ConnectionEvent</code> and update <code>ConnectionHealth</code> records.</li>
 <li>Add audit &amp; credential enforcement tests to ensure all protocol handlers use Vault (<code>api/handlers/credentials.js</code>).</li>
 <li>Add Playwright E2E tests for the <code>/connections</code> dashboard (summary cards, test/retry flow).</li>
 </ul>
-<h2 id="quick-verification">Quick Verification</h2>
+<h2 id="quick-verification">Quick Verification<a class="headerlink" href="#quick-verification" title="Permanent link">&para;</a></h2>
 <ol>
 <li>Start API + web UI: <code>pnpm run api:start</code> and <code>pnpm run web:dev</code></li>
 <li>Open <code>http://localhost:4000/connections</code> or navigate via admin UI</li>
 <li>Trigger a <code>POST /api/connections/test/:connectorId</code> (requires authorized user) and observe the dashboard updates</li>
 </ol>
-<h2 id="strategic-impact">Strategic Impact</h2>
+<h2 id="strategic-impact">Strategic Impact<a class="headerlink" href="#strategic-impact" title="Permanent link">&para;</a></h2>
 <p>Phase 40 removes operational blind spots for integrations, reduces MTTR by providing self-service test/retry flows for connection operators, and creates a single-pane-of-glass for monitoring integration health.</p>
 <hr />
 <p><em>Files referenced above are already present in the repo as part of Phase 40 implementation.</em></p>

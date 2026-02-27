@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="../../css/theme.css" />
     <link rel="stylesheet" href="../../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../../stylesheets/extra.css" rel="stylesheet" />
     
       <script>
         // Current page data
@@ -43,7 +44,16 @@
                 <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
                 </li>
               </ul>
-              <p class="caption"><span class="caption-text">Products</span></p>
+              <p class="caption"><span class="caption-text">Start Here</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../ONBOARDING/">Onboarding</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../ARCHITECTURE/">Architecture</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../api-reference/">API Reference Hub</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Product Suite</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../products/">Overview</a>
                   </li>
@@ -66,7 +76,7 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../products/tracking-portal/">Tracking Portal</a>
                   </li>
               </ul>
-              <p class="caption"><span class="caption-text">Platform</span></p>
+              <p class="caption"><span class="caption-text">Platform Services</span></p>
               <ul class="current">
                   <li class="toctree-l1"><a class="reference internal" href="../">Overview</a>
                   </li>
@@ -86,23 +96,46 @@
                   </li>
                   <li class="toctree-l1 current"><a class="reference internal current" href="#">Warehouse Service</a>
     <ul class="current">
-    <li class="toctree-l2"><a class="reference internal" href="#purpose">Purpose</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#api-endpoint">API Endpoint</a>
-    </li>
     <li class="toctree-l2"><a class="reference internal" href="#status">Status</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#endpoint">Endpoint</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#key-routes">Key Routes</a>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#repository">Repository</a>
     </li>
     </ul>
                   </li>
               </ul>
+              <p class="caption"><span class="caption-text">Capability Catalog</span></p>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../../vision/bf-integration/">Vision</a>
-                </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/SHIPMENTS/">Shipments</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/ADMIN_CONSOLE/">Admin Console</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/CONTROL_TOWER/">Control Tower</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/IDENTITY/">Identity</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/MASTERDATA/">Masterdata</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/ORDERS/">Orders</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/WAREHOUSE/">Warehouse</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/SEARCH/">Search</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/FINTECH/">Fintech</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/CARRIER_PORTAL/">Carrier Portal</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/TRACKING_PORTAL/">Tracking Portal</a>
+                  </li>
               </ul>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../../api-reference/">API Reference</a>
+                <li class="toctree-l1"><a class="reference internal" href="../../vision/bf-integration/">Vision Archive</a>
                 </li>
               </ul>
       </div>
@@ -119,7 +152,7 @@
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
     <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
-          <li class="breadcrumb-item">Platform</li>
+          <li class="breadcrumb-item">Platform Services</li>
       <li class="breadcrumb-item active">Warehouse Service</li>
     <li class="wy-breadcrumbs-aside">
     </li>
@@ -129,31 +162,32 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <h1 id="service-bf-warehouse">Service: bf-warehouse</h1>
-<h2 id="purpose">Purpose</h2>
-<p>Warehouse inventory and pick task operations.</p>
-<h2 id="api-endpoint">API Endpoint</h2>
+                <h1 id="warehouse-service-bf-warehouse">Warehouse Service (<code>bf-warehouse</code>)<a class="headerlink" href="#warehouse-service-bf-warehouse" title="Permanent link">&para;</a></h1>
+<p>Warehouse inventory, receiving, and pick-task orchestration service.</p>
+<h2 id="status">Status<a class="headerlink" href="#status" title="Permanent link">&para;</a></h2>
+<p>Development.</p>
+<h2 id="endpoint">Endpoint<a class="headerlink" href="#endpoint" title="Permanent link">&para;</a></h2>
 <ul>
-<li>Base deployment endpoint not yet documented.</li>
-<li>Core endpoints:</li>
+<li>Stable public base endpoint not documented yet.</li>
+</ul>
+<h2 id="key-routes">Key Routes<a class="headerlink" href="#key-routes" title="Permanent link">&para;</a></h2>
+<ul>
 <li><code>GET /health</code></li>
 <li><code>POST /inventory/receive</code></li>
 <li><code>GET /inventory</code></li>
 <li><code>POST /tasks/pick</code></li>
 <li><code>PATCH /tasks/{task_id}/complete</code></li>
 </ul>
-<h2 id="status">Status</h2>
-<p>Development.</p>
-<h2 id="repository">Repository</h2>
+<h2 id="repository">Repository<a class="headerlink" href="#repository" title="Permanent link">&para;</a></h2>
 <ul>
-<li><code>https://github.com/brockhager/bf-warehouse</code></li>
+<li>https://github.com/brockhager/bf-warehouse</li>
 </ul>
               
             </div>
           </div><footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
         <a href="../bf-fintech/" class="btn btn-neutral float-left" title="Fintech Service"><span class="icon icon-circle-arrow-left"></span> Previous</a>
-        <a href="../../vision/bf-integration/" class="btn btn-neutral float-right" title="Vision">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../../features/" class="btn btn-neutral float-right" title="Overview">Next <span class="icon icon-circle-arrow-right"></span></a>
     </div>
 
   <hr/>
@@ -179,7 +213,7 @@
       <span><a href="../bf-fintech/" style="color: #fcfcfc">&laquo; Previous</a></span>
     
     
-      <span><a href="../../vision/bf-integration/" style="color: #fcfcfc">Next &raquo;</a></span>
+      <span><a href="../../features/" style="color: #fcfcfc">Next &raquo;</a></span>
     
   </span>
 </div>

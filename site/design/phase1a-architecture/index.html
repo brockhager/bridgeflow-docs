@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="../../css/theme.css" />
     <link rel="stylesheet" href="../../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../../stylesheets/extra.css" rel="stylesheet" />
     
       <script>
         // Current page data
@@ -43,7 +44,16 @@
                 <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
                 </li>
               </ul>
-              <p class="caption"><span class="caption-text">Products</span></p>
+              <p class="caption"><span class="caption-text">Start Here</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../ONBOARDING/">Onboarding</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../ARCHITECTURE/">Architecture</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../api-reference/">API Reference Hub</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Product Suite</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../products/">Overview</a>
                   </li>
@@ -66,7 +76,7 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../products/tracking-portal/">Tracking Portal</a>
                   </li>
               </ul>
-              <p class="caption"><span class="caption-text">Platform</span></p>
+              <p class="caption"><span class="caption-text">Platform Services</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../platform/">Overview</a>
                   </li>
@@ -87,12 +97,35 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../platform/bf-warehouse/">Warehouse Service</a>
                   </li>
               </ul>
+              <p class="caption"><span class="caption-text">Capability Catalog</span></p>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../../vision/bf-integration/">Vision</a>
-                </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/SHIPMENTS/">Shipments</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/ADMIN_CONSOLE/">Admin Console</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/CONTROL_TOWER/">Control Tower</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/IDENTITY/">Identity</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/MASTERDATA/">Masterdata</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/ORDERS/">Orders</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/WAREHOUSE/">Warehouse</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/SEARCH/">Search</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/FINTECH/">Fintech</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/CARRIER_PORTAL/">Carrier Portal</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/TRACKING_PORTAL/">Tracking Portal</a>
+                  </li>
               </ul>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../../api-reference/">API Reference</a>
+                <li class="toctree-l1"><a class="reference internal" href="../../vision/bf-integration/">Vision Archive</a>
                 </li>
               </ul>
       </div>
@@ -118,7 +151,7 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <h1 id="phase-1a-architecture-5-layer-model-with-dual-delivery">Phase 1A Architecture — 5-Layer Model with Dual Delivery</h1>
+                <h1 id="phase-1a-architecture-5-layer-model-with-dual-delivery">Phase 1A Architecture — 5-Layer Model with Dual Delivery<a class="headerlink" href="#phase-1a-architecture-5-layer-model-with-dual-delivery" title="Permanent link">&para;</a></h1>
 <p>Purpose: Define the minimal, practical architecture for the Phase 1A Invoice Delivery vertical slice. The system supports two business-language delivery options in the wizard:</p>
 <ul>
 <li>"Send as a secure email" (Default)</li>
@@ -126,14 +159,14 @@
 </ul>
 <p>This spec uses a 5-Layer model and includes minimal data models, retry rules, security notes, and Mermaid sequence diagrams for each happy path.</p>
 <hr />
-<h2 id="summary-intent">Summary &amp; Intent</h2>
+<h2 id="summary-intent">Summary &amp; Intent<a class="headerlink" href="#summary-intent" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Phase 1A is focused on delivering “magic” for pilots (5–10 customers) — minimal operational overhead, small infra footprint, and fast time to value.</li>
 <li>We support two delivery methods: Email (default) and Webhook (manual setup by ops). The wizard exposes both as simple business choices; only operators configure webhooks behind the scenes.</li>
 <li>Keep complexity low: no tenant self-service webhook configuration in Phase 1A, simple API key/HMAC auth for webhook deliveries, encrypted PDF attachments for email.</li>
 </ul>
 <hr />
-<h2 id="layer-1-abstraction-ux-workflow">Layer 1 — Abstraction (UX / Workflow)</h2>
+<h2 id="layer-1-abstraction-ux-workflow">Layer 1 — Abstraction (UX / Workflow)<a class="headerlink" href="#layer-1-abstraction-ux-workflow" title="Permanent link">&para;</a></h2>
 <p>Purpose: Provide a simple, business-language workflow for users and minimal, operator-facing controls to configure webhooks.</p>
 <p>Phase 1A capabilities:
 - Wizard exposes two choices in Screen 4 (see <code>phase1a-wizard.md</code>):
@@ -145,7 +178,7 @@
 <p>Notes:
 - For pilot speed, webhook setup is a manual operator step (internal portal or CLI) that is fast and controlled.</p>
 <hr />
-<h2 id="layer-2-connection-fabric">Layer 2 — Connection Fabric</h2>
+<h2 id="layer-2-connection-fabric">Layer 2 — Connection Fabric<a class="headerlink" href="#layer-2-connection-fabric" title="Permanent link">&para;</a></h2>
 <p>Purpose: Connectors that actually deliver invoices to external endpoints.</p>
 <p>Components:
 - Connector A: <strong>SMTP/Email Gateway Connector</strong>
@@ -165,7 +198,7 @@
 - No mTLS; simple HMAC-based auth is sufficient for pilot customers.
 - Webhook endpoints are validated by operator before enabling for production jobs (test send required).</p>
 <hr />
-<h2 id="layer-3-data-mapping">Layer 3 — Data Mapping</h2>
+<h2 id="layer-3-data-mapping">Layer 3 — Data Mapping<a class="headerlink" href="#layer-3-data-mapping" title="Permanent link">&para;</a></h2>
 <p>Purpose: Normalize invoice data and produce two target formats: PDF (for email) and JSON schema (for webhook).</p>
 <p>Components &amp; behavior:
 - <strong>Auto-mapping service</strong> (already defined in <code>phase1a-autoconfig.md</code>) produces normalized <code>Invoice</code> objects.
@@ -194,7 +227,7 @@
 - Both transformers have the same source <code>Invoice</code> objects, so normalized data feeds both flows with a single parsing step.
 - Validation occurs pre-transform; invalid invoices are flagged and surfaced to users/operators.</p>
 <hr />
-<h2 id="layer-4-platform-core">Layer 4 — Platform Core</h2>
+<h2 id="layer-4-platform-core">Layer 4 — Platform Core<a class="headerlink" href="#layer-4-platform-core" title="Permanent link">&para;</a></h2>
 <p>Purpose: Orchestration, routing, minimal agent management, security, and audit.</p>
 <p>Core components:
 - <strong>DeliveryJob Orchestrator</strong>
@@ -233,7 +266,7 @@
 - Otherwise -&gt; route to email connector.
 - If webhook config absent for webhook preference: default back to email and notify tenant: "We’ll send by email while we set up your webhook." (business language)</p>
 <hr />
-<h2 id="layer-5-infrastructure">Layer 5 — Infrastructure</h2>
+<h2 id="layer-5-infrastructure">Layer 5 — Infrastructure<a class="headerlink" href="#layer-5-infrastructure" title="Permanent link">&para;</a></h2>
 <p>Purpose: Runtime environments, storage, and operational considerations.</p>
 <p>Runtime and hosting:
 - Minimal services can run as small Node.js processes behind a single cluster (ECS/Fargate or a single VM for pilots).
@@ -246,7 +279,7 @@
 - Health checks and metrics endpoints for every service (ready/liveness)
 - Alerts: jobs error rate, deliverability drop (&lt;95% success), high retry counts, webhook endpoint failure rates</p>
 <hr />
-<h2 id="minimal-data-model-sql-conceptual">Minimal Data Model (SQL / conceptual)</h2>
+<h2 id="minimal-data-model-sql-conceptual">Minimal Data Model (SQL / conceptual)<a class="headerlink" href="#minimal-data-model-sql-conceptual" title="Permanent link">&para;</a></h2>
 <p>DeliveryJob
 - id (UUID)
 - tenant_id
@@ -305,7 +338,7 @@
 - created_at, updated_at</p>
 <p>Note: <code>WebhookConfig</code> can be migrated into <code>Resource</code> records; <code>Resource</code> is the long-term canonical model for connector configuration.</p>
 <hr />
-<h2 id="mermaid-sequence-diagrams-happy-paths">Mermaid Sequence Diagrams (Happy Paths)</h2>
+<h2 id="mermaid-sequence-diagrams-happy-paths">Mermaid Sequence Diagrams (Happy Paths)<a class="headerlink" href="#mermaid-sequence-diagrams-happy-paths" title="Permanent link">&para;</a></h2>
 <p>Email flow (happy path):</p>
 <pre><code class="language-mermaid">sequenceDiagram
   participant User
@@ -354,7 +387,7 @@
 </code></pre>
 <p>In both diagrams, the flows diverge at the Connector stage (EmailConnector vs WebhookConnector).</p>
 <hr />
-<h2 id="retry-timeout-failure-policies-recap">Retry, Timeout &amp; Failure Policies (recap)</h2>
+<h2 id="retry-timeout-failure-policies-recap">Retry, Timeout &amp; Failure Policies (recap)<a class="headerlink" href="#retry-timeout-failure-policies-recap" title="Permanent link">&para;</a></h2>
 <p>-- Retries:
   - Email: transient errors retried (1m, 10m, 60m) (three attempts total)
   - Webhook: <strong>up to 3 attempts total</strong>, spaced <strong>5 minutes</strong> apart (attempt 1 immediate, retries at +5m and +10m)
@@ -364,7 +397,7 @@
 -- Permanent failure rules: webhook 4xx except 429 = permanent; email 5xx and hard bounces = permanent
 - On permanent failure: create portal entry and notify tenant; operator can retry manually</p>
 <hr />
-<h2 id="security-compliance-phase-1a-minimal">Security &amp; Compliance (Phase 1A minimal)</h2>
+<h2 id="security-compliance-phase-1a-minimal">Security &amp; Compliance (Phase 1A minimal)<a class="headerlink" href="#security-compliance-phase-1a-minimal" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Transport: HTTPS / TLS for webhooks and API; email via TLS</li>
 <li>Storage: S3 SSE for PDFs; DB encryption for JSON payloads or store small payloads in JSONB</li>
@@ -372,7 +405,7 @@
 <li>Audit: all major events are logged to <code>audit-service</code></li>
 </ul>
 <hr />
-<h2 id="decision-points-questions-for-cto">Decision Points / Questions for CTO</h2>
+<h2 id="decision-points-questions-for-cto">Decision Points / Questions for CTO<a class="headerlink" href="#decision-points-questions-for-cto" title="Permanent link">&para;</a></h2>
 <ol>
 <li><strong>PDF retention</strong>: Confirmed — PDFs retained in hot storage for <strong>24 hours</strong>; core invoice data retained for <strong>7 years</strong> for audit/regeneration.</li>
 <li><strong>Webhook retry schedule &amp; timeout</strong>: Confirmed — webhooks retry up to <strong>3 attempts</strong> spaced <strong>5 minutes</strong> apart; <strong>30s</strong> timeout per attempt.</li>
@@ -380,7 +413,7 @@
 <li>Next decisions: confirm whether we should create a minimal <code>Resource</code> table in Phase 1A to store operator-managed webhook configs (recommended: yes). </li>
 </ol>
 <hr />
-<h2 id="next-steps">Next steps</h2>
+<h2 id="next-steps">Next steps<a class="headerlink" href="#next-steps" title="Permanent link">&para;</a></h2>
 <ol>
 <li>Sign-off on decision points above</li>
 <li>I will scaffold the minimal service structure and a small sequence diagram snippet in Mermaid files for docs</li>

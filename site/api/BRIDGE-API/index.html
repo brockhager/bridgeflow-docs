@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="../../css/theme.css" />
     <link rel="stylesheet" href="../../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../../stylesheets/extra.css" rel="stylesheet" />
     
       <script>
         // Current page data
@@ -43,7 +44,16 @@
                 <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
                 </li>
               </ul>
-              <p class="caption"><span class="caption-text">Products</span></p>
+              <p class="caption"><span class="caption-text">Start Here</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../ONBOARDING/">Onboarding</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../ARCHITECTURE/">Architecture</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../api-reference/">API Reference Hub</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Product Suite</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../products/">Overview</a>
                   </li>
@@ -66,7 +76,7 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../products/tracking-portal/">Tracking Portal</a>
                   </li>
               </ul>
-              <p class="caption"><span class="caption-text">Platform</span></p>
+              <p class="caption"><span class="caption-text">Platform Services</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../platform/">Overview</a>
                   </li>
@@ -87,12 +97,35 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../platform/bf-warehouse/">Warehouse Service</a>
                   </li>
               </ul>
+              <p class="caption"><span class="caption-text">Capability Catalog</span></p>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../../vision/bf-integration/">Vision</a>
-                </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/SHIPMENTS/">Shipments</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/ADMIN_CONSOLE/">Admin Console</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/CONTROL_TOWER/">Control Tower</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/IDENTITY/">Identity</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/MASTERDATA/">Masterdata</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/ORDERS/">Orders</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/WAREHOUSE/">Warehouse</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/SEARCH/">Search</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/FINTECH/">Fintech</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/CARRIER_PORTAL/">Carrier Portal</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/TRACKING_PORTAL/">Tracking Portal</a>
+                  </li>
               </ul>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../../api-reference/">API Reference</a>
+                <li class="toctree-l1"><a class="reference internal" href="../../vision/bf-integration/">Vision Archive</a>
                 </li>
               </ul>
       </div>
@@ -118,11 +151,11 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <h1 id="bridge-api-documentation">Bridge API Documentation</h1>
-<h2 id="overview">Overview</h2>
+                <h1 id="bridge-api-documentation">Bridge API Documentation<a class="headerlink" href="#bridge-api-documentation" title="Permanent link">&para;</a></h1>
+<h2 id="overview">Overview<a class="headerlink" href="#overview" title="Permanent link">&para;</a></h2>
 <p>The Bridge API provides endpoints for managing API integrations with external partners. Bridges enable both inbound (webhook receiving) and outbound (HTTP requests) communication.</p>
 <p><strong>Base URL</strong>: <code>https://your-domain.com</code> or <code>http://localhost:4000</code> (development)</p>
-<h2 id="bridge-resource">Bridge Resource</h2>
+<h2 id="bridge-resource">Bridge Resource<a class="headerlink" href="#bridge-resource" title="Permanent link">&para;</a></h2>
 <p>A Bridge represents a configured integration endpoint with the following properties:</p>
 <pre><code class="language-typescript">interface Bridge {
   id: string              // Unique identifier
@@ -147,8 +180,8 @@
 }
 </code></pre>
 <hr />
-<h2 id="bridge-endpoints">Bridge Endpoints</h2>
-<h3 id="create-bridge">Create Bridge</h3>
+<h2 id="bridge-endpoints">Bridge Endpoints<a class="headerlink" href="#bridge-endpoints" title="Permanent link">&para;</a></h2>
+<h3 id="create-bridge">Create Bridge<a class="headerlink" href="#create-bridge" title="Permanent link">&para;</a></h3>
 <p>Create a new bridge configuration.</p>
 <p><strong>Endpoint</strong>: <code>POST /api/bridges</code></p>
 <p><strong>Request Body</strong>:</p>
@@ -190,7 +223,7 @@
 }
 </code></pre>
 <hr />
-<h3 id="list-bridges">List Bridges</h3>
+<h3 id="list-bridges">List Bridges<a class="headerlink" href="#list-bridges" title="Permanent link">&para;</a></h3>
 <p>Get all bridges with optional filtering.</p>
 <p><strong>Endpoint</strong>: <code>GET /api/bridges</code></p>
 <p><strong>Query Parameters</strong>:
@@ -226,7 +259,7 @@
 }
 </code></pre>
 <hr />
-<h3 id="get-bridge">Get Bridge</h3>
+<h3 id="get-bridge">Get Bridge<a class="headerlink" href="#get-bridge" title="Permanent link">&para;</a></h3>
 <p>Get detailed information about a specific bridge.</p>
 <p><strong>Endpoint</strong>: <code>GET /api/bridges/:id</code></p>
 <p><strong>Response</strong> (200 OK):</p>
@@ -253,7 +286,7 @@
 }
 </code></pre>
 <hr />
-<h3 id="update-bridge">Update Bridge</h3>
+<h3 id="update-bridge">Update Bridge<a class="headerlink" href="#update-bridge" title="Permanent link">&para;</a></h3>
 <p>Update bridge configuration.</p>
 <p><strong>Endpoint</strong>: <code>PUT /api/bridges/:id</code></p>
 <p><strong>Request Body</strong> (all fields optional):</p>
@@ -272,7 +305,7 @@
 }
 </code></pre>
 <hr />
-<h3 id="delete-bridge">Delete Bridge</h3>
+<h3 id="delete-bridge">Delete Bridge<a class="headerlink" href="#delete-bridge" title="Permanent link">&para;</a></h3>
 <p>Delete a bridge and all associated transactions.</p>
 <p><strong>Endpoint</strong>: <code>DELETE /api/bridges/:id</code></p>
 <p><strong>Response</strong> (200 OK):</p>
@@ -283,7 +316,7 @@
 }
 </code></pre>
 <hr />
-<h3 id="test-bridge">Test Bridge</h3>
+<h3 id="test-bridge">Test Bridge<a class="headerlink" href="#test-bridge" title="Permanent link">&para;</a></h3>
 <p>Test bridge connectivity and authentication.</p>
 <p><strong>Endpoint</strong>: <code>POST /api/bridges/:id/test</code></p>
 <p><strong>Response</strong> (200 OK):</p>
@@ -295,8 +328,8 @@
 }
 </code></pre>
 <hr />
-<h2 id="webhook-endpoints">Webhook Endpoints</h2>
-<h3 id="receive-webhook">Receive Webhook</h3>
+<h2 id="webhook-endpoints">Webhook Endpoints<a class="headerlink" href="#webhook-endpoints" title="Permanent link">&para;</a></h2>
+<h3 id="receive-webhook">Receive Webhook<a class="headerlink" href="#receive-webhook" title="Permanent link">&para;</a></h3>
 <p>Receive incoming webhook from external partner.</p>
 <p><strong>Endpoint</strong>: <code>POST /api/webhooks/:bridgeId</code></p>
 <p><strong>Request Body</strong>: Any JSON payload</p>
@@ -308,7 +341,7 @@
 }
 </code></pre>
 <hr />
-<h3 id="get-webhook-url">Get Webhook URL</h3>
+<h3 id="get-webhook-url">Get Webhook URL<a class="headerlink" href="#get-webhook-url" title="Permanent link">&para;</a></h3>
 <p>Get the webhook URL for a bridge.</p>
 <p><strong>Endpoint</strong>: <code>GET /api/webhooks/:bridgeId/url</code></p>
 <p><strong>Response</strong> (200 OK):</p>
@@ -323,8 +356,8 @@
 }
 </code></pre>
 <hr />
-<h2 id="transaction-endpoints">Transaction Endpoints</h2>
-<h3 id="list-transactions">List Transactions</h3>
+<h2 id="transaction-endpoints">Transaction Endpoints<a class="headerlink" href="#transaction-endpoints" title="Permanent link">&para;</a></h2>
+<h3 id="list-transactions">List Transactions<a class="headerlink" href="#list-transactions" title="Permanent link">&para;</a></h3>
 <p>Get all transactions with filtering and pagination.</p>
 <p><strong>Endpoint</strong>: <code>GET /api/transactions</code></p>
 <p><strong>Query Parameters</strong>:
@@ -363,7 +396,7 @@
 }
 </code></pre>
 <hr />
-<h3 id="get-transaction">Get Transaction</h3>
+<h3 id="get-transaction">Get Transaction<a class="headerlink" href="#get-transaction" title="Permanent link">&para;</a></h3>
 <p>Get detailed information about a specific transaction.</p>
 <p><strong>Endpoint</strong>: <code>GET /api/transactions/:id</code></p>
 <p><strong>Response</strong> (200 OK):</p>
@@ -396,7 +429,7 @@
 }
 </code></pre>
 <hr />
-<h3 id="get-transaction-stats">Get Transaction Stats</h3>
+<h3 id="get-transaction-stats">Get Transaction Stats<a class="headerlink" href="#get-transaction-stats" title="Permanent link">&para;</a></h3>
 <p>Get transaction statistics.</p>
 <p><strong>Endpoint</strong>: <code>GET /api/transactions/stats</code></p>
 <p><strong>Query Parameters</strong>:
@@ -425,7 +458,7 @@
 }
 </code></pre>
 <hr />
-<h3 id="retry-transaction">Retry Transaction</h3>
+<h3 id="retry-transaction">Retry Transaction<a class="headerlink" href="#retry-transaction" title="Permanent link">&para;</a></h3>
 <p>Retry a failed outbound transaction.</p>
 <p><strong>Endpoint</strong>: <code>POST /api/transactions/:id/retry</code></p>
 <p><strong>Response</strong> (200 OK):</p>
@@ -437,8 +470,8 @@
 }
 </code></pre>
 <hr />
-<h2 id="authentication-methods">Authentication Methods</h2>
-<h3 id="api-key">API Key</h3>
+<h2 id="authentication-methods">Authentication Methods<a class="headerlink" href="#authentication-methods" title="Permanent link">&para;</a></h2>
+<h3 id="api-key">API Key<a class="headerlink" href="#api-key" title="Permanent link">&para;</a></h3>
 <pre><code class="language-json">{
   &quot;authMethod&quot;: &quot;api_key&quot;,
   &quot;authConfig&quot;: {
@@ -447,7 +480,7 @@
   }
 }
 </code></pre>
-<h3 id="bearer-token">Bearer Token</h3>
+<h3 id="bearer-token">Bearer Token<a class="headerlink" href="#bearer-token" title="Permanent link">&para;</a></h3>
 <pre><code class="language-json">{
   &quot;authMethod&quot;: &quot;bearer&quot;,
   &quot;authConfig&quot;: {
@@ -455,7 +488,7 @@
   }
 }
 </code></pre>
-<h3 id="basic-authentication">Basic Authentication</h3>
+<h3 id="basic-authentication">Basic Authentication<a class="headerlink" href="#basic-authentication" title="Permanent link">&para;</a></h3>
 <pre><code class="language-json">{
   &quot;authMethod&quot;: &quot;basic&quot;,
   &quot;authConfig&quot;: {
@@ -464,7 +497,7 @@
   }
 }
 </code></pre>
-<h3 id="oauth2">OAuth2</h3>
+<h3 id="oauth2">OAuth2<a class="headerlink" href="#oauth2" title="Permanent link">&para;</a></h3>
 <pre><code class="language-json">{
   &quot;authMethod&quot;: &quot;oauth&quot;,
   &quot;authConfig&quot;: {
@@ -472,13 +505,13 @@
   }
 }
 </code></pre>
-<h3 id="no-authentication">No Authentication</h3>
+<h3 id="no-authentication">No Authentication<a class="headerlink" href="#no-authentication" title="Permanent link">&para;</a></h3>
 <pre><code class="language-json">{
   &quot;authMethod&quot;: &quot;none&quot;
 }
 </code></pre>
 <hr />
-<h2 id="error-responses">Error Responses</h2>
+<h2 id="error-responses">Error Responses<a class="headerlink" href="#error-responses" title="Permanent link">&para;</a></h2>
 <p>All endpoints return standard error responses:</p>
 <p><strong>400 Bad Request</strong>:</p>
 <pre><code class="language-json">{
@@ -499,8 +532,8 @@
 }
 </code></pre>
 <hr />
-<h2 id="usage-examples">Usage Examples</h2>
-<h3 id="example-1-outbound-api-integration">Example 1: Outbound API Integration</h3>
+<h2 id="usage-examples">Usage Examples<a class="headerlink" href="#usage-examples" title="Permanent link">&para;</a></h2>
+<h3 id="example-1-outbound-api-integration">Example 1: Outbound API Integration<a class="headerlink" href="#example-1-outbound-api-integration" title="Permanent link">&para;</a></h3>
 <pre><code class="language-javascript">// Create outbound bridge
 const bridge = await fetch('http://localhost:4000/api/bridges', {
   method: 'POST',
@@ -526,7 +559,7 @@ await fetch(`http://localhost:4000/api/bridges/${id}/test`, {
   method: 'POST'
 })
 </code></pre>
-<h3 id="example-2-inbound-webhook-receiver">Example 2: Inbound Webhook Receiver</h3>
+<h3 id="example-2-inbound-webhook-receiver">Example 2: Inbound Webhook Receiver<a class="headerlink" href="#example-2-inbound-webhook-receiver" title="Permanent link">&para;</a></h3>
 <pre><code class="language-javascript">// Create inbound bridge
 const bridge = await fetch('http://localhost:4000/api/bridges', {
   method: 'POST',
@@ -548,7 +581,7 @@ const { webhookUrl } = await urlResponse.json()
 console.log('Configure this URL in Stripe:', webhookUrl)
 </code></pre>
 <hr />
-<h2 id="rate-limiting">Rate Limiting</h2>
+<h2 id="rate-limiting">Rate Limiting<a class="headerlink" href="#rate-limiting" title="Permanent link">&para;</a></h2>
 <p>BridgeFlow enforces rate limiting globally and per-route.</p>
 <ul>
 <li><strong>Global</strong>: 100 req/min per IP by default. Override with <code>RATE_LIMIT_GLOBAL_MAX</code> and <code>RATE_LIMIT_GLOBAL_WINDOW</code>.</li>
@@ -565,7 +598,7 @@ console.log('Configure this URL in Stripe:', webhookUrl)
 </ul>
 <p>See docs/design/rate-limiting.md for full configuration surface and runbook notes.</p>
 <hr />
-<h2 id="changelog">Changelog</h2>
+<h2 id="changelog">Changelog<a class="headerlink" href="#changelog" title="Permanent link">&para;</a></h2>
 <p><strong>Unreleased</strong> (2026-01-06)
 - fix(auth): restrict BRIDGEFLOW_DEV_ADMIN fallback to UI routes only; API routes always require authentication
 - fix(rate-limit): ensure enforcement is active during tests and respect RATE_LIMIT_ENABLED only when explicitly set</p>

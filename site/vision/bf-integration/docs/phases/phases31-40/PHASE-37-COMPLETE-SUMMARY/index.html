@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="../../../../../../css/theme.css" />
     <link rel="stylesheet" href="../../../../../../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../../../../../../stylesheets/extra.css" rel="stylesheet" />
     
       <script>
         // Current page data
@@ -43,7 +44,16 @@
                 <li class="toctree-l1"><a class="reference internal" href="../../../../../..">Home</a>
                 </li>
               </ul>
-              <p class="caption"><span class="caption-text">Products</span></p>
+              <p class="caption"><span class="caption-text">Start Here</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../ONBOARDING/">Onboarding</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../ARCHITECTURE/">Architecture</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../api-reference/">API Reference Hub</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Product Suite</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../../../../../products/">Overview</a>
                   </li>
@@ -66,7 +76,7 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../../../../../products/tracking-portal/">Tracking Portal</a>
                   </li>
               </ul>
-              <p class="caption"><span class="caption-text">Platform</span></p>
+              <p class="caption"><span class="caption-text">Platform Services</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../../../../../platform/">Overview</a>
                   </li>
@@ -87,12 +97,35 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../../../../../platform/bf-warehouse/">Warehouse Service</a>
                   </li>
               </ul>
+              <p class="caption"><span class="caption-text">Capability Catalog</span></p>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../../../../">Vision</a>
-                </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/SHIPMENTS/">Shipments</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/ADMIN_CONSOLE/">Admin Console</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/CONTROL_TOWER/">Control Tower</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/IDENTITY/">Identity</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/MASTERDATA/">Masterdata</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/ORDERS/">Orders</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/WAREHOUSE/">Warehouse</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/SEARCH/">Search</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/FINTECH/">Fintech</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/CARRIER_PORTAL/">Carrier Portal</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/TRACKING_PORTAL/">Tracking Portal</a>
+                  </li>
               </ul>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../../../../../../api-reference/">API Reference</a>
+                <li class="toctree-l1"><a class="reference internal" href="../../../../">Vision Archive</a>
                 </li>
               </ul>
       </div>
@@ -123,10 +156,10 @@
 Status: Planned / In Development
 Context: Original BF-INTEGRATION Vision (Pre-Phase 30)</p>
 </blockquote>
-<h1 id="phase-37-infrastructure-reliability-complete-summary">Phase 37 — Infrastructure &amp; Reliability — Complete Summary</h1>
+<h1 id="phase-37-infrastructure-reliability-complete-summary">Phase 37 — Infrastructure &amp; Reliability — Complete Summary<a class="headerlink" href="#phase-37-infrastructure-reliability-complete-summary" title="Permanent link">&para;</a></h1>
 <p><strong>Status:</strong> ✅ Complete (Week 3 — January 11, 2026)</p>
 <p>Phase 37 delivered enterprise-grade infrastructure and reliability capabilities: production-ready monitoring, stable metrics aggregation, alerting with suppression logic, and a Vault-backed credential management system integrated into adapters.</p>
-<h2 id="phase-37-complete-feature-set">✅ Phase 37 Complete Feature Set</h2>
+<h2 id="phase-37-complete-feature-set">✅ Phase 37 Complete Feature Set<a class="headerlink" href="#phase-37-complete-feature-set" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Production-Ready Monitoring &amp; Alerting (dashboards + alert rules)</li>
 <li>Stable metrics aggregation (fixed crash loop with intelligent suppression)</li>
@@ -134,35 +167,35 @@ Context: Original BF-INTEGRATION Vision (Pre-Phase 30)</p>
 <li>Real-time dashboards (<code>/admin/metrics</code> with live charts)</li>
 <li>Proactive notifications (configurable alert channels)</li>
 </ul>
-<h3 id="enterprise-grade-security">Enterprise-Grade Security</h3>
+<h3 id="enterprise-grade-security">Enterprise-Grade Security<a class="headerlink" href="#enterprise-grade-security" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Vault integration (Credential model with RBAC-protected endpoints)</li>
 <li>Secure credential storage (DatabaseAdapter + APIAdapter use Vault for secrets)</li>
 <li>Granular permissions (<code>credential:read</code>, <code>credential:write</code>, <code>credential:admin</code>)</li>
 <li>Health monitoring (<code>GET /api/vault/health</code>)</li>
 </ul>
-<h3 id="professional-architecture">Professional Architecture</h3>
+<h3 id="professional-architecture">Professional Architecture<a class="headerlink" href="#professional-architecture" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Resource-efficient (10-second intervals prevent system overload)</li>
 <li>Graceful degradation (works with mock Vault or real Vault)</li>
 <li>Comprehensive testing (unit tests for all new functionality)</li>
 <li>Migration-ready (clean Prisma schema with proper relationships)</li>
 </ul>
-<h2 id="implementation-details-short">🔧 Implementation Details (short)</h2>
+<h2 id="implementation-details-short">🔧 Implementation Details (short)<a class="headerlink" href="#implementation-details-short" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Credential metadata stored in Postgres (<code>Credential</code> model); secret values stored in the configured secret backend (mock or Vault).</li>
 <li>Adapters (<code>DatabaseAdapter</code>, <code>APIAdapter</code>) fetch connection strings / secrets from the secret backend at runtime.</li>
 <li>New endpoints provide credential CRUD and secret read/write operations.</li>
 <li>Alerting uses <code>AlertRule</code> / <code>AlertEvent</code> models with evaluation/suppression logic and extensible notification channels.</li>
 </ul>
-<h2 id="strategic-impact">🚀 Strategic Impact</h2>
+<h2 id="strategic-impact">🚀 Strategic Impact<a class="headerlink" href="#strategic-impact" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Observability: real-time metrics, alerting, and dashboards</li>
 <li>Security: enterprise-grade credential management with Vault</li>
 <li>Reliability: stable, resource-efficient metrics and monitoring</li>
 <li>Compliance: RBAC, audit trails, and secure secret storage</li>
 </ul>
-<h2 id="docs-files-of-interest">📚 Docs &amp; Files of Interest</h2>
+<h2 id="docs-files-of-interest">📚 Docs &amp; Files of Interest<a class="headerlink" href="#docs-files-of-interest" title="Permanent link">&para;</a></h2>
 <ul>
 <li><code>docs/phases/phases31-40/phase-37-foundation.md</code></li>
 <li><code>docs/phases/phases31-40/README.md</code></li>

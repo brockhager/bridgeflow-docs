@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="../../../../../../css/theme.css" />
     <link rel="stylesheet" href="../../../../../../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../../../../../../stylesheets/extra.css" rel="stylesheet" />
     
       <script>
         // Current page data
@@ -43,7 +44,16 @@
                 <li class="toctree-l1"><a class="reference internal" href="../../../../../..">Home</a>
                 </li>
               </ul>
-              <p class="caption"><span class="caption-text">Products</span></p>
+              <p class="caption"><span class="caption-text">Start Here</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../ONBOARDING/">Onboarding</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../ARCHITECTURE/">Architecture</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../api-reference/">API Reference Hub</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Product Suite</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../../../../../products/">Overview</a>
                   </li>
@@ -66,7 +76,7 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../../../../../products/tracking-portal/">Tracking Portal</a>
                   </li>
               </ul>
-              <p class="caption"><span class="caption-text">Platform</span></p>
+              <p class="caption"><span class="caption-text">Platform Services</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../../../../../platform/">Overview</a>
                   </li>
@@ -87,12 +97,35 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../../../../../platform/bf-warehouse/">Warehouse Service</a>
                   </li>
               </ul>
+              <p class="caption"><span class="caption-text">Capability Catalog</span></p>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../../../../">Vision</a>
-                </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/SHIPMENTS/">Shipments</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/ADMIN_CONSOLE/">Admin Console</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/CONTROL_TOWER/">Control Tower</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/IDENTITY/">Identity</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/MASTERDATA/">Masterdata</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/ORDERS/">Orders</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/WAREHOUSE/">Warehouse</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/SEARCH/">Search</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/FINTECH/">Fintech</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/CARRIER_PORTAL/">Carrier Portal</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/TRACKING_PORTAL/">Tracking Portal</a>
+                  </li>
               </ul>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../../../../../../api-reference/">API Reference</a>
+                <li class="toctree-l1"><a class="reference internal" href="../../../../">Vision Archive</a>
                 </li>
               </ul>
       </div>
@@ -123,14 +156,14 @@
 Status: Planned / In Development
 Context: Original BF-INTEGRATION Vision (Pre-Phase 30)</p>
 </blockquote>
-<h1 id="phase-22-trading-partner-registration-completion-summary">Phase 22 — Trading Partner Registration — Completion Summary ✅</h1>
+<h1 id="phase-22-trading-partner-registration-completion-summary">Phase 22 — Trading Partner Registration — Completion Summary ✅<a class="headerlink" href="#phase-22-trading-partner-registration-completion-summary" title="Permanent link">&para;</a></h1>
 <p><strong>Completion Date:</strong> December 30, 2025
 <strong>Owner:</strong> Agent4
 <strong>Status:</strong> ✅ COMPLETE (22A, 22B) — 22C (onboarding wizard) scoped for follow-up</p>
 <hr />
-<h2 id="overview">Overview</h2>
+<h2 id="overview">Overview<a class="headerlink" href="#overview" title="Permanent link">&para;</a></h2>
 <p>Phase 22 delivered a self-service Trading Partner registration flow plus an admin approval queue and approval workflow. The work focused on secure, RLS-first onboarding so partners can register and be approved into a limited-access partner organization without widening backend access controls.</p>
-<h2 id="what-we-built-high-level">What we built (high level)</h2>
+<h2 id="what-we-built-high-level">What we built (high level)<a class="headerlink" href="#what-we-built-high-level" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Public partner signup page: <code>/partner-signup</code> (client page + <code>web/src/partner-signup.js</code>).</li>
 <li>Extended auth registration: <code>/api/auth/register</code> accepts <code>type='partner'</code> and creates a <code>PartnerRegistration</code> pending record instead of immediate activation.</li>
@@ -140,7 +173,7 @@ Context: Original BF-INTEGRATION Vision (Pre-Phase 30)</p>
 <li>Approve flow creates <code>Organization { type:'partner', accessLevel:'limited' }</code>, creates a <code>User</code>, links membership, archives (soft-deletes) the <code>PartnerRegistration</code>, and sends notification email (best-effort).</li>
 <li>RLS-first security: added DB migration templates for partner RLS and smoke-check scripts; enforcement remains DB-based.</li>
 </ul>
-<h2 id="files-key-commits-examples">Files &amp; key commits (examples)</h2>
+<h2 id="files-key-commits-examples">Files &amp; key commits (examples)<a class="headerlink" href="#files-key-commits-examples" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Frontend: <code>web/partner-signup.html</code>, <code>web/src/partner-signup.js</code>, router entry in <code>web/src/router.js</code>.</li>
 <li>Backend handlers: <code>api/handlers/auth.js</code> (registration + verify), <code>api/handlers/partnerRegistrations.js</code> (approve/deny/listing).</li>
@@ -149,13 +182,13 @@ Context: Original BF-INTEGRATION Vision (Pre-Phase 30)</p>
 <li>RLS SQL templates: <code>scripts/migrations/2025-12-30_add_partner_rls.sql</code> (policy template and partner-aware examples).</li>
 <li>Tests: integration tests added: <code>test/integration/partner-registration.test.js</code>, <code>test/integration/partner-approval.test.js</code>, <code>test/integration/partner-rls.test.js</code> and <code>web/tests/partner-signup.test.js</code>.</li>
 </ul>
-<h2 id="tests-verification">Tests &amp; Verification</h2>
+<h2 id="tests-verification">Tests &amp; Verification<a class="headerlink" href="#tests-verification" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Integration tests cover registration → verification, admin approve → org/user/membership creation, RLS scoping (partner inbox visibility), and that partners cannot create bridges.</li>
 <li>UI unit tests confirm the signup page posts <code>type='partner'</code> and shows the pending confirmation message.</li>
 <li>Smoke scripts available: <code>scripts/verify-rls.js</code>, <code>scripts/check-rls-partners.js</code>, and manual QA scripts under <code>scripts/admin-ui-qa*.js</code>.</li>
 </ul>
-<h3 id="how-to-run-locally">How to run locally</h3>
+<h3 id="how-to-run-locally">How to run locally<a class="headerlink" href="#how-to-run-locally" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Run focused tests:</li>
 <li>pnpm exec vitest run test/integration/partner-registration.test.js -u</li>
@@ -167,13 +200,13 @@ Context: Original BF-INTEGRATION Vision (Pre-Phase 30)</p>
 <li>Open <code>/partner-signup</code> → register → check Ethereal preview (email) → call verify URL</li>
 <li>In admin UI (<code>/partner-queue</code>), approve registration → verify org/user created via API or database</li>
 </ul>
-<h2 id="technical-achievements-notes">Technical achievements &amp; notes</h2>
+<h2 id="technical-achievements-notes">Technical achievements &amp; notes<a class="headerlink" href="#technical-achievements-notes" title="Permanent link">&para;</a></h2>
 <ul>
 <li>RLS-first model upheld: backend logic does not rely on <code>accessLevel</code> or <code>role</code> to gate data access — tenant isolation is enforced by Postgres RLS.</li>
 <li>Migration adds <code>PartnerRegistration</code> and <code>Organization.type</code>/<code>accessLevel</code> fields; RLS policy templates were added with smoke test scripts to validate behavior.</li>
 <li>Approval workflow and email notifications implemented with best-effort delivery (Ethereal in dev).</li>
 </ul>
-<h2 id="acceptance-checklist-status">Acceptance checklist (status)</h2>
+<h2 id="acceptance-checklist-status">Acceptance checklist (status)<a class="headerlink" href="#acceptance-checklist-status" title="Permanent link">&para;</a></h2>
 <ul>
 <li>[x] 22A: Public sign-up UI + registration flow implemented and tested</li>
 <li>[x] 22B: Admin approval queue + approval workflow + email notifications implemented and tested</li>
@@ -181,7 +214,7 @@ Context: Original BF-INTEGRATION Vision (Pre-Phase 30)</p>
 <li>[x] Prisma migration added (PartnerRegistration + Organization fields)</li>
 <li>[x] RLS policy templates + smoke tests added (some policies are templated/commented; see migration SQL)</li>
 </ul>
-<h2 id="outstanding-items-recommended-next-steps">Outstanding items / recommended next steps</h2>
+<h2 id="outstanding-items-recommended-next-steps">Outstanding items / recommended next steps<a class="headerlink" href="#outstanding-items-recommended-next-steps" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Implement the partner onboarding wizard and limited dashboard (<code>/partner/onboarding</code>) to complete 22C.</li>
 <li>Production: verify email delivery configuration and add endpoint telemetry (delivery failures, bounce handling).</li>

@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="../../css/theme.css" />
     <link rel="stylesheet" href="../../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../../stylesheets/extra.css" rel="stylesheet" />
     
       <script>
         // Current page data
@@ -43,7 +44,16 @@
                 <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
                 </li>
               </ul>
-              <p class="caption"><span class="caption-text">Products</span></p>
+              <p class="caption"><span class="caption-text">Start Here</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../ONBOARDING/">Onboarding</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../ARCHITECTURE/">Architecture</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../api-reference/">API Reference Hub</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Product Suite</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../products/">Overview</a>
                   </li>
@@ -66,7 +76,7 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../products/tracking-portal/">Tracking Portal</a>
                   </li>
               </ul>
-              <p class="caption"><span class="caption-text">Platform</span></p>
+              <p class="caption"><span class="caption-text">Platform Services</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../platform/">Overview</a>
                   </li>
@@ -87,12 +97,35 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../platform/bf-warehouse/">Warehouse Service</a>
                   </li>
               </ul>
+              <p class="caption"><span class="caption-text">Capability Catalog</span></p>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../../vision/bf-integration/">Vision</a>
-                </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/SHIPMENTS/">Shipments</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/ADMIN_CONSOLE/">Admin Console</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/CONTROL_TOWER/">Control Tower</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/IDENTITY/">Identity</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/MASTERDATA/">Masterdata</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/ORDERS/">Orders</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/WAREHOUSE/">Warehouse</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/SEARCH/">Search</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/FINTECH/">Fintech</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/CARRIER_PORTAL/">Carrier Portal</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/TRACKING_PORTAL/">Tracking Portal</a>
+                  </li>
               </ul>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../../api-reference/">API Reference</a>
+                <li class="toctree-l1"><a class="reference internal" href="../../vision/bf-integration/">Vision Archive</a>
                 </li>
               </ul>
       </div>
@@ -118,9 +151,9 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <h1 id="credential-security-vault-enforcement">Credential Security &amp; Vault Enforcement</h1>
+                <h1 id="credential-security-vault-enforcement">Credential Security &amp; Vault Enforcement<a class="headerlink" href="#credential-security-vault-enforcement" title="Permanent link">&para;</a></h1>
 <p><strong>Purpose:</strong> Describe startup-enforced credential security introduced in Phase 40 and provide runbook guidance for production rollout.</p>
-<h2 id="overview">Overview</h2>
+<h2 id="overview">Overview<a class="headerlink" href="#overview" title="Permanent link">&para;</a></h2>
 <p>Phase 40 introduced a credential security enforcer that ensures all protocol handlers retrieve credentials exclusively from the configured secret backend (Vault). This prevents accidental plaintext credentials and enforces a consistent, auditable secret retrieval path.</p>
 <p>Key components
 - <code>api/lib/credentialSecurity.js</code> — Core enforcement module
@@ -129,20 +162,20 @@
   - <code>fetchSftpCredentials</code>, <code>fetchAs2Credentials</code>, <code>fetchApiCredentials</code> — Protocol helpers to resolve credential batches from Vault
   - <code>enforceVaultCompliance()</code> — Throws when non-compliant handlers exist (called during startup enforcement)
 - <code>api/launcher.js</code> — Calls <code>enforceCredentialSecurity()</code> during startup and will block production startup if handlers are non-compliant</p>
-<h2 id="production-runbook">Production Runbook</h2>
+<h2 id="production-runbook">Production Runbook<a class="headerlink" href="#production-runbook" title="Permanent link">&para;</a></h2>
 <ol>
 <li>Configure Vault and set env vars: <code>SECRET_BACKEND=vault</code>, <code>VAULT_ADDR</code>, <code>VAULT_TOKEN</code> (or configure a proper auth backend)</li>
 <li>Ensure all protocol handlers call the credential helpers (<code>fetch*Credentials</code>) or explicitly call <code>markVaultCompliant()</code> during configuration/test paths</li>
 <li>Start server with production env: <code>NODE_ENV=production START_SERVER=true pnpm run api:start</code> — startup will block when any handler is non-compliant</li>
 <li>If deployment blocks, inspect startup logs for the list of non-compliant handlers and remediate code to use the Vault helpers</li>
 </ol>
-<h2 id="notes-tips">Notes &amp; Tips</h2>
+<h2 id="notes-tips">Notes &amp; Tips<a class="headerlink" href="#notes-tips" title="Permanent link">&para;</a></h2>
 <ul>
 <li>In development, non-compliance logs a warning but does not block startup (to avoid breaking local workflows). In production, enforcement is strict.</li>
 <li>Keep credential Vault paths consistent using <code>getCredentialPath(organizationId, connectorId, credentialType)</code> (e.g., <code>organizations/{org}/connectors/{connector}/{type}</code>)</li>
 <li>Add unit/integration tests that assert handlers call Vault helpers or that call <code>markVaultCompliant()</code> when appropriate</li>
 </ul>
-<h2 id="troubleshooting">Troubleshooting</h2>
+<h2 id="troubleshooting">Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permanent link">&para;</a></h2>
 <ul>
 <li><code>Error: handler(s) missing Vault integration: SFTP, AS2</code>: The handler registration exists, but the handler never called <code>markVaultCompliant()</code>; ensure credential fetch occurs during test or configuration paths.</li>
 <li><code>Vault connectivity errors</code>: Verify <code>VAULT_ADDR</code> and <code>VAULT_TOKEN</code> or service role authentication; use <code>api/lib/secretManager.js</code> to mock or inspect behaviour during local development.</li>

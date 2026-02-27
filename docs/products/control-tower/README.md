@@ -1,21 +1,22 @@
-# Product: Bridgeflow Control Tower
+# Control Tower
 
-The Control Tower is Bridgeflow's current live product for resilience monitoring and policy-driven response.
+Control Tower is the primary live BridgeFlow product for resilience monitoring and policy-driven operations.
 
-Live deployment:
-- [https://control-tower.up.railway.app/](https://control-tower.up.railway.app/)
+## Live Access
 
-## What It Includes Today
+- Demo: [https://control-tower.up.railway.app/](https://control-tower.up.railway.app/)
 
-- Public resilience map and activity feed.
-- Public status API (`GET /api/v1/public/resilience-status`).
-- Event ingestion API (`POST /api/control/events`).
-- Autonomous policy loop: Event -> Policy -> Risk -> Case.
+## Core Capabilities
 
-## Start Here
+- Public resilience map and activity feed
+- Public status endpoint: `GET /api/v1/public/resilience-status`
+- Event ingest endpoint: `POST /api/control/events`
+- Automated loop: Event → Policy → Risk → Case
 
-- Quickstart: `quickstart/`
-- Concepts: `concepts/`
-- API details: `public-api/`
-- Integration setup: `integration-guide/`
-- Validation evidence: `trl7-validation/`
+## Recommended Reading Path
+
+1. `quickstart.md`
+2. `concepts.md`
+3. `public-api.md`
+4. `integration-guide.md`
+5. `trl7-validation.md`

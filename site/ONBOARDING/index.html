@@ -5,14 +5,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://brockhager.github.io/bridgeflow-docs/ONBOARDING/" />
       <link rel="shortcut icon" href="../img/favicon.ico" />
-    <title>🚀 Welcome to BridgeFlow - Developer Onboarding - BridgeFlow Docs</title>
+    <title>Onboarding - BridgeFlow Docs</title>
     <link rel="stylesheet" href="../css/theme.css" />
     <link rel="stylesheet" href="../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../stylesheets/extra.css" rel="stylesheet" />
     
       <script>
         // Current page data
-        var mkdocs_page_name = "\ud83d\ude80 Welcome to BridgeFlow - Developer Onboarding";
+        var mkdocs_page_name = "Onboarding";
         var mkdocs_page_input_path = "ONBOARDING.md";
         var mkdocs_page_url = "/bridgeflow-docs/ONBOARDING/";
       </script>
@@ -43,7 +44,56 @@
                 <li class="toctree-l1"><a class="reference internal" href="..">Home</a>
                 </li>
               </ul>
-              <p class="caption"><span class="caption-text">Products</span></p>
+              <p class="caption"><span class="caption-text">Start Here</span></p>
+              <ul class="current">
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">Onboarding</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#1-project-overview">1. Project Overview</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#key-value-proposition">Key Value Proposition</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#2-architecture-tech-stack">2. Architecture &amp; Tech Stack</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#key-directories-cjsbridgeflowweb">🏠 Key Directories (c:\JS\bridgeflow\web\)</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#3-the-visual-builder-phase-8">3. The "Visual Builder" (Phase 8)</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#how-it-works-under-the-hood">How it Works (Under the Hood)</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#key-files-for-the-builder">Key Files for the Builder</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#4-development-workflow">4. Development Workflow</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#getting-started">Getting Started</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#common-tasks">Common Tasks</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#5-current-status-next-steps">5. Current Status &amp; Next Steps</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#completed-phase-8">✅ Completed (Phase 8)</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#upcoming-phase-9-advanced-components">🚧 Upcoming (Phase 9 - Advanced Components)</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#6-resources">6. Resources</a>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../ARCHITECTURE/">Architecture</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../api-reference/">API Reference Hub</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Product Suite</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../products/">Overview</a>
                   </li>
@@ -66,7 +116,7 @@
                   <li class="toctree-l1"><a class="reference internal" href="../products/tracking-portal/">Tracking Portal</a>
                   </li>
               </ul>
-              <p class="caption"><span class="caption-text">Platform</span></p>
+              <p class="caption"><span class="caption-text">Platform Services</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../platform/">Overview</a>
                   </li>
@@ -87,12 +137,35 @@
                   <li class="toctree-l1"><a class="reference internal" href="../platform/bf-warehouse/">Warehouse Service</a>
                   </li>
               </ul>
+              <p class="caption"><span class="caption-text">Capability Catalog</span></p>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../vision/bf-integration/">Vision</a>
-                </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../features/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../features/SHIPMENTS/">Shipments</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../features/ADMIN_CONSOLE/">Admin Console</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../features/CONTROL_TOWER/">Control Tower</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../features/IDENTITY/">Identity</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../features/MASTERDATA/">Masterdata</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../features/ORDERS/">Orders</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../features/WAREHOUSE/">Warehouse</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../features/SEARCH/">Search</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../features/FINTECH/">Fintech</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../features/CARRIER_PORTAL/">Carrier Portal</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../features/TRACKING_PORTAL/">Tracking Portal</a>
+                  </li>
               </ul>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../api-reference/">API Reference</a>
+                <li class="toctree-l1"><a class="reference internal" href="../vision/bf-integration/">Vision Archive</a>
                 </li>
               </ul>
       </div>
@@ -109,7 +182,8 @@
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
     <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
-      <li class="breadcrumb-item active">🚀 Welcome to BridgeFlow - Developer Onboarding</li>
+          <li class="breadcrumb-item">Start Here</li>
+      <li class="breadcrumb-item active">Onboarding</li>
     <li class="wy-breadcrumbs-aside">
     </li>
   </ul>
@@ -118,19 +192,19 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <h1 id="welcome-to-bridgeflow-developer-onboarding">🚀 Welcome to BridgeFlow - Developer Onboarding</h1>
+                <h1 id="welcome-to-bridgeflow-developer-onboarding">🚀 Welcome to BridgeFlow - Developer Onboarding<a class="headerlink" href="#welcome-to-bridgeflow-developer-onboarding" title="Permanent link">&para;</a></h1>
 <p><strong>Current Product Version</strong>: Phase 8 (Enhanced Visual Components)
 <strong>Last Updated</strong>: December 21, 2025</p>
-<h2 id="1-project-overview">1. Project Overview</h2>
+<h2 id="1-project-overview">1. Project Overview<a class="headerlink" href="#1-project-overview" title="Permanent link">&para;</a></h2>
 <p>BridgeFlow is an integration platform designed to make connecting APIs, Webhooks, and EDI systems accessible to non-technical users. We are currently transitioning from a form-based configuration model to a fully interactive <strong>Visual Bridge Builder</strong>.</p>
-<h3 id="key-value-proposition">Key Value Proposition</h3>
+<h3 id="key-value-proposition">Key Value Proposition<a class="headerlink" href="#key-value-proposition" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Visual</strong>: Drag-and-drop canvas to connect Trading Partners and Resources.</li>
 <li><strong>Real-time</strong>: Animated data flow visualization.</li>
 <li><strong>Hybrid</strong>: Supports both simple Webhook-&gt;API bridges and complex EDI workflows.</li>
 </ul>
 <hr />
-<h2 id="2-architecture-tech-stack">2. Architecture &amp; Tech Stack</h2>
+<h2 id="2-architecture-tech-stack">2. Architecture &amp; Tech Stack<a class="headerlink" href="#2-architecture-tech-stack" title="Permanent link">&para;</a></h2>
 <p>We use a <strong>Lightweight, Standards-Based</strong> stack. No heavy frameworks (React/Vue/Angular) are strictly enforced in the core builder to maintain raw performance and control over the canvas, though we use ESM modules extensively.</p>
 <ul>
 <li><strong>Frontend</strong>: Vanilla JavaScript (ES Modules), CSS Variables, HTML5.</li>
@@ -138,7 +212,7 @@
 <li><strong>Persistence</strong>: Dual-layer (LocalStorage for draft/offline, API for production).</li>
 <li><strong>Styling</strong>: Modular CSS (<code>canvas-builder.css</code>, <code>uikit.css</code>) + Utility classes.</li>
 </ul>
-<h3 id="key-directories-cjsbridgeflowweb">🏠 Key Directories (<code>c:\JS\bridgeflow\web\</code>)</h3>
+<h3 id="key-directories-cjsbridgeflowweb">🏠 Key Directories (<code>c:\JS\bridgeflow\web\</code>)<a class="headerlink" href="#key-directories-cjsbridgeflowweb" title="Permanent link">&para;</a></h3>
 <ul>
 <li><code>src/bridge-builder.ui.js</code>: <strong>The Core</strong>. Logic for Drag-and-drop, Slots, SVG connectors, and the Details Panel.</li>
 <li><code>src/state/store.js</code>: <strong>The Brain</strong>. Singleton class managing Bridges, Partners, and Resources.</li>
@@ -147,9 +221,9 @@
 <li><code>css/modules/</code>: Component-specific styles (keep it modular!).</li>
 </ul>
 <hr />
-<h2 id="3-the-visual-builder-phase-8">3. The "Visual Builder" (Phase 8)</h2>
+<h2 id="3-the-visual-builder-phase-8">3. The "Visual Builder" (Phase 8)<a class="headerlink" href="#3-the-visual-builder-phase-8" title="Permanent link">&para;</a></h2>
 <p>We just completed <strong>Phase 8</strong>, which introduced the full-screen visual editor.</p>
-<h3 id="how-it-works-under-the-hood">How it Works (Under the Hood)</h3>
+<h3 id="how-it-works-under-the-hood">How it Works (Under the Hood)<a class="headerlink" href="#how-it-works-under-the-hood" title="Permanent link">&para;</a></h3>
 <ol>
 <li><strong>Slots</strong>: We use a 3-slot model: <code>Source</code> -&gt; <code>Connection Logic</code> -&gt; <code>Destination</code>.</li>
 <li><strong>SVG Connectors</strong>: Dynamic SVG paths draw lines between slots. They accept CSS classes like <code>.active</code> to trigger flow animations.</li>
@@ -160,42 +234,42 @@
 </ul>
 </li>
 </ol>
-<h3 id="key-files-for-the-builder">Key Files for the Builder</h3>
+<h3 id="key-files-for-the-builder">Key Files for the Builder<a class="headerlink" href="#key-files-for-the-builder" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>UI Logic</strong>: <code>web/src/bridge-builder.ui.js</code></li>
 <li><strong>Styles</strong>: <code>web/css/modules/canvas-builder.css</code></li>
 </ul>
 <hr />
-<h2 id="4-development-workflow">4. Development Workflow</h2>
-<h3 id="getting-started">Getting Started</h3>
+<h2 id="4-development-workflow">4. Development Workflow<a class="headerlink" href="#4-development-workflow" title="Permanent link">&para;</a></h2>
+<h3 id="getting-started">Getting Started<a class="headerlink" href="#getting-started" title="Permanent link">&para;</a></h3>
 <ol>
 <li><strong>Serve</strong> the <code>web/</code> directory (e.g., via <code>live-server</code> or <code>python -m http.server</code>).</li>
 <li><strong>Navigate</strong> to <code>http://localhost:8080/canvas-legacy.html</code> to see the Builder (legacy). The original <code>canvas-visual.html</code> has been archived at <code>archive/canvas-visual.html</code>.</li>
 <li><strong>Navigate</strong> to <code>http://localhost:8080/bridges.html</code> to see the Bridge Manager.</li>
 </ol>
-<h3 id="common-tasks">Common Tasks</h3>
+<h3 id="common-tasks">Common Tasks<a class="headerlink" href="#common-tasks" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Adding a new Component Type</strong>: Update <code>bridge-builder.ui.js</code> <code>renderSlot</code> logic.</li>
 <li><strong>Modifying State</strong>: Add methods to <code>BridgeFlowStore</code> (<code>store.js</code>) and emit events.</li>
 <li><strong>Styling</strong>: Add new modules to <code>css/modules/</code> and import in the HTML.</li>
 </ul>
 <hr />
-<h2 id="5-current-status-next-steps">5. Current Status &amp; Next Steps</h2>
-<h3 id="completed-phase-8">✅ Completed (Phase 8)</h3>
+<h2 id="5-current-status-next-steps">5. Current Status &amp; Next Steps<a class="headerlink" href="#5-current-status-next-steps" title="Permanent link">&para;</a></h2>
+<h3 id="completed-phase-8">✅ Completed (Phase 8)<a class="headerlink" href="#completed-phase-8" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Full-screen Expandable Canvas.</li>
 <li>Interactive Data Flow Animations.</li>
 <li>Component Details Panel (Side-bar configuration).</li>
 <li>Unified Bridge Manager (Dashboard).</li>
 </ul>
-<h3 id="upcoming-phase-9-advanced-components">🚧 Upcoming (Phase 9 - Advanced Components)</h3>
+<h3 id="upcoming-phase-9-advanced-components">🚧 Upcoming (Phase 9 - Advanced Components)<a class="headerlink" href="#upcoming-phase-9-advanced-components" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Real Transformation Engine</strong>: Actually executing the JS code written in the details panel.</li>
 <li><strong>Security Layer</strong>: API Key rotation and OAuth flows in the visual builder.</li>
 <li><strong>Monitoring Hub</strong>: Live traffic graphs overlaying the visual connections.</li>
 </ul>
 <hr />
-<h2 id="6-resources">6. Resources</h2>
+<h2 id="6-resources">6. Resources<a class="headerlink" href="#6-resources" title="Permanent link">&para;</a></h2>
 <ul>
 <li><strong>Task Board</strong>: <code>docs/task-lists/TASK-LIST-2.md</code></li>
 <li><strong>Product Phases</strong>: <code>docs/phases/readme.md</code></li>
@@ -205,6 +279,10 @@
               
             </div>
           </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href=".." class="btn btn-neutral float-left" title="Home"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../ARCHITECTURE/" class="btn btn-neutral float-right" title="Architecture">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
 
   <hr/>
 
@@ -226,6 +304,10 @@
   <span class="rst-current-version" data-toggle="rst-current-version">
     
     
+      <span><a href=".." style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../ARCHITECTURE/" style="color: #fcfcfc">Next &raquo;</a></span>
     
   </span>
 </div>

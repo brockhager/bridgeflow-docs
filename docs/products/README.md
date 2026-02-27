@@ -1,8 +1,8 @@
-# Products
+# Product Suite
 
-Products are customer-facing Bridgeflow applications and runtimes.
+BridgeFlow products are customer-facing applications used by operations, carriers, and customers.
 
-## Current Product Inventory
+## Current Inventory
 
 | Repo | Product | Status | Primary Access |
 |---|---|---|---|
@@ -11,10 +11,7 @@ Products are customer-facing Bridgeflow applications and runtimes.
 | `bf-carrier-portal` | Carrier Portal | Development | Endpoint not yet documented |
 | `bf-tracking-portal` | Tracking Portal | Development | Endpoint not yet documented |
 
-## Product vs Platform
+## How This Section Is Organized
 
-- Products are what users interact with directly.
-- Platform services are the underlying modules that power product behavior.
-
-Platform details:
-- `../platform/`
+- Product-specific docs live under each product page in this section.
+- Cross-service architecture details are in `../platform/README.md`.

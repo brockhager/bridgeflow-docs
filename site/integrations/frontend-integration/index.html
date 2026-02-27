@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="../../css/theme.css" />
     <link rel="stylesheet" href="../../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../../stylesheets/extra.css" rel="stylesheet" />
     
       <script>
         // Current page data
@@ -43,7 +44,16 @@
                 <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
                 </li>
               </ul>
-              <p class="caption"><span class="caption-text">Products</span></p>
+              <p class="caption"><span class="caption-text">Start Here</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../ONBOARDING/">Onboarding</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../ARCHITECTURE/">Architecture</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../api-reference/">API Reference Hub</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Product Suite</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../products/">Overview</a>
                   </li>
@@ -66,7 +76,7 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../products/tracking-portal/">Tracking Portal</a>
                   </li>
               </ul>
-              <p class="caption"><span class="caption-text">Platform</span></p>
+              <p class="caption"><span class="caption-text">Platform Services</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../platform/">Overview</a>
                   </li>
@@ -87,12 +97,35 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../platform/bf-warehouse/">Warehouse Service</a>
                   </li>
               </ul>
+              <p class="caption"><span class="caption-text">Capability Catalog</span></p>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../../vision/bf-integration/">Vision</a>
-                </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/SHIPMENTS/">Shipments</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/ADMIN_CONSOLE/">Admin Console</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/CONTROL_TOWER/">Control Tower</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/IDENTITY/">Identity</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/MASTERDATA/">Masterdata</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/ORDERS/">Orders</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/WAREHOUSE/">Warehouse</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/SEARCH/">Search</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/FINTECH/">Fintech</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/CARRIER_PORTAL/">Carrier Portal</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/TRACKING_PORTAL/">Tracking Portal</a>
+                  </li>
               </ul>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../../api-reference/">API Reference</a>
+                <li class="toctree-l1"><a class="reference internal" href="../../vision/bf-integration/">Vision Archive</a>
                 </li>
               </ul>
       </div>
@@ -118,16 +151,16 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <h1 id="frontend-integration-guide">Frontend Integration Guide ✅</h1>
+                <h1 id="frontend-integration-guide">Frontend Integration Guide ✅<a class="headerlink" href="#frontend-integration-guide" title="Permanent link">&para;</a></h1>
 <p>This guide helps frontend engineers integrate with the BridgeFlow CSV mailbox and QBO sync APIs during development.</p>
-<h2 id="authentication-headers">Authentication &amp; Headers 🔐</h2>
+<h2 id="authentication-headers">Authentication &amp; Headers 🔐<a class="headerlink" href="#authentication-headers" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Use <code>X-API-Key</code> header (case-insensitive) or <code>Authorization: Bearer &lt;key&gt;</code>.</li>
 <li>The API key maps to an <code>organizationId</code> via <code>validateCustomerApiKey</code> middleware and must be included on every request.</li>
 </ul>
 <p>Example header:</p>
 <p><code>X-API-Key: &lt;your-api-key&gt;</code></p>
-<h2 id="cors">CORS ⚠️</h2>
+<h2 id="cors">CORS ⚠️<a class="headerlink" href="#cors" title="Permanent link">&para;</a></h2>
 <ul>
 <li>The API allows the following local origins by default:</li>
 <li><code>http://localhost:3000</code>, <code>https://localhost:3000</code></li>
@@ -135,7 +168,7 @@
 <li><code>http://localhost:4000</code>, <code>https://localhost:4000</code>, <code>http://localhost:4001</code>, <code>https://localhost:4001</code></li>
 </ul>
 <p>If your dev UI runs on another port, update <code>api/server.js</code> <code>fastifyCors</code> allowed origins accordingly.</p>
-<h2 id="debugging-dev-only-endpoint">Debugging: Dev-only endpoint 🔧</h2>
+<h2 id="debugging-dev-only-endpoint">Debugging: Dev-only endpoint 🔧<a class="headerlink" href="#debugging-dev-only-endpoint" title="Permanent link">&para;</a></h2>
 <ul>
 <li><code>GET /api/debug/customer-context</code> (development only)</li>
 <li>Requires <code>X-API-Key</code> and returns a minimal JSON object showing mapped identity to aid debugging:</li>
@@ -151,7 +184,7 @@
 <blockquote>
 <p>Note: The endpoint intentionally does NOT return the API key value for safety.</p>
 </blockquote>
-<h2 id="csv-upload-mailbox-endpoint">CSV Upload (Mailbox) — Endpoint 📤</h2>
+<h2 id="csv-upload-mailbox-endpoint">CSV Upload (Mailbox) — Endpoint 📤<a class="headerlink" href="#csv-upload-mailbox-endpoint" title="Permanent link">&para;</a></h2>
 <ul>
 <li><code>POST /api/upload/csv</code></li>
 <li>Headers: <code>X-API-Key</code>, <code>Content-Type: text/csv</code></li>
@@ -160,7 +193,7 @@
 <p>Successful response:</p>
 <pre><code>{ &quot;success&quot;: true, &quot;message&quot;: &quot;Enqueued for processing&quot; }
 </code></pre>
-<h3 id="common-error-responses-and-suggested-ui-messages">Common error responses and suggested UI messages</h3>
+<h3 id="common-error-responses-and-suggested-ui-messages">Common error responses and suggested UI messages<a class="headerlink" href="#common-error-responses-and-suggested-ui-messages" title="Permanent link">&para;</a></h3>
 <ul>
 <li>401 Unauthorized</li>
 <li>{ error: 'Unauthorized', message: 'API key required' }</li>
@@ -174,7 +207,7 @@
 <li>{ error: 'Invalid Template', message: 'Missing required columns: [purchaseOrderId, vendorId]' }</li>
 <li>UI: "CSV is missing required columns"</li>
 </ul>
-<h2 id="sample-csv-minimal">Sample CSV (minimal)</h2>
+<h2 id="sample-csv-minimal">Sample CSV (minimal)<a class="headerlink" href="#sample-csv-minimal" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Location: <code>docs/examples/sample_purchase_orders.csv</code></li>
 </ul>
@@ -184,7 +217,7 @@
 <pre><code>purchaseOrderId,vendorId,orderDate,amount,currency
 PO-123,VEN-10,2025-06-01,120.50,USD
 </code></pre>
-<h2 id="curl-examples">cURL examples 🧪</h2>
+<h2 id="curl-examples">cURL examples 🧪<a class="headerlink" href="#curl-examples" title="Permanent link">&para;</a></h2>
 <p>Upload CSV:</p>
 <pre><code>curl -X POST https://api.local.test/api/upload/csv \
   -H &quot;X-API-Key: &lt;your-key&gt;&quot; \
@@ -194,7 +227,7 @@ PO-123,VEN-10,2025-06-01,120.50,USD
 <p>Get debug context (dev-only):</p>
 <pre><code>curl -X GET https://api.local.test/api/debug/customer-context -H &quot;X-API-Key: &lt;your-key&gt;&quot;
 </code></pre>
-<h2 id="tips-for-frontend-engineers">Tips for frontend engineers 💡</h2>
+<h2 id="tips-for-frontend-engineers">Tips for frontend engineers 💡<a class="headerlink" href="#tips-for-frontend-engineers" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Use the dev debug endpoint to verify your key is mapped to the expected organization before testing uploads.</li>
 <li>Check CORS origin if you see preflight (OPTIONS) failures.</li>

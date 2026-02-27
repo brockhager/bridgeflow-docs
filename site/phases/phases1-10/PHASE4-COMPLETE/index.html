@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="../../../css/theme.css" />
     <link rel="stylesheet" href="../../../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../../../stylesheets/extra.css" rel="stylesheet" />
     
       <script>
         // Current page data
@@ -43,7 +44,16 @@
                 <li class="toctree-l1"><a class="reference internal" href="../../..">Home</a>
                 </li>
               </ul>
-              <p class="caption"><span class="caption-text">Products</span></p>
+              <p class="caption"><span class="caption-text">Start Here</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../ONBOARDING/">Onboarding</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../ARCHITECTURE/">Architecture</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../api-reference/">API Reference Hub</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Product Suite</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../../products/">Overview</a>
                   </li>
@@ -66,7 +76,7 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../../products/tracking-portal/">Tracking Portal</a>
                   </li>
               </ul>
-              <p class="caption"><span class="caption-text">Platform</span></p>
+              <p class="caption"><span class="caption-text">Platform Services</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../../platform/">Overview</a>
                   </li>
@@ -87,12 +97,35 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../../platform/bf-warehouse/">Warehouse Service</a>
                   </li>
               </ul>
+              <p class="caption"><span class="caption-text">Capability Catalog</span></p>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../../../vision/bf-integration/">Vision</a>
-                </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../features/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../features/SHIPMENTS/">Shipments</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../features/ADMIN_CONSOLE/">Admin Console</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../features/CONTROL_TOWER/">Control Tower</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../features/IDENTITY/">Identity</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../features/MASTERDATA/">Masterdata</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../features/ORDERS/">Orders</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../features/WAREHOUSE/">Warehouse</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../features/SEARCH/">Search</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../features/FINTECH/">Fintech</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../features/CARRIER_PORTAL/">Carrier Portal</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../features/TRACKING_PORTAL/">Tracking Portal</a>
+                  </li>
               </ul>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../../../api-reference/">API Reference</a>
+                <li class="toctree-l1"><a class="reference internal" href="../../../vision/bf-integration/">Vision Archive</a>
                 </li>
               </ul>
       </div>
@@ -118,17 +151,17 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <h1 id="phase-4-generic-webhook-integration-complete">Phase 4: Generic Webhook Integration - COMPLETE ✅</h1>
+                <h1 id="phase-4-generic-webhook-integration-complete">Phase 4: Generic Webhook Integration - COMPLETE ✅<a class="headerlink" href="#phase-4-generic-webhook-integration-complete" title="Permanent link">&para;</a></h1>
 <p><strong>Date Completed</strong>: December 17, 2025
 <strong>Duration</strong>: ~4 hours (as planned)
 <strong>Status</strong>: Production Ready 🚀</p>
-<h2 id="overview">Overview</h2>
+<h2 id="overview">Overview<a class="headerlink" href="#overview" title="Permanent link">&para;</a></h2>
 <p>Phase 4 transforms BridgeFlow from a simple bridge manager into a <strong>complete data integration platform</strong>. Any webhook can now automatically trigger any API call with automatic data transformation between formats.</p>
-<h2 id="architecture">Architecture</h2>
+<h2 id="architecture">Architecture<a class="headerlink" href="#architecture" title="Permanent link">&para;</a></h2>
 <pre><code>External System → Webhook → BridgeFlow → Transform → Partner API
      📊              🔌          🏗️           ⚙️            📡
 </code></pre>
-<h3 id="complete-flow">Complete Flow</h3>
+<h3 id="complete-flow">Complete Flow<a class="headerlink" href="#complete-flow" title="Permanent link">&para;</a></h3>
 <ol>
 <li><strong>Webhook Reception</strong> (Inbound Bridge)</li>
 <li>Receives webhook POST with JSON payload</li>
@@ -151,8 +184,8 @@
 <li>Creates outbound transaction record</li>
 <li>Handles retries and error logging</li>
 </ol>
-<h2 id="key-features-implemented">Key Features Implemented</h2>
-<h3 id="1-webhook-tester-tool">1. Webhook Tester Tool 🔧</h3>
+<h2 id="key-features-implemented">Key Features Implemented<a class="headerlink" href="#key-features-implemented" title="Permanent link">&para;</a></h2>
+<h3 id="1-webhook-tester-tool">1. Webhook Tester Tool 🔧<a class="headerlink" href="#1-webhook-tester-tool" title="Permanent link">&para;</a></h3>
 <p><strong>Files:</strong>
 - <code>web/webhook-tester.html</code> - Testing interface
 - <code>web/src/webhookTester.js</code> - Form logic and submission</p>
@@ -169,10 +202,10 @@
 4. Click &quot;Send Webhook&quot;
 5. View response and transaction ID
 </code></pre>
-<h3 id="2-data-transformation-engine">2. Data Transformation Engine ⚙️</h3>
+<h3 id="2-data-transformation-engine">2. Data Transformation Engine ⚙️<a class="headerlink" href="#2-data-transformation-engine" title="Permanent link">&para;</a></h3>
 <p><strong>File:</strong> <code>api/lib/transformer.js</code></p>
 <p><strong>Capabilities:</strong></p>
-<h4 id="simple-field-mapping">Simple Field Mapping</h4>
+<h4 id="simple-field-mapping">Simple Field Mapping<a class="headerlink" href="#simple-field-mapping" title="Permanent link">&para;</a></h4>
 <pre><code class="language-javascript">const rules = {
   orderId: 'order_id',
   email: 'customer.email',
@@ -182,7 +215,7 @@
 transform(input, rules)
 // { order_id: &quot;123&quot; } → { orderId: &quot;123&quot; }
 </code></pre>
-<h4 id="template-substitution">Template Substitution</h4>
+<h4 id="template-substitution">Template Substitution<a class="headerlink" href="#template-substitution" title="Permanent link">&para;</a></h4>
 <pre><code class="language-javascript">const rules = {
   fullName: '${firstName} ${lastName}',
   message: 'Order #${orderId} total: $${amount}'
@@ -190,7 +223,7 @@ transform(input, rules)
 
 applyTemplate(input, rules)
 </code></pre>
-<h4 id="conditional-transformation">Conditional Transformation</h4>
+<h4 id="conditional-transformation">Conditional Transformation<a class="headerlink" href="#conditional-transformation" title="Permanent link">&para;</a></h4>
 <pre><code class="language-javascript">const rules = [
   {
     when: { type: 'premium' },
@@ -200,11 +233,11 @@ applyTemplate(input, rules)
 
 transformConditional(input, rules)
 </code></pre>
-<h4 id="pass-through-mode">Pass-Through Mode</h4>
+<h4 id="pass-through-mode">Pass-Through Mode<a class="headerlink" href="#pass-through-mode" title="Permanent link">&para;</a></h4>
 <pre><code class="language-javascript">passThrough(input)
 // Returns data unchanged
 </code></pre>
-<h3 id="3-bridge-flow-configuration">3. Bridge Flow Configuration 🔗</h3>
+<h3 id="3-bridge-flow-configuration">3. Bridge Flow Configuration 🔗<a class="headerlink" href="#3-bridge-flow-configuration" title="Permanent link">&para;</a></h3>
 <p><strong>Database Schema:</strong></p>
 <pre><code class="language-prisma">model Bridge {
   // ... existing fields ...
@@ -222,7 +255,7 @@ transformConditional(input, rules)
   - <code>linkedBridgeId</code> - String (ID of outbound bridge)
   - <code>transformRules</code> - Object (field mapping rules)
   - <code>autoForward</code> - Boolean (enable/disable forwarding)</p>
-<h3 id="4-auto-forward-logic">4. Auto-Forward Logic 🚀</h3>
+<h3 id="4-auto-forward-logic">4. Auto-Forward Logic 🚀<a class="headerlink" href="#4-auto-forward-logic" title="Permanent link">&para;</a></h3>
 <p><strong>File:</strong> <code>api/handlers/webhooks.js</code></p>
 <p><strong>Process:</strong></p>
 <pre><code class="language-javascript">async function processWebhookAsync(transactionId, bridge, payload, headers) {
@@ -248,8 +281,8 @@ transformConditional(input, rules)
   }
 }
 </code></pre>
-<h2 id="testing">Testing</h2>
-<h3 id="end-to-end-test-suite">End-to-End Test Suite</h3>
+<h2 id="testing">Testing<a class="headerlink" href="#testing" title="Permanent link">&para;</a></h2>
+<h3 id="end-to-end-test-suite">End-to-End Test Suite<a class="headerlink" href="#end-to-end-test-suite" title="Permanent link">&para;</a></h3>
 <p><strong>File:</strong> <code>api/tests/phase4-e2e.integration.js</code></p>
 <p><strong>Test Coverage:</strong>
 1. ✅ Create outbound bridge (httpbin.org)
@@ -304,8 +337,8 @@ node api/tests/phase4-e2e.integration.js
    • Auto-forward: ✅ Working
    • Complete Flow: ✅ Webhook → Transform → API
 </code></pre>
-<h2 id="demo-walkthrough">Demo Walkthrough</h2>
-<h3 id="step-1-create-outbound-bridge">Step 1: Create Outbound Bridge</h3>
+<h2 id="demo-walkthrough">Demo Walkthrough<a class="headerlink" href="#demo-walkthrough" title="Permanent link">&para;</a></h2>
+<h3 id="step-1-create-outbound-bridge">Step 1: Create Outbound Bridge<a class="headerlink" href="#step-1-create-outbound-bridge" title="Permanent link">&para;</a></h3>
 <p>Navigate to <code>http://localhost:5173/bridges.html</code> and create:</p>
 <pre><code class="language-json">{
   &quot;name&quot;: &quot;Partner API - Orders&quot;,
@@ -318,7 +351,7 @@ node api/tests/phase4-e2e.integration.js
 }
 </code></pre>
 <p>Copy the bridge ID (e.g., <code>cmjac123...</code>)</p>
-<h3 id="step-2-create-inbound-bridge-with-flow-config">Step 2: Create Inbound Bridge with Flow Config</h3>
+<h3 id="step-2-create-inbound-bridge-with-flow-config">Step 2: Create Inbound Bridge with Flow Config<a class="headerlink" href="#step-2-create-inbound-bridge-with-flow-config" title="Permanent link">&para;</a></h3>
 <p>Create a second bridge:</p>
 <pre><code class="language-json">{
   &quot;name&quot;: &quot;Shopify Webhook Receiver&quot;,
@@ -335,7 +368,7 @@ node api/tests/phase4-e2e.integration.js
 }
 </code></pre>
 <p>Copy this bridge ID (e.g., <code>cmjac456...</code>)</p>
-<h3 id="step-3-send-test-webhook">Step 3: Send Test Webhook</h3>
+<h3 id="step-3-send-test-webhook">Step 3: Send Test Webhook<a class="headerlink" href="#step-3-send-test-webhook" title="Permanent link">&para;</a></h3>
 <p>Navigate to <code>http://localhost:5173/webhook-tester.html</code></p>
 <ol>
 <li>Paste inbound bridge ID: <code>cmjac456...</code></li>
@@ -355,7 +388,7 @@ node api/tests/phase4-e2e.integration.js
 <ol>
 <li>Click "Send Webhook"</li>
 </ol>
-<h3 id="step-4-verify-results">Step 4: Verify Results</h3>
+<h3 id="step-4-verify-results">Step 4: Verify Results<a class="headerlink" href="#step-4-verify-results" title="Permanent link">&para;</a></h3>
 <p>Go to <code>http://localhost:5173/transactions.html</code></p>
 <p><strong>You should see TWO transactions:</strong></p>
 <ol>
@@ -381,8 +414,8 @@ node api/tests/phase4-e2e.integration.js
      "currency": "USD"
    }</code></li>
 </ol>
-<h2 id="real-world-use-cases">Real-World Use Cases</h2>
-<h3 id="1-e-commerce-integration">1. E-commerce Integration</h3>
+<h2 id="real-world-use-cases">Real-World Use Cases<a class="headerlink" href="#real-world-use-cases" title="Permanent link">&para;</a></h2>
+<h3 id="1-e-commerce-integration">1. E-commerce Integration<a class="headerlink" href="#1-e-commerce-integration" title="Permanent link">&para;</a></h3>
 <p><strong>Scenario:</strong> Shopify sends order webhooks → Transform to partner fulfillment API</p>
 <pre><code class="language-javascript">transformRules: {
   externalOrderId: 'order_id',
@@ -391,7 +424,7 @@ node api/tests/phase4-e2e.integration.js
   items: 'line_items'
 }
 </code></pre>
-<h3 id="2-crm-synchronization">2. CRM Synchronization</h3>
+<h3 id="2-crm-synchronization">2. CRM Synchronization<a class="headerlink" href="#2-crm-synchronization" title="Permanent link">&para;</a></h3>
 <p><strong>Scenario:</strong> Marketing platform webhooks → Transform to Salesforce API</p>
 <pre><code class="language-javascript">transformRules: {
   FirstName: 'contact.first_name',
@@ -400,7 +433,7 @@ node api/tests/phase4-e2e.integration.js
   LeadSource: 'campaign.name'
 }
 </code></pre>
-<h3 id="3-accounting-automation">3. Accounting Automation</h3>
+<h3 id="3-accounting-automation">3. Accounting Automation<a class="headerlink" href="#3-accounting-automation" title="Permanent link">&para;</a></h3>
 <p><strong>Scenario:</strong> Payment processor webhooks → Transform to QuickBooks API</p>
 <pre><code class="language-javascript">transformRules: {
   invoiceNumber: 'payment.reference',
@@ -409,8 +442,8 @@ node api/tests/phase4-e2e.integration.js
   customerId: 'customer.id'
 }
 </code></pre>
-<h2 id="api-reference">API Reference</h2>
-<h3 id="post-apibridges">POST /api/bridges</h3>
+<h2 id="api-reference">API Reference<a class="headerlink" href="#api-reference" title="Permanent link">&para;</a></h2>
+<h3 id="post-apibridges">POST /api/bridges<a class="headerlink" href="#post-apibridges" title="Permanent link">&para;</a></h3>
 <p>Create a new bridge with flow configuration.</p>
 <p><strong>Body:</strong></p>
 <pre><code class="language-json">{
@@ -422,7 +455,7 @@ node api/tests/phase4-e2e.integration.js
   &quot;autoForward&quot;: true               // Optional
 }
 </code></pre>
-<h3 id="put-apibridgesid">PUT /api/bridges/:id</h3>
+<h3 id="put-apibridgesid">PUT /api/bridges/:id<a class="headerlink" href="#put-apibridgesid" title="Permanent link">&para;</a></h3>
 <p>Update bridge flow configuration.</p>
 <p><strong>Body:</strong></p>
 <pre><code class="language-json">{
@@ -434,7 +467,7 @@ node api/tests/phase4-e2e.integration.js
   &quot;autoForward&quot;: true
 }
 </code></pre>
-<h3 id="post-apiwebhooksbridgeid">POST /api/webhooks/:bridgeId</h3>
+<h3 id="post-apiwebhooksbridgeid">POST /api/webhooks/:bridgeId<a class="headerlink" href="#post-apiwebhooksbridgeid" title="Permanent link">&para;</a></h3>
 <p>Receive webhook and trigger auto-forward flow.</p>
 <p><strong>Headers:</strong></p>
 <pre><code>Content-Type: application/json
@@ -449,15 +482,15 @@ X-Webhook-Source: Optional-Identifier
   &quot;message&quot;: &quot;Webhook received and queued for processing&quot;
 }
 </code></pre>
-<h2 id="performance-characteristics">Performance Characteristics</h2>
+<h2 id="performance-characteristics">Performance Characteristics<a class="headerlink" href="#performance-characteristics" title="Permanent link">&para;</a></h2>
 <ul>
 <li><strong>Webhook Response Time:</strong> &lt; 100ms (async processing)</li>
 <li><strong>Transformation Speed:</strong> &lt; 10ms for typical payloads</li>
 <li><strong>Auto-Forward Latency:</strong> 1-3s (includes external API call)</li>
 <li><strong>Concurrent Webhooks:</strong> Unlimited (async processing)</li>
 </ul>
-<h2 id="limitations-future-enhancements">Limitations &amp; Future Enhancements</h2>
-<h3 id="current-limitations">Current Limitations</h3>
+<h2 id="limitations-future-enhancements">Limitations &amp; Future Enhancements<a class="headerlink" href="#limitations-future-enhancements" title="Permanent link">&para;</a></h2>
+<h3 id="current-limitations">Current Limitations<a class="headerlink" href="#current-limitations" title="Permanent link">&para;</a></h3>
 <ol>
 <li><strong>No Array Indexing:</strong> Transform rules don't support <code>items[0].field</code> syntax</li>
 <li>Workaround: Use first-level fields only</li>
@@ -477,7 +510,7 @@ X-Webhook-Source: Optional-Identifier
 <li>Workaround: Chain multiple bridge pairs</li>
 <li>Future: Add workflow builder with multi-step flows</li>
 </ol>
-<h3 id="planned-enhancements">Planned Enhancements</h3>
+<h3 id="planned-enhancements">Planned Enhancements<a class="headerlink" href="#planned-enhancements" title="Permanent link">&para;</a></h3>
 <ul>
 <li>[ ] Array indexing in transformation rules</li>
 <li>[ ] Transformation functions (format, calculate, concatenate)</li>
@@ -486,8 +519,8 @@ X-Webhook-Source: Optional-Identifier
 <li>[ ] Visual transformation rule builder</li>
 <li>[ ] Transformation testing/preview UI</li>
 </ul>
-<h2 id="files-modified">Files Modified</h2>
-<h3 id="created-files">Created Files</h3>
+<h2 id="files-modified">Files Modified<a class="headerlink" href="#files-modified" title="Permanent link">&para;</a></h2>
+<h3 id="created-files">Created Files<a class="headerlink" href="#created-files" title="Permanent link">&para;</a></h3>
 <ul>
 <li><code>web/webhook-tester.html</code> - Webhook testing interface</li>
 <li><code>web/src/webhookTester.js</code> - Testing tool logic</li>
@@ -495,32 +528,32 @@ X-Webhook-Source: Optional-Identifier
 <li><code>api/tests/phase4-e2e.integration.js</code> - End-to-end test suite</li>
 <li><code>docs/PHASE4-COMPLETE.md</code> - This documentation</li>
 </ul>
-<h3 id="modified-files">Modified Files</h3>
+<h3 id="modified-files">Modified Files<a class="headerlink" href="#modified-files" title="Permanent link">&para;</a></h3>
 <ul>
 <li><code>web/src/canvas.js</code> - Added webhook tester navigation</li>
 <li><code>prisma/schema.prisma</code> - Added bridge flow fields</li>
 <li><code>api/handlers/webhooks.js</code> - Added auto-forward logic</li>
 <li><code>api/handlers/bridges.js</code> - Added flow config support</li>
 </ul>
-<h3 id="database-migration">Database Migration</h3>
+<h3 id="database-migration">Database Migration<a class="headerlink" href="#database-migration" title="Permanent link">&para;</a></h3>
 <ul>
 <li><code>prisma/migrations/20251217180918_add_bridge_flow_config/</code></li>
 </ul>
-<h2 id="success-metrics">Success Metrics</h2>
+<h2 id="success-metrics">Success Metrics<a class="headerlink" href="#success-metrics" title="Permanent link">&para;</a></h2>
 <p>✅ <strong>Webhook → API Flow Working:</strong> Complete end-to-end flow tested and verified
 ✅ <strong>Data Transformation:</strong> Field mapping with dot notation working
 ✅ <strong>Testing Tool:</strong> Webhook tester built and functional
 ✅ <strong>Documentation:</strong> Complete usage guide with examples
 ✅ <strong>E2E Tests:</strong> Automated test suite passing
 ✅ <strong>Timeline:</strong> Completed in ~4 hours as planned</p>
-<h2 id="next-phase">Next Phase</h2>
+<h2 id="next-phase">Next Phase<a class="headerlink" href="#next-phase" title="Permanent link">&para;</a></h2>
 <p><strong>Phase 5 Options:</strong>
 1. <strong>Visual Workflow Builder</strong> - Drag-and-drop flow designer
 2. <strong>Advanced Transformations</strong> - Functions, conditionals, loops
 3. <strong>Multi-Destination Forwarding</strong> - Send to multiple APIs
 4. <strong>Enterprise Features</strong> - Rate limiting, quotas, SLA monitoring
 5. <strong>Partner Marketplace</strong> - Pre-built integrations catalog</p>
-<h2 id="conclusion">Conclusion</h2>
+<h2 id="conclusion">Conclusion<a class="headerlink" href="#conclusion" title="Permanent link">&para;</a></h2>
 <p>Phase 4 successfully transforms BridgeFlow into a <strong>production-ready data integration platform</strong>. The system can now handle real-world webhook → API scenarios with automatic transformation, making it suitable for:</p>
 <ul>
 <li>E-commerce order fulfillment</li>

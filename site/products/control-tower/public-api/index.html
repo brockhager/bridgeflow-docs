@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="../../../css/theme.css" />
     <link rel="stylesheet" href="../../../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../../../stylesheets/extra.css" rel="stylesheet" />
     
       <script>
         // Current page data
@@ -43,7 +44,16 @@
                 <li class="toctree-l1"><a class="reference internal" href="../../..">Home</a>
                 </li>
               </ul>
-              <p class="caption"><span class="caption-text">Products</span></p>
+              <p class="caption"><span class="caption-text">Start Here</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../ONBOARDING/">Onboarding</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../ARCHITECTURE/">Architecture</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../api-reference/">API Reference Hub</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Product Suite</span></p>
               <ul class="current">
                   <li class="toctree-l1"><a class="reference internal" href="../../">Overview</a>
                   </li>
@@ -78,7 +88,7 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../tracking-portal/">Tracking Portal</a>
                   </li>
               </ul>
-              <p class="caption"><span class="caption-text">Platform</span></p>
+              <p class="caption"><span class="caption-text">Platform Services</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../../platform/">Overview</a>
                   </li>
@@ -99,12 +109,35 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../../platform/bf-warehouse/">Warehouse Service</a>
                   </li>
               </ul>
+              <p class="caption"><span class="caption-text">Capability Catalog</span></p>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../../../vision/bf-integration/">Vision</a>
-                </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../features/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../features/SHIPMENTS/">Shipments</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../features/ADMIN_CONSOLE/">Admin Console</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../features/CONTROL_TOWER/">Control Tower</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../features/IDENTITY/">Identity</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../features/MASTERDATA/">Masterdata</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../features/ORDERS/">Orders</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../features/WAREHOUSE/">Warehouse</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../features/SEARCH/">Search</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../features/FINTECH/">Fintech</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../features/CARRIER_PORTAL/">Carrier Portal</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../features/TRACKING_PORTAL/">Tracking Portal</a>
+                  </li>
               </ul>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../../../api-reference/">API Reference</a>
+                <li class="toctree-l1"><a class="reference internal" href="../../../vision/bf-integration/">Vision Archive</a>
                 </li>
               </ul>
       </div>
@@ -121,7 +154,7 @@
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
     <li><a href="../../.." class="icon icon-home" aria-label="Docs"></a></li>
-          <li class="breadcrumb-item">Products</li>
+          <li class="breadcrumb-item">Product Suite</li>
       <li class="breadcrumb-item active">Public API</li>
     <li class="wy-breadcrumbs-aside">
     </li>
@@ -131,17 +164,17 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <h1 id="control-tower-api-reference">Control Tower API Reference</h1>
+                <h1 id="control-tower-api-reference">Control Tower API Reference<a class="headerlink" href="#control-tower-api-reference" title="Permanent link">&para;</a></h1>
 <p>Base URL:
 - <code>https://control-tower.up.railway.app</code></p>
-<h2 id="1-public-resilience-status">1. Public Resilience Status</h2>
+<h2 id="1-public-resilience-status">1. Public Resilience Status<a class="headerlink" href="#1-public-resilience-status" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Endpoint: <code>GET /api/v1/public/resilience-status</code></li>
 <li>Auth: None</li>
 <li>Rate limit: <code>PUBLIC_API_RATE_LIMIT</code> (default 60 req/min/IP)</li>
 <li>Purpose: Public-safe resilience snapshot</li>
 </ul>
-<h3 id="response-shape">Response Shape</h3>
+<h3 id="response-shape">Response Shape<a class="headerlink" href="#response-shape" title="Permanent link">&para;</a></h3>
 <pre><code class="language-json">{
   &quot;system_health&quot;: &quot;OPERATIONAL&quot;,
   &quot;current_risk_level&quot;: &quot;LOW&quot;,
@@ -159,14 +192,14 @@
   ]
 }
 </code></pre>
-<h3 id="error-model">Error Model</h3>
+<h3 id="error-model">Error Model<a class="headerlink" href="#error-model" title="Permanent link">&para;</a></h3>
 <pre><code class="language-json">{
   &quot;error&quot;: &quot;RATE_LIMIT_EXCEEDED&quot;,
   &quot;message&quot;: &quot;Too many requests. Please try again in 1 minute.&quot;,
   &quot;retry_after&quot;: 60
 }
 </code></pre>
-<h2 id="2-event-ingestion-api">2. Event Ingestion API</h2>
+<h2 id="2-event-ingestion-api">2. Event Ingestion API<a class="headerlink" href="#2-event-ingestion-api" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Endpoint: <code>POST /api/control/events</code></li>
 <li>Auth: Bearer token integration model</li>

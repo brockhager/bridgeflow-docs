@@ -1,23 +1,16 @@
-# Product: Carrier Portal
+# Carrier Portal
 
-## Purpose
-
-Carrier-facing portal for operational interactions and workflow access.
+Carrier-facing product for tender actions, shipment visibility, and execution workflows.
 
 ## Status
 
-Development.
+Development (no stable public endpoint documented yet).
 
-## Primary Endpoint
+## Integrations
 
-Not yet documented as a stable public deployment endpoint.
+- Auth and user context via `bf-identity`
+- Shipment workflow data via `bf-shipments`
 
 ## Repository
 
-- `https://github.com/brockhager/bf-carrier-portal`
-
-## Notes
-
-Repository code references:
-- identity login flow via `bf-identity`
-- shipment data integration via `bf-shipments`
+- https://github.com/brockhager/bf-carrier-portal

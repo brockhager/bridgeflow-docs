@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="../../css/theme.css" />
     <link rel="stylesheet" href="../../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../../stylesheets/extra.css" rel="stylesheet" />
     
       <script>
         // Current page data
@@ -43,7 +44,16 @@
                 <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
                 </li>
               </ul>
-              <p class="caption"><span class="caption-text">Products</span></p>
+              <p class="caption"><span class="caption-text">Start Here</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../ONBOARDING/">Onboarding</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../ARCHITECTURE/">Architecture</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../api-reference/">API Reference Hub</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Product Suite</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../products/">Overview</a>
                   </li>
@@ -66,7 +76,7 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../products/tracking-portal/">Tracking Portal</a>
                   </li>
               </ul>
-              <p class="caption"><span class="caption-text">Platform</span></p>
+              <p class="caption"><span class="caption-text">Platform Services</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../platform/">Overview</a>
                   </li>
@@ -87,12 +97,35 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../platform/bf-warehouse/">Warehouse Service</a>
                   </li>
               </ul>
+              <p class="caption"><span class="caption-text">Capability Catalog</span></p>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../../vision/bf-integration/">Vision</a>
-                </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/SHIPMENTS/">Shipments</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/ADMIN_CONSOLE/">Admin Console</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/CONTROL_TOWER/">Control Tower</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/IDENTITY/">Identity</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/MASTERDATA/">Masterdata</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/ORDERS/">Orders</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/WAREHOUSE/">Warehouse</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/SEARCH/">Search</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/FINTECH/">Fintech</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/CARRIER_PORTAL/">Carrier Portal</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/TRACKING_PORTAL/">Tracking Portal</a>
+                  </li>
               </ul>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../../api-reference/">API Reference</a>
+                <li class="toctree-l1"><a class="reference internal" href="../../vision/bf-integration/">Vision Archive</a>
                 </li>
               </ul>
       </div>
@@ -118,14 +151,14 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <h1 id="layer-3-data-mapping-quickbooks-purchase-orders">Layer 3 — Data Mapping: QuickBooks Purchase Orders</h1>
+                <h1 id="layer-3-data-mapping-quickbooks-purchase-orders">Layer 3 — Data Mapping: QuickBooks Purchase Orders<a class="headerlink" href="#layer-3-data-mapping-quickbooks-purchase-orders" title="Permanent link">&para;</a></h1>
 <p>This document explains how QuickBooks Online (QBO) Purchase Orders are mapped into BridgeFlow's Layer 3 Data Mapping Layer.
 It documents the mapping choices, validation, template alignment with CSV mailbox, and suggestions for future mapping extensions.</p>
-<h2 id="goal">Goal</h2>
+<h2 id="goal">Goal<a class="headerlink" href="#goal" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Ensure QBO-sourced Purchase Orders are normalized to the same internal schema used by CSV mailbox ingestion so downstream mapping, validation, and delivery pipelines are unified and reusable.</li>
 </ul>
-<h2 id="input-qbo-purchaseorder">Input (QBO PurchaseOrder)</h2>
+<h2 id="input-qbo-purchaseorder">Input (QBO PurchaseOrder)<a class="headerlink" href="#input-qbo-purchaseorder" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Typical relevant fields:</li>
 <li><code>Id</code> (TxnId) — primary identifier</li>
@@ -133,7 +166,7 @@ It documents the mapping choices, validation, template alignment with CSV mailbo
 <li><code>EntityRef.value</code> — vendor id</li>
 <li><code>Line[]</code> — line items (various detail types: <code>ItemBasedExpenseLineDetail</code>, <code>SalesItemLineDetail</code>, etc.)</li>
 </ul>
-<h2 id="internal-target-schema-same-as-csv-mailbox">Internal Target Schema (same as CSV mailbox)</h2>
+<h2 id="internal-target-schema-same-as-csv-mailbox">Internal Target Schema (same as CSV mailbox)<a class="headerlink" href="#internal-target-schema-same-as-csv-mailbox" title="Permanent link">&para;</a></h2>
 <ul>
 <li><code>purchaseOrderId</code> (string) — prefer <code>DocNumber</code> when available; fall back to <code>Id</code></li>
 <li><code>vendorId</code> (string) — maps from <code>EntityRef.value</code></li>
@@ -143,7 +176,7 @@ It documents the mapping choices, validation, template alignment with CSV mailbo
 <li><code>unitPrice</code> (number|null)</li>
 </ul>
 <p>Rationale: Aligning with CSV shape means existing mapping templates and validation rules are applied unchanged.</p>
-<h2 id="qbotointernal-mapping-rules">qboToInternal Mapping Rules</h2>
+<h2 id="qbotointernal-mapping-rules">qboToInternal Mapping Rules<a class="headerlink" href="#qbotointernal-mapping-rules" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Use <code>DocNumber</code> as <code>purchaseOrderId</code> when provided, else <code>Id</code></li>
 <li>For each <code>Line</code>:</li>
@@ -161,28 +194,28 @@ It documents the mapping choices, validation, template alignment with CSV mailbo
 </li>
 <li>Otherwise, use best-effort mapping from <code>ItemRef</code>/<code>Quantity</code>/<code>Amount</code></li>
 </ul>
-<h2 id="validation-mapping-templates">Validation &amp; Mapping Templates</h2>
+<h2 id="validation-mapping-templates">Validation &amp; Mapping Templates<a class="headerlink" href="#validation-mapping-templates" title="Permanent link">&para;</a></h2>
 <ul>
 <li>After mapping, the payload is fed into existing Mapping &amp; Validation layers (Layer 3):</li>
 <li>Reuse CSV mapping templates for <code>purchase_order</code> where possible</li>
 <li>Validation rules apply identically (e.g., required fields, format checks)</li>
 </ul>
-<h2 id="idempotency-interaction">Idempotency Interaction</h2>
+<h2 id="idempotency-interaction">Idempotency Interaction<a class="headerlink" href="#idempotency-interaction" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Each mapped PO is assigned an idempotency key <code>qbo_po:&lt;Id&gt;</code> at the producer (Layer 2) before enqueuing to the raw stream.</li>
 <li>Layer 3 mapping/worker components do not need to re-compute idempotency — they rely on Phase 18 deduplication logic and stored IdempotencyKey records.</li>
 </ul>
-<h2 id="extensibility">Extensibility</h2>
+<h2 id="extensibility">Extensibility<a class="headerlink" href="#extensibility" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Add support for additional QBO objects (Invoices, Bills) by creating <code>qboToInternal</code> mappers for each object and adding new <code>source</code> fields on the raw stream.</li>
 <li>Consider adding a richer line-level mapping that preserves QBO detail types for advanced mappings in the admin UI.</li>
 </ul>
-<h2 id="testing">Testing</h2>
+<h2 id="testing">Testing<a class="headerlink" href="#testing" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Unit tests for <code>qboToInternal</code> must cover: varied line detail types, missing fields, and fallbacks.</li>
 <li>Integration tests should validate end-to-end: QBO response → mapping → enqueue → downstream processing.</li>
 </ul>
-<h2 id="files-references">Files &amp; References</h2>
+<h2 id="files-references">Files &amp; References<a class="headerlink" href="#files-references" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Implementation: <code>api/lib/qboToInternal.js</code></li>
 <li>Mapping unit test: <code>test/api/qboToInternal.test.js</code></li>

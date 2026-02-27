@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="../../css/theme.css" />
     <link rel="stylesheet" href="../../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../../stylesheets/extra.css" rel="stylesheet" />
     
       <script>
         // Current page data
@@ -43,7 +44,16 @@
                 <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
                 </li>
               </ul>
-              <p class="caption"><span class="caption-text">Products</span></p>
+              <p class="caption"><span class="caption-text">Start Here</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../ONBOARDING/">Onboarding</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../ARCHITECTURE/">Architecture</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../api-reference/">API Reference Hub</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Product Suite</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../products/">Overview</a>
                   </li>
@@ -66,7 +76,7 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../products/tracking-portal/">Tracking Portal</a>
                   </li>
               </ul>
-              <p class="caption"><span class="caption-text">Platform</span></p>
+              <p class="caption"><span class="caption-text">Platform Services</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../platform/">Overview</a>
                   </li>
@@ -87,12 +97,35 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../platform/bf-warehouse/">Warehouse Service</a>
                   </li>
               </ul>
+              <p class="caption"><span class="caption-text">Capability Catalog</span></p>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../../vision/bf-integration/">Vision</a>
-                </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/SHIPMENTS/">Shipments</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/ADMIN_CONSOLE/">Admin Console</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/CONTROL_TOWER/">Control Tower</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/IDENTITY/">Identity</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/MASTERDATA/">Masterdata</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/ORDERS/">Orders</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/WAREHOUSE/">Warehouse</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/SEARCH/">Search</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/FINTECH/">Fintech</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/CARRIER_PORTAL/">Carrier Portal</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/TRACKING_PORTAL/">Tracking Portal</a>
+                  </li>
               </ul>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../../api-reference/">API Reference</a>
+                <li class="toctree-l1"><a class="reference internal" href="../../vision/bf-integration/">Vision Archive</a>
                 </li>
               </ul>
       </div>
@@ -118,48 +151,48 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <h1 id="railway-postgresql-setup-complete">Railway PostgreSQL Setup - Complete ✅</h1>
-<h2 id="summary">Summary</h2>
+                <h1 id="railway-postgresql-setup-complete">Railway PostgreSQL Setup - Complete ✅<a class="headerlink" href="#railway-postgresql-setup-complete" title="Permanent link">&para;</a></h1>
+<h2 id="summary">Summary<a class="headerlink" href="#summary" title="Permanent link">&para;</a></h2>
 <p>BridgeFlow is now configured to use Railway PostgreSQL as the production/staging database. All migrations have been applied and the system is operational.</p>
-<h2 id="connection-details">Connection Details</h2>
+<h2 id="connection-details">Connection Details<a class="headerlink" href="#connection-details" title="Permanent link">&para;</a></h2>
 <p><strong>Database</strong>: Railway PostgreSQL
 <strong>Host</strong>: <code>gondola.proxy.rlwy.net:42013</code>
 <strong>Database Name</strong>: <code>railway</code>
 <strong>Connection String</strong>: Stored in <code>.env</code> and GitHub Secrets as <code>STAGING_DATABASE_URL</code></p>
-<h2 id="what-was-configured">What Was Configured</h2>
-<h3 id="1-environment-variables">1. Environment Variables</h3>
+<h2 id="what-was-configured">What Was Configured<a class="headerlink" href="#what-was-configured" title="Permanent link">&para;</a></h2>
+<h3 id="1-environment-variables">1. Environment Variables<a class="headerlink" href="#1-environment-variables" title="Permanent link">&para;</a></h3>
 <p><strong>Local Development</strong> (<code>.env</code>):</p>
 <pre><code class="language-env">DATABASE_URL=&quot;postgresql://postgres:***@gondola.proxy.rlwy.net:42013/railway&quot;
 NODE_ENV=&quot;staging&quot;
 </code></pre>
 <p><strong>CI/CD</strong> (GitHub Secrets):
 - <code>STAGING_DATABASE_URL</code>: Railway connection string (already configured)</p>
-<h3 id="2-database-schema">2. Database Schema</h3>
+<h3 id="2-database-schema">2. Database Schema<a class="headerlink" href="#2-database-schema" title="Permanent link">&para;</a></h3>
 <p>All Prisma migrations have been applied to Railway:
 - ✅ 3 migrations applied successfully
 - ✅ Database schema is up to date
 - ✅ Tables created: Entity, Resource, DeliveryJob, DeliveryTask, Invoice, AuditLog</p>
-<h3 id="3-current-database-state">3. Current Database State</h3>
+<h3 id="3-current-database-state">3. Current Database State<a class="headerlink" href="#3-current-database-state" title="Permanent link">&para;</a></h3>
 <p>As of 2025-12-16:
 - <strong>Entities</strong>: 100 (from CI seed runs)
 - <strong>Resources</strong>: 100 (from CI seed runs)
 - <strong>Delivery Jobs</strong>: 31+ (test jobs)
 - <strong>Audit Logs</strong>: 225+
 - <strong>Invoices</strong>: Generating on successful jobs</p>
-<h3 id="4-verification-steps-completed">4. Verification Steps Completed</h3>
+<h3 id="4-verification-steps-completed">4. Verification Steps Completed<a class="headerlink" href="#4-verification-steps-completed" title="Permanent link">&para;</a></h3>
 <p>✅ <strong>Connection Test</strong>: Successfully connected to Railway DB
 ✅ <strong>Migration Status</strong>: All migrations applied, schema up to date
 ✅ <strong>Data Persistence</strong>: Jobs created via API persist in Railway
 ✅ <strong>Worker Processing</strong>: Dev worker processes jobs from Railway DB
 ✅ <strong>Foreign Keys</strong>: Constraints working correctly
 ✅ <strong>API Endpoints</strong>: All endpoints work with Railway DB</p>
-<h3 id="5-test-results">5. Test Results</h3>
+<h3 id="5-test-results">5. Test Results<a class="headerlink" href="#5-test-results" title="Permanent link">&para;</a></h3>
 <p><strong>Unit Tests</strong> (Mock DB): 6/6 passing ✅
 <strong>API Test</strong>: Job creation successful ✅
 <strong>Worker Test</strong>: Jobs processed correctly ✅
 <strong>Data Persistence</strong>: Verified in Railway dashboard ✅</p>
-<h2 id="usage">Usage</h2>
-<h3 id="starting-the-server">Starting the Server</h3>
+<h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
+<h3 id="starting-the-server">Starting the Server<a class="headerlink" href="#starting-the-server" title="Permanent link">&para;</a></h3>
 <p><strong>Development Mode</strong> (with dev worker):</p>
 <pre><code class="language-bash"># PowerShell
 $env:NODE_ENV=&quot;development&quot;
@@ -176,7 +209,7 @@ node api/server.js
 # Bash
 NODE_ENV=production node api/server.js
 </code></pre>
-<h3 id="running-migrations">Running Migrations</h3>
+<h3 id="running-migrations">Running Migrations<a class="headerlink" href="#running-migrations" title="Permanent link">&para;</a></h3>
 <p><strong>Deploy migrations to Railway</strong>:</p>
 <pre><code class="language-bash">pnpm exec prisma migrate deploy --schema prisma/schema.prisma
 </code></pre>
@@ -186,7 +219,7 @@ NODE_ENV=production node api/server.js
 <p><strong>Create new migration</strong> (dev only):</p>
 <pre><code class="language-bash">pnpm exec prisma migrate dev --name description_here --schema prisma/schema.prisma
 </code></pre>
-<h3 id="database-management">Database Management</h3>
+<h3 id="database-management">Database Management<a class="headerlink" href="#database-management" title="Permanent link">&para;</a></h3>
 <p><strong>View data with Prisma Studio</strong>:</p>
 <pre><code class="language-bash">pnpm exec prisma studio --schema prisma/schema.prisma
 </code></pre>
@@ -196,7 +229,7 @@ NODE_ENV=production node api/server.js
 <p><strong>Clean up old test data</strong>:</p>
 <pre><code class="language-bash">pnpm exec cross-env CLEANUP=true node scripts/cleanup-railway-db.js
 </code></pre>
-<h2 id="cicd-integration">CI/CD Integration</h2>
+<h2 id="cicd-integration">CI/CD Integration<a class="headerlink" href="#cicd-integration" title="Permanent link">&para;</a></h2>
 <p>The CI/CD pipeline is configured to use Railway PostgreSQL:</p>
 <ol>
 <li><strong>Workflow</strong>: <code>.github/workflows/migrate.yml</code></li>
@@ -208,8 +241,8 @@ NODE_ENV=production node api/server.js
 <li>Verify schema</li>
 </ol>
 <p><strong>All CI jobs now run against Railway instead of local Postgres service.</strong></p>
-<h2 id="mock-db-vs-railway-db">Mock DB vs Railway DB</h2>
-<h3 id="mock-db-developmenttesting">Mock DB (Development/Testing)</h3>
+<h2 id="mock-db-vs-railway-db">Mock DB vs Railway DB<a class="headerlink" href="#mock-db-vs-railway-db" title="Permanent link">&para;</a></h2>
+<h3 id="mock-db-developmenttesting">Mock DB (Development/Testing)<a class="headerlink" href="#mock-db-developmenttesting" title="Permanent link">&para;</a></h3>
 <pre><code class="language-bash"># Use in-memory mock DB
 $env:USE_MOCK_DB=&quot;true&quot;
 node scripts/test-email-flow.js
@@ -218,7 +251,7 @@ node scripts/test-email-flow.js
 - Unit tests (<code>pnpm test</code>)
 - Local development without DB
 - Fast, isolated testing</p>
-<h3 id="railway-db-stagingproduction">Railway DB (Staging/Production)</h3>
+<h3 id="railway-db-stagingproduction">Railway DB (Staging/Production)<a class="headerlink" href="#railway-db-stagingproduction" title="Permanent link">&para;</a></h3>
 <pre><code class="language-bash"># Use Railway PostgreSQL
 # (no USE_MOCK_DB flag)
 node api/server.js
@@ -228,21 +261,21 @@ node api/server.js
 - Data persistence
 - Integration testing
 - CI/CD pipelines</p>
-<h2 id="switching-between-databases">Switching Between Databases</h2>
-<h3 id="use-railway-default">Use Railway (Default)</h3>
+<h2 id="switching-between-databases">Switching Between Databases<a class="headerlink" href="#switching-between-databases" title="Permanent link">&para;</a></h2>
+<h3 id="use-railway-default">Use Railway (Default)<a class="headerlink" href="#use-railway-default" title="Permanent link">&para;</a></h3>
 <pre><code class="language-bash"># Just run with .env configured
 node api/server.js
 </code></pre>
-<h3 id="use-mock-db">Use Mock DB</h3>
+<h3 id="use-mock-db">Use Mock DB<a class="headerlink" href="#use-mock-db" title="Permanent link">&para;</a></h3>
 <pre><code class="language-bash">$env:USE_MOCK_DB=&quot;true&quot;
 node api/server.js
 </code></pre>
-<h3 id="use-local-postgres">Use Local Postgres</h3>
+<h3 id="use-local-postgres">Use Local Postgres<a class="headerlink" href="#use-local-postgres" title="Permanent link">&para;</a></h3>
 <pre><code class="language-bash"># Update .env
 DATABASE_URL=&quot;postgresql://postgres:postgres@localhost:5432/postgres?schema=public&quot;
 node api/server.js
 </code></pre>
-<h2 id="important-notes">Important Notes</h2>
+<h2 id="important-notes">Important Notes<a class="headerlink" href="#important-notes" title="Permanent link">&para;</a></h2>
 <ol>
 <li><strong>Don't commit sensitive data</strong>: The <code>.env</code> file contains the Railway password and is gitignored</li>
 <li><strong>CI/CD uses Railway</strong>: GitHub Actions runs migrations against Railway DB via secret</li>
@@ -250,34 +283,34 @@ node api/server.js
 <li><strong>Foreign keys enforced</strong>: Railway enforces all Prisma relationship constraints</li>
 <li><strong>Data cleanup</strong>: Old test jobs should be cleaned up periodically to avoid clutter</li>
 </ol>
-<h2 id="troubleshooting">Troubleshooting</h2>
-<h3 id="connection-issues">Connection Issues</h3>
+<h2 id="troubleshooting">Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permanent link">&para;</a></h2>
+<h3 id="connection-issues">Connection Issues<a class="headerlink" href="#connection-issues" title="Permanent link">&para;</a></h3>
 <p><strong>Problem</strong>: "Can't reach database server"</p>
 <pre><code class="language-bash"># Check if Railway DB is accessible
 node scripts/cleanup-railway-db.js
 </code></pre>
 <p><strong>Solution</strong>: Verify Railway database is running in the Railway dashboard</p>
-<h3 id="migration-issues">Migration Issues</h3>
+<h3 id="migration-issues">Migration Issues<a class="headerlink" href="#migration-issues" title="Permanent link">&para;</a></h3>
 <p><strong>Problem</strong>: "Migration failed"</p>
 <pre><code class="language-bash"># Check migration status
 pnpm exec prisma migrate status
 </code></pre>
 <p><strong>Solution</strong>: Ensure DATABASE_URL is correct and database is accessible</p>
-<h3 id="test-failures">Test Failures</h3>
+<h3 id="test-failures">Test Failures<a class="headerlink" href="#test-failures" title="Permanent link">&para;</a></h3>
 <p><strong>Problem</strong>: Tests failing with real DB</p>
 <pre><code class="language-bash"># Run tests with Mock DB
 pnpm test
 # (automatically uses USE_MOCK_DB=true)
 </code></pre>
 <p><strong>Solution</strong>: Tests are configured to use Mock DB by default</p>
-<h2 id="next-steps">Next Steps</h2>
+<h2 id="next-steps">Next Steps<a class="headerlink" href="#next-steps" title="Permanent link">&para;</a></h2>
 <ul>
 <li>✅ T-008 PostgreSQL Integration: <strong>COMPLETE</strong></li>
 <li>🔄 T-009 History Page: Next task</li>
 <li>🔄 T-010 Error Handling UI: Pending</li>
 <li>🔄 T-011 Basic Monitoring: Pending</li>
 </ul>
-<h2 id="additional-resources">Additional Resources</h2>
+<h2 id="additional-resources">Additional Resources<a class="headerlink" href="#additional-resources" title="Permanent link">&para;</a></h2>
 <ul>
 <li><a href="https://railway.app">Railway Dashboard</a></li>
 <li><a href="https://www.prisma.io/docs/concepts/components/prisma-migrate">Prisma Migrate Docs</a></li>

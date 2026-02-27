@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="../../../css/theme.css" />
     <link rel="stylesheet" href="../../../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../../../stylesheets/extra.css" rel="stylesheet" />
     
       <script>
         // Current page data
@@ -43,7 +44,16 @@
                 <li class="toctree-l1"><a class="reference internal" href="../../..">Home</a>
                 </li>
               </ul>
-              <p class="caption"><span class="caption-text">Products</span></p>
+              <p class="caption"><span class="caption-text">Start Here</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../ONBOARDING/">Onboarding</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../ARCHITECTURE/">Architecture</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../api-reference/">API Reference Hub</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Product Suite</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../../products/">Overview</a>
                   </li>
@@ -66,7 +76,7 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../../products/tracking-portal/">Tracking Portal</a>
                   </li>
               </ul>
-              <p class="caption"><span class="caption-text">Platform</span></p>
+              <p class="caption"><span class="caption-text">Platform Services</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../../platform/">Overview</a>
                   </li>
@@ -87,12 +97,35 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../../platform/bf-warehouse/">Warehouse Service</a>
                   </li>
               </ul>
+              <p class="caption"><span class="caption-text">Capability Catalog</span></p>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../../../vision/bf-integration/">Vision</a>
-                </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../features/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../features/SHIPMENTS/">Shipments</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../features/ADMIN_CONSOLE/">Admin Console</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../features/CONTROL_TOWER/">Control Tower</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../features/IDENTITY/">Identity</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../features/MASTERDATA/">Masterdata</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../features/ORDERS/">Orders</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../features/WAREHOUSE/">Warehouse</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../features/SEARCH/">Search</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../features/FINTECH/">Fintech</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../features/CARRIER_PORTAL/">Carrier Portal</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../features/TRACKING_PORTAL/">Tracking Portal</a>
+                  </li>
               </ul>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../../../api-reference/">API Reference</a>
+                <li class="toctree-l1"><a class="reference internal" href="../../../vision/bf-integration/">Vision Archive</a>
                 </li>
               </ul>
       </div>
@@ -118,12 +151,12 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <h1 id="phase-28-package-management-admin-ux-polish">Phase 28 — Package Management &amp; Admin UX Polish</h1>
+                <h1 id="phase-28-package-management-admin-ux-polish">Phase 28 — Package Management &amp; Admin UX Polish<a class="headerlink" href="#phase-28-package-management-admin-ux-polish" title="Permanent link">&para;</a></h1>
 <p><strong>Completed:</strong> January 8, 2026<br />
 <strong>Updated:</strong> January 8, 2026 (Phase 28.1 Admin UX Polish)</p>
 <p><strong>Summary:</strong> Phase 28 delivered comprehensive Package Management with full CRUD capabilities and professional admin UX polish. The implementation includes document ingestion with org/tenet scoping, real-time processing pipeline, admin management interfaces, and intuitive user experience with clear conceptual distinctions. Phase 28.1 added UX polish to eliminate confusion and ensure the admin interface is truly self-explanatory for bf_employees.</p>
-<h2 id="core-objectives-achieved">Core Objectives Achieved</h2>
-<h3 id="package-management-phase-280">Package Management (Phase 28.0)</h3>
+<h2 id="core-objectives-achieved">Core Objectives Achieved<a class="headerlink" href="#core-objectives-achieved" title="Permanent link">&para;</a></h2>
+<h3 id="package-management-phase-280">Package Management (Phase 28.0)<a class="headerlink" href="#package-management-phase-280" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Domain Model Refactoring</strong>: Successfully migrated from "Document" to "Package" for better EDI domain alignment</li>
 <li><strong>API Implementation</strong>: Complete CRUD operations with org/tenet validation (<code>/api/packages</code>)</li>
@@ -131,15 +164,15 @@
 <li><strong>Processing Pipeline</strong>: Automatic EDI 210 parsing, mapping, and ACK generation</li>
 <li><strong>Multi-tenancy</strong>: Proper organization and tenet scoping with RBAC enforcement</li>
 </ul>
-<h3 id="admin-ux-polish-phase-281">Admin UX Polish (Phase 28.1)</h3>
+<h3 id="admin-ux-polish-phase-281">Admin UX Polish (Phase 28.1)<a class="headerlink" href="#admin-ux-polish-phase-281" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Data Consistency</strong>: Fixed Dashboard/Tenet count mismatches with real-time stats</li>
 <li><strong>Workflow Integration</strong>: Seamless TP creation from Tenet detail pages</li>
 <li><strong>Conceptual Clarity</strong>: Added tooltips explaining Org vs Tenet vs Package differences</li>
 <li><strong>Professional Polish</strong>: Enhanced UI with helpful visual cues and consistent styling</li>
 </ul>
-<h2 id="recent-implementation">Recent Implementation</h2>
-<h3 id="phase-280-package-management-foundation">Phase 28.0: Package Management Foundation</h3>
+<h2 id="recent-implementation">Recent Implementation<a class="headerlink" href="#recent-implementation" title="Permanent link">&para;</a></h2>
+<h3 id="phase-280-package-management-foundation">Phase 28.0: Package Management Foundation<a class="headerlink" href="#phase-280-package-management-foundation" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Database Schema</strong>: Updated Prisma model from Document to Package with proper org/tenet relationships</li>
 <li><strong>API Endpoints</strong>: <code>POST /api/packages</code>, <code>GET /api/packages</code>, <code>GET /admin-api/packages</code></li>
@@ -147,15 +180,15 @@
 <li><strong>Main App Upload</strong>: Package upload interface at <code>/packages</code></li>
 <li><strong>Processing Pipeline</strong>: Automatic EDI parsing, canonical mapping, and ACK generation</li>
 </ul>
-<h3 id="phase-281-admin-ux-polish">Phase 28.1: Admin UX Polish</h3>
+<h3 id="phase-281-admin-ux-polish">Phase 28.1: Admin UX Polish<a class="headerlink" href="#phase-281-admin-ux-polish" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Dashboard Stats</strong>: Real-time tenet statistics from <code>/admin-api/tenets/stats</code></li>
 <li><strong>Tooltip System</strong>: Reusable tooltip component with clear explanations</li>
 <li><strong>Conceptual Clarity</strong>: Added info icons with hover tooltips to key headers</li>
 <li><strong>Workflow Optimization</strong>: Enhanced TP creation from Tenet pages with pre-filled data</li>
 </ul>
-<h2 id="core-deliverables-88">Core Deliverables (8/8)</h2>
-<h3 id="backend-implementation">Backend Implementation</h3>
+<h2 id="core-deliverables-88">Core Deliverables (8/8)<a class="headerlink" href="#core-deliverables-88" title="Permanent link">&para;</a></h2>
+<h3 id="backend-implementation">Backend Implementation<a class="headerlink" href="#backend-implementation" title="Permanent link">&para;</a></h3>
 <ol>
 <li><strong>Package Handlers</strong> (<code>api/handlers/packages.js</code>)</li>
 <li>Package creation with org/tenet validation</li>
@@ -179,7 +212,7 @@
 <li>Proper indexing for performance</li>
 <li>Migration from Document to Package</li>
 </ol>
-<h3 id="frontend-implementation">Frontend Implementation</h3>
+<h3 id="frontend-implementation">Frontend Implementation<a class="headerlink" href="#frontend-implementation" title="Permanent link">&para;</a></h3>
 <ol>
 <li><strong>Admin Package UI</strong> (<code>admin-bridgeflow/src/pages/Packages.jsx</code>)</li>
 <li>Package listing with search/filter capabilities</li>
@@ -221,30 +254,30 @@
 <li>Visual indicators and status badges</li>
 <li>Consistent navigation patterns</li>
 </ol>
-<h2 id="system-impact">System Impact</h2>
-<h3 id="package-management-ecosystem">Package Management Ecosystem</h3>
+<h2 id="system-impact">System Impact<a class="headerlink" href="#system-impact" title="Permanent link">&para;</a></h2>
+<h3 id="package-management-ecosystem">Package Management Ecosystem<a class="headerlink" href="#package-management-ecosystem" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Multi-tenant Architecture</strong>: Proper org/tenet scoping ensures data isolation</li>
 <li><strong>Processing Pipeline</strong>: Automatic EDI parsing, mapping, and acknowledgment generation</li>
 <li><strong>Admin Oversight</strong>: bf_employees can monitor and manage across all organizations</li>
 <li><strong>User Empowerment</strong>: Regular users can upload packages for their organizations</li>
 </ul>
-<h3 id="user-experience-transformation">User Experience Transformation</h3>
+<h3 id="user-experience-transformation">User Experience Transformation<a class="headerlink" href="#user-experience-transformation" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Clear Concepts</strong>: Tooltips explain Org/Tenet/Package differences</li>
 <li><strong>Consistent Data</strong>: All counts and statistics are accurate and synchronized</li>
 <li><strong>Seamless Workflows</strong>: Direct actions and intuitive navigation</li>
 <li><strong>Self-Service</strong>: Users can create and manage entities without confusion</li>
 </ul>
-<h3 id="admin-efficiency">Admin Efficiency</h3>
+<h3 id="admin-efficiency">Admin Efficiency<a class="headerlink" href="#admin-efficiency" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Reduced Training Time</strong>: Users understand concepts without documentation</li>
 <li><strong>Fewer Support Tickets</strong>: Clear UI reduces confusion and errors</li>
 <li><strong>Faster Workflows</strong>: Direct actions reduce navigation overhead</li>
 <li><strong>Better Decision Making</strong>: Clear data supports informed choices</li>
 </ul>
-<h2 id="technical-architecture">Technical Architecture</h2>
-<h3 id="api-layer">API Layer</h3>
+<h2 id="technical-architecture">Technical Architecture<a class="headerlink" href="#technical-architecture" title="Permanent link">&para;</a></h2>
+<h3 id="api-layer">API Layer<a class="headerlink" href="#api-layer" title="Permanent link">&para;</a></h3>
 <pre><code class="language-javascript">// web/src/routes/trading-partners.js
 // Added pending partners section with action buttons
 // Added success banner handling from URL params
@@ -254,23 +287,23 @@
 // Added partner fetching and form pre-filling
 // Added status update to ACTIVE on completion
 </code></pre>
-<h3 id="backend-changes">Backend Changes</h3>
+<h3 id="backend-changes">Backend Changes<a class="headerlink" href="#backend-changes" title="Permanent link">&para;</a></h3>
 <pre><code class="language-javascript">// api/handlers/tradingPartners.js
 // Already supported status updates in PUT endpoint
 // No changes required - existing API sufficient
 </code></pre>
-<h3 id="state-management-changes">State Management Changes</h3>
+<h3 id="state-management-changes">State Management Changes<a class="headerlink" href="#state-management-changes" title="Permanent link">&para;</a></h3>
 <pre><code class="language-javascript">// web/src/state/store.js
 // Updated _apiCreatePartner, _apiUpdatePartner, _apiDeletePartner
 // Return { error: true } instead of throwing exceptions
 // Prevents frontend crashes, enables graceful error handling
 </code></pre>
-<h3 id="test-coverage">Test Coverage</h3>
+<h3 id="test-coverage">Test Coverage<a class="headerlink" href="#test-coverage" title="Permanent link">&para;</a></h3>
 <pre><code class="language-javascript">// test/integration/partner-onboarding-e2e.test.js
 // Complete E2E validation of onboarding workflow
 // Tests: create PENDING → verify in list → update to ACTIVE → verify in active list
 </code></pre>
-<h2 id="user-flow">User Flow</h2>
+<h2 id="user-flow">User Flow<a class="headerlink" href="#user-flow" title="Permanent link">&para;</a></h2>
 <ol>
 <li><strong>Partner Discovery:</strong> Ingest system creates partner with <code>status: 'PENDING_ONBOARDING'</code></li>
 <li><strong>UI Display:</strong> User sees partner in "Pending Partners" section on <code>/trading-partners</code></li>
@@ -278,19 +311,19 @@
 <li><strong>Status Update:</strong> User submits form → partner status changes to <code>ACTIVE</code></li>
 <li><strong>Confirmation:</strong> User redirected back with success banner: "Partner profile completed successfully"</li>
 </ol>
-<h2 id="test-results">Test Results</h2>
+<h2 id="test-results">Test Results<a class="headerlink" href="#test-results" title="Permanent link">&para;</a></h2>
 <ul>
 <li><strong>Integration Suite:</strong> 43 tests passed, 15 skipped (no regressions)</li>
 <li><strong>Partner Onboarding E2E:</strong> ✅ Complete workflow validation</li>
 <li><strong>Error Handling:</strong> ✅ Prevents crashes, maintains UX</li>
 </ul>
-<h2 id="production-readiness">Production Readiness</h2>
+<h2 id="production-readiness">Production Readiness<a class="headerlink" href="#production-readiness" title="Permanent link">&para;</a></h2>
 <p>✅ <strong>UI Complete:</strong> Pending partners section, action buttons, success banners
 ✅ <strong>API Integration:</strong> Status updates work correctly
 ✅ <strong>Error Handling:</strong> Safe error patterns prevent crashes
 ✅ <strong>E2E Coverage:</strong> Full workflow validated
 ✅ <strong>Data Integrity:</strong> externalId preserved, status transitions atomic</p>
-<h2 id="demo-ready">Demo Ready</h2>
+<h2 id="demo-ready">Demo Ready<a class="headerlink" href="#demo-ready" title="Permanent link">&para;</a></h2>
 <pre><code class="language-bash"># Start API
 pnpm run api:start
 
@@ -300,18 +333,18 @@ pnpm run web:dev
 # Visit /trading-partners to see pending partners
 # Click &quot;Complete Profile&quot; to test workflow
 </code></pre>
-<h2 id="files-delivered">Files Delivered</h2>
+<h2 id="files-delivered">Files Delivered<a class="headerlink" href="#files-delivered" title="Permanent link">&para;</a></h2>
 <ul>
 <li><strong>Frontend:</strong> <code>web/src/routes/trading-partners.js</code>, <code>web/src/routes/trading-partners-create.js</code></li>
 <li><strong>State:</strong> <code>web/src/state/store.js</code></li>
 <li><strong>Tests:</strong> <code>test/integration/partner-onboarding-e2e.test.js</code></li>
 </ul>
-<h2 id="next-steps">Next Steps</h2>
+<h2 id="next-steps">Next Steps<a class="headerlink" href="#next-steps" title="Permanent link">&para;</a></h2>
 <ul>
 <li><strong>Phase 29:</strong> Activity stream (timeline view of partner events)</li>
 <li><strong>Phase 30:</strong> Advanced analytics (throughput charts, error rates)</li>
 </ul>
-<h2 id="outstanding">Outstanding</h2>
+<h2 id="outstanding">Outstanding<a class="headerlink" href="#outstanding" title="Permanent link">&para;</a></h2>
 <p>None - complete workflow implemented and tested.</content>
 <parameter name="filePath">C:\JS\bridgeflow\docs\phases\phases21-30\phase-28.md</p>
               

@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="../../../../../../css/theme.css" />
     <link rel="stylesheet" href="../../../../../../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../../../../../../stylesheets/extra.css" rel="stylesheet" />
     
       <script>
         // Current page data
@@ -43,7 +44,16 @@
                 <li class="toctree-l1"><a class="reference internal" href="../../../../../..">Home</a>
                 </li>
               </ul>
-              <p class="caption"><span class="caption-text">Products</span></p>
+              <p class="caption"><span class="caption-text">Start Here</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../ONBOARDING/">Onboarding</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../ARCHITECTURE/">Architecture</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../api-reference/">API Reference Hub</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Product Suite</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../../../../../products/">Overview</a>
                   </li>
@@ -66,7 +76,7 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../../../../../products/tracking-portal/">Tracking Portal</a>
                   </li>
               </ul>
-              <p class="caption"><span class="caption-text">Platform</span></p>
+              <p class="caption"><span class="caption-text">Platform Services</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../../../../../platform/">Overview</a>
                   </li>
@@ -87,12 +97,35 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../../../../../platform/bf-warehouse/">Warehouse Service</a>
                   </li>
               </ul>
+              <p class="caption"><span class="caption-text">Capability Catalog</span></p>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../../../../">Vision</a>
-                </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/SHIPMENTS/">Shipments</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/ADMIN_CONSOLE/">Admin Console</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/CONTROL_TOWER/">Control Tower</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/IDENTITY/">Identity</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/MASTERDATA/">Masterdata</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/ORDERS/">Orders</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/WAREHOUSE/">Warehouse</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/SEARCH/">Search</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/FINTECH/">Fintech</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/CARRIER_PORTAL/">Carrier Portal</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/TRACKING_PORTAL/">Tracking Portal</a>
+                  </li>
               </ul>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../../../../../../api-reference/">API Reference</a>
+                <li class="toctree-l1"><a class="reference internal" href="../../../../">Vision Archive</a>
                 </li>
               </ul>
       </div>
@@ -123,10 +156,10 @@
 Status: Planned / In Development
 Context: Original BF-INTEGRATION Vision (Pre-Phase 30)</p>
 </blockquote>
-<h1 id="phase-41-railway-deployment-configuration-complete-summary">Phase 41 — Railway Deployment Configuration — Complete Summary</h1>
+<h1 id="phase-41-railway-deployment-configuration-complete-summary">Phase 41 — Railway Deployment Configuration — Complete Summary<a class="headerlink" href="#phase-41-railway-deployment-configuration-complete-summary" title="Permanent link">&para;</a></h1>
 <p><strong>Status:</strong> ✅ Complete (January 13, 2026)</p>
 <p>Phase 41 focused on making BridgeFlow deployable to Railway with a small set of configuration and operational artifacts, and verifying build and runtime behavior.</p>
-<h2 id="final-configuration">Final Configuration</h2>
+<h2 id="final-configuration">Final Configuration<a class="headerlink" href="#final-configuration" title="Permanent link">&para;</a></h2>
 <ul>
 <li><code>railway.json</code></li>
 </ul>
@@ -145,14 +178,14 @@ Context: Original BF-INTEGRATION Vision (Pre-Phase 30)</p>
 <li><code>Procfile</code> — <code>web: node api/server.js</code></li>
 <li><code>.env.example</code> — updated with recommended variables for Railway (e.g., <code>DATABASE_URL</code>, <code>JWT_SECRET</code>, optional Vault vars)</li>
 </ul>
-<h2 id="build-verification">Build &amp; Verification</h2>
+<h2 id="build-verification">Build &amp; Verification<a class="headerlink" href="#build-verification" title="Permanent link">&para;</a></h2>
 <ul>
 <li>pnpm prisma generate — ✅ Prisma client generated</li>
 <li>pnpm build — ✅ Frontend bundled (195.7kb)</li>
 <li>Server startup — ✅ Listening on port 4000</li>
 <li>Static file serving — ✅ Configured in <code>api/server.js</code> (serves <code>web/dist</code>, SPA fallback)</li>
 </ul>
-<h2 id="files-added-updated">Files Added / Updated</h2>
+<h2 id="files-added-updated">Files Added / Updated<a class="headerlink" href="#files-added-updated" title="Permanent link">&para;</a></h2>
 <ul>
 <li><code>railway.json</code> (root) — Railway build &amp; deploy configuration (Nixpacks builder)</li>
 <li><code>Procfile</code> (root) — Web process definition (<code>web: node api/server.js</code>)</li>
@@ -160,7 +193,7 @@ Context: Original BF-INTEGRATION Vision (Pre-Phase 30)</p>
 <li><code>docs/deployment/RAILWAY.md</code> — Railway deployment runbook (this file)</li>
 <li><code>docs/phases/phases41-50/PHASE-41-COMPLETE-SUMMARY.md</code> — this summary</li>
 </ul>
-<h2 id="railway-dashboard-setup-runbook">Railway Dashboard Setup (runbook)</h2>
+<h2 id="railway-dashboard-setup-runbook">Railway Dashboard Setup (runbook)<a class="headerlink" href="#railway-dashboard-setup-runbook" title="Permanent link">&para;</a></h2>
 <ol>
 <li>Connect repository in Railway and select the <code>bridgeflow</code> repo/branch</li>
 <li>Add a PostgreSQL service and attach it (Railway will provide <code>DATABASE_URL</code>)</li>
@@ -173,7 +206,7 @@ Context: Original BF-INTEGRATION Vision (Pre-Phase 30)</p>
 <li>Deploy → Railway will run the <code>buildCommand</code> and start the server with <code>startCommand</code></li>
 <li>Verify <code>GET /health</code> and that the API serves the SPA at <code>/</code></li>
 </ol>
-<h2 id="strategic-impact">Strategic Impact</h2>
+<h2 id="strategic-impact">Strategic Impact<a class="headerlink" href="#strategic-impact" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Simplifies deploy-to-production step for customers evaluating BridgeFlow</li>
 <li>Ensures Prisma generation and frontend build are part of the Railway build pipeline</li>

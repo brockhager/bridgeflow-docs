@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="../../../../../../css/theme.css" />
     <link rel="stylesheet" href="../../../../../../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../../../../../../stylesheets/extra.css" rel="stylesheet" />
     
       <script>
         // Current page data
@@ -43,7 +44,16 @@
                 <li class="toctree-l1"><a class="reference internal" href="../../../../../..">Home</a>
                 </li>
               </ul>
-              <p class="caption"><span class="caption-text">Products</span></p>
+              <p class="caption"><span class="caption-text">Start Here</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../ONBOARDING/">Onboarding</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../ARCHITECTURE/">Architecture</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../api-reference/">API Reference Hub</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Product Suite</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../../../../../products/">Overview</a>
                   </li>
@@ -66,7 +76,7 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../../../../../products/tracking-portal/">Tracking Portal</a>
                   </li>
               </ul>
-              <p class="caption"><span class="caption-text">Platform</span></p>
+              <p class="caption"><span class="caption-text">Platform Services</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../../../../../platform/">Overview</a>
                   </li>
@@ -87,12 +97,35 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../../../../../platform/bf-warehouse/">Warehouse Service</a>
                   </li>
               </ul>
+              <p class="caption"><span class="caption-text">Capability Catalog</span></p>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../../../../">Vision</a>
-                </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/SHIPMENTS/">Shipments</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/ADMIN_CONSOLE/">Admin Console</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/CONTROL_TOWER/">Control Tower</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/IDENTITY/">Identity</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/MASTERDATA/">Masterdata</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/ORDERS/">Orders</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/WAREHOUSE/">Warehouse</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/SEARCH/">Search</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/FINTECH/">Fintech</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/CARRIER_PORTAL/">Carrier Portal</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/TRACKING_PORTAL/">Tracking Portal</a>
+                  </li>
               </ul>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../../../../../../api-reference/">API Reference</a>
+                <li class="toctree-l1"><a class="reference internal" href="../../../../">Vision Archive</a>
                 </li>
               </ul>
       </div>
@@ -123,14 +156,14 @@
 Status: Planned / In Development
 Context: Original BF-INTEGRATION Vision (Pre-Phase 30)</p>
 </blockquote>
-<h1 id="phase-31a-unified-adapter-framework">Phase 31A — Unified Adapter Framework</h1>
+<h1 id="phase-31a-unified-adapter-framework">Phase 31A — Unified Adapter Framework<a class="headerlink" href="#phase-31a-unified-adapter-framework" title="Permanent link">&para;</a></h1>
 <p><strong>Completed:</strong> January 8, 2026<br />
 <strong>Effort:</strong> 2-3 hours<br />
 <strong>Priority:</strong> High (customer integration foundation)</p>
-<h2 id="objective">🎯 Objective</h2>
+<h2 id="objective">🎯 Objective<a class="headerlink" href="#objective" title="Permanent link">&para;</a></h2>
 <p>Establish the foundational Layer 3 adapter framework with symmetric architecture, enabling both enterprise and free tier adapters to run from the same codebase with capabilities controlled by token permissions.</p>
-<h2 id="core-deliverables-44">📋 Core Deliverables (4/4)</h2>
-<h3 id="1-bridgeflowadapter-interface">✅ 1. BridgeFlowAdapter Interface</h3>
+<h2 id="core-deliverables-44">📋 Core Deliverables (4/4)<a class="headerlink" href="#core-deliverables-44" title="Permanent link">&para;</a></h2>
+<h3 id="1-bridgeflowadapter-interface">✅ 1. BridgeFlowAdapter Interface<a class="headerlink" href="#1-bridgeflowadapter-interface" title="Permanent link">&para;</a></h3>
 <p><strong>Unified Interface</strong>: Same interface for all adapter types
 - <strong>Common Lifecycle</strong>: <code>validateConfig</code>, <code>authenticate</code>, <code>initialize</code>, <code>healthCheck</code>
 - <strong>Onramp Methods</strong>: <code>onramp</code>, <code>monitorSource</code>, <code>stopMonitoring</code>
@@ -142,7 +175,7 @@ Context: Original BF-INTEGRATION Vision (Pre-Phase 30)</p>
 - <strong>Default Implementations</strong>: Monitoring, batch processing, cleanup
 - <strong>Error Handling</strong>: Consistent error patterns across all adapters
 - <strong>Logging</strong>: Unified logging for all tiers</p>
-<h3 id="2-permissionmanager-system">✅ 2. PermissionManager System</h3>
+<h3 id="2-permissionmanager-system">✅ 2. PermissionManager System<a class="headerlink" href="#2-permissionmanager-system" title="Permanent link">&para;</a></h3>
 <p><strong>Token-Based Authentication</strong>: Unified authentication for all tiers
 - <strong>Token Validation</strong>: JWT parsing and validation
 - <strong>Permission Checking</strong>: Capability gating based on token permissions
@@ -165,7 +198,7 @@ Context: Original BF-INTEGRATION Vision (Pre-Phase 30)</p>
   &quot;sponsorId&quot;: &quot;cust_a&quot;
 }
 </code></pre>
-<h3 id="3-fileadapter-implementation">✅ 3. FileAdapter Implementation</h3>
+<h3 id="3-fileadapter-implementation">✅ 3. FileAdapter Implementation<a class="headerlink" href="#3-fileadapter-implementation" title="Permanent link">&para;</a></h3>
 <p><strong>Symmetric Deployment</strong>: Same binary works for both tiers
 - <strong>Free Tier</strong>: File offramp only, basic validation
 - <strong>Enterprise</strong>: Full onramp/offramp with monitoring, custom transforms
@@ -180,7 +213,7 @@ Context: Original BF-INTEGRATION Vision (Pre-Phase 30)</p>
 | File Monitoring | ❌ | ✅ |
 | Custom Transforms | ❌ | ✅ |
 | Advanced Validation | ❌ | ✅ |</p>
-<h3 id="4-database-schema-foundation">✅ 4. Database Schema Foundation</h3>
+<h3 id="4-database-schema-foundation">✅ 4. Database Schema Foundation<a class="headerlink" href="#4-database-schema-foundation" title="Permanent link">&para;</a></h3>
 <p><strong>Unified Adapter Models</strong>: Support for all tiers in single schema
 - <strong>Adapter Model</strong>: Unified adapter registration
 - <strong>AdapterToken Model</strong>: Token-based authentication and permissions
@@ -188,8 +221,8 @@ Context: Original BF-INTEGRATION Vision (Pre-Phase 30)</p>
 - <strong>AdapterCapability Model</strong>: Tier-specific capability tracking
 - <strong>AdapterLog Model</strong>: Unified logging for all tiers
 - <strong>RLS Policies</strong>: Multi-tenant security with CTO access</p>
-<h2 id="technical-architecture">🏗️ <strong>Technical Architecture</strong></h2>
-<h3 id="symmetric-architecture-principle"><strong>Symmetric Architecture Principle</strong></h3>
+<h2 id="technical-architecture">🏗️ <strong>Technical Architecture</strong><a class="headerlink" href="#technical-architecture" title="Permanent link">&para;</a></h2>
+<h3 id="symmetric-architecture-principle"><strong>Symmetric Architecture Principle</strong><a class="headerlink" href="#symmetric-architecture-principle" title="Permanent link">&para;</a></h3>
 <pre><code>┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
 │   Customer A   │    │  BridgeFlow    │    │   Trading      │
 │   (Enterprise) │    │  Core         │    │   Partner      │
@@ -200,7 +233,7 @@ Context: Original BF-INTEGRATION Vision (Pre-Phase 30)</p>
 │ └───────────┘ │    │ └───────────┘ │    │ └───────────┘ │
 └─────────────────┘    └─────────────────┘    └─────────────────┘
 </code></pre>
-<h3 id="permission-based-capability-gating"><strong>Permission-Based Capability Gating</strong></h3>
+<h3 id="permission-based-capability-gating"><strong>Permission-Based Capability Gating</strong><a class="headerlink" href="#permission-based-capability-gating" title="Permanent link">&para;</a></h3>
 <pre><code class="language-typescript">class BridgeFlowAdapter {
   async onramp(source: DataSource): Promise&lt;PackagePayload&gt; {
     if (!this.hasPermission('onramp:*')) {
@@ -210,44 +243,44 @@ Context: Original BF-INTEGRATION Vision (Pre-Phase 30)</p>
   }
 }
 </code></pre>
-<h3 id="token-driven-feature-control"><strong>Token-Driven Feature Control</strong></h3>
+<h3 id="token-driven-feature-control"><strong>Token-Driven Feature Control</strong><a class="headerlink" href="#token-driven-feature-control" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>No Code Branching</strong>: Same codebase for all tiers</li>
 <li><strong>Runtime Capability</strong>: Features enabled/disabled by token permissions</li>
 <li><strong>Zero Reinstall</strong>: Upgrade by issuing new token</li>
 <li><strong>Unified Deployment</strong>: Single binary for all customers</li>
 </ul>
-<h2 id="security-model">🔐 <strong>Security Model</strong></h2>
-<h3 id="multi-tenant-architecture"><strong>Multi-Tenant Architecture</strong></h3>
+<h2 id="security-model">🔐 <strong>Security Model</strong><a class="headerlink" href="#security-model" title="Permanent link">&para;</a></h2>
+<h3 id="multi-tenant-architecture"><strong>Multi-Tenant Architecture</strong><a class="headerlink" href="#multi-tenant-architecture" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Organization Scoping</strong>: All adapters scoped to organization</li>
 <li><strong>RLS Policies</strong>: Database-level tenant isolation</li>
 <li><strong>CTO Access</strong>: Global view across all organizations</li>
 <li><strong>Audit Trail</strong>: Complete adapter activity logging</li>
 </ul>
-<h3 id="permission-system"><strong>Permission System</strong></h3>
+<h3 id="permission-system"><strong>Permission System</strong><a class="headerlink" href="#permission-system" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Granular Permissions</strong>: <code>onramp:file</code>, <code>offramp:api</code>, <code>transform:custom</code></li>
 <li><strong>Wildcard Support</strong>: <code>onramp:*</code> grants all onramp capabilities</li>
 <li><strong>Tier Restrictions</strong>: Free tier limited to file offramp</li>
 <li><strong>Sponsor Binding</strong>: Free TPs bound to enterprise sponsors</li>
 </ul>
-<h3 id="token-security"><strong>Token Security</strong></h3>
+<h3 id="token-security"><strong>Token Security</strong><a class="headerlink" href="#token-security" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>JWT Tokens</strong>: Secure token format with expiration</li>
 <li><strong>Permission Claims</strong>: Capabilities encoded in token</li>
 <li><strong>Sponsor Claims</strong>: Free tier sponsorship relationships</li>
 <li><strong>Version Control</strong>: Token versioning for compatibility</li>
 </ul>
-<h2 id="adapter-capabilities">📊 <strong>Adapter Capabilities</strong></h2>
-<h3 id="free-tier-capabilities"><strong>Free Tier Capabilities</strong></h3>
+<h2 id="adapter-capabilities">📊 <strong>Adapter Capabilities</strong><a class="headerlink" href="#adapter-capabilities" title="Permanent link">&para;</a></h2>
+<h3 id="free-tier-capabilities"><strong>Free Tier Capabilities</strong><a class="headerlink" href="#free-tier-capabilities" title="Permanent link">&para;</a></h3>
 <pre><code class="language-typescript">const freePermissions = [
   'offramp:file',
   'validate:basic',
   'monitor:file'
 ];
 </code></pre>
-<h3 id="enterprise-tier-capabilities"><strong>Enterprise Tier Capabilities</strong></h3>
+<h3 id="enterprise-tier-capabilities"><strong>Enterprise Tier Capabilities</strong><a class="headerlink" href="#enterprise-tier-capabilities" title="Permanent link">&para;</a></h3>
 <pre><code class="language-typescript">const enterprisePermissions = [
   'onramp:*',
   'offramp:*', 
@@ -257,7 +290,7 @@ Context: Original BF-INTEGRATION Vision (Pre-Phase 30)</p>
   'batch:*'
 ];
 </code></pre>
-<h3 id="permission-examples"><strong>Permission Examples</strong></h3>
+<h3 id="permission-examples"><strong>Permission Examples</strong><a class="headerlink" href="#permission-examples" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>File Operations</strong>: <code>onramp:file</code>, <code>offramp:file</code></li>
 <li><strong>Database Operations</strong>: <code>onramp:database</code>, <code>offramp:database</code></li>
@@ -265,44 +298,44 @@ Context: Original BF-INTEGRATION Vision (Pre-Phase 30)</p>
 <li><strong>Transformations</strong>: <code>transform:basic</code>, <code>transform:custom</code></li>
 <li><strong>Monitoring</strong>: <code>monitor:file</code>, <code>monitor:database</code>, <code>monitor:api</code></li>
 </ul>
-<h2 id="integration-points">🔄 <strong>Integration Points</strong></h2>
-<h3 id="phase-30-integration"><strong>Phase 30 Integration</strong></h3>
+<h2 id="integration-points">🔄 <strong>Integration Points</strong><a class="headerlink" href="#integration-points" title="Permanent link">&para;</a></h2>
+<h3 id="phase-30-integration"><strong>Phase 30 Integration</strong><a class="headerlink" href="#phase-30-integration" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Package Creation</strong>: Adapters create standardized packages</li>
 <li><strong>Protocol Processing</strong>: Connectors handle Layer 2 processing</li>
 <li><strong>Package Delivery</strong>: Both tiers receive processed packages</li>
 <li><strong>Status Tracking</strong>: End-to-end package lifecycle</li>
 </ul>
-<h3 id="phase-28-integration"><strong>Phase 28 Integration</strong></h3>
+<h3 id="phase-28-integration"><strong>Phase 28 Integration</strong><a class="headerlink" href="#phase-28-integration" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Tenet Application</strong>: Business rules during package creation</li>
 <li><strong>Package Management</strong>: Unified package lifecycle for all tiers</li>
 <li><strong>Statistics</strong>: Tier-aware statistics and monitoring</li>
 <li><strong>Admin Experience</strong>: Enterprise customers manage all adapters</li>
 </ul>
-<h3 id="phase-29-integration"><strong>Phase 29 Integration</strong></h3>
+<h3 id="phase-29-integration"><strong>Phase 29 Integration</strong><a class="headerlink" href="#phase-29-integration" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Organization Scoping</strong>: Enterprise customers manage their free TPs</li>
 <li><strong>Multi-Tenancy</strong>: Proper data isolation across tiers</li>
 <li><strong>CTO Access</strong>: Global view of all adapters and tiers</li>
 <li><strong>Security</strong>: Unified RBAC across enterprise and free tiers</li>
 </ul>
-<h2 id="files-delivered">📁 <strong>Files Delivered</strong></h2>
-<h3 id="core-framework"><strong>Core Framework</strong></h3>
+<h2 id="files-delivered">📁 <strong>Files Delivered</strong><a class="headerlink" href="#files-delivered" title="Permanent link">&para;</a></h2>
+<h3 id="core-framework"><strong>Core Framework</strong><a class="headerlink" href="#core-framework" title="Permanent link">&para;</a></h3>
 <ul>
 <li><code>api/lib/adapter/BridgeFlowAdapter.ts</code> - Unified adapter interface</li>
 <li><code>api/lib/adapter/PermissionManager.ts</code> - Token-based permission system</li>
 <li><code>api/lib/adapter/BaseAdapter.ts</code> - Base adapter implementation</li>
 </ul>
-<h3 id="adapter-implementations"><strong>Adapter Implementations</strong></h3>
+<h3 id="adapter-implementations"><strong>Adapter Implementations</strong><a class="headerlink" href="#adapter-implementations" title="Permanent link">&para;</a></h3>
 <ul>
 <li><code>api/lib/adapter/adapters/FileAdapter.ts</code> - File system adapter (both tiers)</li>
 </ul>
-<h3 id="database-schema"><strong>Database Schema</strong></h3>
+<h3 id="database-schema"><strong>Database Schema</strong><a class="headerlink" href="#database-schema" title="Permanent link">&para;</a></h3>
 <ul>
 <li><code>api/migrations/phase31-migration.sql</code> - Unified adapter database schema</li>
 </ul>
-<h3 id="models-added"><strong>Models Added</strong></h3>
+<h3 id="models-added"><strong>Models Added</strong><a class="headerlink" href="#models-added" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Adapter</strong> - Unified adapter registration</li>
 <li><strong>AdapterToken</strong> - Token-based authentication</li>
@@ -311,8 +344,8 @@ Context: Original BF-INTEGRATION Vision (Pre-Phase 30)</p>
 <li><strong>AdapterLog</strong> - Activity logging</li>
 <li><strong>AdapterStatistics</strong> - Performance metrics</li>
 </ul>
-<h2 id="success-criteria">🎯 <strong>Success Criteria</strong></h2>
-<h3 id="unified-architecture">✅ <strong>Unified Architecture</strong></h3>
+<h2 id="success-criteria">🎯 <strong>Success Criteria</strong><a class="headerlink" href="#success-criteria" title="Permanent link">&para;</a></h2>
+<h3 id="unified-architecture">✅ <strong>Unified Architecture</strong><a class="headerlink" href="#unified-architecture" title="Permanent link">&para;</a></h3>
 <ul>
 <li>[x] Single adapter binary works for both enterprise and free tiers</li>
 <li>[x] Token permissions control feature availability (no code branching)</li>
@@ -320,7 +353,7 @@ Context: Original BF-INTEGRATION Vision (Pre-Phase 30)</p>
 <li>[x] Configuration schema supports all tiers with optional fields</li>
 <li>[x] Logging and metrics work identically on both sides</li>
 </ul>
-<h3 id="tier-management">✅ <strong>Tier Management</strong></h3>
+<h3 id="tier-management">✅ <strong>Tier Management</strong><a class="headerlink" href="#tier-management" title="Permanent link">&para;</a></h3>
 <ul>
 <li>[x] Free trading partners can onboard with zero cost</li>
 <li>[x] Enterprise customers can manage free TP tokens via admin UI</li>
@@ -328,7 +361,7 @@ Context: Original BF-INTEGRATION Vision (Pre-Phase 30)</p>
 <li>[x] Feature discovery shows available capabilities based on token</li>
 <li>[x] Sponsor relationships properly enforced for free TPs</li>
 </ul>
-<h3 id="developer-experience">✅ <strong>Developer Experience</strong></h3>
+<h3 id="developer-experience">✅ <strong>Developer Experience</strong><a class="headerlink" href="#developer-experience" title="Permanent link">&para;</a></h3>
 <ul>
 <li>[x] Adapter SDK with unified interface for all tiers</li>
 <li>[x] Clear documentation for enterprise vs free tier capabilities</li>
@@ -336,24 +369,24 @@ Context: Original BF-INTEGRATION Vision (Pre-Phase 30)</p>
 <li>[x] Deployment is identical for all tiers</li>
 <li>[x] Performance monitoring works across all tiers</li>
 </ul>
-<h2 id="real-world-impact">🚀 <strong>Real-World Impact</strong></h2>
-<h3 id="customer-onboarding"><strong>Customer Onboarding</strong></h3>
+<h2 id="real-world-impact">🚀 <strong>Real-World Impact</strong><a class="headerlink" href="#real-world-impact" title="Permanent link">&para;</a></h2>
+<h3 id="customer-onboarding"><strong>Customer Onboarding</strong><a class="headerlink" href="#customer-onboarding" title="Permanent link">&para;</a></h3>
 <pre><code>Enterprise Customer: &quot;Add Partner&quot; → auto-issue free-tier token → send download link
 Free Trading Partner: Download agent → configure file drop → immediate value
 </code></pre>
-<h3 id="seamless-upgrades"><strong>Seamless Upgrades</strong></h3>
+<h3 id="seamless-upgrades"><strong>Seamless Upgrades</strong><a class="headerlink" href="#seamless-upgrades" title="Permanent link">&para;</a></h3>
 <pre><code>Free TP: File drop only
 ↓ (Token swap)
 Enterprise: Full database/API integration with custom transforms
 </code></pre>
-<h3 id="operational-efficiency"><strong>Operational Efficiency</strong></h3>
+<h3 id="operational-efficiency"><strong>Operational Efficiency</strong><a class="headerlink" href="#operational-efficiency" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Zero Reinstall</strong>: Same binary for all tiers</li>
 <li><strong>Unified Support</strong>: Single codebase to maintain</li>
 <li><strong>Consistent Experience</strong>: Same logging, monitoring, error handling</li>
 <li><strong>Scalable Architecture</strong>: Add new capabilities without new deployments</li>
 </ul>
-<h2 id="next-steps">📈 <strong>Next Steps</strong></h2>
+<h2 id="next-steps">📈 <strong>Next Steps</strong><a class="headerlink" href="#next-steps" title="Permanent link">&para;</a></h2>
 <p>Phase 31A establishes the foundation. Phase 31B will build intelligence on top:</p>
 <ul>
 <li><strong>Advanced Adapters</strong>: DatabaseAdapter, APIAdapter (enterprise only)</li>

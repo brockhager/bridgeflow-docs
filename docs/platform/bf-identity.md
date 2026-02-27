@@ -1,21 +1,21 @@
-# Service: bf-identity
+# Identity Service (`bf-identity`)
 
-## Purpose
-
-Authentication and authorization service (JWT issuance, user and role management, org scoping).
-
-## API Endpoint
-
-- Common base reference in workspace code: `https://bf-identity.up.railway.app`
-- Core endpoints:
-  - `POST /auth/login`
-  - `GET /health`
-  - `POST /users`
+Authentication and authorization service for JWT issuance, user management, and org scoping.
 
 ## Status
 
 Active.
 
+## Endpoint
+
+- https://bf-identity.up.railway.app
+
+## Key Routes
+
+- `POST /auth/login`
+- `GET /health`
+- `POST /users`
+
 ## Repository
 
-- `https://github.com/brockhager/bf-identity`
+- https://github.com/brockhager/bf-identity

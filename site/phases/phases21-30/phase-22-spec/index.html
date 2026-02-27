@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="../../../css/theme.css" />
     <link rel="stylesheet" href="../../../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../../../stylesheets/extra.css" rel="stylesheet" />
     
       <script>
         // Current page data
@@ -43,7 +44,16 @@
                 <li class="toctree-l1"><a class="reference internal" href="../../..">Home</a>
                 </li>
               </ul>
-              <p class="caption"><span class="caption-text">Products</span></p>
+              <p class="caption"><span class="caption-text">Start Here</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../ONBOARDING/">Onboarding</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../ARCHITECTURE/">Architecture</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../api-reference/">API Reference Hub</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Product Suite</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../../products/">Overview</a>
                   </li>
@@ -66,7 +76,7 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../../products/tracking-portal/">Tracking Portal</a>
                   </li>
               </ul>
-              <p class="caption"><span class="caption-text">Platform</span></p>
+              <p class="caption"><span class="caption-text">Platform Services</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../../platform/">Overview</a>
                   </li>
@@ -87,12 +97,35 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../../platform/bf-warehouse/">Warehouse Service</a>
                   </li>
               </ul>
+              <p class="caption"><span class="caption-text">Capability Catalog</span></p>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../../../vision/bf-integration/">Vision</a>
-                </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../features/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../features/SHIPMENTS/">Shipments</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../features/ADMIN_CONSOLE/">Admin Console</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../features/CONTROL_TOWER/">Control Tower</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../features/IDENTITY/">Identity</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../features/MASTERDATA/">Masterdata</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../features/ORDERS/">Orders</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../features/WAREHOUSE/">Warehouse</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../features/SEARCH/">Search</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../features/FINTECH/">Fintech</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../features/CARRIER_PORTAL/">Carrier Portal</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../features/TRACKING_PORTAL/">Tracking Portal</a>
+                  </li>
               </ul>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../../../api-reference/">API Reference</a>
+                <li class="toctree-l1"><a class="reference internal" href="../../../vision/bf-integration/">Vision Archive</a>
                 </li>
               </ul>
       </div>
@@ -118,14 +151,14 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <h1 id="phase-22-trading-partner-registration-system">Phase 22: Trading Partner Registration System</h1>
-<h2 id="goal">Goal</h2>
+                <h1 id="phase-22-trading-partner-registration-system">Phase 22: Trading Partner Registration System<a class="headerlink" href="#phase-22-trading-partner-registration-system" title="Permanent link">&para;</a></h1>
+<h2 id="goal">Goal<a class="headerlink" href="#goal" title="Permanent link">&para;</a></h2>
 <p>Allow external trading partners to self‑register, enter a pending queue for admin approval, and upon approval become limited‑access partners capable of sending/receiving documents, with a clear upgrade path to become full BridgeFlow customers.</p>
 <hr />
-<h2 id="issue-22a-public-partner-registration-portal">Issue 22A: Public Partner Registration Portal</h2>
+<h2 id="issue-22a-public-partner-registration-portal">Issue 22A: Public Partner Registration Portal<a class="headerlink" href="#issue-22a-public-partner-registration-portal" title="Permanent link">&para;</a></h2>
 <p><strong>Assignee:</strong> Agent4<br />
 <strong>Labels:</strong> phase:22, frontend, auth, registration</p>
-<h3 id="deliverables">Deliverables</h3>
+<h3 id="deliverables">Deliverables<a class="headerlink" href="#deliverables" title="Permanent link">&para;</a></h3>
 <ol>
 <li><strong>Public sign‑up route</strong> <code>/partner‑signup</code></li>
 <li>Standalone page, no login required</li>
@@ -142,7 +175,7 @@
 <li>“Thank you for registering. Your account is pending approval.”</li>
 <li>Links to support/docs</li>
 </ol>
-<h3 id="guardrails">Guardrails</h3>
+<h3 id="guardrails">Guardrails<a class="headerlink" href="#guardrails" title="Permanent link">&para;</a></h3>
 <ul>
 <li>One partner per registration</li>
 <li>Email must be unique across system</li>
@@ -150,10 +183,10 @@
 <li>Reuse existing auth flow (JWT, verification emails)</li>
 </ul>
 <hr />
-<h2 id="issue-22b-admin-approval-queue-feature-gating">Issue 22B: Admin Approval Queue &amp; Feature Gating</h2>
+<h2 id="issue-22b-admin-approval-queue-feature-gating">Issue 22B: Admin Approval Queue &amp; Feature Gating<a class="headerlink" href="#issue-22b-admin-approval-queue-feature-gating" title="Permanent link">&para;</a></h2>
 <p><strong>Assignee:</strong> Agent4<br />
 <strong>Labels:</strong> phase:22, backend, admin</p>
-<h3 id="deliverables_1">Deliverables</h3>
+<h3 id="deliverables_1">Deliverables<a class="headerlink" href="#deliverables_1" title="Permanent link">&para;</a></h3>
 <ol>
 <li><strong>Admin queue UI</strong> <code>/admin/partner‑queue</code></li>
 <li>Lists pending registrations (name, email, submitted date)</li>
@@ -169,17 +202,17 @@
 <li>Email to partner when approved/denied</li>
 <li>In‑app alert to SMB customer when invited partner is approved</li>
 </ol>
-<h3 id="guardrails_1">Guardrails</h3>
+<h3 id="guardrails_1">Guardrails<a class="headerlink" href="#guardrails_1" title="Permanent link">&para;</a></h3>
 <ul>
 <li>RBAC not used — RLS isolates partner data</li>
 <li>Pending registrations are visible only to admins</li>
 <li>Denied registrations are logged but soft‑deleted</li>
 </ul>
 <hr />
-<h2 id="issue-22c-partner-onboarding-conversion-path">Issue 22C: Partner Onboarding &amp; Conversion Path</h2>
+<h2 id="issue-22c-partner-onboarding-conversion-path">Issue 22C: Partner Onboarding &amp; Conversion Path<a class="headerlink" href="#issue-22c-partner-onboarding-conversion-path" title="Permanent link">&para;</a></h2>
 <p><strong>Assignee:</strong> Agent4<br />
 <strong>Labels:</strong> phase:22, frontend, onboarding</p>
-<h3 id="deliverables_2">Deliverables</h3>
+<h3 id="deliverables_2">Deliverables<a class="headerlink" href="#deliverables_2" title="Permanent link">&para;</a></h3>
 <ol>
 <li><strong>Post‑approval onboarding wizard</strong> <code>/partner/onboarding</code></li>
 <li>Steps:<ol>
@@ -197,14 +230,14 @@
 <li>“Upgrade to full account” button (placeholder for future billing)</li>
 <li>If upgraded, <code>accessLevel = 'full'</code> and partner becomes full customer with canvas access</li>
 </ol>
-<h3 id="guardrails_2">Guardrails</h3>
+<h3 id="guardrails_2">Guardrails<a class="headerlink" href="#guardrails_2" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Onboarding skippable (partner can exit and return)</li>
 <li>Dashboard only shows data scoped to partner’s own org (RLS)</li>
 <li>Upgrade button is non‑functional in Phase 22 — logs event for future phase</li>
 </ul>
 <hr />
-<h2 id="data-model-additions">Data Model Additions</h2>
+<h2 id="data-model-additions">Data Model Additions<a class="headerlink" href="#data-model-additions" title="Permanent link">&para;</a></h2>
 <pre><code class="language-prisma">model PartnerRegistration {
   id          String   @id @default(cuid())
   email       String   @unique
@@ -236,7 +269,7 @@ Payment/plan selection</p>
 <p>Custom roles or permissions beyond accessLevel</p>
 <p><strong>Once you or Agent4 creates the file, I will instruct the team to begin.</strong></p>
 <hr />
-<h2 id="implementation-constraints-agent10-directives-must-follow">Implementation constraints &amp; Agent10 directives (must follow)</h2>
+<h2 id="implementation-constraints-agent10-directives-must-follow">Implementation constraints &amp; Agent10 directives (must follow)<a class="headerlink" href="#implementation-constraints-agent10-directives-must-follow" title="Permanent link">&para;</a></h2>
 <ol>
 <li><strong>Security model: RLS is the sole gatekeeper</strong></li>
 <li>Do NOT use <code>role = 'partner'</code> or <code>accessLevel</code> in application logic to gate data access.</li>

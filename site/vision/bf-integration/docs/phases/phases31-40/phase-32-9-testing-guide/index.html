@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="../../../../../../css/theme.css" />
     <link rel="stylesheet" href="../../../../../../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../../../../../../stylesheets/extra.css" rel="stylesheet" />
     
       <script>
         // Current page data
@@ -43,7 +44,16 @@
                 <li class="toctree-l1"><a class="reference internal" href="../../../../../..">Home</a>
                 </li>
               </ul>
-              <p class="caption"><span class="caption-text">Products</span></p>
+              <p class="caption"><span class="caption-text">Start Here</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../ONBOARDING/">Onboarding</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../ARCHITECTURE/">Architecture</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../api-reference/">API Reference Hub</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Product Suite</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../../../../../products/">Overview</a>
                   </li>
@@ -66,7 +76,7 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../../../../../products/tracking-portal/">Tracking Portal</a>
                   </li>
               </ul>
-              <p class="caption"><span class="caption-text">Platform</span></p>
+              <p class="caption"><span class="caption-text">Platform Services</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../../../../../platform/">Overview</a>
                   </li>
@@ -87,12 +97,35 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../../../../../platform/bf-warehouse/">Warehouse Service</a>
                   </li>
               </ul>
+              <p class="caption"><span class="caption-text">Capability Catalog</span></p>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../../../../">Vision</a>
-                </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/SHIPMENTS/">Shipments</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/ADMIN_CONSOLE/">Admin Console</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/CONTROL_TOWER/">Control Tower</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/IDENTITY/">Identity</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/MASTERDATA/">Masterdata</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/ORDERS/">Orders</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/WAREHOUSE/">Warehouse</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/SEARCH/">Search</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/FINTECH/">Fintech</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/CARRIER_PORTAL/">Carrier Portal</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/TRACKING_PORTAL/">Tracking Portal</a>
+                  </li>
               </ul>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../../../../../../api-reference/">API Reference</a>
+                <li class="toctree-l1"><a class="reference internal" href="../../../../">Vision Archive</a>
                 </li>
               </ul>
       </div>
@@ -123,9 +156,9 @@
 Status: Planned / In Development
 Context: Original BF-INTEGRATION Vision (Pre-Phase 30)</p>
 </blockquote>
-<h1 id="phase-329-quick-start-testing-guide">Phase 32.9 — Quick Start Testing Guide</h1>
-<h2 id="getting-started">🚀 Getting Started</h2>
-<h3 id="step-1-start-the-development-server">Step 1: Start the Development Server</h3>
+<h1 id="phase-329-quick-start-testing-guide">Phase 32.9 — Quick Start Testing Guide<a class="headerlink" href="#phase-329-quick-start-testing-guide" title="Permanent link">&para;</a></h1>
+<h2 id="getting-started">🚀 Getting Started<a class="headerlink" href="#getting-started" title="Permanent link">&para;</a></h2>
+<h3 id="step-1-start-the-development-server">Step 1: Start the Development Server<a class="headerlink" href="#step-1-start-the-development-server" title="Permanent link">&para;</a></h3>
 <pre><code class="language-powershell">cd c:\JS\bridgeflow
 pnpm run web:dev
 </code></pre>
@@ -133,16 +166,16 @@ pnpm run web:dev
 <pre><code>✅ Initial build succeeded — bundled to C:\JS\bridgeflow\web\dist
 🚀 Dev server running at http://localhost:3000
 </code></pre>
-<h3 id="step-2-open-bridge-assembly-page">Step 2: Open Bridge Assembly Page</h3>
+<h3 id="step-2-open-bridge-assembly-page">Step 2: Open Bridge Assembly Page<a class="headerlink" href="#step-2-open-bridge-assembly-page" title="Permanent link">&para;</a></h3>
 <p>Navigate to: <code>http://localhost:3000/canvas-assembly</code></p>
-<h3 id="step-3-load-test-data">Step 3: Load Test Data</h3>
+<h3 id="step-3-load-test-data">Step 3: Load Test Data<a class="headerlink" href="#step-3-load-test-data" title="Permanent link">&para;</a></h3>
 <p>The page will auto-load trading partners from the API. If the TP list is empty:
 1. Seed test data: <code>pnpm run db:seed</code>
 2. Refresh the page</p>
 <hr />
-<h2 id="testing-the-three-fixes">🧪 Testing the Three Fixes</h2>
-<h3 id="test-1-canvas-panning-biztalk-style">TEST #1: Canvas Panning (BizTalk-Style)</h3>
-<h4 id="setup">Setup</h4>
+<h2 id="testing-the-three-fixes">🧪 Testing the Three Fixes<a class="headerlink" href="#testing-the-three-fixes" title="Permanent link">&para;</a></h2>
+<h3 id="test-1-canvas-panning-biztalk-style">TEST #1: Canvas Panning (BizTalk-Style)<a class="headerlink" href="#test-1-canvas-panning-biztalk-style" title="Permanent link">&para;</a></h3>
+<h4 id="setup">Setup<a class="headerlink" href="#setup" title="Permanent link">&para;</a></h4>
 <ol>
 <li>Open Browser DevTools Console (F12 → Console tab)</li>
 <li>Create some components on canvas:</li>
@@ -151,7 +184,7 @@ pnpm run web:dev
 <li>Drag another "Trading Partner"</li>
 <li>This creates a larger canvas area</li>
 </ol>
-<h4 id="test-middle-mouse-button">Test Middle Mouse Button</h4>
+<h4 id="test-middle-mouse-button">Test Middle Mouse Button<a class="headerlink" href="#test-middle-mouse-button" title="Permanent link">&para;</a></h4>
 <ol>
 <li><strong>Position</strong>: Move mouse over canvas center</li>
 <li><strong>Action</strong>: Press middle mouse button (scroll wheel button)</li>
@@ -161,7 +194,7 @@ pnpm run web:dev
 <li><strong>Release</strong>: Release middle button</li>
 <li><strong>Expected</strong>: Cursor returns to normal</li>
 </ol>
-<h4 id="test-ctrl-left-click">Test Ctrl + Left Click</h4>
+<h4 id="test-ctrl-left-click">Test Ctrl + Left Click<a class="headerlink" href="#test-ctrl-left-click" title="Permanent link">&para;</a></h4>
 <ol>
 <li><strong>Position</strong>: Move mouse over empty canvas area (not on component)</li>
 <li><strong>Hold</strong>: Press and hold Ctrl key</li>
@@ -172,14 +205,14 @@ pnpm run web:dev
 <li><strong>Release</strong>: Release mouse button</li>
 <li><strong>Expected</strong>: Normal cursor returns</li>
 </ol>
-<h4 id="test-double-click-reset">Test Double-Click Reset</h4>
+<h4 id="test-double-click-reset">Test Double-Click Reset<a class="headerlink" href="#test-double-click-reset" title="Permanent link">&para;</a></h4>
 <ol>
 <li><strong>Pan</strong>: Use any method above to pan the canvas away from origin</li>
 <li><strong>Double-Click</strong>: Double-click on canvas (not on component)</li>
 <li><strong>Expected</strong>: Canvas snaps back to origin (0, 0)</li>
 <li><strong>Verify</strong>: Components are in original positions</li>
 </ol>
-<h4 id="verify-non-interference">Verify Non-Interference</h4>
+<h4 id="verify-non-interference">Verify Non-Interference<a class="headerlink" href="#verify-non-interference" title="Permanent link">&para;</a></h4>
 <ol>
 <li><strong>Drag Component</strong>: Left-click on component → drag normally</li>
 <li><strong>Expected</strong>: Component moves with mouse, not entire canvas</li>
@@ -187,14 +220,14 @@ pnpm run web:dev
 <li><strong>Expected</strong>: Palette item creates new component, not canvas pan</li>
 </ol>
 <hr />
-<h3 id="test-2-sidebar-slide-off-animation">TEST #2: Sidebar Slide-Off Animation</h3>
-<h4 id="setup_1">Setup</h4>
+<h3 id="test-2-sidebar-slide-off-animation">TEST #2: Sidebar Slide-Off Animation<a class="headerlink" href="#test-2-sidebar-slide-off-animation" title="Permanent link">&para;</a></h3>
+<h4 id="setup_1">Setup<a class="headerlink" href="#setup_1" title="Permanent link">&para;</a></h4>
 <ol>
 <li>Open page: <code>http://localhost:3000/canvas-assembly</code></li>
 <li>DevTools open (F12) for console visibility</li>
 <li>Check both sidebars are visible</li>
 </ol>
-<h4 id="test-left-sidebar-collapse">Test Left Sidebar Collapse</h4>
+<h4 id="test-left-sidebar-collapse">Test Left Sidebar Collapse<a class="headerlink" href="#test-left-sidebar-collapse" title="Permanent link">&para;</a></h4>
 <ol>
 <li><strong>Locate</strong>: Find left sidebar (Component Palette)</li>
 <li><strong>Find Button</strong>: Look for toggle arrow <code>◀</code> at top-right of sidebar header</li>
@@ -203,7 +236,7 @@ pnpm run web:dev
 <li><strong>Arrow Visible</strong>: After collapse, arrow <code>→</code> should be visible outside canvas edge</li>
 <li><strong>Canvas</strong>: Canvas should expand to full width (minus right sidebar)</li>
 </ol>
-<h4 id="test-left-sidebar-expand">Test Left Sidebar Expand</h4>
+<h4 id="test-left-sidebar-expand">Test Left Sidebar Expand<a class="headerlink" href="#test-left-sidebar-expand" title="Permanent link">&para;</a></h4>
 <ol>
 <li><strong>Locate</strong>: Find the floating arrow <code>→</code> outside left canvas edge</li>
 <li><strong>Click</strong>: Click the arrow</li>
@@ -211,7 +244,7 @@ pnpm run web:dev
 <li><strong>Header</strong>: Sidebar title and content should be visible again</li>
 <li><strong>Arrow</strong>: Arrow changes back to <code>◀</code></li>
 </ol>
-<h4 id="test-right-sidebar-collapse">Test Right Sidebar Collapse</h4>
+<h4 id="test-right-sidebar-collapse">Test Right Sidebar Collapse<a class="headerlink" href="#test-right-sidebar-collapse" title="Permanent link">&para;</a></h4>
 <ol>
 <li><strong>Locate</strong>: Find right sidebar (Configuration)</li>
 <li><strong>Find Button</strong>: Look for toggle arrow <code>▶</code> at top-left of sidebar header</li>
@@ -220,21 +253,21 @@ pnpm run web:dev
 <li><strong>Arrow Visible</strong>: Arrow <code>◀</code> visible outside right canvas edge</li>
 <li><strong>Canvas</strong>: Canvas expands left</li>
 </ol>
-<h4 id="test-right-sidebar-expand">Test Right Sidebar Expand</h4>
+<h4 id="test-right-sidebar-expand">Test Right Sidebar Expand<a class="headerlink" href="#test-right-sidebar-expand" title="Permanent link">&para;</a></h4>
 <ol>
 <li><strong>Locate</strong>: Find floating arrow <code>◀</code> outside right edge</li>
 <li><strong>Click</strong>: Arrow</li>
 <li><strong>Animation</strong>: Sidebar slides back LEFT</li>
 <li><strong>Arrow Changes</strong>: Back to <code>▶</code></li>
 </ol>
-<h4 id="test-collapse-both-sidebars">Test Collapse Both Sidebars</h4>
+<h4 id="test-collapse-both-sidebars">Test Collapse Both Sidebars<a class="headerlink" href="#test-collapse-both-sidebars" title="Permanent link">&para;</a></h4>
 <ol>
 <li><strong>Collapse Left</strong>: Click left toggle</li>
 <li><strong>Collapse Right</strong>: Click right toggle</li>
 <li><strong>Expected</strong>: Full-screen canvas with only two small arrow buttons visible</li>
 <li><strong>Expand</strong>: Click each arrow to restore sidebars</li>
 </ol>
-<h4 id="verify-connection-updates">Verify Connection Updates</h4>
+<h4 id="verify-connection-updates">Verify Connection Updates<a class="headerlink" href="#verify-connection-updates" title="Permanent link">&para;</a></h4>
 <ol>
 <li><strong>Create Bridge</strong>: Add 2+ components with connections</li>
 <li><strong>Collapse Sidebar</strong>: Click toggle</li>
@@ -244,8 +277,8 @@ pnpm run web:dev
 <li><strong>Expected</strong>: Layout correct, connections still valid</li>
 </ol>
 <hr />
-<h3 id="test-3-trading-partner-loading">TEST #3: Trading Partner Loading</h3>
-<h4 id="verify-tp-count-display">Verify TP Count Display</h4>
+<h3 id="test-3-trading-partner-loading">TEST #3: Trading Partner Loading<a class="headerlink" href="#test-3-trading-partner-loading" title="Permanent link">&para;</a></h3>
+<h4 id="verify-tp-count-display">Verify TP Count Display<a class="headerlink" href="#verify-tp-count-display" title="Permanent link">&para;</a></h4>
 <ol>
 <li><strong>Open</strong>: <code>http://localhost:3000/canvas-assembly</code></li>
 <li><strong>Wait</strong>: Page loads (2-3 seconds for API sync)</li>
@@ -257,7 +290,7 @@ pnpm run web:dev
 <li>Verify API is running: <code>http://localhost:4000/api/trading-partners</code></li>
 <li>Check database seeding: <code>pnpm run db:seed</code></li>
 </ol>
-<h4 id="verify-tp-list-populated">Verify TP List Populated</h4>
+<h4 id="verify-tp-list-populated">Verify TP List Populated<a class="headerlink" href="#verify-tp-list-populated" title="Permanent link">&para;</a></h4>
 <ol>
 <li><strong>Open</strong>: Trading Partners folder (should show <code>(n)</code> items)</li>
 <li><strong>Look For</strong>: Draggable TP items with:</li>
@@ -266,7 +299,7 @@ pnpm run web:dev
 <li>Status indicator (● color-coded)</li>
 <li><strong>Count</strong>: Verify number of items matches count <code>(n)</code></li>
 </ol>
-<h4 id="test-tp-dragging">Test TP Dragging</h4>
+<h4 id="test-tp-dragging">Test TP Dragging<a class="headerlink" href="#test-tp-dragging" title="Permanent link">&para;</a></h4>
 <ol>
 <li><strong>Click &amp; Hold</strong>: On a TP item in palette</li>
 <li><strong>Drag</strong>: Move to canvas area</li>
@@ -274,7 +307,7 @@ pnpm run web:dev
 <li><strong>Release</strong>: Component locks to grid position</li>
 <li><strong>Verify</strong>: Component appears in canvas, not in palette</li>
 </ol>
-<h4 id="test-tp-add">Test TP Add</h4>
+<h4 id="test-tp-add">Test TP Add<a class="headerlink" href="#test-tp-add" title="Permanent link">&para;</a></h4>
 <ol>
 <li><strong>Locate</strong>: "+ Add Trading Partner" button in Trading Partners folder</li>
 <li><strong>Click</strong>: Button</li>
@@ -284,7 +317,7 @@ pnpm run web:dev
 <li><strong>Verify</strong>: New TP appears in palette</li>
 <li><strong>Count</strong>: Count should increment</li>
 </ol>
-<h4 id="test-auto-sync-on-navigation">Test Auto-Sync on Navigation</h4>
+<h4 id="test-auto-sync-on-navigation">Test Auto-Sync on Navigation<a class="headerlink" href="#test-auto-sync-on-navigation" title="Permanent link">&para;</a></h4>
 <ol>
 <li><strong>Add TP</strong>: From <code>/create-tp</code> route</li>
 <li><strong>Return</strong>: Navigate back to canvas</li>
@@ -292,22 +325,22 @@ pnpm run web:dev
 <li><strong>Count</strong>: Updated to include new TP</li>
 </ol>
 <hr />
-<h2 id="debugging-tips">🔍 Debugging Tips</h2>
-<h3 id="canvas-panning-not-working">Canvas Panning Not Working</h3>
+<h2 id="debugging-tips">🔍 Debugging Tips<a class="headerlink" href="#debugging-tips" title="Permanent link">&para;</a></h2>
+<h3 id="canvas-panning-not-working">Canvas Panning Not Working<a class="headerlink" href="#canvas-panning-not-working" title="Permanent link">&para;</a></h3>
 <ol>
 <li><strong>Check Console</strong>: F12 → Console (should be clean)</li>
 <li><strong>Verify Viewport</strong>: Inspect element → canvas-viewport (should exist)</li>
 <li><strong>Mouse Button</strong>: Ensure middle mouse/Ctrl+click works in your browser</li>
 <li><strong>Browser Test</strong>: Try different browser (Chrome, Firefox, etc.)</li>
 </ol>
-<h3 id="sidebar-animation-choppy">Sidebar Animation Choppy</h3>
+<h3 id="sidebar-animation-choppy">Sidebar Animation Choppy<a class="headerlink" href="#sidebar-animation-choppy" title="Permanent link">&para;</a></h3>
 <ol>
 <li><strong>DevTools Performance</strong>: F12 → Performance tab</li>
 <li><strong>Record</strong>: Record sidebar collapse</li>
 <li><strong>Analyze</strong>: Look for layout thrashing or repaints</li>
 <li><strong>CPU</strong>: High CPU usage? Check for loops in setupPanelToggles</li>
 </ol>
-<h3 id="tp-count-shows-zero">TP Count Shows Zero</h3>
+<h3 id="tp-count-shows-zero">TP Count Shows Zero<a class="headerlink" href="#tp-count-shows-zero" title="Permanent link">&para;</a></h3>
 <ol>
 <li><strong>API Status</strong>: Check <code>http://localhost:4000/api/health</code></li>
 <li><strong>API Route</strong>: Verify <code>/api/trading-partners</code> returns data</li>
@@ -315,7 +348,7 @@ pnpm run web:dev
 <li><strong>API Fetch</strong>: Check browser Network tab (F12 → Network) for <code>/trading-partners</code> request</li>
 <li><strong>Database</strong>: Run <code>pnpm run db:seed</code> to populate test data</li>
 </ol>
-<h3 id="no-toggle-arrows-visible-when-collapsed">No Toggle Arrows Visible When Collapsed</h3>
+<h3 id="no-toggle-arrows-visible-when-collapsed">No Toggle Arrows Visible When Collapsed<a class="headerlink" href="#no-toggle-arrows-visible-when-collapsed" title="Permanent link">&para;</a></h3>
 <ol>
 <li><strong>CSS</strong>: Check DevTools → Styles (F12 → Elements → Styles)</li>
 <li><strong>z-index</strong>: Should be <code>41</code> (visible on top)</li>
@@ -323,7 +356,7 @@ pnpm run web:dev
 <li><strong>Visibility</strong>: Check <code>opacity: 1</code> and <code>pointer-events: auto</code></li>
 </ol>
 <hr />
-<h2 id="expected-performance">📊 Expected Performance</h2>
+<h2 id="expected-performance">📊 Expected Performance<a class="headerlink" href="#expected-performance" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
@@ -356,7 +389,7 @@ pnpm run web:dev
 </tbody>
 </table>
 <hr />
-<h2 id="acceptance-criteria">✅ Acceptance Criteria</h2>
+<h2 id="acceptance-criteria">✅ Acceptance Criteria<a class="headerlink" href="#acceptance-criteria" title="Permanent link">&para;</a></h2>
 <ul>
 <li>[x] Canvas pans smoothly with middle mouse / Ctrl+click</li>
 <li>[x] Double-click resets pan to origin</li>
@@ -368,7 +401,7 @@ pnpm run web:dev
 <li>[x] No layout thrashing or performance degradation</li>
 </ul>
 <hr />
-<h2 id="notes">📝 Notes</h2>
+<h2 id="notes">📝 Notes<a class="headerlink" href="#notes" title="Permanent link">&para;</a></h2>
 <ul>
 <li><strong>First Load</strong>: TP API call takes 1-2 seconds. Count will update when response arrives.</li>
 <li><strong>Hot Reload</strong>: Changes to assembly.js or CSS auto-reload in dev mode</li>
@@ -376,7 +409,7 @@ pnpm run web:dev
 <li><strong>Mobile</strong>: Panning works on touch devices with middle button emulation (varies by browser)</li>
 </ul>
 <hr />
-<h2 id="need-help">🆘 Need Help?</h2>
+<h2 id="need-help">🆘 Need Help?<a class="headerlink" href="#need-help" title="Permanent link">&para;</a></h2>
 <p>If tests fail:
 1. Check console (F12 → Console) for JavaScript errors
 2. Check Network tab (F12 → Network) for API failures

@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="../../css/theme.css" />
     <link rel="stylesheet" href="../../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../../stylesheets/extra.css" rel="stylesheet" />
     
       <script>
         // Current page data
@@ -43,7 +44,16 @@
                 <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
                 </li>
               </ul>
-              <p class="caption"><span class="caption-text">Products</span></p>
+              <p class="caption"><span class="caption-text">Start Here</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../ONBOARDING/">Onboarding</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../ARCHITECTURE/">Architecture</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../api-reference/">API Reference Hub</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Product Suite</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../products/">Overview</a>
                   </li>
@@ -66,7 +76,7 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../products/tracking-portal/">Tracking Portal</a>
                   </li>
               </ul>
-              <p class="caption"><span class="caption-text">Platform</span></p>
+              <p class="caption"><span class="caption-text">Platform Services</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../platform/">Overview</a>
                   </li>
@@ -87,12 +97,35 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../platform/bf-warehouse/">Warehouse Service</a>
                   </li>
               </ul>
+              <p class="caption"><span class="caption-text">Capability Catalog</span></p>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../../vision/bf-integration/">Vision</a>
-                </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/SHIPMENTS/">Shipments</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/ADMIN_CONSOLE/">Admin Console</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/CONTROL_TOWER/">Control Tower</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/IDENTITY/">Identity</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/MASTERDATA/">Masterdata</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/ORDERS/">Orders</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/WAREHOUSE/">Warehouse</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/SEARCH/">Search</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/FINTECH/">Fintech</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/CARRIER_PORTAL/">Carrier Portal</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/TRACKING_PORTAL/">Tracking Portal</a>
+                  </li>
               </ul>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../../api-reference/">API Reference</a>
+                <li class="toctree-l1"><a class="reference internal" href="../../vision/bf-integration/">Vision Archive</a>
                 </li>
               </ul>
       </div>
@@ -118,12 +151,12 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <h1 id="cicd-release-plan-draft">CI/CD &amp; Release Plan (Draft)</h1>
+                <h1 id="cicd-release-plan-draft">CI/CD &amp; Release Plan (Draft)<a class="headerlink" href="#cicd-release-plan-draft" title="Permanent link">&para;</a></h1>
 <p>Goals
 - Fast feedback loop (lint, test, typecheck) on every PR
 - Security gates (CodeQL, dependency scanning) enforced before merge
 - Clean release pipeline with rollback strategies (canary/blue-green)</p>
-<h2 id="github-actions-suggested-jobs">GitHub Actions - Suggested Jobs</h2>
+<h2 id="github-actions-suggested-jobs">GitHub Actions - Suggested Jobs<a class="headerlink" href="#github-actions-suggested-jobs" title="Permanent link">&para;</a></h2>
 <ul>
 <li>push / PR</li>
 <li>lint (eslint + formatting check)</li>
@@ -140,32 +173,32 @@
 <li>run migration dry-run and smoke tests</li>
 <li>promote to prod using canary/blue-green pattern</li>
 </ul>
-<h2 id="pr-requirements">PR Requirements</h2>
+<h2 id="pr-requirements">PR Requirements<a class="headerlink" href="#pr-requirements" title="Permanent link">&para;</a></h2>
 <ul>
 <li>PR template includes checklist: tests included, security review, migration impact, operational runbook required? (yes/no)</li>
 <li>Require at least one code owner review for core libraries and security-sensitive changes</li>
 </ul>
-<h2 id="secrets-in-ci">Secrets in CI</h2>
+<h2 id="secrets-in-ci">Secrets in CI<a class="headerlink" href="#secrets-in-ci" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Use GitHub Encrypted Secrets (or Vault integration) — do not commit credentials</li>
 </ul>
-<h2 id="esm-policy-and-prisma-in-ci">ESM policy and Prisma in CI</h2>
+<h2 id="esm-policy-and-prisma-in-ci">ESM policy and Prisma in CI<a class="headerlink" href="#esm-policy-and-prisma-in-ci" title="Permanent link">&para;</a></h2>
 <ul>
 <li>This repository is ESM-only; ensure <code>package.json</code> has <code>"type": "module"</code> and all in-repo JS files use <code>import</code>/<code>export</code>.</li>
 <li>The Prisma CLI historically expects CommonJS config files; to avoid needing CJS artifacts in the repo, invoke Prisma CLI with explicit flags (e.g., <code>--schema ./prisma/schema.prisma</code>) in CI scripts.</li>
 </ul>
-<h2 id="packaging-and-deployments">Packaging and Deployments</h2>
+<h2 id="packaging-and-deployments">Packaging and Deployments<a class="headerlink" href="#packaging-and-deployments" title="Permanent link">&para;</a></h2>
 <ul>
 <li>For serverless: build and publish packages as artifacts, deployments use IaC modules to manage release</li>
 <li>For containerized services: build images, push to registry, scan images before deploy</li>
 <li>For VMs or managed services: use deployment scripts and IAM roles with least privilege</li>
 </ul>
-<h2 id="rollback-strategies">Rollback Strategies</h2>
+<h2 id="rollback-strategies">Rollback Strategies<a class="headerlink" href="#rollback-strategies" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Database migrations must be reversible where possible; maintain <code>down</code> steps and backup before irreversible schema changes</li>
 <li>Deployments should have a health-check based automated rollback threshold (e.g., &gt;1% error rate in 5 minutes triggers rollback)</li>
 </ul>
-<h2 id="observability-in-pipeline">Observability in Pipeline</h2>
+<h2 id="observability-in-pipeline">Observability in Pipeline<a class="headerlink" href="#observability-in-pipeline" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Publish test coverage and SLO smoke results as part of PR checks</li>
 <li>Keep a deployment log and attach migration evidence to releases for compliance</li>

@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="../css/theme.css" />
     <link rel="stylesheet" href="../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../stylesheets/extra.css" rel="stylesheet" />
     
       <script>
         // Current page data
@@ -43,7 +44,16 @@
                 <li class="toctree-l1"><a class="reference internal" href="..">Home</a>
                 </li>
               </ul>
-              <p class="caption"><span class="caption-text">Products</span></p>
+              <p class="caption"><span class="caption-text">Start Here</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../ONBOARDING/">Onboarding</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../ARCHITECTURE/">Architecture</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../api-reference/">API Reference Hub</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Product Suite</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../products/">Overview</a>
                   </li>
@@ -66,7 +76,7 @@
                   <li class="toctree-l1"><a class="reference internal" href="../products/tracking-portal/">Tracking Portal</a>
                   </li>
               </ul>
-              <p class="caption"><span class="caption-text">Platform</span></p>
+              <p class="caption"><span class="caption-text">Platform Services</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../platform/">Overview</a>
                   </li>
@@ -87,12 +97,35 @@
                   <li class="toctree-l1"><a class="reference internal" href="../platform/bf-warehouse/">Warehouse Service</a>
                   </li>
               </ul>
+              <p class="caption"><span class="caption-text">Capability Catalog</span></p>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../vision/bf-integration/">Vision</a>
-                </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../features/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../features/SHIPMENTS/">Shipments</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../features/ADMIN_CONSOLE/">Admin Console</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../features/CONTROL_TOWER/">Control Tower</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../features/IDENTITY/">Identity</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../features/MASTERDATA/">Masterdata</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../features/ORDERS/">Orders</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../features/WAREHOUSE/">Warehouse</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../features/SEARCH/">Search</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../features/FINTECH/">Fintech</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../features/CARRIER_PORTAL/">Carrier Portal</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../features/TRACKING_PORTAL/">Tracking Portal</a>
+                  </li>
               </ul>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../api-reference/">API Reference</a>
+                <li class="toctree-l1"><a class="reference internal" href="../vision/bf-integration/">Vision Archive</a>
                 </li>
               </ul>
       </div>
@@ -118,9 +151,9 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <h1 id="phase-60-gap-analysis-and-update-plan">Phase 60 Gap Analysis and Update Plan</h1>
+                <h1 id="phase-60-gap-analysis-and-update-plan">Phase 60 Gap Analysis and Update Plan<a class="headerlink" href="#phase-60-gap-analysis-and-update-plan" title="Permanent link">&para;</a></h1>
 <p>Date: February 23, 2026</p>
-<h2 id="executive-summary">Executive Summary</h2>
+<h2 id="executive-summary">Executive Summary<a class="headerlink" href="#executive-summary" title="Permanent link">&para;</a></h2>
 <p>The docs repository currently mixes:
 - legacy BF-INTEGRATION vision material (pre-Phase 30),
 - older marketing docs,
@@ -129,8 +162,8 @@
 - <strong>Preserve all BF-INTEGRATION content</strong>
 - <strong>Re-label and relocate it as Future Vision</strong>
 - <strong>Add a new Current System section for live Control Tower</strong></p>
-<h2 id="1-what-is-live-vs-what-is-missing">1. What Is Live vs What Is Missing</h2>
-<h3 id="live-system-facts-present-in-code-missingunderrepresented-in-docs">Live system facts (present in code, missing/underrepresented in docs)</h3>
+<h2 id="1-what-is-live-vs-what-is-missing">1. What Is Live vs What Is Missing<a class="headerlink" href="#1-what-is-live-vs-what-is-missing" title="Permanent link">&para;</a></h2>
+<h3 id="live-system-facts-present-in-code-missingunderrepresented-in-docs">Live system facts (present in code, missing/underrepresented in docs)<a class="headerlink" href="#live-system-facts-present-in-code-missingunderrepresented-in-docs" title="Permanent link">&para;</a></h3>
 <ul>
 <li>TRL 7 validation (Phase 56 live loop)</li>
 <li>Unified <code>bf-control</code> deployment serving both API and public frontend (<code>home/</code>)</li>
@@ -138,7 +171,7 @@
 <li>Ingestion API: <code>POST /api/control/events</code></li>
 <li>Customer-facing integration onboarding guide</li>
 </ul>
-<h3 id="missing-sections-must-add">Missing sections (must add)</h3>
+<h3 id="missing-sections-must-add">Missing sections (must add)<a class="headerlink" href="#missing-sections-must-add" title="Permanent link">&para;</a></h3>
 <ul>
 <li><code>Current System</code> section documenting live Control Tower</li>
 <li>TRL 7 proof/evidence summary for February 20, 2026 validation</li>
@@ -147,7 +180,7 @@
 <li>Integration Guide for external developers</li>
 <li>Fresh screenshots from <code>https://control-tower.up.railway.app/</code></li>
 </ul>
-<h2 id="2-legacy-content-to-preserve-and-re-index">2. Legacy Content To Preserve and Re-Index</h2>
+<h2 id="2-legacy-content-to-preserve-and-re-index">2. Legacy Content To Preserve and Re-Index<a class="headerlink" href="#2-legacy-content-to-preserve-and-re-index" title="Permanent link">&para;</a></h2>
 <p>This content is <strong>not obsolete</strong>, but currently unlabeled and hard to distinguish from live-state docs:</p>
 <ul>
 <li><code>docs/phases/phases1-10/</code> (18 files)</li>
@@ -166,14 +199,14 @@
 <li><code>docs/Layer4-PlatformCoreLayer/</code></li>
 <li><code>docs/Layer5-InfrastructureLayer/</code></li>
 </ul>
-<h2 id="3-reorganization-plan">3. Reorganization Plan</h2>
-<h3 id="track-a-current-system-live">Track A: Current System (Live)</h3>
+<h2 id="3-reorganization-plan">3. Reorganization Plan<a class="headerlink" href="#3-reorganization-plan" title="Permanent link">&para;</a></h2>
+<h3 id="track-a-current-system-live">Track A: Current System (Live)<a class="headerlink" href="#track-a-current-system-live" title="Permanent link">&para;</a></h3>
 <p>Create and maintain:
 - <code>docs/current/control-tower/README.md</code>
 - <code>docs/current/control-tower/trl7-validation.md</code>
 - <code>docs/current/control-tower/public-api.md</code>
 - <code>docs/current/control-tower/integration-guide.md</code></p>
-<h3 id="track-b-future-vision-preserved">Track B: Future Vision (Preserved)</h3>
+<h3 id="track-b-future-vision-preserved">Track B: Future Vision (Preserved)<a class="headerlink" href="#track-b-future-vision-preserved" title="Permanent link">&para;</a></h3>
 <p>Create a future-vision index and route existing design docs through it:
 - <code>docs/roadmap/future-architecture/README.md</code></p>
 <p>Then migrate or mirror legacy docs into:
@@ -182,7 +215,7 @@
 - <code>Planned</code>
 - <code>Historical</code>
 - <code>Superseded by current implementation</code> (when applicable)</p>
-<h2 id="4-drafts-completed-in-this-pass">4. Drafts Completed in This Pass</h2>
+<h2 id="4-drafts-completed-in-this-pass">4. Drafts Completed in This Pass<a class="headerlink" href="#4-drafts-completed-in-this-pass" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Root narrative rewrite: <code>README.md</code> (Today vs Tomorrow framing)</li>
 <li>New current-system section scaffolding:</li>
@@ -195,14 +228,14 @@
 <li>Live screenshot captured:</li>
 <li><code>docs/images/phase-60-control-tower-home.png</code></li>
 </ul>
-<h2 id="5-next-actions-execution-order">5. Next Actions (Execution Order)</h2>
+<h2 id="5-next-actions-execution-order">5. Next Actions (Execution Order)<a class="headerlink" href="#5-next-actions-execution-order" title="Permanent link">&para;</a></h2>
 <ol>
 <li>Add navigation/index links in MkDocs to both Current and Future sections.</li>
 <li>Migrate top-priority legacy files into <code>docs/vision/bf-integration/</code> with labels.</li>
 <li>Replace root <code>docs/index.md</code> content to point users to Current vs Future pathways.</li>
 <li>Publish docs on GitHub Pages.</li>
 </ol>
-<h2 id="6-hosting-setup-proposal-github-pages">6. Hosting Setup Proposal (GitHub Pages)</h2>
+<h2 id="6-hosting-setup-proposal-github-pages">6. Hosting Setup Proposal (GitHub Pages)<a class="headerlink" href="#6-hosting-setup-proposal-github-pages" title="Permanent link">&para;</a></h2>
 <p>From repository root:</p>
 <pre><code class="language-bash"># if gh CLI is installed
 gh repo edit --enable-pages --pages-source=main --pages-path=/

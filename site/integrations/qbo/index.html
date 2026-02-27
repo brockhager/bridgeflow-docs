@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="../../css/theme.css" />
     <link rel="stylesheet" href="../../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../../stylesheets/extra.css" rel="stylesheet" />
     
       <script>
         // Current page data
@@ -43,7 +44,16 @@
                 <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
                 </li>
               </ul>
-              <p class="caption"><span class="caption-text">Products</span></p>
+              <p class="caption"><span class="caption-text">Start Here</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../ONBOARDING/">Onboarding</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../ARCHITECTURE/">Architecture</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../api-reference/">API Reference Hub</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Product Suite</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../products/">Overview</a>
                   </li>
@@ -66,7 +76,7 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../products/tracking-portal/">Tracking Portal</a>
                   </li>
               </ul>
-              <p class="caption"><span class="caption-text">Platform</span></p>
+              <p class="caption"><span class="caption-text">Platform Services</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../platform/">Overview</a>
                   </li>
@@ -87,12 +97,35 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../platform/bf-warehouse/">Warehouse Service</a>
                   </li>
               </ul>
+              <p class="caption"><span class="caption-text">Capability Catalog</span></p>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../../vision/bf-integration/">Vision</a>
-                </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/SHIPMENTS/">Shipments</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/ADMIN_CONSOLE/">Admin Console</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/CONTROL_TOWER/">Control Tower</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/IDENTITY/">Identity</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/MASTERDATA/">Masterdata</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/ORDERS/">Orders</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/WAREHOUSE/">Warehouse</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/SEARCH/">Search</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/FINTECH/">Fintech</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/CARRIER_PORTAL/">Carrier Portal</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/TRACKING_PORTAL/">Tracking Portal</a>
+                  </li>
               </ul>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../../api-reference/">API Reference</a>
+                <li class="toctree-l1"><a class="reference internal" href="../../vision/bf-integration/">Vision Archive</a>
                 </li>
               </ul>
       </div>
@@ -118,10 +151,10 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <h1 id="quickbooks-online-qbo-connector">QuickBooks Online (QBO) Connector</h1>
-<h2 id="overview">Overview</h2>
+                <h1 id="quickbooks-online-qbo-connector">QuickBooks Online (QBO) Connector<a class="headerlink" href="#quickbooks-online-qbo-connector" title="Permanent link">&para;</a></h1>
+<h2 id="overview">Overview<a class="headerlink" href="#overview" title="Permanent link">&para;</a></h2>
 <p>This document describes the QuickBooks Online integration (Phase 19C). The connector allows organizations to securely connect a QBO company and synchronize Purchase Orders (POs) into BridgeFlow's ingestion pipeline. The backend implementation is read-only (no writes to QBO).</p>
-<h2 id="oauth-setup">OAuth &amp; Setup</h2>
+<h2 id="oauth-setup">OAuth &amp; Setup<a class="headerlink" href="#oauth-setup" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Redirect URI to register in Intuit Developer Console:</li>
 <li>https://<your-railway-app>.up.railway.app/oauth/qbo/callback</li>
@@ -130,7 +163,7 @@
 <li><code>QBO_CLIENT_SECRET</code> — Intuit app client secret</li>
 <li><code>QBO_CREDENTIAL_ENCRYPTION_KEY</code> — 32-byte hex string (64 chars) used to encrypt credentials (AES-256-GCM)</li>
 </ul>
-<h2 id="data-flow">Data Flow</h2>
+<h2 id="data-flow">Data Flow<a class="headerlink" href="#data-flow" title="Permanent link">&para;</a></h2>
 <ol>
 <li>User connects QBO via OAuth (frontend handles the redirect and authorization flow).</li>
 <li>The frontend exchanges the authorization code for tokens and sends the encrypted credentials to BridgeFlow (stored in <code>IntegrationCredential</code> table).</li>
@@ -141,25 +174,25 @@
 <li>Enqueues each mapped payload to Redis Stream <code>raw_payloads:&lt;organizationId&gt;</code> with idempotency key <code>qbo_po:&lt;TxnId&gt;</code> and <code>source=quickbooks</code></li>
 <li>Phase 18 pipeline (workers and S3 flush) processes messages, performs deduplication using idempotency keys, and stores original payloads in S3 inbox.</li>
 </ol>
-<h2 id="limitations-notes">Limitations &amp; Notes</h2>
+<h2 id="limitations-notes">Limitations &amp; Notes<a class="headerlink" href="#limitations-notes" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Read-only: connector does not write back to QBO.</li>
 <li>POs only: the initial scope covers Purchase Orders only.</li>
 <li>One QBO company per organization (realmId stored in <code>IntegrationCredential</code>).</li>
 <li>Rate limiting: the client implements a per-org counter and simple backoff; Intuit limits should be respected (450–500 requests/min).</li>
 </ul>
-<h2 id="security">Security</h2>
+<h2 id="security">Security<a class="headerlink" href="#security" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Tokens are stored encrypted using AES-256-GCM (<code>QBO_CREDENTIAL_ENCRYPTION_KEY</code>).</li>
 <li>Token refresh is handled server-side; refresh tokens are persisted encrypted and not exposed in logs.</li>
 <li>All endpoints require <code>x-api-key</code> (customer API keys) which map to <code>organizationId</code> and are validated by <code>validateCustomerApiKey</code> middleware.</li>
 </ul>
-<h2 id="tests">Tests</h2>
+<h2 id="tests">Tests<a class="headerlink" href="#tests" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Unit tests: mapping, client refresh logic, and credential encryption/decryption.</li>
 <li>Integration tests: mock QBO responses validate enqueueing and idempotency behavior.</li>
 </ul>
-<h2 id="admin-debugging">Admin / Debugging</h2>
+<h2 id="admin-debugging">Admin / Debugging<a class="headerlink" href="#admin-debugging" title="Permanent link">&para;</a></h2>
 <ul>
 <li>To trigger a sync from server-side: <code>POST /api/qbo/sync</code> with header <code>x-api-key: &lt;org-api-key&gt;</code></li>
 <li>Check Redis Stream <code>raw_payloads:&lt;organizationId&gt;</code> for queued payloads</li>

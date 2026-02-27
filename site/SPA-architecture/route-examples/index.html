@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="../../css/theme.css" />
     <link rel="stylesheet" href="../../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../../stylesheets/extra.css" rel="stylesheet" />
     
       <script>
         // Current page data
@@ -43,7 +44,16 @@
                 <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
                 </li>
               </ul>
-              <p class="caption"><span class="caption-text">Products</span></p>
+              <p class="caption"><span class="caption-text">Start Here</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../ONBOARDING/">Onboarding</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../ARCHITECTURE/">Architecture</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../api-reference/">API Reference Hub</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Product Suite</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../products/">Overview</a>
                   </li>
@@ -66,7 +76,7 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../products/tracking-portal/">Tracking Portal</a>
                   </li>
               </ul>
-              <p class="caption"><span class="caption-text">Platform</span></p>
+              <p class="caption"><span class="caption-text">Platform Services</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../platform/">Overview</a>
                   </li>
@@ -87,12 +97,35 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../platform/bf-warehouse/">Warehouse Service</a>
                   </li>
               </ul>
+              <p class="caption"><span class="caption-text">Capability Catalog</span></p>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../../vision/bf-integration/">Vision</a>
-                </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/SHIPMENTS/">Shipments</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/ADMIN_CONSOLE/">Admin Console</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/CONTROL_TOWER/">Control Tower</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/IDENTITY/">Identity</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/MASTERDATA/">Masterdata</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/ORDERS/">Orders</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/WAREHOUSE/">Warehouse</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/SEARCH/">Search</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/FINTECH/">Fintech</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/CARRIER_PORTAL/">Carrier Portal</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/TRACKING_PORTAL/">Tracking Portal</a>
+                  </li>
               </ul>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../../api-reference/">API Reference</a>
+                <li class="toctree-l1"><a class="reference internal" href="../../vision/bf-integration/">Vision Archive</a>
                 </li>
               </ul>
       </div>
@@ -118,9 +151,9 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <h1 id="route-module-examples">Route Module Examples</h1>
+                <h1 id="route-module-examples">Route Module Examples<a class="headerlink" href="#route-module-examples" title="Permanent link">&para;</a></h1>
 <p>This document provides real-world examples of route modules from BridgeFlow.</p>
-<h2 id="simple-static-route">Simple Static Route</h2>
+<h2 id="simple-static-route">Simple Static Route<a class="headerlink" href="#simple-static-route" title="Permanent link">&para;</a></h2>
 <p><strong>File:</strong> <code>web/src/routes/admin-partner-queue.js</code></p>
 <pre><code class="language-javascript">export function render() {
   return `
@@ -134,7 +167,7 @@ export function cleanup() {}
 </code></pre>
 <p><strong>Use case:</strong> Placeholder page with no interactivity.</p>
 <hr />
-<h2 id="route-with-api-data">Route with API Data</h2>
+<h2 id="route-with-api-data">Route with API Data<a class="headerlink" href="#route-with-api-data" title="Permanent link">&para;</a></h2>
 <p><strong>File:</strong> <code>web/src/routes/infrastructure.js</code></p>
 <pre><code class="language-javascript">export function render() {
   return `
@@ -166,7 +199,7 @@ export function init() {
 </code></pre>
 <p><strong>Use case:</strong> Fetch and display data from API, with refresh button.</p>
 <hr />
-<h2 id="route-with-dynamic-imports">Route with Dynamic Imports</h2>
+<h2 id="route-with-dynamic-imports">Route with Dynamic Imports<a class="headerlink" href="#route-with-dynamic-imports" title="Permanent link">&para;</a></h2>
 <p><strong>File:</strong> <code>web/src/routes/canvas-assembly.js</code></p>
 <pre><code class="language-javascript">export function render() {
   return `
@@ -208,7 +241,7 @@ export function cleanup() {
 - Loads functionality on-demand
 - Better performance for users who never visit this page</p>
 <hr />
-<h2 id="route-with-parameters">Route with Parameters</h2>
+<h2 id="route-with-parameters">Route with Parameters<a class="headerlink" href="#route-with-parameters" title="Permanent link">&para;</a></h2>
 <p><strong>File:</strong> <code>web/src/routes/tp-profile.js</code></p>
 <pre><code class="language-javascript">export function render(tpId) {
   return `
@@ -250,7 +283,7 @@ if (tpMatch) {
 </code></pre>
 <p><strong>Use case:</strong> Detail pages with dynamic IDs in URL.</p>
 <hr />
-<h2 id="route-with-complex-state">Route with Complex State</h2>
+<h2 id="route-with-complex-state">Route with Complex State<a class="headerlink" href="#route-with-complex-state" title="Permanent link">&para;</a></h2>
 <p><strong>File:</strong> <code>web/src/routes/trading-partners.js</code></p>
 <pre><code class="language-javascript">// Module-level state
 let partners = []
@@ -329,7 +362,7 @@ export function cleanup() {
 </code></pre>
 <p><strong>Use case:</strong> List page with filtering, search, and local state management.</p>
 <hr />
-<h2 id="route-with-modal">Route with Modal</h2>
+<h2 id="route-with-modal">Route with Modal<a class="headerlink" href="#route-with-modal" title="Permanent link">&para;</a></h2>
 <p><strong>File:</strong> <code>web/src/routes/admin-users.js</code></p>
 <pre><code class="language-javascript">let currentModal = null
 
@@ -433,7 +466,7 @@ export function cleanup() {
 </code></pre>
 <p><strong>Use case:</strong> CRUD interface with modal dialogs.</p>
 <hr />
-<h2 id="route-with-main-menu">Route with Main Menu</h2>
+<h2 id="route-with-main-menu">Route with Main Menu<a class="headerlink" href="#route-with-main-menu" title="Permanent link">&para;</a></h2>
 <p><strong>File:</strong> <code>web/src/routes/main-menu.js</code></p>
 <pre><code class="language-javascript">import { apiFetch } from '../apiClient.js'
 
@@ -495,8 +528,8 @@ function getMenuItemsForRole(role) {
 </code></pre>
 <p><strong>Use case:</strong> Home page that adapts to user's role.</p>
 <hr />
-<h2 id="key-patterns">Key Patterns</h2>
-<h3 id="pattern-1-loading-states">Pattern 1: Loading States</h3>
+<h2 id="key-patterns">Key Patterns<a class="headerlink" href="#key-patterns" title="Permanent link">&para;</a></h2>
+<h3 id="pattern-1-loading-states">Pattern 1: Loading States<a class="headerlink" href="#pattern-1-loading-states" title="Permanent link">&para;</a></h3>
 <pre><code class="language-javascript">export function render() {
   return `&lt;div id=&quot;content&quot;&gt;Loading...&lt;/div&gt;`
 }
@@ -509,7 +542,7 @@ export async function init() {
   el.innerHTML = renderData(data)
 }
 </code></pre>
-<h3 id="pattern-2-error-handling">Pattern 2: Error Handling</h3>
+<h3 id="pattern-2-error-handling">Pattern 2: Error Handling<a class="headerlink" href="#pattern-2-error-handling" title="Permanent link">&para;</a></h3>
 <pre><code class="language-javascript">export async function init() {
   try {
     const res = await fetch('/api/endpoint')
@@ -530,7 +563,7 @@ function renderError(message) {
   `
 }
 </code></pre>
-<h3 id="pattern-3-progressive-enhancement">Pattern 3: Progressive Enhancement</h3>
+<h3 id="pattern-3-progressive-enhancement">Pattern 3: Progressive Enhancement<a class="headerlink" href="#pattern-3-progressive-enhancement" title="Permanent link">&para;</a></h3>
 <pre><code class="language-javascript">export function render() {
   // Render basic content immediately
   return `
@@ -548,7 +581,7 @@ export async function init() {
   document.getElementById('dynamic-content').innerHTML = renderDynamic(data)
 }
 </code></pre>
-<h3 id="pattern-4-event-delegation">Pattern 4: Event Delegation</h3>
+<h3 id="pattern-4-event-delegation">Pattern 4: Event Delegation<a class="headerlink" href="#pattern-4-event-delegation" title="Permanent link">&para;</a></h3>
 <pre><code class="language-javascript">export function init() {
   // Instead of attaching listener to each item
   document.getElementById('item-list').addEventListener('click', (e) =&gt; {
@@ -560,7 +593,7 @@ export async function init() {
   })
 }
 </code></pre>
-<h3 id="pattern-5-cleanup">Pattern 5: Cleanup</h3>
+<h3 id="pattern-5-cleanup">Pattern 5: Cleanup<a class="headerlink" href="#pattern-5-cleanup" title="Permanent link">&para;</a></h3>
 <pre><code class="language-javascript">let intervalId = null
 
 export function init() {
@@ -579,14 +612,14 @@ export function cleanup() {
 }
 </code></pre>
 <hr />
-<h2 id="common-mistakes">Common Mistakes</h2>
-<h3 id="forgetting-to-export-functions">❌ Forgetting to export functions</h3>
+<h2 id="common-mistakes">Common Mistakes<a class="headerlink" href="#common-mistakes" title="Permanent link">&para;</a></h2>
+<h3 id="forgetting-to-export-functions">❌ Forgetting to export functions<a class="headerlink" href="#forgetting-to-export-functions" title="Permanent link">&para;</a></h3>
 <pre><code class="language-javascript">function render() { /* ... */ } // Missing 'export'
 </code></pre>
 <p><strong>Fix:</strong></p>
 <pre><code class="language-javascript">export function render() { /* ... */ }
 </code></pre>
-<h3 id="not-handling-missing-elements">❌ Not handling missing elements</h3>
+<h3 id="not-handling-missing-elements">❌ Not handling missing elements<a class="headerlink" href="#not-handling-missing-elements" title="Permanent link">&para;</a></h3>
 <pre><code class="language-javascript">export function init() {
   document.getElementById('btn').addEventListener('click', handler)
   // Error if #btn doesn't exist!
@@ -598,7 +631,7 @@ export function cleanup() {
   if (btn) btn.addEventListener('click', handler)
 }
 </code></pre>
-<h3 id="memory-leaks-from-event-listeners">❌ Memory leaks from event listeners</h3>
+<h3 id="memory-leaks-from-event-listeners">❌ Memory leaks from event listeners<a class="headerlink" href="#memory-leaks-from-event-listeners" title="Permanent link">&para;</a></h3>
 <pre><code class="language-javascript">export function init() {
   window.addEventListener('resize', handleResize)
   // Never removed!
@@ -613,7 +646,7 @@ export function cleanup() {
   window.removeEventListener('resize', handleResize)
 }
 </code></pre>
-<h3 id="modifying-global-scope">❌ Modifying global scope</h3>
+<h3 id="modifying-global-scope">❌ Modifying global scope<a class="headerlink" href="#modifying-global-scope" title="Permanent link">&para;</a></h3>
 <pre><code class="language-javascript">export function init() {
   window.myData = []
   // Pollutes global scope
@@ -627,7 +660,7 @@ export function cleanup() {
 }
 </code></pre>
 <hr />
-<h2 id="testing-route-modules">Testing Route Modules</h2>
+<h2 id="testing-route-modules">Testing Route Modules<a class="headerlink" href="#testing-route-modules" title="Permanent link">&para;</a></h2>
 <pre><code class="language-javascript">// test/routes/example.test.js
 import { describe, it, expect } from 'vitest'
 import * as exampleRoute from '../../web/src/routes/example.js'

@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="../../css/theme.css" />
     <link rel="stylesheet" href="../../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../../stylesheets/extra.css" rel="stylesheet" />
     
       <script>
         // Current page data
@@ -43,7 +44,16 @@
                 <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
                 </li>
               </ul>
-              <p class="caption"><span class="caption-text">Products</span></p>
+              <p class="caption"><span class="caption-text">Start Here</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../ONBOARDING/">Onboarding</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../ARCHITECTURE/">Architecture</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../api-reference/">API Reference Hub</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Product Suite</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../products/">Overview</a>
                   </li>
@@ -66,7 +76,7 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../products/tracking-portal/">Tracking Portal</a>
                   </li>
               </ul>
-              <p class="caption"><span class="caption-text">Platform</span></p>
+              <p class="caption"><span class="caption-text">Platform Services</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../platform/">Overview</a>
                   </li>
@@ -87,12 +97,35 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../platform/bf-warehouse/">Warehouse Service</a>
                   </li>
               </ul>
+              <p class="caption"><span class="caption-text">Capability Catalog</span></p>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../../vision/bf-integration/">Vision</a>
-                </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/SHIPMENTS/">Shipments</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/ADMIN_CONSOLE/">Admin Console</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/CONTROL_TOWER/">Control Tower</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/IDENTITY/">Identity</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/MASTERDATA/">Masterdata</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/ORDERS/">Orders</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/WAREHOUSE/">Warehouse</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/SEARCH/">Search</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/FINTECH/">Fintech</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/CARRIER_PORTAL/">Carrier Portal</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/TRACKING_PORTAL/">Tracking Portal</a>
+                  </li>
               </ul>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../../api-reference/">API Reference</a>
+                <li class="toctree-l1"><a class="reference internal" href="../../vision/bf-integration/">Vision Archive</a>
                 </li>
               </ul>
       </div>
@@ -118,18 +151,18 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <h1 id="test-suite-stabilization-january-2026">Test Suite Stabilization (January 2026)</h1>
+                <h1 id="test-suite-stabilization-january-2026">Test Suite Stabilization (January 2026)<a class="headerlink" href="#test-suite-stabilization-january-2026" title="Permanent link">&para;</a></h1>
 <p><strong>Status</strong>: In Progress<br />
 <strong>Priority</strong>: Critical<br />
 <strong>Phase</strong>: Pre-Phase 32 (blocking feature work)</p>
-<h2 id="overview">Overview</h2>
+<h2 id="overview">Overview<a class="headerlink" href="#overview" title="Permanent link">&para;</a></h2>
 <p>The BridgeFlow test suite is experiencing widespread failures across ~40+ test files. Root cause analysis reveals two primary patterns:
 1. Incorrect Prisma schema usage in handlers (field type mismatches)
 2. Test isolation issues (missing database seeding, hardcoded user IDs)</p>
 <p>This document tracks identified issues and fixes applied.</p>
 <hr />
-<h2 id="issues-identified">Issues Identified</h2>
-<h3 id="issue-1-userorganization-role-type-mismatch-fixed">Issue 1: UserOrganization Role Type Mismatch ✅ FIXED</h3>
+<h2 id="issues-identified">Issues Identified<a class="headerlink" href="#issues-identified" title="Permanent link">&para;</a></h2>
+<h3 id="issue-1-userorganization-role-type-mismatch-fixed">Issue 1: UserOrganization Role Type Mismatch ✅ FIXED<a class="headerlink" href="#issue-1-userorganization-role-type-mismatch-fixed" title="Permanent link">&para;</a></h3>
 <p><strong>Problem</strong>: Handlers were passing <code>role</code> as string (<code>'OWNER'</code>, <code>'MEMBER'</code>) to <code>userOrganization.create()</code>, but Prisma schema expects <code>String[]</code> (array).</p>
 <p><strong>Error Message</strong>:</p>
 <pre><code>Argument `role`: Invalid value provided. Expected UserOrganizationCreateroleInput or String[], provided String.
@@ -145,7 +178,7 @@
 - Updated ensureOwner to check array: <code>role: { has: 'OWNER' }</code></p>
 <p><strong>Commit Reference</strong>: Direct push to main</p>
 <hr />
-<h3 id="issue-2-isdocumentstuck-logic-incomplete-fixed">Issue 2: isDocumentStuck() Logic Incomplete ✅ FIXED</h3>
+<h3 id="issue-2-isdocumentstuck-logic-incomplete-fixed">Issue 2: isDocumentStuck() Logic Incomplete ✅ FIXED<a class="headerlink" href="#issue-2-isdocumentstuck-logic-incomplete-fixed" title="Permanent link">&para;</a></h3>
 <p><strong>Problem</strong>: Dashboard health tests failing because <code>isDocumentStuck()</code> didn't handle explicit <code>status === 'STUCK'</code> documents.</p>
 <p><strong>Behavior</strong>:
 - Function only checked if <code>status !== 'RECEIVED'</code> and age &gt; 2 min
@@ -164,7 +197,7 @@ if (doc.status !== 'RECEIVED') return false
 </code></pre>
 <p><strong>Impact</strong>: Dashboard tests now 2/4 passing (up from 0/4)</p>
 <hr />
-<h3 id="issue-3-healthjs-invalid-deliveryjob-field-fixed">Issue 3: Health.js Invalid DeliveryJob Field ✅ FIXED</h3>
+<h3 id="issue-3-healthjs-invalid-deliveryjob-field-fixed">Issue 3: Health.js Invalid DeliveryJob Field ✅ FIXED<a class="headerlink" href="#issue-3-healthjs-invalid-deliveryjob-field-fixed" title="Permanent link">&para;</a></h3>
 <p><strong>Problem</strong>: Health check handler selecting non-existent <code>state</code> field from DeliveryJob model.</p>
 <p><strong>Error Message</strong>:</p>
 <pre><code>Unknown field `state` for select statement on model `DeliveryJob`. Available options are marked with ?.
@@ -176,7 +209,7 @@ if (doc.status !== 'RECEIVED') return false
 - Updated response mapping from <code>state: job.state</code> → <code>status: job.status</code></p>
 <p><strong>Commit Reference</strong>: Direct push to main</p>
 <hr />
-<h3 id="issue-4-test-isolation-missing-database-seeding-in-progress">Issue 4: Test Isolation - Missing Database Seeding 🚧 IN PROGRESS</h3>
+<h3 id="issue-4-test-isolation-missing-database-seeding-in-progress">Issue 4: Test Isolation - Missing Database Seeding 🚧 IN PROGRESS<a class="headerlink" href="#issue-4-test-isolation-missing-database-seeding-in-progress" title="Permanent link">&para;</a></h3>
 <p><strong>Problem</strong>: ~40 test files use hardcoded user IDs (<code>'userA'</code>, <code>'u1'</code>, <code>'admin@example.com'</code>) that don't exist in PostgreSQL test database.</p>
 <p><strong>Symptoms</strong>:
 - Auth middleware returns 401 instead of 201/400/404
@@ -255,15 +288,15 @@ describe('My Feature', () =&gt; {
 </code></pre>
 <p><strong>Status</strong>: Not yet applied to failing tests</p>
 <hr />
-<h3 id="issue-5-process-exit-code-3221225477-windows-memory-error-investigating">Issue 5: Process Exit Code 3221225477 (Windows Memory Error) 🔍 INVESTIGATING</h3>
+<h3 id="issue-5-process-exit-code-3221225477-windows-memory-error-investigating">Issue 5: Process Exit Code 3221225477 (Windows Memory Error) 🔍 INVESTIGATING<a class="headerlink" href="#issue-5-process-exit-code-3221225477-windows-memory-error-investigating" title="Permanent link">&para;</a></h3>
 <p><strong>Problem</strong>: Test process crashes at end with exit code 3221225477 (0xC0000005 = ACCESS_VIOLATION).</p>
 <p><strong>Occurs</strong>: After all tests complete successfully, during process cleanup.</p>
 <p><strong>Likely Cause</strong>: Native library cleanup issue with Prisma library engine on Windows, possible unbounded connection handling.</p>
 <p><strong>Current Workaround</strong>: Errors are semantic (auth/logic), not infrastructure - fixing test isolation will likely resolve cascading failures.</p>
 <p><strong>Status</strong>: Will investigate after test seeding issues resolved.</p>
 <hr />
-<h2 id="test-results-summary">Test Results Summary</h2>
-<h3 id="passing">Passing ✅</h3>
+<h2 id="test-results-summary">Test Results Summary<a class="headerlink" href="#test-results-summary" title="Permanent link">&para;</a></h2>
+<h3 id="passing">Passing ✅<a class="headerlink" href="#passing" title="Permanent link">&para;</a></h3>
 <ul>
 <li><code>api/tests/users.test.js</code>: 5/5</li>
 <li><code>api/tests/alerts.unit.test.js</code>: 3/3</li>
@@ -271,7 +304,7 @@ describe('My Feature', () =&gt; {
 <li><code>api/tests/secretManager.test.js</code>: 9/9</li>
 <li><code>api/tests/dashboard.integration.test.js</code>: 3/3</li>
 </ul>
-<h3 id="partially-passing">Partially Passing 🟡</h3>
+<h3 id="partially-passing">Partially Passing 🟡<a class="headerlink" href="#partially-passing" title="Permanent link">&para;</a></h3>
 <ul>
 <li><code>api/tests/dashboard.unit.test.js</code>: 4/5</li>
 <li>✓ should return OK health with no stuck or failed documents</li>
@@ -279,7 +312,7 @@ describe('My Feature', () =&gt; {
 <li>✓ should return CRITICAL health with many stuck documents</li>
 <li>✗ should show system-wide stats for BF employees (expected ≥2 recent activity, got 1)</li>
 </ul>
-<h3 id="failing">Failing ❌</h3>
+<h3 id="failing">Failing ❌<a class="headerlink" href="#failing" title="Permanent link">&para;</a></h3>
 <ul>
 <li><code>api/tests/templates.integration.test.js</code>: 0/4 (all 401 auth errors)</li>
 <li><code>api/tests/tradingPartners.test.js</code>: 0/3 (500 org creation, 401 auth)</li>
@@ -287,8 +320,8 @@ describe('My Feature', () =&gt; {
 <li>And ~30+ more files with similar patterns</li>
 </ul>
 <hr />
-<h2 id="critical-pattern-discovery">Critical Pattern Discovery</h2>
-<h3 id="prisma-connection-pool-visibility-issue-production-grade-anomaly">Prisma Connection Pool Visibility Issue (Production-Grade Anomaly)</h3>
+<h2 id="critical-pattern-discovery">Critical Pattern Discovery<a class="headerlink" href="#critical-pattern-discovery" title="Permanent link">&para;</a></h2>
+<h3 id="prisma-connection-pool-visibility-issue-production-grade-anomaly">Prisma Connection Pool Visibility Issue (Production-Grade Anomaly)<a class="headerlink" href="#prisma-connection-pool-visibility-issue-production-grade-anomaly" title="Permanent link">&para;</a></h3>
 <p><strong>ROOT CAUSE:</strong> Import-time <code>resetTestDatabase()</code> calls in EVERY test file create race conditions when vitest loads files for dependency analysis, even with <code>VITEST_POOL=single</code>.</p>
 <p><strong>Symptoms:</strong>
 - Same Prisma client, same org ID, same process
@@ -339,7 +372,7 @@ beforeAll(async () =&gt; {
 - Ensures DB reset happens synchronously before each test, not at random import time
 - Pattern: Tests should NEVER have side effects at import/module level</p>
 <hr />
-<h3 id="userorganization-role-type-cascade">UserOrganization Role Type Cascade</h3>
+<h3 id="userorganization-role-type-cascade">UserOrganization Role Type Cascade<a class="headerlink" href="#userorganization-role-type-cascade" title="Permanent link">&para;</a></h3>
 <p>This was THE critical issue multiplying across the codebase. The Prisma schema defines <code>role</code> as <code>String[]</code> (array), but code was treating it as a single string in THREE contexts:</p>
 <ol>
 <li><strong>Creating</strong> UserOrganization: <code>role: 'OWNER'</code> → MUST be <code>role: ['OWNER']</code></li>
@@ -452,15 +485,15 @@ beforeAll(async () =&gt; {
 </tbody>
 </table>
 <hr />
-<h2 id="next-steps">Next Steps</h2>
-<h3 id="phase-1-complete-dashboard-test-isolation-proven">✅ Phase 1 Complete: Dashboard Test Isolation Proven</h3>
+<h2 id="next-steps">Next Steps<a class="headerlink" href="#next-steps" title="Permanent link">&para;</a></h2>
+<h3 id="phase-1-complete-dashboard-test-isolation-proven">✅ Phase 1 Complete: Dashboard Test Isolation Proven<a class="headerlink" href="#phase-1-complete-dashboard-test-isolation-proven" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>dashboard.unit.test.js</strong>: 5/5 passing (100% success rate)</li>
 <li>Pattern proven: <code>beforeAll(() =&gt; resetTestDatabase())</code> eliminates import-time race conditions</li>
 <li>Zero timing delays, zero flakiness, deterministic execution</li>
 <li>Execution time: 550ms for all 5 tests</li>
 </ul>
-<h3 id="priority-1-phase-2-batch-apply-pattern-to-all-test-files">Priority 1: Phase 2 - Batch Apply Pattern to All Test Files</h3>
+<h3 id="priority-1-phase-2-batch-apply-pattern-to-all-test-files">Priority 1: Phase 2 - Batch Apply Pattern to All Test Files<a class="headerlink" href="#priority-1-phase-2-batch-apply-pattern-to-all-test-files" title="Permanent link">&para;</a></h3>
 <p><strong>Target:</strong> Refactor 40+ test files to move <code>resetTestDatabase()</code> from module scope to <code>beforeAll()</code></p>
 <p><strong>High-Priority Files</strong> (blocking features):
 1. templates.integration.test.js (0/4 passing)
@@ -479,32 +512,32 @@ beforeAll(async () =&gt; {
 })
 </code></pre>
 <p><strong>Decision:</strong> Use <code>beforeAll()</code> for files where each test creates isolated data (org/user). Use <code>beforeEach()</code> if tests share/modify entities.</p>
-<h3 id="priority-2-test-factory-integration">Priority 2: Test Factory Integration</h3>
+<h3 id="priority-2-test-factory-integration">Priority 2: Test Factory Integration<a class="headerlink" href="#priority-2-test-factory-integration" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Apply <code>testOrgUser.js</code> helpers to new tests</li>
 <li>Pattern: <code>const { org, user } = await createTestOrgUser(prisma, options)</code></li>
 <li>Eliminates hardcoded user IDs, ensures UserOrganization membership</li>
 </ul>
-<h3 id="priority-3-eliminate-remaining-infrastructure-bugs">Priority 3: Eliminate Remaining Infrastructure Bugs</h3>
+<h3 id="priority-3-eliminate-remaining-infrastructure-bugs">Priority 3: Eliminate Remaining Infrastructure Bugs<a class="headerlink" href="#priority-3-eliminate-remaining-infrastructure-bugs" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Monitor test suite for new flakiness after Phase 2 refactor</li>
 <li>Track Windows exit code 3221225477 (low priority - doesn't affect test semantics)</li>
 <li>Target: &lt;5% overall failure rate before Phase 32 feature work</li>
 </ul>
-<h3 id="priority-4-fix-mappingsvalidation-tests">Priority 4: Fix Mappings/Validation Tests</h3>
+<h3 id="priority-4-fix-mappingsvalidation-tests">Priority 4: Fix Mappings/Validation Tests<a class="headerlink" href="#priority-4-fix-mappingsvalidation-tests" title="Permanent link">&para;</a></h3>
 <ul>
 <li>[ ] mappings.rbac.test.js (10+ failures)</li>
 <li>[ ] validation-rules.test.js</li>
 <li>Add: Role/permission seeding + org membership</li>
 </ul>
-<h3 id="priority-5-fix-monitorsecretsrate-limit-tests">Priority 5: Fix Monitor/Secrets/Rate-Limit Tests</h3>
+<h3 id="priority-5-fix-monitorsecretsrate-limit-tests">Priority 5: Fix Monitor/Secrets/Rate-Limit Tests<a class="headerlink" href="#priority-5-fix-monitorsecretsrate-limit-tests" title="Permanent link">&para;</a></h3>
 <ul>
 <li>[ ] monitor.test.js</li>
 <li>[ ] secrets.test.js</li>
 <li>[ ] rate-limit.test.js</li>
 <li>Pattern: Replace hardcoded IDs with real Prisma-seeded users</li>
 </ul>
-<h3 id="success-criteria">Success Criteria</h3>
+<h3 id="success-criteria">Success Criteria<a class="headerlink" href="#success-criteria" title="Permanent link">&para;</a></h3>
 <ul>
 <li>[ ] All unit tests pass locally (0 failures)</li>
 <li>[ ] All integration tests pass against PostgreSQL (0 failures)</li>
@@ -513,7 +546,7 @@ beforeAll(async () =&gt; {
 <li>[ ] Ready to proceed with Phase 32 feature work</li>
 </ul>
 <hr />
-<h2 id="references">References</h2>
+<h2 id="references">References<a class="headerlink" href="#references" title="Permanent link">&para;</a></h2>
 <ul>
 <li><strong>Auth Middleware</strong>: <code>api/handlers/auth.js</code> - Validates user.orgIds, assigns UserOrganization records</li>
 <li><strong>Test Pattern (Proven)</strong>: <code>api/tests/users.test.js</code> - Implements seedUsers() with full isolation</li>
@@ -521,7 +554,7 @@ beforeAll(async () =&gt; {
 <li><strong>Copilot Instructions</strong>: <code>docs/breakfixes/</code> - Detailed Phase 32 readiness criteria</li>
 </ul>
 <hr />
-<h2 id="notes">Notes</h2>
+<h2 id="notes">Notes<a class="headerlink" href="#notes" title="Permanent link">&para;</a></h2>
 <ul>
 <li>All fixes maintain backward compatibility</li>
 <li>Fixes are schema-aligned (no migrations needed)</li>

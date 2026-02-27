@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="../../css/theme.css" />
     <link rel="stylesheet" href="../../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../../stylesheets/extra.css" rel="stylesheet" />
     
       <script>
         // Current page data
@@ -43,7 +44,16 @@
                 <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
                 </li>
               </ul>
-              <p class="caption"><span class="caption-text">Products</span></p>
+              <p class="caption"><span class="caption-text">Start Here</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../ONBOARDING/">Onboarding</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../ARCHITECTURE/">Architecture</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../api-reference/">API Reference Hub</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Product Suite</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../products/">Overview</a>
                   </li>
@@ -66,7 +76,7 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../products/tracking-portal/">Tracking Portal</a>
                   </li>
               </ul>
-              <p class="caption"><span class="caption-text">Platform</span></p>
+              <p class="caption"><span class="caption-text">Platform Services</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../platform/">Overview</a>
                   </li>
@@ -87,12 +97,35 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../platform/bf-warehouse/">Warehouse Service</a>
                   </li>
               </ul>
+              <p class="caption"><span class="caption-text">Capability Catalog</span></p>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../../vision/bf-integration/">Vision</a>
-                </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/SHIPMENTS/">Shipments</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/ADMIN_CONSOLE/">Admin Console</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/CONTROL_TOWER/">Control Tower</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/IDENTITY/">Identity</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/MASTERDATA/">Masterdata</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/ORDERS/">Orders</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/WAREHOUSE/">Warehouse</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/SEARCH/">Search</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/FINTECH/">Fintech</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/CARRIER_PORTAL/">Carrier Portal</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/TRACKING_PORTAL/">Tracking Portal</a>
+                  </li>
               </ul>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../../api-reference/">API Reference</a>
+                <li class="toctree-l1"><a class="reference internal" href="../../vision/bf-integration/">Vision Archive</a>
                 </li>
               </ul>
       </div>
@@ -118,9 +151,9 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <h1 id="blueprints-canvas-integration">Blueprints: Canvas Integration</h1>
+                <h1 id="blueprints-canvas-integration">Blueprints: Canvas Integration<a class="headerlink" href="#blueprints-canvas-integration" title="Permanent link">&para;</a></h1>
 <p>The Bridge Canvas (<code>/canvas-assembly</code>) is the primary interface for consuming Blueprints.</p>
-<h2 id="architecture">Architecture</h2>
+<h2 id="architecture">Architecture<a class="headerlink" href="#architecture" title="Permanent link">&para;</a></h2>
 <p>The integration consists of three key phases:</p>
 <ol>
 <li><strong>Catalog Selection</strong> (<code>gallery.js</code>)</li>
@@ -128,13 +161,13 @@
 <li><strong>Gap-Filling &amp; Configuration</strong> (<code>assembly.js</code>)</li>
 <li><strong>Deployment</strong> (<code>deployBridge.js</code>)</li>
 </ol>
-<h3 id="1-dynamic-catalog-galleryjs">1. Dynamic Catalog (<code>gallery.js</code>)</h3>
+<h3 id="1-dynamic-catalog-galleryjs">1. Dynamic Catalog (<code>gallery.js</code>)<a class="headerlink" href="#1-dynamic-catalog-galleryjs" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Source</strong>: Fetches from <code>GET /api/blueprints</code>.</li>
 <li><strong>UI</strong>: Displayed as a modal overlay over the canvas.</li>
 <li><strong>Selection</strong>: User clicks "Select", which loads the blueprint template into the assembly engine.</li>
 </ul>
-<h3 id="2-bridge-outline-visualization-assemblyjs">2. Bridge Outline Visualization (<code>assembly.js</code>)</h3>
+<h3 id="2-bridge-outline-visualization-assemblyjs">2. Bridge Outline Visualization (<code>assembly.js</code>)<a class="headerlink" href="#2-bridge-outline-visualization-assemblyjs" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>New in Phase 32</strong>: Blueprints render as interactive bridge skeleton instead of component tiles</li>
 <li><strong>Function</strong>: <code>renderBridgeOutline()</code> creates visual metaphor of incomplete integration</li>
@@ -144,14 +177,14 @@
 <li>Optional slots: Gray dashed circles (static)</li>
 <li>Filled slots: Solid borders with component icons</li>
 </ul>
-<h3 id="3-gap-filling-workflow-assemblyjs">3. Gap-Filling Workflow (<code>assembly.js</code>)</h3>
+<h3 id="3-gap-filling-workflow-assemblyjs">3. Gap-Filling Workflow (<code>assembly.js</code>)<a class="headerlink" href="#3-gap-filling-workflow-assemblyjs" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Bridge Slots</strong>: Click orange/gray circles to open configuration modals</li>
 <li><strong>Component Creation</strong>: Configured resources replace empty slots in the bridge outline</li>
 <li><strong>Visual Progress</strong>: Bridge appears to "build" as slots are filled</li>
 <li><strong>State Management</strong>: Tracks which bridge positions are configured</li>
 </ul>
-<h3 id="4-deployment-deploybridgejs">4. Deployment (<code>deployBridge.js</code>)</h3>
+<h3 id="4-deployment-deploybridgejs">4. Deployment (<code>deployBridge.js</code>)<a class="headerlink" href="#4-deployment-deploybridgejs" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Trigger</strong>: "Activate Bridge" button.</li>
 <li><strong>Validation</strong>: Checks that all required bridge slots are filled</li>
@@ -160,71 +193,71 @@
 <li>Calls <code>POST /api/bridges/:id/activate</code> with UserBridge data</li>
 <li>Backend provisions the integration package</li>
 </ul>
-<h2 id="bridge-outline-implementation">🌉 Bridge Outline Implementation</h2>
-<h3 id="rendering-function">Rendering Function</h3>
+<h2 id="bridge-outline-implementation">🌉 Bridge Outline Implementation<a class="headerlink" href="#bridge-outline-implementation" title="Permanent link">&para;</a></h2>
+<h3 id="rendering-function">Rendering Function<a class="headerlink" href="#rendering-function" title="Permanent link">&para;</a></h3>
 <pre><code class="language-javascript">renderBridgeOutline(template) {
   // Creates SVG bridge skeleton
   // Positions interactive slots at key points
   // Maps blueprint.required to slot colors
 }
 </code></pre>
-<h3 id="slot-configuration">Slot Configuration</h3>
+<h3 id="slot-configuration">Slot Configuration<a class="headerlink" href="#slot-configuration" title="Permanent link">&para;</a></h3>
 <pre><code class="language-javascript">const slotMappings = [
   { type: 'source', label: 'Source System', required: true },
   { type: 'transform', label: 'Data Transform', required: false },
   { type: 'destination', label: 'Destination', required: true }
 ];
 </code></pre>
-<h3 id="interactive-elements">Interactive Elements</h3>
+<h3 id="interactive-elements">Interactive Elements<a class="headerlink" href="#interactive-elements" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Click handlers</strong>: <code>triggerBridgeSlotConfiguration()</code></li>
 <li><strong>Hover effects</strong>: Scale and background color transitions</li>
 <li><strong>Accessibility</strong>: ARIA labels, keyboard navigation, high contrast</li>
 </ul>
-<h2 id="updated-user-workflow">🔄 Updated User Workflow</h2>
-<h3 id="traditional-phase-31">Traditional (Phase 31)</h3>
+<h2 id="updated-user-workflow">🔄 Updated User Workflow<a class="headerlink" href="#updated-user-workflow" title="Permanent link">&para;</a></h2>
+<h3 id="traditional-phase-31">Traditional (Phase 31)<a class="headerlink" href="#traditional-phase-31" title="Permanent link">&para;</a></h3>
 <ol>
 <li>Load blueprint → Ghost component tiles appear</li>
 <li>Click ghost tiles → Configure each component</li>
 <li>Validate → Deploy bridge</li>
 </ol>
-<h3 id="bridge-outline-phase-32">Bridge Outline (Phase 32+)</h3>
+<h3 id="bridge-outline-phase-32">Bridge Outline (Phase 32+)<a class="headerlink" href="#bridge-outline-phase-32" title="Permanent link">&para;</a></h3>
 <ol>
 <li>Load blueprint → Interactive bridge skeleton appears</li>
 <li>Click orange/gray slots → Configure required/optional components</li>
 <li>Bridge visually "builds" as slots are filled</li>
 <li>Validate → Deploy bridge</li>
 </ol>
-<h2 id="ux-improvements">🎨 UX Improvements</h2>
-<h3 id="visual-clarity">Visual Clarity</h3>
+<h2 id="ux-improvements">🎨 UX Improvements<a class="headerlink" href="#ux-improvements" title="Permanent link">&para;</a></h2>
+<h3 id="visual-clarity">Visual Clarity<a class="headerlink" href="#visual-clarity" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Before</strong>: Static tiles felt "complete" even when empty</li>
 <li><strong>After</strong>: Empty bridge outline clearly shows "needs configuration"</li>
 </ul>
-<h3 id="spatial-understanding">Spatial Understanding</h3>
+<h3 id="spatial-understanding">Spatial Understanding<a class="headerlink" href="#spatial-understanding" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Before</strong>: Linear list of components</li>
 <li><strong>After</strong>: Spatial layout matches data flow direction</li>
 </ul>
-<h3 id="progress-visualization">Progress Visualization</h3>
+<h3 id="progress-visualization">Progress Visualization<a class="headerlink" href="#progress-visualization" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Before</strong>: Badge-based status indicators</li>
 <li><strong>After</strong>: Bridge visually "constructs" as configured</li>
 </ul>
-<h2 id="technical-implementation">🛠 Technical Implementation</h2>
-<h3 id="key-functions">Key Functions</h3>
+<h2 id="technical-implementation">🛠 Technical Implementation<a class="headerlink" href="#technical-implementation" title="Permanent link">&para;</a></h2>
+<h3 id="key-functions">Key Functions<a class="headerlink" href="#key-functions" title="Permanent link">&para;</a></h3>
 <ul>
 <li><code>renderBridgeOutline(template)</code> - Main rendering function</li>
 <li><code>triggerBridgeSlotConfiguration(slotType, isRequired, blueprint)</code> - Gap filling logic</li>
 <li><code>loadBlueprintToCanvas(template)</code> - Entry point from gallery</li>
 </ul>
-<h3 id="css-classes">CSS Classes</h3>
+<h3 id="css-classes">CSS Classes<a class="headerlink" href="#css-classes" title="Permanent link">&para;</a></h3>
 <ul>
 <li><code>.bridge-outline</code> - Container for bridge SVG</li>
 <li><code>.bridge-slot</code> - Interactive slot (required)</li>
 <li><code>.bridge-slot.optional</code> - Interactive slot (optional)</li>
 </ul>
-<h3 id="data-flow">Data Flow</h3>
+<h3 id="data-flow">Data Flow<a class="headerlink" href="#data-flow" title="Permanent link">&para;</a></h3>
 <ol>
 <li>Blueprint selection → <code>loadBlueprintToCanvas()</code></li>
 <li><code>renderBridgeOutline()</code> → Creates visual skeleton</li>
@@ -232,26 +265,26 @@
 <li>Component configuration → Updates bridge visualization</li>
 <li>All slots filled → Bridge ready for deployment</li>
 </ol>
-<h2 id="frontend-components">📱 Frontend Components</h2>
-<h3 id="files-modified">Files Modified</h3>
+<h2 id="frontend-components">📱 Frontend Components<a class="headerlink" href="#frontend-components" title="Permanent link">&para;</a></h2>
+<h3 id="files-modified">Files Modified<a class="headerlink" href="#files-modified" title="Permanent link">&para;</a></h3>
 <ul>
 <li><code>web/src/assembly.js</code> - Main canvas logic</li>
 <li><code>web/src/features/canvas-assembly/blueprints/gallery.js</code> - Blueprint catalog</li>
 <li><code>web/test-bridge-outline.html</code> - Visual test page</li>
 </ul>
-<h3 id="browser-compatibility">Browser Compatibility</h3>
+<h3 id="browser-compatibility">Browser Compatibility<a class="headerlink" href="#browser-compatibility" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Modern browsers (Chrome 90+, Firefox 88+, Safari 14+)</li>
 <li>SVG rendering support required</li>
 <li>CSS animations and transitions</li>
 </ul>
-<h2 id="backend-integration">🔧 Backend Integration</h2>
-<h3 id="api-endpoints">API Endpoints</h3>
+<h2 id="backend-integration">🔧 Backend Integration<a class="headerlink" href="#backend-integration" title="Permanent link">&para;</a></h2>
+<h3 id="api-endpoints">API Endpoints<a class="headerlink" href="#api-endpoints" title="Permanent link">&para;</a></h3>
 <ul>
 <li><code>GET /api/blueprints</code> - Fetch available blueprints</li>
 <li><code>POST /api/bridges/:id/activate</code> - Deploy configured bridge</li>
 </ul>
-<h3 id="data-model">Data Model</h3>
+<h3 id="data-model">Data Model<a class="headerlink" href="#data-model" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Blueprint <code>required</code> array determines slot colors</li>
 <li>Component mapping to bridge positions</li>

@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="../../../../../../css/theme.css" />
     <link rel="stylesheet" href="../../../../../../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../../../../../../stylesheets/extra.css" rel="stylesheet" />
     
       <script>
         // Current page data
@@ -43,7 +44,16 @@
                 <li class="toctree-l1"><a class="reference internal" href="../../../../../..">Home</a>
                 </li>
               </ul>
-              <p class="caption"><span class="caption-text">Products</span></p>
+              <p class="caption"><span class="caption-text">Start Here</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../ONBOARDING/">Onboarding</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../ARCHITECTURE/">Architecture</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../api-reference/">API Reference Hub</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Product Suite</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../../../../../products/">Overview</a>
                   </li>
@@ -66,7 +76,7 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../../../../../products/tracking-portal/">Tracking Portal</a>
                   </li>
               </ul>
-              <p class="caption"><span class="caption-text">Platform</span></p>
+              <p class="caption"><span class="caption-text">Platform Services</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../../../../../platform/">Overview</a>
                   </li>
@@ -87,12 +97,35 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../../../../../platform/bf-warehouse/">Warehouse Service</a>
                   </li>
               </ul>
+              <p class="caption"><span class="caption-text">Capability Catalog</span></p>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../../../../">Vision</a>
-                </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/SHIPMENTS/">Shipments</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/ADMIN_CONSOLE/">Admin Console</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/CONTROL_TOWER/">Control Tower</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/IDENTITY/">Identity</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/MASTERDATA/">Masterdata</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/ORDERS/">Orders</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/WAREHOUSE/">Warehouse</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/SEARCH/">Search</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/FINTECH/">Fintech</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/CARRIER_PORTAL/">Carrier Portal</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/TRACKING_PORTAL/">Tracking Portal</a>
+                  </li>
               </ul>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../../../../../../api-reference/">API Reference</a>
+                <li class="toctree-l1"><a class="reference internal" href="../../../../">Vision Archive</a>
                 </li>
               </ul>
       </div>
@@ -123,11 +156,11 @@
 Status: Planned / In Development
 Context: Original BF-INTEGRATION Vision (Pre-Phase 30)</p>
 </blockquote>
-<h1 id="phase-5-task-3-onboarding-flow-implementation-guide">Phase 5 Task 3: Onboarding Flow Implementation Guide</h1>
-<h2 id="overview">Overview</h2>
+<h1 id="phase-5-task-3-onboarding-flow-implementation-guide">Phase 5 Task 3: Onboarding Flow Implementation Guide<a class="headerlink" href="#phase-5-task-3-onboarding-flow-implementation-guide" title="Permanent link">&para;</a></h1>
+<h2 id="overview">Overview<a class="headerlink" href="#overview" title="Permanent link">&para;</a></h2>
 <p>This guide provides the complete implementation for the welcome/onboarding screen in BridgeFlow. The onboarding flow helps new users understand the platform and guides them through their first steps.</p>
-<h2 id="whats-included">What's Included</h2>
-<h3 id="1-welcome-screen-webwelcomehtml">1. Welcome Screen (<code>web/welcome.html</code>)</h3>
+<h2 id="whats-included">What's Included<a class="headerlink" href="#whats-included" title="Permanent link">&para;</a></h2>
+<h3 id="1-welcome-screen-webwelcomehtml">1. Welcome Screen (<code>web/welcome.html</code>)<a class="headerlink" href="#1-welcome-screen-webwelcomehtml" title="Permanent link">&para;</a></h3>
 <p>A comprehensive onboarding page that includes:
 - <strong>User Profile Display</strong>: Shows user's name, email, and initials in a gradient avatar
 - <strong>3-Step Getting Started Guide</strong>: 
@@ -137,17 +170,17 @@ Context: Original BF-INTEGRATION Vision (Pre-Phase 30)</p>
 - <strong>Feature Highlights</strong>: Showcases key BridgeFlow capabilities
 - <strong>Quick Navigation Links</strong>: Easy access to all main pages
 - <strong>Continue to Dashboard</strong>: Primary CTA to proceed</p>
-<h3 id="2-welcome-page-logic-websrcwelcomejs">2. Welcome Page Logic (<code>web/src/welcome.js</code>)</h3>
+<h3 id="2-welcome-page-logic-websrcwelcomejs">2. Welcome Page Logic (<code>web/src/welcome.js</code>)<a class="headerlink" href="#2-welcome-page-logic-websrcwelcomejs" title="Permanent link">&para;</a></h3>
 <p>JavaScript that handles:
 - Fetching user information from <code>/api/auth/me</code>
 - Displaying user's name and email
 - Generating user initials for avatar
 - Authentication redirect (if not logged in)
 - Optional analytics tracking for step clicks</p>
-<h3 id="3-updated-registration-flow-websrcregisterjs">3. Updated Registration Flow (<code>web/src/register.js</code>)</h3>
+<h3 id="3-updated-registration-flow-websrcregisterjs">3. Updated Registration Flow (<code>web/src/register.js</code>)<a class="headerlink" href="#3-updated-registration-flow-websrcregisterjs" title="Permanent link">&para;</a></h3>
 <p>Modified to redirect new users to the welcome page instead of directly to the dashboard.</p>
-<h2 id="file-changes-required">File Changes Required</h2>
-<h3 id="file-1-create-webwelcomehtml">File 1: Create <code>web/welcome.html</code></h3>
+<h2 id="file-changes-required">File Changes Required<a class="headerlink" href="#file-changes-required" title="Permanent link">&para;</a></h2>
+<h3 id="file-1-create-webwelcomehtml">File 1: Create <code>web/welcome.html</code><a class="headerlink" href="#file-1-create-webwelcomehtml" title="Permanent link">&para;</a></h3>
 <pre><code class="language-html">&lt;!doctype html&gt;
 &lt;html lang=&quot;en&quot;&gt;
 &lt;head&gt;
@@ -309,7 +342,7 @@ Context: Original BF-INTEGRATION Vision (Pre-Phase 30)</p>
 &lt;/body&gt;
 &lt;/html&gt;
 </code></pre>
-<h3 id="file-2-create-websrcwelcomejs">File 2: Create <code>web/src/welcome.js</code></h3>
+<h3 id="file-2-create-websrcwelcomejs">File 2: Create <code>web/src/welcome.js</code><a class="headerlink" href="#file-2-create-websrcwelcomejs" title="Permanent link">&para;</a></h3>
 <pre><code class="language-javascript">/**
  * Welcome/Onboarding page logic
  * Load and display user information after successful registration
@@ -382,7 +415,7 @@ actionButtons.forEach((button, index) =&gt; {
   })
 })
 </code></pre>
-<h3 id="file-3-update-websrcregisterjs">File 3: Update <code>web/src/register.js</code></h3>
+<h3 id="file-3-update-websrcregisterjs">File 3: Update <code>web/src/register.js</code><a class="headerlink" href="#file-3-update-websrcregisterjs" title="Permanent link">&para;</a></h3>
 <p>Change line 65 from:</p>
 <pre><code class="language-javascript">window.location.href = './canvas.html'
 </code></pre>
@@ -501,7 +534,7 @@ function showNotification(message, type = 'info') {
   }, 4000)
 }
 </code></pre>
-<h2 id="implementation-steps">Implementation Steps</h2>
+<h2 id="implementation-steps">Implementation Steps<a class="headerlink" href="#implementation-steps" title="Permanent link">&para;</a></h2>
 <ol>
 <li><strong>Add welcome.html</strong></li>
 <li>Navigate to your <code>web</code> folder</li>
@@ -535,44 +568,44 @@ function showNotification(message, type = 'info') {
    # 3. Should redirect to http://localhost:4000/welcome.html
    # 4. Click "Continue to Dashboard" to go to canvas.html
    ```</p>
-<h2 id="features-implemented">Features Implemented</h2>
-<h3 id="user-personalization">✅ User Personalization</h3>
+<h2 id="features-implemented">Features Implemented<a class="headerlink" href="#features-implemented" title="Permanent link">&para;</a></h2>
+<h3 id="user-personalization">✅ User Personalization<a class="headerlink" href="#user-personalization" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Displays user's name and email</li>
 <li>Shows initials in a gradient avatar</li>
 <li>Fallback to email initial if no name provided</li>
 </ul>
-<h3 id="clear-onboarding-steps">✅ Clear Onboarding Steps</h3>
+<h3 id="clear-onboarding-steps">✅ Clear Onboarding Steps<a class="headerlink" href="#clear-onboarding-steps" title="Permanent link">&para;</a></h3>
 <ul>
 <li>3-step guide with clear CTAs</li>
 <li>Direct links to key features</li>
 <li>Visual workflow cards (reuses existing CSS)</li>
 </ul>
-<h3 id="feature-education">✅ Feature Education</h3>
+<h3 id="feature-education">✅ Feature Education<a class="headerlink" href="#feature-education" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Highlights 4 main BridgeFlow capabilities</li>
 <li>Icons and descriptions for each feature</li>
 <li>Helps users understand platform value</li>
 </ul>
-<h3 id="easy-navigation">✅ Easy Navigation</h3>
+<h3 id="easy-navigation">✅ Easy Navigation<a class="headerlink" href="#easy-navigation" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Quick links to all main pages</li>
 <li>Primary CTA to continue to dashboard</li>
 <li>Note about accessing guide later</li>
 </ul>
-<h3 id="authentication-protection">✅ Authentication Protection</h3>
+<h3 id="authentication-protection">✅ Authentication Protection<a class="headerlink" href="#authentication-protection" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Redirects to login if not authenticated</li>
 <li>Fetches user data from <code>/api/auth/me</code></li>
 <li>Handles errors gracefully</li>
 </ul>
-<h2 id="design-consistency">Design Consistency</h2>
+<h2 id="design-consistency">Design Consistency<a class="headerlink" href="#design-consistency" title="Permanent link">&para;</a></h2>
 <p>The welcome screen uses existing BridgeFlow design patterns:
 - <strong>CSS Classes</strong>: Reuses <code>.canvas-app</code>, <code>.workflow-card</code>, <code>.btn</code>, etc.
 - <strong>Color Scheme</strong>: Matches existing accent colors and gradients
 - <strong>Responsive</strong>: Works on mobile and desktop (existing CSS handles this)
 - <strong>Icons</strong>: Uses emojis consistent with other pages</p>
-<h2 id="future-enhancements-optional">Future Enhancements (Optional)</h2>
+<h2 id="future-enhancements-optional">Future Enhancements (Optional)<a class="headerlink" href="#future-enhancements-optional" title="Permanent link">&para;</a></h2>
 <ol>
 <li><strong>Progress Tracking</strong>: Store which steps user has completed</li>
 <li><strong>Skip Option</strong>: Allow users to skip onboarding</li>
@@ -581,7 +614,7 @@ function showNotification(message, type = 'info') {
 <li><strong>Analytics</strong>: Track onboarding completion rates</li>
 <li><strong>Personalization</strong>: Customize based on user's role or industry</li>
 </ol>
-<h2 id="testing-checklist">Testing Checklist</h2>
+<h2 id="testing-checklist">Testing Checklist<a class="headerlink" href="#testing-checklist" title="Permanent link">&para;</a></h2>
 <ul>
 <li>[ ] New user registration redirects to welcome page</li>
 <li>[ ] Welcome page displays user name and email correctly</li>
@@ -592,7 +625,7 @@ function showNotification(message, type = 'info') {
 <li>[ ] Unauthenticated users are redirected to login</li>
 <li>[ ] Error handling works if API call fails</li>
 </ul>
-<h2 id="commit-message">Commit Message</h2>
+<h2 id="commit-message">Commit Message<a class="headerlink" href="#commit-message" title="Permanent link">&para;</a></h2>
 <pre><code>Phase 5 Task 3: Add welcome/onboarding screen
 
 - Created welcome.html with 3-step onboarding flow
@@ -602,7 +635,7 @@ function showNotification(message, type = 'info') {
 - Reuses existing design system (CSS classes, colors, patterns)
 - Responsive design works on mobile and desktop
 </code></pre>
-<h2 id="notes">Notes</h2>
+<h2 id="notes">Notes<a class="headerlink" href="#notes" title="Permanent link">&para;</a></h2>
 <ul>
 <li>No database changes required</li>
 <li>No API changes required</li>

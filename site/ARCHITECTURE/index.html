@@ -5,14 +5,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://brockhager.github.io/bridgeflow-docs/ARCHITECTURE/" />
       <link rel="shortcut icon" href="../img/favicon.ico" />
-    <title>Bridgeflow Live Architecture (Phases 56-58) - BridgeFlow Docs</title>
+    <title>Architecture - BridgeFlow Docs</title>
     <link rel="stylesheet" href="../css/theme.css" />
     <link rel="stylesheet" href="../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../stylesheets/extra.css" rel="stylesheet" />
     
       <script>
         // Current page data
-        var mkdocs_page_name = "Bridgeflow Live Architecture (Phases 56-58)";
+        var mkdocs_page_name = "Architecture";
         var mkdocs_page_input_path = "ARCHITECTURE.md";
         var mkdocs_page_url = "/bridgeflow-docs/ARCHITECTURE/";
       </script>
@@ -43,7 +44,46 @@
                 <li class="toctree-l1"><a class="reference internal" href="..">Home</a>
                 </li>
               </ul>
-              <p class="caption"><span class="caption-text">Products</span></p>
+              <p class="caption"><span class="caption-text">Start Here</span></p>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="../ONBOARDING/">Onboarding</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">Architecture</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#1-system-reality">1. System Reality</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#2-runtime-components">2. Runtime Components</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#21-bf-control-fastapi-app">2.1 bf-control FastAPI app</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#22-background-jobs">2.2 Background jobs</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#23-data-plane">2.3 Data plane</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#3-public-web-api-surface">3. Public Web + API Surface</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#public-ui-no-login-required">Public UI (no login required)</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#public-status-api">Public status API</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#ingestion-api">Ingestion API</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#4-deployment-model">4. Deployment Model</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#5-trl-7-validation-anchor">5. TRL 7 Validation Anchor</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#6-phase-59-architecture-direction">6. Phase 59+ Architecture Direction</a>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../api-reference/">API Reference Hub</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Product Suite</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../products/">Overview</a>
                   </li>
@@ -66,7 +106,7 @@
                   <li class="toctree-l1"><a class="reference internal" href="../products/tracking-portal/">Tracking Portal</a>
                   </li>
               </ul>
-              <p class="caption"><span class="caption-text">Platform</span></p>
+              <p class="caption"><span class="caption-text">Platform Services</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../platform/">Overview</a>
                   </li>
@@ -87,12 +127,35 @@
                   <li class="toctree-l1"><a class="reference internal" href="../platform/bf-warehouse/">Warehouse Service</a>
                   </li>
               </ul>
+              <p class="caption"><span class="caption-text">Capability Catalog</span></p>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../vision/bf-integration/">Vision</a>
-                </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../features/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../features/SHIPMENTS/">Shipments</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../features/ADMIN_CONSOLE/">Admin Console</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../features/CONTROL_TOWER/">Control Tower</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../features/IDENTITY/">Identity</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../features/MASTERDATA/">Masterdata</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../features/ORDERS/">Orders</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../features/WAREHOUSE/">Warehouse</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../features/SEARCH/">Search</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../features/FINTECH/">Fintech</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../features/CARRIER_PORTAL/">Carrier Portal</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../features/TRACKING_PORTAL/">Tracking Portal</a>
+                  </li>
               </ul>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../api-reference/">API Reference</a>
+                <li class="toctree-l1"><a class="reference internal" href="../vision/bf-integration/">Vision Archive</a>
                 </li>
               </ul>
       </div>
@@ -109,7 +172,8 @@
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
     <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
-      <li class="breadcrumb-item active">Bridgeflow Live Architecture (Phases 56-58)</li>
+          <li class="breadcrumb-item">Start Here</li>
+      <li class="breadcrumb-item active">Architecture</li>
     <li class="wy-breadcrumbs-aside">
     </li>
   </ul>
@@ -118,9 +182,9 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <h1 id="bridgeflow-live-architecture-phases-56-58">Bridgeflow Live Architecture (Phases 56-58)</h1>
+                <h1 id="bridgeflow-live-architecture-phases-56-58">Bridgeflow Live Architecture (Phases 56-58)<a class="headerlink" href="#bridgeflow-live-architecture-phases-56-58" title="Permanent link">&para;</a></h1>
 <p>Last updated: February 23, 2026</p>
-<h2 id="1-system-reality">1. System Reality</h2>
+<h2 id="1-system-reality">1. System Reality<a class="headerlink" href="#1-system-reality" title="Permanent link">&para;</a></h2>
 <p>Bridgeflow currently runs as a live control tower centered on <code>bf-control</code>.</p>
 <p>Production endpoint:
 - <code>https://control-tower.up.railway.app</code></p>
@@ -129,21 +193,21 @@
 - Public status API (<code>/api/v1/public/resilience-status</code>)
 - Ingestion and case APIs (<code>/api/control/*</code>)
 - Background jobs (live weather ingest + escalation watcher)</p>
-<h2 id="2-runtime-components">2. Runtime Components</h2>
-<h3 id="21-bf-control-fastapi-app">2.1 <code>bf-control</code> FastAPI app</h3>
+<h2 id="2-runtime-components">2. Runtime Components<a class="headerlink" href="#2-runtime-components" title="Permanent link">&para;</a></h2>
+<h3 id="21-bf-control-fastapi-app">2.1 <code>bf-control</code> FastAPI app<a class="headerlink" href="#21-bf-control-fastapi-app" title="Permanent link">&para;</a></h3>
 <p>Core responsibilities:
 - Event ingest and normalization (<code>POST /api/control/events</code>)
 - Policy/risk evaluation
 - Case lifecycle management (<code>/api/control/cases*</code>)
 - Public resilience projection (<code>GET /api/v1/public/resilience-status</code>)
 - Static frontend serving for public map/feed (<code>/</code>, <code>/home</code>)</p>
-<h3 id="22-background-jobs">2.2 Background jobs</h3>
+<h3 id="22-background-jobs">2.2 Background jobs<a class="headerlink" href="#22-background-jobs" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Live weather ingest loop (Lima pilot / OpenWeatherMap)</li>
 <li>Escalation watcher loop (SLA breach detection)</li>
 </ul>
 <p>Both run in-process via FastAPI lifespan startup.</p>
-<h3 id="23-data-plane">2.3 Data plane</h3>
+<h3 id="23-data-plane">2.3 Data plane<a class="headerlink" href="#23-data-plane" title="Permanent link">&para;</a></h3>
 <p>Primary stores in Postgres:
 - <code>events</code>
 - <code>cases</code>
@@ -152,8 +216,8 @@
 <p>Isolation model:
 - tenant-scoped processing keyed by <code>tenant_id</code>
 - idempotency on inbound events via <code>(tenant_id, event_id)</code></p>
-<h2 id="3-public-web-api-surface">3. Public Web + API Surface</h2>
-<h3 id="public-ui-no-login-required">Public UI (no login required)</h3>
+<h2 id="3-public-web-api-surface">3. Public Web + API Surface<a class="headerlink" href="#3-public-web-api-surface" title="Permanent link">&para;</a></h2>
+<h3 id="public-ui-no-login-required">Public UI (no login required)<a class="headerlink" href="#public-ui-no-login-required" title="Permanent link">&para;</a></h3>
 <ul>
 <li><code>GET /</code></li>
 <li><code>GET /home</code></li>
@@ -162,13 +226,13 @@
 - Callao map marker with risk-driven color
 - weather snapshot
 - anonymized recent activity feed</p>
-<h3 id="public-status-api">Public status API</h3>
+<h3 id="public-status-api">Public status API<a class="headerlink" href="#public-status-api" title="Permanent link">&para;</a></h3>
 <ul>
 <li><code>GET /api/v1/public/resilience-status</code></li>
 <li>Rate limit: <code>PUBLIC_API_RATE_LIMIT</code> (default <code>60</code> req/min/IP, in-memory per instance)</li>
 <li>Error model includes structured JSON for <code>429</code>/<code>500</code></li>
 </ul>
-<h3 id="ingestion-api">Ingestion API</h3>
+<h3 id="ingestion-api">Ingestion API<a class="headerlink" href="#ingestion-api" title="Permanent link">&para;</a></h3>
 <ul>
 <li><code>POST /api/control/events</code></li>
 <li>Normalized envelope:</li>
@@ -179,7 +243,7 @@
 <li><code>occurred_at</code></li>
 <li><code>payload</code></li>
 </ul>
-<h2 id="4-deployment-model">4. Deployment Model</h2>
+<h2 id="4-deployment-model">4. Deployment Model<a class="headerlink" href="#4-deployment-model" title="Permanent link">&para;</a></h2>
 <p>Railway deploy:
 - Service: <code>bf-control</code>
 - Builder: Dockerfile
@@ -188,7 +252,7 @@
   - Python stage runs FastAPI and serves compiled assets</p>
 <p>Health endpoint:
 - <code>GET /health</code></p>
-<h2 id="5-trl-7-validation-anchor">5. TRL 7 Validation Anchor</h2>
+<h2 id="5-trl-7-validation-anchor">5. TRL 7 Validation Anchor<a class="headerlink" href="#5-trl-7-validation-anchor" title="Permanent link">&para;</a></h2>
 <p>Validated live loop milestone:
 - Date: February 20, 2026
 - UTC evidence chain:
@@ -199,7 +263,7 @@
 - Outcome: autonomous case creation with 4-hour SLA</p>
 <p>Reference:
 - <code>bf-control/docs/phases51-60/README.md</code> (Phase 56 section)</p>
-<h2 id="6-phase-59-architecture-direction">6. Phase 59+ Architecture Direction</h2>
+<h2 id="6-phase-59-architecture-direction">6. Phase 59+ Architecture Direction<a class="headerlink" href="#6-phase-59-architecture-direction" title="Permanent link">&para;</a></h2>
 <p>Planned extensions:
 - <code>bf-connect</code> service for integration credential and webhook management
 - adapter library for ERP/WMS/TMS systems
@@ -211,6 +275,10 @@
               
             </div>
           </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../ONBOARDING/" class="btn btn-neutral float-left" title="Onboarding"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../api-reference/" class="btn btn-neutral float-right" title="API Reference Hub">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
 
   <hr/>
 
@@ -232,6 +300,10 @@
   <span class="rst-current-version" data-toggle="rst-current-version">
     
     
+      <span><a href="../ONBOARDING/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../api-reference/" style="color: #fcfcfc">Next &raquo;</a></span>
     
   </span>
 </div>

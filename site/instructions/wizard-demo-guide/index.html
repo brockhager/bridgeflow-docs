@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="../../css/theme.css" />
     <link rel="stylesheet" href="../../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../../stylesheets/extra.css" rel="stylesheet" />
     
       <script>
         // Current page data
@@ -43,7 +44,16 @@
                 <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
                 </li>
               </ul>
-              <p class="caption"><span class="caption-text">Products</span></p>
+              <p class="caption"><span class="caption-text">Start Here</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../ONBOARDING/">Onboarding</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../ARCHITECTURE/">Architecture</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../api-reference/">API Reference Hub</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Product Suite</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../products/">Overview</a>
                   </li>
@@ -66,7 +76,7 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../products/tracking-portal/">Tracking Portal</a>
                   </li>
               </ul>
-              <p class="caption"><span class="caption-text">Platform</span></p>
+              <p class="caption"><span class="caption-text">Platform Services</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../platform/">Overview</a>
                   </li>
@@ -87,12 +97,35 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../platform/bf-warehouse/">Warehouse Service</a>
                   </li>
               </ul>
+              <p class="caption"><span class="caption-text">Capability Catalog</span></p>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../../vision/bf-integration/">Vision</a>
-                </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/SHIPMENTS/">Shipments</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/ADMIN_CONSOLE/">Admin Console</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/CONTROL_TOWER/">Control Tower</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/IDENTITY/">Identity</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/MASTERDATA/">Masterdata</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/ORDERS/">Orders</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/WAREHOUSE/">Warehouse</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/SEARCH/">Search</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/FINTECH/">Fintech</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/CARRIER_PORTAL/">Carrier Portal</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/TRACKING_PORTAL/">Tracking Portal</a>
+                  </li>
               </ul>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../../api-reference/">API Reference</a>
+                <li class="toctree-l1"><a class="reference internal" href="../../vision/bf-integration/">Vision Archive</a>
                 </li>
               </ul>
       </div>
@@ -118,18 +151,18 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <h2 id="phase-1a-wizard-demo-guide">Phase 1A Wizard — Demo Guide</h2>
-<h2 id="purpose">Purpose</h2>
+                <h2 id="phase-1a-wizard-demo-guide">Phase 1A Wizard — Demo Guide<a class="headerlink" href="#phase-1a-wizard-demo-guide" title="Permanent link">&para;</a></h2>
+<h2 id="purpose">Purpose<a class="headerlink" href="#purpose" title="Permanent link">&para;</a></h2>
 <p>This is the Phase 1A "Magic Toll Booth" wizard for invoice delivery. The demo demonstrates the 5‑minute setup flow (Welcome → Source → Customer → Delivery → Review) and shows the end-to-end happy path plus error recovery.</p>
-<h2 id="status">Status</h2>
+<h2 id="status">Status<a class="headerlink" href="#status" title="Permanent link">&para;</a></h2>
 <p>APPROVED
 Approved by CTO: 2025-12-15</p>
-<h2 id="how-to-run-quick">How to run (quick)</h2>
+<h2 id="how-to-run-quick">How to run (quick)<a class="headerlink" href="#how-to-run-quick" title="Permanent link">&para;</a></h2>
 <p>Run a simple static server from the project root and open the prototype in a browser:</p>
 <pre><code class="language-bash">npx http-server web -p 3000
 # then open http://localhost:3000 in your browser
 </code></pre>
-<h2 id="demo-script-step-by-step">Demo script (step-by-step)</h2>
+<h2 id="demo-script-step-by-step">Demo script (step-by-step)<a class="headerlink" href="#demo-script-step-by-step" title="Permanent link">&para;</a></h2>
 <ol>
 <li>Start on the <strong>Welcome</strong> screen. Click <strong>Start setup</strong>.</li>
 <li>On <strong>Source</strong>, select <strong>Upload invoice CSV</strong> (default). Note keyboard navigation: use Tab to move focus and Enter to select cards.</li>
@@ -139,22 +172,22 @@ Approved by CTO: 2025-12-15</p>
 <li>Observe the <strong>progress stepper</strong> modal; it will fail (simulated). Click <strong>Retry</strong> (uncheck Simulate failure first) to run again and observe a successful completion.</li>
 <li>On success, the modal shows a fake job ID and the Success screen: <strong>Success — First invoice sent</strong>. Click <strong>View status</strong> or <strong>Done</strong>.</li>
 </ol>
-<h2 id="key-features-to-highlight-business-language">Key features to highlight (business-language)</h2>
+<h2 id="key-features-to-highlight-business-language">Key features to highlight (business-language)<a class="headerlink" href="#key-features-to-highlight-business-language" title="Permanent link">&para;</a></h2>
 <ul>
 <li><strong>5-minute promise</strong>: wizard delivers a focused path to get invoice automation running quickly.</li>
 <li><strong>Friendly progress visibility</strong>: stepper shows clear progress across Import → Prepare → Send → Complete.</li>
 <li><strong>Error recovery</strong>: demo shows automatic retries and a clear path to retry or change settings without losing state.</li>
 <li><strong>Accessibility &amp; keyboard support</strong>: full keyboard navigation (Tab/Enter/Escape) and accessible stepper messaging.</li>
 </ul>
-<h2 id="screenshot">Screenshot</h2>
+<h2 id="screenshot">Screenshot<a class="headerlink" href="#screenshot" title="Permanent link">&para;</a></h2>
 <p>Please include a screenshot of the Review screen in this guide. Save the image as <code>docs/images/wizard-review.png</code> and include it next to this file.</p>
 <p>If you want, paste the screenshot or a link here and I will embed it into the guide and commit it.</p>
-<h2 id="notes-for-demo-presenter">Notes for demo presenter</h2>
+<h2 id="notes-for-demo-presenter">Notes for demo presenter<a class="headerlink" href="#notes-for-demo-presenter" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Keep the demo fast: follow the happy path first, then exercise the error scenario.</li>
 <li>Mention the mock job ID is a demo artifact; after UI sign-off we will integrate with the backend job orchestrator to return real job IDs and statuses.</li>
 </ul>
-<h2 id="decision">Decision</h2>
+<h2 id="decision">Decision<a class="headerlink" href="#decision" title="Permanent link">&para;</a></h2>
 <p>Decision: "Yes, approved" — Approved by CTO
 Date: 2025-12-15</p>
 <p>CTO Review conducted on 2025-12-15. Feedback: "Demo was good. Design could be better - but overall it works and makes sense." The requested visual polish, live progress percentage, and invoice access were implemented and approved.</p>
@@ -167,9 +200,9 @@ Date: 2025-12-15</p>
 - "View Sent Invoice" button on success that opens a mock invoice page.
 - Visual polish applied (subtle gradient, refined spacing, brand color accents).</p>
 <p>Please review the updated demo and reply with either "Yes, approved" or "No, make these changes: ...".</p>
-<h2 id="formal-approval">Formal Approval</h2>
+<h2 id="formal-approval">Formal Approval<a class="headerlink" href="#formal-approval" title="Permanent link">&para;</a></h2>
 <p>CTO approval granted on 2025-12-15. 'I approve the demo.'</p>
-<h2 id="appendix-run-locally-optional">Appendix: Run locally (optional)</h2>
+<h2 id="appendix-run-locally-optional">Appendix: Run locally (optional)<a class="headerlink" href="#appendix-run-locally-optional" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Start a local static server: <code>npx http-server web -p 3000</code>.</li>
 <li>Open <code>http://localhost:3000</code> and walk through the wizard.</li>

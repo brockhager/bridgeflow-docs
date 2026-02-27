@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="../../css/theme.css" />
     <link rel="stylesheet" href="../../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../../stylesheets/extra.css" rel="stylesheet" />
     
       <script>
         // Current page data
@@ -43,7 +44,16 @@
                 <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
                 </li>
               </ul>
-              <p class="caption"><span class="caption-text">Products</span></p>
+              <p class="caption"><span class="caption-text">Start Here</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../ONBOARDING/">Onboarding</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../ARCHITECTURE/">Architecture</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../api-reference/">API Reference Hub</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Product Suite</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../products/">Overview</a>
                   </li>
@@ -66,7 +76,7 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../products/tracking-portal/">Tracking Portal</a>
                   </li>
               </ul>
-              <p class="caption"><span class="caption-text">Platform</span></p>
+              <p class="caption"><span class="caption-text">Platform Services</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../platform/">Overview</a>
                   </li>
@@ -87,12 +97,35 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../platform/bf-warehouse/">Warehouse Service</a>
                   </li>
               </ul>
+              <p class="caption"><span class="caption-text">Capability Catalog</span></p>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../../vision/bf-integration/">Vision</a>
-                </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/SHIPMENTS/">Shipments</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/ADMIN_CONSOLE/">Admin Console</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/CONTROL_TOWER/">Control Tower</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/IDENTITY/">Identity</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/MASTERDATA/">Masterdata</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/ORDERS/">Orders</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/WAREHOUSE/">Warehouse</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/SEARCH/">Search</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/FINTECH/">Fintech</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/CARRIER_PORTAL/">Carrier Portal</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/TRACKING_PORTAL/">Tracking Portal</a>
+                  </li>
               </ul>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../../api-reference/">API Reference</a>
+                <li class="toctree-l1"><a class="reference internal" href="../../vision/bf-integration/">Vision Archive</a>
                 </li>
               </ul>
       </div>
@@ -118,12 +151,12 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <h1 id="p0-p3-fixes-verification-checklist">P0-P3 Fixes Verification Checklist</h1>
+                <h1 id="p0-p3-fixes-verification-checklist">P0-P3 Fixes Verification Checklist<a class="headerlink" href="#p0-p3-fixes-verification-checklist" title="Permanent link">&para;</a></h1>
 <p><strong>Date:</strong> 2024-12-21<br />
 <strong>Testing Phase:</strong> Post-Fix Validation<br />
 <strong>Commits:</strong> 4df0c57, 2ce3c18, f3cf384, dba9ab8</p>
-<h2 id="p0-critical-fixes">P0 Critical Fixes</h2>
-<h3 id="p0-1-entity-duplication-bug">✅ P0-1: Entity Duplication Bug</h3>
+<h2 id="p0-critical-fixes">P0 Critical Fixes<a class="headerlink" href="#p0-critical-fixes" title="Permanent link">&para;</a></h2>
+<h3 id="p0-1-entity-duplication-bug">✅ P0-1: Entity Duplication Bug<a class="headerlink" href="#p0-1-entity-duplication-bug" title="Permanent link">&para;</a></h3>
 <p><strong>Issue:</strong> Entities (TPs, Resources, Bridges) were duplicating on save<br />
 <strong>Root Cause:</strong> Multiple addEventListener('submit') registrations in canvas-controller.js<br />
 <strong>Fix:</strong> Added dataset._tpBound, _resBound, _bridgeBound guards to prevent duplicate listeners</p>
@@ -139,7 +172,7 @@
 <p><strong>Expected Result:</strong> Each entity appears exactly once in localStorage after save<br />
 <strong>Status:</strong> ⏳ NEEDS TESTING</p>
 <hr />
-<h3 id="p0-2-drag-functionality-broken">✅ P0-2: Drag Functionality Broken</h3>
+<h3 id="p0-2-drag-functionality-broken">✅ P0-2: Drag Functionality Broken<a class="headerlink" href="#p0-2-drag-functionality-broken" title="Permanent link">&para;</a></h3>
 <p><strong>Issue:</strong> Nodes in Bridge Builder were not draggable<br />
 <strong>Root Cause:</strong> SVG lines being cleared during redraws, missing user-select:none<br />
 <strong>Fix:</strong> 
@@ -157,8 +190,8 @@
 <p><strong>Expected Result:</strong> Smooth drag-and-drop with visual feedback<br />
 <strong>Status:</strong> ⏳ NEEDS TESTING</p>
 <hr />
-<h2 id="p1-priority-fixes">P1 Priority Fixes</h2>
-<h3 id="p1-entities-not-clickable">✅ P1: Entities Not Clickable</h3>
+<h2 id="p1-priority-fixes">P1 Priority Fixes<a class="headerlink" href="#p1-priority-fixes" title="Permanent link">&para;</a></h2>
+<h3 id="p1-entities-not-clickable">✅ P1: Entities Not Clickable<a class="headerlink" href="#p1-entities-not-clickable" title="Permanent link">&para;</a></h3>
 <p><strong>Issue:</strong> Could not click entities to edit them<br />
 <strong>Fix:</strong> 
 - Added click handlers to TP folder headers → trading-partners/manage.html?id=xyz
@@ -174,8 +207,8 @@
 <p><strong>Expected Result:</strong> Clicking entities navigates to their edit pages<br />
 <strong>Status:</strong> ⏳ NEEDS TESTING</p>
 <hr />
-<h2 id="p2-nice-to-have-fixes">P2 Nice-to-Have Fixes</h2>
-<h3 id="p2-1-menu-missing-on-bridge-formhtml">✅ P2-1: Menu Missing on bridge-form.html</h3>
+<h2 id="p2-nice-to-have-fixes">P2 Nice-to-Have Fixes<a class="headerlink" href="#p2-nice-to-have-fixes" title="Permanent link">&para;</a></h2>
+<h3 id="p2-1-menu-missing-on-bridge-formhtml">✅ P2-1: Menu Missing on bridge-form.html<a class="headerlink" href="#p2-1-menu-missing-on-bridge-formhtml" title="Permanent link">&para;</a></h3>
 <p><strong>Issue:</strong> Navigation menu disappeared on bridge-form page<br />
 <strong>Fix:</strong> Added full navigation header with nav links to bridge-form.html</p>
 <p><strong>Test Steps:</strong>
@@ -186,7 +219,7 @@
 <p><strong>Expected Result:</strong> Full navigation menu present and functional<br />
 <strong>Status:</strong> ⏳ NEEDS TESTING</p>
 <hr />
-<h3 id="p2-2-missing-canvas-home-button">✅ P2-2: Missing Canvas Home Button</h3>
+<h3 id="p2-2-missing-canvas-home-button">✅ P2-2: Missing Canvas Home Button<a class="headerlink" href="#p2-2-missing-canvas-home-button" title="Permanent link">&para;</a></h3>
 <p><strong>Issue:</strong> No way to get back to Canvas from entity pages<br />
 <strong>Status:</strong> ALREADY EXISTS - trading-partners/manage.html and resources/create.html both have Canvas links in their nav</p>
 <p><strong>Test Steps:</strong>
@@ -197,7 +230,7 @@
 <p><strong>Expected Result:</strong> Canvas link present on all entity pages<br />
 <strong>Status:</strong> ✅ VERIFIED (already implemented)</p>
 <hr />
-<h3 id="p2-3-cancel-button-placement">✅ P2-3: Cancel Button Placement</h3>
+<h3 id="p2-3-cancel-button-placement">✅ P2-3: Cancel Button Placement<a class="headerlink" href="#p2-3-cancel-button-placement" title="Permanent link">&para;</a></h3>
 <p><strong>Issue:</strong> Cancel buttons at top instead of bottom<br />
 <strong>Status:</strong> ALREADY CORRECT - All modals have cancel buttons at bottom next to Save button</p>
 <p><strong>Test Steps:</strong>
@@ -208,8 +241,8 @@
 <p><strong>Expected Result:</strong> Cancel buttons consistently placed at bottom of all forms<br />
 <strong>Status:</strong> ✅ VERIFIED (already correct)</p>
 <hr />
-<h2 id="p3-display-issues">P3 Display Issues</h2>
-<h3 id="p3-bridge-count-showing-double">✅ P3: Bridge Count Showing Double</h3>
+<h2 id="p3-display-issues">P3 Display Issues<a class="headerlink" href="#p3-display-issues" title="Permanent link">&para;</a></h2>
+<h3 id="p3-bridge-count-showing-double">✅ P3: Bridge Count Showing Double<a class="headerlink" href="#p3-bridge-count-showing-double" title="Permanent link">&para;</a></h3>
 <p><strong>Issue:</strong> Bridge count showing 2 when only 1 created<br />
 <strong>Root Cause:</strong> Likely caused by duplicate event listeners (now fixed)<br />
 <strong>Fix:</strong> Same fix as P0-1 duplication bug</p>
@@ -222,8 +255,8 @@
 <p><strong>Expected Result:</strong> Bridge count matches number of bridges created<br />
 <strong>Status:</strong> ⏳ NEEDS TESTING</p>
 <hr />
-<h2 id="e2e-validation-checklist">E2E Validation Checklist</h2>
-<h3 id="complete-bridge-creation-flow">Complete Bridge Creation Flow</h3>
+<h2 id="e2e-validation-checklist">E2E Validation Checklist<a class="headerlink" href="#e2e-validation-checklist" title="Permanent link">&para;</a></h2>
+<h3 id="complete-bridge-creation-flow">Complete Bridge Creation Flow<a class="headerlink" href="#complete-bridge-creation-flow" title="Permanent link">&para;</a></h3>
 <ul>
 <li>[ ] Create Trading Partner "Walmart" (Retail, Active)</li>
 <li>[ ] Create Trading Partner "Amazon" (Marketplace, Active)</li>
@@ -239,7 +272,7 @@
 <li>[ ] Click resource name - verify navigates to edit page</li>
 <li>[ ] Click bridge line - verify shows bridge detail modal</li>
 </ul>
-<h3 id="data-integrity-check">Data Integrity Check</h3>
+<h3 id="data-integrity-check">Data Integrity Check<a class="headerlink" href="#data-integrity-check" title="Permanent link">&para;</a></h3>
 <ul>
 <li>[ ] Check DevTools console for errors</li>
 <li>[ ] Verify no duplicate entries in localStorage.bridgeflow_partners</li>
@@ -248,16 +281,16 @@
 <li>[ ] Verify bridge IDs are unique</li>
 </ul>
 <hr />
-<h2 id="test-environment">Test Environment</h2>
+<h2 id="test-environment">Test Environment<a class="headerlink" href="#test-environment" title="Permanent link">&para;</a></h2>
 <ul>
 <li><strong>Browser:</strong> Chrome/Edge/Firefox (test in primary browser)</li>
 <li><strong>URL:</strong> http://localhost:8080/web/canvas-visual.html (or your dev server)</li>
 <li><strong>Clear Storage Before Testing:</strong> <code>localStorage.clear()</code></li>
 </ul>
 <hr />
-<h2 id="pass-criteria">Pass Criteria</h2>
+<h2 id="pass-criteria">Pass Criteria<a class="headerlink" href="#pass-criteria" title="Permanent link">&para;</a></h2>
 <p>All P0 and P1 items must pass. P2/P3 are nice-to-have but should be verified.</p>
-<h2 id="notes">Notes</h2>
+<h2 id="notes">Notes<a class="headerlink" href="#notes" title="Permanent link">&para;</a></h2>
 <ul>
 <li>If any test fails, document the exact steps and browser console errors</li>
 <li>Take screenshots of any visual issues</li>

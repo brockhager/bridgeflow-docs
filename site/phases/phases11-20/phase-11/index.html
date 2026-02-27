@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="../../../css/theme.css" />
     <link rel="stylesheet" href="../../../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../../../stylesheets/extra.css" rel="stylesheet" />
     
       <script>
         // Current page data
@@ -43,7 +44,16 @@
                 <li class="toctree-l1"><a class="reference internal" href="../../..">Home</a>
                 </li>
               </ul>
-              <p class="caption"><span class="caption-text">Products</span></p>
+              <p class="caption"><span class="caption-text">Start Here</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../ONBOARDING/">Onboarding</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../ARCHITECTURE/">Architecture</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../api-reference/">API Reference Hub</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Product Suite</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../../products/">Overview</a>
                   </li>
@@ -66,7 +76,7 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../../products/tracking-portal/">Tracking Portal</a>
                   </li>
               </ul>
-              <p class="caption"><span class="caption-text">Platform</span></p>
+              <p class="caption"><span class="caption-text">Platform Services</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../../platform/">Overview</a>
                   </li>
@@ -87,12 +97,35 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../../platform/bf-warehouse/">Warehouse Service</a>
                   </li>
               </ul>
+              <p class="caption"><span class="caption-text">Capability Catalog</span></p>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../../../vision/bf-integration/">Vision</a>
-                </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../features/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../features/SHIPMENTS/">Shipments</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../features/ADMIN_CONSOLE/">Admin Console</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../features/CONTROL_TOWER/">Control Tower</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../features/IDENTITY/">Identity</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../features/MASTERDATA/">Masterdata</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../features/ORDERS/">Orders</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../features/WAREHOUSE/">Warehouse</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../features/SEARCH/">Search</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../features/FINTECH/">Fintech</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../features/CARRIER_PORTAL/">Carrier Portal</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../features/TRACKING_PORTAL/">Tracking Portal</a>
+                  </li>
               </ul>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../../../api-reference/">API Reference</a>
+                <li class="toctree-l1"><a class="reference internal" href="../../../vision/bf-integration/">Vision Archive</a>
                 </li>
               </ul>
       </div>
@@ -118,21 +151,21 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <h1 id="phase-11-customer-core-authentication-tenancy-billing">Phase 11 — Customer Core (Authentication, Tenancy, Billing) 🚀</h1>
+                <h1 id="phase-11-customer-core-authentication-tenancy-billing">Phase 11 — Customer Core (Authentication, Tenancy, Billing) 🚀<a class="headerlink" href="#phase-11-customer-core-authentication-tenancy-billing" title="Permanent link">&para;</a></h1>
 <p><strong>Status:</strong> ✅ COMPLETE (Dec 23, 2025)
 <strong>Owner:</strong> Backend (Auth/Billing) / Frontend (Auth UI) / Ops (Infra)</p>
 <hr />
-<h2 id="overview">Overview</h2>
+<h2 id="overview">Overview<a class="headerlink" href="#overview" title="Permanent link">&para;</a></h2>
 <p>Phase 11 transformed BridgeFlow from an internal security tool into a commercial SaaS platform with full customer authentication, multi-tenant organization support, and monetization capabilities via Stripe billing integration.</p>
 <p><strong>Completion Summary:</strong> All core customer-facing features implemented and tested. The platform now supports user registration, organization creation, paid plan subscriptions, and automated subscription activation via Stripe webhooks. Full E2E test coverage with mock database integration.</p>
-<h2 id="goals">Goals 🎯</h2>
+<h2 id="goals">Goals 🎯<a class="headerlink" href="#goals" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Complete auth flows: registration, login, logout, <code>GET /me</code>, session persistence (cookie + JWT), password reset basics.</li>
 <li>Add E2E tests and contract tests for auth and session behavior.</li>
 <li>Scaffold multi-tenant (organization) model and required DB migrations.</li>
 <li>Harden ops: Redis HA/backups, monitoring/alerts for rate limiting and auth anomalies, and add a small runbook for failover.</li>
 </ul>
-<h2 id="deliverables-all-complete">Deliverables ✅ (All Complete)</h2>
+<h2 id="deliverables-all-complete">Deliverables ✅ (All Complete)<a class="headerlink" href="#deliverables-all-complete" title="Permanent link">&para;</a></h2>
 <ul>
 <li>✅ <code>api/handlers/auth.js</code> — Complete authentication system: register, login, logout, GET /me, password reset prep</li>
 <li>✅ <code>api/handlers/organizations.js</code> — Organization CRUD, membership management, tenant isolation</li>
@@ -144,14 +177,14 @@
 <li>✅ Mock DB extensions: billing models, subscription queries with status filtering</li>
 <li>✅ Rate limiting: Redis-backed with in-memory fallback, admin bypass, IP controls</li>
 </ul>
-<h2 id="acceptance-criteria">Acceptance Criteria ✅</h2>
+<h2 id="acceptance-criteria">Acceptance Criteria ✅<a class="headerlink" href="#acceptance-criteria" title="Permanent link">&para;</a></h2>
 <ul>
 <li>All auth unit and integration tests pass locally and on CI.</li>
 <li>An operator can create an organization and create users attached to it via API.</li>
 <li>Rate limiter and admin endpoints unaffected; admin users can bypass blocks as documented.</li>
 <li>Demo: successful registration → login → <code>GET /me</code> → logout flow works end-to-end.</li>
 </ul>
-<h2 id="tasks-priority-order">Tasks (priority order) 🔧</h2>
+<h2 id="tasks-priority-order">Tasks (priority order) 🔧<a class="headerlink" href="#tasks-priority-order" title="Permanent link">&para;</a></h2>
 <ol>
 <li>Finish/extend auth tests (<code>api/tests/auth.*</code>) and fix failures. — <strong>Backend</strong></li>
 <li>Add frontend auth pages and e2e flows. — <strong>Frontend</strong></li>
@@ -160,15 +193,15 @@
 <li>Add Redis HA/backups notes + small monitoring docs. — <strong>Ops</strong></li>
 <li>Add load/chaos test plan for Redis failover (optional). — <strong>QA/Ops</strong></li>
 </ol>
-<h2 id="risks-mitigations">Risks &amp; Mitigations ⚠️</h2>
+<h2 id="risks-mitigations">Risks &amp; Mitigations ⚠️<a class="headerlink" href="#risks-mitigations" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Risk: DB migration collisions in shared test envs — mitigate by namespaced test databases and unique test data (timestamped emails). </li>
 <li>Risk: Redis instability causing auth rate limit false positives — mitigate with StoreProvider failover tests and better alerting.</li>
 </ul>
-<h2 id="timeline">Timeline</h2>
+<h2 id="timeline">Timeline<a class="headerlink" href="#timeline" title="Permanent link">&para;</a></h2>
 <p>Suggest 1–2 sprints (2–4 weeks) depending on scope choices; break into two milestones: Auth completion (week 1) and Tenancy + Hardening (week 2).</p>
 <hr />
-<h2 id="what-we-built">What We Built 🎉</h2>
+<h2 id="what-we-built">What We Built 🎉<a class="headerlink" href="#what-we-built" title="Permanent link">&para;</a></h2>
 <p><strong>Customer Core (Monetization Ready):</strong>
 - <strong>Authentication System:</strong> Full JWT-based auth with bcrypt password hashing, session cookies, token refresh
 - <strong>Organization/Tenancy:</strong> Multi-tenant architecture with organization creation, membership roles (OWNER/ADMIN/MEMBER), tenant isolation
@@ -185,7 +218,7 @@
 - Subscription status tracked and queryable
 - Webhook signature verification ready for production
 - Multiple pricing tiers supported (extensible plan system)</p>
-<h2 id="demo-checklist-verified">Demo Checklist 🧪 (Verified)</h2>
+<h2 id="demo-checklist-verified">Demo Checklist 🧪 (Verified)<a class="headerlink" href="#demo-checklist-verified" title="Permanent link">&para;</a></h2>
 <ul>
 <li>✅ Run migrations and seed demo plans</li>
 <li>✅ Register user and receive JWT token</li>
@@ -196,7 +229,7 @@
 <li>✅ Query subscription and confirm Stripe subscription ID attached</li>
 </ul>
 <hr />
-<h2 id="references">References</h2>
+<h2 id="references">References<a class="headerlink" href="#references" title="Permanent link">&para;</a></h2>
 <ul>
 <li><code>docs/auth/AUTH-SPEC.md</code>  </li>
 <li><code>docs/task-lists/TASK-LIST-3.md</code>  </li>

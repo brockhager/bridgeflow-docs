@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="../../../../../../css/theme.css" />
     <link rel="stylesheet" href="../../../../../../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../../../../../../stylesheets/extra.css" rel="stylesheet" />
     
       <script>
         // Current page data
@@ -43,7 +44,16 @@
                 <li class="toctree-l1"><a class="reference internal" href="../../../../../..">Home</a>
                 </li>
               </ul>
-              <p class="caption"><span class="caption-text">Products</span></p>
+              <p class="caption"><span class="caption-text">Start Here</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../ONBOARDING/">Onboarding</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../ARCHITECTURE/">Architecture</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../api-reference/">API Reference Hub</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Product Suite</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../../../../../products/">Overview</a>
                   </li>
@@ -66,7 +76,7 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../../../../../products/tracking-portal/">Tracking Portal</a>
                   </li>
               </ul>
-              <p class="caption"><span class="caption-text">Platform</span></p>
+              <p class="caption"><span class="caption-text">Platform Services</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../../../../../platform/">Overview</a>
                   </li>
@@ -87,12 +97,35 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../../../../../platform/bf-warehouse/">Warehouse Service</a>
                   </li>
               </ul>
+              <p class="caption"><span class="caption-text">Capability Catalog</span></p>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../../../../">Vision</a>
-                </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/SHIPMENTS/">Shipments</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/ADMIN_CONSOLE/">Admin Console</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/CONTROL_TOWER/">Control Tower</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/IDENTITY/">Identity</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/MASTERDATA/">Masterdata</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/ORDERS/">Orders</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/WAREHOUSE/">Warehouse</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/SEARCH/">Search</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/FINTECH/">Fintech</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/CARRIER_PORTAL/">Carrier Portal</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/TRACKING_PORTAL/">Tracking Portal</a>
+                  </li>
               </ul>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../../../../../../api-reference/">API Reference</a>
+                <li class="toctree-l1"><a class="reference internal" href="../../../../">Vision Archive</a>
                 </li>
               </ul>
       </div>
@@ -123,14 +156,14 @@
 Status: Planned / In Development
 Context: Original BF-INTEGRATION Vision (Pre-Phase 30)</p>
 </blockquote>
-<h1 id="phase-30-layer-2-core-entities">Phase 30 — Layer 2 Core Entities ✅</h1>
+<h1 id="phase-30-layer-2-core-entities">Phase 30 — Layer 2 Core Entities ✅<a class="headerlink" href="#phase-30-layer-2-core-entities" title="Permanent link">&para;</a></h1>
 <p><strong>Completed:</strong> January 8, 2026<br />
 <strong>Effort:</strong> 2-3 hours<br />
 <strong>Priority:</strong> High (protocol integration foundation)</p>
-<h2 id="objective">🎯 Objective</h2>
+<h2 id="objective">🎯 Objective<a class="headerlink" href="#objective" title="Permanent link">&para;</a></h2>
 <p>Implement Layer 2 Core Entities (Connectors and Endpoints) to provide the critical scaffolding for real protocol integration. This phase establishes the foundation for AS2, SFTP, API, and EMAIL protocols while maintaining proper multi-tenant architecture and admin management capabilities.</p>
-<h2 id="core-deliverables-44">📋 Core Deliverables (4/4)</h2>
-<h3 id="1-prisma-schema-implementation">✅ 1. Prisma Schema Implementation</h3>
+<h2 id="core-deliverables-44">📋 Core Deliverables (4/4)<a class="headerlink" href="#core-deliverables-44" title="Permanent link">&para;</a></h2>
+<h3 id="1-prisma-schema-implementation">✅ 1. Prisma Schema Implementation<a class="headerlink" href="#1-prisma-schema-implementation" title="Permanent link">&para;</a></h3>
 <p><strong>Connector Model</strong>: Protocol-specific communication channels owned by organizations</p>
 <pre><code class="language-sql">model Connector {
   id             String    @id @default(cuid())
@@ -175,7 +208,7 @@ Context: Original BF-INTEGRATION Vision (Pre-Phase 30)</p>
   packages        Package[]    // Packages that use this tenet
 }
 </code></pre>
-<h3 id="2-admin-api-endpoints">✅ 2. Admin API Endpoints</h3>
+<h3 id="2-admin-api-endpoints">✅ 2. Admin API Endpoints<a class="headerlink" href="#2-admin-api-endpoints" title="Permanent link">&para;</a></h3>
 <p><strong>Connector Management</strong>: Full CRUD with organization scoping
 - <code>POST /admin-api/connectors</code> - Create connector with validation
 - <code>GET /admin-api/connectors</code> - List connectors with filtering
@@ -195,7 +228,7 @@ Context: Original BF-INTEGRATION Vision (Pre-Phase 30)</p>
 - Organization scoping
 - Config field masking (sensitive data hidden)
 - Protocol-specific validation</p>
-<h3 id="3-admin-ui-foundations">✅ 3. Admin UI Foundations</h3>
+<h3 id="3-admin-ui-foundations">✅ 3. Admin UI Foundations<a class="headerlink" href="#3-admin-ui-foundations" title="Permanent link">&para;</a></h3>
 <p><strong>Connector Management Interface</strong>: Professional admin experience
 - <strong>List View</strong>: Searchable, filterable connector listing
 - <strong>Type Selection</strong>: Dynamic forms based on connector type (AS2, SFTP, API, EMAIL)
@@ -226,7 +259,7 @@ Context: Original BF-INTEGRATION Vision (Pre-Phase 30)</p>
 - Email Address (required)
 - SMTP Configuration
 </code></pre>
-<h3 id="4-protocol-handler-stubs">✅ 4. Protocol Handler Stubs</h3>
+<h3 id="4-protocol-handler-stubs">✅ 4. Protocol Handler Stubs<a class="headerlink" href="#4-protocol-handler-stubs" title="Permanent link">&para;</a></h3>
 <p><strong>AS2 Handler</strong>: EDI over HTTP/HTTPS protocol</p>
 <pre><code class="language-javascript">// api/handlers/protocols/as2.js
 export {
@@ -261,14 +294,14 @@ export {
   validateWebhookSignature(config, payload, signature, headers) // Validate signatures
 }
 </code></pre>
-<h2 id="technical-architecture">🏗️ <strong>Technical Architecture</strong></h2>
-<h3 id="layer-2-data-flow"><strong>Layer 2 Data Flow</strong></h3>
+<h2 id="technical-architecture">🏗️ <strong>Technical Architecture</strong><a class="headerlink" href="#technical-architecture" title="Permanent link">&para;</a></h2>
+<h3 id="layer-2-data-flow"><strong>Layer 2 Data Flow</strong><a class="headerlink" href="#layer-2-data-flow" title="Permanent link">&para;</a></h3>
 <pre><code>Organization → Connector → Endpoint → Package
      ↓              ↓           ↓
    Org Owner    Protocol    Direction
    Scoping      Channel    Data Flow
 </code></pre>
-<h3 id="real-world-example"><strong>Real-World Example</strong></h3>
+<h3 id="real-world-example"><strong>Real-World Example</strong><a class="headerlink" href="#real-world-example" title="Permanent link">&para;</a></h3>
 <pre><code>Org: BridgeFlow Group
 ├── Connector: SFTP - Inbound Claims (type: SFTP)
 │   └── Endpoint: Inbound 837 (direction: INGRESS, tenetId: hipaa-claims-tenet)
@@ -284,15 +317,15 @@ export {
 └── Connector: AS2 - Outbound Invoices (type: AS2)
     └── Endpoint: Egress 810 (direction: EGRESS)
 </code></pre>
-<h3 id="multi-tenant-security"><strong>Multi-Tenant Security</strong></h3>
+<h3 id="multi-tenant-security"><strong>Multi-Tenant Security</strong><a class="headerlink" href="#multi-tenant-security" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Organization Scoping</strong>: All connectors bound to organizations</li>
 <li><strong>Tenet Binding</strong>: INGRESS endpoints auto-apply business rules</li>
 <li><strong>RBAC Enforcement</strong>: Only bf_employees can manage connectors</li>
 <li><strong>Config Security</strong>: Sensitive fields masked in API responses</li>
 </ul>
-<h2 id="admin-capabilities">📊 <strong>Admin Capabilities</strong></h2>
-<h3 id="connector-management"><strong>Connector Management</strong></h3>
+<h2 id="admin-capabilities">📊 <strong>Admin Capabilities</strong><a class="headerlink" href="#admin-capabilities" title="Permanent link">&para;</a></h2>
+<h3 id="connector-management"><strong>Connector Management</strong><a class="headerlink" href="#connector-management" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Create</strong>: Add new connectors with protocol-specific configuration</li>
 <li><strong>Edit</strong>: Update connector settings and trading partner associations</li>
@@ -300,22 +333,22 @@ export {
 <li><strong>View</strong>: Detailed connector information with endpoint counts</li>
 <li><strong>Statistics</strong>: Usage analytics and organization breakdown</li>
 </ul>
-<h3 id="endpoint-management"><strong>Endpoint Management</strong></h3>
+<h3 id="endpoint-management"><strong>Endpoint Management</strong><a class="headerlink" href="#endpoint-management" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Create</strong>: Define data flow directions with tenet binding</li>
 <li><strong>Configure</strong>: Protocol-specific endpoint settings</li>
 <li><strong>Monitor</strong>: Track package processing and status</li>
 <li><strong>Statistics</strong>: Endpoint usage and performance metrics</li>
 </ul>
-<h3 id="protocol-support"><strong>Protocol Support</strong></h3>
+<h3 id="protocol-support"><strong>Protocol Support</strong><a class="headerlink" href="#protocol-support" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>AS2</strong>: EDI over HTTP/HTTPS with MDN support</li>
 <li><strong>SFTP</strong>: File transfer with directory monitoring</li>
 <li><strong>API</strong>: RESTful webhooks and HTTP requests</li>
 <li><strong>EMAIL</strong>: SMTP-based communication</li>
 </ul>
-<h2 id="security-validation">🔐 <strong>Security &amp; Validation</strong></h2>
-<h3 id="protocol-configuration-validation"><strong>Protocol Configuration Validation</strong></h3>
+<h2 id="security-validation">🔐 <strong>Security &amp; Validation</strong><a class="headerlink" href="#security-validation" title="Permanent link">&para;</a></h2>
+<h3 id="protocol-configuration-validation"><strong>Protocol Configuration Validation</strong><a class="headerlink" href="#protocol-configuration-validation" title="Permanent link">&para;</a></h3>
 <pre><code class="language-javascript">// AS2 Validation
 required: ['url', 'as2Id']
 url: Must be valid HTTPS URL
@@ -335,37 +368,37 @@ required: ['smtpHost', 'email']
 smtpHost: Must be valid hostname
 email: Must be valid email address
 </code></pre>
-<h3 id="data-protection"><strong>Data Protection</strong></h3>
+<h3 id="data-protection"><strong>Data Protection</strong><a class="headerlink" href="#data-protection" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Config Masking</strong>: Sensitive fields masked in API responses</li>
 <li><strong>Secure Storage</strong>: Protocol credentials stored as encrypted JSON</li>
 <li><strong>Access Control</strong>: RBAC prevents unauthorized access</li>
 <li><strong>Audit Trail</strong>: All changes logged and tracked</li>
 </ul>
-<h2 id="implementation-details">🚀 <strong>Implementation Details</strong></h2>
-<h3 id="database-schema-updates"><strong>Database Schema Updates</strong></h3>
+<h2 id="implementation-details">🚀 <strong>Implementation Details</strong><a class="headerlink" href="#implementation-details" title="Permanent link">&para;</a></h2>
+<h3 id="database-schema-updates"><strong>Database Schema Updates</strong><a class="headerlink" href="#database-schema-updates" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>New Models</strong>: Connector, Endpoint, Tenet, TradingPartnerConnector</li>
 <li><strong>Relations</strong>: Proper foreign key relationships with cascading deletes</li>
 <li><strong>Indexes</strong>: Optimized for performance and querying</li>
 <li><strong>Constraints</strong>: Unique constraints and data validation</li>
 </ul>
-<h3 id="api-implementation"><strong>API Implementation</strong></h3>
+<h3 id="api-implementation"><strong>API Implementation</strong><a class="headerlink" href="#api-implementation" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Handlers</strong>: Complete CRUD operations with validation</li>
 <li><strong>Routes</strong>: RESTful API endpoints with proper HTTP methods</li>
 <li><strong>Middleware</strong>: RBAC, authentication, and request validation</li>
 <li><strong>Error Handling</strong>: Comprehensive error responses and logging</li>
 </ul>
-<h3 id="frontend-implementation"><strong>Frontend Implementation</strong></h3>
+<h3 id="frontend-implementation"><strong>Frontend Implementation</strong><a class="headerlink" href="#frontend-implementation" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>React Components</strong>: Professional admin interface with dynamic forms</li>
 <li><strong>State Management</strong>: Efficient data fetching and caching</li>
 <li><strong>User Experience</strong>: Intuitive navigation and visual feedback</li>
 <li><strong>Responsive Design</strong>: Works across all admin devices</li>
 </ul>
-<h2 id="success-criteria">📈 <strong>Success Criteria</strong></h2>
-<h3 id="core-functionality">✅ <strong>Core Functionality</strong></h3>
+<h2 id="success-criteria">📈 <strong>Success Criteria</strong><a class="headerlink" href="#success-criteria" title="Permanent link">&para;</a></h2>
+<h3 id="core-functionality">✅ <strong>Core Functionality</strong><a class="headerlink" href="#core-functionality" title="Permanent link">&para;</a></h3>
 <ul>
 <li>[x] Create connectors for all protocol types</li>
 <li>[x] Define endpoints with proper direction and tenet binding</li>
@@ -373,7 +406,7 @@ email: Must be valid email address
 <li>[x] View connector and endpoint statistics</li>
 <li>[x] Manage connector lifecycle (create, read, update, delete)</li>
 </ul>
-<h3 id="security-scoping">✅ <strong>Security &amp; Scoping</strong></h3>
+<h3 id="security-scoping">✅ <strong>Security &amp; Scoping</strong><a class="headerlink" href="#security-scoping" title="Permanent link">&para;</a></h3>
 <ul>
 <li>[x] Organization-based access control</li>
 <li>[x] RBAC enforcement for admin operations</li>
@@ -381,7 +414,7 @@ email: Must be valid email address
 <li>[x] Protocol-specific configuration validation</li>
 <li>[x] Tenet binding for INGRESS endpoints</li>
 </ul>
-<h3 id="admin-experience">✅ <strong>Admin Experience</strong></h3>
+<h3 id="admin-experience">✅ <strong>Admin Experience</strong><a class="headerlink" href="#admin-experience" title="Permanent link">&para;</a></h3>
 <ul>
 <li>[x] Professional connector management UI</li>
 <li>[x] Dynamic forms for different protocol types</li>
@@ -389,7 +422,7 @@ email: Must be valid email address
 <li>[x] Real-time statistics and analytics</li>
 <li>[x] Visual indicators for status and health</li>
 </ul>
-<h3 id="protocol-handler-foundation">✅ <strong>Protocol Handler Foundation</strong></h3>
+<h3 id="protocol-handler-foundation">✅ <strong>Protocol Handler Foundation</strong><a class="headerlink" href="#protocol-handler-foundation" title="Permanent link">&para;</a></h3>
 <ul>
 <li>[x] Stub implementations for AS2, SFTP, API, EMAIL</li>
 <li>[x] Configuration validation for each protocol</li>
@@ -397,8 +430,8 @@ email: Must be valid email address
 <li>[x] Extensible architecture for real implementation</li>
 <li>[x] Error handling and logging</li>
 </ul>
-<h2 id="next-steps">🎯 <strong>Next Steps</strong></h2>
-<h3 id="phase-31-real-protocol-implementation"><strong>Phase 31+</strong>: Real Protocol Implementation</h3>
+<h2 id="next-steps">🎯 <strong>Next Steps</strong><a class="headerlink" href="#next-steps" title="Permanent link">&para;</a></h2>
+<h3 id="phase-31-real-protocol-implementation"><strong>Phase 31+</strong>: Real Protocol Implementation<a class="headerlink" href="#phase-31-real-protocol-implementation" title="Permanent link">&para;</a></h3>
 <p>The Layer 2 foundation is now ready for real protocol integration:</p>
 <ol>
 <li><strong>AS2 Implementation</strong>: Real AS2 message processing</li>
@@ -406,19 +439,19 @@ email: Must be valid email address
 <li><strong>API Implementation</strong>: Webhook handling and HTTP requests</li>
 <li><strong>EMAIL Implementation</strong>: SMTP communication and processing</li>
 </ol>
-<h3 id="integration-points"><strong>Integration Points</strong></h3>
+<h3 id="integration-points"><strong>Integration Points</strong><a class="headerlink" href="#integration-points" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Package Processing</strong>: Connect endpoints to Phase 28 package workflow</li>
 <li><strong>Trading Partners</strong>: Link connectors to partner management</li>
 <li><strong>Tenet Rules</strong>: Apply business rules via endpoint binding</li>
 <li><strong>Monitoring</strong>: Track protocol health and performance</li>
 </ul>
-<h2 id="files-createdmodified">📁 <strong>Files Created/Modified</strong></h2>
-<h3 id="database-schema"><strong>Database Schema</strong></h3>
+<h2 id="files-createdmodified">📁 <strong>Files Created/Modified</strong><a class="headerlink" href="#files-createdmodified" title="Permanent link">&para;</a></h2>
+<h3 id="database-schema"><strong>Database Schema</strong><a class="headerlink" href="#database-schema" title="Permanent link">&para;</a></h3>
 <ul>
 <li><code>prisma/schema.prisma</code> - Added Connector, Endpoint, Tenet models</li>
 </ul>
-<h3 id="api-implementation_1"><strong>API Implementation</strong></h3>
+<h3 id="api-implementation_1"><strong>API Implementation</strong><a class="headerlink" href="#api-implementation_1" title="Permanent link">&para;</a></h3>
 <ul>
 <li><code>api/handlers/admin/connectors.js</code> - Connector CRUD handlers</li>
 <li><code>api/handlers/admin/endpoints.js</code> - Endpoint CRUD handlers</li>
@@ -426,17 +459,17 @@ email: Must be valid email address
 <li><code>api/routes/adminEndpoints.js</code> - Endpoint route registration</li>
 <li><code>api/server.js</code> - Route registration in main server</li>
 </ul>
-<h3 id="frontend-ui"><strong>Frontend UI</strong></h3>
+<h3 id="frontend-ui"><strong>Frontend UI</strong><a class="headerlink" href="#frontend-ui" title="Permanent link">&para;</a></h3>
 <ul>
 <li><code>admin-bridgeflow/src/pages/Connectors.jsx</code> - Connector management interface</li>
 </ul>
-<h3 id="protocol-handlers"><strong>Protocol Handlers</strong></h3>
+<h3 id="protocol-handlers"><strong>Protocol Handlers</strong><a class="headerlink" href="#protocol-handlers" title="Permanent link">&para;</a></h3>
 <ul>
 <li><code>api/handlers/protocols/as2.js</code> - AS2 protocol stub</li>
 <li><code>api/handlers/protocols/sftp.js</code> - SFTP protocol stub</li>
 <li><code>api/handlers/protocols/api.js</code> - API protocol stub</li>
 </ul>
-<h2 id="phase-30-status-complete">🎉 <strong>Phase 30 Status: COMPLETE</strong></h2>
+<h2 id="phase-30-status-complete">🎉 <strong>Phase 30 Status: COMPLETE</strong><a class="headerlink" href="#phase-30-status-complete" title="Permanent link">&para;</a></h2>
 <p>Phase 30 successfully delivers the critical Layer 2 foundation for protocol integration. The system now has:</p>
 <ul>
 <li><strong>Complete Data Model</strong>: Connectors and endpoints with proper relations</li>

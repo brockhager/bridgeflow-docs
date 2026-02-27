@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="../../css/theme.css" />
     <link rel="stylesheet" href="../../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../../stylesheets/extra.css" rel="stylesheet" />
     
       <script>
         // Current page data
@@ -43,7 +44,16 @@
                 <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
                 </li>
               </ul>
-              <p class="caption"><span class="caption-text">Products</span></p>
+              <p class="caption"><span class="caption-text">Start Here</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../ONBOARDING/">Onboarding</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../ARCHITECTURE/">Architecture</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../api-reference/">API Reference Hub</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Product Suite</span></p>
               <ul class="current">
                   <li class="toctree-l1"><a class="reference internal" href="../">Overview</a>
                   </li>
@@ -61,17 +71,13 @@
                   </li>
                   <li class="toctree-l1 current"><a class="reference internal current" href="#">Coords App</a>
     <ul class="current">
-    <li class="toctree-l2"><a class="reference internal" href="#purpose">Purpose</a>
+    <li class="toctree-l2"><a class="reference internal" href="#what-it-provides">What It Provides</a>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#workspace-location">Workspace Location</a>
+    <li class="toctree-l2"><a class="reference internal" href="#workspace-layout">Workspace Layout</a>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#structure">Structure</a>
+    <li class="toctree-l2"><a class="reference internal" href="#runtime-status">Runtime Status</a>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#status">Status</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#primary-endpoint">Primary Endpoint</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#notable-api-surface-cloud">Notable API Surface (cloud)</a>
+    <li class="toctree-l2"><a class="reference internal" href="#key-cloud-endpoints">Key Cloud Endpoints</a>
     </li>
     </ul>
                   </li>
@@ -80,7 +86,7 @@
                   <li class="toctree-l1"><a class="reference internal" href="../tracking-portal/">Tracking Portal</a>
                   </li>
               </ul>
-              <p class="caption"><span class="caption-text">Platform</span></p>
+              <p class="caption"><span class="caption-text">Platform Services</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../platform/">Overview</a>
                   </li>
@@ -101,12 +107,35 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../platform/bf-warehouse/">Warehouse Service</a>
                   </li>
               </ul>
+              <p class="caption"><span class="caption-text">Capability Catalog</span></p>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../../vision/bf-integration/">Vision</a>
-                </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/SHIPMENTS/">Shipments</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/ADMIN_CONSOLE/">Admin Console</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/CONTROL_TOWER/">Control Tower</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/IDENTITY/">Identity</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/MASTERDATA/">Masterdata</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/ORDERS/">Orders</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/WAREHOUSE/">Warehouse</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/SEARCH/">Search</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/FINTECH/">Fintech</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/CARRIER_PORTAL/">Carrier Portal</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/TRACKING_PORTAL/">Tracking Portal</a>
+                  </li>
               </ul>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../../api-reference/">API Reference</a>
+                <li class="toctree-l1"><a class="reference internal" href="../../vision/bf-integration/">Vision Archive</a>
                 </li>
               </ul>
       </div>
@@ -123,7 +152,7 @@
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
     <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
-          <li class="breadcrumb-item">Products</li>
+          <li class="breadcrumb-item">Product Suite</li>
       <li class="breadcrumb-item active">Coords App</li>
     <li class="wy-breadcrumbs-aside">
     </li>
@@ -133,38 +162,31 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <h1 id="product-coords-app">Product: Coords App</h1>
-<h2 id="purpose">Purpose</h2>
-<p>Coords App is a separate Bridgeflow-umbrella application focused on spatial identity and logistics coordination.</p>
-<p>It supports the BF system with:
-- open coordinate protocol specification
-- reference CLI encoding/decoding tools
-- hosted resolver and coordination APIs</p>
-<h2 id="workspace-location">Workspace Location</h2>
+                <h1 id="coords-app">Coords App<a class="headerlink" href="#coords-app" title="Permanent link">&para;</a></h1>
+<p>Coords App is a BridgeFlow umbrella product focused on spatial identity and logistics coordination.</p>
+<h2 id="what-it-provides">What It Provides<a class="headerlink" href="#what-it-provides" title="Permanent link">&para;</a></h2>
 <ul>
-<li><code>c:\bridgeflow-core\coordsapp</code></li>
+<li>Open coordinate protocol specification</li>
+<li>Reference CLI tooling for encode/decode</li>
+<li>Hosted resolver and coordination APIs</li>
 </ul>
-<h2 id="structure">Structure</h2>
+<h2 id="workspace-layout">Workspace Layout<a class="headerlink" href="#workspace-layout" title="Permanent link">&para;</a></h2>
 <ul>
-<li><code>spec/</code>: open protocol spec (CC0) and feature docs</li>
-<li><code>core/</code>: Go reference CLI for protocol encode/decode</li>
-<li><code>cloud/</code>: hosted resolver API, alias registry, and coordination runtime</li>
+<li><code>spec/</code> protocol and feature docs</li>
+<li><code>core/</code> Go reference CLI</li>
+<li><code>cloud/</code> resolver API and coordination runtime</li>
 </ul>
-<h2 id="status">Status</h2>
-<p>Active development under BF umbrella.</p>
-<h2 id="primary-endpoint">Primary Endpoint</h2>
-<ul>
-<li><code>https://coords.up.railway.app</code> (referenced in <code>coordsapp/cloud/README.md</code>)</li>
-</ul>
-<h2 id="notable-api-surface-cloud">Notable API Surface (<code>cloud</code>)</h2>
+<h2 id="runtime-status">Runtime Status<a class="headerlink" href="#runtime-status" title="Permanent link">&para;</a></h2>
+<p>Active development.</p>
+<p>Primary endpoint: https://coords.up.railway.app</p>
+<h2 id="key-cloud-endpoints">Key Cloud Endpoints<a class="headerlink" href="#key-cloud-endpoints" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Resolver: <code>GET /v1/resolve/{handle}</code></li>
 <li>Auth: <code>POST /v1/auth/signup</code>, <code>POST /v1/auth/token</code></li>
-<li>Status: <code>GET /v1/status/public</code></li>
-<li>Coordination:</li>
-<li><code>POST /v1/routing/plan</code></li>
-<li><code>POST /v1/coordination/assign-dock</code></li>
-<li><code>GET /v1/coordination/docks/{id}/status</code></li>
+<li>Public status: <code>GET /v1/status/public</code></li>
+<li>Routing: <code>POST /v1/routing/plan</code></li>
+<li>Dock assignment: <code>POST /v1/coordination/assign-dock</code></li>
+<li>Dock status: <code>GET /v1/coordination/docks/{id}/status</code></li>
 </ul>
               
             </div>

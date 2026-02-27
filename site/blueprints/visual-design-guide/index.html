@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="../../css/theme.css" />
     <link rel="stylesheet" href="../../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../../stylesheets/extra.css" rel="stylesheet" />
     
       <script>
         // Current page data
@@ -43,7 +44,16 @@
                 <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
                 </li>
               </ul>
-              <p class="caption"><span class="caption-text">Products</span></p>
+              <p class="caption"><span class="caption-text">Start Here</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../ONBOARDING/">Onboarding</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../ARCHITECTURE/">Architecture</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../api-reference/">API Reference Hub</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Product Suite</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../products/">Overview</a>
                   </li>
@@ -66,7 +76,7 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../products/tracking-portal/">Tracking Portal</a>
                   </li>
               </ul>
-              <p class="caption"><span class="caption-text">Platform</span></p>
+              <p class="caption"><span class="caption-text">Platform Services</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../platform/">Overview</a>
                   </li>
@@ -87,12 +97,35 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../platform/bf-warehouse/">Warehouse Service</a>
                   </li>
               </ul>
+              <p class="caption"><span class="caption-text">Capability Catalog</span></p>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../../vision/bf-integration/">Vision</a>
-                </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/SHIPMENTS/">Shipments</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/ADMIN_CONSOLE/">Admin Console</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/CONTROL_TOWER/">Control Tower</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/IDENTITY/">Identity</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/MASTERDATA/">Masterdata</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/ORDERS/">Orders</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/WAREHOUSE/">Warehouse</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/SEARCH/">Search</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/FINTECH/">Fintech</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/CARRIER_PORTAL/">Carrier Portal</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/TRACKING_PORTAL/">Tracking Portal</a>
+                  </li>
               </ul>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../../api-reference/">API Reference</a>
+                <li class="toctree-l1"><a class="reference internal" href="../../vision/bf-integration/">Vision Archive</a>
                 </li>
               </ul>
       </div>
@@ -118,11 +151,11 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <h1 id="bridge-blueprint-visual-design-guide">🌉 Bridge Blueprint Visual Design Guide</h1>
-<h2 id="overview">Overview</h2>
+                <h1 id="bridge-blueprint-visual-design-guide">🌉 Bridge Blueprint Visual Design Guide<a class="headerlink" href="#bridge-blueprint-visual-design-guide" title="Permanent link">&para;</a></h1>
+<h2 id="overview">Overview<a class="headerlink" href="#overview" title="Permanent link">&para;</a></h2>
 <p>Bridge Blueprints now use a <strong>spatial metaphor</strong> that mirrors real-world integration architecture: Trading Partners as external foundations at the edges, Adapters (transformers) nested internally, and Connectors spanning the bridge. This design provides clear visual hierarchy and guides users through the integration assembly process.</p>
-<h2 id="visual-metaphor">🎨 Visual Metaphor</h2>
-<h3 id="the-spatial-bridge-model">The Spatial Bridge Model</h3>
+<h2 id="visual-metaphor">🎨 Visual Metaphor<a class="headerlink" href="#visual-metaphor" title="Permanent link">&para;</a></h2>
+<h3 id="the-spatial-bridge-model">The Spatial Bridge Model<a class="headerlink" href="#the-spatial-bridge-model" title="Permanent link">&para;</a></h3>
 <p><strong>Jan 2026 Update</strong>: New layout reflects the true architectural model:</p>
 <pre><code>┌─────────────────────────────────────────────────────┐
 │                    BRIDGE CANVAS                     │
@@ -148,8 +181,8 @@
 - Adapters are <em>internal transformers</em> — nested behind TPs, green slots (z-index behind)
 - Connector is the <em>bridge span</em> — connects across middle, blue slot
 - No center element — the bridge IS the integration, not something separate</p>
-<h2 id="slot-types-positioning">🎯 Slot Types &amp; Positioning</h2>
-<h3 id="trading-partner-blocks-source-destination">Trading Partner Blocks (Source &amp; Destination)</h3>
+<h2 id="slot-types-positioning">🎯 Slot Types &amp; Positioning<a class="headerlink" href="#slot-types-positioning" title="Permanent link">&para;</a></h2>
+<h3 id="trading-partner-blocks-source-destination">Trading Partner Blocks (Source &amp; Destination)<a class="headerlink" href="#trading-partner-blocks-source-destination" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Type</strong>: <code>'source-tp'</code>, <code>'dest-tp'</code></li>
 <li><strong>Position</strong>: Left (x:80, y:220), Right (x:720, y:220)</li>
@@ -161,7 +194,7 @@
 <li><strong>Required</strong>: ✅ Both mandatory</li>
 <li><strong>Meaning</strong>: External partner systems</li>
 </ul>
-<h3 id="adapter-slots-internal-transformers">Adapter Slots (Internal Transformers)</h3>
+<h3 id="adapter-slots-internal-transformers">Adapter Slots (Internal Transformers)<a class="headerlink" href="#adapter-slots-internal-transformers" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Type</strong>: <code>'source-adapter'</code>, <code>'dest-adapter'</code></li>
 <li><strong>Position</strong>: Behind left TP (x:20, y:240), Behind right TP (x:820, y:240)</li>
@@ -173,7 +206,7 @@
 <li><strong>Required</strong>: First is required, second is optional</li>
 <li><strong>Meaning</strong>: Internal data transformation (X12→JSON, CSV→XML, etc.)</li>
 </ul>
-<h3 id="connector-slot-bridge-span">Connector Slot (Bridge Span)</h3>
+<h3 id="connector-slot-bridge-span">Connector Slot (Bridge Span)<a class="headerlink" href="#connector-slot-bridge-span" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Type</strong>: <code>'bridge-connector'</code></li>
 <li><strong>Position</strong>: Center (x:180, y:250)</li>
@@ -185,8 +218,8 @@
 <li><strong>Required</strong>: ✅ Mandatory</li>
 <li><strong>Meaning</strong>: Transport mechanism (AS2, SFTP, HTTP, etc.)</li>
 </ul>
-<h2 id="slot-states-styling">🎨 Slot States &amp; Styling</h2>
-<h3 id="unfilled-required-pulsing">Unfilled (Required) - Pulsing</h3>
+<h2 id="slot-states-styling">🎨 Slot States &amp; Styling<a class="headerlink" href="#slot-states-styling" title="Permanent link">&para;</a></h2>
+<h3 id="unfilled-required-pulsing">Unfilled (Required) - Pulsing<a class="headerlink" href="#unfilled-required-pulsing" title="Permanent link">&para;</a></h3>
 <pre><code class="language-css">.tp-block.slot--required,
 .adapter-slot.slot--required,
 .connector-slot.slot--required {
@@ -200,22 +233,22 @@
   100% { box-shadow: 0 0 0 0 rgba(249, 115, 22, 0); }
 }
 </code></pre>
-<h3 id="unfilled-optional-static">Unfilled (Optional) - Static</h3>
+<h3 id="unfilled-optional-static">Unfilled (Optional) - Static<a class="headerlink" href="#unfilled-optional-static" title="Permanent link">&para;</a></h3>
 <pre><code class="language-css">.adapter-slot:not(.slot--required) {
   border-color: #D1D5DB;
   animation: none;
   opacity: 0.7;
 }
 </code></pre>
-<h3 id="filled-configured">Filled (Configured)</h3>
+<h3 id="filled-configured">Filled (Configured)<a class="headerlink" href="#filled-configured" title="Permanent link">&para;</a></h3>
 <pre><code class="language-css">.slot--filled {
   border-style: solid;
   background: #F8FAFC;
   animation: none;
 }
 </code></pre>
-<h2 id="accessibility-features">♿ Accessibility Features</h2>
-<h3 id="aria-labels-semantic-html">ARIA Labels &amp; Semantic HTML</h3>
+<h2 id="accessibility-features">♿ Accessibility Features<a class="headerlink" href="#accessibility-features" title="Permanent link">&para;</a></h2>
+<h3 id="aria-labels-semantic-html">ARIA Labels &amp; Semantic HTML<a class="headerlink" href="#aria-labels-semantic-html" title="Permanent link">&para;</a></h3>
 <pre><code class="language-html">&lt;div class=&quot;tp-block&quot;
      data-slot-key=&quot;source-tp&quot;
      aria-label=&quot;Add Source System - External trading partner - Required&quot;
@@ -225,15 +258,15 @@
   &lt;div class=&quot;slot-label&quot;&gt;Source System&lt;/div&gt;
 &lt;/div&gt;
 </code></pre>
-<h3 id="keyboard-navigation">Keyboard Navigation</h3>
+<h3 id="keyboard-navigation">Keyboard Navigation<a class="headerlink" href="#keyboard-navigation" title="Permanent link">&para;</a></h3>
 <ul>
 <li><code>Tab</code> / <code>Shift+Tab</code>: Navigate through slots</li>
 <li><code>Enter</code> / <code>Space</code>: Activate slot → open gap-filling modal</li>
 <li>Visible focus rings on all interactive elements</li>
 <li>High contrast: 4.5:1+ WCAG AA compliant</li>
 </ul>
-<h2 id="responsive-layout-phase-328">� Responsive Layout (Phase 32.8)</h2>
-<h3 id="breakpoint-strategy">Breakpoint Strategy</h3>
+<h2 id="responsive-layout-phase-328">� Responsive Layout (Phase 32.8)<a class="headerlink" href="#responsive-layout-phase-328" title="Permanent link">&para;</a></h2>
+<h3 id="breakpoint-strategy">Breakpoint Strategy<a class="headerlink" href="#breakpoint-strategy" title="Permanent link">&para;</a></h3>
 <p><strong>Desktop (&gt;1024px): Percentage-Based</strong></p>
 <pre><code class="language-css">/* Source TP: left edge */
 left: 5%;        width: 12%;     minWidth: 80px;
@@ -255,7 +288,7 @@ margin: 10px auto;
 width: 90% !important;
 </code></pre>
 <p>→ One slot per row, centered, staggered layout</p>
-<h3 id="drag-and-drop-feedback-phase-328">Drag-and-Drop Feedback (Phase 32.8)</h3>
+<h3 id="drag-and-drop-feedback-phase-328">Drag-and-Drop Feedback (Phase 32.8)<a class="headerlink" href="#drag-and-drop-feedback-phase-328" title="Permanent link">&para;</a></h3>
 <p>When dragging a palette item over a slot:</p>
 <pre><code class="language-css">.slot-drag-over {
   background: rgba(249, 115, 22, 0.15);
@@ -269,7 +302,7 @@ width: 90% !important;
 - Dragged component type checked against slot acceptance
 - ✅ Compatible → snap to slot
 - ❌ Incompatible → warning toast, no snap</p>
-<h3 id="implementation-details">Implementation Details</h3>
+<h3 id="implementation-details">Implementation Details<a class="headerlink" href="#implementation-details" title="Permanent link">&para;</a></h3>
 <p><strong><a href="web/src/assembly.js#L1875+">setupResponsiveLayoutObserver()</a></strong>
 - Monitors window resize, detects &gt;1024px threshold crossing
 - Re-renders bridge outline when crossing breakpoint
@@ -296,8 +329,8 @@ Each slot now includes both positioning modes:</p>
 }
 </code></pre>
 <hr />
-<h2 id="user-interaction-flow">🔄 User Interaction Flow</h2>
-<h3 id="1-blueprint-selection-responsive-render">1. Blueprint Selection &amp; Responsive Render</h3>
+<h2 id="user-interaction-flow">🔄 User Interaction Flow<a class="headerlink" href="#user-interaction-flow" title="Permanent link">&para;</a></h2>
+<h3 id="1-blueprint-selection-responsive-render">1. Blueprint Selection &amp; Responsive Render<a class="headerlink" href="#1-blueprint-selection-responsive-render" title="Permanent link">&para;</a></h3>
 <pre><code>User selects &quot;Retail Brand&quot; blueprint
 ↓
 Canvas detects screen width &amp; renders:
@@ -311,7 +344,7 @@ Canvas detects screen width &amp; renders:
   • Dest TP block (right, orange, pulsing)
   • Dest Adapter slot (behind right, gray, static)
 </code></pre>
-<h3 id="2-drag-and-drop-configuration-new-phase-328">2. Drag-and-Drop Configuration (NEW Phase 32.8)</h3>
+<h3 id="2-drag-and-drop-configuration-new-phase-328">2. Drag-and-Drop Configuration (NEW Phase 32.8)<a class="headerlink" href="#2-drag-and-drop-configuration-new-phase-328" title="Permanent link">&para;</a></h3>
 <pre><code>User drags &quot;Company CRM&quot; from palette → &quot;Source System&quot; slot
 ↓
 On dragover: Slot feedback
@@ -328,7 +361,7 @@ On drop:
 Result: Slot configured, no longer pulses
   Toast: &quot;✅ Source System configured: Company CRM&quot;
 </code></pre>
-<h3 id="3-gap-filling-click-fallback">3. Gap Filling (Click Fallback)</h3>
+<h3 id="3-gap-filling-click-fallback">3. Gap Filling (Click Fallback)<a class="headerlink" href="#3-gap-filling-click-fallback" title="Permanent link">&para;</a></h3>
 <pre><code>User clicks &quot;Source System&quot; (if didn't drag-drop)
 ↓
 Opens gap-filling modal:
@@ -340,7 +373,7 @@ User selects existing TP or creates new
 ↓
 Slot fills (border→solid, stops pulsing)
 </code></pre>
-<h3 id="4-progress-visualization">4. Progress Visualization</h3>
+<h3 id="4-progress-visualization">4. Progress Visualization<a class="headerlink" href="#4-progress-visualization" title="Permanent link">&para;</a></h3>
 <pre><code>Empty → Pulsing (orange)
     ↓
 (Drag-drop OR click modal)
@@ -349,15 +382,15 @@ Selection → Slot fills (solid background)
     ↓
 All filled → &quot;Ready to Activate Bridge&quot; button enabled
 </code></pre>
-<h2 id="design-principles">🎨 Design Principles</h2>
-<h3 id="architecture-as-visual-grammar">Architecture as Visual Grammar</h3>
+<h2 id="design-principles">🎨 Design Principles<a class="headerlink" href="#design-principles" title="Permanent link">&para;</a></h2>
+<h3 id="architecture-as-visual-grammar">Architecture as Visual Grammar<a class="headerlink" href="#architecture-as-visual-grammar" title="Permanent link">&para;</a></h3>
 <ol>
 <li><strong>Edges = External</strong> (TPs in orange at edges)</li>
 <li><strong>Interior = Internal</strong> (Adapters nested behind TPs)</li>
 <li><strong>Span = Transport</strong> (Connector crossing middle)</li>
 <li><strong>No Center Element</strong> (Bridge IS the connection, not a separate transform layer)</li>
 </ol>
-<h3 id="color-semantics-fixed">Color Semantics (Fixed)</h3>
+<h3 id="color-semantics-fixed">Color Semantics (Fixed)<a class="headerlink" href="#color-semantics-fixed" title="Permanent link">&para;</a></h3>
 <ul>
 <li>🟠 <strong>Orange (#F97316)</strong>: Trading Partners (required, external)</li>
 <li>💚 <strong>Green (#10B981)</strong>: Adapters (required/optional, internal)</li>
@@ -365,29 +398,29 @@ All filled → &quot;Ready to Activate Bridge&quot; button enabled
 <li>⚪ <strong>Gray (#D1D5DB)</strong>: Optional/secondary slots</li>
 <li>🤍 <strong>White</strong>: Backgrounds, clean canvas</li>
 </ul>
-<h3 id="animation-language">Animation Language</h3>
+<h3 id="animation-language">Animation Language<a class="headerlink" href="#animation-language" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Pulse</strong>: Required slots draw attention without distraction</li>
 <li><strong>Duration</strong>: 2s cycle (slow, professional)</li>
 <li><strong>Easing</strong>: Box-shadow expand (smooth)</li>
 <li><strong>Stops on Fill</strong>: Slot animates until configured</li>
 </ul>
-<h3 id="spacing-proportions">Spacing &amp; Proportions</h3>
+<h3 id="spacing-proportions">Spacing &amp; Proportions<a class="headerlink" href="#spacing-proportions" title="Permanent link">&para;</a></h3>
 <ul>
 <li>TPs: 80×100 (large, prominent)</li>
 <li>Adapters: 60×40 (compact, secondary)</li>
 <li>Connector: 500×24 (wide, thin spanning line)</li>
 <li>Gaps: ~100px between edges and center (breathing room)</li>
 </ul>
-<h2 id="responsive-considerations-phase-328">📱 Responsive Considerations (Phase 32.8+)</h2>
-<h3 id="current-phase-32-fixed-layout">Current (Phase 32): Fixed Layout</h3>
+<h2 id="responsive-considerations-phase-328">📱 Responsive Considerations (Phase 32.8+)<a class="headerlink" href="#responsive-considerations-phase-328" title="Permanent link">&para;</a></h2>
+<h3 id="current-phase-32-fixed-layout">Current (Phase 32): Fixed Layout<a class="headerlink" href="#current-phase-32-fixed-layout" title="Permanent link">&para;</a></h3>
 <pre><code class="language-css">position: absolute;
 left: [fixed px];
 top: [fixed px];
 width: [fixed px];
 height: [fixed px];
 </code></pre>
-<h3 id="future-phase-328-responsive-layout">Future (Phase 32.8): Responsive Layout</h3>
+<h3 id="future-phase-328-responsive-layout">Future (Phase 32.8): Responsive Layout<a class="headerlink" href="#future-phase-328-responsive-layout" title="Permanent link">&para;</a></h3>
 <pre><code class="language-css">/* Percentage-based or flex-based positioning */
 position: absolute;
 left: 5%;        /* Source TP */
@@ -396,15 +429,15 @@ right: 5%;       /* Dest TP */
 /* Adapter positions relative to TPs */
 /* Connector scales with container */
 </code></pre>
-<h3 id="mobile-adaptation-phase-33">Mobile Adaptation (Phase 33+)</h3>
+<h3 id="mobile-adaptation-phase-33">Mobile Adaptation (Phase 33+)<a class="headerlink" href="#mobile-adaptation-phase-33" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Stack TPs vertically on mobile</li>
 <li>Rotate connector 90° for vertical flow</li>
 <li>Larger touch targets (48px minimum)</li>
 <li>Maintained visual hierarchy</li>
 </ul>
-<h2 id="implementation-details_1">🚀 Implementation Details</h2>
-<h3 id="core-functions">Core Functions</h3>
+<h2 id="implementation-details_1">🚀 Implementation Details<a class="headerlink" href="#implementation-details_1" title="Permanent link">&para;</a></h2>
+<h3 id="core-functions">Core Functions<a class="headerlink" href="#core-functions" title="Permanent link">&para;</a></h3>
 <p><strong><a href="web/src/assembly.js#L21-L87">injectBridgeStyles()</a></strong>
 - Creates <code>&lt;style&gt;</code> tag once (idempotent)
 - Defines all slot classes: <code>.tp-block</code>, <code>.adapter-slot</code>, <code>.connector-slot</code>
@@ -428,7 +461,7 @@ right: 5%;       /* Dest TP */
 - Receives full slot metadata (type, label, hint, required, position, etc.)
 - Creates ghost component with slot context
 - Calls <code>triggerGapFilling()</code> → opens modal</p>
-<h3 id="integration-points">Integration Points</h3>
+<h3 id="integration-points">Integration Points<a class="headerlink" href="#integration-points" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
 <tr>
@@ -463,23 +496,23 @@ right: 5%;       /* Dest TP */
 </tr>
 </tbody>
 </table>
-<h2 id="success-metrics">🎯 Success Metrics</h2>
-<h3 id="user-experience">User Experience</h3>
+<h2 id="success-metrics">🎯 Success Metrics<a class="headerlink" href="#success-metrics" title="Permanent link">&para;</a></h2>
+<h3 id="user-experience">User Experience<a class="headerlink" href="#user-experience" title="Permanent link">&para;</a></h3>
 <ul>
 <li>✅ <strong>Instant clarity</strong>: Bridge spatial layout immediately communicates architecture</li>
 <li>✅ <strong>Reduced clicks</strong>: Fewer modals/steps to understand flow</li>
 <li>✅ <strong>Guided flow</strong>: Pulsing slots show what to configure next</li>
 <li>✅ <strong>Professional UX</strong>: Enterprise-grade visual polish</li>
 </ul>
-<h3 id="business-value">Business Value</h3>
+<h3 id="business-value">Business Value<a class="headerlink" href="#business-value" title="Permanent link">&para;</a></h3>
 <ul>
 <li>✅ <strong>Faster onboarding</strong>: New users understand TPs/Adapters/Connectors</li>
 <li>✅ <strong>Higher completion</strong>: Clear progress from empty → filled</li>
 <li>✅ <strong>Extensibility</strong>: Easy to add Firewall/Policy slots</li>
 <li>✅ <strong>Competitive edge</strong>: Unique bridge metaphor differentiates BridgeFlow</li>
 </ul>
-<h2 id="roadmap">🔮 Roadmap</h2>
-<h3 id="phase-32-core-spatial-model">Phase 32 (Core Spatial Model) ✅</h3>
+<h2 id="roadmap">🔮 Roadmap<a class="headerlink" href="#roadmap" title="Permanent link">&para;</a></h2>
+<h3 id="phase-32-core-spatial-model">Phase 32 (Core Spatial Model) ✅<a class="headerlink" href="#phase-32-core-spatial-model" title="Permanent link">&para;</a></h3>
 <ul>
 <li>✅ Spatial layout (TP edges, adapters nested, connector span)</li>
 <li>✅ Slot metadata &amp; configuration</li>
@@ -487,7 +520,7 @@ right: 5%;       /* Dest TP */
 <li>✅ Idempotent style injection</li>
 <li>✅ Centralized BRIDGE_SLOT_CONFIG</li>
 </ul>
-<h3 id="phase-328-responsive-drag-and-drop-in-progress">Phase 32.8 (Responsive + Drag-and-Drop) 🔨 IN PROGRESS</h3>
+<h3 id="phase-328-responsive-drag-and-drop-in-progress">Phase 32.8 (Responsive + Drag-and-Drop) 🔨 IN PROGRESS<a class="headerlink" href="#phase-328-responsive-drag-and-drop-in-progress" title="Permanent link">&para;</a></h3>
 <ul>
 <li>✅ Percentage-based positioning (responsive breakpoints)</li>
 <li>✅ Window resize observer (re-render on threshold crossing)</li>
@@ -497,7 +530,7 @@ right: 5%;       /* Dest TP */
 <li>📋 Live status indicators (healthy/warning — defer to Phase 33)</li>
 <li>📋 Mobile stack layout polish (Phase 33+)</li>
 </ul>
-<h3 id="phase-33-expansion-polish">Phase 33 (Expansion + Polish)</h3>
+<h3 id="phase-33-expansion-polish">Phase 33 (Expansion + Polish)<a class="headerlink" href="#phase-33-expansion-polish" title="Permanent link">&para;</a></h3>
 <ul>
 <li>📋 Firewall slot (security policies)</li>
 <li>📋 Data Map slot (field transformation)</li>
@@ -506,7 +539,7 @@ right: 5%;       /* Dest TP */
 <li>📋 Mobile layout optimization</li>
 <li>📋 Animated transitions (slot fill, adapter reveal)</li>
 </ul>
-<h3 id="phase-39-canvas-ux-polish">Phase 39 — Canvas UX Polish ✅</h3>
+<h3 id="phase-39-canvas-ux-polish">Phase 39 — Canvas UX Polish ✅<a class="headerlink" href="#phase-39-canvas-ux-polish" title="Permanent link">&para;</a></h3>
 <ul>
 <li>✅ Professional color scheme, non-overlapping positioning, visual hierarchy</li>
 <li>✅ <strong>Red outlines</strong> for required elements (static, non-blinking) for clear guidance</li>

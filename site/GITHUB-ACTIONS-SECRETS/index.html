@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="../css/theme.css" />
     <link rel="stylesheet" href="../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../stylesheets/extra.css" rel="stylesheet" />
     
       <script>
         // Current page data
@@ -43,7 +44,16 @@
                 <li class="toctree-l1"><a class="reference internal" href="..">Home</a>
                 </li>
               </ul>
-              <p class="caption"><span class="caption-text">Products</span></p>
+              <p class="caption"><span class="caption-text">Start Here</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../ONBOARDING/">Onboarding</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../ARCHITECTURE/">Architecture</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../api-reference/">API Reference Hub</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Product Suite</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../products/">Overview</a>
                   </li>
@@ -66,7 +76,7 @@
                   <li class="toctree-l1"><a class="reference internal" href="../products/tracking-portal/">Tracking Portal</a>
                   </li>
               </ul>
-              <p class="caption"><span class="caption-text">Platform</span></p>
+              <p class="caption"><span class="caption-text">Platform Services</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../platform/">Overview</a>
                   </li>
@@ -87,12 +97,35 @@
                   <li class="toctree-l1"><a class="reference internal" href="../platform/bf-warehouse/">Warehouse Service</a>
                   </li>
               </ul>
+              <p class="caption"><span class="caption-text">Capability Catalog</span></p>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../vision/bf-integration/">Vision</a>
-                </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../features/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../features/SHIPMENTS/">Shipments</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../features/ADMIN_CONSOLE/">Admin Console</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../features/CONTROL_TOWER/">Control Tower</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../features/IDENTITY/">Identity</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../features/MASTERDATA/">Masterdata</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../features/ORDERS/">Orders</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../features/WAREHOUSE/">Warehouse</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../features/SEARCH/">Search</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../features/FINTECH/">Fintech</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../features/CARRIER_PORTAL/">Carrier Portal</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../features/TRACKING_PORTAL/">Tracking Portal</a>
+                  </li>
               </ul>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../api-reference/">API Reference</a>
+                <li class="toctree-l1"><a class="reference internal" href="../vision/bf-integration/">Vision Archive</a>
                 </li>
               </ul>
       </div>
@@ -118,15 +151,15 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <h1 id="github-actions-safe-secrets-handling">GitHub Actions: Safe Secrets Handling</h1>
+                <h1 id="github-actions-safe-secrets-handling">GitHub Actions: Safe Secrets Handling<a class="headerlink" href="#github-actions-safe-secrets-handling" title="Permanent link">&para;</a></h1>
 <p>This short note explains a common gotcha when writing workflow conditionals and how we handle it in this repo.</p>
-<h2 id="problem">Problem</h2>
+<h2 id="problem">Problem<a class="headerlink" href="#problem" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Using <code>secrets</code> directly in a workflow <code>if:</code> expression (e.g. <code>if: secrets.API_TOKEN</code>) can fail with:
   <code>Unrecognized named-value: 'secrets'</code> during workflow validation.</li>
 <li>The parser/evaluation context for <code>if:</code> expressions is limited and may not include <code>secrets</code> in some cases.</li>
 </ul>
-<h2 id="pattern-we-use">Pattern we use</h2>
+<h2 id="pattern-we-use">Pattern we use<a class="headerlink" href="#pattern-we-use" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Avoid referencing <code>secrets</code> in <code>if:</code> expressions.</li>
 <li>Instead, gate the step on a non-secret variable (e.g., <code>vars.STAGING_APP_URL</code>) and then check the presence of the secret inside the step script:</li>
@@ -139,12 +172,12 @@ run: |
   fi
   curl -f -H &quot;Authorization: Bearer ${{ secrets.API_TOKEN }}&quot; &quot;${APP_URL}/api/health&quot;
 </code></pre>
-<h2 id="why-this-is-better">Why this is better</h2>
+<h2 id="why-this-is-better">Why this is better<a class="headerlink" href="#why-this-is-better" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Avoids workflow syntax errors caused by unavailable named-values in <code>if:</code> contexts.</li>
 <li>Keeps secret use confined to step runtime where secrets are available and hidden from logs unless explicitly echoed.</li>
 </ul>
-<h2 id="security-notes">Security notes</h2>
+<h2 id="security-notes">Security notes<a class="headerlink" href="#security-notes" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Never echo raw secrets into logs.</li>
 <li>Use <code>curl -sS</code> or similar to avoid accidental output; if in debug mode, redact secrets before printing.</li>

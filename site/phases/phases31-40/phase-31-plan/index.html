@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="../../../css/theme.css" />
     <link rel="stylesheet" href="../../../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../../../stylesheets/extra.css" rel="stylesheet" />
     
       <script>
         // Current page data
@@ -43,7 +44,16 @@
                 <li class="toctree-l1"><a class="reference internal" href="../../..">Home</a>
                 </li>
               </ul>
-              <p class="caption"><span class="caption-text">Products</span></p>
+              <p class="caption"><span class="caption-text">Start Here</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../ONBOARDING/">Onboarding</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../ARCHITECTURE/">Architecture</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../api-reference/">API Reference Hub</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Product Suite</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../../products/">Overview</a>
                   </li>
@@ -66,7 +76,7 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../../products/tracking-portal/">Tracking Portal</a>
                   </li>
               </ul>
-              <p class="caption"><span class="caption-text">Platform</span></p>
+              <p class="caption"><span class="caption-text">Platform Services</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../../platform/">Overview</a>
                   </li>
@@ -87,12 +97,35 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../../platform/bf-warehouse/">Warehouse Service</a>
                   </li>
               </ul>
+              <p class="caption"><span class="caption-text">Capability Catalog</span></p>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../../../vision/bf-integration/">Vision</a>
-                </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../features/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../features/SHIPMENTS/">Shipments</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../features/ADMIN_CONSOLE/">Admin Console</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../features/CONTROL_TOWER/">Control Tower</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../features/IDENTITY/">Identity</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../features/MASTERDATA/">Masterdata</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../features/ORDERS/">Orders</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../features/WAREHOUSE/">Warehouse</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../features/SEARCH/">Search</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../features/FINTECH/">Fintech</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../features/CARRIER_PORTAL/">Carrier Portal</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../features/TRACKING_PORTAL/">Tracking Portal</a>
+                  </li>
               </ul>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../../../api-reference/">API Reference</a>
+                <li class="toctree-l1"><a class="reference internal" href="../../../vision/bf-integration/">Vision Archive</a>
                 </li>
               </ul>
       </div>
@@ -118,11 +151,11 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <h1 id="phase-31-layer-3-unified-adapters-connectors">Phase 31 — Layer 3: Unified Adapters &amp; Connectors</h1>
+                <h1 id="phase-31-layer-3-unified-adapters-connectors">Phase 31 — Layer 3: Unified Adapters &amp; Connectors<a class="headerlink" href="#phase-31-layer-3-unified-adapters-connectors" title="Permanent link">&para;</a></h1>
 <p><strong>Planned:</strong> January 8, 2026<br />
 <strong>Effort:</strong> TBD (estimated 3-4 days)<br />
 <strong>Priority:</strong> High (customer integration foundation)</p>
-<h2 id="critical-principle-symmetric-architecture">🎯 Critical Principle: Symmetric Architecture</h2>
+<h2 id="critical-principle-symmetric-architecture">🎯 Critical Principle: Symmetric Architecture<a class="headerlink" href="#critical-principle-symmetric-architecture" title="Permanent link">&para;</a></h2>
 <p><strong>🔁 Unified Adapter &amp; Connector Model (Both Sides)</strong>
 ✅ <strong>Core Principle</strong>: One codebase. One protocol. One deployment model.
 Capabilities vary by license tier — not by code path.</p>
@@ -162,8 +195,8 @@ Capabilities vary by license tier — not by code path.</p>
 </tr>
 </tbody>
 </table>
-<h2 id="standardized-architecture-key-for-reusability">🧱 Standardized Architecture (Key for Reusability)</h2>
-<h3 id="1-adapter-interface-all-adapters-implement-this"><strong>1. Adapter Interface (All Adapters Implement This)</strong></h3>
+<h2 id="standardized-architecture-key-for-reusability">🧱 Standardized Architecture (Key for Reusability)<a class="headerlink" href="#standardized-architecture-key-for-reusability" title="Permanent link">&para;</a></h2>
+<h3 id="1-adapter-interface-all-adapters-implement-this"><strong>1. Adapter Interface (All Adapters Implement This)</strong><a class="headerlink" href="#1-adapter-interface-all-adapters-implement-this" title="Permanent link">&para;</a></h3>
 <pre><code class="language-typescript">interface BridgeFlowAdapter {
   // Common lifecycle
   validateConfig(config: AdapterConfig): boolean;
@@ -177,14 +210,14 @@ Capabilities vary by license tier — not by code path.</p>
 }
 </code></pre>
 <p>💡 <strong>Same adapter binary runs for both tiers</strong> — feature flags or token permissions enable/disable capabilities.</p>
-<h3 id="2-connector-abstraction"><strong>2. Connector Abstraction</strong></h3>
+<h3 id="2-connector-abstraction"><strong>2. Connector Abstraction</strong><a class="headerlink" href="#2-connector-abstraction" title="Permanent link">&para;</a></h3>
 <pre><code class="language-typescript">BridgeConnector = protocol handler (AS2/SFTP/API)
 Configurable direction:
 - bidirectional (Enterprise)
 - receive-only (Free TP)
 </code></pre>
 <p>Same binary, same logs, same update mechanism.</p>
-<h3 id="3-token-driven-capability-gates"><strong>3. Token-Driven Capability Gates</strong></h3>
+<h3 id="3-token-driven-capability-gates"><strong>3. Token-Driven Capability Gates</strong><a class="headerlink" href="#3-token-driven-capability-gates" title="Permanent link">&para;</a></h3>
 <p>The token itself declares what's allowed:</p>
 <pre><code class="language-json">// Enterprise Token
 {
@@ -202,7 +235,7 @@ Configurable direction:
 }
 </code></pre>
 <p>→ <strong>No code branching</strong> — just permission checks.</p>
-<h2 id="both-sides-of-the-bridge-full-symmetry">🌉 Both Sides of the Bridge — Full Symmetry</h2>
+<h2 id="both-sides-of-the-bridge-full-symmetry">🌉 Both Sides of the Bridge — Full Symmetry<a class="headerlink" href="#both-sides-of-the-bridge-full-symmetry" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
@@ -235,10 +268,10 @@ Configurable direction:
 </tbody>
 </table>
 <p>🔑 <strong>Critical</strong>: A Free TP could later become a Customer — their adapter auto-upgrades with new token. Zero re-install.</p>
-<h2 id="objective">🎯 Objective</h2>
+<h2 id="objective">🎯 Objective<a class="headerlink" href="#objective" title="Permanent link">&para;</a></h2>
 <p>Establish Layer 3: Unified Data Exchange Adapters, which handle pre- and post-processing transformation between BridgeFlow's core Packages and customer-specific systems using a <strong>symmetric, single-codebase architecture</strong> with tiered capabilities controlled by token permissions.</p>
-<h2 id="core-deliverables-22">📋 Core Deliverables (2/2)</h2>
-<h3 id="phase-31a-unified-adapter-framework">Phase 31A: Unified Adapter Framework</h3>
+<h2 id="core-deliverables-22">📋 Core Deliverables (2/2)<a class="headerlink" href="#core-deliverables-22" title="Permanent link">&para;</a></h2>
+<h3 id="phase-31a-unified-adapter-framework">Phase 31A: Unified Adapter Framework<a class="headerlink" href="#phase-31a-unified-adapter-framework" title="Permanent link">&para;</a></h3>
 <p><strong>Pluggable Adapter System</strong>: One adapter framework for all tiers
 - <strong>Unified Interface</strong>: All adapters implement the same BridgeFlowAdapter interface
 - <strong>Token-Based Gating</strong>: Features enabled/disabled by token permissions, not code paths
@@ -251,7 +284,7 @@ Configurable direction:
 - <strong>Receive-Only Mode</strong>: Free trading partners get receive-only connectors
 - <strong>Protocol Support</strong>: AS2, SFTP, API with same runtime
 - <strong>Sponsor Binding</strong>: Free TP connectors pre-bound to sponsor organization</p>
-<h3 id="phase-31b-intelligent-processing-tier-management">Phase 31B: Intelligent Processing &amp; Tier Management</h3>
+<h3 id="phase-31b-intelligent-processing-tier-management">Phase 31B: Intelligent Processing &amp; Tier Management<a class="headerlink" href="#phase-31b-intelligent-processing-tier-management" title="Permanent link">&para;</a></h3>
 <p><strong>Enhanced Processing</strong>: Smart document handling for all tiers
 - <strong>Auto-Type Detection</strong>: Works for both enterprise and free tiers
 - <strong>Validation Framework</strong>: Multi-format validation with tier-appropriate features
@@ -262,14 +295,14 @@ Configurable direction:
 - <strong>Zero-Reinstall</strong>: Same binary automatically adapts to new capabilities
 - <strong>Feature Monitoring</strong>: Track tier usage and upgrade opportunities
 - <strong>Admin Integration</strong>: Enterprise customers manage free TP tokens via UI</p>
-<h2 id="technical-architecture">🏗️ <strong>Technical Architecture</strong></h2>
-<h3 id="unified-data-flow"><strong>Unified Data Flow</strong></h3>
+<h2 id="technical-architecture">🏗️ <strong>Technical Architecture</strong><a class="headerlink" href="#technical-architecture" title="Permanent link">&para;</a></h2>
+<h3 id="unified-data-flow"><strong>Unified Data Flow</strong><a class="headerlink" href="#unified-data-flow" title="Permanent link">&para;</a></h3>
 <pre><code>Customer System A ←→ Adapter ←→ BridgeFlow Package ←→ Connector ←→ Trading Partner System B
       ↓              ↓              ↓              ↓              ↓
   Raw Data    Same Binary    Standardized    Same Binary    Target Format
   Ingestion   All Tiers      Package        All Tiers      Delivery
 </code></pre>
-<h3 id="symmetric-adapter-architecture"><strong>Symmetric Adapter Architecture</strong></h3>
+<h3 id="symmetric-adapter-architecture"><strong>Symmetric Adapter Architecture</strong><a class="headerlink" href="#symmetric-adapter-architecture" title="Permanent link">&para;</a></h3>
 <pre><code>┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
 │   Customer A   │    │  BridgeFlow    │    │   Trading      │
 │   (Enterprise) │    │  Core         │    │   Partner      │
@@ -280,7 +313,7 @@ Configurable direction:
 │ └───────────┘ │    │ └───────────┘ │    │ └───────────┘ │
 └─────────────────┘    └─────────────────┘    └─────────────────┘
 </code></pre>
-<h3 id="security-tier-model"><strong>Security &amp; Tier Model</strong></h3>
+<h3 id="security-tier-model"><strong>Security &amp; Tier Model</strong><a class="headerlink" href="#security-tier-model" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Token-Based Authentication</strong>: Unified token system for all tiers</li>
 <li><strong>Permission Gates</strong>: Features controlled by token permissions</li>
@@ -288,8 +321,8 @@ Configurable direction:
 <li><strong>Audit Trail</strong>: Same logging for all tiers with tier-aware filtering</li>
 <li><strong>Network Isolation</strong>: Adapters run in customer/partner infrastructure</li>
 </ul>
-<h2 id="adapter-capabilities-by-tier">📊 <strong>Adapter Capabilities by Tier</strong></h2>
-<h3 id="enterprise-customer-adapters"><strong>Enterprise Customer Adapters</strong></h3>
+<h2 id="adapter-capabilities-by-tier">📊 <strong>Adapter Capabilities by Tier</strong><a class="headerlink" href="#adapter-capabilities-by-tier" title="Permanent link">&para;</a></h2>
+<h3 id="enterprise-customer-adapters"><strong>Enterprise Customer Adapters</strong><a class="headerlink" href="#enterprise-customer-adapters" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Onramp</strong>: Full capabilities (DB, API, file, custom transforms)</li>
 <li><strong>Offramp</strong>: Full capabilities (DB, API, SFTP, email, custom mappings)</li>
@@ -297,7 +330,7 @@ Configurable direction:
 <li><strong>Authentication</strong>: Org-scoped tokens with granular permissions</li>
 <li><strong>Support</strong>: Premium support with SLA</li>
 </ul>
-<h3 id="free-trading-partner-adapters"><strong>Free Trading Partner Adapters</strong></h3>
+<h3 id="free-trading-partner-adapters"><strong>Free Trading Partner Adapters</strong><a class="headerlink" href="#free-trading-partner-adapters" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Onramp</strong>: Not available (typically doesn't originate data)</li>
 <li><strong>Offramp</strong>: Limited to local file drop only</li>
@@ -305,15 +338,15 @@ Configurable direction:
 <li><strong>Authentication</strong>: Sponsor-scoped token, receive-only permissions</li>
 <li><strong>Support</strong>: Community support + documentation</li>
 </ul>
-<h3 id="upgrade-path"><strong>Upgrade Path</strong></h3>
+<h3 id="upgrade-path"><strong>Upgrade Path</strong><a class="headerlink" href="#upgrade-path" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Zero Reinstall</strong>: Same binary automatically unlocks features</li>
 <li><strong>Token Swap</strong>: New token enables enterprise capabilities</li>
 <li><strong>Data Migration</strong>: Seamless transition with no data loss</li>
 <li><strong>Feature Discovery</strong>: UI shows available features based on token</li>
 </ul>
-<h2 id="security-authentication">🔐 <strong>Security &amp; Authentication</strong></h2>
-<h3 id="unified-token-system"><strong>Unified Token System</strong></h3>
+<h2 id="security-authentication">🔐 <strong>Security &amp; Authentication</strong><a class="headerlink" href="#security-authentication" title="Permanent link">&para;</a></h2>
+<h3 id="unified-token-system"><strong>Unified Token System</strong><a class="headerlink" href="#unified-token-system" title="Permanent link">&para;</a></h3>
 <pre><code class="language-javascript">// Enterprise Customer Token
 {
   &quot;adapterId&quot;: &quot;customer-a-adapter-001&quot;,
@@ -344,7 +377,7 @@ Configurable direction:
   &quot;expiresAt&quot;: &quot;2026-12-31T23:59:59Z&quot;
 }
 </code></pre>
-<h3 id="permission-based-feature-gates"><strong>Permission-Based Feature Gates</strong></h3>
+<h3 id="permission-based-feature-gates"><strong>Permission-Based Feature Gates</strong><a class="headerlink" href="#permission-based-feature-gates" title="Permanent link">&para;</a></h3>
 <pre><code class="language-typescript">class BridgeFlowAdapter {
   async onramp(source: DataSource): Promise&lt;PackagePayload&gt; {
     if (!this.hasPermission('onramp:*')) {
@@ -366,8 +399,8 @@ Configurable direction:
   }
 }
 </code></pre>
-<h2 id="implementation-plan">🛠️ <strong>Implementation Plan</strong></h2>
-<h3 id="phase-31a-unified-framework-days-1-2"><strong>Phase 31A: Unified Framework (Days 1-2)</strong></h3>
+<h2 id="implementation-plan">🛠️ <strong>Implementation Plan</strong><a class="headerlink" href="#implementation-plan" title="Permanent link">&para;</a></h2>
+<h3 id="phase-31a-unified-framework-days-1-2"><strong>Phase 31A: Unified Framework (Days 1-2)</strong><a class="headerlink" href="#phase-31a-unified-framework-days-1-2" title="Permanent link">&para;</a></h3>
 <ol>
 <li><strong>Adapter Interface</strong>: Define BridgeFlowAdapter interface with tier-agnostic methods</li>
 <li><strong>Permission System</strong>: Implement token-based permission checking</li>
@@ -375,7 +408,7 @@ Configurable direction:
 <li><strong>File Adapter</strong>: Implement file system adapter (works for both tiers)</li>
 <li><strong>Connector Integration</strong>: Unified connector runtime with bidirectional/receive-only modes</li>
 </ol>
-<h3 id="phase-31b-tier-management-days-3-4"><strong>Phase 31B: Tier Management (Days 3-4)</strong></h3>
+<h3 id="phase-31b-tier-management-days-3-4"><strong>Phase 31B: Tier Management (Days 3-4)</strong><a class="headerlink" href="#phase-31b-tier-management-days-3-4" title="Permanent link">&para;</a></h3>
 <ol>
 <li><strong>Enterprise Features</strong>: Add database and API adapters (enterprise only)</li>
 <li><strong>Transformation Engine</strong>: Custom transforms for enterprise tier</li>
@@ -383,8 +416,8 @@ Configurable direction:
 <li><strong>Upgrade System</strong>: Token-based upgrade mechanism</li>
 <li><strong>Admin Integration</strong>: Enterprise customer UI for managing free TP tokens</li>
 </ol>
-<h2 id="success-criteria">📈 <strong>Success Criteria</strong></h2>
-<h3 id="unified-architecture">✅ <strong>Unified Architecture</strong></h3>
+<h2 id="success-criteria">📈 <strong>Success Criteria</strong><a class="headerlink" href="#success-criteria" title="Permanent link">&para;</a></h2>
+<h3 id="unified-architecture">✅ <strong>Unified Architecture</strong><a class="headerlink" href="#unified-architecture" title="Permanent link">&para;</a></h3>
 <ul>
 <li>[ ] Single adapter binary works for both enterprise and free tiers</li>
 <li>[ ] Token permissions control feature availability (no code branching)</li>
@@ -392,7 +425,7 @@ Configurable direction:
 <li>[ ] Configuration schema supports all tiers with optional fields</li>
 <li>[ ] Logging and metrics work identically on both sides</li>
 </ul>
-<h3 id="tier-management">✅ <strong>Tier Management</strong></h3>
+<h3 id="tier-management">✅ <strong>Tier Management</strong><a class="headerlink" href="#tier-management" title="Permanent link">&para;</a></h3>
 <ul>
 <li>[ ] Free trading partners can onboard with zero cost</li>
 <li>[ ] Enterprise customers can manage free TP tokens via admin UI</li>
@@ -400,7 +433,7 @@ Configurable direction:
 <li>[ ] Feature discovery shows available capabilities based on token</li>
 <li>[ ] Sponsor relationships properly enforced for free TPs</li>
 </ul>
-<h3 id="developer-experience">✅ <strong>Developer Experience</strong></h3>
+<h3 id="developer-experience">✅ <strong>Developer Experience</strong><a class="headerlink" href="#developer-experience" title="Permanent link">&para;</a></h3>
 <ul>
 <li>[ ] Adapter SDK with unified interface for all tiers</li>
 <li>[ ] Clear documentation for enterprise vs free tier capabilities</li>
@@ -408,88 +441,88 @@ Configurable direction:
 <li>[ ] Deployment is identical for all tiers</li>
 <li>[ ] Performance monitoring works across all tiers</li>
 </ul>
-<h2 id="real-world-use-cases">🎯 <strong>Real-World Use Cases</strong></h2>
-<h3 id="healthcare-provider-enterprise-insurance-company-free-tp"><strong>Healthcare Provider (Enterprise) ↔ Insurance Company (Free TP)</strong></h3>
+<h2 id="real-world-use-cases">🎯 <strong>Real-World Use Cases</strong><a class="headerlink" href="#real-world-use-cases" title="Permanent link">&para;</a></h2>
+<h3 id="healthcare-provider-enterprise-insurance-company-free-tp"><strong>Healthcare Provider (Enterprise) ↔ Insurance Company (Free TP)</strong><a class="headerlink" href="#healthcare-provider-enterprise-insurance-company-free-tp" title="Permanent link">&para;</a></h3>
 <pre><code>Healthcare EHR → Adapter (Enterprise) → Package → Connector → Adapter (Free TP) → Local File
       ↓                    ↓              ↓           ↓              ↓
   Patient Records      Full Onramp    AS2/SFTP    File Offramp    Claims Processing
 </code></pre>
-<h3 id="retail-supply-chain-enterprise-supplier-free-tp"><strong>Retail Supply Chain (Enterprise) ↔ Supplier (Free TP)</strong></h3>
+<h3 id="retail-supply-chain-enterprise-supplier-free-tp"><strong>Retail Supply Chain (Enterprise) ↔ Supplier (Free TP)</strong><a class="headerlink" href="#retail-supply-chain-enterprise-supplier-free-tp" title="Permanent link">&para;</a></h3>
 <pre><code>Retail ERP → Adapter (Enterprise) → Package → Connector → Adapter (Free TP) → Local File
       ↓                    ↓              ↓           ↓              ↓
   Purchase Orders      Full Onramp    AS2/API     File Offramp    Order Processing
 </code></pre>
-<h3 id="financial-services-enterprise-regulatory-agency-free-tp"><strong>Financial Services (Enterprise) ↔ Regulatory Agency (Free TP)</strong></h3>
+<h3 id="financial-services-enterprise-regulatory-agency-free-tp"><strong>Financial Services (Enterprise) ↔ Regulatory Agency (Free TP)</strong><a class="headerlink" href="#financial-services-enterprise-regulatory-agency-free-tp" title="Permanent link">&para;</a></h3>
 <pre><code>Bank Core → Adapter (Enterprise) → Package → Connector → Adapter (Free TP) → Local File
       ↓                    ↓              ↓           ↓              ↓
   Payment Orders      Full Onramp    SFTP        File Offramp    Payment Processing
 </code></pre>
-<h2 id="files-to-be-created">📁 <strong>Files to be Created</strong></h2>
-<h3 id="core-framework"><strong>Core Framework</strong></h3>
+<h2 id="files-to-be-created">📁 <strong>Files to be Created</strong><a class="headerlink" href="#files-to-be-created" title="Permanent link">&para;</a></h2>
+<h3 id="core-framework"><strong>Core Framework</strong><a class="headerlink" href="#core-framework" title="Permanent link">&para;</a></h3>
 <ul>
 <li><code>api/lib/adapter/BridgeFlowAdapter.ts</code> - Unified adapter interface</li>
 <li><code>api/lib/adapter/PermissionManager.ts</code> - Token-based permission system</li>
 <li><code>api/lib/adapter/BaseAdapter.ts</code> - Base adapter implementation</li>
 <li><code>api/lib/adapter/AdapterManager.ts</code> - Adapter lifecycle management</li>
 </ul>
-<h3 id="adapter-implementations"><strong>Adapter Implementations</strong></h3>
+<h3 id="adapter-implementations"><strong>Adapter Implementations</strong><a class="headerlink" href="#adapter-implementations" title="Permanent link">&para;</a></h3>
 <ul>
 <li><code>api/lib/adapter/adapters/FileAdapter.ts</code> - File system adapter (both tiers)</li>
 <li><code>api/lib/adapter/adapters/DatabaseAdapter.ts</code> - Database adapter (enterprise only)</li>
 <li><code>api/lib/adapter/adapters/APIAdapter.ts</code> - API adapter (enterprise only)</li>
 <li><code>api/lib/adapter/adapters/EmailAdapter.ts</code> - Email adapter (enterprise only)</li>
 </ul>
-<h3 id="connector-integration"><strong>Connector Integration</strong></h3>
+<h3 id="connector-integration"><strong>Connector Integration</strong><a class="headerlink" href="#connector-integration" title="Permanent link">&para;</a></h3>
 <ul>
 <li><code>api/lib/connectors/UnifiedConnector.ts</code> - Unified connector runtime</li>
 <li><code>api/lib/connectors/ConnectorMode.ts</code> - Bidirectional vs receive-only modes</li>
 <li><code>api/lib/connectors/SponsorManager.ts</code> - Free TP sponsor relationship management</li>
 </ul>
-<h3 id="frontend-implementation"><strong>Frontend Implementation</strong></h3>
+<h3 id="frontend-implementation"><strong>Frontend Implementation</strong><a class="headerlink" href="#frontend-implementation" title="Permanent link">&para;</a></h3>
 <ul>
 <li><code>admin-bridgeflow/src/pages/Adapters.jsx</code> - Enterprise adapter management</li>
 <li><code>admin-bridgeflow/src/pages/TradingPartnerAdapters.jsx</code> - Free TP token management</li>
 <li><code>admin-bridgeflow/src/components/AdapterBuilder.jsx</code> - Adapter configuration builder</li>
 <li><code>admin-bridgeflow/src/components/TierIndicator.jsx</code> - Tier capability indicator</li>
 </ul>
-<h3 id="database-schema"><strong>Database Schema</strong></h3>
+<h3 id="database-schema"><strong>Database Schema</strong><a class="headerlink" href="#database-schema" title="Permanent link">&para;</a></h3>
 <ul>
 <li><code>Adapter</code> model - Unified adapter registration (supports both tiers)</li>
 <li><code>AdapterToken</code> model - Token-based authentication and permissions</li>
 <li><code>SponsorRelationship</code> model - Free TP to enterprise sponsor relationships</li>
 <li><code>AdapterCapability</code> model - Tier-specific capability tracking</li>
 </ul>
-<h3 id="sdk-documentation"><strong>SDK &amp; Documentation</strong></h3>
+<h3 id="sdk-documentation"><strong>SDK &amp; Documentation</strong><a class="headerlink" href="#sdk-documentation" title="Permanent link">&para;</a></h3>
 <ul>
 <li><code>docs/adapters/SDK.md</code> - Unified adapter development guide</li>
 <li><code>docs/adapters/tiers.md</code> - Enterprise vs free tier capabilities</li>
 <li><code>docs/adapters/permissions.md</code> - Token-based permission system</li>
 <li><code>docs/adapters/examples/</code> - Sample adapters for both tiers</li>
 </ul>
-<h2 id="integration-points">🔄 <strong>Integration Points</strong></h2>
-<h3 id="phase-30-integration"><strong>Phase 30 Integration</strong></h3>
+<h2 id="integration-points">🔄 <strong>Integration Points</strong><a class="headerlink" href="#integration-points" title="Permanent link">&para;</a></h2>
+<h3 id="phase-30-integration"><strong>Phase 30 Integration</strong><a class="headerlink" href="#phase-30-integration" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Package Creation</strong>: Unified adapters create standardized packages</li>
 <li><strong>Protocol Processing</strong>: Unified connectors handle Layer 2 processing</li>
 <li><strong>Package Delivery</strong>: Both tiers receive processed packages</li>
 <li><strong>Status Tracking</strong>: End-to-end package lifecycle across tiers</li>
 </ul>
-<h3 id="phase-28-integration"><strong>Phase 28 Integration</strong></h3>
+<h3 id="phase-28-integration"><strong>Phase 28 Integration</strong><a class="headerlink" href="#phase-28-integration" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Tenet Application</strong>: Business rules applied during package creation</li>
 <li><strong>Package Management</strong>: Unified package lifecycle for all tiers</li>
 <li><strong>Statistics</strong>: Tier-aware statistics and monitoring</li>
 <li><strong>Admin Experience</strong>: Enterprise customers manage all adapters from single UI</li>
 </ul>
-<h3 id="phase-29-integration"><strong>Phase 29 Integration</strong></h3>
+<h3 id="phase-29-integration"><strong>Phase 29 Integration</strong><a class="headerlink" href="#phase-29-integration" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Organization Scoping</strong>: Enterprise customers manage their free TPs</li>
 <li><strong>Multi-Tenancy</strong>: Proper data isolation across tiers</li>
 <li><strong>CTO Access</strong>: Global view of all adapters and tiers</li>
 <li><strong>Security</strong>: Unified RBAC across enterprise and free tiers</li>
 </ul>
-<h2 id="next-steps">🚀 <strong>Next Steps</strong></h2>
-<h3 id="phase-32-advanced-unified-features"><strong>Phase 32+: Advanced Unified Features</strong></h3>
+<h2 id="next-steps">🚀 <strong>Next Steps</strong><a class="headerlink" href="#next-steps" title="Permanent link">&para;</a></h2>
+<h3 id="phase-32-advanced-unified-features"><strong>Phase 32+: Advanced Unified Features</strong><a class="headerlink" href="#phase-32-advanced-unified-features" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Machine Learning</strong>: Intelligent transformation suggestions (enterprise only)</li>
 <li><strong>Real-Time Processing</strong>: Streaming adapters (enterprise only)</li>
@@ -497,22 +530,22 @@ Configurable direction:
 <li><strong>Performance Optimization</strong>: Tier-aware optimization strategies</li>
 <li><strong>Integration Marketplace</strong>: Pre-built adapter templates (both tiers)</li>
 </ul>
-<h3 id="enterprise-features"><strong>Enterprise Features</strong></h3>
+<h3 id="enterprise-features"><strong>Enterprise Features</strong><a class="headerlink" href="#enterprise-features" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Multi-Tenant Adapters</strong>: Shared adapters across enterprise organizations</li>
 <li><strong>Advanced Analytics</strong>: Enterprise-only adapter performance analytics</li>
 <li><strong>Compliance Reporting</strong>: Enterprise compliance reporting</li>
 <li><strong>Disaster Recovery</strong>: Enterprise disaster recovery procedures</li>
 </ul>
-<h3 id="free-tier-enhancements"><strong>Free Tier Enhancements</strong></h3>
+<h3 id="free-tier-enhancements"><strong>Free Tier Enhancements</strong><a class="headerlink" href="#free-tier-enhancements" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Web-Based Setup</strong>: Browser-based free TP adapter configuration</li>
 <li><strong>Mobile Support</strong>: Mobile app for free TP monitoring</li>
 <li><strong>Community Features</strong>: Community-driven adapter sharing</li>
 <li><strong>Upgrade Incentives</strong>: Clear upgrade path visualization</li>
 </ul>
-<h2 id="critical-implementation-guidelines">🛠 <strong>Critical Implementation Guidelines</strong></h2>
-<h3 id="do-this-now"><strong>Do This Now</strong></h3>
+<h2 id="critical-implementation-guidelines">🛠 <strong>Critical Implementation Guidelines</strong><a class="headerlink" href="#critical-implementation-guidelines" title="Permanent link">&para;</a></h2>
+<h3 id="do-this-now"><strong>Do This Now</strong><a class="headerlink" href="#do-this-now" title="Permanent link">&para;</a></h3>
 <ul>
 <li>✅ Build adapters as pluggable modules (not monolithic)</li>
 <li>✅ Use token permissions to gate features (not separate binaries)</li>
@@ -520,7 +553,7 @@ Configurable direction:
 <li>✅ Ensure logging/metrics work identically on both sides</li>
 <li>✅ Create unified deployment package for all tiers</li>
 </ul>
-<h3 id="avoid-this"><strong>Avoid This</strong></h3>
+<h3 id="avoid-this"><strong>Avoid This</strong><a class="headerlink" href="#avoid-this" title="Permanent link">&para;</a></h3>
 <ul>
 <li>❌ Separate "free" and "enterprise" codebases</li>
 <li>❌ Hardcoded feature checks (if (isFree) ...)</li>
@@ -528,7 +561,7 @@ Configurable direction:
 <li>❌ Tier-specific configuration files</li>
 <li>❌ Separate monitoring systems</li>
 </ul>
-<h2 id="strategic-outcome">🎯 <strong>Strategic Outcome</strong></h2>
+<h2 id="strategic-outcome">🎯 <strong>Strategic Outcome</strong><a class="headerlink" href="#strategic-outcome" title="Permanent link">&para;</a></h2>
 <ul>
 <li><strong>Customer A</strong> onboards TPs in minutes via admin UI</li>
 <li><strong>TPs</strong> get immediate value with zero cost and frictionless setup</li>

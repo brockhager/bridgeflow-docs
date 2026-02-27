@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="../../css/theme.css" />
     <link rel="stylesheet" href="../../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../../stylesheets/extra.css" rel="stylesheet" />
     
       <script>
         // Current page data
@@ -43,7 +44,16 @@
                 <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
                 </li>
               </ul>
-              <p class="caption"><span class="caption-text">Products</span></p>
+              <p class="caption"><span class="caption-text">Start Here</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../ONBOARDING/">Onboarding</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../ARCHITECTURE/">Architecture</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../api-reference/">API Reference Hub</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Product Suite</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../products/">Overview</a>
                   </li>
@@ -66,7 +76,7 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../products/tracking-portal/">Tracking Portal</a>
                   </li>
               </ul>
-              <p class="caption"><span class="caption-text">Platform</span></p>
+              <p class="caption"><span class="caption-text">Platform Services</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../platform/">Overview</a>
                   </li>
@@ -87,12 +97,35 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../platform/bf-warehouse/">Warehouse Service</a>
                   </li>
               </ul>
+              <p class="caption"><span class="caption-text">Capability Catalog</span></p>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../../vision/bf-integration/">Vision</a>
-                </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/SHIPMENTS/">Shipments</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/ADMIN_CONSOLE/">Admin Console</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/CONTROL_TOWER/">Control Tower</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/IDENTITY/">Identity</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/MASTERDATA/">Masterdata</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/ORDERS/">Orders</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/WAREHOUSE/">Warehouse</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/SEARCH/">Search</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/FINTECH/">Fintech</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/CARRIER_PORTAL/">Carrier Portal</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/TRACKING_PORTAL/">Tracking Portal</a>
+                  </li>
               </ul>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../../api-reference/">API Reference</a>
+                <li class="toctree-l1"><a class="reference internal" href="../../vision/bf-integration/">Vision Archive</a>
                 </li>
               </ul>
       </div>
@@ -118,7 +151,7 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <h1 id="layer-4-admin-ux-wireframes-securityrbacaudit">Layer 4 — Admin UX Wireframes (Security/RBAC/Audit)</h1>
+                <h1 id="layer-4-admin-ux-wireframes-securityrbacaudit">Layer 4 — Admin UX Wireframes (Security/RBAC/Audit)<a class="headerlink" href="#layer-4-admin-ux-wireframes-securityrbacaudit" title="Permanent link">&para;</a></h1>
 <p>Status: Draft</p>
 <p>This is a minimal, implementation-agnostic sketch of the <strong>admin experiences</strong> needed to support the Layer 4 security foundation.</p>
 <p>Note: “Layer 4 / Platform Core” is used only as the end-state architecture location for these capabilities.</p>
@@ -126,7 +159,7 @@
 - Tenant-scoped admin (Tenant Admin)
 - Operator/admin (Platform role)</p>
 <hr />
-<h2 id="1-tenant-admin-users">1) Tenant Admin: Users</h2>
+<h2 id="1-tenant-admin-users">1) Tenant Admin: Users<a class="headerlink" href="#1-tenant-admin-users" title="Permanent link">&para;</a></h2>
 <p>Page: <code>Settings → Users</code></p>
 <p>Layout:</p>
 <pre><code>Users
@@ -147,7 +180,7 @@ carol@acme.com       Carol       Viewer          Invited
 <p>Audit requirements:
 - <code>user.invite</code>, <code>user.role_changed</code>, <code>user.removed</code></p>
 <hr />
-<h2 id="2-tenant-admin-api-keys">2) Tenant Admin: API Keys</h2>
+<h2 id="2-tenant-admin-api-keys">2) Tenant Admin: API Keys<a class="headerlink" href="#2-tenant-admin-api-keys" title="Permanent link">&para;</a></h2>
 <p>Page: <code>Settings → API Keys</code></p>
 <p>Layout:</p>
 <pre><code>API Keys
@@ -165,7 +198,7 @@ Automation      2025-12-xx     2025-12-xx       Revoke
 <p>Audit:
 - <code>api_key.created</code>, <code>api_key.revoked</code></p>
 <hr />
-<h2 id="3-tenant-admin-audit-log">3) Tenant Admin: Audit Log</h2>
+<h2 id="3-tenant-admin-audit-log">3) Tenant Admin: Audit Log<a class="headerlink" href="#3-tenant-admin-audit-log" title="Permanent link">&para;</a></h2>
 <p>Page: <code>Settings → Audit Log</code></p>
 <p>Layout:</p>
 <pre><code>Audit Log
@@ -180,7 +213,7 @@ Time                Actor           Action            Target
 - Read-only.
 - Tenant Admin and Tenant Auditor can access.</p>
 <hr />
-<h2 id="4-resources-operator-first-later-tenant-self-service">4) Resources (Operator-first, later tenant self-service)</h2>
+<h2 id="4-resources-operator-first-later-tenant-self-service">4) Resources (Operator-first, later tenant self-service)<a class="headerlink" href="#4-resources-operator-first-later-tenant-self-service" title="Permanent link">&para;</a></h2>
 <p>Page: <code>Resources</code></p>
 <p>Layout:</p>
 <pre><code>Resources
@@ -201,7 +234,7 @@ Shared Email Sender   email_sender     Global  Yes
 - <code>resource.created</code>, <code>resource.updated</code>, <code>resource.validated</code>
 - <code>secret.accessed</code> (if validation requires secret read)</p>
 <hr />
-<h2 id="5-operator-tenant-support">5) Operator: Tenant Support</h2>
+<h2 id="5-operator-tenant-support">5) Operator: Tenant Support<a class="headerlink" href="#5-operator-tenant-support" title="Permanent link">&para;</a></h2>
 <p>Page: <code>Operator → Tenants</code></p>
 <p>Layout:</p>
 <pre><code>Tenants

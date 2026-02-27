@@ -1,64 +1,52 @@
-# Bridgeflow: The Policy-First Logistics Runtime
+# BridgeFlow Documentation Hub
 
-Bridgeflow is a policy enforcement layer for logistics operations.  
-Core model: **Event -> Policy -> Action**.
+BridgeFlow is a policy-first logistics runtime built around one operating loop: **Event → Policy → Action**.
 
-Teams keep their ERP/WMS/TMS systems, while Bridgeflow ingests operational signals, evaluates policy, and coordinates action automatically.
+This site is organized by what teams usually need first: onboarding, product workflows, platform services, and capability coverage.
 
-## 1. Live Products
+## Start Here
 
-### Control Tower (Live Pilot)
+- Onboarding guide: `ONBOARDING.md`
+- Architecture overview: `ARCHITECTURE.md`
+- API entry point: `api-reference.md`
 
-See the Lima/Callao pilot in production:
+## Product Suite
 
-- Product docs: `products/control-tower/`
-- Live demo: [control-tower.up.railway.app](https://control-tower.up.railway.app/)
+Customer-facing applications and runtime experiences:
 
-![Bridgeflow Control Tower live view](images/phase-60-control-tower-home.png)
+- Control Tower (live pilot)
+- Carrier Portal
+- Tracking Portal
+- Coords App companion
 
-Other product repos in workspace:
-- `products/carrier-portal/`
-- `products/tracking-portal/`
-- `products/coords-app/`
+Control Tower live demo: [control-tower.up.railway.app](https://control-tower.up.railway.app/)
 
-## 2. Platform Stack
+![BridgeFlow Control Tower live view](images/phase-60-control-tower-home.png)
 
-Bridgeflow products are powered by a modular service layer.
+## Platform Services
 
-### Service Layer (Core Services and Modules)
+Core services that power BridgeFlow products:
 
-- Auth and tenancy: `platform/bf-identity/`
-- Master data: `platform/bf-masterdata/`
-- Orders: `platform/bf-orders/`
-- Shipments: `platform/bf-shipments/`
-- Search: `platform/bf-search/`
-- Fintech and billing: `platform/bf-fintech/`
-- Warehouse operations: `platform/bf-warehouse/`
-- Internal operations console: `platform/bf-admin-console/`
+- Identity and tenancy
+- Masterdata
+- Orders
+- Shipments
+- Search
+- Fintech
+- Warehouse
+- Admin Console
 
-### Stack Relationship
+Use the **Platform Services** section in the navigation for service-by-service docs.
 
-- Products (customer-facing):
-  - Control Tower, Carrier Portal, Tracking Portal
-- Platform (powering services):
-  - Identity, Masterdata, Orders, Shipments, Search, Fintech, Warehouse, Admin Console
+## Capability Catalog
 
-## 3. Future Vision
+Implemented functionality by app/service is tracked in:
 
-Bridgeflow's long-term architecture is preserved in the BF-INTEGRATION vision archive:
+- `features/README.md`
 
-- Vision deep dive: `vision/bf-integration/`
-- Vision index and migration map: `vision/`
+## Vision Archive
 
-## 4. Developer Hub
+Future-state architecture and BF-INTEGRATION historical materials:
 
-Start integrating without choosing a product first:
-
-- API reference hub: `api-reference/`
-- Integration guide: `products/control-tower/integration-guide/`
-- First event quickstart: `products/control-tower/quickstart/`
-
-## 5. Feature Catalog
-
-- App-by-app feature index: [features/README.md](features/README.md)
+- `vision/bf-integration/README.md`
 

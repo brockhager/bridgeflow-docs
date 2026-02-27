@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="../../../../../css/theme.css" />
     <link rel="stylesheet" href="../../../../../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../../../../../stylesheets/extra.css" rel="stylesheet" />
     
       <script>
         // Current page data
@@ -43,7 +44,16 @@
                 <li class="toctree-l1"><a class="reference internal" href="../../../../..">Home</a>
                 </li>
               </ul>
-              <p class="caption"><span class="caption-text">Products</span></p>
+              <p class="caption"><span class="caption-text">Start Here</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../ONBOARDING/">Onboarding</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../ARCHITECTURE/">Architecture</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../api-reference/">API Reference Hub</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Product Suite</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../../../../products/">Overview</a>
                   </li>
@@ -66,7 +76,7 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../../../../products/tracking-portal/">Tracking Portal</a>
                   </li>
               </ul>
-              <p class="caption"><span class="caption-text">Platform</span></p>
+              <p class="caption"><span class="caption-text">Platform Services</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../../../../platform/">Overview</a>
                   </li>
@@ -87,12 +97,35 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../../../../platform/bf-warehouse/">Warehouse Service</a>
                   </li>
               </ul>
+              <p class="caption"><span class="caption-text">Capability Catalog</span></p>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../../../">Vision</a>
-                </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../features/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../features/SHIPMENTS/">Shipments</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../features/ADMIN_CONSOLE/">Admin Console</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../features/CONTROL_TOWER/">Control Tower</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../features/IDENTITY/">Identity</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../features/MASTERDATA/">Masterdata</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../features/ORDERS/">Orders</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../features/WAREHOUSE/">Warehouse</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../features/SEARCH/">Search</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../features/FINTECH/">Fintech</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../features/CARRIER_PORTAL/">Carrier Portal</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../features/TRACKING_PORTAL/">Tracking Portal</a>
+                  </li>
               </ul>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../../../../../api-reference/">API Reference</a>
+                <li class="toctree-l1"><a class="reference internal" href="../../../">Vision Archive</a>
                 </li>
               </ul>
       </div>
@@ -123,33 +156,33 @@
 Status: Planned / In Development
 Context: Original BF-INTEGRATION Vision (Pre-Phase 30)</p>
 </blockquote>
-<h1 id="phase-13-verification-self-service-demo">Phase 13 Verification - Self-Service Demo</h1>
-<h2 id="quick-start-5-minutes">🚀 Quick Start (5 minutes)</h2>
+<h1 id="phase-13-verification-self-service-demo">Phase 13 Verification - Self-Service Demo<a class="headerlink" href="#phase-13-verification-self-service-demo" title="Permanent link">&para;</a></h1>
+<h2 id="quick-start-5-minutes">🚀 Quick Start (5 minutes)<a class="headerlink" href="#quick-start-5-minutes" title="Permanent link">&para;</a></h2>
 <ol>
 <li><strong>Login:</strong> https://admin.bridgeflow.example.com (use admin credentials)</li>
 <li><strong>Verify:</strong> MFA prompt appears → complete authentication</li>
 <li><strong>Landing:</strong> Tenant dashboard loads with search functionality</li>
 </ol>
-<h2 id="critical-paths-to-test-15-minutes">✅ Critical Paths to Test (15 minutes)</h2>
-<h3 id="a-customer-management-must-pass">A. Customer Management (Must Pass)</h3>
+<h2 id="critical-paths-to-test-15-minutes">✅ Critical Paths to Test (15 minutes)<a class="headerlink" href="#critical-paths-to-test-15-minutes" title="Permanent link">&para;</a></h2>
+<h3 id="a-customer-management-must-pass">A. Customer Management (Must Pass)<a class="headerlink" href="#a-customer-management-must-pass" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Search for "TestCorp" → appears in results</li>
 <li>Click tenant → see user count, subscription plan</li>
 <li>Click "Impersonate" → opens new tab as customer</li>
 </ul>
-<h3 id="b-account-controls-must-pass">B. Account Controls (Must Pass)</h3>
+<h3 id="b-account-controls-must-pass">B. Account Controls (Must Pass)<a class="headerlink" href="#b-account-controls-must-pass" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Find "SuspendedTest" tenant</li>
 <li>Click "Reactivate" → confirmation appears</li>
 <li>Verify suspension lifted (status changes)</li>
 </ul>
-<h3 id="c-emergency-controls-must-pass">C. Emergency Controls (Must Pass)</h3>
+<h3 id="c-emergency-controls-must-pass">C. Emergency Controls (Must Pass)<a class="headerlink" href="#c-emergency-controls-must-pass" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Click "Global Pause" → system pauses (API returns 503)</li>
 <li>Click "Global Resume" → system resumes (API returns 200)</li>
 <li>Check health metrics (should show brief spike)</li>
 </ul>
-<h2 id="acceptance-criteria">🎯 Acceptance Criteria</h2>
+<h2 id="acceptance-criteria">🎯 Acceptance Criteria<a class="headerlink" href="#acceptance-criteria" title="Permanent link">&para;</a></h2>
 <ul>
 <li>[ ] Can login without engineering help</li>
 <li>[ ] Can find any customer in &lt;30 seconds</li>
@@ -158,14 +191,14 @@ Context: Original BF-INTEGRATION Vision (Pre-Phase 30)</p>
 <li>[ ] Can pause/resume system globally</li>
 <li>[ ] No console errors during above flows</li>
 </ul>
-<h2 id="if-issues-occur">📞 If Issues Occur</h2>
+<h2 id="if-issues-occur">📞 If Issues Occur<a class="headerlink" href="#if-issues-occur" title="Permanent link">&para;</a></h2>
 <ol>
 <li>Check <code>/docs/Layer0-Admin-Bridgeflow/KNOWN-ISSUES.md</code></li>
 <li>Quick rollback: <code>git checkout main~1</code></li>
 <li>Contact: Agent4 for technical, Scrum Master for process</li>
 </ol>
 <hr />
-<h1 id="demo-script-operational-walkthrough">Demo Script (Operational Walkthrough)</h1>
+<h1 id="demo-script-operational-walkthrough">Demo Script (Operational Walkthrough)<a class="headerlink" href="#demo-script-operational-walkthrough" title="Permanent link">&para;</a></h1>
 <p>Use this script as a guide for the 30-minute CTO demo. Commands below assume the API is running locally and admin auth is available via the dev stub.</p>
 <p>1) Admin login (dev stub)</p>
 <p>POST /admin-api/_dev/login</p>

@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="../../../../../../css/theme.css" />
     <link rel="stylesheet" href="../../../../../../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../../../../../../stylesheets/extra.css" rel="stylesheet" />
     
       <script>
         // Current page data
@@ -43,7 +44,16 @@
                 <li class="toctree-l1"><a class="reference internal" href="../../../../../..">Home</a>
                 </li>
               </ul>
-              <p class="caption"><span class="caption-text">Products</span></p>
+              <p class="caption"><span class="caption-text">Start Here</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../ONBOARDING/">Onboarding</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../ARCHITECTURE/">Architecture</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../api-reference/">API Reference Hub</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Product Suite</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../../../../../products/">Overview</a>
                   </li>
@@ -66,7 +76,7 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../../../../../products/tracking-portal/">Tracking Portal</a>
                   </li>
               </ul>
-              <p class="caption"><span class="caption-text">Platform</span></p>
+              <p class="caption"><span class="caption-text">Platform Services</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../../../../../platform/">Overview</a>
                   </li>
@@ -87,12 +97,35 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../../../../../platform/bf-warehouse/">Warehouse Service</a>
                   </li>
               </ul>
+              <p class="caption"><span class="caption-text">Capability Catalog</span></p>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../../../../">Vision</a>
-                </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/SHIPMENTS/">Shipments</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/ADMIN_CONSOLE/">Admin Console</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/CONTROL_TOWER/">Control Tower</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/IDENTITY/">Identity</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/MASTERDATA/">Masterdata</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/ORDERS/">Orders</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/WAREHOUSE/">Warehouse</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/SEARCH/">Search</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/FINTECH/">Fintech</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/CARRIER_PORTAL/">Carrier Portal</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/TRACKING_PORTAL/">Tracking Portal</a>
+                  </li>
               </ul>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../../../../../../api-reference/">API Reference</a>
+                <li class="toctree-l1"><a class="reference internal" href="../../../../">Vision Archive</a>
                 </li>
               </ul>
       </div>
@@ -123,8 +156,8 @@
 Status: Planned / In Development
 Context: Original BF-INTEGRATION Vision (Pre-Phase 30)</p>
 </blockquote>
-<h1 id="phase-18-customer-api-platform-completion">Phase 18 — Customer API Platform (Completion)</h1>
-<h2 id="status">✅ Status</h2>
+<h1 id="phase-18-customer-api-platform-completion">Phase 18 — Customer API Platform (Completion)<a class="headerlink" href="#phase-18-customer-api-platform-completion" title="Permanent link">&para;</a></h1>
+<h2 id="status">✅ Status<a class="headerlink" href="#status" title="Permanent link">&para;</a></h2>
 <p><strong>Phase 18: COMPLETE</strong> — core deliverables implemented and validated (see summary below). 🎉</p>
 <ul>
 <li><strong>18A (Idempotency):</strong> Implemented DB-backed idempotency keys, middleware, pruning job, and metrics.</li>
@@ -132,7 +165,7 @@ Context: Original BF-INTEGRATION Vision (Pre-Phase 30)</p>
 <li><strong>18C (Ingest pipeline):</strong> Tenant-scoped ingest route with Redis Streams producer, S3 flush worker, and tenant-aware Redis rate limiting.</li>
 </ul>
 <hr />
-<h2 id="architecture-ingest-flow">🧭 Architecture (ingest flow)</h2>
+<h2 id="architecture-ingest-flow">🧭 Architecture (ingest flow)<a class="headerlink" href="#architecture-ingest-flow" title="Permanent link">&para;</a></h2>
 <ol>
 <li>Client POST /ingest/:customer_id/:endpoint_slug (authenticated with <code>x-api-key</code>)</li>
 <li><code>validateCustomerApiKey</code> authenticates and sets <code>request.customerOrgId</code> (organization context)</li>
@@ -144,7 +177,7 @@ Context: Original BF-INTEGRATION Vision (Pre-Phase 30)</p>
 <p>Diagram (linear):</p>
 <p>Client → validateCustomerApiKey → rateLimiterMiddleware → idempotencyMiddleware → handler → Redis Stream → S3 Flush Worker → S3</p>
 <hr />
-<h2 id="security-guarantees">🔐 Security guarantees</h2>
+<h2 id="security-guarantees">🔐 Security guarantees<a class="headerlink" href="#security-guarantees" title="Permanent link">&para;</a></h2>
 <ul>
 <li><strong>Authentication:</strong> Customer API keys validated with secure bcrypt hashed keys (<code>validateCustomerApiKey</code>).</li>
 <li><strong>Authorization:</strong> RBAC middleware and request context (<code>request.customerOrgId</code>) enforce resource scoping.</li>
@@ -153,7 +186,7 @@ Context: Original BF-INTEGRATION Vision (Pre-Phase 30)</p>
 <li><strong>Idempotency:</strong> Responses persisted to idempotency keys (sha256(tenant + ':' + key)) to guarantee safe retries and deduplication.</li>
 </ul>
 <hr />
-<h2 id="operational-runbook-short">🔧 Operational runbook (short)</h2>
+<h2 id="operational-runbook-short">🔧 Operational runbook (short)<a class="headerlink" href="#operational-runbook-short" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Metrics to monitor:</li>
 <li><code>ingest_requests_total{status}</code> (allowed, rate_limited)</li>
@@ -179,7 +212,7 @@ Context: Original BF-INTEGRATION Vision (Pre-Phase 30)</p>
 <li>If idempotency key store grows: run <code>node scripts/prune-idempotency-keys.js</code> (configured TTL env var)</li>
 </ul>
 <hr />
-<h2 id="how-we-validated-high-level">✅ How we validated (high level)</h2>
+<h2 id="how-we-validated-high-level">✅ How we validated (high level)<a class="headerlink" href="#how-we-validated-high-level" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Unit tests for idempotency middleware, prune job, metrics exporter, and stores.</li>
 <li>Integration tests for trading partner duplicate-name behavior (409 structured response).</li>
@@ -188,7 +221,7 @@ Context: Original BF-INTEGRATION Vision (Pre-Phase 30)</p>
 <li>Postgres RLS: policies applied in dev; verified with targeted RLS verification script that checks cross-org visibility.</li>
 </ul>
 <hr />
-<h2 id="announcement-draft-for-engineering">📣 Announcement draft for #engineering</h2>
+<h2 id="announcement-draft-for-engineering">📣 Announcement draft for #engineering<a class="headerlink" href="#announcement-draft-for-engineering" title="Permanent link">&para;</a></h2>
 <blockquote>
 <p>🎉 Phase 18 Complete — Customer API Platform is ready!</p>
 <p>Highlights:
@@ -200,7 +233,7 @@ Context: Original BF-INTEGRATION Vision (Pre-Phase 30)</p>
 <p>Thanks to the team (Agent4, Solution Architect, CTO) for the rapid delivery and verification. Next: monitor rollout and schedule Phase 19 for robustness improvements (DLQs, backoff, and scaling).</p>
 </blockquote>
 <hr />
-<h2 id="links-artifacts">Links &amp; artifacts</h2>
+<h2 id="links-artifacts">Links &amp; artifacts<a class="headerlink" href="#links-artifacts" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Key files:</li>
 <li><code>api/lib/middleware/idempotency.js</code></li>

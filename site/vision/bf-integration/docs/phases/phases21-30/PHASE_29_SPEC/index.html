@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="../../../../../../css/theme.css" />
     <link rel="stylesheet" href="../../../../../../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../../../../../../stylesheets/extra.css" rel="stylesheet" />
     
       <script>
         // Current page data
@@ -43,7 +44,16 @@
                 <li class="toctree-l1"><a class="reference internal" href="../../../../../..">Home</a>
                 </li>
               </ul>
-              <p class="caption"><span class="caption-text">Products</span></p>
+              <p class="caption"><span class="caption-text">Start Here</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../ONBOARDING/">Onboarding</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../ARCHITECTURE/">Architecture</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../api-reference/">API Reference Hub</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Product Suite</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../../../../../products/">Overview</a>
                   </li>
@@ -66,7 +76,7 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../../../../../products/tracking-portal/">Tracking Portal</a>
                   </li>
               </ul>
-              <p class="caption"><span class="caption-text">Platform</span></p>
+              <p class="caption"><span class="caption-text">Platform Services</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../../../../../platform/">Overview</a>
                   </li>
@@ -87,12 +97,35 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../../../../../platform/bf-warehouse/">Warehouse Service</a>
                   </li>
               </ul>
+              <p class="caption"><span class="caption-text">Capability Catalog</span></p>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../../../../">Vision</a>
-                </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/SHIPMENTS/">Shipments</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/ADMIN_CONSOLE/">Admin Console</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/CONTROL_TOWER/">Control Tower</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/IDENTITY/">Identity</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/MASTERDATA/">Masterdata</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/ORDERS/">Orders</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/WAREHOUSE/">Warehouse</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/SEARCH/">Search</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/FINTECH/">Fintech</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/CARRIER_PORTAL/">Carrier Portal</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/TRACKING_PORTAL/">Tracking Portal</a>
+                  </li>
               </ul>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../../../../../../api-reference/">API Reference</a>
+                <li class="toctree-l1"><a class="reference internal" href="../../../../">Vision Archive</a>
                 </li>
               </ul>
       </div>
@@ -123,10 +156,10 @@
 Status: Planned / In Development
 Context: Original BF-INTEGRATION Vision (Pre-Phase 30)</p>
 </blockquote>
-<h1 id="phase-29-organizations-tenets-specification">Phase 29: Organizations &amp; Tenets Specification</h1>
-<h2 id="executive-summary">🎯 Executive Summary</h2>
+<h1 id="phase-29-organizations-tenets-specification">Phase 29: Organizations &amp; Tenets Specification<a class="headerlink" href="#phase-29-organizations-tenets-specification" title="Permanent link">&para;</a></h1>
+<h2 id="executive-summary">🎯 Executive Summary<a class="headerlink" href="#executive-summary" title="Permanent link">&para;</a></h2>
 <p>Phase 29 establishes the core organizational model and tenet enforcement that underpins the entire BridgeFlow platform. This is a foundational architectural layer that ensures proper data isolation, security, and scalability.</p>
-<h2 id="core-tenets-non-negotiable">🔑 Core Tenets (Non-Negotiable)</h2>
+<h2 id="core-tenets-non-negotiable">🔑 Core Tenets (Non-Negotiable)<a class="headerlink" href="#core-tenets-non-negotiable" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
@@ -158,8 +191,8 @@ Context: Original BF-INTEGRATION Vision (Pre-Phase 30)</p>
 </tr>
 </tbody>
 </table>
-<h2 id="data-model-changes">📊 Data Model Changes</h2>
-<h3 id="prisma-schema-updates">Prisma Schema Updates</h3>
+<h2 id="data-model-changes">📊 Data Model Changes<a class="headerlink" href="#data-model-changes" title="Permanent link">&para;</a></h2>
+<h3 id="prisma-schema-updates">Prisma Schema Updates<a class="headerlink" href="#prisma-schema-updates" title="Permanent link">&para;</a></h3>
 <pre><code class="language-prisma">model User {
   id               String    @id @default(cuid())
   email            String    @unique
@@ -219,8 +252,8 @@ enum UserRole {
   MEMBER
 }
 </code></pre>
-<h2 id="authentication-middleware-architecture">🔐 Authentication &amp; Middleware Architecture</h2>
-<h3 id="enhanced-auth-middleware">Enhanced Auth Middleware</h3>
+<h2 id="authentication-middleware-architecture">🔐 Authentication &amp; Middleware Architecture<a class="headerlink" href="#authentication-middleware-architecture" title="Permanent link">&para;</a></h2>
+<h3 id="enhanced-auth-middleware">Enhanced Auth Middleware<a class="headerlink" href="#enhanced-auth-middleware" title="Permanent link">&para;</a></h3>
 <pre><code class="language-javascript">// lib/authMiddleware.js
 export async function authMiddleware(request, reply) {
   const token = extractToken(request)
@@ -256,7 +289,7 @@ export async function authMiddleware(request, reply) {
   request.orgIds = user.accessibleOrgs.map(uo =&gt; uo.organizationId)
 }
 </code></pre>
-<h3 id="org-scoping-middleware">Org Scoping Middleware</h3>
+<h3 id="org-scoping-middleware">Org Scoping Middleware<a class="headerlink" href="#org-scoping-middleware" title="Permanent link">&para;</a></h3>
 <pre><code class="language-javascript">// lib/orgScope.js
 export function addOrgScope(prisma, orgIds) {
   return {
@@ -288,8 +321,8 @@ export function addOrgScope(prisma, orgIds) {
   }
 }
 </code></pre>
-<h2 id="api-changes">🏗️ API Changes</h2>
-<h3 id="updated-endpoints">Updated Endpoints</h3>
+<h2 id="api-changes">🏗️ API Changes<a class="headerlink" href="#api-changes" title="Permanent link">&para;</a></h2>
+<h3 id="updated-endpoints">Updated Endpoints<a class="headerlink" href="#updated-endpoints" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
 <tr>
@@ -331,7 +364,7 @@ export function addOrgScope(prisma, orgIds) {
 </tr>
 </tbody>
 </table>
-<h3 id="example-scoped-trading-partners">Example: Scoped Trading Partners</h3>
+<h3 id="example-scoped-trading-partners">Example: Scoped Trading Partners<a class="headerlink" href="#example-scoped-trading-partners" title="Permanent link">&para;</a></h3>
 <pre><code class="language-javascript">// handlers/tradingPartners.js
 export async function listTradingPartners(request, reply) {
   const scopedPrisma = addOrgScope(prisma, request.orgIds)
@@ -343,9 +376,9 @@ export async function listTradingPartners(request, reply) {
   return reply.send({ partners })
 }
 </code></pre>
-<h2 id="uiux-changes">🎨 UI/UX Changes</h2>
-<h3 id="enhanced-admin-panel">Enhanced Admin Panel</h3>
-<h4 id="regular-user-org-management">Regular User Org Management</h4>
+<h2 id="uiux-changes">🎨 UI/UX Changes<a class="headerlink" href="#uiux-changes" title="Permanent link">&para;</a></h2>
+<h3 id="enhanced-admin-panel">Enhanced Admin Panel<a class="headerlink" href="#enhanced-admin-panel" title="Permanent link">&para;</a></h3>
+<h4 id="regular-user-org-management">Regular User Org Management<a class="headerlink" href="#regular-user-org-management" title="Permanent link">&para;</a></h4>
 <pre><code class="language-jsx">// Single org assignment for regular users
 function UserOrgAssignment({ user }) {
   return (
@@ -360,7 +393,7 @@ function UserOrgAssignment({ user }) {
   )
 }
 </code></pre>
-<h4 id="bf_employee-org-management">bf_employee Org Management</h4>
+<h4 id="bf_employee-org-management">bf_employee Org Management<a class="headerlink" href="#bf_employee-org-management" title="Permanent link">&para;</a></h4>
 <pre><code class="language-jsx">// Multi-org assignment for bf_employees
 function BfEmployeeOrgAssignment({ user }) {
   return (
@@ -376,7 +409,7 @@ function BfEmployeeOrgAssignment({ user }) {
   )
 }
 </code></pre>
-<h3 id="user-type-detection">User Type Detection</h3>
+<h3 id="user-type-detection">User Type Detection<a class="headerlink" href="#user-type-detection" title="Permanent link">&para;</a></h3>
 <pre><code class="language-jsx">// Dynamic UI based on user type
 function UserManagement() {
   const { user } = useAuth()
@@ -392,8 +425,8 @@ function UserManagement() {
   )
 }
 </code></pre>
-<h2 id="testing-strategy">🧪 Testing Strategy</h2>
-<h3 id="core-test-scenarios">Core Test Scenarios</h3>
+<h2 id="testing-strategy">🧪 Testing Strategy<a class="headerlink" href="#testing-strategy" title="Permanent link">&para;</a></h2>
+<h3 id="core-test-scenarios">Core Test Scenarios<a class="headerlink" href="#core-test-scenarios" title="Permanent link">&para;</a></h3>
 <ol>
 <li><strong>Regular User Org Isolation</strong></li>
 <li>User can only see their own org's data</li>
@@ -424,44 +457,44 @@ function UserManagement() {
 <li>Data integrity maintained</li>
 <li>No breaking changes to existing functionality</li>
 </ol>
-<h2 id="implementation-plan">📋 Implementation Plan</h2>
-<h3 id="phase-291-data-model-migration-2-days">Phase 29.1: Data Model &amp; Migration (2 days)</h3>
+<h2 id="implementation-plan">📋 Implementation Plan<a class="headerlink" href="#implementation-plan" title="Permanent link">&para;</a></h2>
+<h3 id="phase-291-data-model-migration-2-days">Phase 29.1: Data Model &amp; Migration (2 days)<a class="headerlink" href="#phase-291-data-model-migration-2-days" title="Permanent link">&para;</a></h3>
 <ul>
 <li>[ ] Update Prisma schema</li>
 <li>[ ] Create migration script</li>
 <li>[ ] Add <code>isBfEmployee</code> flag to existing users</li>
 <li>[ ] Migrate existing user-org relationships</li>
 </ul>
-<h3 id="phase-292-auth-middleware-2-days">Phase 29.2: Auth Middleware (2 days)</h3>
+<h3 id="phase-292-auth-middleware-2-days">Phase 29.2: Auth Middleware (2 days)<a class="headerlink" href="#phase-292-auth-middleware-2-days" title="Permanent link">&para;</a></h3>
 <ul>
 <li>[ ] Implement enhanced auth middleware</li>
 <li>[ ] Add org scoping utilities</li>
 <li>[ ] Update token verification</li>
 <li>[ ] Add user type detection</li>
 </ul>
-<h3 id="phase-293-api-updates-3-days">Phase 29.3: API Updates (3 days)</h3>
+<h3 id="phase-293-api-updates-3-days">Phase 29.3: API Updates (3 days)<a class="headerlink" href="#phase-293-api-updates-3-days" title="Permanent link">&para;</a></h3>
 <ul>
 <li>[ ] Update all data endpoints with org scoping</li>
 <li>[ ] Add organization management endpoints</li>
 <li>[ ] Update authentication responses</li>
 <li>[ ] Add bf_employee specific endpoints</li>
 </ul>
-<h3 id="phase-294-uiux-updates-2-days">Phase 29.4: UI/UX Updates (2 days)</h3>
+<h3 id="phase-294-uiux-updates-2-days">Phase 29.4: UI/UX Updates (2 days)<a class="headerlink" href="#phase-294-uiux-updates-2-days" title="Permanent link">&para;</a></h3>
 <ul>
 <li>[ ] Update admin panel for org management</li>
 <li>[ ] Add user type indicators</li>
 <li>[ ] Implement multi-org selection</li>
 <li>[ ] Update navigation and permissions</li>
 </ul>
-<h3 id="phase-295-testing-validation-2-days">Phase 29.5: Testing &amp; Validation (2 days)</h3>
+<h3 id="phase-295-testing-validation-2-days">Phase 29.5: Testing &amp; Validation (2 days)<a class="headerlink" href="#phase-295-testing-validation-2-days" title="Permanent link">&para;</a></h3>
 <ul>
 <li>[ ] Comprehensive test suite</li>
 <li>[ ] Security validation</li>
 <li>[ ] Performance testing</li>
 <li>[ ] Documentation updates</li>
 </ul>
-<h2 id="migration-strategy">🚨 Migration Strategy</h2>
-<h3 id="existing-user-migration">Existing User Migration</h3>
+<h2 id="migration-strategy">🚨 Migration Strategy<a class="headerlink" href="#migration-strategy" title="Permanent link">&para;</a></h2>
+<h3 id="existing-user-migration">Existing User Migration<a class="headerlink" href="#existing-user-migration" title="Permanent link">&para;</a></h3>
 <pre><code class="language-javascript">// Migration script for existing users
 async function migrateExistingUsers(prisma) {
   // 1. Add isBfEmployee flag
@@ -501,7 +534,7 @@ async function migrateExistingUsers(prisma) {
   }
 }
 </code></pre>
-<h2 id="success-metrics">📊 Success Metrics</h2>
+<h2 id="success-metrics">📊 Success Metrics<a class="headerlink" href="#success-metrics" title="Permanent link">&para;</a></h2>
 <ul>
 <li>[ ] 100% of API endpoints properly scoped by organization</li>
 <li>[ ] Zero data leakage between organizations</li>
@@ -510,7 +543,7 @@ async function migrateExistingUsers(prisma) {
 <li>[ ] Regular users restricted to single organization</li>
 <li>[ ] Performance impact &lt; 5% on query execution</li>
 </ul>
-<h2 id="rollback-plan">🔄 Rollback Plan</h2>
+<h2 id="rollback-plan">🔄 Rollback Plan<a class="headerlink" href="#rollback-plan" title="Permanent link">&para;</a></h2>
 <p>If critical issues arise:
 1. Database backup before migration
 2. Feature flags to disable org scoping

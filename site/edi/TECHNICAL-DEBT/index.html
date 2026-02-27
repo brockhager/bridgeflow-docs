@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="../../css/theme.css" />
     <link rel="stylesheet" href="../../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../../stylesheets/extra.css" rel="stylesheet" />
     
       <script>
         // Current page data
@@ -43,7 +44,16 @@
                 <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
                 </li>
               </ul>
-              <p class="caption"><span class="caption-text">Products</span></p>
+              <p class="caption"><span class="caption-text">Start Here</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../ONBOARDING/">Onboarding</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../ARCHITECTURE/">Architecture</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../api-reference/">API Reference Hub</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Product Suite</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../products/">Overview</a>
                   </li>
@@ -66,7 +76,7 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../products/tracking-portal/">Tracking Portal</a>
                   </li>
               </ul>
-              <p class="caption"><span class="caption-text">Platform</span></p>
+              <p class="caption"><span class="caption-text">Platform Services</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../platform/">Overview</a>
                   </li>
@@ -87,12 +97,35 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../platform/bf-warehouse/">Warehouse Service</a>
                   </li>
               </ul>
+              <p class="caption"><span class="caption-text">Capability Catalog</span></p>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../../vision/bf-integration/">Vision</a>
-                </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/SHIPMENTS/">Shipments</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/ADMIN_CONSOLE/">Admin Console</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/CONTROL_TOWER/">Control Tower</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/IDENTITY/">Identity</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/MASTERDATA/">Masterdata</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/ORDERS/">Orders</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/WAREHOUSE/">Warehouse</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/SEARCH/">Search</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/FINTECH/">Fintech</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/CARRIER_PORTAL/">Carrier Portal</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/TRACKING_PORTAL/">Tracking Portal</a>
+                  </li>
               </ul>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../../api-reference/">API Reference</a>
+                <li class="toctree-l1"><a class="reference internal" href="../../vision/bf-integration/">Vision Archive</a>
                 </li>
               </ul>
       </div>
@@ -118,16 +151,16 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <h1 id="edi-technical-debt">EDI Technical Debt</h1>
+                <h1 id="edi-technical-debt">EDI Technical Debt<a class="headerlink" href="#edi-technical-debt" title="Permanent link">&para;</a></h1>
 <p>This document captures known technical debt in the EDI library and serves as a checklist for the post-Phase 5 architectural refactor.</p>
-<h2 id="purpose">Purpose</h2>
+<h2 id="purpose">Purpose<a class="headerlink" href="#purpose" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Track duplicated segment logic across parser/generator implementations</li>
 <li>Call out inconsistent validations and data typing</li>
 <li>Capture opportunities to extract shared element/segment primitives</li>
 <li>Prioritize refactoring work and acceptance criteria</li>
 </ul>
-<h2 id="known-issues-debt-items">Known Issues / Debt Items</h2>
+<h2 id="known-issues-debt-items">Known Issues / Debt Items<a class="headerlink" href="#known-issues-debt-items" title="Permanent link">&para;</a></h2>
 <ol>
 <li>Duplicated Generation/Parsing Logic</li>
 <li>Multiple transactions implement similar handling for segments like <code>N1</code>, <code>TD1</code>, <code>TD5</code>, <code>LIN</code>, <code>SN1</code>, etc.</li>
@@ -160,12 +193,12 @@
 </li>
 <li>Repeated parse/generate operations for large HL trees could be optimized.</li>
 </ol>
-<h2 id="945-specific-notes">945-specific notes</h2>
+<h2 id="945-specific-notes">945-specific notes<a class="headerlink" href="#945-specific-notes" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Reuse TD1/TD5/N1 handling where applicable</li>
 <li>W05/N9/G62/NTE/W27/W28 scaffolding added; consider centralizing date/reference handling</li>
 </ul>
-<h2 id="proposed-refactor-plan-post-phase-5">Proposed Refactor Plan (Post-Phase 5)</h2>
+<h2 id="proposed-refactor-plan-post-phase-5">Proposed Refactor Plan (Post-Phase 5)<a class="headerlink" href="#proposed-refactor-plan-post-phase-5" title="Permanent link">&para;</a></h2>
 <ol>
 <li>Design a small element/segment model (JS module) that provides:</li>
 <li>Segment definitions (id, element names, required/optional, types)</li>
@@ -175,20 +208,20 @@
 <li>Add schema-based validation (lightweight) using the definitions above</li>
 <li>Create migration tests that verify parity between old and new implementations</li>
 </ol>
-<h2 id="acceptance-criteria-for-refactor">Acceptance Criteria for Refactor</h2>
+<h2 id="acceptance-criteria-for-refactor">Acceptance Criteria for Refactor<a class="headerlink" href="#acceptance-criteria-for-refactor" title="Permanent link">&para;</a></h2>
 <ul>
 <li>All existing tests pass (generator ↔ parser round-trip parity maintained)</li>
 <li>Reduced code duplication by &gt;50% across segment handling code paths</li>
 <li>Segment validation coverage in unit tests for all core segments (850,810,820,856,997)</li>
 <li>Performance of roundtrip generation/parsing for large HL trees acceptable (no regressions)</li>
 </ul>
-<h2 id="short-term-mitigations-before-refactor">Short-term Mitigations (Before Refactor)</h2>
+<h2 id="short-term-mitigations-before-refactor">Short-term Mitigations (Before Refactor)<a class="headerlink" href="#short-term-mitigations-before-refactor" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Add unit tests for all edge cases encountered during Phase 5</li>
 <li>Document canonical JSON shapes for each segment in <code>docs/edi/</code> as we implement them</li>
 <li>Use consistent helper functions in the EDI package where obvious (e.g., generateSegment)</li>
 </ul>
-<h2 id="tracking">Tracking</h2>
+<h2 id="tracking">Tracking<a class="headerlink" href="#tracking" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Use this file to list specific code pointers and improvements discovered while implementing 856/945/210</li>
 <li>Link PRs that address the items above for visibility</li>

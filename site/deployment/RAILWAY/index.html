@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="../../css/theme.css" />
     <link rel="stylesheet" href="../../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../../stylesheets/extra.css" rel="stylesheet" />
     
       <script>
         // Current page data
@@ -43,7 +44,16 @@
                 <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
                 </li>
               </ul>
-              <p class="caption"><span class="caption-text">Products</span></p>
+              <p class="caption"><span class="caption-text">Start Here</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../ONBOARDING/">Onboarding</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../ARCHITECTURE/">Architecture</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../api-reference/">API Reference Hub</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Product Suite</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../products/">Overview</a>
                   </li>
@@ -66,7 +76,7 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../products/tracking-portal/">Tracking Portal</a>
                   </li>
               </ul>
-              <p class="caption"><span class="caption-text">Platform</span></p>
+              <p class="caption"><span class="caption-text">Platform Services</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../platform/">Overview</a>
                   </li>
@@ -87,12 +97,35 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../platform/bf-warehouse/">Warehouse Service</a>
                   </li>
               </ul>
+              <p class="caption"><span class="caption-text">Capability Catalog</span></p>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../../vision/bf-integration/">Vision</a>
-                </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/SHIPMENTS/">Shipments</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/ADMIN_CONSOLE/">Admin Console</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/CONTROL_TOWER/">Control Tower</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/IDENTITY/">Identity</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/MASTERDATA/">Masterdata</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/ORDERS/">Orders</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/WAREHOUSE/">Warehouse</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/SEARCH/">Search</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/FINTECH/">Fintech</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/CARRIER_PORTAL/">Carrier Portal</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/TRACKING_PORTAL/">Tracking Portal</a>
+                  </li>
               </ul>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../../api-reference/">API Reference</a>
+                <li class="toctree-l1"><a class="reference internal" href="../../vision/bf-integration/">Vision Archive</a>
                 </li>
               </ul>
       </div>
@@ -118,27 +151,27 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <h1 id="railway-deployment-runbook">Railway Deployment Runbook</h1>
+                <h1 id="railway-deployment-runbook">Railway Deployment Runbook<a class="headerlink" href="#railway-deployment-runbook" title="Permanent link">&para;</a></h1>
 <p><strong>Purpose:</strong> Step-by-step guidance for deploying BridgeFlow to Railway (build, deploy, verify).</p>
-<h2 id="prerequisites">Prerequisites</h2>
+<h2 id="prerequisites">Prerequisites<a class="headerlink" href="#prerequisites" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Railway account with repository access</li>
 <li>PostgreSQL service added (Railway-managed) to provide <code>DATABASE_URL</code></li>
 <li>(Optional) Redis service for rate-limiting and workers</li>
 </ul>
-<h2 id="key-files">Key Files</h2>
+<h2 id="key-files">Key Files<a class="headerlink" href="#key-files" title="Permanent link">&para;</a></h2>
 <ul>
 <li><code>railway.json</code> — Railway build &amp; deploy configuration</li>
 <li><code>Procfile</code> — process definition (<code>web: node api/server.js</code>)</li>
 <li><code>.env.example</code> — environment vars guidance (JWT_SECRET, START_SERVER, VAULT vars)</li>
 </ul>
-<h2 id="railway-configuration">Railway Configuration</h2>
+<h2 id="railway-configuration">Railway Configuration<a class="headerlink" href="#railway-configuration" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Build (Nixpacks): <code>pnpm install &amp;&amp; pnpm prisma generate &amp;&amp; pnpm build</code></li>
 <li>Start command: <code>node api/server.js</code></li>
 <li>Healthcheck: <code>/health</code></li>
 </ul>
-<h2 id="deployment-steps">Deployment Steps</h2>
+<h2 id="deployment-steps">Deployment Steps<a class="headerlink" href="#deployment-steps" title="Permanent link">&para;</a></h2>
 <ol>
 <li>Connect repository → Select <code>bridgeflow</code> repo</li>
 <li>Add services: PostgreSQL (required), Redis (optional)</li>
@@ -152,14 +185,14 @@
 <li>Deploy and monitor build logs for <code>pnpm prisma generate</code> and <code>pnpm build</code></li>
 <li>Verify healthcheck URL and that API serves <code>/</code> (SPA)</li>
 </ol>
-<h2 id="verification">Verification</h2>
+<h2 id="verification">Verification<a class="headerlink" href="#verification" title="Permanent link">&para;</a></h2>
 <ul>
 <li><code>pnpm prisma generate</code> — should complete successfully during build</li>
 <li><code>pnpm build</code> — front-end builds and produces <code>web/dist/main.js</code></li>
 <li>Server listens on configured port and responds to <code>/health</code></li>
 <li>Static assets served at <code>/</code> and SPA routing works (fallback to <code>index.html</code>)</li>
 </ul>
-<h2 id="troubleshooting">Troubleshooting</h2>
+<h2 id="troubleshooting">Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Build failures during <code>prisma generate</code>: ensure <code>DATABASE_URL</code> is available in Railway build or use <code>--schema</code> flags as needed</li>
 <li>Server fails to start: check <code>NODE_ENV</code> and <code>START_SERVER</code> config, verify <code>JWT_SECRET</code> is set</li>

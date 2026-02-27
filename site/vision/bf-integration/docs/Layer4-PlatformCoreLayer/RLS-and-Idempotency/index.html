@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="../../../../../css/theme.css" />
     <link rel="stylesheet" href="../../../../../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../../../../../stylesheets/extra.css" rel="stylesheet" />
     
       <script>
         // Current page data
@@ -43,7 +44,16 @@
                 <li class="toctree-l1"><a class="reference internal" href="../../../../..">Home</a>
                 </li>
               </ul>
-              <p class="caption"><span class="caption-text">Products</span></p>
+              <p class="caption"><span class="caption-text">Start Here</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../ONBOARDING/">Onboarding</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../ARCHITECTURE/">Architecture</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../api-reference/">API Reference Hub</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Product Suite</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../../../../products/">Overview</a>
                   </li>
@@ -66,7 +76,7 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../../../../products/tracking-portal/">Tracking Portal</a>
                   </li>
               </ul>
-              <p class="caption"><span class="caption-text">Platform</span></p>
+              <p class="caption"><span class="caption-text">Platform Services</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../../../../platform/">Overview</a>
                   </li>
@@ -87,12 +97,35 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../../../../platform/bf-warehouse/">Warehouse Service</a>
                   </li>
               </ul>
+              <p class="caption"><span class="caption-text">Capability Catalog</span></p>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../../../">Vision</a>
-                </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../features/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../features/SHIPMENTS/">Shipments</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../features/ADMIN_CONSOLE/">Admin Console</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../features/CONTROL_TOWER/">Control Tower</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../features/IDENTITY/">Identity</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../features/MASTERDATA/">Masterdata</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../features/ORDERS/">Orders</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../features/WAREHOUSE/">Warehouse</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../features/SEARCH/">Search</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../features/FINTECH/">Fintech</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../features/CARRIER_PORTAL/">Carrier Portal</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../features/TRACKING_PORTAL/">Tracking Portal</a>
+                  </li>
               </ul>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../../../../../api-reference/">API Reference</a>
+                <li class="toctree-l1"><a class="reference internal" href="../../../">Vision Archive</a>
                 </li>
               </ul>
       </div>
@@ -123,14 +156,14 @@
 Status: Planned / In Development
 Context: Original BF-INTEGRATION Vision (Pre-Phase 30)</p>
 </blockquote>
-<h1 id="row-level-security-rls-idempotency-phase-18-design-notes">Row-level Security (RLS) &amp; Idempotency — Phase 18 Design Notes</h1>
-<h2 id="goals">Goals</h2>
+<h1 id="row-level-security-rls-idempotency-phase-18-design-notes">Row-level Security (RLS) &amp; Idempotency — Phase 18 Design Notes<a class="headerlink" href="#row-level-security-rls-idempotency-phase-18-design-notes" title="Permanent link">&para;</a></h1>
+<h2 id="goals">Goals<a class="headerlink" href="#goals" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Enforce tenant isolation at the DB layer using Postgres RLS where appropriate.</li>
 <li>Add application-level idempotency support to safely dedupe client retries for ingest endpoints.</li>
 <li>Use Redis Streams for high-throughput ingest buffer and add an S3 flush worker for persistence.</li>
 </ul>
-<h2 id="idempotency">Idempotency</h2>
+<h2 id="idempotency">Idempotency<a class="headerlink" href="#idempotency" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Schema:</li>
 <li><code>idempotency_keys (key_hash, tenant_id, response JSONB, created_at)</code></li>
@@ -140,7 +173,7 @@ Context: Original BF-INTEGRATION Vision (Pre-Phase 30)</p>
 <li>Incoming requests with <code>Idempotency-Key</code> header are checked; if a recent result exists, return it immediately.</li>
 <li>On first request, persist the response once handler finishes (best-effort), so subsequent retries get the same response.</li>
 </ul>
-<h2 id="postgres-rls">Postgres RLS</h2>
+<h2 id="postgres-rls">Postgres RLS<a class="headerlink" href="#postgres-rls" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Migrations include an RLS template: create the table, enable RLS and attach a policy that compares <code>organization_id</code> to <code>current_setting('app.current_org_id')</code>.</li>
 <li>App must set per-transaction setting <code>SET LOCAL app.current_org_id = '&lt;organization-id&gt;'</code> (or use <code>withOrgContext(orgId, fn)</code>/<code>runWithTenant</code>) before requests reach DB.</li>
@@ -148,17 +181,17 @@ Context: Original BF-INTEGRATION Vision (Pre-Phase 30)</p>
 <li><strong>Note:</strong> The <code>IntegrationCredential</code> model is tenant-scoped and should be covered by RLS policies so credentials are isolated per organization.</li>
 <li>Scripts and checks (e.g., <code>scripts/verify-rls.js</code>, <code>scripts/check-tradingpartners-rls.js</code>) rely on <code>app.current_org_id</code> being set; use the helper <code>runWithTenant</code>/<code>withOrgContext</code> in background jobs to ensure RLS is applied.</li>
 </ul>
-<h2 id="redis-streams-s3-worker">Redis Streams + S3 worker</h2>
+<h2 id="redis-streams-s3-worker">Redis Streams + S3 worker<a class="headerlink" href="#redis-streams-s3-worker" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Ingest pipeline writes to Redis streams (<code>ingest:stream:&lt;tenantId&gt;</code>) using XADD when available; fallbacks to lists for stubbed Redis.</li>
 <li>A consumer worker group claims messages (XREADGROUP) and writes payload batches to S3 in the configured bucket/prefix.</li>
 </ul>
-<h2 id="operational-notes">Operational Notes</h2>
+<h2 id="operational-notes">Operational Notes<a class="headerlink" href="#operational-notes" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Add pruning job to remove old idempotency keys (7+ days).</li>
 <li>Add infra module for managed Redis (Elasticache / Memorystore) with TLS and auth.</li>
 </ul>
-<h2 id="next-steps-implementation">Next steps / Implementation</h2>
+<h2 id="next-steps-implementation">Next steps / Implementation<a class="headerlink" href="#next-steps-implementation" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Implement idempotency middleware (done: <code>api/lib/middleware/idempotency.js</code>).</li>
 <li>Register Prisma tenant middleware to inject tenant and reject missing tenant where filters (done: <code>api/lib/db.js</code>).</li>

@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="../../../../../../css/theme.css" />
     <link rel="stylesheet" href="../../../../../../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../../../../../../stylesheets/extra.css" rel="stylesheet" />
     
       <script>
         // Current page data
@@ -43,7 +44,16 @@
                 <li class="toctree-l1"><a class="reference internal" href="../../../../../..">Home</a>
                 </li>
               </ul>
-              <p class="caption"><span class="caption-text">Products</span></p>
+              <p class="caption"><span class="caption-text">Start Here</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../ONBOARDING/">Onboarding</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../ARCHITECTURE/">Architecture</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../api-reference/">API Reference Hub</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Product Suite</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../../../../../products/">Overview</a>
                   </li>
@@ -66,7 +76,7 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../../../../../products/tracking-portal/">Tracking Portal</a>
                   </li>
               </ul>
-              <p class="caption"><span class="caption-text">Platform</span></p>
+              <p class="caption"><span class="caption-text">Platform Services</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../../../../../platform/">Overview</a>
                   </li>
@@ -87,12 +97,35 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../../../../../platform/bf-warehouse/">Warehouse Service</a>
                   </li>
               </ul>
+              <p class="caption"><span class="caption-text">Capability Catalog</span></p>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../../../../">Vision</a>
-                </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/SHIPMENTS/">Shipments</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/ADMIN_CONSOLE/">Admin Console</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/CONTROL_TOWER/">Control Tower</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/IDENTITY/">Identity</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/MASTERDATA/">Masterdata</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/ORDERS/">Orders</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/WAREHOUSE/">Warehouse</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/SEARCH/">Search</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/FINTECH/">Fintech</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/CARRIER_PORTAL/">Carrier Portal</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/TRACKING_PORTAL/">Tracking Portal</a>
+                  </li>
               </ul>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../../../../../../api-reference/">API Reference</a>
+                <li class="toctree-l1"><a class="reference internal" href="../../../../">Vision Archive</a>
                 </li>
               </ul>
       </div>
@@ -123,9 +156,9 @@
 Status: Planned / In Development
 Context: Original BF-INTEGRATION Vision (Pre-Phase 30)</p>
 </blockquote>
-<h1 id="phase-38-blueprint-templates-library-plan">Phase 38 — Blueprint Templates &amp; Library (Plan)</h1>
+<h1 id="phase-38-blueprint-templates-library-plan">Phase 38 — Blueprint Templates &amp; Library (Plan)<a class="headerlink" href="#phase-38-blueprint-templates-library-plan" title="Permanent link">&para;</a></h1>
 <p><strong>Goal:</strong> Build a reusable Blueprint Templates library that lets customers save, version, and apply blueprint configurations (connectors, adapters, mappings, and credentials) as reusable templates. Leverage Phase 37's monitoring and Vault integration for secure template provisioning and operational visibility.</p>
-<h2 id="objectives">Objectives</h2>
+<h2 id="objectives">Objectives<a class="headerlink" href="#objectives" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Provide a template model and CRUD API for Blueprint Templates</li>
 <li>Allow templates to reference credential IDs (secrets are read from Vault at activation time)</li>
@@ -133,7 +166,7 @@ Context: Original BF-INTEGRATION Vision (Pre-Phase 30)</p>
 <li>Instrument blueprint deployment with monitoring &amp; alerting hooks (success rate, failures, duration)</li>
 <li>Provide UI for template creation, browsing, and applying templates to new bridges</li>
 </ul>
-<h2 id="deliverables-mvp">Deliverables (MVP)</h2>
+<h2 id="deliverables-mvp">Deliverables (MVP)<a class="headerlink" href="#deliverables-mvp" title="Permanent link">&para;</a></h2>
 <ol>
 <li>Prisma model: <code>BlueprintTemplate { id, blueprintId, name, version, isEnterprise, config, createdBy, createdAt }</code></li>
 <li>API endpoints: CRUD + apply (<code>POST /api/blueprints/:id/apply-template</code>) with RBAC (<code>templates:write</code>, <code>templates:read</code>, <code>templates:admin</code>)</li>
@@ -142,19 +175,19 @@ Context: Original BF-INTEGRATION Vision (Pre-Phase 30)</p>
 <li>Metrics &amp; Alerts: <code>template:apply</code> metrics, alert rule for repeated application failures</li>
 <li>Tests: Unit tests for API, integration tests for apply flow, Playwright E2E for UI</li>
 </ol>
-<h2 id="security-secrets">Security &amp; Secrets</h2>
+<h2 id="security-secrets">Security &amp; Secrets<a class="headerlink" href="#security-secrets" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Templates may include references to <code>credentialId</code> only — secret values are never embedded in templates.</li>
 <li>On apply/activation, adapters will retrieve secrets from the configured secret backend (Vault/mock) using the <code>credentialId</code> associated with the template.</li>
 <li>RBAC: only users with <code>templates:write</code> and correct org scope can create templates; only <code>templates:admin</code> can delete templates.</li>
 </ul>
-<h2 id="monitoring-alerting">Monitoring &amp; Alerting</h2>
+<h2 id="monitoring-alerting">Monitoring &amp; Alerting<a class="headerlink" href="#monitoring-alerting" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Emit metrics on <code>template.apply</code> (success/failure, duration)</li>
 <li>Create alert rule: <code>template.apply.failure_rate &gt; 5% over 5m</code> → notify operators</li>
 <li>Add dashboard panels to <code>/admin/metrics</code> for Template usage and health</li>
 </ul>
-<h2 id="timeline-next-steps">Timeline &amp; Next Steps</h2>
+<h2 id="timeline-next-steps">Timeline &amp; Next Steps<a class="headerlink" href="#timeline-next-steps" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Day 1: Design Prisma model + migrations; scaffold API endpoints</li>
 <li>Day 2: Implement server-side validation and credential references; add tests</li>
@@ -162,7 +195,7 @@ Context: Original BF-INTEGRATION Vision (Pre-Phase 30)</p>
 <li>Day 4: Instrument metrics and create basic Grafana panels; add alert rules</li>
 <li>Day 5: Run full test suite, finalize docs, and prepare release notes</li>
 </ul>
-<h2 id="where-to-document">Where to document</h2>
+<h2 id="where-to-document">Where to document<a class="headerlink" href="#where-to-document" title="Permanent link">&para;</a></h2>
 <ul>
 <li><code>docs/phases/phases31-40/phase-38-plan.md</code> (this file)</li>
 <li><code>docs/blueprints/</code> — add template UX &amp; API examples</li>

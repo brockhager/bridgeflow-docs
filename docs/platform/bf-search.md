@@ -1,21 +1,21 @@
-# Service: bf-search
+# Search Service (`bf-search`)
 
-## Purpose
-
-Search and ingestion service for queryable operational data.
-
-## API Endpoint
-
-- Base deployment endpoint not yet documented.
-- Core endpoints:
-  - `GET /health`
-  - `GET /search`
-  - `POST /admin/ingest`
+Search and ingest service for operational discovery and query workloads.
 
 ## Status
 
 Development.
 
+## Endpoint
+
+- Stable public base endpoint not documented yet.
+
+## Key Routes
+
+- `GET /health`
+- `GET /search`
+- `POST /admin/ingest`
+
 ## Repository
 
-- `https://github.com/brockhager/bf-search`
+- https://github.com/brockhager/bf-search

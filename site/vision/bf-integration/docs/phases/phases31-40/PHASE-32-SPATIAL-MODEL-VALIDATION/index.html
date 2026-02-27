@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="../../../../../../css/theme.css" />
     <link rel="stylesheet" href="../../../../../../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../../../../../../stylesheets/extra.css" rel="stylesheet" />
     
       <script>
         // Current page data
@@ -43,7 +44,16 @@
                 <li class="toctree-l1"><a class="reference internal" href="../../../../../..">Home</a>
                 </li>
               </ul>
-              <p class="caption"><span class="caption-text">Products</span></p>
+              <p class="caption"><span class="caption-text">Start Here</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../ONBOARDING/">Onboarding</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../ARCHITECTURE/">Architecture</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../api-reference/">API Reference Hub</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Product Suite</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../../../../../products/">Overview</a>
                   </li>
@@ -66,7 +76,7 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../../../../../products/tracking-portal/">Tracking Portal</a>
                   </li>
               </ul>
-              <p class="caption"><span class="caption-text">Platform</span></p>
+              <p class="caption"><span class="caption-text">Platform Services</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../../../../../platform/">Overview</a>
                   </li>
@@ -87,12 +97,35 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../../../../../platform/bf-warehouse/">Warehouse Service</a>
                   </li>
               </ul>
+              <p class="caption"><span class="caption-text">Capability Catalog</span></p>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../../../../">Vision</a>
-                </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/SHIPMENTS/">Shipments</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/ADMIN_CONSOLE/">Admin Console</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/CONTROL_TOWER/">Control Tower</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/IDENTITY/">Identity</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/MASTERDATA/">Masterdata</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/ORDERS/">Orders</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/WAREHOUSE/">Warehouse</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/SEARCH/">Search</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/FINTECH/">Fintech</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/CARRIER_PORTAL/">Carrier Portal</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/TRACKING_PORTAL/">Tracking Portal</a>
+                  </li>
               </ul>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../../../../../../api-reference/">API Reference</a>
+                <li class="toctree-l1"><a class="reference internal" href="../../../../">Vision Archive</a>
                 </li>
               </ul>
       </div>
@@ -123,14 +156,14 @@
 Status: Planned / In Development
 Context: Original BF-INTEGRATION Vision (Pre-Phase 30)</p>
 </blockquote>
-<h1 id="phase-32-spatial-bridge-model-implementation-validation">✅ Phase 32: Spatial Bridge Model — Implementation Validation</h1>
+<h1 id="phase-32-spatial-bridge-model-implementation-validation">✅ Phase 32: Spatial Bridge Model — Implementation Validation<a class="headerlink" href="#phase-32-spatial-bridge-model-implementation-validation" title="Permanent link">&para;</a></h1>
 <p><strong>Date</strong>: January 10, 2026<br />
 <strong>Status</strong>: 🚀 <strong>READY FOR MERGE</strong><br />
 <strong>Branch</strong>: <code>main</code><br />
 <strong>Changes</strong>: Web frontend canvas assembly redesign</p>
 <hr />
-<h2 id="implementation-summary">📋 Implementation Summary</h2>
-<h3 id="new-spatial-layout-jan-2026">New Spatial Layout (Jan 2026)</h3>
+<h2 id="implementation-summary">📋 Implementation Summary<a class="headerlink" href="#implementation-summary" title="Permanent link">&para;</a></h2>
+<h3 id="new-spatial-layout-jan-2026">New Spatial Layout (Jan 2026)<a class="headerlink" href="#new-spatial-layout-jan-2026" title="Permanent link">&para;</a></h3>
 <p>The bridge canvas now renders the architectural reality:</p>
 <pre><code>┌────────────────────────────────────────────┐
 │         SPATIAL BRIDGE CANVAS              │
@@ -149,7 +182,7 @@ Context: Original BF-INTEGRATION Vision (Pre-Phase 30)</p>
 - <strong>Center Span</strong>: Connector Bridge (blue, 500×24)
 - <strong>Behind Right</strong>: Destination Adapter (green, 60×40)
 - <strong>Right Edge</strong>: Destination TP (orange, 80×100)</p>
-<h3 id="idempotent-styles-centralized-config">Idempotent Styles + Centralized Config</h3>
+<h3 id="idempotent-styles-centralized-config">Idempotent Styles + Centralized Config<a class="headerlink" href="#idempotent-styles-centralized-config" title="Permanent link">&para;</a></h3>
 <p><strong>File</strong>: <a href="web/src/assembly.js#L18-L131">web/src/assembly.js</a></p>
 <p>✅ <strong>Style Injection</strong> (Lines 18–87)
 - Single <code>&lt;style&gt;</code> tag created once per page load
@@ -161,7 +194,7 @@ Context: Original BF-INTEGRATION Vision (Pre-Phase 30)</p>
 - Each slot specifies: type, label, hint, required flag, position (x, y, width, height), className
 - Easy to extend: add Firewall/Policy/DataMap slots by adding entries
 - Position format enables future responsive migration</p>
-<h3 id="rendering-pipeline">Rendering Pipeline</h3>
+<h3 id="rendering-pipeline">Rendering Pipeline<a class="headerlink" href="#rendering-pipeline" title="Permanent link">&para;</a></h3>
 <p><strong><a href="web/src/assembly.js#L813-L836">renderBridgeOutline()</a></strong></p>
 <pre><code class="language-javascript">function renderBridgeOutline(template, workspaceOverride)
 </code></pre>
@@ -194,8 +227,8 @@ Context: Original BF-INTEGRATION Vision (Pre-Phase 30)</p>
 <li>Triggers gap-filling modal via <code>triggerGapFilling()</code></li>
 </ul>
 <hr />
-<h2 id="validation-checklist">✅ Validation Checklist</h2>
-<h3 id="code-quality">Code Quality</h3>
+<h2 id="validation-checklist">✅ Validation Checklist<a class="headerlink" href="#validation-checklist" title="Permanent link">&para;</a></h2>
+<h3 id="code-quality">Code Quality<a class="headerlink" href="#code-quality" title="Permanent link">&para;</a></h3>
 <ul>
 <li>[x] No old SVG circle IDs (<code>bridge-slot-source</code>, etc.) remain</li>
 <li>[x] No stray <code>bridge-outline</code> SVG markup</li>
@@ -203,7 +236,7 @@ Context: Original BF-INTEGRATION Vision (Pre-Phase 30)</p>
 <li>[x] All functions properly scoped and documented</li>
 <li>[x] Ghost component structure captures slot metadata</li>
 </ul>
-<h3 id="architecture">Architecture</h3>
+<h3 id="architecture">Architecture<a class="headerlink" href="#architecture" title="Permanent link">&para;</a></h3>
 <ul>
 <li>[x] Centralized configuration (<code>BRIDGE_SLOT_CONFIG</code>)</li>
 <li>[x] Type normalization (<code>tradingPartner</code> → <code>trading-partner</code>)</li>
@@ -211,7 +244,7 @@ Context: Original BF-INTEGRATION Vision (Pre-Phase 30)</p>
 <li>[x] Position data structure ready for responsive migration</li>
 <li>[x] Extensible design (easy to add new slot types)</li>
 </ul>
-<h3 id="user-experience">User Experience</h3>
+<h3 id="user-experience">User Experience<a class="headerlink" href="#user-experience" title="Permanent link">&para;</a></h3>
 <ul>
 <li>[x] Orange TP blocks at edges (80×100, solid border, #F97316)</li>
 <li>[x] Green adapter slots behind TPs (60×40, dashed border, #10B981)</li>
@@ -219,14 +252,14 @@ Context: Original BF-INTEGRATION Vision (Pre-Phase 30)</p>
 <li>[x] Pulsing animation on required slots (2s cycle)</li>
 <li>[x] No center element (bridge IS the connection)</li>
 </ul>
-<h3 id="accessibility">Accessibility</h3>
+<h3 id="accessibility">Accessibility<a class="headerlink" href="#accessibility" title="Permanent link">&para;</a></h3>
 <ul>
 <li>[x] Slot elements have <code>role="button"</code> and <code>tabindex="0"</code></li>
 <li>[x] Descriptive aria-labels generated from config</li>
 <li>[x] Color contrasts meet WCAG AA (4.5:1+)</li>
 <li>[x] Keyboard navigation works (Tab/Enter to activate slots)</li>
 </ul>
-<h3 id="backward-compatibility">Backward Compatibility</h3>
+<h3 id="backward-compatibility">Backward Compatibility<a class="headerlink" href="#backward-compatibility" title="Permanent link">&para;</a></h3>
 <ul>
 <li>[x] Existing <code>components</code> array unchanged</li>
 <li>[x] <code>renderComponents()</code> still works for manual layout</li>
@@ -234,7 +267,7 @@ Context: Original BF-INTEGRATION Vision (Pre-Phase 30)</p>
 <li>[x] Palette drag-and-drop unaffected</li>
 <li>[x] Connection manager unchanged</li>
 </ul>
-<h3 id="documentation">Documentation</h3>
+<h3 id="documentation">Documentation<a class="headerlink" href="#documentation" title="Permanent link">&para;</a></h3>
 <ul>
 <li>[x] Updated <a href="docs/blueprints/visual-design-guide.md">docs/blueprints/visual-design-guide.md</a></li>
 <li>[x] New spatial model explained with ASCII diagrams</li>
@@ -243,8 +276,8 @@ Context: Original BF-INTEGRATION Vision (Pre-Phase 30)</p>
 <li>[x] Roadmap for Phase 32.8 (responsive) and Phase 33 (firewall/policy)</li>
 </ul>
 <hr />
-<h2 id="visual-verification">🎨 Visual Verification</h2>
-<h3 id="slot-positioning-fixed-layout-phase-32">Slot Positioning (Fixed Layout, Phase 32)</h3>
+<h2 id="visual-verification">🎨 Visual Verification<a class="headerlink" href="#visual-verification" title="Permanent link">&para;</a></h2>
+<h3 id="slot-positioning-fixed-layout-phase-32">Slot Positioning (Fixed Layout, Phase 32)<a class="headerlink" href="#slot-positioning-fixed-layout-phase-32" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
 <tr>
@@ -312,7 +345,7 @@ Context: Original BF-INTEGRATION Vision (Pre-Phase 30)</p>
 </tbody>
 </table>
 <p><strong>Note:</strong> Positions are in <strong>absolute pixels</strong>. Phase 32.8 will migrate to percentage-based for responsive design.</p>
-<h3 id="animation-states">Animation &amp; States</h3>
+<h3 id="animation-states">Animation &amp; States<a class="headerlink" href="#animation-states" title="Permanent link">&para;</a></h3>
 <p><strong>Required Slots</strong></p>
 <pre><code class="language-css">animation: bridge-pulse 2s infinite;
 border: 2px dashed [color];
@@ -328,8 +361,8 @@ border: 2px dashed #d1d5db;
 opacity: 0.7;
 </code></pre>
 <hr />
-<h2 id="merge-readiness">🚀 Merge Readiness</h2>
-<h3 id="pre-merge-checklist">Pre-Merge Checklist</h3>
+<h2 id="merge-readiness">🚀 Merge Readiness<a class="headerlink" href="#merge-readiness" title="Permanent link">&para;</a></h2>
+<h3 id="pre-merge-checklist">Pre-Merge Checklist<a class="headerlink" href="#pre-merge-checklist" title="Permanent link">&para;</a></h3>
 <ul>
 <li>[x] Code compiles without errors</li>
 <li>[x] No console warnings or deprecations</li>
@@ -340,18 +373,18 @@ opacity: 0.7;
 <li>[x] CSS scoped and idempotent</li>
 <li>[x] Accessibility standards met</li>
 </ul>
-<h3 id="known-limitations-phase-32">Known Limitations (Phase 32)</h3>
+<h3 id="known-limitations-phase-32">Known Limitations (Phase 32)<a class="headerlink" href="#known-limitations-phase-32" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Fixed Layout</strong>: Positions in pixels, not responsive yet (Phase 32.8 task)</li>
 <li><strong>No Persistence</strong>: Slot fills not yet saved to localStorage (future)</li>
 <li><strong>Palette Integration</strong>: Palette still uses free-form drag-and-drop (Phase 32.8: snap to slots)</li>
 <li><strong>Adapter Type</strong>: Adapter components not yet in palette (add as Phase 32.7 task)</li>
 </ul>
-<h3 id="safe-to-deploy">Safe to Deploy</h3>
+<h3 id="safe-to-deploy">Safe to Deploy<a class="headerlink" href="#safe-to-deploy" title="Permanent link">&para;</a></h3>
 <p>✅ <strong>Yes.</strong> All changes are additive and backward-compatible. Existing canvas functionality remains unchanged.</p>
 <hr />
-<h2 id="file-changes">📚 File Changes</h2>
-<h3 id="modified-files">Modified Files</h3>
+<h2 id="file-changes">📚 File Changes<a class="headerlink" href="#file-changes" title="Permanent link">&para;</a></h2>
+<h3 id="modified-files">Modified Files<a class="headerlink" href="#modified-files" title="Permanent link">&para;</a></h3>
 <ol>
 <li><strong><a href="web/src/assembly.js">web/src/assembly.js</a></strong></li>
 <li>Added: <code>injectBridgeStyles()</code> (lines 21–87)</li>
@@ -370,7 +403,7 @@ opacity: 0.7;
 <li>Added implementation details and function references</li>
 <li>Updated roadmap with Phase 32.8 and 33 plans</li>
 </ol>
-<h3 id="testing-recommendations">Testing Recommendations</h3>
+<h3 id="testing-recommendations">Testing Recommendations<a class="headerlink" href="#testing-recommendations" title="Permanent link">&para;</a></h3>
 <p><strong>Unit Tests</strong> (if adding to test suite):</p>
 <pre><code class="language-javascript">describe('renderBridgeOutline', () =&gt; {
   it('should render all 5 slot types from BRIDGE_SLOT_CONFIG', () =&gt; {
@@ -397,7 +430,7 @@ opacity: 0.7;
 4. Click any slot → modal opens with correct title/hint
 5. Check DevTools → only 1 <code>&lt;style&gt;</code> tag for bridge styles</p>
 <hr />
-<h2 id="phase-32-progression">🎯 Phase 32 Progression</h2>
+<h2 id="phase-32-progression">🎯 Phase 32 Progression<a class="headerlink" href="#phase-32-progression" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
@@ -455,7 +488,7 @@ opacity: 0.7;
 </tbody>
 </table>
 <hr />
-<h2 id="references">📖 References</h2>
+<h2 id="references">📖 References<a class="headerlink" href="#references" title="Permanent link">&para;</a></h2>
 <ul>
 <li><strong>Copilot Instructions</strong>: <a href=".github/copilot-instructions.md#L157-L187">.github/copilot-instructions.md</a> — Phase 32 section</li>
 <li><strong>Blueprint Tech Spec</strong>: <a href="docs/blueprints/technical-overview.md">docs/blueprints/technical-overview.md</a></li>
@@ -463,7 +496,7 @@ opacity: 0.7;
 <li><strong>Architecture</strong>: <a href="docs/ARCHITECTURE.md">docs/ARCHITECTURE.md</a></li>
 </ul>
 <hr />
-<h2 id="summary">✨ Summary</h2>
+<h2 id="summary">✨ Summary<a class="headerlink" href="#summary" title="Permanent link">&para;</a></h2>
 <p>This PR delivers the <strong>spatial bridge mental model</strong> to the BridgeFlow canvas:</p>
 <blockquote>
 <p><strong>TPs at edges. Adapters nested. Connector spanning.</strong></p>

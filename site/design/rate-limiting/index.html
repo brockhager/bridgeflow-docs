@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="../../css/theme.css" />
     <link rel="stylesheet" href="../../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../../stylesheets/extra.css" rel="stylesheet" />
     
       <script>
         // Current page data
@@ -43,7 +44,16 @@
                 <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
                 </li>
               </ul>
-              <p class="caption"><span class="caption-text">Products</span></p>
+              <p class="caption"><span class="caption-text">Start Here</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../ONBOARDING/">Onboarding</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../ARCHITECTURE/">Architecture</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../api-reference/">API Reference Hub</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Product Suite</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../products/">Overview</a>
                   </li>
@@ -66,7 +76,7 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../products/tracking-portal/">Tracking Portal</a>
                   </li>
               </ul>
-              <p class="caption"><span class="caption-text">Platform</span></p>
+              <p class="caption"><span class="caption-text">Platform Services</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../platform/">Overview</a>
                   </li>
@@ -87,12 +97,35 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../platform/bf-warehouse/">Warehouse Service</a>
                   </li>
               </ul>
+              <p class="caption"><span class="caption-text">Capability Catalog</span></p>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../../vision/bf-integration/">Vision</a>
-                </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/SHIPMENTS/">Shipments</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/ADMIN_CONSOLE/">Admin Console</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/CONTROL_TOWER/">Control Tower</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/IDENTITY/">Identity</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/MASTERDATA/">Masterdata</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/ORDERS/">Orders</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/WAREHOUSE/">Warehouse</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/SEARCH/">Search</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/FINTECH/">Fintech</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/CARRIER_PORTAL/">Carrier Portal</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/TRACKING_PORTAL/">Tracking Portal</a>
+                  </li>
               </ul>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../../api-reference/">API Reference</a>
+                <li class="toctree-l1"><a class="reference internal" href="../../vision/bf-integration/">Vision Archive</a>
                 </li>
               </ul>
       </div>
@@ -118,8 +151,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <h1 id="rate-limiting-ddos-plan">Rate Limiting &amp; DDoS Plan</h1>
-<h2 id="goals">Goals</h2>
+                <h1 id="rate-limiting-ddos-plan">Rate Limiting &amp; DDoS Plan<a class="headerlink" href="#rate-limiting-ddos-plan" title="Permanent link">&para;</a></h1>
+<h2 id="goals">Goals<a class="headerlink" href="#goals" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Redis-backed global/route rate limits with in-memory fallback for tests/local.</li>
 <li>IP allow/deny (single IP or CIDR), dynamic blocks from anomaly detection, admin controls to view/unblock.</li>
@@ -127,28 +160,28 @@
 <li>Anomaly rules: excessive 404s (&gt;20/min per IP) and auth failures (&gt;10/min on /api/auth/*). Offenders auto-blocked with TTL.</li>
 <li>Admin UI (reuse admin pages) to inspect blocks and manage allow/deny entries.</li>
 </ul>
-<h2 id="components">Components</h2>
+<h2 id="components">Components<a class="headerlink" href="#components" title="Permanent link">&para;</a></h2>
 <ul>
 <li><strong>RateLimitManager</strong> (new): wraps store, allow/deny checks, anomaly tracking, dynamic blocks. Exposes Fastify hooks and plugin options.</li>
 <li><strong>Store selection</strong>: <code>ioredis</code> client when <code>REDIS_URL</code> (or host/port) is set; otherwise in-memory map. Both expose counters, sets (allow/deny), and block registry with TTL.</li>
 <li><strong>Fastify plugin config</strong>: global=true, defaults 100 req/min; env overrides <code>RATE_LIMIT_GLOBAL_MAX</code>, <code>RATE_LIMIT_GLOBAL_WINDOW</code>. Uses custom <code>allowList</code> + <code>keyGenerator</code> to respect CIDR allowlist and dynamic blocks.</li>
 <li><strong>Headers</strong>: enable <code>RateLimit-Limit</code>, <code>RateLimit-Remaining</code>, <code>RateLimit-Reset</code>, <code>X-RateLimit-*</code> for legacy, plus <code>Retry-After</code> on block.</li>
 </ul>
-<h2 id="policy">Policy</h2>
+<h2 id="policy">Policy<a class="headerlink" href="#policy" title="Permanent link">&para;</a></h2>
 <ul>
 <li><strong>Global</strong>: per-IP (post-normalization) unless allowlisted.</li>
 <li><strong>Per-route</strong>: existing auth/webhook limits kept; route configs can override max/window/key.</li>
 <li><strong>Allow/Deny</strong>: static via env (<code>RATE_LIMIT_ALLOW_LIST</code>, <code>RATE_LIMIT_DENY_LIST</code>, comma-separated IP/CIDR); dynamic via admin API (stored in store sets).</li>
 <li><strong>Blocks</strong>: anomaly-triggered blocks stored with reason, ttl, and firstSeen; enforced at <code>onRequest</code> before Fastify handlers.</li>
 </ul>
-<h2 id="anomaly-detection">Anomaly Detection</h2>
+<h2 id="anomaly-detection">Anomaly Detection<a class="headerlink" href="#anomaly-detection" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Hook on response to record patterns:</li>
 <li>404 bursts: key <code>anomaly:404:&lt;ip&gt;</code>; threshold 20/min (env <code>RATE_LIMIT_404_THRESHOLD</code>, <code>RATE_LIMIT_404_WINDOW</code>), block TTL default 15m (<code>RATE_LIMIT_BLOCK_TTL</code>).</li>
 <li>Auth failures: status 401 on <code>/api/auth/*</code>; key <code>anomaly:authfail:&lt;ip&gt;</code>; threshold 10/min (env <code>RATE_LIMIT_AUTHFAIL_THRESHOLD</code>, <code>RATE_LIMIT_AUTHFAIL_WINDOW</code>), block TTL default 30m.</li>
 <li>When threshold exceeded, add block entry <code>{ reason, ttlSeconds, until }</code> and log event.</li>
 </ul>
-<h2 id="admin-surface">Admin Surface</h2>
+<h2 id="admin-surface">Admin Surface<a class="headerlink" href="#admin-surface" title="Permanent link">&para;</a></h2>
 <ul>
 <li><strong>API</strong> under <code>/api/rate-limits</code> (mTLS + auth + permission):</li>
 <li><code>GET /status</code> → config + active blocks + allow/deny lists + backend type (redis|memory).</li>
@@ -157,14 +190,14 @@
 <li><code>DELETE /blocks/:ip</code> → unblock.</li>
 <li><strong>UI</strong>: new admin page listing backend, current limits, allow/deny entries, active blocks, and quick actions (allow, deny, unblock). Uses existing admin styling/components.</li>
 </ul>
-<h2 id="environment-surface">Environment Surface</h2>
+<h2 id="environment-surface">Environment Surface<a class="headerlink" href="#environment-surface" title="Permanent link">&para;</a></h2>
 <ul>
 <li><code>REDIS_URL</code> or <code>REDIS_HOST</code>/<code>REDIS_PORT</code> for backend; fallback to memory when absent or failing.</li>
 <li><code>RATE_LIMIT_GLOBAL_MAX</code> (default 100), <code>RATE_LIMIT_GLOBAL_WINDOW</code> (default 1 minute).</li>
 <li><code>RATE_LIMIT_ALLOW_LIST</code>, <code>RATE_LIMIT_DENY_LIST</code> (comma-separated IP or CIDR).</li>
 <li>Anomaly tunables: <code>RATE_LIMIT_404_THRESHOLD</code> (default 20), <code>RATE_LIMIT_404_WINDOW</code> (60s), <code>RATE_LIMIT_AUTHFAIL_THRESHOLD</code> (10), <code>RATE_LIMIT_AUTHFAIL_WINDOW</code> (60s), <code>RATE_LIMIT_BLOCK_TTL</code> (900s default for 404, 1800s for auth failures unless overridden per rule).</li>
 </ul>
-<h2 id="testing-strategy">Testing Strategy</h2>
+<h2 id="testing-strategy">Testing Strategy<a class="headerlink" href="#testing-strategy" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Use in-memory store for Vitest by omitting Redis env.</li>
 <li>Set tiny thresholds/windows in tests (e.g., global=2) to hit limits quickly.</li>

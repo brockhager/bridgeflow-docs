@@ -1,23 +1,23 @@
-# Service: bf-warehouse
+# Warehouse Service (`bf-warehouse`)
 
-## Purpose
-
-Warehouse inventory and pick task operations.
-
-## API Endpoint
-
-- Base deployment endpoint not yet documented.
-- Core endpoints:
-  - `GET /health`
-  - `POST /inventory/receive`
-  - `GET /inventory`
-  - `POST /tasks/pick`
-  - `PATCH /tasks/{task_id}/complete`
+Warehouse inventory, receiving, and pick-task orchestration service.
 
 ## Status
 
 Development.
 
+## Endpoint
+
+- Stable public base endpoint not documented yet.
+
+## Key Routes
+
+- `GET /health`
+- `POST /inventory/receive`
+- `GET /inventory`
+- `POST /tasks/pick`
+- `PATCH /tasks/{task_id}/complete`
+
 ## Repository
 
-- `https://github.com/brockhager/bf-warehouse`
+- https://github.com/brockhager/bf-warehouse

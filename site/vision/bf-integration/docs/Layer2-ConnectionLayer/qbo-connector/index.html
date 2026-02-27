@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="../../../../../css/theme.css" />
     <link rel="stylesheet" href="../../../../../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../../../../../stylesheets/extra.css" rel="stylesheet" />
     
       <script>
         // Current page data
@@ -43,7 +44,16 @@
                 <li class="toctree-l1"><a class="reference internal" href="../../../../..">Home</a>
                 </li>
               </ul>
-              <p class="caption"><span class="caption-text">Products</span></p>
+              <p class="caption"><span class="caption-text">Start Here</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../ONBOARDING/">Onboarding</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../ARCHITECTURE/">Architecture</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../api-reference/">API Reference Hub</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Product Suite</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../../../../products/">Overview</a>
                   </li>
@@ -66,7 +76,7 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../../../../products/tracking-portal/">Tracking Portal</a>
                   </li>
               </ul>
-              <p class="caption"><span class="caption-text">Platform</span></p>
+              <p class="caption"><span class="caption-text">Platform Services</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../../../../platform/">Overview</a>
                   </li>
@@ -87,12 +97,35 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../../../../platform/bf-warehouse/">Warehouse Service</a>
                   </li>
               </ul>
+              <p class="caption"><span class="caption-text">Capability Catalog</span></p>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../../../">Vision</a>
-                </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../features/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../features/SHIPMENTS/">Shipments</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../features/ADMIN_CONSOLE/">Admin Console</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../features/CONTROL_TOWER/">Control Tower</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../features/IDENTITY/">Identity</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../features/MASTERDATA/">Masterdata</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../features/ORDERS/">Orders</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../features/WAREHOUSE/">Warehouse</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../features/SEARCH/">Search</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../features/FINTECH/">Fintech</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../features/CARRIER_PORTAL/">Carrier Portal</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../features/TRACKING_PORTAL/">Tracking Portal</a>
+                  </li>
               </ul>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../../../../../api-reference/">API Reference</a>
+                <li class="toctree-l1"><a class="reference internal" href="../../../">Vision Archive</a>
                 </li>
               </ul>
       </div>
@@ -123,23 +156,23 @@
 Status: Planned / In Development
 Context: Original BF-INTEGRATION Vision (Pre-Phase 30)</p>
 </blockquote>
-<h1 id="layer-2-quickbooks-online-qbo-connector">Layer 2 — QuickBooks Online (QBO) Connector</h1>
+<h1 id="layer-2-quickbooks-online-qbo-connector">Layer 2 — QuickBooks Online (QBO) Connector<a class="headerlink" href="#layer-2-quickbooks-online-qbo-connector" title="Permanent link">&para;</a></h1>
 <p>This document describes how the QBO connector fits into <strong>Layer 2 (Connection Layer)</strong> of BridgeFlow.
 It covers the connection lifecycle, security, operational behaviors, and how QBO syncs are enqueued into the Phase 18 ingestion pipeline.</p>
 <hr />
-<h2 id="purpose">Purpose</h2>
+<h2 id="purpose">Purpose<a class="headerlink" href="#purpose" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Provide a secure, tenant-scoped connector that lets organizations pull Purchase Orders from QuickBooks Online into BridgeFlow.</li>
 <li>Keep connection responsibilities scoped to Layer 2: authentication, credential management, and upstream payload delivery to Layer 3/4 processing.</li>
 </ul>
-<h2 id="high-level-flow">High-level flow</h2>
+<h2 id="high-level-flow">High-level flow<a class="headerlink" href="#high-level-flow" title="Permanent link">&para;</a></h2>
 <ol>
 <li>Frontend performs OAuth 2.0 authorization with Intuit (QBO). Frontend exchanges authorization code for tokens.</li>
 <li>Frontend sends encrypted credentials to backend (stored in <code>IntegrationCredential</code> table in <code>public</code> schema).</li>
 <li>User triggers <code>POST /api/qbo/sync</code> (backend) to fetch POs and enqueue mapped payloads into <code>raw_payloads:&lt;orgId&gt;</code>.</li>
 <li>Phase 18 pipeline (workers) processes, deduplicates (idempotency), and stores payloads in S3 inbox for downstream workflows.</li>
 </ol>
-<h2 id="key-responsibilities-layer-2">Key responsibilities (Layer 2)</h2>
+<h2 id="key-responsibilities-layer-2">Key responsibilities (Layer 2)<a class="headerlink" href="#key-responsibilities-layer-2" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Credential persistence (encrypted at rest)</li>
 <li>Token refresh and secure handling (no tokens leaked in logs)</li>
@@ -147,7 +180,7 @@ It covers the connection lifecycle, security, operational behaviors, and how QBO
 <li>Mapping to internal payload format (same shape as CSV mailbox) and producing to <code>raw_payloads</code> stream</li>
 <li>Cooperative idempotency: ensure same QBO TxnId is not enqueued more than once within TTL</li>
 </ul>
-<h2 id="data-model">Data model</h2>
+<h2 id="data-model">Data model<a class="headerlink" href="#data-model" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Prisma model: <code>IntegrationCredential</code></li>
 <li>id: cuid()</li>
@@ -155,14 +188,14 @@ It covers the connection lifecycle, security, operational behaviors, and how QBO
 <li>encryptedData: Bytes (AES-256-GCM encrypted JSON blob)</li>
 <li>createdAt: DateTime</li>
 </ul>
-<h2 id="security-encryption">Security &amp; Encryption</h2>
+<h2 id="security-encryption">Security &amp; Encryption<a class="headerlink" href="#security-encryption" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Use Node Web Crypto (AES-256-GCM) to encrypt credential JSON before storing.</li>
 <li>Derive the encryption key from environment variable <code>QBO_CREDENTIAL_ENCRYPTION_KEY</code> (32 bytes in hex; 64 hex chars).</li>
 <li>Rotation: rotate key only via an ops process — rotating the key requires re-encrypting stored credentials.</li>
 <li>Tokens and refresh flows are never logged or returned.</li>
 </ul>
-<h2 id="endpoints-rpcs">Endpoints / RPCs</h2>
+<h2 id="endpoints-rpcs">Endpoints / RPCs<a class="headerlink" href="#endpoints-rpcs" title="Permanent link">&para;</a></h2>
 <ul>
 <li>POST /api/qbo/sync</li>
 <li>Auth: <code>x-api-key</code> → validated via <code>validateCustomerApiKey</code> middleware (maps to <code>organizationId</code>)</li>
@@ -170,18 +203,18 @@ It covers the connection lifecycle, security, operational behaviors, and how QBO
 <li>Behavior: calls <code>syncQboPurchaseOrders(orgId)</code> which fetches, maps and enqueues POs; returns <code>{ enqueued: n }</code>.</li>
 <li>(Frontend) OAuth redirect flow: handled by frontend; backend exposes credential storage and refresh handling.</li>
 </ul>
-<h2 id="idempotency">Idempotency</h2>
+<h2 id="idempotency">Idempotency<a class="headerlink" href="#idempotency" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Producer-side idempotency: each PO uses idempotency key <code>qbo_po:&lt;TxnId&gt;</code>.</li>
 <li>The ingestion producer checks <code>IdempotencyKey</code> (Prisma model) to skip already-processed POs within TTL (configurable via <code>IDEMPOTENCY_TTL_HOURS</code>).</li>
 <li>This aligns with Phase 18 deduplication policy and avoids duplicate processing on retries.</li>
 </ul>
-<h2 id="rate-limiting">Rate limiting</h2>
+<h2 id="rate-limiting">Rate limiting<a class="headerlink" href="#rate-limiting" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Implement a per-org Redis counter <code>qbo:rate:&lt;orgId&gt;</code> with a soft cap at ~450/min.</li>
 <li>On exceeding, the client will use a backoff delay; production should observe Intuit limits and adjust accordingly.</li>
 </ul>
-<h2 id="observability-tests">Observability &amp; Tests</h2>
+<h2 id="observability-tests">Observability &amp; Tests<a class="headerlink" href="#observability-tests" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Add metrics for:</li>
 <li><code>qbo.sync.enqueued_total</code></li>
@@ -191,14 +224,14 @@ It covers the connection lifecycle, security, operational behaviors, and how QBO
 <li>Unit: qbo client (refresh logic), encryption helpers, mapping tests</li>
 <li>Integration: mock QBO responses, call <code>/api/qbo/sync</code>, assert messages enqueued and idempotency behavior</li>
 </ul>
-<h2 id="limitations-notes">Limitations &amp; Notes</h2>
+<h2 id="limitations-notes">Limitations &amp; Notes<a class="headerlink" href="#limitations-notes" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Read-only integration for Purchase Orders only (no writes to QBO).</li>
 <li>One QBO company/realm per organization.</li>
 <li>Admins should rotate credentials carefully; no automatic key rotation is provided yet.</li>
 </ul>
 <hr />
-<h2 id="operational-playbook-short">Operational Playbook (short)</h2>
+<h2 id="operational-playbook-short">Operational Playbook (short)<a class="headerlink" href="#operational-playbook-short" title="Permanent link">&para;</a></h2>
 <ul>
 <li>If sync failures spike, check:</li>
 <li>QBO token expiry / refresh errors</li>

@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="../../../css/theme.css" />
     <link rel="stylesheet" href="../../../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../../../stylesheets/extra.css" rel="stylesheet" />
     
       <script>
         // Current page data
@@ -43,7 +44,16 @@
                 <li class="toctree-l1"><a class="reference internal" href="../../..">Home</a>
                 </li>
               </ul>
-              <p class="caption"><span class="caption-text">Products</span></p>
+              <p class="caption"><span class="caption-text">Start Here</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../ONBOARDING/">Onboarding</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../ARCHITECTURE/">Architecture</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../api-reference/">API Reference Hub</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Product Suite</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../../products/">Overview</a>
                   </li>
@@ -66,7 +76,7 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../../products/tracking-portal/">Tracking Portal</a>
                   </li>
               </ul>
-              <p class="caption"><span class="caption-text">Platform</span></p>
+              <p class="caption"><span class="caption-text">Platform Services</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../../platform/">Overview</a>
                   </li>
@@ -87,12 +97,35 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../../platform/bf-warehouse/">Warehouse Service</a>
                   </li>
               </ul>
+              <p class="caption"><span class="caption-text">Capability Catalog</span></p>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../../../vision/bf-integration/">Vision</a>
-                </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../features/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../features/SHIPMENTS/">Shipments</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../features/ADMIN_CONSOLE/">Admin Console</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../features/CONTROL_TOWER/">Control Tower</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../features/IDENTITY/">Identity</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../features/MASTERDATA/">Masterdata</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../features/ORDERS/">Orders</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../features/WAREHOUSE/">Warehouse</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../features/SEARCH/">Search</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../features/FINTECH/">Fintech</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../features/CARRIER_PORTAL/">Carrier Portal</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../features/TRACKING_PORTAL/">Tracking Portal</a>
+                  </li>
               </ul>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../../../api-reference/">API Reference</a>
+                <li class="toctree-l1"><a class="reference internal" href="../../../vision/bf-integration/">Vision Archive</a>
                 </li>
               </ul>
       </div>
@@ -118,8 +151,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <h1 id="phase-7-lean-api-platform-edi-expansion">Phase 7: Lean API Platform + EDI Expansion</h1>
-<h2 id="overview">Overview</h2>
+                <h1 id="phase-7-lean-api-platform-edi-expansion">Phase 7: Lean API Platform + EDI Expansion<a class="headerlink" href="#phase-7-lean-api-platform-edi-expansion" title="Permanent link">&para;</a></h1>
+<h2 id="overview">Overview<a class="headerlink" href="#overview" title="Permanent link">&para;</a></h2>
 <ul>
 <li><strong>Philosophy:</strong> Depth over breadth, quality over quantity</li>
 <li><strong>Timeline:</strong> Q1 2026 (8–10 weeks)</li>
@@ -127,7 +160,7 @@
 </ul>
 <p>This document captures objectives, success metrics, epics, milestones, risks, dependencies, and validation for Phase 7 (formerly planned as Phase 6). It preserves the original plan and timeline so Phase 7 can be kickstarted when Phase 6 Canvas work completes.</p>
 <hr />
-<h2 id="objectives-success-metrics">Objectives &amp; Success Metrics</h2>
+<h2 id="objectives-success-metrics">Objectives &amp; Success Metrics<a class="headerlink" href="#objectives-success-metrics" title="Permanent link">&para;</a></h2>
 <ol>
 <li>Complete Wizard Integration (T-004 continuation)</li>
 <li>Metric: User can send an invoice start→finish in &lt; 5 minutes via the wizard</li>
@@ -148,8 +181,8 @@
 <li>Validation: Refactor 2 transactions as pilot, run full test suite, preserve round-trip parity</li>
 </ol>
 <hr />
-<h2 id="detailed-epics">Detailed Epics</h2>
-<h3 id="epic-1-wizard-job-orchestrator-integration">Epic 1: Wizard → Job Orchestrator Integration</h3>
+<h2 id="detailed-epics">Detailed Epics<a class="headerlink" href="#detailed-epics" title="Permanent link">&para;</a></h2>
+<h3 id="epic-1-wizard-job-orchestrator-integration">Epic 1: Wizard → Job Orchestrator Integration<a class="headerlink" href="#epic-1-wizard-job-orchestrator-integration" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Connect Wizard UI to backend job API (secure endpoints)</li>
 <li>Real email provider integrations (SendGrid, fallback to Ethereal for testing)</li>
@@ -157,7 +190,7 @@
 <li>Robust error handling &amp; user-facing feedback</li>
 </ul>
 <p>Deliverables: API endpoints, UI wiring, provider connector, monitoring dashboard, E2E tests</p>
-<h3 id="epic-2-minimal-external-api-platform">Epic 2: Minimal External API Platform</h3>
+<h3 id="epic-2-minimal-external-api-platform">Epic 2: Minimal External API Platform<a class="headerlink" href="#epic-2-minimal-external-api-platform" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Core REST endpoints: jobs, job status, webhooks, bridges</li>
 <li>API key authentication and simple token lifecycle</li>
@@ -166,7 +199,7 @@
 <li>Tests: contract tests and example scripts</li>
 </ul>
 <p>Deliverables: API routes, middleware, rate-limiter, OpenAPI docs, SDK starters, tests</p>
-<h3 id="epic-3-edi-foundation-refactor">Epic 3: EDI Foundation Refactor</h3>
+<h3 id="epic-3-edi-foundation-refactor">Epic 3: EDI Foundation Refactor<a class="headerlink" href="#epic-3-edi-foundation-refactor" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Design element/segment primitives and serialization/validation primitives</li>
 <li>Refactor parser/generator to use primitives (start with 2 transactions: pick high-impact ones)</li>
@@ -175,7 +208,7 @@
 </ul>
 <p>Deliverables: design doc, primitives library module, migrated transactions, benchmark report</p>
 <hr />
-<h2 id="milestones-timeline-draft">Milestones &amp; Timeline (Draft)</h2>
+<h2 id="milestones-timeline-draft">Milestones &amp; Timeline (Draft)<a class="headerlink" href="#milestones-timeline-draft" title="Permanent link">&para;</a></h2>
 <ul>
 <li><strong>Week 1–2:</strong> Epic 1 complete (Wizard wiring, provider integrations, monitoring)</li>
 <li><strong>Week 3–4:</strong> Epic 2 complete (API endpoints, auth, rate limiting, docs, SDK starters)</li>
@@ -184,7 +217,7 @@
 </ul>
 <p>Notes: Treat timeline as tentative — update as we scope E2E tests and provider access windows.</p>
 <hr />
-<h2 id="next-steps">Next Steps</h2>
+<h2 id="next-steps">Next Steps<a class="headerlink" href="#next-steps" title="Permanent link">&para;</a></h2>
 <ol>
 <li>Preserve this plan for Phase 7 kickoff after Phase 6 Canvas delivery</li>
 <li>Re-prioritize epics and assign owners when Phase 6 is sufficiently validated</li>

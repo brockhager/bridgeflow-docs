@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="../../css/theme.css" />
     <link rel="stylesheet" href="../../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../../stylesheets/extra.css" rel="stylesheet" />
     
       <script>
         // Current page data
@@ -43,7 +44,16 @@
                 <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
                 </li>
               </ul>
-              <p class="caption"><span class="caption-text">Products</span></p>
+              <p class="caption"><span class="caption-text">Start Here</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../ONBOARDING/">Onboarding</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../ARCHITECTURE/">Architecture</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../api-reference/">API Reference Hub</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Product Suite</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../products/">Overview</a>
                   </li>
@@ -66,7 +76,7 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../products/tracking-portal/">Tracking Portal</a>
                   </li>
               </ul>
-              <p class="caption"><span class="caption-text">Platform</span></p>
+              <p class="caption"><span class="caption-text">Platform Services</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../platform/">Overview</a>
                   </li>
@@ -87,12 +97,35 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../platform/bf-warehouse/">Warehouse Service</a>
                   </li>
               </ul>
+              <p class="caption"><span class="caption-text">Capability Catalog</span></p>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../../vision/bf-integration/">Vision</a>
-                </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/SHIPMENTS/">Shipments</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/ADMIN_CONSOLE/">Admin Console</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/CONTROL_TOWER/">Control Tower</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/IDENTITY/">Identity</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/MASTERDATA/">Masterdata</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/ORDERS/">Orders</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/WAREHOUSE/">Warehouse</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/SEARCH/">Search</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/FINTECH/">Fintech</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/CARRIER_PORTAL/">Carrier Portal</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/TRACKING_PORTAL/">Tracking Portal</a>
+                  </li>
               </ul>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../../api-reference/">API Reference</a>
+                <li class="toctree-l1"><a class="reference internal" href="../../vision/bf-integration/">Vision Archive</a>
                 </li>
               </ul>
       </div>
@@ -118,7 +151,7 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <h1 id="phase-1-complete-mtls-core-infrastructure">🎯 Phase 1 Complete: mTLS Core Infrastructure</h1>
+                <h1 id="phase-1-complete-mtls-core-infrastructure">🎯 Phase 1 Complete: mTLS Core Infrastructure<a class="headerlink" href="#phase-1-complete-mtls-core-infrastructure" title="Permanent link">&para;</a></h1>
 <p><strong>Project</strong>: BridgeFlow Platform Core - Authentication Security Hardening<br />
 <strong>Feature</strong>: Mutual TLS (mTLS) Certificate Authentication<br />
 <strong>Phase</strong>: 1 of 8 - Core Infrastructure<br />
@@ -126,9 +159,9 @@
 <strong>Completion Date</strong>: 2025<br />
 <strong>Time Invested</strong>: ~3 hours  </p>
 <hr />
-<h2 id="executive-summary">📋 Executive Summary</h2>
+<h2 id="executive-summary">📋 Executive Summary<a class="headerlink" href="#executive-summary" title="Permanent link">&para;</a></h2>
 <p>Successfully implemented comprehensive mutual TLS (mTLS) authentication infrastructure for BridgeFlow, providing certificate-based client authentication for sensitive API endpoints. Completed core middleware, certificate management, testing, and documentation.</p>
-<h3 id="key-achievements">Key Achievements</h3>
+<h3 id="key-achievements">Key Achievements<a class="headerlink" href="#key-achievements" title="Permanent link">&para;</a></h3>
 <ul>
 <li>✅ <strong>Core mTLS Plugin</strong>: 385-line Fastify plugin with multi-stage certificate validation</li>
 <li>✅ <strong>Certificate Management</strong>: Runtime certificate addition/removal via secret manager</li>
@@ -137,8 +170,8 @@
 <li>✅ <strong>Production Documentation</strong>: 550+ line guide with deployment instructions</li>
 </ul>
 <hr />
-<h2 id="implementation-details">🏗️ Implementation Details</h2>
-<h3 id="1-mtls-middleware-apilibmtlsjs">1. mTLS Middleware (<code>api/lib/mtls.js</code>)</h3>
+<h2 id="implementation-details">🏗️ Implementation Details<a class="headerlink" href="#implementation-details" title="Permanent link">&para;</a></h2>
+<h3 id="1-mtls-middleware-apilibmtlsjs">1. mTLS Middleware (<code>api/lib/mtls.js</code>)<a class="headerlink" href="#1-mtls-middleware-apilibmtlsjs" title="Permanent link">&para;</a></h3>
 <p><strong>Size</strong>: 385 lines<br />
 <strong>Type</strong>: Fastify plugin with fp wrapper  </p>
 <p><strong>Core Functions</strong>:
@@ -183,7 +216,7 @@ await fastify.removeTrustedCertificate(fingerprint)
 - Supports runtime certificate management
 - Graceful handling when secret manager unavailable</p>
 <hr />
-<h3 id="2-certificate-generation-script-scriptsgenerate-certsjs">2. Certificate Generation Script (<code>scripts/generate-certs.js</code>)</h3>
+<h3 id="2-certificate-generation-script-scriptsgenerate-certsjs">2. Certificate Generation Script (<code>scripts/generate-certs.js</code>)<a class="headerlink" href="#2-certificate-generation-script-scriptsgenerate-certsjs" title="Permanent link">&para;</a></h3>
 <p><strong>Size</strong>: 390 lines<br />
 <strong>Type</strong>: ES module with OpenSSL integration  </p>
 <p><strong>Commands</strong>:</p>
@@ -220,7 +253,7 @@ node scripts/generate-certs.js verify
 └── client-{name}-cert.pem    # Client certificate
 </code></pre>
 <hr />
-<h3 id="3-test-suite-apitestsmtlstestjs">3. Test Suite (<code>api/tests/mtls.test.js</code>)</h3>
+<h3 id="3-test-suite-apitestsmtlstestjs">3. Test Suite (<code>api/tests/mtls.test.js</code>)<a class="headerlink" href="#3-test-suite-apitestsmtlstestjs" title="Permanent link">&para;</a></h3>
 <p><strong>Size</strong>: 31 tests (29 passing, 2 skipped)<br />
 <strong>Coverage</strong>: 94%<br />
 <strong>Test Categories</strong>:</p>
@@ -293,7 +326,7 @@ node scripts/generate-certs.js verify
 # ℹ skipped 2
 </code></pre>
 <hr />
-<h3 id="4-documentation-docssecuritymtls-guidemd">4. Documentation (<code>docs/security/mtls-guide.md</code>)</h3>
+<h3 id="4-documentation-docssecuritymtls-guidemd">4. Documentation (<code>docs/security/mtls-guide.md</code>)<a class="headerlink" href="#4-documentation-docssecuritymtls-guidemd" title="Permanent link">&para;</a></h3>
 <p><strong>Size</strong>: 550+ lines<br />
 <strong>Sections</strong>:</p>
 <ol>
@@ -315,8 +348,8 @@ node scripts/generate-certs.js verify
 - Comprehensive troubleshooting guide
 - Security best practices</p>
 <hr />
-<h2 id="security-features">🔐 Security Features</h2>
-<h3 id="multi-stage-validation">Multi-Stage Validation</h3>
+<h2 id="security-features">🔐 Security Features<a class="headerlink" href="#security-features" title="Permanent link">&para;</a></h2>
+<h3 id="multi-stage-validation">Multi-Stage Validation<a class="headerlink" href="#multi-stage-validation" title="Permanent link">&para;</a></h3>
 <ol>
 <li><strong>TLS Socket Extraction</strong>: Uses <code>socket.getPeerCertificate(true)</code> to extract client certificate</li>
 <li><strong>Expiry Checking</strong>: Validates <code>valid_from</code> and <code>valid_to</code> dates against current time</li>
@@ -325,14 +358,14 @@ node scripts/generate-certs.js verify
 <li><strong>CA Chain Validation</strong>: Verifies certificate signed by trusted CA, rejects self-signed certs</li>
 <li><strong>Issuer Verification</strong>: Checks issuerCertificate chain for CA-signed certificates</li>
 </ol>
-<h3 id="flexible-authentication-modes">Flexible Authentication Modes</h3>
+<h3 id="flexible-authentication-modes">Flexible Authentication Modes<a class="headerlink" href="#flexible-authentication-modes" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Required mTLS</strong>: Enforces certificate authentication (401/403 on failure)</li>
 <li><strong>Optional mTLS</strong>: Attaches certificate if present, continues without</li>
 <li><strong>Per-Route Configuration</strong>: Override plugin config on specific endpoints</li>
 <li><strong>Graceful Degradation</strong>: No-op decorators when mTLS disabled</li>
 </ul>
-<h3 id="audit-trail">Audit Trail</h3>
+<h3 id="audit-trail">Audit Trail<a class="headerlink" href="#audit-trail" title="Permanent link">&para;</a></h3>
 <p>All authentication attempts logged with:
 - Event type (success/failure)
 - Client fingerprint and CN
@@ -340,8 +373,8 @@ node scripts/generate-certs.js verify
 - Request context (URL, method, IP)
 - Timestamp and actor</p>
 <hr />
-<h2 id="metrics">📊 Metrics</h2>
-<h3 id="code-statistics">Code Statistics</h3>
+<h2 id="metrics">📊 Metrics<a class="headerlink" href="#metrics" title="Permanent link">&para;</a></h2>
+<h3 id="code-statistics">Code Statistics<a class="headerlink" href="#code-statistics" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
 <tr>
@@ -384,7 +417,7 @@ node scripts/generate-certs.js verify
 </tr>
 </tbody>
 </table>
-<h3 id="test-coverage">Test Coverage</h3>
+<h3 id="test-coverage">Test Coverage<a class="headerlink" href="#test-coverage" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Unit Tests</strong>: 29/31 passing (94%)</li>
 <li><strong>Integration Tests</strong>: 2 skipped (require TLS socket setup)</li>
@@ -393,8 +426,8 @@ node scripts/generate-certs.js verify
 <li><strong>Audit Logging</strong>: 100% coverage</li>
 </ul>
 <hr />
-<h2 id="ready-for-integration">🚀 Ready for Integration</h2>
-<h3 id="server-configuration-example">Server Configuration Example</h3>
+<h2 id="ready-for-integration">🚀 Ready for Integration<a class="headerlink" href="#ready-for-integration" title="Permanent link">&para;</a></h2>
+<h3 id="server-configuration-example">Server Configuration Example<a class="headerlink" href="#server-configuration-example" title="Permanent link">&para;</a></h3>
 <pre><code class="language-javascript">// api/server.js
 import fs from 'fs'
 import fastify from 'fastify'
@@ -421,7 +454,7 @@ await server.register(mtlsPlugin, {
 
 await server.listen({ port: 3000, host: '0.0.0.0' })
 </code></pre>
-<h3 id="endpoint-protection-example">Endpoint Protection Example</h3>
+<h3 id="endpoint-protection-example">Endpoint Protection Example<a class="headerlink" href="#endpoint-protection-example" title="Permanent link">&para;</a></h3>
 <pre><code class="language-javascript">// Protect admin endpoints
 server.get('/api/admin/*', {
   preHandler: server.requireMTLS()
@@ -451,8 +484,8 @@ server.get('/api/status', {
 })
 </code></pre>
 <hr />
-<h2 id="next-steps-phase-2">🎯 Next Steps (Phase 2)</h2>
-<h3 id="immediate-integration-tasks">Immediate Integration Tasks</h3>
+<h2 id="next-steps-phase-2">🎯 Next Steps (Phase 2)<a class="headerlink" href="#next-steps-phase-2" title="Permanent link">&para;</a></h2>
+<h3 id="immediate-integration-tasks">Immediate Integration Tasks<a class="headerlink" href="#immediate-integration-tasks" title="Permanent link">&para;</a></h3>
 <ol>
 <li><strong>Server Registration</strong> (30 mins)</li>
 <li>Configure HTTPS options in <code>api/server.js</code></li>
@@ -491,7 +524,7 @@ server.get('/api/status', {
 <li>Document certificate rotation schedule</li>
 </ol>
 <hr />
-<h2 id="known-limitations">📝 Known Limitations</h2>
+<h2 id="known-limitations">📝 Known Limitations<a class="headerlink" href="#known-limitations" title="Permanent link">&para;</a></h2>
 <ol>
 <li><strong>TLS Socket Simulation</strong>: Integration tests skipped due to Fastify inject() limitations</li>
 <li>Workaround: Manual testing with curl/HTTPS client</li>
@@ -512,8 +545,8 @@ server.get('/api/status', {
 <li>Future: Implement CRL checking in Phase 3</li>
 </ol>
 <hr />
-<h2 id="security-considerations">🔒 Security Considerations</h2>
-<h3 id="implemented">Implemented</h3>
+<h2 id="security-considerations">🔒 Security Considerations<a class="headerlink" href="#security-considerations" title="Permanent link">&para;</a></h2>
+<h3 id="implemented">Implemented<a class="headerlink" href="#implemented" title="Permanent link">&para;</a></h3>
 <ul>
 <li>✅ Multi-stage certificate validation</li>
 <li>✅ Fingerprint pinning for trusted certificates</li>
@@ -524,7 +557,7 @@ server.get('/api/status', {
 <li>✅ Secure certificate storage via secret manager</li>
 <li>✅ Graceful degradation when disabled</li>
 </ul>
-<h3 id="recommended-for-production">Recommended for Production</h3>
+<h3 id="recommended-for-production">Recommended for Production<a class="headerlink" href="#recommended-for-production" title="Permanent link">&para;</a></h3>
 <ul>
 <li>📋 4096-bit CA keys, 2048-bit certificate keys</li>
 <li>📋 365-day maximum validity for client certificates</li>
@@ -535,7 +568,7 @@ server.get('/api/status', {
 <li>📋 Separate CA for each environment (dev, staging, prod)</li>
 </ul>
 <hr />
-<h2 id="documentation-references">📚 Documentation References</h2>
+<h2 id="documentation-references">📚 Documentation References<a class="headerlink" href="#documentation-references" title="Permanent link">&para;</a></h2>
 <ul>
 <li><strong>mTLS Guide</strong>: <code>docs/security/mtls-guide.md</code> (550+ lines)</li>
 <li><strong>Certificate Script</strong>: <code>scripts/generate-certs.js</code> (390 lines)</li>
@@ -543,7 +576,7 @@ server.get('/api/status', {
 <li><strong>Test Suite</strong>: <code>api/tests/mtls.test.js</code> (478 lines)</li>
 </ul>
 <hr />
-<h2 id="completion-checklist">✅ Completion Checklist</h2>
+<h2 id="completion-checklist">✅ Completion Checklist<a class="headerlink" href="#completion-checklist" title="Permanent link">&para;</a></h2>
 <ul>
 <li>[x] Core mTLS middleware implementation</li>
 <li>[x] Certificate extraction and validation</li>
@@ -562,7 +595,7 @@ server.get('/api/status', {
 <li>[ ] Production testing (ready for Phase 2)</li>
 </ul>
 <hr />
-<h2 id="phase-1-summary">🎉 Phase 1 Summary</h2>
+<h2 id="phase-1-summary">🎉 Phase 1 Summary<a class="headerlink" href="#phase-1-summary" title="Permanent link">&para;</a></h2>
 <p>Successfully delivered <strong>complete mTLS core infrastructure</strong> with:
 - Production-ready middleware (385 lines)
 - Automated certificate generation (390 lines)

@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="../../../../../css/theme.css" />
     <link rel="stylesheet" href="../../../../../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../../../../../stylesheets/extra.css" rel="stylesheet" />
     
       <script>
         // Current page data
@@ -43,7 +44,16 @@
                 <li class="toctree-l1"><a class="reference internal" href="../../../../..">Home</a>
                 </li>
               </ul>
-              <p class="caption"><span class="caption-text">Products</span></p>
+              <p class="caption"><span class="caption-text">Start Here</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../ONBOARDING/">Onboarding</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../ARCHITECTURE/">Architecture</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../api-reference/">API Reference Hub</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Product Suite</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../../../../products/">Overview</a>
                   </li>
@@ -66,7 +76,7 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../../../../products/tracking-portal/">Tracking Portal</a>
                   </li>
               </ul>
-              <p class="caption"><span class="caption-text">Platform</span></p>
+              <p class="caption"><span class="caption-text">Platform Services</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../../../../platform/">Overview</a>
                   </li>
@@ -87,12 +97,35 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../../../../platform/bf-warehouse/">Warehouse Service</a>
                   </li>
               </ul>
+              <p class="caption"><span class="caption-text">Capability Catalog</span></p>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../../../">Vision</a>
-                </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../features/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../features/SHIPMENTS/">Shipments</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../features/ADMIN_CONSOLE/">Admin Console</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../features/CONTROL_TOWER/">Control Tower</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../features/IDENTITY/">Identity</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../features/MASTERDATA/">Masterdata</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../features/ORDERS/">Orders</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../features/WAREHOUSE/">Warehouse</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../features/SEARCH/">Search</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../features/FINTECH/">Fintech</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../features/CARRIER_PORTAL/">Carrier Portal</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../features/TRACKING_PORTAL/">Tracking Portal</a>
+                  </li>
               </ul>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../../../../../api-reference/">API Reference</a>
+                <li class="toctree-l1"><a class="reference internal" href="../../../">Vision Archive</a>
                 </li>
               </ul>
       </div>
@@ -123,19 +156,19 @@
 Status: Planned / In Development
 Context: Original BF-INTEGRATION Vision (Pre-Phase 30)</p>
 </blockquote>
-<h1 id="security-headers-implementation">Security Headers Implementation</h1>
-<h2 id="overview">Overview</h2>
+<h1 id="security-headers-implementation">Security Headers Implementation<a class="headerlink" href="#security-headers-implementation" title="Permanent link">&para;</a></h1>
+<h2 id="overview">Overview<a class="headerlink" href="#overview" title="Permanent link">&para;</a></h2>
 <p>This document describes the implementation of HTTP security headers and Content Security Policy (CSP) as part of Security Hardening Phase A.</p>
-<h2 id="implementation-details">Implementation Details</h2>
-<h3 id="plugin-architecture">Plugin Architecture</h3>
+<h2 id="implementation-details">Implementation Details<a class="headerlink" href="#implementation-details" title="Permanent link">&para;</a></h2>
+<h3 id="plugin-architecture">Plugin Architecture<a class="headerlink" href="#plugin-architecture" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>File</strong>: <a href="../../api/lib/securityHeaders.js">api/lib/securityHeaders.js</a></li>
 <li><strong>Type</strong>: Fastify plugin using <code>fastify-plugin</code> wrapper</li>
 <li><strong>Hook</strong>: Uses <code>onSend</code> hook to inject headers into all responses</li>
 <li><strong>Integration</strong>: Registered in <a href="../../api/server.js">api/server.js</a> after cookies, before rate limiting</li>
 </ul>
-<h3 id="security-headers">Security Headers</h3>
-<h4 id="strict-transport-security-hsts">Strict-Transport-Security (HSTS)</h4>
+<h3 id="security-headers">Security Headers<a class="headerlink" href="#security-headers" title="Permanent link">&para;</a></h3>
+<h4 id="strict-transport-security-hsts">Strict-Transport-Security (HSTS)<a class="headerlink" href="#strict-transport-security-hsts" title="Permanent link">&para;</a></h4>
 <ul>
 <li><strong>Purpose</strong>: Force HTTPS connections and prevent SSL stripping attacks</li>
 <li><strong>Default</strong>: Enabled in production only (disabled in development to avoid localhost certificate issues)</li>
@@ -146,41 +179,41 @@ Context: Original BF-INTEGRATION Vision (Pre-Phase 30)</p>
 <li><code>HSTS_IN_DEV=true</code> — enable HSTS in development (default: false)</li>
 <li><strong>Value</strong>: <code>max-age=31536000; includeSubDomains</code></li>
 </ul>
-<h4 id="x-frame-options">X-Frame-Options</h4>
+<h4 id="x-frame-options">X-Frame-Options<a class="headerlink" href="#x-frame-options" title="Permanent link">&para;</a></h4>
 <ul>
 <li><strong>Purpose</strong>: Prevent clickjacking attacks by controlling iframe embedding</li>
 <li><strong>Default</strong>: <code>DENY</code> (cannot be embedded in any iframe)</li>
 <li><strong>Configuration</strong>: <code>X_FRAME_OPTIONS=DENY|SAMEORIGIN|ALLOW-FROM</code></li>
 <li><strong>Value</strong>: <code>DENY</code></li>
 </ul>
-<h4 id="x-content-type-options">X-Content-Type-Options</h4>
+<h4 id="x-content-type-options">X-Content-Type-Options<a class="headerlink" href="#x-content-type-options" title="Permanent link">&para;</a></h4>
 <ul>
 <li><strong>Purpose</strong>: Prevent MIME-sniffing attacks</li>
 <li><strong>Default</strong>: <code>nosniff</code> (always enabled)</li>
 <li><strong>Value</strong>: <code>nosniff</code></li>
 </ul>
-<h4 id="referrer-policy">Referrer-Policy</h4>
+<h4 id="referrer-policy">Referrer-Policy<a class="headerlink" href="#referrer-policy" title="Permanent link">&para;</a></h4>
 <ul>
 <li><strong>Purpose</strong>: Control how much referrer information is sent with requests</li>
 <li><strong>Default</strong>: <code>strict-origin-when-cross-origin</code> (full URL for same-origin, origin only for HTTPS cross-origin)</li>
 <li><strong>Configuration</strong>: <code>REFERRER_POLICY=no-referrer|strict-origin-when-cross-origin|...</code></li>
 <li><strong>Value</strong>: <code>strict-origin-when-cross-origin</code></li>
 </ul>
-<h4 id="permissions-policy">Permissions-Policy</h4>
+<h4 id="permissions-policy">Permissions-Policy<a class="headerlink" href="#permissions-policy" title="Permanent link">&para;</a></h4>
 <ul>
 <li><strong>Purpose</strong>: Restrict browser features (camera, microphone, geolocation, etc.)</li>
 <li><strong>Default</strong>: All sensitive features disabled</li>
 <li><strong>Value</strong>: <code>camera=(), microphone=(), geolocation=(), payment=(), usb=(), interest-cohort=()</code></li>
 <li><strong>Note</strong>: <code>interest-cohort=()</code> blocks Google FLoC tracking</li>
 </ul>
-<h4 id="x-xss-protection">X-XSS-Protection</h4>
+<h4 id="x-xss-protection">X-XSS-Protection<a class="headerlink" href="#x-xss-protection" title="Permanent link">&para;</a></h4>
 <ul>
 <li><strong>Purpose</strong>: Legacy XSS filter for older browsers (modern browsers rely on CSP)</li>
 <li><strong>Default</strong>: <code>1; mode=block</code> (enable XSS filter and block page if attack detected)</li>
 <li><strong>Value</strong>: <code>1; mode=block</code></li>
 </ul>
-<h3 id="content-security-policy-csp">Content Security Policy (CSP)</h3>
-<h4 id="default-policy">Default Policy</h4>
+<h3 id="content-security-policy-csp">Content Security Policy (CSP)<a class="headerlink" href="#content-security-policy-csp" title="Permanent link">&para;</a></h3>
+<h4 id="default-policy">Default Policy<a class="headerlink" href="#default-policy" title="Permanent link">&para;</a></h4>
 <pre><code>default-src 'self';
 script-src 'self';
 style-src 'self' 'unsafe-inline';
@@ -191,7 +224,7 @@ object-src 'none';
 frame-ancestors 'none';
 upgrade-insecure-requests
 </code></pre>
-<h4 id="policy-breakdown">Policy Breakdown</h4>
+<h4 id="policy-breakdown">Policy Breakdown<a class="headerlink" href="#policy-breakdown" title="Permanent link">&para;</a></h4>
 <ul>
 <li><strong>default-src 'self'</strong>: Only load resources from same origin (baseline restriction)</li>
 <li><strong>script-src 'self'</strong>: Only execute scripts from same origin (prevents XSS)</li>
@@ -203,7 +236,7 @@ upgrade-insecure-requests
 <li><strong>frame-ancestors 'none'</strong>: Prevent embedding in iframes (equivalent to X-Frame-Options: DENY)</li>
 <li><strong>upgrade-insecure-requests</strong>: Automatically upgrade HTTP to HTTPS</li>
 </ul>
-<h4 id="environment-behavior">Environment Behavior</h4>
+<h4 id="environment-behavior">Environment Behavior<a class="headerlink" href="#environment-behavior" title="Permanent link">&para;</a></h4>
 <ul>
 <li><strong>Development</strong>: CSP in <strong>report-only</strong> mode by default (logs violations to console without blocking)</li>
 <li>Override with <code>CSP_ENFORCE=true</code> to enforce CSP in development</li>
@@ -211,14 +244,14 @@ upgrade-insecure-requests
 <li>Override with <code>CSP_REPORT_ONLY=true</code> for report-only mode in production</li>
 <li><strong>Disable</strong>: Set <code>DISABLE_CSP=true</code> to disable CSP entirely (not recommended)</li>
 </ul>
-<h4 id="environment-variables">Environment Variables</h4>
+<h4 id="environment-variables">Environment Variables<a class="headerlink" href="#environment-variables" title="Permanent link">&para;</a></h4>
 <ul>
 <li><code>DISABLE_CSP=true</code> — disable CSP entirely</li>
 <li><code>CSP_REPORT_ONLY=true</code> — force report-only mode (even in production)</li>
 <li><code>CSP_ENFORCE=true</code> — force enforce mode (even in development)</li>
 </ul>
-<h3 id="configuration">Configuration</h3>
-<h4 id="server-integration">Server Integration</h4>
+<h3 id="configuration">Configuration<a class="headerlink" href="#configuration" title="Permanent link">&para;</a></h3>
+<h4 id="server-integration">Server Integration<a class="headerlink" href="#server-integration" title="Permanent link">&para;</a></h4>
 <pre><code class="language-javascript">// api/server.js
 import securityHeaders from './lib/securityHeaders.js'
 
@@ -242,7 +275,7 @@ app.register(securityHeaders, {
   skipRoutes: []
 })
 </code></pre>
-<h4 id="plugin-options">Plugin Options</h4>
+<h4 id="plugin-options">Plugin Options<a class="headerlink" href="#plugin-options" title="Permanent link">&para;</a></h4>
 <ul>
 <li><code>hsts</code> (boolean): Enable/disable HSTS</li>
 <li><code>hstsMaxAge</code> (number): HSTS max-age in seconds</li>
@@ -257,8 +290,8 @@ app.register(securityHeaders, {
 <li><code>permissionsPolicy</code> (object): Custom Permissions-Policy</li>
 <li><code>skipRoutes</code> (array): Array of URL patterns to skip (for health checks, etc.)</li>
 </ul>
-<h3 id="testing">Testing</h3>
-<h4 id="test-coverage">Test Coverage</h4>
+<h3 id="testing">Testing<a class="headerlink" href="#testing" title="Permanent link">&para;</a></h3>
+<h4 id="test-coverage">Test Coverage<a class="headerlink" href="#test-coverage" title="Permanent link">&para;</a></h4>
 <ul>
 <li><strong>File</strong>: <a href="../../api/tests/securityHeaders.test.js">api/tests/securityHeaders.test.js</a></li>
 <li><strong>Total Tests</strong>: 16</li>
@@ -269,15 +302,15 @@ app.register(securityHeaders, {
 <li>HSTS Behavior (disabled in dev, enabled in production with correct directives)</li>
 <li>Environment Variable Overrides (DISABLE_CSP, DISABLE_HSTS, X_FRAME_OPTIONS)</li>
 </ul>
-<h4 id="running-tests">Running Tests</h4>
+<h4 id="running-tests">Running Tests<a class="headerlink" href="#running-tests" title="Permanent link">&para;</a></h4>
 <pre><code class="language-powershell"># Run security headers tests only
 pnpm test api/tests/securityHeaders.test.js
 
 # Run all tests
 pnpm test
 </code></pre>
-<h3 id="security-scanner-compliance">Security Scanner Compliance</h3>
-<h4 id="owasp-recommendations">OWASP Recommendations</h4>
+<h3 id="security-scanner-compliance">Security Scanner Compliance<a class="headerlink" href="#security-scanner-compliance" title="Permanent link">&para;</a></h3>
+<h4 id="owasp-recommendations">OWASP Recommendations<a class="headerlink" href="#owasp-recommendations" title="Permanent link">&para;</a></h4>
 <p>✅ Strict-Transport-Security (HSTS)<br />
 ✅ X-Frame-Options (clickjacking protection)<br />
 ✅ X-Content-Type-Options (MIME-sniffing protection)<br />
@@ -285,18 +318,18 @@ pnpm test
 ✅ Permissions-Policy (feature restriction)<br />
 ✅ Content-Security-Policy (XSS prevention)<br />
 ✅ X-XSS-Protection (legacy browser support)  </p>
-<h4 id="expected-scanner-score">Expected Scanner Score</h4>
+<h4 id="expected-scanner-score">Expected Scanner Score<a class="headerlink" href="#expected-scanner-score" title="Permanent link">&para;</a></h4>
 <ul>
 <li><strong>securityheaders.com</strong>: A+ (all recommended headers present)</li>
 <li><strong>Mozilla Observatory</strong>: A+ (comprehensive header coverage)</li>
 </ul>
-<h3 id="development-workflow">Development Workflow</h3>
-<h4 id="local-development">Local Development</h4>
+<h3 id="development-workflow">Development Workflow<a class="headerlink" href="#development-workflow" title="Permanent link">&para;</a></h3>
+<h4 id="local-development">Local Development<a class="headerlink" href="#local-development" title="Permanent link">&para;</a></h4>
 <p>By default, security headers work seamlessly in development:
 - HSTS is disabled (no certificate warnings on localhost)
 - CSP is in report-only mode (violations logged to console, not blocked)
 - All other headers are active for realistic testing</p>
-<h4 id="testing-security-headers-locally">Testing Security Headers Locally</h4>
+<h4 id="testing-security-headers-locally">Testing Security Headers Locally<a class="headerlink" href="#testing-security-headers-locally" title="Permanent link">&para;</a></h4>
 <pre><code class="language-powershell"># Start server
 pnpm dev
 
@@ -311,7 +344,7 @@ curl -I http://localhost:3000/
 # Content-Security-Policy-Report-Only: default-src 'self'; ...
 # (no Strict-Transport-Security in dev by default)
 </code></pre>
-<h4 id="production-testing">Production Testing</h4>
+<h4 id="production-testing">Production Testing<a class="headerlink" href="#production-testing" title="Permanent link">&para;</a></h4>
 <pre><code class="language-powershell"># Set production environment
 $env:NODE_ENV = 'production'
 pnpm start
@@ -327,13 +360,13 @@ curl -I http://localhost:3000/
 # Permissions-Policy: camera=(), microphone=(), ...
 # Content-Security-Policy: default-src 'self'; ...
 </code></pre>
-<h3 id="csp-debugging">CSP Debugging</h3>
-<h4 id="console-output">Console Output</h4>
+<h3 id="csp-debugging">CSP Debugging<a class="headerlink" href="#csp-debugging" title="Permanent link">&para;</a></h3>
+<h4 id="console-output">Console Output<a class="headerlink" href="#console-output" title="Permanent link">&para;</a></h4>
 <p>When CSP is in report-only mode (development), violations are logged to the browser console:</p>
 <pre><code>[Report Only] Refused to load the script 'https://evil.com/script.js' because it violates 
 the following Content Security Policy directive: &quot;script-src 'self'&quot;.
 </code></pre>
-<h4 id="common-violations">Common Violations</h4>
+<h4 id="common-violations">Common Violations<a class="headerlink" href="#common-violations" title="Permanent link">&para;</a></h4>
 <ol>
 <li><strong>Inline Scripts</strong>: <code>script-src 'self'</code> blocks <code>&lt;script&gt;alert('xss')&lt;/script&gt;</code></li>
 <li>Solution: Move scripts to external files or add nonce/hash (Phase 2)</li>
@@ -342,8 +375,8 @@ the following Content Security Policy directive: &quot;script-src 'self'&quot;.
 <li><strong>Inline Styles</strong>: Currently allowed via <code>'unsafe-inline'</code> for compatibility</li>
 <li>Solution: Remove <code>'unsafe-inline'</code> and use nonce/hash in production (Phase 2)</li>
 </ol>
-<h3 id="future-enhancements-phase-2">Future Enhancements (Phase 2)</h3>
-<h4 id="csp-nonce-support-implemented">CSP Nonce Support ✅ IMPLEMENTED</h4>
+<h3 id="future-enhancements-phase-2">Future Enhancements (Phase 2)<a class="headerlink" href="#future-enhancements-phase-2" title="Permanent link">&para;</a></h3>
+<h4 id="csp-nonce-support-implemented">CSP Nonce Support ✅ IMPLEMENTED<a class="headerlink" href="#csp-nonce-support-implemented" title="Permanent link">&para;</a></h4>
 <ul>
 <li><strong>Status</strong>: Complete</li>
 <li><strong>Feature</strong>: Generate unique cryptographic nonces per request for inline scripts/styles</li>
@@ -354,7 +387,7 @@ the following Content Security Policy directive: &quot;script-src 'self'&quot;.
 <li>Enabled with <code>CSP_USE_NONCES=true</code> environment variable</li>
 <li><strong>Benefits</strong>: Allows safe inline scripts/styles without <code>'unsafe-inline'</code> in production</li>
 </ul>
-<h4 id="csp-violation-reporting-implemented">CSP Violation Reporting ✅ IMPLEMENTED</h4>
+<h4 id="csp-violation-reporting-implemented">CSP Violation Reporting ✅ IMPLEMENTED<a class="headerlink" href="#csp-violation-reporting-implemented" title="Permanent link">&para;</a></h4>
 <ul>
 <li><strong>Status</strong>: Complete</li>
 <li><strong>Endpoint</strong>: <code>POST /api/csp-report</code></li>
@@ -367,7 +400,7 @@ the following Content Security Policy directive: &quot;script-src 'self'&quot;.
 <li><strong>Audit Integration</strong>: All violations logged with <code>event: 'csp.violation'</code>, actor, severity, metadata</li>
 <li><strong>Future</strong>: Add alerting for critical violations in production (currently stubbed)</li>
 </ul>
-<h4 id="production-csp-hardening-implemented">Production CSP Hardening ✅ IMPLEMENTED</h4>
+<h4 id="production-csp-hardening-implemented">Production CSP Hardening ✅ IMPLEMENTED<a class="headerlink" href="#production-csp-hardening-implemented" title="Permanent link">&para;</a></h4>
 <ul>
 <li><strong>Status</strong>: Complete</li>
 <li><strong>Production CSP Policy</strong> (<code>PRODUCTION_CSP</code>):</li>
@@ -378,7 +411,7 @@ the following Content Security Policy directive: &quot;script-src 'self'&quot;.
 <li>Automatically used when <code>NODE_ENV=production</code> (override with <code>USE_PRODUCTION_CSP=false</code>)</li>
 <li><strong>Benefits</strong>: Maximum protection against XSS, clickjacking, and code injection attacks</li>
 </ul>
-<h4 id="per-pageroute-csp-implemented">Per-Page/Route CSP ✅ IMPLEMENTED</h4>
+<h4 id="per-pageroute-csp-implemented">Per-Page/Route CSP ✅ IMPLEMENTED<a class="headerlink" href="#per-pageroute-csp-implemented" title="Permanent link">&para;</a></h4>
 <ul>
 <li><strong>Status</strong>: Complete</li>
 <li><strong>Implementation</strong>:</li>
@@ -399,15 +432,15 @@ the following Content Security Policy directive: &quot;script-src 'self'&quot;.
   }</code></li>
 <li><strong>Usage</strong>: Automatically applied based on route, no code changes needed</li>
 </ul>
-<h3 id="environment-variables-complete-list">Environment Variables (Complete List)</h3>
-<h4 id="hsts-configuration">HSTS Configuration</h4>
+<h3 id="environment-variables-complete-list">Environment Variables (Complete List)<a class="headerlink" href="#environment-variables-complete-list" title="Permanent link">&para;</a></h3>
+<h4 id="hsts-configuration">HSTS Configuration<a class="headerlink" href="#hsts-configuration" title="Permanent link">&para;</a></h4>
 <ul>
 <li><code>DISABLE_HSTS</code> — disable HSTS (default: false)</li>
 <li><code>HSTS_MAX_AGE</code> — HSTS max-age in seconds (default: 31536000 = 1 year)</li>
 <li><code>HSTS_INCLUDE_SUBDOMAINS</code> — include subdomains (default: true)</li>
 <li><code>HSTS_IN_DEV</code> — enable HSTS in development (default: false)</li>
 </ul>
-<h4 id="csp-configuration">CSP Configuration</h4>
+<h4 id="csp-configuration">CSP Configuration<a class="headerlink" href="#csp-configuration" title="Permanent link">&para;</a></h4>
 <ul>
 <li><code>DISABLE_CSP</code> — disable CSP entirely (default: false)</li>
 <li><code>CSP_REPORT_ONLY</code> — CSP report-only mode (default: true in dev, false in prod)</li>
@@ -416,13 +449,13 @@ the following Content Security Policy directive: &quot;script-src 'self'&quot;.
 <li><code>USE_PRODUCTION_CSP</code> — use hardened production CSP (default: true in production)</li>
 <li><code>CSP_REPORT_URI</code> — CSP violation report endpoint (default: <code>/api/csp-report</code>)</li>
 </ul>
-<h4 id="other-headers">Other Headers</h4>
+<h4 id="other-headers">Other Headers<a class="headerlink" href="#other-headers" title="Permanent link">&para;</a></h4>
 <ul>
 <li><code>X_FRAME_OPTIONS</code> — X-Frame-Options value (default: DENY)</li>
 <li><code>REFERRER_POLICY</code> — Referrer-Policy value (default: strict-origin-when-cross-origin)</li>
 </ul>
-<h3 id="advanced-usage">Advanced Usage</h3>
-<h4 id="using-nonces-in-html-templates">Using Nonces in HTML Templates</h4>
+<h3 id="advanced-usage">Advanced Usage<a class="headerlink" href="#advanced-usage" title="Permanent link">&para;</a></h3>
+<h4 id="using-nonces-in-html-templates">Using Nonces in HTML Templates<a class="headerlink" href="#using-nonces-in-html-templates" title="Permanent link">&para;</a></h4>
 <pre><code class="language-javascript">// In route handler
 app.get('/secure-page', (request, reply) =&gt; {
   const nonce = request.cspNonce  // Available when CSP_USE_NONCES=true
@@ -442,7 +475,7 @@ app.get('/secure-page', (request, reply) =&gt; {
   `)
 })
 </code></pre>
-<h4 id="custom-route-specific-csp">Custom Route-Specific CSP</h4>
+<h4 id="custom-route-specific-csp">Custom Route-Specific CSP<a class="headerlink" href="#custom-route-specific-csp" title="Permanent link">&para;</a></h4>
 <pre><code class="language-javascript">// In server.js
 app.register(securityHeaders, {
   // ... other config ...
@@ -460,7 +493,7 @@ app.register(securityHeaders, {
   }
 })
 </code></pre>
-<h4 id="csp-violation-monitoring">CSP Violation Monitoring</h4>
+<h4 id="csp-violation-monitoring">CSP Violation Monitoring<a class="headerlink" href="#csp-violation-monitoring" title="Permanent link">&para;</a></h4>
 <pre><code class="language-javascript">// Violations are automatically logged to audit system
 // Query violations:
 const violations = await prisma.auditLog.findMany({
@@ -473,27 +506,27 @@ const criticalViolations = violations.filter(v =&gt;
   v.meta.severity === 'critical'
 )
 </code></pre>
-<h3 id="troubleshooting">Troubleshooting</h3>
-<h4 id="headers-not-applied">Headers Not Applied</h4>
+<h3 id="troubleshooting">Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permanent link">&para;</a></h3>
+<h4 id="headers-not-applied">Headers Not Applied<a class="headerlink" href="#headers-not-applied" title="Permanent link">&para;</a></h4>
 <ol>
 <li>Check that security headers plugin is registered in server.js</li>
 <li>Verify route is not in <code>skipRoutes</code> array</li>
 <li>Check for conflicting plugins that might override headers</li>
 </ol>
-<h4 id="hsts-issues-in-development">HSTS Issues in Development</h4>
+<h4 id="hsts-issues-in-development">HSTS Issues in Development<a class="headerlink" href="#hsts-issues-in-development" title="Permanent link">&para;</a></h4>
 <ul>
 <li>HSTS is disabled in development by default (no localhost certificate issues)</li>
 <li>If you need HSTS in dev, set <code>HSTS_IN_DEV=true</code></li>
 <li>Clear browser HSTS cache if switching between dev/prod: <code>chrome://net-internals/#hsts</code></li>
 </ul>
-<h4 id="csp-blocking-resources">CSP Blocking Resources</h4>
+<h4 id="csp-blocking-resources">CSP Blocking Resources<a class="headerlink" href="#csp-blocking-resources" title="Permanent link">&para;</a></h4>
 <ol>
 <li>Check browser console for CSP violations</li>
 <li>If in production, temporarily enable report-only mode: <code>CSP_REPORT_ONLY=true</code></li>
 <li>Update CSP policy to allow required resources</li>
 <li>Test with <code>CSP_ENFORCE=true</code> in development before deploying</li>
 </ol>
-<h3 id="references">References</h3>
+<h3 id="references">References<a class="headerlink" href="#references" title="Permanent link">&para;</a></h3>
 <ul>
 <li><a href="https://owasp.org/www-project-secure-headers/">OWASP Secure Headers Project</a></li>
 <li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP">MDN Content Security Policy</a></li>

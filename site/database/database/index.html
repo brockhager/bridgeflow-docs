@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="../../css/theme.css" />
     <link rel="stylesheet" href="../../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../../stylesheets/extra.css" rel="stylesheet" />
     
       <script>
         // Current page data
@@ -43,7 +44,16 @@
                 <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
                 </li>
               </ul>
-              <p class="caption"><span class="caption-text">Products</span></p>
+              <p class="caption"><span class="caption-text">Start Here</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../ONBOARDING/">Onboarding</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../ARCHITECTURE/">Architecture</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../api-reference/">API Reference Hub</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Product Suite</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../products/">Overview</a>
                   </li>
@@ -66,7 +76,7 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../products/tracking-portal/">Tracking Portal</a>
                   </li>
               </ul>
-              <p class="caption"><span class="caption-text">Platform</span></p>
+              <p class="caption"><span class="caption-text">Platform Services</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../platform/">Overview</a>
                   </li>
@@ -87,12 +97,35 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../platform/bf-warehouse/">Warehouse Service</a>
                   </li>
               </ul>
+              <p class="caption"><span class="caption-text">Capability Catalog</span></p>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../../vision/bf-integration/">Vision</a>
-                </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/SHIPMENTS/">Shipments</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/ADMIN_CONSOLE/">Admin Console</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/CONTROL_TOWER/">Control Tower</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/IDENTITY/">Identity</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/MASTERDATA/">Masterdata</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/ORDERS/">Orders</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/WAREHOUSE/">Warehouse</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/SEARCH/">Search</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/FINTECH/">Fintech</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/CARRIER_PORTAL/">Carrier Portal</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/TRACKING_PORTAL/">Tracking Portal</a>
+                  </li>
               </ul>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../../api-reference/">API Reference</a>
+                <li class="toctree-l1"><a class="reference internal" href="../../vision/bf-integration/">Vision Archive</a>
                 </li>
               </ul>
       </div>
@@ -118,17 +151,17 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <h1 id="database-prisma-local-developer-guide-windows-powershell">Database &amp; Prisma — Local Developer Guide (Windows PowerShell)</h1>
+                <h1 id="database-prisma-local-developer-guide-windows-powershell">Database &amp; Prisma — Local Developer Guide (Windows PowerShell)<a class="headerlink" href="#database-prisma-local-developer-guide-windows-powershell" title="Permanent link">&para;</a></h1>
 <p>This document describes the current state of our databases and how to work with them locally and in CI.</p>
 <hr />
-<h2 id="quick-overview">Quick overview ✅</h2>
+<h2 id="quick-overview">Quick overview ✅<a class="headerlink" href="#quick-overview" title="Permanent link">&para;</a></h2>
 <ul>
 <li><strong>Production database</strong>: PostgreSQL (multi‑schema). We use <em>two</em> schemas: <strong>public</strong> (app data) and <strong>admin</strong> (admin users / audit logs).</li>
 <li><strong>Prisma</strong>: schema in <code>prisma/schema.prisma</code>. Generator uses the <code>multiSchema</code> preview feature and the datasource lists both <code>admin</code> and <code>public</code> schemas.</li>
 <li><strong>Testing</strong>: Integration tests that require a real database use a temporary <strong>SQLite</strong> database created by <code>scripts/setup-sqlite-test-db.js</code> (minimal schema + <code>prisma db push</code>). Unit tests default to a mocked DB (<code>USE_MOCK_DB=true</code>).</li>
 </ul>
 <hr />
-<h2 id="production-local-postgres-recommended-dev-flow">Production / Local Postgres (recommended dev flow) 🔧</h2>
+<h2 id="production-local-postgres-recommended-dev-flow">Production / Local Postgres (recommended dev flow) 🔧<a class="headerlink" href="#production-local-postgres-recommended-dev-flow" title="Permanent link">&para;</a></h2>
 <p>Prerequisites
 - Node.js (LTS)
 - pnpm
@@ -150,7 +183,7 @@ pnpm run db:seed            # runs seed script to create demo entities/resources
 - If <code>pnpm run db:migrate</code> fails: verify <code>DATABASE_URL</code>, DB connectivity, and that the DB user has create/migration privileges.
 - If a new migration fails, run <code>pnpm run prisma:generate</code> locally after editing <code>prisma/schema.prisma</code> and test migrations against a disposable DB first.</p>
 <hr />
-<h2 id="sqlite-test-harness-ci-local-integration">SQLite test harness (CI &amp; local integration) 🧪</h2>
+<h2 id="sqlite-test-harness-ci-local-integration">SQLite test harness (CI &amp; local integration) 🧪<a class="headerlink" href="#sqlite-test-harness-ci-local-integration" title="Permanent link">&para;</a></h2>
 <p>For quick integration tests in CI (and locally) we use a minimal SQLite schema because the full Postgres schema relies on features not supported by SQLite (multi‑schema, some enums, list types, etc.). The helper script <code>scripts/setup-sqlite-test-db.js</code>:
 - Writes a small SQLite‑compatible Prisma schema (Organization, User, UserOrganization, TradingPartner)
 - Runs <code>prisma db push --schema &lt;tmp_schema&gt; --accept-data-loss</code> to create the DB file under <code>.tmp/</code> (e.g., <code>.tmp/ethereal-test.db</code>)
@@ -169,27 +202,27 @@ pnpm exec vitest run test/integration/tradingPartners.persistence.test.js
 - When using SQLite, the Prisma <code>DATABASE_URL</code> must begin with the <code>file:</code> protocol (for example: <code>file:.tmp/ethereal-test.db</code>). The helper script prints both PowerShell and POSIX export commands for convenience.
 - CI runs a dedicated <code>sqlite-integration</code> job that sets <code>RUN_SQLITE_INTEGRATION=true</code> and uses <code>node scripts/setup-sqlite-test-db.js</code> to prepare the DB before running the tests.</p>
 <hr />
-<h2 id="test-flags-expectations">Test flags &amp; expectations 🧩</h2>
+<h2 id="test-flags-expectations">Test flags &amp; expectations 🧩<a class="headerlink" href="#test-flags-expectations" title="Permanent link">&para;</a></h2>
 <ul>
 <li>By default <code>pnpm test</code> uses <code>USE_MOCK_DB=true</code> (see <code>package.json</code>) to keep unit tests fast and deterministic.</li>
 <li>Integration tests that exercise the real Prisma client must opt in via <code>RUN_SQLITE_INTEGRATION=true</code> and (internally) the tests set <code>USE_MOCK_DB=false</code>.</li>
 <li>mTLS tests are run separately (<code>pnpm run test:mtls</code>) because they require certs &amp; special setup.</li>
 </ul>
 <hr />
-<h2 id="admin-schema-notes">Admin schema notes 🔐</h2>
+<h2 id="admin-schema-notes">Admin schema notes 🔐<a class="headerlink" href="#admin-schema-notes" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Admin models (e.g., <code>AdminUser</code>, <code>AdminAuditLog</code>) live in the <code>admin</code> schema — they are defined in <code>prisma/schema.prisma</code> with <code>@@schema("admin")</code>.</li>
 <li>Keep admin models minimal and ensure migrations include both <code>admin</code> and <code>public</code> schema changes.</li>
 </ul>
 <hr />
-<h2 id="good-practices-reminders">Good practices &amp; reminders 💡</h2>
+<h2 id="good-practices-reminders">Good practices &amp; reminders 💡<a class="headerlink" href="#good-practices-reminders" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Always run <code>pnpm run prisma:generate</code> after changing <code>prisma/schema.prisma</code>.</li>
 <li>Use a disposable DB when testing migrations locally (e.g., Docker Postgres or SQLite push scripts) before applying to shared/staging databases.</li>
 <li>Do not commit real credentials — use <code>.env</code> and <code>.env.example</code> to document variables.</li>
 </ul>
 <hr />
-<h2 id="useful-file-references">Useful file references 🔗</h2>
+<h2 id="useful-file-references">Useful file references 🔗<a class="headerlink" href="#useful-file-references" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Prisma schema: <code>prisma/schema.prisma</code></li>
 <li>SQLite integration helper: <code>scripts/setup-sqlite-test-db.js</code></li>

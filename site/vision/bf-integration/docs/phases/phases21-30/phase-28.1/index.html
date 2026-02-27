@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="../../../../../../css/theme.css" />
     <link rel="stylesheet" href="../../../../../../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../../../../../../stylesheets/extra.css" rel="stylesheet" />
     
       <script>
         // Current page data
@@ -43,7 +44,16 @@
                 <li class="toctree-l1"><a class="reference internal" href="../../../../../..">Home</a>
                 </li>
               </ul>
-              <p class="caption"><span class="caption-text">Products</span></p>
+              <p class="caption"><span class="caption-text">Start Here</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../ONBOARDING/">Onboarding</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../ARCHITECTURE/">Architecture</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../api-reference/">API Reference Hub</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Product Suite</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../../../../../products/">Overview</a>
                   </li>
@@ -66,7 +76,7 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../../../../../products/tracking-portal/">Tracking Portal</a>
                   </li>
               </ul>
-              <p class="caption"><span class="caption-text">Platform</span></p>
+              <p class="caption"><span class="caption-text">Platform Services</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../../../../../platform/">Overview</a>
                   </li>
@@ -87,12 +97,35 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../../../../../platform/bf-warehouse/">Warehouse Service</a>
                   </li>
               </ul>
+              <p class="caption"><span class="caption-text">Capability Catalog</span></p>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../../../../">Vision</a>
-                </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/SHIPMENTS/">Shipments</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/ADMIN_CONSOLE/">Admin Console</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/CONTROL_TOWER/">Control Tower</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/IDENTITY/">Identity</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/MASTERDATA/">Masterdata</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/ORDERS/">Orders</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/WAREHOUSE/">Warehouse</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/SEARCH/">Search</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/FINTECH/">Fintech</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/CARRIER_PORTAL/">Carrier Portal</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/TRACKING_PORTAL/">Tracking Portal</a>
+                  </li>
               </ul>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../../../../../../api-reference/">API Reference</a>
+                <li class="toctree-l1"><a class="reference internal" href="../../../../">Vision Archive</a>
                 </li>
               </ul>
       </div>
@@ -123,21 +156,21 @@
 Status: Planned / In Development
 Context: Original BF-INTEGRATION Vision (Pre-Phase 30)</p>
 </blockquote>
-<h1 id="phase-281-admin-ux-polish">Phase 28.1: Admin UX Polish</h1>
+<h1 id="phase-281-admin-ux-polish">Phase 28.1: Admin UX Polish<a class="headerlink" href="#phase-281-admin-ux-polish" title="Permanent link">&para;</a></h1>
 <p><strong>Status</strong>: ✅ Complete<br />
 <strong>Date</strong>: January 8, 2026<br />
 <strong>Effort</strong>: 2-3 hours<br />
 <strong>Priority</strong>: High (user-facing clarity)</p>
-<h2 id="objective">🎯 Objective</h2>
+<h2 id="objective">🎯 Objective<a class="headerlink" href="#objective" title="Permanent link">&para;</a></h2>
 <p>Resolve the 4 remaining UX gaps to ensure the admin interface is intuitive, consistent, and self-explanatory for bf_employees.</p>
-<h2 id="tasks-completed">📋 Tasks Completed</h2>
-<h3 id="task-1-fix-tenet-count-mismatch">✅ Task 1: Fix Tenet Count Mismatch</h3>
+<h2 id="tasks-completed">📋 Tasks Completed<a class="headerlink" href="#tasks-completed" title="Permanent link">&para;</a></h2>
+<h3 id="task-1-fix-tenet-count-mismatch">✅ Task 1: Fix Tenet Count Mismatch<a class="headerlink" href="#task-1-fix-tenet-count-mismatch" title="Permanent link">&para;</a></h3>
 <p><strong>Issue</strong>: Dashboard showed 12 tenets, Tenet list showed 11<br />
 <strong>Root Cause</strong>: Dashboard used hardcoded stats while Tenet list used live API data<br />
 <strong>Solution</strong>: Updated Dashboard to fetch real-time stats from <code>/admin-api/tenets/stats</code><br />
 <strong>Result</strong>: Dashboard and Tenet list now show identical counts<br />
 <strong>Files Modified</strong>: <code>admin-bridgeflow/src/pages/Dashboard.jsx</code></p>
-<h3 id="task-2-add-tp-list-to-tenet-detail-page">✅ Task 2: Add TP List to Tenet Detail Page</h3>
+<h3 id="task-2-add-tp-list-to-tenet-detail-page">✅ Task 2: Add TP List to Tenet Detail Page<a class="headerlink" href="#task-2-add-tp-list-to-tenet-detail-page" title="Permanent link">&para;</a></h3>
 <p><strong>Issue</strong>: Tenet page didn't show associated Trading Partners<br />
 <strong>Solution</strong>: Already implemented in <code>TenetDetail.jsx</code><br />
 <strong>Features</strong>:
@@ -147,7 +180,7 @@ Context: Original BF-INTEGRATION Vision (Pre-Phase 30)</p>
 - "View Details" and "Edit" actions for each TP
 <strong>Result</strong>: Seamless TP → Tenet workflow<br />
 <strong>Files Modified</strong>: <code>admin-bridgeflow/src/pages/TenetDetail.jsx</code></p>
-<h3 id="task-3-enable-tp-creation-from-tenet-page">✅ Task 3: Enable TP Creation from Tenet Page</h3>
+<h3 id="task-3-enable-tp-creation-from-tenet-page">✅ Task 3: Enable TP Creation from Tenet Page<a class="headerlink" href="#task-3-enable-tp-creation-from-tenet-page" title="Permanent link">&para;</a></h3>
 <p><strong>Issue</strong>: No way to create a TP while viewing a tenet<br />
 <strong>Solution</strong>: Already implemented with pre-filled tenetId<br />
 <strong>Features</strong>:
@@ -157,7 +190,7 @@ Context: Original BF-INTEGRATION Vision (Pre-Phase 30)</p>
 - Form validation and error handling
 <strong>Result</strong>: Streamlined TP creation workflow<br />
 <strong>Files Modified</strong>: <code>admin-bridgeflow/src/pages/TenetDetail.jsx</code></p>
-<h3 id="task-4-clarify-org-vs-tenet-with-tooltips">✅ Task 4: Clarify Org vs Tenet with Tooltips</h3>
+<h3 id="task-4-clarify-org-vs-tenet-with-tooltips">✅ Task 4: Clarify Org vs Tenet with Tooltips<a class="headerlink" href="#task-4-clarify-org-vs-tenet-with-tooltips" title="Permanent link">&para;</a></h3>
 <p><strong>Issue</strong>: Conceptual confusion between Organizations and Tenets<br />
 <strong>Solution</strong>: Added helpful tooltips across key UI elements<br />
 <strong>Implementation</strong>:
@@ -175,44 +208,44 @@ Context: Original BF-INTEGRATION Vision (Pre-Phase 30)</p>
 - <code>admin-bridgeflow/src/pages/TenetProfiles.jsx</code>
 - <code>admin-bridgeflow/src/pages/Packages.jsx</code>
 - <code>web/src/routes/packages.js</code></p>
-<h2 id="uiux-improvements">🎨 UI/UX Improvements</h2>
-<h3 id="visual-clarity">Visual Clarity</h3>
+<h2 id="uiux-improvements">🎨 UI/UX Improvements<a class="headerlink" href="#uiux-improvements" title="Permanent link">&para;</a></h2>
+<h3 id="visual-clarity">Visual Clarity<a class="headerlink" href="#visual-clarity" title="Permanent link">&para;</a></h3>
 <ul>
 <li>✅ Info icons with hover tooltips in all major headers</li>
 <li>✅ Consistent tooltip styling across admin and main app</li>
 <li>✅ Clear visual distinction between concepts</li>
 <li>✅ Professional tooltip design with arrows and shadows</li>
 </ul>
-<h3 id="data-consistency">Data Consistency</h3>
+<h3 id="data-consistency">Data Consistency<a class="headerlink" href="#data-consistency" title="Permanent link">&para;</a></h3>
 <ul>
 <li>✅ Real-time stats synchronization</li>
 <li>✅ Accurate count displays</li>
 <li>✅ Loading states for async operations</li>
 <li>✅ Error handling and fallbacks</li>
 </ul>
-<h3 id="workflow-integration">Workflow Integration</h3>
+<h3 id="workflow-integration">Workflow Integration<a class="headerlink" href="#workflow-integration" title="Permanent link">&para;</a></h3>
 <ul>
 <li>✅ Seamless navigation between entities</li>
 <li>✅ Pre-filled forms for better UX</li>
 <li>✅ Contextual actions (e.g., "Add TP" from Tenet page)</li>
 <li>✅ Intuitive user flows</li>
 </ul>
-<h2 id="before-vs-after">📊 Before vs After</h2>
-<h3 id="before">Before</h3>
+<h2 id="before-vs-after">📊 Before vs After<a class="headerlink" href="#before-vs-after" title="Permanent link">&para;</a></h2>
+<h3 id="before">Before<a class="headerlink" href="#before" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Confusing terminology</strong>: Users unclear about Org vs Tenet vs Package</li>
 <li><strong>Inconsistent data</strong>: Dashboard showed 12 tenets, list showed 11</li>
 <li><strong>Disconnected workflows</strong>: Had to navigate away to create TPs</li>
 <li><strong>No guidance</strong>: No explanation of concepts</li>
 </ul>
-<h3 id="after">After</h3>
+<h3 id="after">After<a class="headerlink" href="#after" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Clear concepts</strong>: Tooltips explain Org/Tenet/Package differences</li>
 <li><strong>Consistent data</strong>: All counts are accurate and synchronized</li>
 <li><strong>Seamless workflows</strong>: Create TPs directly from Tenet pages</li>
 <li><strong>Self-explanatory</strong>: Tooltips provide instant clarification</li>
 </ul>
-<h2 id="validation-checklist">🧪 Validation Checklist</h2>
+<h2 id="validation-checklist">🧪 Validation Checklist<a class="headerlink" href="#validation-checklist" title="Permanent link">&para;</a></h2>
 <ul>
 <li>✅ Dashboard and Tenet list show identical tenet counts</li>
 <li>✅ Tenet detail page shows related Trading Partners</li>
@@ -222,8 +255,8 @@ Context: Original BF-INTEGRATION Vision (Pre-Phase 30)</p>
 <li>✅ Tooltip styling is consistent and professional</li>
 <li>✅ Tooltips work in both admin and main app</li>
 </ul>
-<h2 id="impact-achieved">🚀 Impact Achieved</h2>
-<h3 id="user-experience-transformation">User Experience Transformation</h3>
+<h2 id="impact-achieved">🚀 Impact Achieved<a class="headerlink" href="#impact-achieved" title="Permanent link">&para;</a></h2>
+<h3 id="user-experience-transformation">User Experience Transformation<a class="headerlink" href="#user-experience-transformation" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Zero Confusion</strong>: Clear distinction between Organizations, Tenets, and Packages</li>
 <li><strong>Consistent Data</strong>: All counts and statistics are accurate and synchronized  </li>
@@ -231,15 +264,15 @@ Context: Original BF-INTEGRATION Vision (Pre-Phase 30)</p>
 <li><strong>Self-Service</strong>: Users can create TPs directly from Tenet pages</li>
 <li><strong>Professional Polish</strong>: Tooltips and visual cues enhance usability</li>
 </ul>
-<h3 id="admin-efficiency">Admin Efficiency</h3>
+<h3 id="admin-efficiency">Admin Efficiency<a class="headerlink" href="#admin-efficiency" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Reduced Training Time</strong>: Users understand concepts without documentation</li>
 <li><strong>Fewer Support Tickets</strong>: Clear UI reduces confusion and errors</li>
 <li><strong>Faster Workflows</strong>: Direct actions reduce navigation overhead</li>
 <li><strong>Better Decision Making</strong>: Clear data supports informed choices</li>
 </ul>
-<h2 id="files-modified">📁 Files Modified</h2>
-<h3 id="admin-bridgeflow">Admin Bridgeflow</h3>
+<h2 id="files-modified">📁 Files Modified<a class="headerlink" href="#files-modified" title="Permanent link">&para;</a></h2>
+<h3 id="admin-bridgeflow">Admin Bridgeflow<a class="headerlink" href="#admin-bridgeflow" title="Permanent link">&para;</a></h3>
 <ul>
 <li><code>src/pages/Dashboard.jsx</code> - Real-time tenet stats integration</li>
 <li><code>src/pages/Organizations.jsx</code> - Organization tooltip</li>
@@ -247,11 +280,11 @@ Context: Original BF-INTEGRATION Vision (Pre-Phase 30)</p>
 <li><code>src/pages/Packages.jsx</code> - Package tooltip</li>
 <li><code>src/components/Tooltip.jsx</code> - Reusable tooltip component</li>
 </ul>
-<h3 id="web-app">Web App</h3>
+<h3 id="web-app">Web App<a class="headerlink" href="#web-app" title="Permanent link">&para;</a></h3>
 <ul>
 <li><code>src/routes/packages.js</code> - Package upload form tooltips</li>
 </ul>
-<h2 id="next-steps">🎯 Next Steps</h2>
+<h2 id="next-steps">🎯 Next Steps<a class="headerlink" href="#next-steps" title="Permanent link">&para;</a></h2>
 <p>The admin interface is now <strong>production-ready</strong> with professional UX polish. Users can:</p>
 <ol>
 <li><strong>Understand Concepts</strong>: Clear distinction between Orgs, Tenets, and Packages</li>

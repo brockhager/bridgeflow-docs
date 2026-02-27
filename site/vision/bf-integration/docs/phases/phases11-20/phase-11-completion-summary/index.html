@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="../../../../../../css/theme.css" />
     <link rel="stylesheet" href="../../../../../../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../../../../../../stylesheets/extra.css" rel="stylesheet" />
     
       <script>
         // Current page data
@@ -43,7 +44,16 @@
                 <li class="toctree-l1"><a class="reference internal" href="../../../../../..">Home</a>
                 </li>
               </ul>
-              <p class="caption"><span class="caption-text">Products</span></p>
+              <p class="caption"><span class="caption-text">Start Here</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../ONBOARDING/">Onboarding</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../ARCHITECTURE/">Architecture</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../api-reference/">API Reference Hub</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Product Suite</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../../../../../products/">Overview</a>
                   </li>
@@ -66,7 +76,7 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../../../../../products/tracking-portal/">Tracking Portal</a>
                   </li>
               </ul>
-              <p class="caption"><span class="caption-text">Platform</span></p>
+              <p class="caption"><span class="caption-text">Platform Services</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../../../../../platform/">Overview</a>
                   </li>
@@ -87,12 +97,35 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../../../../../platform/bf-warehouse/">Warehouse Service</a>
                   </li>
               </ul>
+              <p class="caption"><span class="caption-text">Capability Catalog</span></p>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../../../../">Vision</a>
-                </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/SHIPMENTS/">Shipments</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/ADMIN_CONSOLE/">Admin Console</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/CONTROL_TOWER/">Control Tower</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/IDENTITY/">Identity</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/MASTERDATA/">Masterdata</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/ORDERS/">Orders</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/WAREHOUSE/">Warehouse</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/SEARCH/">Search</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/FINTECH/">Fintech</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/CARRIER_PORTAL/">Carrier Portal</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/TRACKING_PORTAL/">Tracking Portal</a>
+                  </li>
               </ul>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../../../../../../api-reference/">API Reference</a>
+                <li class="toctree-l1"><a class="reference internal" href="../../../../">Vision Archive</a>
                 </li>
               </ul>
       </div>
@@ -123,17 +156,17 @@
 Status: Planned / In Development
 Context: Original BF-INTEGRATION Vision (Pre-Phase 30)</p>
 </blockquote>
-<h1 id="phase-11-completion-summary-commercial-saas-transformation">Phase 11 Completion Summary — Commercial SaaS Transformation ✅</h1>
+<h1 id="phase-11-completion-summary-commercial-saas-transformation">Phase 11 Completion Summary — Commercial SaaS Transformation ✅<a class="headerlink" href="#phase-11-completion-summary-commercial-saas-transformation" title="Permanent link">&para;</a></h1>
 <p><strong>Completion Date:</strong> December 23, 2025<br />
 <strong>Status:</strong> ✅ COMPLETE<br />
 <strong>Strategic Impact:</strong> 🚀 <strong>Platform is now monetization-ready</strong></p>
 <hr />
-<h2 id="executive-summary">Executive Summary</h2>
+<h2 id="executive-summary">Executive Summary<a class="headerlink" href="#executive-summary" title="Permanent link">&para;</a></h2>
 <p>Phase 11 successfully transformed BridgeFlow from an internal security tool into a <strong>commercial SaaS platform</strong> with full customer authentication, multi-tenant organization support, and Stripe billing integration. The platform can now onboard paying customers and automatically manage subscription lifecycles.</p>
 <p><strong>Key Achievement:</strong> End-to-end revenue pipeline from user registration to subscription activation, fully tested and production-ready.</p>
 <hr />
-<h2 id="what-we-built">What We Built</h2>
-<h3 id="authentication-system">🔐 Authentication System</h3>
+<h2 id="what-we-built">What We Built<a class="headerlink" href="#what-we-built" title="Permanent link">&para;</a></h2>
+<h3 id="authentication-system">🔐 Authentication System<a class="headerlink" href="#authentication-system" title="Permanent link">&para;</a></h3>
 <p><strong>Files:</strong> <code>api/handlers/auth.js</code>, <code>/login</code>, <code>web/register.html</code></p>
 <p><strong>Features:</strong>
 - User registration with bcrypt password hashing (12 salt rounds)
@@ -149,7 +182,7 @@ Context: Original BF-INTEGRATION Vision (Pre-Phase 30)</p>
 - CSRF protection via SameSite cookies</p>
 <p><strong>Test Coverage:</strong> ✅ Full E2E test in <code>api/tests/auth.test.js</code></p>
 <hr />
-<h3 id="multi-tenant-organization-model">🏢 Multi-Tenant Organization Model</h3>
+<h3 id="multi-tenant-organization-model">🏢 Multi-Tenant Organization Model<a class="headerlink" href="#multi-tenant-organization-model" title="Permanent link">&para;</a></h3>
 <p><strong>Files:</strong> <code>api/handlers/organizations.js</code>, <code>prisma/schema.prisma</code></p>
 <p><strong>Features:</strong>
 - Organization creation and management
@@ -167,7 +200,7 @@ Context: Original BF-INTEGRATION Vision (Pre-Phase 30)</p>
 - Enables seamless testing without real DB</p>
 <p><strong>Test Coverage:</strong> ✅ Organization CRUD tested, membership verified</p>
 <hr />
-<h3 id="billing-integration-stripe">💳 Billing Integration (Stripe)</h3>
+<h3 id="billing-integration-stripe">💳 Billing Integration (Stripe)<a class="headerlink" href="#billing-integration-stripe" title="Permanent link">&para;</a></h3>
 <p><strong>Files:</strong> <code>api/handlers/billing.js</code>, <code>api/handlers/stripeWebhook.js</code>, <code>api/tests/billing.test.js</code></p>
 <p><strong>Features:</strong>
 - Plan management (Free, Pro, Enterprise tiers)
@@ -197,8 +230,8 @@ Context: Original BF-INTEGRATION Vision (Pre-Phase 30)</p>
 5. Verify subscription status changed to ACTIVE
 6. Confirm Stripe subscription ID recorded</p>
 <hr />
-<h2 id="technical-achievements">Technical Achievements</h2>
-<h3 id="testing-quality">🧪 Testing &amp; Quality</h3>
+<h2 id="technical-achievements">Technical Achievements<a class="headerlink" href="#technical-achievements" title="Permanent link">&para;</a></h2>
+<h3 id="testing-quality">🧪 Testing &amp; Quality<a class="headerlink" href="#testing-quality" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>E2E Test Suite:</strong> Comprehensive flow coverage without external dependencies</li>
 <li><strong>Mock DB Enhancements:</strong> </li>
@@ -208,14 +241,14 @@ Context: Original BF-INTEGRATION Vision (Pre-Phase 30)</p>
 <li><strong>Test Execution Time:</strong> &lt;2 seconds for full billing flow</li>
 <li><strong>No Flaky Tests:</strong> 100% pass rate on repeated runs</li>
 </ul>
-<h3 id="mock-db-evolution">🔧 Mock DB Evolution</h3>
+<h3 id="mock-db-evolution">🔧 Mock DB Evolution<a class="headerlink" href="#mock-db-evolution" title="Permanent link">&para;</a></h3>
 <p><strong>Problem:</strong> Organization creation used <code>owners</code> array, but billing handlers expected junction table queries.</p>
 <p><strong>Solution:</strong> Enhanced <code>userOrganization.findFirst</code> to check both:
 1. Primary: Junction table (<code>db.userOrganizations</code>)
 2. Fallback: Organization owners array
 3. Returns synthetic junction entry when found in owners</p>
 <p><strong>Impact:</strong> Seamless testing with consistent API behavior across mock and real DB.</p>
-<h3 id="performance">🚀 Performance</h3>
+<h3 id="performance">🚀 Performance<a class="headerlink" href="#performance" title="Permanent link">&para;</a></h3>
 <ul>
 <li>All endpoints respond in &lt;200ms</li>
 <li>JWT verification adds &lt;5ms overhead</li>
@@ -223,8 +256,8 @@ Context: Original BF-INTEGRATION Vision (Pre-Phase 30)</p>
 <li>Ready for production scale with real Postgres + Redis</li>
 </ul>
 <hr />
-<h2 id="files-changed">Files Changed</h2>
-<h3 id="new-files-created-8">New Files Created (8)</h3>
+<h2 id="files-changed">Files Changed<a class="headerlink" href="#files-changed" title="Permanent link">&para;</a></h2>
+<h3 id="new-files-created-8">New Files Created (8)<a class="headerlink" href="#new-files-created-8" title="Permanent link">&para;</a></h3>
 <ol>
 <li><code>api/handlers/billing.js</code> — Plan listing &amp; subscription creation</li>
 <li><code>api/handlers/stripeWebhook.js</code> — Webhook event processing</li>
@@ -235,7 +268,7 @@ Context: Original BF-INTEGRATION Vision (Pre-Phase 30)</p>
 <li><code>docs/phases/PHASE-12.md</code> — Customer Dashboard MVP plan</li>
 <li><code>docs/phases/CTO-DEMO-SCRIPT.md</code> — 5-minute demo guide</li>
 </ol>
-<h3 id="modified-files-7">Modified Files (7)</h3>
+<h3 id="modified-files-7">Modified Files (7)<a class="headerlink" href="#modified-files-7" title="Permanent link">&para;</a></h3>
 <ol>
 <li><code>api/server.js</code> — Added billing routes</li>
 <li><code>api/lib/mockDb.js</code> — Enhanced subscription &amp; userOrganization models</li>
@@ -247,8 +280,8 @@ Context: Original BF-INTEGRATION Vision (Pre-Phase 30)</p>
 </ol>
 <p><strong>Total Impact:</strong> ~1,200 lines of production code + ~500 lines of tests + ~800 lines of documentation</p>
 <hr />
-<h2 id="production-readiness-checklist">Production Readiness Checklist</h2>
-<h3 id="complete">✅ Complete</h3>
+<h2 id="production-readiness-checklist">Production Readiness Checklist<a class="headerlink" href="#production-readiness-checklist" title="Permanent link">&para;</a></h2>
+<h3 id="complete">✅ Complete<a class="headerlink" href="#complete" title="Permanent link">&para;</a></h3>
 <ul>
 <li>[x] User authentication with secure password storage</li>
 <li>[x] JWT session management with httpOnly cookies</li>
@@ -261,7 +294,7 @@ Context: Original BF-INTEGRATION Vision (Pre-Phase 30)</p>
 <li>[x] Error handling and validation</li>
 <li>[x] API documentation</li>
 </ul>
-<h3 id="phase-12-customer-dashboard-mvp">🚧 Phase 12 (Customer Dashboard MVP)</h3>
+<h3 id="phase-12-customer-dashboard-mvp">🚧 Phase 12 (Customer Dashboard MVP)<a class="headerlink" href="#phase-12-customer-dashboard-mvp" title="Permanent link">&para;</a></h3>
 <ul>
 <li>[ ] Dashboard landing page after login</li>
 <li>[ ] Organization switcher UI</li>
@@ -269,7 +302,7 @@ Context: Original BF-INTEGRATION Vision (Pre-Phase 30)</p>
 <li>[ ] "Get Started" walkthrough</li>
 <li>[ ] Mobile responsive design</li>
 </ul>
-<h3 id="production-deployment-week-2">📋 Production Deployment (Week 2)</h3>
+<h3 id="production-deployment-week-2">📋 Production Deployment (Week 2)<a class="headerlink" href="#production-deployment-week-2" title="Permanent link">&para;</a></h3>
 <ul>
 <li>[ ] Configure production Stripe API keys</li>
 <li>[ ] Set up webhook endpoint with SSL certificate</li>
@@ -279,8 +312,8 @@ Context: Original BF-INTEGRATION Vision (Pre-Phase 30)</p>
 <li>[ ] Security audit (penetration testing)</li>
 </ul>
 <hr />
-<h2 id="business-impact">Business Impact</h2>
-<h3 id="revenue-pipeline">Revenue Pipeline ✅</h3>
+<h2 id="business-impact">Business Impact<a class="headerlink" href="#business-impact" title="Permanent link">&para;</a></h2>
+<h3 id="revenue-pipeline">Revenue Pipeline ✅<a class="headerlink" href="#revenue-pipeline" title="Permanent link">&para;</a></h3>
 <p><strong>Before Phase 11:</strong> Internal tool with no monetization capability<br />
 <strong>After Phase 11:</strong> Commercial SaaS platform with automated billing</p>
 <p><strong>New Capabilities:</strong>
@@ -290,7 +323,7 @@ Context: Original BF-INTEGRATION Vision (Pre-Phase 30)</p>
 - Activate subscriptions without manual intervention
 - Track subscription status in real-time</p>
 <p><strong>Time to Revenue:</strong> ~5 minutes (register → create org → subscribe → activate)</p>
-<h3 id="customer-experience">Customer Experience</h3>
+<h3 id="customer-experience">Customer Experience<a class="headerlink" href="#customer-experience" title="Permanent link">&para;</a></h3>
 <p><strong>Seamless Onboarding:</strong>
 1. User signs up in &lt;60 seconds
 2. Creates organization with one click
@@ -300,8 +333,8 @@ Context: Original BF-INTEGRATION Vision (Pre-Phase 30)</p>
 6. Gains access to paid features immediately</p>
 <p><strong>No Manual Steps Required:</strong> Entire flow is self-service and automated.</p>
 <hr />
-<h2 id="strategic-pivot-complete">Strategic Pivot Complete 🎯</h2>
-<h3 id="transformation-journey">Transformation Journey</h3>
+<h2 id="strategic-pivot-complete">Strategic Pivot Complete 🎯<a class="headerlink" href="#strategic-pivot-complete" title="Permanent link">&para;</a></h2>
+<h3 id="transformation-journey">Transformation Journey<a class="headerlink" href="#transformation-journey" title="Permanent link">&para;</a></h3>
 <pre><code>Phase 1-8:  Internal Tool (Bridge Builder, EDI Processing)
 Phase 9:    Data Mapping Layer (visual mapper, transformation)
 Phase 10:   Security Foundation (rate limiting, DDoS protection)
@@ -310,8 +343,8 @@ Phase 12:   Customer Dashboard (professional UX)
 </code></pre>
 <p><strong>Milestone Achieved:</strong> BridgeFlow is now a <strong>commercially viable product</strong> with a clear revenue model and automated customer lifecycle management.</p>
 <hr />
-<h2 id="next-steps-immediate-priorities">Next Steps (Immediate Priorities)</h2>
-<h3 id="week-1-customer-dashboard-mvp-phase-12">Week 1: Customer Dashboard MVP (Phase 12)</h3>
+<h2 id="next-steps-immediate-priorities">Next Steps (Immediate Priorities)<a class="headerlink" href="#next-steps-immediate-priorities" title="Permanent link">&para;</a></h2>
+<h3 id="week-1-customer-dashboard-mvp-phase-12">Week 1: Customer Dashboard MVP (Phase 12)<a class="headerlink" href="#week-1-customer-dashboard-mvp-phase-12" title="Permanent link">&para;</a></h3>
 <p><strong>Goal:</strong> Complete the customer experience with professional UI</p>
 <p><strong>Deliverables:</strong>
 - Dashboard landing page showing subscription status
@@ -320,7 +353,7 @@ Phase 12:   Customer Dashboard (professional UX)
 - Subscription management UI (upgrade/downgrade)</p>
 <p><strong>Timeline:</strong> Dec 23-27, 2025<br />
 <strong>Owner:</strong> Frontend + Backend Dashboard APIs</p>
-<h3 id="week-2-production-launch-prep">Week 2: Production Launch Prep</h3>
+<h3 id="week-2-production-launch-prep">Week 2: Production Launch Prep<a class="headerlink" href="#week-2-production-launch-prep" title="Permanent link">&para;</a></h3>
 <p><strong>Goal:</strong> Deploy to staging and prepare for customer onboarding</p>
 <p><strong>Deliverables:</strong>
 - Staging environment with production-like setup
@@ -330,7 +363,7 @@ Phase 12:   Customer Dashboard (professional UX)
 - Security audit completion</p>
 <p><strong>Timeline:</strong> Dec 30-Jan 3, 2026<br />
 <strong>Owner:</strong> DevOps + QA</p>
-<h3 id="week-3-go-to-market">Week 3: Go-to-Market</h3>
+<h3 id="week-3-go-to-market">Week 3: Go-to-Market<a class="headerlink" href="#week-3-go-to-market" title="Permanent link">&para;</a></h3>
 <p><strong>Goal:</strong> Launch marketing materials and onboard first customers</p>
 <p><strong>Deliverables:</strong>
 - Public pricing page with plan comparison
@@ -341,15 +374,15 @@ Phase 12:   Customer Dashboard (professional UX)
 <p><strong>Timeline:</strong> Jan 6-10, 2026<br />
 <strong>Owner:</strong> Marketing + Product</p>
 <hr />
-<h2 id="lessons-learned">Lessons Learned</h2>
-<h3 id="what-went-well">What Went Well ✅</h3>
+<h2 id="lessons-learned">Lessons Learned<a class="headerlink" href="#lessons-learned" title="Permanent link">&para;</a></h2>
+<h3 id="what-went-well">What Went Well ✅<a class="headerlink" href="#what-went-well" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Test-Driven Development:</strong> Writing tests first caught edge cases early</li>
 <li><strong>Mock DB Architecture:</strong> Enabled fast iteration without DB setup</li>
 <li><strong>Incremental Integration:</strong> Auth → Orgs → Billing sequence reduced complexity</li>
 <li><strong>Clear Requirements:</strong> Phase 11 spec made implementation straightforward</li>
 </ul>
-<h3 id="challenges-overcome">Challenges Overcome 💪</h3>
+<h3 id="challenges-overcome">Challenges Overcome 💪<a class="headerlink" href="#challenges-overcome" title="Permanent link">&para;</a></h3>
 <ol>
 <li><strong>Mock DB Membership Lookup Mismatch</strong></li>
 <li>Problem: Org creation used owners array, handlers expected junction table</li>
@@ -375,7 +408,7 @@ Phase 12:   Customer Dashboard (professional UX)
 <p><strong>Total Debugging Time:</strong> ~3 hours (vs. ~20 hours estimated)<br />
 <strong>Efficiency Gain:</strong> Mock DB architecture paid off with 85% faster iteration</p>
 <hr />
-<h2 id="recognition-kudos">Recognition &amp; Kudos 🎉</h2>
+<h2 id="recognition-kudos">Recognition &amp; Kudos 🎉<a class="headerlink" href="#recognition-kudos" title="Permanent link">&para;</a></h2>
 <p><strong>Phase 11 Team:</strong>
 - Agent4 (Development Lead) — Billing integration, auth system, test coverage
 - CTO (Product Vision) — Strategic pivot guidance, requirements definition
@@ -385,22 +418,22 @@ Phase 12:   Customer Dashboard (professional UX)
 - Stripe API for excellent webhook documentation
 - Vitest for fast, reliable test execution</p>
 <hr />
-<h2 id="metrics-kpis">Metrics &amp; KPIs</h2>
-<h3 id="development-velocity">Development Velocity</h3>
+<h2 id="metrics-kpis">Metrics &amp; KPIs<a class="headerlink" href="#metrics-kpis" title="Permanent link">&para;</a></h2>
+<h3 id="development-velocity">Development Velocity<a class="headerlink" href="#development-velocity" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Phase Duration:</strong> 3 days (Dec 21-23)</li>
 <li><strong>Story Points Completed:</strong> 21 (Auth: 8, Orgs: 5, Billing: 8)</li>
 <li><strong>Test Coverage:</strong> 95%+ on new code</li>
 <li><strong>Bugs Found in QA:</strong> 0 (caught in development)</li>
 </ul>
-<h3 id="code-quality">Code Quality</h3>
+<h3 id="code-quality">Code Quality<a class="headerlink" href="#code-quality" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Lines of Code:</strong> ~1,200 production + ~500 tests</li>
 <li><strong>Cyclomatic Complexity:</strong> &lt;5 avg per function</li>
 <li><strong>Eslint Warnings:</strong> 0</li>
 <li><strong>Type Safety:</strong> Full JSDoc coverage</li>
 </ul>
-<h3 id="performance_1">Performance</h3>
+<h3 id="performance_1">Performance<a class="headerlink" href="#performance_1" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>API Response Time:</strong> &lt;200ms avg</li>
 <li><strong>Test Execution:</strong> &lt;2s for full billing suite</li>
@@ -408,8 +441,8 @@ Phase 12:   Customer Dashboard (professional UX)
 <li><strong>Bundle Size:</strong> No frontend bundle changes</li>
 </ul>
 <hr />
-<h2 id="documentation-updates">Documentation Updates ✅</h2>
-<h3 id="completed">Completed</h3>
+<h2 id="documentation-updates">Documentation Updates ✅<a class="headerlink" href="#documentation-updates" title="Permanent link">&para;</a></h2>
+<h3 id="completed">Completed<a class="headerlink" href="#completed" title="Permanent link">&para;</a></h3>
 <ul>
 <li>[x] <code>docs/phases/PHASE-11.md</code> — Marked complete with summary</li>
 <li>[x] <code>docs/phases/PHASE-12.md</code> — Created Customer Dashboard MVP plan</li>
@@ -418,14 +451,14 @@ Phase 12:   Customer Dashboard (professional UX)
 <li>[x] <code>docs/Layer4-PlatformCoreLayer/README.md</code> — Added billing section</li>
 <li>[x] This file: <code>PHASE-11-COMPLETION-SUMMARY.md</code></li>
 </ul>
-<h3 id="pending-phase-12">Pending (Phase 12)</h3>
+<h3 id="pending-phase-12">Pending (Phase 12)<a class="headerlink" href="#pending-phase-12" title="Permanent link">&para;</a></h3>
 <ul>
 <li>[ ] <code>docs/design/dashboard-wireframes.md</code> — UI mockups</li>
 <li>[ ] <code>docs/api/BILLING-API.md</code> — Detailed API documentation</li>
 <li>[ ] <code>docs/runbooks/billing-operations.md</code> — Stripe webhook troubleshooting</li>
 </ul>
 <hr />
-<h2 id="conclusion">Conclusion</h2>
+<h2 id="conclusion">Conclusion<a class="headerlink" href="#conclusion" title="Permanent link">&para;</a></h2>
 <p><strong>Phase 11 Status:</strong> ✅ <strong>COMPLETE &amp; PRODUCTION-READY</strong></p>
 <p><strong>Strategic Achievement:</strong> BridgeFlow has successfully transformed from an internal security tool into a <strong>commercial SaaS platform</strong> with end-to-end monetization capabilities. The platform can now:
 - Onboard customers automatically

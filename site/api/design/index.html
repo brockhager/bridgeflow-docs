@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="../../css/theme.css" />
     <link rel="stylesheet" href="../../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../../stylesheets/extra.css" rel="stylesheet" />
     
       <script>
         // Current page data
@@ -43,7 +44,16 @@
                 <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
                 </li>
               </ul>
-              <p class="caption"><span class="caption-text">Products</span></p>
+              <p class="caption"><span class="caption-text">Start Here</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../ONBOARDING/">Onboarding</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../ARCHITECTURE/">Architecture</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../api-reference/">API Reference Hub</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Product Suite</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../products/">Overview</a>
                   </li>
@@ -66,7 +76,7 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../products/tracking-portal/">Tracking Portal</a>
                   </li>
               </ul>
-              <p class="caption"><span class="caption-text">Platform</span></p>
+              <p class="caption"><span class="caption-text">Platform Services</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../platform/">Overview</a>
                   </li>
@@ -87,12 +97,35 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../platform/bf-warehouse/">Warehouse Service</a>
                   </li>
               </ul>
+              <p class="caption"><span class="caption-text">Capability Catalog</span></p>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../../vision/bf-integration/">Vision</a>
-                </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/SHIPMENTS/">Shipments</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/ADMIN_CONSOLE/">Admin Console</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/CONTROL_TOWER/">Control Tower</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/IDENTITY/">Identity</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/MASTERDATA/">Masterdata</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/ORDERS/">Orders</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/WAREHOUSE/">Warehouse</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/SEARCH/">Search</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/FINTECH/">Fintech</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/CARRIER_PORTAL/">Carrier Portal</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/TRACKING_PORTAL/">Tracking Portal</a>
+                  </li>
               </ul>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../../api-reference/">API Reference</a>
+                <li class="toctree-l1"><a class="reference internal" href="../../vision/bf-integration/">Vision Archive</a>
                 </li>
               </ul>
       </div>
@@ -118,12 +151,12 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <h1 id="job-orchestrator-design-phase-1a">Job Orchestrator — Design (Phase 1A)</h1>
-<h2 id="purpose">Purpose</h2>
+                <h1 id="job-orchestrator-design-phase-1a">Job Orchestrator — Design (Phase 1A)<a class="headerlink" href="#job-orchestrator-design-phase-1a" title="Permanent link">&para;</a></h1>
+<h2 id="purpose">Purpose<a class="headerlink" href="#purpose" title="Permanent link">&para;</a></h2>
 <p>Design notes and acceptance criteria for the Job Orchestrator core (T-003).</p>
-<h2 id="overview">Overview</h2>
+<h2 id="overview">Overview<a class="headerlink" href="#overview" title="Permanent link">&para;</a></h2>
 <p>The Job Orchestrator is a thin platform core that receives invoice delivery requests from the UI, persists job metadata and items, and advances job state through a short life-cycle (Import -&gt; Prepare -&gt; Send -&gt; Complete). For Phase 1A we'll implement a durable DB model (Prisma), a minimal REST API (POST /jobs, GET /jobs/:id, GET /jobs/:id/invoice), and an in-process simulated worker to progress jobs and report percent-complete for the UI.</p>
-<h2 id="prisma-models-proposal">Prisma Models (proposal)</h2>
+<h2 id="prisma-models-proposal">Prisma Models (proposal)<a class="headerlink" href="#prisma-models-proposal" title="Permanent link">&para;</a></h2>
 <p>Add the following models to <code>prisma/schema.prisma</code>:</p>
 <ul>
 <li>
@@ -154,7 +187,7 @@
 }</p>
 </li>
 </ul>
-<h2 id="api-surface">API Surface</h2>
+<h2 id="api-surface">API Surface<a class="headerlink" href="#api-surface" title="Permanent link">&para;</a></h2>
 <p>POST /jobs
 - Request:
   {
@@ -183,7 +216,7 @@
   }</p>
 <p>GET /jobs/:id/invoice
 - Response (200): returns an invoice PDF or redirect to storage URL. For Phase 1A we will return a mock HTML invoice page (<code>web/invoice.html</code>) or a small PDF binary placeholder.</p>
-<h2 id="acceptance-criteria">Acceptance Criteria</h2>
+<h2 id="acceptance-criteria">Acceptance Criteria<a class="headerlink" href="#acceptance-criteria" title="Permanent link">&para;</a></h2>
 <ul>
 <li>The DB schema compiles and migrates cleanly (prisma migrate).</li>
 <li>POST /jobs persists a DeliveryJob with initial items derived from request and returns a job id.</li>
@@ -192,13 +225,13 @@
 <li>On completion, GET /jobs/:id/invoice returns an access point (mock or real) the UI can open.</li>
 <li>Tests cover the core happy path and simulated failure path.</li>
 </ul>
-<h2 id="next-steps-immediate">Next steps (immediate)</h2>
+<h2 id="next-steps-immediate">Next steps (immediate)<a class="headerlink" href="#next-steps-immediate" title="Permanent link">&para;</a></h2>
 <ol>
 <li>Add Prisma models and create a migration (blocked until we run migrations in a dev DB in CI/local).  </li>
 <li>Implement minimal ESM Node API (Fastify recommended) and endpoints above.  </li>
 <li>Implement simulated in-process worker and progress reporting.  </li>
 </ol>
-<h2 id="notes">Notes</h2>
+<h2 id="notes">Notes<a class="headerlink" href="#notes" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Keep design minimal and testable for Phase 1A; focus on durability and clear contracts to let the UI integrate with polling.</li>
 <li>Use <code>progress</code> (0..100) to communicate percent-complete. Store job items so we can later implement retries and per-item status.</li>

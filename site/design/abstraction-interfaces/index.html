@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="../../css/theme.css" />
     <link rel="stylesheet" href="../../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../../stylesheets/extra.css" rel="stylesheet" />
     
       <script>
         // Current page data
@@ -43,7 +44,16 @@
                 <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
                 </li>
               </ul>
-              <p class="caption"><span class="caption-text">Products</span></p>
+              <p class="caption"><span class="caption-text">Start Here</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../ONBOARDING/">Onboarding</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../ARCHITECTURE/">Architecture</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../api-reference/">API Reference Hub</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Product Suite</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../products/">Overview</a>
                   </li>
@@ -66,7 +76,7 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../products/tracking-portal/">Tracking Portal</a>
                   </li>
               </ul>
-              <p class="caption"><span class="caption-text">Platform</span></p>
+              <p class="caption"><span class="caption-text">Platform Services</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../platform/">Overview</a>
                   </li>
@@ -87,12 +97,35 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../platform/bf-warehouse/">Warehouse Service</a>
                   </li>
               </ul>
+              <p class="caption"><span class="caption-text">Capability Catalog</span></p>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../../vision/bf-integration/">Vision</a>
-                </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/SHIPMENTS/">Shipments</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/ADMIN_CONSOLE/">Admin Console</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/CONTROL_TOWER/">Control Tower</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/IDENTITY/">Identity</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/MASTERDATA/">Masterdata</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/ORDERS/">Orders</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/WAREHOUSE/">Warehouse</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/SEARCH/">Search</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/FINTECH/">Fintech</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/CARRIER_PORTAL/">Carrier Portal</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/TRACKING_PORTAL/">Tracking Portal</a>
+                  </li>
               </ul>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../../api-reference/">API Reference</a>
+                <li class="toctree-l1"><a class="reference internal" href="../../vision/bf-integration/">Vision Archive</a>
                 </li>
               </ul>
       </div>
@@ -118,11 +151,11 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <h1 id="abstraction-interfaces-typescript-draft">Abstraction Interfaces (TypeScript) — Draft</h1>
+                <h1 id="abstraction-interfaces-typescript-draft">Abstraction Interfaces (TypeScript) — Draft<a class="headerlink" href="#abstraction-interfaces-typescript-draft" title="Permanent link">&para;</a></h1>
 <p>Purpose: Provide clear, testable interfaces that enable evolving the tenancy model and swapping implementations (e.g., secrets backends, audit sink) without major code rewrites.</p>
 <p>All interfaces are intentionally minimal and focused on contracts. Implementations must instrument observability and enforce RBAC.</p>
 <hr />
-<h2 id="common-types">Common types</h2>
+<h2 id="common-types">Common types<a class="headerlink" href="#common-types" title="Permanent link">&para;</a></h2>
 <pre><code class="language-ts">export type Result&lt;T&gt; = { ok: true; value: T } | { ok: false; error: Error; code?: string };
 
 export interface Paging { limit?: number; offset?: number; cursor?: string }
@@ -131,7 +164,7 @@ export interface Principal { id: string; roles: string[]; email?: string }
 
 export interface TraceContext { traceId?: string; spanId?: string }
 </code></pre>
-<h2 id="requestcontext">RequestContext</h2>
+<h2 id="requestcontext">RequestContext<a class="headerlink" href="#requestcontext" title="Permanent link">&para;</a></h2>
 <pre><code class="language-ts">export interface RequestContext {
   requestId: string; // correlation id
   principal?: Principal;
@@ -142,7 +175,7 @@ export interface TraceContext { traceId?: string; spanId?: string }
   hasRole(role: string): boolean;
 }
 </code></pre>
-<h2 id="tenantdescriptor-manager">TenantDescriptor &amp; Manager</h2>
+<h2 id="tenantdescriptor-manager">TenantDescriptor &amp; Manager<a class="headerlink" href="#tenantdescriptor-manager" title="Permanent link">&para;</a></h2>
 <pre><code class="language-ts">export type TenantIsolationMode = 'shared-schema' | 'schema-per-tenant' | 'db-per-tenant'
 
 export interface TenantDescriptor {
@@ -165,7 +198,7 @@ export interface ITenantManager {
 
 export interface ConnectionInfo { connectionString: string; schema?: string }
 </code></pre>
-<h2 id="tenantdataaccess-the-critical-abstraction">TenantDataAccess (The critical abstraction)</h2>
+<h2 id="tenantdataaccess-the-critical-abstraction">TenantDataAccess (The critical abstraction)<a class="headerlink" href="#tenantdataaccess-the-critical-abstraction" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Purpose: Abstracts data access such that code using tenant-scoped data does not need to know whether we run shared-schema, schema-per-tenant, or db-per-tenant.</li>
 </ul>
@@ -183,7 +216,7 @@ export interface ConnectionInfo { connectionString: string; schema?: string }
 //  - SchemaPerTenantDataAccess (resolves schema and uses schema-scoped connections)
 //  - DbPerTenantDataAccess (resolves tenant-specific connection strings)
 </code></pre>
-<h2 id="secrets-manager-isecretsmanager">Secrets Manager (ISecretsManager)</h2>
+<h2 id="secrets-manager-isecretsmanager">Secrets Manager (ISecretsManager)<a class="headerlink" href="#secrets-manager-isecretsmanager" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Purpose: Abstract access to secrets. Production impls use KMS + Secrets Manager, dev can use file-based or env-based shim.</li>
 </ul>
@@ -200,7 +233,7 @@ export interface ISecretsManager {
 - Calls must be audited
 - Cached with short TTL locally
 - Support for rotation and version metadata</p>
-<h2 id="audit-logger">Audit Logger</h2>
+<h2 id="audit-logger">Audit Logger<a class="headerlink" href="#audit-logger" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Purpose: Immutable, append-only logging for compliance with retention and queryability</li>
 </ul>
@@ -225,7 +258,7 @@ export interface IAuditLogger {
 - Write path should be highly available and append-only
 - Event immutability guaranteed by service (write-once semantics)
 - Retention policy enforced by the <code>audit-service</code> (e.g., move older logs to cold encrypted storage after 90 days)</p>
-<h2 id="servicediscovery">ServiceDiscovery</h2>
+<h2 id="servicediscovery">ServiceDiscovery<a class="headerlink" href="#servicediscovery" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Purpose: Simple, lightweight discovery for services in the microservice architecture without forcing heavy orchestration</li>
 </ul>
@@ -238,14 +271,14 @@ export interface IServiceDiscovery {
 }
 </code></pre>
 <hr />
-<h2 id="example-usage-patterns">Example usage patterns</h2>
+<h2 id="example-usage-patterns">Example usage patterns<a class="headerlink" href="#example-usage-patterns" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Business logic should accept a <code>TenantDataAccess&lt;T&gt;</code> (constructor injection) and <code>RequestContext</code> on each request</li>
 <li>Tests can provide an in-memory <code>TenantDataAccess</code> or mock to assert tenant filtering</li>
 <li>Secrets retrieval is via <code>ISecretsManager.getSecret(ctx, path)</code> — never read raw envs for production creds</li>
 </ul>
 <hr />
-<h2 id="notes-next-steps">Notes &amp; Next Steps</h2>
+<h2 id="notes-next-steps">Notes &amp; Next Steps<a class="headerlink" href="#notes-next-steps" title="Permanent link">&para;</a></h2>
 <ul>
 <li>These interfaces are intentionally small; refine with the team and implement small dev shims for local usage</li>
 <li>Add TypeScript <code>index.d.ts</code> and example implementations in <code>@bridgeflow/lib-db</code> and <code>@bridgeflow/lib-secrets</code></li>

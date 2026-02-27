@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="../../css/theme.css" />
     <link rel="stylesheet" href="../../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../../stylesheets/extra.css" rel="stylesheet" />
     
       <script>
         // Current page data
@@ -43,7 +44,16 @@
                 <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
                 </li>
               </ul>
-              <p class="caption"><span class="caption-text">Products</span></p>
+              <p class="caption"><span class="caption-text">Start Here</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../ONBOARDING/">Onboarding</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../ARCHITECTURE/">Architecture</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../api-reference/">API Reference Hub</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Product Suite</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../products/">Overview</a>
                   </li>
@@ -66,7 +76,7 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../products/tracking-portal/">Tracking Portal</a>
                   </li>
               </ul>
-              <p class="caption"><span class="caption-text">Platform</span></p>
+              <p class="caption"><span class="caption-text">Platform Services</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../platform/">Overview</a>
                   </li>
@@ -87,12 +97,35 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../platform/bf-warehouse/">Warehouse Service</a>
                   </li>
               </ul>
+              <p class="caption"><span class="caption-text">Capability Catalog</span></p>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../../vision/bf-integration/">Vision</a>
-                </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/SHIPMENTS/">Shipments</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/ADMIN_CONSOLE/">Admin Console</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/CONTROL_TOWER/">Control Tower</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/IDENTITY/">Identity</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/MASTERDATA/">Masterdata</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/ORDERS/">Orders</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/WAREHOUSE/">Warehouse</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/SEARCH/">Search</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/FINTECH/">Fintech</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/CARRIER_PORTAL/">Carrier Portal</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/TRACKING_PORTAL/">Tracking Portal</a>
+                  </li>
               </ul>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../../api-reference/">API Reference</a>
+                <li class="toctree-l1"><a class="reference internal" href="../../vision/bf-integration/">Vision Archive</a>
                 </li>
               </ul>
       </div>
@@ -118,10 +151,10 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <h1 id="release-notes-january-2026">Release Notes — January 2026</h1>
+                <h1 id="release-notes-january-2026">Release Notes — January 2026<a class="headerlink" href="#release-notes-january-2026" title="Permanent link">&para;</a></h1>
 <p><strong>Date:</strong> 2026-01-11
 <strong>Release cadence:</strong> monthly (format: <code>release-&lt;MM&gt;-YYYY.md</code>)</p>
-<h2 id="highlights">Highlights</h2>
+<h2 id="highlights">Highlights<a class="headerlink" href="#highlights" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Phase 34 — Mapping Studio (Completed Jan 10, 2026)</li>
 <li>Production-ready Mapping Studio: schema-driven field palettes, real-time preview with sample data, enterprise validation, and Playwright E2E coverage.</li>
@@ -168,7 +201,7 @@
 <li>Verification: migration applied (<code>20260116082917_add_bridgepackage_config</code>), unit tests added, and a <code>pnpm run verify:bridgepackage</code> script validates create/read/delete against the dev DB.</li>
 <li>Files &amp; docs: <code>prisma/schema.prisma</code> (model <code>BridgePackage</code>), <code>api/handlers/admin/bridgePackages.js</code>, <code>api/routes/adminPackages.js</code>, <code>admin-bridgeflow/src/pages/PackageManager.jsx</code>, <code>web/src/assembly.js</code>, <code>scripts/verify-bridgepackage.js</code>, <code>docs/bridge-packages/readme.md</code>, <code>docs/phases/phases41-50/BridgePackages.md</code>.</li>
 </ul>
-<h2 id="detailed-phase-highlights">Detailed Phase Highlights</h2>
+<h2 id="detailed-phase-highlights">Detailed Phase Highlights<a class="headerlink" href="#detailed-phase-highlights" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Phase 31A — Unified Adapter Framework (Completed Jan 8, 2026)</li>
 <li>Built the <strong>BridgeFlowAdapter</strong> interface and symmetric adapter model so a single binary supports free and enterprise tiers; added permission-based capability gating.</li>
@@ -288,7 +321,7 @@
 <li><strong>Authentication Issue Resolution</strong>: Fixed missing <code>isSuperAdmin</code> flag in login JWT tokens and resolved rate limiting blocking in tests, enabling CTO super-admin access.</li>
 <li>Files: <code>docs/phases/phases31-40/PHASE-39-COMPLETE-SUMMARY.md</code>, <code>api/handlers/auth.js</code>, <code>test/integration/super-admin-create-blueprint.test.js</code>.</li>
 </ul>
-<h2 id="validation-smoke-checks">Validation / Smoke checks</h2>
+<h2 id="validation-smoke-checks">Validation / Smoke checks<a class="headerlink" href="#validation-smoke-checks" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Start API &amp; UI</li>
 <li><code>pnpm run api:start</code></li>
@@ -300,27 +333,27 @@
 <li>Templates: save a validated mapping, confirm template created and version increment; apply template and confirm mapping applied</li>
 <li><strong>Authentication</strong>: <code>npm test -- test/integration/super-admin-create-blueprint.test.js</code> to verify CTO super-admin access</li>
 </ul>
-<h2 id="artifacts-ci">Artifacts &amp; CI</h2>
+<h2 id="artifacts-ci">Artifacts &amp; CI<a class="headerlink" href="#artifacts-ci" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Playwright pipeline uploads artifacts for Phase 34 and Phase 35 E2E runs (check pipeline run for artifact links in CI).</li>
 </ul>
-<h2 id="impact">Impact</h2>
+<h2 id="impact">Impact<a class="headerlink" href="#impact" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Free users: improved JSON/CSV mapping experience</li>
 <li>Enterprise customers: X12/HL7/EDIFACT mapping with validation + template management</li>
 <li>Business ops: versioned templates reduce configuration drift and accelerate onboarding</li>
 </ul>
-<h2 id="spotlight-outstanding-achievement">Spotlight — Outstanding Achievement</h2>
+<h2 id="spotlight-outstanding-achievement">Spotlight — Outstanding Achievement<a class="headerlink" href="#spotlight-outstanding-achievement" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Complete Mapping Studio Feature Set: Real-Time Preview with Sample Data ✅, Enterprise Field Validation ✅, Profile Templates ✅, Clean E2E Test Suite ✅.</li>
 <li>Technical excellence: clean architecture (~800 lines total), backward compatible changes, security-first design, and validation-integrated flows.</li>
 <li>Business impact: self-service for business users, risk mitigation through validation, productivity multipliers via templates, and revenue protection via enterprise gating.</li>
 </ul>
-<h2 id="sprint-board-update">Sprint Board Update</h2>
+<h2 id="sprint-board-update">Sprint Board Update<a class="headerlink" href="#sprint-board-update" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Mapping Studio: COMPLETE ✅ (75 points delivered; production-ready and fully tested)</li>
 </ul>
-<h2 id="contact-follow-up">Contact &amp; Follow-up</h2>
+<h2 id="contact-follow-up">Contact &amp; Follow-up<a class="headerlink" href="#contact-follow-up" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Questions / rollouts: CTO</li>
 <li>Planning: Phase 36 (Machine Learning Intelligence) — scope &amp; schedule to follow</li>

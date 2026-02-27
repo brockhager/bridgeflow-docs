@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="../../css/theme.css" />
     <link rel="stylesheet" href="../../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../../stylesheets/extra.css" rel="stylesheet" />
     
       <script>
         // Current page data
@@ -43,7 +44,16 @@
                 <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
                 </li>
               </ul>
-              <p class="caption"><span class="caption-text">Products</span></p>
+              <p class="caption"><span class="caption-text">Start Here</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../ONBOARDING/">Onboarding</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../ARCHITECTURE/">Architecture</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../api-reference/">API Reference Hub</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Product Suite</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../products/">Overview</a>
                   </li>
@@ -66,7 +76,7 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../products/tracking-portal/">Tracking Portal</a>
                   </li>
               </ul>
-              <p class="caption"><span class="caption-text">Platform</span></p>
+              <p class="caption"><span class="caption-text">Platform Services</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../platform/">Overview</a>
                   </li>
@@ -87,12 +97,35 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../platform/bf-warehouse/">Warehouse Service</a>
                   </li>
               </ul>
+              <p class="caption"><span class="caption-text">Capability Catalog</span></p>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../../vision/bf-integration/">Vision</a>
-                </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/SHIPMENTS/">Shipments</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/ADMIN_CONSOLE/">Admin Console</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/CONTROL_TOWER/">Control Tower</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/IDENTITY/">Identity</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/MASTERDATA/">Masterdata</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/ORDERS/">Orders</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/WAREHOUSE/">Warehouse</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/SEARCH/">Search</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/FINTECH/">Fintech</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/CARRIER_PORTAL/">Carrier Portal</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/TRACKING_PORTAL/">Tracking Portal</a>
+                  </li>
               </ul>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../../api-reference/">API Reference</a>
+                <li class="toctree-l1"><a class="reference internal" href="../../vision/bf-integration/">Vision Archive</a>
                 </li>
               </ul>
       </div>
@@ -118,8 +151,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <h1 id="metrics-export-monitoring">Metrics Export &amp; Monitoring</h1>
-<h2 id="enabling-metrics">Enabling Metrics</h2>
+                <h1 id="metrics-export-monitoring">Metrics Export &amp; Monitoring<a class="headerlink" href="#metrics-export-monitoring" title="Permanent link">&para;</a></h1>
+<h2 id="enabling-metrics">Enabling Metrics<a class="headerlink" href="#enabling-metrics" title="Permanent link">&para;</a></h2>
 <pre><code class="language-bash"># Environment variable
 EXPOSE_METRICS=true
 
@@ -128,7 +161,7 @@ env:
 - name: EXPOSE_METRICS
   value: &quot;true&quot;
 </code></pre>
-<h2 id="available-metrics">Available Metrics</h2>
+<h2 id="available-metrics">Available Metrics<a class="headerlink" href="#available-metrics" title="Permanent link">&para;</a></h2>
 <p>Idempotency
 - <code>idempotency_keys_pruned_total</code> - Keys removed by prune job
 - <code>idempotency_duplicate_prevented_total</code> - Duplicate requests blocked
@@ -142,7 +175,7 @@ env:
 - <code>qbo_sync_enqueued_total</code> - Number of POs enqueued to Redis (label with <code>{ org_id }</code>)
 - <code>qbo_sync_failures_total</code> - Number of sync errors (label with <code>{ org_id, reason }</code>)
 - <code>qbo_sync_refreshes_total</code> - Number of token refreshes performed (label with <code>{ org_id }</code>)</p>
-<h2 id="prometheus-integration">Prometheus Integration</h2>
+<h2 id="prometheus-integration">Prometheus Integration<a class="headerlink" href="#prometheus-integration" title="Permanent link">&para;</a></h2>
 <p>Deploy ServiceMonitor:</p>
 <pre><code class="language-bash">kubectl apply -f k8s/service-monitor.yaml
 </code></pre>
@@ -150,11 +183,11 @@ env:
 <pre><code class="language-bash">curl http://&lt;bridgeflow-service&gt;:&lt;port&gt;/metrics | grep idempotency
 </code></pre>
 <p>Create Grafana dashboard using metrics.</p>
-<h2 id="health-endpoint">Health Endpoint</h2>
+<h2 id="health-endpoint">Health Endpoint<a class="headerlink" href="#health-endpoint" title="Permanent link">&para;</a></h2>
 <p>The exporter exposes <code>/metrics/health</code> which returns a simple JSON health object for monitoring:</p>
 <pre><code class="language-json">{ &quot;status&quot;: &quot;healthy&quot;, &quot;ts&quot;: &quot;...&quot;, &quot;metrics&quot;: { &quot;counters&quot;: 4, &quot;gauges&quot;: 1, &quot;histos&quot;: 1 } }
 </code></pre>
-<h2 id="notes">Notes</h2>
+<h2 id="notes">Notes<a class="headerlink" href="#notes" title="Permanent link">&para;</a></h2>
 <ul>
 <li>The exporter converts metric names by replacing dots with underscores and appending <code>_total</code> for counters. Example: <code>idempotency.keys_pruned</code> -&gt; <code>idempotency_keys_pruned_total</code>.</li>
 <li>Histograms are exposed as <code>_count</code> and <code>_sum</code> pairs (simplified) for Prometheus compatibility.</li>

@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="../../../../../../css/theme.css" />
     <link rel="stylesheet" href="../../../../../../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../../../../../../stylesheets/extra.css" rel="stylesheet" />
     
       <script>
         // Current page data
@@ -43,7 +44,16 @@
                 <li class="toctree-l1"><a class="reference internal" href="../../../../../..">Home</a>
                 </li>
               </ul>
-              <p class="caption"><span class="caption-text">Products</span></p>
+              <p class="caption"><span class="caption-text">Start Here</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../ONBOARDING/">Onboarding</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../ARCHITECTURE/">Architecture</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../api-reference/">API Reference Hub</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Product Suite</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../../../../../products/">Overview</a>
                   </li>
@@ -66,7 +76,7 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../../../../../products/tracking-portal/">Tracking Portal</a>
                   </li>
               </ul>
-              <p class="caption"><span class="caption-text">Platform</span></p>
+              <p class="caption"><span class="caption-text">Platform Services</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../../../../../platform/">Overview</a>
                   </li>
@@ -87,12 +97,35 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../../../../../platform/bf-warehouse/">Warehouse Service</a>
                   </li>
               </ul>
+              <p class="caption"><span class="caption-text">Capability Catalog</span></p>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../../../../">Vision</a>
-                </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/SHIPMENTS/">Shipments</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/ADMIN_CONSOLE/">Admin Console</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/CONTROL_TOWER/">Control Tower</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/IDENTITY/">Identity</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/MASTERDATA/">Masterdata</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/ORDERS/">Orders</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/WAREHOUSE/">Warehouse</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/SEARCH/">Search</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/FINTECH/">Fintech</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/CARRIER_PORTAL/">Carrier Portal</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/TRACKING_PORTAL/">Tracking Portal</a>
+                  </li>
               </ul>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../../../../../../api-reference/">API Reference</a>
+                <li class="toctree-l1"><a class="reference internal" href="../../../../">Vision Archive</a>
                 </li>
               </ul>
       </div>
@@ -123,22 +156,22 @@
 Status: Planned / In Development
 Context: Original BF-INTEGRATION Vision (Pre-Phase 30)</p>
 </blockquote>
-<h1 id="phase-39-layer-1-canvas-polish-ux-complete-summary">Phase 39 — Layer 1 Canvas Polish &amp; UX — Complete Summary</h1>
+<h1 id="phase-39-layer-1-canvas-polish-ux-complete-summary">Phase 39 — Layer 1 Canvas Polish &amp; UX — Complete Summary<a class="headerlink" href="#phase-39-layer-1-canvas-polish-ux-complete-summary" title="Permanent link">&para;</a></h1>
 <p><strong>Status:</strong> ✅ Complete (January 12, 2026)</p>
 <p>Phase 39 transformed the Canvas from functional to enterprise-grade with usability and visual design improvements, robust placement guides, connection visualization, TP duplication fixes, keyboard/workflow enhancements, tooltips, and <strong>critical authentication fixes</strong> that enabled full super-admin functionality.</p>
-<h2 id="files-created">Files Created</h2>
+<h2 id="files-created">Files Created<a class="headerlink" href="#files-created" title="Permanent link">&para;</a></h2>
 <ul>
 <li><code>web/src/features/canvas-assembly/canvasUX.js</code> — Core UX enhancement module</li>
 <li><code>web/tests/canvas-ux.test.js</code> — Unit tests</li>
 </ul>
-<h2 id="files-modified">Files Modified</h2>
+<h2 id="files-modified">Files Modified<a class="headerlink" href="#files-modified" title="Permanent link">&para;</a></h2>
 <ul>
 <li><code>web/src/assembly.js</code> — Initialized <code>CanvasUXEnhancer</code></li>
 <li><code>web/src/assembly/renderComponents.js</code> — Added tooltips, protocol badges, empty state updates</li>
 <li><code>api/handlers/auth.js</code> — <strong>Added super admin logic to login function</strong></li>
 <li><code>test/integration/super-admin-create-blueprint.test.js</code> — <strong>Fixed authentication test</strong></li>
 </ul>
-<h2 id="features-implemented">Features Implemented</h2>
+<h2 id="features-implemented">Features Implemented<a class="headerlink" href="#features-implemented" title="Permanent link">&para;</a></h2>
 <ol>
 <li><strong>Critical Authentication Fixes</strong> </li>
 <li><strong>Super-admin login consistency</strong>: Fixed missing <code>isSuperAdmin</code> flag in JWT tokens during login</li>
@@ -190,15 +223,15 @@ Context: Original BF-INTEGRATION Vision (Pre-Phase 30)</p>
 <li>5-second hover tooltips with component/protocol details (auto-dismiss)</li>
 <li>Tooltips include protocol metadata and quick-action hints (where applicable)</li>
 </ol>
-<h2 id="quick-test">Quick test</h2>
+<h2 id="quick-test">Quick test<a class="headerlink" href="#quick-test" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Run UI unit tests: <code>pnpm test web/tests/canvas-ux.test.js</code></li>
 <li><strong>Run authentication test</strong>: <code>npm test -- test/integration/super-admin-create-blueprint.test.js</code></li>
 </ul>
-<h2 id="strategic-impact">Strategic Impact</h2>
+<h2 id="strategic-impact">Strategic Impact<a class="headerlink" href="#strategic-impact" title="Permanent link">&para;</a></h2>
 <p>Phase 39 noticeably improves discoverability and reduces the time-to-complete for non-technical users; it also preserves developer productivity by offering keyboard shortcuts, undo/redo, and programmatic stability for large canvases. <strong>Most critically, it resolves authentication blocking issues that prevented the CTO from accessing system functionality, enabling full enterprise management capabilities.</strong></p>
 <hr />
-<h2 id="authentication-issue-resolution">Authentication Issue Resolution</h2>
+<h2 id="authentication-issue-resolution">Authentication Issue Resolution<a class="headerlink" href="#authentication-issue-resolution" title="Permanent link">&para;</a></h2>
 <p><strong>Before</strong>: CTO couldn't access system due to missing <code>isSuperAdmin</code> flag in login JWT tokens and rate limiting interference
 <strong>After</strong>: Clean, reliable super-admin access with proper JWT claims and test environment isolation
 <strong>Impact</strong>: Transforms BridgeFlow from blocking its own administrator to empowering enterprise management with proper security boundaries</p>

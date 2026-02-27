@@ -1,38 +1,30 @@
-# Product: Coords App
+# Coords App
 
-## Purpose
+Coords App is a BridgeFlow umbrella product focused on spatial identity and logistics coordination.
 
-Coords App is a separate Bridgeflow-umbrella application focused on spatial identity and logistics coordination.
+## What It Provides
 
-It supports the BF system with:
-- open coordinate protocol specification
-- reference CLI encoding/decoding tools
-- hosted resolver and coordination APIs
+- Open coordinate protocol specification
+- Reference CLI tooling for encode/decode
+- Hosted resolver and coordination APIs
 
-## Workspace Location
+## Workspace Layout
 
-- `c:\bridgeflow-core\coordsapp`
+- `spec/` protocol and feature docs
+- `core/` Go reference CLI
+- `cloud/` resolver API and coordination runtime
 
-## Structure
+## Runtime Status
 
-- `spec/`: open protocol spec (CC0) and feature docs
-- `core/`: Go reference CLI for protocol encode/decode
-- `cloud/`: hosted resolver API, alias registry, and coordination runtime
+Active development.
 
-## Status
+Primary endpoint: https://coords.up.railway.app
 
-Active development under BF umbrella.
-
-## Primary Endpoint
-
-- `https://coords.up.railway.app` (referenced in `coordsapp/cloud/README.md`)
-
-## Notable API Surface (`cloud`)
+## Key Cloud Endpoints
 
 - Resolver: `GET /v1/resolve/{handle}`
 - Auth: `POST /v1/auth/signup`, `POST /v1/auth/token`
-- Status: `GET /v1/status/public`
-- Coordination:
-  - `POST /v1/routing/plan`
-  - `POST /v1/coordination/assign-dock`
-  - `GET /v1/coordination/docks/{id}/status`
+- Public status: `GET /v1/status/public`
+- Routing: `POST /v1/routing/plan`
+- Dock assignment: `POST /v1/coordination/assign-dock`
+- Dock status: `GET /v1/coordination/docks/{id}/status`

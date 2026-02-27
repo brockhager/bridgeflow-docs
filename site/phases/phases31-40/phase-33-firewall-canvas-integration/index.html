@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="../../../css/theme.css" />
     <link rel="stylesheet" href="../../../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../../../stylesheets/extra.css" rel="stylesheet" />
     
       <script>
         // Current page data
@@ -43,7 +44,16 @@
                 <li class="toctree-l1"><a class="reference internal" href="../../..">Home</a>
                 </li>
               </ul>
-              <p class="caption"><span class="caption-text">Products</span></p>
+              <p class="caption"><span class="caption-text">Start Here</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../ONBOARDING/">Onboarding</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../ARCHITECTURE/">Architecture</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../api-reference/">API Reference Hub</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Product Suite</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../../products/">Overview</a>
                   </li>
@@ -66,7 +76,7 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../../products/tracking-portal/">Tracking Portal</a>
                   </li>
               </ul>
-              <p class="caption"><span class="caption-text">Platform</span></p>
+              <p class="caption"><span class="caption-text">Platform Services</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../../platform/">Overview</a>
                   </li>
@@ -87,12 +97,35 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../../platform/bf-warehouse/">Warehouse Service</a>
                   </li>
               </ul>
+              <p class="caption"><span class="caption-text">Capability Catalog</span></p>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../../../vision/bf-integration/">Vision</a>
-                </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../features/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../features/SHIPMENTS/">Shipments</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../features/ADMIN_CONSOLE/">Admin Console</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../features/CONTROL_TOWER/">Control Tower</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../features/IDENTITY/">Identity</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../features/MASTERDATA/">Masterdata</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../features/ORDERS/">Orders</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../features/WAREHOUSE/">Warehouse</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../features/SEARCH/">Search</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../features/FINTECH/">Fintech</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../features/CARRIER_PORTAL/">Carrier Portal</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../features/TRACKING_PORTAL/">Tracking Portal</a>
+                  </li>
               </ul>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../../../api-reference/">API Reference</a>
+                <li class="toctree-l1"><a class="reference internal" href="../../../vision/bf-integration/">Vision Archive</a>
                 </li>
               </ul>
       </div>
@@ -118,10 +151,10 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <h1 id="firewall-api-canvas-integration-roadmap">Firewall API + Canvas Integration Roadmap</h1>
+                <h1 id="firewall-api-canvas-integration-roadmap">Firewall API + Canvas Integration Roadmap<a class="headerlink" href="#firewall-api-canvas-integration-roadmap" title="Permanent link">&para;</a></h1>
 <p><strong>Status:</strong> API complete (Phase 33 Part 1), Canvas integration pending (Phase 32 final push)</p>
-<h2 id="current-state">Current State</h2>
-<h3 id="completed-phase-33-part-1">✅ Completed (Phase 33 Part 1)</h3>
+<h2 id="current-state">Current State<a class="headerlink" href="#current-state" title="Permanent link">&para;</a></h2>
+<h3 id="completed-phase-33-part-1">✅ Completed (Phase 33 Part 1)<a class="headerlink" href="#completed-phase-33-part-1" title="Permanent link">&para;</a></h3>
 <ol>
 <li><strong>Prisma Model</strong> - Firewall entity with Layer 4 security fields</li>
 <li><strong>API Endpoints</strong> - POST/GET/DELETE handlers with full RBAC + tenancy</li>
@@ -130,10 +163,10 @@
 <li><strong>Migration</strong> - Database schema applied</li>
 <li><strong>Documentation</strong> - Complete specification</li>
 </ol>
-<h3 id="next-canvas-integration-phase-32-final">⏳ Next: Canvas Integration (Phase 32 Final)</h3>
+<h3 id="next-canvas-integration-phase-32-final">⏳ Next: Canvas Integration (Phase 32 Final)<a class="headerlink" href="#next-canvas-integration-phase-32-final" title="Permanent link">&para;</a></h3>
 <p>The firewall API is now ready for Canvas UI integration. When a user activates a bridge in Canvas, the firewall creation flow should follow the same pattern as Trading Partners and Connectors.</p>
-<h2 id="canvas-integration-pattern">Canvas Integration Pattern</h2>
-<h3 id="template-how-tpsconnectors-are-added">Template: How TPs/Connectors Are Added</h3>
+<h2 id="canvas-integration-pattern">Canvas Integration Pattern<a class="headerlink" href="#canvas-integration-pattern" title="Permanent link">&para;</a></h2>
+<h3 id="template-how-tpsconnectors-are-added">Template: How TPs/Connectors Are Added<a class="headerlink" href="#template-how-tpsconnectors-are-added" title="Permanent link">&para;</a></h3>
 <pre><code class="language-javascript">// In assembly.js - existing pattern for TPs
 const urlParams = new URLSearchParams(window.location.search)
 const newTpId = urlParams.get('newTpId')
@@ -149,7 +182,7 @@ if (newTpId) {
   })
 }
 </code></pre>
-<h3 id="same-pattern-for-firewalls">Same Pattern for Firewalls</h3>
+<h3 id="same-pattern-for-firewalls">Same Pattern for Firewalls<a class="headerlink" href="#same-pattern-for-firewalls" title="Permanent link">&para;</a></h3>
 <pre><code class="language-javascript">// In assembly.js - firewall pattern (ready to implement)
 const urlParams = new URLSearchParams(window.location.search)
 const newFirewallId = urlParams.get('newFirewallId')
@@ -189,7 +222,7 @@ if (newFirewallId) {
   pollStatus(newFirewallId).catch(err =&gt; console.error('Poll failed:', err))
 }
 </code></pre>
-<h2 id="data-flow-diagram">Data Flow Diagram</h2>
+<h2 id="data-flow-diagram">Data Flow Diagram<a class="headerlink" href="#data-flow-diagram" title="Permanent link">&para;</a></h2>
 <pre><code>┌──────────────────────────────────┐
 │  Canvas UI (web/src/assembly.js) │
 │  User clicks &quot;Add Firewall&quot;      │
@@ -226,8 +259,8 @@ if (newFirewallId) {
                        ├─→ Test port connectivity
                        └─→ Update status in DB
 </code></pre>
-<h2 id="canvas-rendering-requirements">Canvas Rendering Requirements</h2>
-<h3 id="firewall-card-component-to-be-added">Firewall Card Component (to be added)</h3>
+<h2 id="canvas-rendering-requirements">Canvas Rendering Requirements<a class="headerlink" href="#canvas-rendering-requirements" title="Permanent link">&para;</a></h2>
+<h3 id="firewall-card-component-to-be-added">Firewall Card Component (to be added)<a class="headerlink" href="#firewall-card-component-to-be-added" title="Permanent link">&para;</a></h3>
 <pre><code class="language-javascript">class FirewallCard extends Component {
   // Display firewall configuration on bridge
   render() {
@@ -254,7 +287,7 @@ if (newFirewallId) {
   }
 }
 </code></pre>
-<h3 id="firewall-form-component-to-be-added">Firewall Form Component (to be added)</h3>
+<h3 id="firewall-form-component-to-be-added">Firewall Form Component (to be added)<a class="headerlink" href="#firewall-form-component-to-be-added" title="Permanent link">&para;</a></h3>
 <pre><code class="language-javascript">class FirewallForm extends Component {
   // User enters firewall details
   fields = {
@@ -317,7 +350,7 @@ if (newFirewallId) {
   }
 }
 </code></pre>
-<h2 id="api-integration-checklist-for-canvas-dev">API Integration Checklist (for Canvas dev)</h2>
+<h2 id="api-integration-checklist-for-canvas-dev">API Integration Checklist (for Canvas dev)<a class="headerlink" href="#api-integration-checklist-for-canvas-dev" title="Permanent link">&para;</a></h2>
 <ul>
 <li>[ ] Add firewall form component to Canvas</li>
 <li>[ ] Add firewall card component to bridge rendering</li>
@@ -330,7 +363,7 @@ if (newFirewallId) {
 <li>[ ] Persist firewall state in bridge config</li>
 <li>[ ] Test full activation flow end-to-end</li>
 </ul>
-<h2 id="error-handling-in-canvas">Error Handling in Canvas</h2>
+<h2 id="error-handling-in-canvas">Error Handling in Canvas<a class="headerlink" href="#error-handling-in-canvas" title="Permanent link">&para;</a></h2>
 <p>The API returns structured errors that Canvas should handle:</p>
 <pre><code class="language-javascript">// Example: Create firewall with private IP (rejected by API)
 POST /api/firewalls
@@ -351,8 +384,8 @@ POST /api/firewalls
 // Canvas should display:
 // &quot;⚠️ Private IP range 10.0.0.0/8 not allowed — use public IP&quot;
 </code></pre>
-<h2 id="testing-checklist-for-canvas-integration">Testing Checklist for Canvas Integration</h2>
-<h3 id="manual-testing">Manual Testing</h3>
+<h2 id="testing-checklist-for-canvas-integration">Testing Checklist for Canvas Integration<a class="headerlink" href="#testing-checklist-for-canvas-integration" title="Permanent link">&para;</a></h2>
+<h3 id="manual-testing">Manual Testing<a class="headerlink" href="#manual-testing" title="Permanent link">&para;</a></h3>
 <ul>
 <li>[ ] Create inbound firewall (PROVISIONING → ACTIVE)</li>
 <li>[ ] Create outbound firewall (PROVISIONING → ACTIVE)</li>
@@ -363,14 +396,14 @@ POST /api/firewalls
 <li>[ ] View firewall details in palette</li>
 <li>[ ] View all firewalls for a bridge (GET /api/bridges/:id/firewalls)</li>
 </ul>
-<h3 id="automated-testing">Automated Testing</h3>
+<h3 id="automated-testing">Automated Testing<a class="headerlink" href="#automated-testing" title="Permanent link">&para;</a></h3>
 <ul>
 <li>[ ] E2E test: Create bridge → add firewall → activate → verify status</li>
 <li>[ ] E2E test: Create firewall → delete → verify not in list</li>
 <li>[ ] E2E test: Create duplicate → verify 409 error</li>
 </ul>
-<h2 id="api-documentation-for-frontend-engineers">API Documentation (for frontend engineers)</h2>
-<h3 id="post-apifirewalls">POST /api/firewalls</h3>
+<h2 id="api-documentation-for-frontend-engineers">API Documentation (for frontend engineers)<a class="headerlink" href="#api-documentation-for-frontend-engineers" title="Permanent link">&para;</a></h2>
+<h3 id="post-apifirewalls">POST /api/firewalls<a class="headerlink" href="#post-apifirewalls" title="Permanent link">&para;</a></h3>
 <p><strong>Create a firewall rule set</strong></p>
 <pre><code>POST /api/firewalls
 Content-Type: application/json
@@ -408,7 +441,7 @@ Error (409 Conflict):
   &quot;message&quot;: &quot;A inbound firewall already exists for this bridge&quot;
 }
 </code></pre>
-<h3 id="get-apifirewallsid">GET /api/firewalls/:id</h3>
+<h3 id="get-apifirewallsid">GET /api/firewalls/:id<a class="headerlink" href="#get-apifirewallsid" title="Permanent link">&para;</a></h3>
 <p><strong>Fetch a single firewall</strong></p>
 <pre><code>GET /api/firewalls/fw_456
 Authorization: Bearer &lt;jwt&gt;
@@ -431,7 +464,7 @@ Error (404 Not Found):
   &quot;message&quot;: &quot;Firewall not found or access denied&quot;
 }
 </code></pre>
-<h3 id="get-apibridgesbridgeidfirewalls">GET /api/bridges/:bridgeId/firewalls</h3>
+<h3 id="get-apibridgesbridgeidfirewalls">GET /api/bridges/:bridgeId/firewalls<a class="headerlink" href="#get-apibridgesbridgeidfirewalls" title="Permanent link">&para;</a></h3>
 <p><strong>List all firewalls for a bridge</strong></p>
 <pre><code>GET /api/bridges/userbridge_123/firewalls
 Authorization: Bearer &lt;jwt&gt;
@@ -458,7 +491,7 @@ Response (200 OK):
   ]
 }
 </code></pre>
-<h3 id="delete-apifirewallsid">DELETE /api/firewalls/:id</h3>
+<h3 id="delete-apifirewallsid">DELETE /api/firewalls/:id<a class="headerlink" href="#delete-apifirewallsid" title="Permanent link">&para;</a></h3>
 <p><strong>Delete a firewall rule set</strong></p>
 <pre><code>DELETE /api/firewalls/fw_456
 Authorization: Bearer &lt;jwt&gt;
@@ -472,7 +505,7 @@ Error (404 Not Found):
   &quot;message&quot;: &quot;Firewall not found or access denied&quot;
 }
 </code></pre>
-<h2 id="next-steps">Next Steps</h2>
+<h2 id="next-steps">Next Steps<a class="headerlink" href="#next-steps" title="Permanent link">&para;</a></h2>
 <ol>
 <li><strong>Canvas Team:</strong> Implement firewall form + card components</li>
 <li><strong>Canvas Team:</strong> Add <code>?newFirewallId</code> URL parameter detection</li>
@@ -481,7 +514,7 @@ Error (404 Not Found):
 <li><strong>API Team:</strong> Apply firewall rules to Layer 4 infrastructure</li>
 <li><strong>QA Team:</strong> End-to-end test firewall activation flow</li>
 </ol>
-<h2 id="references">References</h2>
+<h2 id="references">References<a class="headerlink" href="#references" title="Permanent link">&para;</a></h2>
 <ul>
 <li>API Implementation: <a href="../../handlers/firewalls.js">api/handlers/firewalls.js</a></li>
 <li>Validators: <a href="../../validators/firewall.js">api/validators/firewall.js</a></li>

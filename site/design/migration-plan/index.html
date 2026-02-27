@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="../../css/theme.css" />
     <link rel="stylesheet" href="../../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../../stylesheets/extra.css" rel="stylesheet" />
     
       <script>
         // Current page data
@@ -43,7 +44,16 @@
                 <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
                 </li>
               </ul>
-              <p class="caption"><span class="caption-text">Products</span></p>
+              <p class="caption"><span class="caption-text">Start Here</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../ONBOARDING/">Onboarding</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../ARCHITECTURE/">Architecture</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../api-reference/">API Reference Hub</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Product Suite</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../products/">Overview</a>
                   </li>
@@ -66,7 +76,7 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../products/tracking-portal/">Tracking Portal</a>
                   </li>
               </ul>
-              <p class="caption"><span class="caption-text">Platform</span></p>
+              <p class="caption"><span class="caption-text">Platform Services</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../platform/">Overview</a>
                   </li>
@@ -87,12 +97,35 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../platform/bf-warehouse/">Warehouse Service</a>
                   </li>
               </ul>
+              <p class="caption"><span class="caption-text">Capability Catalog</span></p>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../../vision/bf-integration/">Vision</a>
-                </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/SHIPMENTS/">Shipments</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/ADMIN_CONSOLE/">Admin Console</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/CONTROL_TOWER/">Control Tower</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/IDENTITY/">Identity</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/MASTERDATA/">Masterdata</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/ORDERS/">Orders</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/WAREHOUSE/">Warehouse</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/SEARCH/">Search</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/FINTECH/">Fintech</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/CARRIER_PORTAL/">Carrier Portal</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/TRACKING_PORTAL/">Tracking Portal</a>
+                  </li>
               </ul>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../../api-reference/">API Reference</a>
+                <li class="toctree-l1"><a class="reference internal" href="../../vision/bf-integration/">Vision Archive</a>
                 </li>
               </ul>
       </div>
@@ -118,22 +151,22 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <h1 id="migration-plan-tenant_id-schemadb-per-tenant">Migration Plan: tenant_id -&gt; schema/db-per-tenant</h1>
+                <h1 id="migration-plan-tenant_id-schemadb-per-tenant">Migration Plan: tenant_id -&gt; schema/db-per-tenant<a class="headerlink" href="#migration-plan-tenant_id-schemadb-per-tenant" title="Permanent link">&para;</a></h1>
 <p>This is a pragmatic, staged migration plan designed to avoid downtime and provide rollback options. Keep migrations idempotent and script-driven.</p>
-<h2 id="phases">Phases</h2>
-<h3 id="phase-0-mvp-shared-schema-with-tenant_id">Phase 0 — MVP (shared schema with tenant_id)</h3>
+<h2 id="phases">Phases<a class="headerlink" href="#phases" title="Permanent link">&para;</a></h2>
+<h3 id="phase-0-mvp-shared-schema-with-tenant_id">Phase 0 — MVP (shared schema with tenant_id)<a class="headerlink" href="#phase-0-mvp-shared-schema-with-tenant_id" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Enforce tenant filters in repository layer and test for tenant isolation</li>
 <li>Add <code>TenantDescriptor</code> and <code>TenantManager</code> to centralize tenant metadata</li>
 <li>Add operator tools to tag heavy tenants for future isolation</li>
 </ul>
-<h3 id="phase-1-prepare-introduce-schema-per-tenant-capabilities">Phase 1 — Prepare (introduce schema-per-tenant capabilities)</h3>
+<h3 id="phase-1-prepare-introduce-schema-per-tenant-capabilities">Phase 1 — Prepare (introduce schema-per-tenant capabilities)<a class="headerlink" href="#phase-1-prepare-introduce-schema-per-tenant-capabilities" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Add schema management utilities in <code>lib-db</code> and small migration worker service</li>
 <li>Implement per-tenant schema templates and migration pipelines</li>
 <li>Add status tracking for tenant migration state (pending, in-progress, completed, failed)</li>
 </ul>
-<h3 id="phase-2-migrate-selected-tenants-schema-per-tenant">Phase 2 — Migrate selected tenants (schema-per-tenant)</h3>
+<h3 id="phase-2-migrate-selected-tenants-schema-per-tenant">Phase 2 — Migrate selected tenants (schema-per-tenant)<a class="headerlink" href="#phase-2-migrate-selected-tenants-schema-per-tenant" title="Permanent link">&para;</a></h3>
 <ul>
 <li>For a single tenant:</li>
 <li>Create schema and apply base migrations</li>
@@ -144,14 +177,14 @@
 <li>Cut over reads fully and disable dual-write after confident</li>
 <li>Repeat per tenant; prefer non-critical tenants first</li>
 </ul>
-<h3 id="phase-3-db-per-tenant-enterprise">Phase 3 — DB-per-tenant (enterprise)</h3>
+<h3 id="phase-3-db-per-tenant-enterprise">Phase 3 — DB-per-tenant (enterprise)<a class="headerlink" href="#phase-3-db-per-tenant-enterprise" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Provision dedicated DB instance or cluster per tenant (automated via IaC)</li>
 <li>Implement connection pooling and operator limits</li>
 <li>Ensure backup/restore and per-tenant recovery procedures exist</li>
 </ul>
 <hr />
-<h2 id="patterns-best-practices">Patterns &amp; Best Practices</h2>
+<h2 id="patterns-best-practices">Patterns &amp; Best Practices<a class="headerlink" href="#patterns-best-practices" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Dual-Write &amp; Read-Fallback</li>
 <li>Dual-write to old and new models, and read from old by default until validation completes</li>
@@ -186,7 +219,7 @@
 <li>If production divergence occurs: re-enable reads from shared schema and investigate</li>
 </ul>
 <hr />
-<h2 id="operational-runbook-example">Operational Runbook (example)</h2>
+<h2 id="operational-runbook-example">Operational Runbook (example)<a class="headerlink" href="#operational-runbook-example" title="Permanent link">&para;</a></h2>
 <ol>
 <li>Pre-checks: ensure nightly backup succeeded and target schema has been created</li>
 <li>Start migration job in <code>dry-run</code> mode to capture expected differences</li>
@@ -196,14 +229,14 @@
 <li>Monitor for N days; if stable, disable dual-write</li>
 </ol>
 <hr />
-<h2 id="tooling-recommendations">Tooling Recommendations</h2>
+<h2 id="tooling-recommendations">Tooling Recommendations<a class="headerlink" href="#tooling-recommendations" title="Permanent link">&para;</a></h2>
 <ul>
 <li><code>migration-worker</code> service to perform backfills and monitor progress</li>
 <li><code>migration-cli</code> as operator tool to trigger and supervise migrations</li>
 <li><code>migration-audit</code> into <code>audit-service</code> for every step</li>
 </ul>
 <hr />
-<h2 id="risks-mitigations">Risks &amp; Mitigations</h2>
+<h2 id="risks-mitigations">Risks &amp; Mitigations<a class="headerlink" href="#risks-mitigations" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Risk: performance hit during dual-write/backfill</li>
 <li>Mitigation: throttle backfill, schedule during low traffic windows</li>

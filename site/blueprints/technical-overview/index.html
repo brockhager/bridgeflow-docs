@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="../../css/theme.css" />
     <link rel="stylesheet" href="../../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../../stylesheets/extra.css" rel="stylesheet" />
     
       <script>
         // Current page data
@@ -43,7 +44,16 @@
                 <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
                 </li>
               </ul>
-              <p class="caption"><span class="caption-text">Products</span></p>
+              <p class="caption"><span class="caption-text">Start Here</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../ONBOARDING/">Onboarding</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../ARCHITECTURE/">Architecture</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../api-reference/">API Reference Hub</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Product Suite</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../products/">Overview</a>
                   </li>
@@ -66,7 +76,7 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../products/tracking-portal/">Tracking Portal</a>
                   </li>
               </ul>
-              <p class="caption"><span class="caption-text">Platform</span></p>
+              <p class="caption"><span class="caption-text">Platform Services</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../platform/">Overview</a>
                   </li>
@@ -87,12 +97,35 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../platform/bf-warehouse/">Warehouse Service</a>
                   </li>
               </ul>
+              <p class="caption"><span class="caption-text">Capability Catalog</span></p>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../../vision/bf-integration/">Vision</a>
-                </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/SHIPMENTS/">Shipments</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/ADMIN_CONSOLE/">Admin Console</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/CONTROL_TOWER/">Control Tower</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/IDENTITY/">Identity</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/MASTERDATA/">Masterdata</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/ORDERS/">Orders</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/WAREHOUSE/">Warehouse</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/SEARCH/">Search</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/FINTECH/">Fintech</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/CARRIER_PORTAL/">Carrier Portal</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/TRACKING_PORTAL/">Tracking Portal</a>
+                  </li>
               </ul>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../../api-reference/">API Reference</a>
+                <li class="toctree-l1"><a class="reference internal" href="../../vision/bf-integration/">Vision Archive</a>
                 </li>
               </ul>
       </div>
@@ -118,8 +151,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <h1 id="blueprints-technical-overview">Blueprints: Technical Overview</h1>
-<h2 id="data-model">Data Model</h2>
+                <h1 id="blueprints-technical-overview">Blueprints: Technical Overview<a class="headerlink" href="#blueprints-technical-overview" title="Permanent link">&para;</a></h1>
+<h2 id="data-model">Data Model<a class="headerlink" href="#data-model" title="Permanent link">&para;</a></h2>
 <p>The <code>BridgeBlueprint</code> model is the core entity. It supports multi-tenancy via <code>organizationId</code>.</p>
 <pre><code class="language-prisma">model BridgeBlueprint {
   id             String        @id @default(cuid())
@@ -153,10 +186,10 @@ model BlueprintInstance {
   metadata      Json?
 }
 </code></pre>
-<h2 id="bridge-visualization-integration">🌉 Bridge Visualization Integration</h2>
-<h3 id="phase-32-bridge-outline-enhancement">Phase 32+ Bridge Outline Enhancement</h3>
+<h2 id="bridge-visualization-integration">🌉 Bridge Visualization Integration<a class="headerlink" href="#bridge-visualization-integration" title="Permanent link">&para;</a></h2>
+<h3 id="phase-32-bridge-outline-enhancement">Phase 32+ Bridge Outline Enhancement<a class="headerlink" href="#phase-32-bridge-outline-enhancement" title="Permanent link">&para;</a></h3>
 <p>The blueprint system now includes visual configuration for bridge outline rendering:</p>
-<h4 id="required-components-mapping">Required Components Mapping</h4>
+<h4 id="required-components-mapping">Required Components Mapping<a class="headerlink" href="#required-components-mapping" title="Permanent link">&para;</a></h4>
 <pre><code class="language-javascript">// Blueprint config structure for bridge visualization
 {
   &quot;required&quot;: [&quot;trading-partner&quot;, &quot;connector&quot;, &quot;trading-partner&quot;],
@@ -168,21 +201,21 @@ model BlueprintInstance {
   }
 }
 </code></pre>
-<h4 id="visual-slot-determination">Visual Slot Determination</h4>
+<h4 id="visual-slot-determination">Visual Slot Determination<a class="headerlink" href="#visual-slot-determination" title="Permanent link">&para;</a></h4>
 <ul>
 <li><strong>Required slots</strong>: Orange dashed circles with pulse animation</li>
 <li><strong>Optional slots</strong>: Gray dashed circles (static)</li>
 <li><strong>Slot mapping</strong>: Based on blueprint <code>required</code> array and component types</li>
 </ul>
-<h2 id="api-architecture">API Architecture</h2>
+<h2 id="api-architecture">API Architecture<a class="headerlink" href="#api-architecture" title="Permanent link">&para;</a></h2>
 <p>We strictly separate Public (Catalog) and Private (Management) access to ensure security.</p>
-<h3 id="public-api-get-apiblueprints">Public API (<code>GET /api/blueprints</code>)</h3>
+<h3 id="public-api-get-apiblueprints">Public API (<code>GET /api/blueprints</code>)<a class="headerlink" href="#public-api-get-apiblueprints" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Purpose</strong>: Power the "Browse Blueprints" UI for all users.</li>
 <li><strong>Behavior</strong>: Returns <strong>only</strong> public blueprints (<code>organizationId: null</code>).</li>
 <li><strong>Security</strong>: Authenticated users only. Enterprise users view the global public catalog here. They do <em>not</em> see their private blueprints mixed in.</li>
 </ul>
-<h3 id="admin-api-admin-apiblueprints">Admin API (<code>/admin-api/blueprints</code>)</h3>
+<h3 id="admin-api-admin-apiblueprints">Admin API (<code>/admin-api/blueprints</code>)<a class="headerlink" href="#admin-api-admin-apiblueprints" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Purpose</strong>: Manage private blueprints for organizations.</li>
 <li><strong>Behavior</strong>: Scoped to the user's organization.</li>
@@ -190,15 +223,15 @@ model BlueprintInstance {
 <li><code>POST /</code>: Create a new blueprint. (BF Admins -&gt; Public, Org Admins -&gt; Private).</li>
 <li><code>GET /</code>: List blueprints belonging to the user's organization.</li>
 </ul>
-<h2 id="bridge-outline-technical-implementation">🔧 Bridge Outline Technical Implementation</h2>
-<h3 id="frontend-rendering-pipeline">Frontend Rendering Pipeline</h3>
+<h2 id="bridge-outline-technical-implementation">🔧 Bridge Outline Technical Implementation<a class="headerlink" href="#bridge-outline-technical-implementation" title="Permanent link">&para;</a></h2>
+<h3 id="frontend-rendering-pipeline">Frontend Rendering Pipeline<a class="headerlink" href="#frontend-rendering-pipeline" title="Permanent link">&para;</a></h3>
 <ol>
 <li><strong>Blueprint Selection</strong> → <code>loadBlueprintToCanvas(template)</code></li>
 <li><strong>Visual Processing</strong> → <code>renderBridgeOutline(template)</code></li>
 <li><strong>Slot Creation</strong> → Interactive circles positioned at bridge integration points</li>
 <li><strong>Gap Filling</strong> → <code>triggerBridgeSlotConfiguration(slotType, isRequired, blueprint)</code></li>
 </ol>
-<h3 id="data-flow-integration">Data Flow Integration</h3>
+<h3 id="data-flow-integration">Data Flow Integration<a class="headerlink" href="#data-flow-integration" title="Permanent link">&para;</a></h3>
 <pre><code class="language-javascript">// Blueprint → Bridge Outline mapping
 const requiredItems = template.config?.required || template.required || [];
 
@@ -209,7 +242,7 @@ const isRequired = requiredItems.some(req =&gt;
   (slot.type === 'destination' &amp;&amp; req.toLowerCase().includes('trading-partner'))
 );
 </code></pre>
-<h3 id="css-animation-classes">CSS Animation Classes</h3>
+<h3 id="css-animation-classes">CSS Animation Classes<a class="headerlink" href="#css-animation-classes" title="Permanent link">&para;</a></h3>
 <pre><code class="language-css">.bridge-slot {
   /* Required slot styling */
   border: 3px dashed #F97316;
@@ -227,21 +260,21 @@ const isRequired = requiredItems.some(req =&gt;
   50% { opacity: 0.7; }
 }
 </code></pre>
-<h2 id="security-rbac">Security &amp; RBAC</h2>
+<h2 id="security-rbac">Security &amp; RBAC<a class="headerlink" href="#security-rbac" title="Permanent link">&para;</a></h2>
 <ul>
 <li><strong>Free Users</strong>: Can view Public Catalog. Cannot create blueprints.</li>
 <li><strong>Customer Admins</strong>: Can view Public Catalog. Can create/manage their own Private Blueprints via Admin API.</li>
 <li><strong>BridgeFlow Admins</strong>: Can create/manage Public Blueprints.</li>
 </ul>
-<h2 id="visual-design-system">🎨 Visual Design System</h2>
-<h3 id="color-semantics">Color Semantics</h3>
+<h2 id="visual-design-system">🎨 Visual Design System<a class="headerlink" href="#visual-design-system" title="Permanent link">&para;</a></h2>
+<h3 id="color-semantics">Color Semantics<a class="headerlink" href="#color-semantics" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Orange (<code>#F97316</code>)</strong>: Required components (attention/action needed)</li>
 <li><strong>Gray (<code>#D1D5DB</code>)</strong>: Optional components (less prominent)</li>
 <li><strong>White (<code>rgba(255, 255, 255, 0.9)</code>)</strong>: Background for slots</li>
 <li><strong>Blue (<code>#3B82F6</code>)</strong>: Completed/active states</li>
 </ul>
-<h3 id="accessibility-standards">Accessibility Standards</h3>
+<h3 id="accessibility-standards">Accessibility Standards<a class="headerlink" href="#accessibility-standards" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>ARIA Labels</strong>: "Add Source System - Required component"</li>
 <li><strong>Keyboard Navigation</strong>: <code>tabindex="0"</code> on all interactive slots</li>

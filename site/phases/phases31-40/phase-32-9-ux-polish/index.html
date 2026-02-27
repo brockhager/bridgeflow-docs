@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="../../../css/theme.css" />
     <link rel="stylesheet" href="../../../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../../../stylesheets/extra.css" rel="stylesheet" />
     
       <script>
         // Current page data
@@ -43,7 +44,16 @@
                 <li class="toctree-l1"><a class="reference internal" href="../../..">Home</a>
                 </li>
               </ul>
-              <p class="caption"><span class="caption-text">Products</span></p>
+              <p class="caption"><span class="caption-text">Start Here</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../ONBOARDING/">Onboarding</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../ARCHITECTURE/">Architecture</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../api-reference/">API Reference Hub</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Product Suite</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../../products/">Overview</a>
                   </li>
@@ -66,7 +76,7 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../../products/tracking-portal/">Tracking Portal</a>
                   </li>
               </ul>
-              <p class="caption"><span class="caption-text">Platform</span></p>
+              <p class="caption"><span class="caption-text">Platform Services</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../../platform/">Overview</a>
                   </li>
@@ -87,12 +97,35 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../../platform/bf-warehouse/">Warehouse Service</a>
                   </li>
               </ul>
+              <p class="caption"><span class="caption-text">Capability Catalog</span></p>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../../../vision/bf-integration/">Vision</a>
-                </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../features/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../features/SHIPMENTS/">Shipments</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../features/ADMIN_CONSOLE/">Admin Console</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../features/CONTROL_TOWER/">Control Tower</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../features/IDENTITY/">Identity</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../features/MASTERDATA/">Masterdata</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../features/ORDERS/">Orders</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../features/WAREHOUSE/">Warehouse</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../features/SEARCH/">Search</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../features/FINTECH/">Fintech</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../features/CARRIER_PORTAL/">Carrier Portal</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../features/TRACKING_PORTAL/">Tracking Portal</a>
+                  </li>
               </ul>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../../../api-reference/">API Reference</a>
+                <li class="toctree-l1"><a class="reference internal" href="../../../vision/bf-integration/">Vision Archive</a>
                 </li>
               </ul>
       </div>
@@ -118,12 +151,12 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <h1 id="phase-329-enterprise-ux-polish">Phase 32.9 — Enterprise UX Polish</h1>
+                <h1 id="phase-329-enterprise-ux-polish">Phase 32.9 — Enterprise UX Polish<a class="headerlink" href="#phase-329-enterprise-ux-polish" title="Permanent link">&para;</a></h1>
 <p><strong>Status:</strong> ✅ COMPLETE<br />
 <strong>Date:</strong> January 2026<br />
 <strong>Scope:</strong> Three critical UX fixes for professional bridge canvas experience</p>
 <hr />
-<h2 id="overview">Overview</h2>
+<h2 id="overview">Overview<a class="headerlink" href="#overview" title="Permanent link">&para;</a></h2>
 <p>Phase 32.9 implements three enterprise-grade UX improvements to the Bridge Assembly Canvas, targeting BizTalk-parity user experience:</p>
 <ol>
 <li><strong>Canvas Panning</strong> — BizTalk-style drag-to-navigate for large integration diagrams</li>
@@ -131,17 +164,17 @@
 <li><strong>TP Loading</strong> — Correct trading partner count and list display</li>
 </ol>
 <hr />
-<h2 id="issue-1-canvas-panning-biztalk-style">Issue #1: Canvas Panning (BizTalk-Style)</h2>
-<h3 id="problem">Problem</h3>
+<h2 id="issue-1-canvas-panning-biztalk-style">Issue #1: Canvas Panning (BizTalk-Style)<a class="headerlink" href="#issue-1-canvas-panning-biztalk-style" title="Permanent link">&para;</a></h2>
+<h3 id="problem">Problem<a class="headerlink" href="#problem" title="Permanent link">&para;</a></h3>
 <p>Users couldn't pan/navigate the canvas when diagrams became larger than the viewport. This blocked workflow for complex multi-component integrations.</p>
-<h3 id="solution">Solution</h3>
+<h3 id="solution">Solution<a class="headerlink" href="#solution" title="Permanent link">&para;</a></h3>
 <p>Implemented viewport-based panning with three interaction modes:
 - <strong>Middle Mouse Button</strong>: Click + drag to pan canvas
 - <strong>Ctrl + Left Click</strong>: Alternative pan gesture for trackpad users
 - <strong>Right Click + Drag</strong>: Context-menu suppressed pan fallback
 - <strong>Double-Click</strong>: Reset pan to origin (0, 0)</p>
-<h3 id="implementation">Implementation</h3>
-<h4 id="html-structure-canvas-assemblyjs">HTML Structure (canvas-assembly.js)</h4>
+<h3 id="implementation">Implementation<a class="headerlink" href="#implementation" title="Permanent link">&para;</a></h3>
+<h4 id="html-structure-canvas-assemblyjs">HTML Structure (canvas-assembly.js)<a class="headerlink" href="#html-structure-canvas-assemblyjs" title="Permanent link">&para;</a></h4>
 <pre><code class="language-html">&lt;!-- Canvas Viewport for Panning (BizTalk-style) --&gt;
 &lt;div id=&quot;canvas-viewport&quot; class=&quot;canvas-viewport&quot;&gt;
   &lt;div id=&quot;assembly-workspace&quot; class=&quot;assembly-workspace&quot;&gt;
@@ -149,7 +182,7 @@
   &lt;/div&gt;
 &lt;/div&gt;
 </code></pre>
-<h4 id="css-assemblycss">CSS (assembly.css)</h4>
+<h4 id="css-assemblycss">CSS (assembly.css)<a class="headerlink" href="#css-assemblycss" title="Permanent link">&para;</a></h4>
 <pre><code class="language-css">.canvas-viewport {
   flex: 1;
   overflow: hidden;
@@ -171,7 +204,7 @@
   transition: none; /* No transition during drag */
 }
 </code></pre>
-<h4 id="javascript-assemblyjs">JavaScript (assembly.js)</h4>
+<h4 id="javascript-assemblyjs">JavaScript (assembly.js)<a class="headerlink" href="#javascript-assemblyjs" title="Permanent link">&para;</a></h4>
 <pre><code class="language-javascript">function setupCanvasPanning() {
   const viewport = document.getElementById('canvas-viewport');
   const workspace = document.getElementById('assembly-workspace');
@@ -219,29 +252,29 @@
   });
 }
 </code></pre>
-<h3 id="called-from">Called From</h3>
+<h3 id="called-from">Called From<a class="headerlink" href="#called-from" title="Permanent link">&para;</a></h3>
 <ul>
 <li><code>initAssembly()</code> at startup via <code>setupCanvasPanning()</code></li>
 </ul>
-<h3 id="testing-notes">Testing Notes</h3>
+<h3 id="testing-notes">Testing Notes<a class="headerlink" href="#testing-notes" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Panning works independently of drag-drop palette items</li>
 <li>Interactive elements (buttons, inputs, draggable items) are excluded from pan trigger</li>
 <li>Canvas respects zoom/transform state when resuming pan</li>
 </ul>
 <hr />
-<h2 id="issue-2-sidebar-slide-off-animation">Issue #2: Sidebar Slide-Off Animation</h2>
-<h3 id="problem_1">Problem</h3>
+<h2 id="issue-2-sidebar-slide-off-animation">Issue #2: Sidebar Slide-Off Animation<a class="headerlink" href="#issue-2-sidebar-slide-off-animation" title="Permanent link">&para;</a></h2>
+<h3 id="problem_1">Problem<a class="headerlink" href="#problem_1" title="Permanent link">&para;</a></h3>
 <p>Sidebars hid/showed abruptly with no visual feedback. Toggle arrows disappeared, making it unclear how to restore panels. Sidebars consumed valuable canvas space.</p>
-<h3 id="solution_1">Solution</h3>
+<h3 id="solution_1">Solution<a class="headerlink" href="#solution_1" title="Permanent link">&para;</a></h3>
 <p>Implemented smooth slide-off animation with persistent toggle arrows:
 - Left sidebar slides <strong>left</strong> (off-screen) with <code>transform: translateX(-100%)</code>
 - Right sidebar slides <strong>right</strong> (off-screen) with <code>transform: translateX(100%)</code>
 - Toggle buttons remain <strong>visible</strong> in fixed positions outside canvas
 - Grid columns adjust to zero width, giving full canvas space
 - Smooth 0.3s transition for professional feel</p>
-<h3 id="implementation_1">Implementation</h3>
-<h4 id="css-assemblycss_1">CSS (assembly.css)</h4>
+<h3 id="implementation_1">Implementation<a class="headerlink" href="#implementation_1" title="Permanent link">&para;</a></h3>
+<h4 id="css-assemblycss_1">CSS (assembly.css)<a class="headerlink" href="#css-assemblycss_1" title="Permanent link">&para;</a></h4>
 <pre><code class="language-css">/* Sidebar Slide-Off Behavior (Phase 32.9) */
 #left-panel {
   transition: transform 0.3s ease, opacity 0.3s ease;
@@ -300,7 +333,7 @@
   grid-template-columns: 0 1fr 0;
 }
 </code></pre>
-<h4 id="javascript-assemblyjs_1">JavaScript (assembly.js)</h4>
+<h4 id="javascript-assemblyjs_1">JavaScript (assembly.js)<a class="headerlink" href="#javascript-assemblyjs_1" title="Permanent link">&para;</a></h4>
 <p>Updated <code>setupPanelToggles()</code>:</p>
 <pre><code class="language-javascript">function setupPanelToggles() {
   const canvasContainer = document.querySelector('.canvas-container');
@@ -336,26 +369,26 @@
   if (rightBtn &amp;&amp; rightPanel) rightBtn.textContent = rightPanel.classList.contains('collapsed') ? '←' : '→';
 }
 </code></pre>
-<h3 id="visual-indicators">Visual Indicators</h3>
+<h3 id="visual-indicators">Visual Indicators<a class="headerlink" href="#visual-indicators" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Arrow changes direction when collapsed/expanded</li>
 <li>Toggle button stays visible with box shadow</li>
 <li>Smooth transition animation (0.3s ease)</li>
 </ul>
 <hr />
-<h2 id="issue-3-trading-partner-loading">Issue #3: Trading Partner Loading</h2>
-<h3 id="problem_2">Problem</h3>
+<h2 id="issue-3-trading-partner-loading">Issue #3: Trading Partner Loading<a class="headerlink" href="#issue-3-trading-partner-loading" title="Permanent link">&para;</a></h2>
+<h3 id="problem_2">Problem<a class="headerlink" href="#problem_2" title="Permanent link">&para;</a></h3>
 <p>TP sidebar showed count <code>(0)</code> and no list items, even though 4+ trading partners were seeded in the database.</p>
-<h3 id="root-cause">Root Cause</h3>
+<h3 id="root-cause">Root Cause<a class="headerlink" href="#root-cause" title="Permanent link">&para;</a></h3>
 <p>Already implemented correctly but not clearly visible in this session.</p>
-<h3 id="verification">Verification</h3>
+<h3 id="verification">Verification<a class="headerlink" href="#verification" title="Permanent link">&para;</a></h3>
 <ul>
 <li><code>store.partners</code> array is populated by <code>syncPartnersFromApi()</code> at store initialization</li>
 <li><code>loadTPPalette()</code> reads from <code>store.partners</code> and renders palette items</li>
 <li>Palette is called early in <code>initAssembly()</code> and re-called on store updates</li>
 <li>Count updates correctly via <code>store.subscribe('partners:updated', ...)</code></li>
 </ul>
-<h3 id="data-flow">Data Flow</h3>
+<h3 id="data-flow">Data Flow<a class="headerlink" href="#data-flow" title="Permanent link">&para;</a></h3>
 <pre><code>Store Init
   ↓
 syncPartnersFromApi() → GET /trading-partners
@@ -368,7 +401,7 @@ initAssembly() calls loadTPPalette()
   ↓
 Render TP items + update count (n)
 </code></pre>
-<h3 id="implementation-confirmed">Implementation Confirmed</h3>
+<h3 id="implementation-confirmed">Implementation Confirmed<a class="headerlink" href="#implementation-confirmed" title="Permanent link">&para;</a></h3>
 <ul>
 <li><a href="../../src/assembly.js#L385">loadTPPalette()</a> renders all visible partners</li>
 <li><a href="../../src/assembly.js#L385">filterVisiblePartners()</a> filters by permissions</li>
@@ -376,26 +409,26 @@ Render TP items + update count (n)
 <li>Store subscription in <a href="../../src/assembly.js#L1768">initAssembly()</a> keeps palette fresh</li>
 </ul>
 <hr />
-<h2 id="integration-points">Integration Points</h2>
-<h3 id="files-modified">Files Modified</h3>
+<h2 id="integration-points">Integration Points<a class="headerlink" href="#integration-points" title="Permanent link">&para;</a></h2>
+<h3 id="files-modified">Files Modified<a class="headerlink" href="#files-modified" title="Permanent link">&para;</a></h3>
 <ul>
 <li><code>web/src/routes/canvas-assembly.js</code> — Added viewport wrapper HTML</li>
 <li><code>web/src/assembly.js</code> — Added <code>setupCanvasPanning()</code>, updated <code>setupPanelToggles()</code></li>
 <li><code>web/css/assembly.css</code> — Added viewport + sidebar CSS</li>
 </ul>
-<h3 id="files-referenced-no-changes">Files Referenced (No Changes)</h3>
+<h3 id="files-referenced-no-changes">Files Referenced (No Changes)<a class="headerlink" href="#files-referenced-no-changes" title="Permanent link">&para;</a></h3>
 <ul>
 <li><code>web/src/state/store.js</code> — Auto-syncs partners (already working)</li>
 <li><code>api/handlers/trading-partners.js</code> — Serves partner list to frontend</li>
 </ul>
-<h3 id="backwards-compatibility">Backwards Compatibility</h3>
+<h3 id="backwards-compatibility">Backwards Compatibility<a class="headerlink" href="#backwards-compatibility" title="Permanent link">&para;</a></h3>
 <p>✅ All changes are additive and non-breaking:
 - Panning is opt-in (requires middle mouse, Ctrl+click, or right-click)
 - Sidebar toggle still works with existing toggle-sidebar buttons
 - TP palette rendering unchanged</p>
 <hr />
-<h2 id="testing-checklist">Testing Checklist</h2>
-<h3 id="canvas-panning">Canvas Panning</h3>
+<h2 id="testing-checklist">Testing Checklist<a class="headerlink" href="#testing-checklist" title="Permanent link">&para;</a></h2>
+<h3 id="canvas-panning">Canvas Panning<a class="headerlink" href="#canvas-panning" title="Permanent link">&para;</a></h3>
 <ul>
 <li>[ ] Middle mouse button: click + drag pans canvas</li>
 <li>[ ] Ctrl + Left click: alternative pan gesture works</li>
@@ -403,7 +436,7 @@ Render TP items + update count (n)
 <li>[ ] Components remain draggable (not affected by pan mode)</li>
 <li>[ ] Palette items draggable (not affected by pan mode)</li>
 </ul>
-<h3 id="sidebar-slide-off">Sidebar Slide-Off</h3>
+<h3 id="sidebar-slide-off">Sidebar Slide-Off<a class="headerlink" href="#sidebar-slide-off" title="Permanent link">&para;</a></h3>
 <ul>
 <li>[ ] Left sidebar collapses → slides off-screen → toggle arrow visible</li>
 <li>[ ] Right sidebar collapses → slides off-screen → toggle arrow visible</li>
@@ -412,7 +445,7 @@ Render TP items + update count (n)
 <li>[ ] Connections update correctly after collapse/expand</li>
 <li>[ ] Animation is smooth (0.3s ease)</li>
 </ul>
-<h3 id="tp-loading">TP Loading</h3>
+<h3 id="tp-loading">TP Loading<a class="headerlink" href="#tp-loading" title="Permanent link">&para;</a></h3>
 <ul>
 <li>[ ] Page loads → TP count shows &gt; 0</li>
 <li>[ ] TP list populated with draggable items</li>
@@ -421,21 +454,21 @@ Render TP items + update count (n)
 <li>[ ] TP status indicators refresh periodically</li>
 </ul>
 <hr />
-<h2 id="performance-impact">Performance Impact</h2>
+<h2 id="performance-impact">Performance Impact<a class="headerlink" href="#performance-impact" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Minimal: Panning uses GPU-accelerated transforms (no reflow)</li>
 <li>Sidebar transitions use CSS transitions (GPU-accelerated)</li>
 <li>TP palette lazy-loads status data with fallback</li>
 </ul>
 <hr />
-<h2 id="known-limitations">Known Limitations</h2>
+<h2 id="known-limitations">Known Limitations<a class="headerlink" href="#known-limitations" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Panning only horizontal/vertical (not diagonal zoom)</li>
 <li>Toggle arrows positioned outside grid; may wrap on very small screens</li>
 <li>Pan state lost on page refresh (could be enhanced with sessionStorage)</li>
 </ul>
 <hr />
-<h2 id="next-steps-phase-33">Next Steps (Phase 33+)</h2>
+<h2 id="next-steps-phase-33">Next Steps (Phase 33+)<a class="headerlink" href="#next-steps-phase-33" title="Permanent link">&para;</a></h2>
 <ul>
 <li><strong>Zoom Control</strong>: Add mouse wheel zoom + keyboard shortcuts (Ctrl+/Ctrl-)</li>
 <li><strong>Pan History</strong>: Undo/redo pan positions</li>

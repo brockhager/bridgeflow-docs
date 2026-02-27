@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="../../css/theme.css" />
     <link rel="stylesheet" href="../../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../../stylesheets/extra.css" rel="stylesheet" />
     
       <script>
         // Current page data
@@ -43,7 +44,16 @@
                 <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
                 </li>
               </ul>
-              <p class="caption"><span class="caption-text">Products</span></p>
+              <p class="caption"><span class="caption-text">Start Here</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../ONBOARDING/">Onboarding</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../ARCHITECTURE/">Architecture</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../api-reference/">API Reference Hub</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Product Suite</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../products/">Overview</a>
                   </li>
@@ -66,7 +76,7 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../products/tracking-portal/">Tracking Portal</a>
                   </li>
               </ul>
-              <p class="caption"><span class="caption-text">Platform</span></p>
+              <p class="caption"><span class="caption-text">Platform Services</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../platform/">Overview</a>
                   </li>
@@ -87,12 +97,35 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../platform/bf-warehouse/">Warehouse Service</a>
                   </li>
               </ul>
+              <p class="caption"><span class="caption-text">Capability Catalog</span></p>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../../vision/bf-integration/">Vision</a>
-                </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/SHIPMENTS/">Shipments</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/ADMIN_CONSOLE/">Admin Console</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/CONTROL_TOWER/">Control Tower</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/IDENTITY/">Identity</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/MASTERDATA/">Masterdata</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/ORDERS/">Orders</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/WAREHOUSE/">Warehouse</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/SEARCH/">Search</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/FINTECH/">Fintech</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/CARRIER_PORTAL/">Carrier Portal</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/TRACKING_PORTAL/">Tracking Portal</a>
+                  </li>
               </ul>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../../api-reference/">API Reference</a>
+                <li class="toctree-l1"><a class="reference internal" href="../../vision/bf-integration/">Vision Archive</a>
                 </li>
               </ul>
       </div>
@@ -118,9 +151,9 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <h1 id="admin-bridgeflow-architecture">Admin Bridgeflow Architecture</h1>
+                <h1 id="admin-bridgeflow-architecture">Admin Bridgeflow Architecture<a class="headerlink" href="#admin-bridgeflow-architecture" title="Permanent link">&para;</a></h1>
 <p>This document gives a high-level overview of the Admin Bridgeflow architecture and component interactions.</p>
-<h2 id="components">Components</h2>
+<h2 id="components">Components<a class="headerlink" href="#components" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Admin UI (admin-bridgeflow)</li>
 <li>React + Vite app served as static assets (by the main <code>api</code> server in dev)</li>
@@ -156,14 +189,14 @@
 <li>Optional mTLS plugin (<code>api/lib/mtls.js</code>) to require mutual TLS for admin API traffic</li>
 <li>Audit logging (<code>api/lib/audit.js</code>) records admin actions</li>
 </ul>
-<h2 id="data-flows-simplified">Data flows (simplified)</h2>
+<h2 id="data-flows-simplified">Data flows (simplified)<a class="headerlink" href="#data-flows-simplified" title="Permanent link">&para;</a></h2>
 <ol>
 <li>Operator uses Admin UI to perform an action (e.g., "Suspend Organization").</li>
 <li>UI calls protected endpoint (e.g., POST <code>/admin-api/tenants/:id/suspend</code>) with admin JWT.</li>
 <li>Server validates IP/mTLS and RBAC, writes audit log, updates DB (Prisma), triggers notifications (email), and modifies runtime flags (e.g., processingPaused).</li>
 <li>Metrics plugin records the request and updates in-memory metrics; clear/flush operations reset metrics on resume.</li>
 </ol>
-<h2 id="developer-notes">Developer notes</h2>
+<h2 id="developer-notes">Developer notes<a class="headerlink" href="#developer-notes" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Keep admin route handlers idempotent and ensure <code>reply.status(200).send(...)</code> on successful paths (tests rely on this behavior).</li>
 <li>Avoid importing heavy client-side assets (JSX/HTML) inside server-loaded modules—Vitest/Vite import analysis can fail on unexpected content.</li>

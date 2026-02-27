@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="../../css/theme.css" />
     <link rel="stylesheet" href="../../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../../stylesheets/extra.css" rel="stylesheet" />
     
       <script>
         // Current page data
@@ -43,7 +44,16 @@
                 <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
                 </li>
               </ul>
-              <p class="caption"><span class="caption-text">Products</span></p>
+              <p class="caption"><span class="caption-text">Start Here</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../ONBOARDING/">Onboarding</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../ARCHITECTURE/">Architecture</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../api-reference/">API Reference Hub</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Product Suite</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../products/">Overview</a>
                   </li>
@@ -66,7 +76,7 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../products/tracking-portal/">Tracking Portal</a>
                   </li>
               </ul>
-              <p class="caption"><span class="caption-text">Platform</span></p>
+              <p class="caption"><span class="caption-text">Platform Services</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../platform/">Overview</a>
                   </li>
@@ -87,12 +97,35 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../platform/bf-warehouse/">Warehouse Service</a>
                   </li>
               </ul>
+              <p class="caption"><span class="caption-text">Capability Catalog</span></p>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../../vision/bf-integration/">Vision</a>
-                </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/SHIPMENTS/">Shipments</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/ADMIN_CONSOLE/">Admin Console</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/CONTROL_TOWER/">Control Tower</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/IDENTITY/">Identity</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/MASTERDATA/">Masterdata</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/ORDERS/">Orders</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/WAREHOUSE/">Warehouse</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/SEARCH/">Search</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/FINTECH/">Fintech</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/CARRIER_PORTAL/">Carrier Portal</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/TRACKING_PORTAL/">Tracking Portal</a>
+                  </li>
               </ul>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../../api-reference/">API Reference</a>
+                <li class="toctree-l1"><a class="reference internal" href="../../vision/bf-integration/">Vision Archive</a>
                 </li>
               </ul>
       </div>
@@ -118,9 +151,9 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <h1 id="bridgeflow-task-list-4-current">BridgeFlow Task List #4 (Current)</h1>
-<h2 id="starting-december-23-2025"><em>Starting: December 23, 2025</em></h2>
-<h2 id="in-progress">📋 IN PROGRESS</h2>
+                <h1 id="bridgeflow-task-list-4-current">BridgeFlow Task List #4 (Current)<a class="headerlink" href="#bridgeflow-task-list-4-current" title="Permanent link">&para;</a></h1>
+<h2 id="starting-december-23-2025"><em>Starting: December 23, 2025</em><a class="headerlink" href="#starting-december-23-2025" title="Permanent link">&para;</a></h2>
+<h2 id="in-progress">📋 IN PROGRESS<a class="headerlink" href="#in-progress" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
@@ -157,7 +190,7 @@
 </tr>
 </tbody>
 </table>
-<h3 id="phase-13-sprint-1-admin-foundation">Phase 13 — Sprint 1 (Admin Foundation)</h3>
+<h3 id="phase-13-sprint-1-admin-foundation">Phase 13 — Sprint 1 (Admin Foundation)<a class="headerlink" href="#phase-13-sprint-1-admin-foundation" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Admin authentication (separate admin auth, MFA, session policy)</li>
 <li>Admin DB schema &amp; migration (admin_users, admin_audit_log)</li>
@@ -166,12 +199,12 @@
 <li>Owner: Agent4 (kickoff now)</li>
 </ul>
 <hr />
-<h2 id="phase-14-trading-partner-management-complete">🎯 PHASE 14 — TRADING PARTNER MANAGEMENT — COMPLETE</h2>
+<h2 id="phase-14-trading-partner-management-complete">🎯 PHASE 14 — TRADING PARTNER MANAGEMENT — COMPLETE<a class="headerlink" href="#phase-14-trading-partner-management-complete" title="Permanent link">&para;</a></h2>
 <p><strong>Status:</strong> ✅ Complete (2025-12-26)
 <strong>Deliverables:</strong> DB model, CRUD API, migration endpoint, migration UI (banner + modal), frontend dual-write fallback, top-level navigation item
 <strong>Verification:</strong> <code>docs/Phase-14-Demo-Script.md</code> (10-minute CTO demo)
 <strong>Notes:</strong> Credentials are stored plain-text in MVP; Phase 15 will address secret management</p>
-<h2 id="active-backlog">🗂️ ACTIVE BACKLOG</h2>
+<h2 id="active-backlog">🗂️ ACTIVE BACKLOG<a class="headerlink" href="#active-backlog" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
@@ -244,7 +277,7 @@
 </tr>
 </tbody>
 </table>
-<h2 id="completed">✅ COMPLETED</h2>
+<h2 id="completed">✅ COMPLETED<a class="headerlink" href="#completed" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
@@ -287,17 +320,17 @@
 </tr>
 </tbody>
 </table>
-<h2 id="4-notes-logs">4) NOTES &amp; LOGS</h2>
+<h2 id="4-notes-logs">4) NOTES &amp; LOGS<a class="headerlink" href="#4-notes-logs" title="Permanent link">&para;</a></h2>
 <ul>
 <li><strong>Phase 12 deliverables:</strong> Version Control with RBAC; Templates/Reusable Components; Validation Rules Engine; AI-Assisted Mapping; Backup &amp; Restore System.</li>
 <li><strong>Tests &amp; Docs:</strong> All related tests added and passing; documentation (docs/) and task list updated.</li>
 <li><strong>Next steps:</strong> Phase 13 Planning (AdminBridgeflow) — architecture design, tech selection, API spec (timebox: 30 minutes).</li>
 </ul>
 <hr />
-<h2 id="full-details-logs">FULL DETAILS &amp; LOGS</h2>
-<h2 id="week-1-dashboard-mvp-agent4">✅ WEEK 1 DASHBOARD MVP (Agent4)</h2>
+<h2 id="full-details-logs">FULL DETAILS &amp; LOGS<a class="headerlink" href="#full-details-logs" title="Permanent link">&para;</a></h2>
+<h2 id="week-1-dashboard-mvp-agent4">✅ WEEK 1 DASHBOARD MVP (Agent4)<a class="headerlink" href="#week-1-dashboard-mvp-agent4" title="Permanent link">&para;</a></h2>
 <p>Timebox: 3 days — Owner: Agent4</p>
-<h3 id="day-1-admin-foundation-login-december-23-2025-completed">Day 1: Admin Foundation &amp; Login (December 23, 2025) — Completed</h3>
+<h3 id="day-1-admin-foundation-login-december-23-2025-completed">Day 1: Admin Foundation &amp; Login (December 23, 2025) — Completed<a class="headerlink" href="#day-1-admin-foundation-login-december-23-2025-completed" title="Permanent link">&para;</a></h3>
 <ul>
 <li>[x] Secure admin authentication (bcrypt + TOTP MFA)</li>
 <li>[x] IP whitelisting middleware</li>
@@ -308,7 +341,7 @@
 <li>[x] Development tooling &amp; test credentials</li>
 <li>[x] Comprehensive security tests</li>
 </ul>
-<h3 id="day-2-tenant-management-dashboard-in-progress-december-25-2025">Day 2: Tenant Management Dashboard — In Progress (December 25, 2025)</h3>
+<h3 id="day-2-tenant-management-dashboard-in-progress-december-25-2025">Day 2: Tenant Management Dashboard — In Progress (December 25, 2025)<a class="headerlink" href="#day-2-tenant-management-dashboard-in-progress-december-25-2025" title="Permanent link">&para;</a></h3>
 <ul>
 <li>[x] Tenant list table with real data</li>
 <li>[x] Search, filtering, pagination</li>
@@ -318,25 +351,25 @@
 <li>[ ] Admin user management UI (next)</li>
 <li>[ ] System health widgets (next)</li>
 </ul>
-<h3 id="day-3-system-health-alerts-planned">Day 3: System health &amp; alerts — Planned</h3>
+<h3 id="day-3-system-health-alerts-planned">Day 3: System health &amp; alerts — Planned<a class="headerlink" href="#day-3-system-health-alerts-planned" title="Permanent link">&para;</a></h3>
 <ul>
 <li>System health widgets &amp; alerts/notifications</li>
 </ul>
 <p>Tech: React + Vite (scaffolded), Tailwind CSS, integrate with <code>/admin-api/*</code>
 Notes: Startup scripts are COMPLETE (see Completed section); focus shifted from tooling to admin interface.</p>
-<h2 id="weekly-updates">�📝 WEEKLY UPDATES</h2>
+<h2 id="weekly-updates">�📝 WEEKLY UPDATES<a class="headerlink" href="#weekly-updates" title="Permanent link">&para;</a></h2>
 <ul>
 <li>2025-12-23 — Backup &amp; Restore export implemented; import dry-run and apply added; AI-Assisted Mapping delivered; Backup &amp; Restore (Phase 12) completed; full test-suite green.</li>
 <li>Note: <code>TASK-LIST-3.md</code> kept as archive of completed work; <code>TASK-LIST-4.md</code> is the current working board.</li>
 <li>Next: <strong>Phase 13 Planning (AdminBridgeflow)</strong> — architecture design session, technology selection, and API specification for admin endpoints (timebox: 30 minutes).</li>
 </ul>
 <hr />
-<h2 id="phase-13-complete-deployed">🎉 PHASE 13 - COMPLETE &amp; DEPLOYED</h2>
+<h2 id="phase-13-complete-deployed">🎉 PHASE 13 - COMPLETE &amp; DEPLOYED<a class="headerlink" href="#phase-13-complete-deployed" title="Permanent link">&para;</a></h2>
 <p><strong>Status:</strong> Committed to main, ready for CTO verification<br />
 <strong>Verification Method:</strong> Self-service demo package<br />
 <strong>Completion Time:</strong> December 26, 2025<br />
 <strong>Next Phase:</strong> Layer 1 Canvas polish (awaiting CTO approval)</p>
-<h3 id="complete">✅ COMPLETE</h3>
+<h3 id="complete">✅ COMPLETE<a class="headerlink" href="#complete" title="Permanent link">&para;</a></h3>
 <ul>
 <li>[x] Tenant Management Dashboard</li>
 <li>[x] System Health Dashboard (critical metrics)</li>
@@ -345,13 +378,13 @@ Notes: Startup scripts are COMPLETE (see Completed section); focus shifted from 
 <li>[x] clearMetrics() + Redis dynamic imports</li>
 <li>[x] reply.status(200).send() handler consistency</li>
 </ul>
-<h3 id="blocked-vitememory-issues-deferred-to-phase-14">🚧 BLOCKED (Vite/Memory Issues - Deferred to Phase 14)</h3>
+<h3 id="blocked-vitememory-issues-deferred-to-phase-14">🚧 BLOCKED (Vite/Memory Issues - Deferred to Phase 14)<a class="headerlink" href="#blocked-vitememory-issues-deferred-to-phase-14" title="Permanent link">&para;</a></h3>
 <ul>
 <li>[ ] api/tests/users.test.js → Vite transform failure</li>
 <li>[ ] api/tests/worker.integration.test.js → 2TB memory explosion</li>
 <li>[ ] Full suite without exclusions</li>
 </ul>
-<h3 id="communication-readiness">📊 COMMUNICATION READINESS</h3>
+<h3 id="communication-readiness">📊 COMMUNICATION READINESS<a class="headerlink" href="#communication-readiness" title="Permanent link">&para;</a></h3>
 <p><strong>When CTO Asks "Is Phase 13 Ready?"</strong></p>
 <p><em>One-Liner Response:</em><br />
 Phase 13 complete. Admin system operational. Self-service demo package at <code>/docs/Layer0-Admin-Bridgeflow/</code>. Test login, search, suspend/reactivate. Approve when ready for Phase 14.</p>
@@ -363,20 +396,20 @@ Phase 13 complete. Admin system operational. Self-service demo package at <code>
   ├── CHECKLIST.md (pre-launch items)
   └── KNOWN-ISSUES.md (Phase 14 backlog)
 </code></pre>
-<h3 id="risk-management">🛡️ RISK MANAGEMENT</h3>
+<h3 id="risk-management">🛡️ RISK MANAGEMENT<a class="headerlink" href="#risk-management" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Risk:</strong> CTO delays verification<br />
 <strong>Mitigation:</strong> Package is self-service, zero scheduling overhead</li>
 <li><strong>Risk:</strong> CTO finds issues we missed<br />
 <strong>Mitigation:</strong> Known issues documented, 2-hour SLA for fixes</li>
 </ul>
-<h3 id="phase-14-readiness">🎪 PHASE 14 READINESS</h3>
+<h3 id="phase-14-readiness">🎪 PHASE 14 READINESS<a class="headerlink" href="#phase-14-readiness" title="Permanent link">&para;</a></h3>
 <p>While waiting for CTO verification, we can:
 - Review customer feedback on Layer 1 Canvas
 - Prepare Phase 14 backlog items (Recipe library, Customer timeline view)
 - Document onboarding sequence for first customers
 - Investigate and fix Vite transform / users &amp; worker tests</p>
-<h2 id="phase-15-tp-canvas-integration-part-1">PHASE 15 — TP CANVAS INTEGRATION — PART 1 ✅</h2>
+<h2 id="phase-15-tp-canvas-integration-part-1">PHASE 15 — TP CANVAS INTEGRATION — PART 1 ✅<a class="headerlink" href="#phase-15-tp-canvas-integration-part-1" title="Permanent link">&para;</a></h2>
 <p><strong>Status:</strong> Implemented (2025-12-26)</p>
 <p><strong>Summary:</strong> Added a <strong>+TP</strong> quick-add to the Assembly Canvas which opens a TP selection modal and inserts the selected Trading Partner as a draggable node on the canvas. This feature reuses <code>store.partners</code> (permission-filtered) and uses grid-based placement to avoid overlap.</p>
 <p><strong>Files changed:</strong>
@@ -389,7 +422,7 @@ Phase 13 complete. Admin system operational. Self-service demo package at <code>
 4. Verify no console errors.</p>
 <p><strong>Next:</strong> Phase 15 Part 2 — inline TP creation from modal, auto-connection hints, and additional tests.</p>
 <hr />
-<h2 id="phase-16-persistent-storage-kickoff-in-progress">🎯 PHASE 16 — PERSISTENT STORAGE (KICKOFF &amp; IN PROGRESS)</h2>
+<h2 id="phase-16-persistent-storage-kickoff-in-progress">🎯 PHASE 16 — PERSISTENT STORAGE (KICKOFF &amp; IN PROGRESS)<a class="headerlink" href="#phase-16-persistent-storage-kickoff-in-progress" title="Permanent link">&para;</a></h2>
 <p><strong>Status:</strong> In progress (2025-12-27) — Foundation validated, CI green ✅</p>
 <p><strong>Summary:</strong> Began Phase 16 (persistent storage hardening for Trading Partners &amp; Bridges). Short-term goal: verify "Create TP → Save to database" end-to-end using SQLite for CI/local dev and Postgres in production.</p>
 <p><strong>Completed so far:</strong>
@@ -407,7 +440,7 @@ Phase 13 complete. Admin system operational. Self-service demo package at <code>
 - Long-term: plan migration/backfill strategy, parity tests between SQLite and Postgres, and UI end-to-end Playwright tests</p>
 <p><strong>Acceptance criteria (MVP):</strong> Create TP via API and confirm it persists in SQLite (CI); client sync reliably replaces temporary IDs with canonical IDs and handles failures gracefully.</p>
 <hr />
-<h2 id="recent-operations-fixes">🛠️ RECENT OPERATIONS &amp; FIXES</h2>
+<h2 id="recent-operations-fixes">🛠️ RECENT OPERATIONS &amp; FIXES<a class="headerlink" href="#recent-operations-fixes" title="Permanent link">&para;</a></h2>
 <ul>
 <li>CI blocker resolved: removed <code>cache: 'pnpm'</code> from workflows that triggered premature pnpm usage; standardized on <code>pnpm/action-setup@v4</code> and added <code>Verify pnpm</code> checks. All workflows are GREEN (2025-12-27). ✅</li>
 <li>Added <code>docs/CI-SETUP.md</code> and <code>docs/GITHUB-ACTIONS-SECRETS.md</code> to record the pattern and prevent future regressions.</li>

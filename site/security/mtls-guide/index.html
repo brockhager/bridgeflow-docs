@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="../../css/theme.css" />
     <link rel="stylesheet" href="../../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../../stylesheets/extra.css" rel="stylesheet" />
     
       <script>
         // Current page data
@@ -43,7 +44,16 @@
                 <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
                 </li>
               </ul>
-              <p class="caption"><span class="caption-text">Products</span></p>
+              <p class="caption"><span class="caption-text">Start Here</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../ONBOARDING/">Onboarding</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../ARCHITECTURE/">Architecture</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../api-reference/">API Reference Hub</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Product Suite</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../products/">Overview</a>
                   </li>
@@ -66,7 +76,7 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../products/tracking-portal/">Tracking Portal</a>
                   </li>
               </ul>
-              <p class="caption"><span class="caption-text">Platform</span></p>
+              <p class="caption"><span class="caption-text">Platform Services</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../platform/">Overview</a>
                   </li>
@@ -87,12 +97,35 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../platform/bf-warehouse/">Warehouse Service</a>
                   </li>
               </ul>
+              <p class="caption"><span class="caption-text">Capability Catalog</span></p>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../../vision/bf-integration/">Vision</a>
-                </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/SHIPMENTS/">Shipments</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/ADMIN_CONSOLE/">Admin Console</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/CONTROL_TOWER/">Control Tower</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/IDENTITY/">Identity</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/MASTERDATA/">Masterdata</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/ORDERS/">Orders</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/WAREHOUSE/">Warehouse</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/SEARCH/">Search</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/FINTECH/">Fintech</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/CARRIER_PORTAL/">Carrier Portal</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/TRACKING_PORTAL/">Tracking Portal</a>
+                  </li>
               </ul>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../../api-reference/">API Reference</a>
+                <li class="toctree-l1"><a class="reference internal" href="../../vision/bf-integration/">Vision Archive</a>
                 </li>
               </ul>
       </div>
@@ -118,10 +151,10 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <h1 id="mtls-mutual-tls-authentication-guide">mTLS (Mutual TLS) Authentication Guide</h1>
-<h2 id="overview">Overview</h2>
+                <h1 id="mtls-mutual-tls-authentication-guide">mTLS (Mutual TLS) Authentication Guide<a class="headerlink" href="#mtls-mutual-tls-authentication-guide" title="Permanent link">&para;</a></h1>
+<h2 id="overview">Overview<a class="headerlink" href="#overview" title="Permanent link">&para;</a></h2>
 <p>This guide covers the implementation of mutual TLS (mTLS) authentication in BridgeFlow. mTLS provides strong client authentication by requiring clients to present valid X.509 certificates signed by a trusted Certificate Authority.</p>
-<h2 id="table-of-contents">Table of Contents</h2>
+<h2 id="table-of-contents">Table of Contents<a class="headerlink" href="#table-of-contents" title="Permanent link">&para;</a></h2>
 <ol>
 <li><a href="#architecture">Architecture</a></li>
 <li><a href="#certificate-generation">Certificate Generation</a></li>
@@ -132,8 +165,8 @@
 <li><a href="#troubleshooting">Troubleshooting</a></li>
 </ol>
 <hr />
-<h2 id="architecture">Architecture</h2>
-<h3 id="components">Components</h3>
+<h2 id="architecture">Architecture<a class="headerlink" href="#architecture" title="Permanent link">&para;</a></h2>
+<h3 id="components">Components<a class="headerlink" href="#components" title="Permanent link">&para;</a></h3>
 <pre><code>┌─────────────────────────────────────────────────────────┐
 │                    mTLS Architecture                     │
 └─────────────────────────────────────────────────────────┘
@@ -171,7 +204,7 @@
                                     │  - Certificate management      │
                                     └───────────────────────────────┘
 </code></pre>
-<h3 id="features">Features</h3>
+<h3 id="features">Features<a class="headerlink" href="#features" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Certificate Extraction</strong>: Extracts client certificates from TLS socket</li>
 <li><strong>Multi-stage Validation</strong>:</li>
@@ -186,13 +219,13 @@
 <li><strong>Environment-aware</strong>: Graceful degradation when disabled</li>
 </ul>
 <hr />
-<h2 id="certificate-generation">Certificate Generation</h2>
-<h3 id="prerequisites">Prerequisites</h3>
+<h2 id="certificate-generation">Certificate Generation<a class="headerlink" href="#certificate-generation" title="Permanent link">&para;</a></h2>
+<h3 id="prerequisites">Prerequisites<a class="headerlink" href="#prerequisites" title="Permanent link">&para;</a></h3>
 <ul>
 <li>OpenSSL installed</li>
 <li>Node.js 18+ (for certificate generation script)</li>
 </ul>
-<h3 id="generate-certificate-authority-ca">Generate Certificate Authority (CA)</h3>
+<h3 id="generate-certificate-authority-ca">Generate Certificate Authority (CA)<a class="headerlink" href="#generate-certificate-authority-ca" title="Permanent link">&para;</a></h3>
 <pre><code class="language-bash"># Using the provided script
 node scripts/generate-certs.js ca
 
@@ -205,7 +238,7 @@ openssl req -new -x509 -days 3650 -key certs/ca-key.pem \
 <p>This generates:
 - <code>certs/ca-key.pem</code> - CA private key (keep secure!)
 - <code>certs/ca-cert.pem</code> - CA certificate (distribute to clients)</p>
-<h3 id="generate-server-certificate">Generate Server Certificate</h3>
+<h3 id="generate-server-certificate">Generate Server Certificate<a class="headerlink" href="#generate-server-certificate" title="Permanent link">&para;</a></h3>
 <pre><code class="language-bash"># Using the script
 node scripts/generate-certs.js server
 
@@ -222,7 +255,7 @@ openssl x509 -req -in certs/server-csr.pem \
 <p>This generates:
 - <code>certs/server-key.pem</code> - Server private key
 - <code>certs/server-cert.pem</code> - Server certificate</p>
-<h3 id="generate-client-certificate">Generate Client Certificate</h3>
+<h3 id="generate-client-certificate">Generate Client Certificate<a class="headerlink" href="#generate-client-certificate" title="Permanent link">&para;</a></h3>
 <pre><code class="language-bash"># Using the script (required CN parameter)
 node scripts/generate-certs.js client --cn=&quot;trading-partner-1&quot;
 
@@ -239,14 +272,14 @@ openssl x509 -req -in certs/client-trading-partner-1-csr.pem \
 <p>This generates:
 - <code>certs/client-{name}-key.pem</code> - Client private key
 - <code>certs/client-{name}-cert.pem</code> - Client certificate</p>
-<h3 id="get-certificate-fingerprint">Get Certificate Fingerprint</h3>
+<h3 id="get-certificate-fingerprint">Get Certificate Fingerprint<a class="headerlink" href="#get-certificate-fingerprint" title="Permanent link">&para;</a></h3>
 <pre><code class="language-bash"># SHA256 fingerprint (recommended)
 openssl x509 -in certs/client-trading-partner-1-cert.pem -noout -fingerprint -sha256
 
 # Example output:
 # SHA256 Fingerprint=AA:BB:CC:DD:EE:FF:00:11:22:33:44:55:66:77:88:99:AA:BB:CC:DD:EE:FF:00:11:22:33:44:55:66:77:88:99
 </code></pre>
-<h3 id="verify-certificate-chain">Verify Certificate Chain</h3>
+<h3 id="verify-certificate-chain">Verify Certificate Chain<a class="headerlink" href="#verify-certificate-chain" title="Permanent link">&para;</a></h3>
 <pre><code class="language-bash"># Verify server certificate against CA
 openssl verify -CAfile certs/ca-cert.pem certs/server-cert.pem
 
@@ -254,8 +287,8 @@ openssl verify -CAfile certs/ca-cert.pem certs/server-cert.pem
 node scripts/generate-certs.js verify
 </code></pre>
 <hr />
-<h2 id="configuration">Configuration</h2>
-<h3 id="environment-variables">Environment Variables</h3>
+<h2 id="configuration">Configuration<a class="headerlink" href="#configuration" title="Permanent link">&para;</a></h2>
+<h3 id="environment-variables">Environment Variables<a class="headerlink" href="#environment-variables" title="Permanent link">&para;</a></h3>
 <pre><code class="language-bash"># Enable/disable mTLS
 MTLS_ENABLED=true
 
@@ -271,7 +304,7 @@ MTLS_REQUIRE_CA=true
 # Enable audit logging for successful authentications
 MTLS_AUDIT_SUCCESS=true
 </code></pre>
-<h3 id="server-configuration">Server Configuration</h3>
+<h3 id="server-configuration">Server Configuration<a class="headerlink" href="#server-configuration" title="Permanent link">&para;</a></h3>
 <pre><code class="language-javascript">// api/server.js
 import fs from 'fs'
 import fastify from 'fastify'
@@ -302,9 +335,9 @@ await server.register(mtlsPlugin, {
 await server.listen({ port: 3000, host: '0.0.0.0' })
 </code></pre>
 <hr />
-<h2 id="api-usage">API Usage</h2>
-<h3 id="protecting-routes">Protecting Routes</h3>
-<h4 id="required-mtls-401403-if-invalid">Required mTLS (401/403 if invalid)</h4>
+<h2 id="api-usage">API Usage<a class="headerlink" href="#api-usage" title="Permanent link">&para;</a></h2>
+<h3 id="protecting-routes">Protecting Routes<a class="headerlink" href="#protecting-routes" title="Permanent link">&para;</a></h3>
+<h4 id="required-mtls-401403-if-invalid">Required mTLS (401/403 if invalid)<a class="headerlink" href="#required-mtls-401403-if-invalid" title="Permanent link">&para;</a></h4>
 <pre><code class="language-javascript">// Protect admin endpoints
 server.get('/api/admin/users', {
   preHandler: server.requireMTLS()
@@ -325,7 +358,7 @@ server.post('/api/secrets', {
   return { success: true }
 })
 </code></pre>
-<h4 id="optional-mtls-attach-cert-if-present">Optional mTLS (attach cert if present)</h4>
+<h4 id="optional-mtls-attach-cert-if-present">Optional mTLS (attach cert if present)<a class="headerlink" href="#optional-mtls-attach-cert-if-present" title="Permanent link">&para;</a></h4>
 <pre><code class="language-javascript">// Endpoint works with or without certificate
 server.get('/api/status', {
   preHandler: server.optionalMTLS()
@@ -339,7 +372,7 @@ server.get('/api/status', {
   return { status: 'anonymous' }
 })
 </code></pre>
-<h3 id="request-decorators">Request Decorators</h3>
+<h3 id="request-decorators">Request Decorators<a class="headerlink" href="#request-decorators" title="Permanent link">&para;</a></h3>
 <pre><code class="language-javascript">// Check if request has valid client certificate
 if (request.hasClientCert()) {
   // Certificate present and valid
@@ -355,7 +388,7 @@ console.log(cert.issuer)        // { CN: 'BridgeFlow CA', O: 'BridgeFlow' }
 console.log(cert.fingerprint256) // SHA256 fingerprint
 console.log(cert.valid_to)      // Expiry date
 </code></pre>
-<h3 id="certificate-management-api">Certificate Management API</h3>
+<h3 id="certificate-management-api">Certificate Management API<a class="headerlink" href="#certificate-management-api" title="Permanent link">&para;</a></h3>
 <pre><code class="language-javascript">// Add trusted certificate
 await fastify.addTrustedCertificate({
   fingerprint: 'AA:BB:CC:...',
@@ -366,12 +399,12 @@ await fastify.addTrustedCertificate({
 await fastify.removeTrustedCertificate('AA:BB:CC:...')
 </code></pre>
 <hr />
-<h2 id="testing">Testing</h2>
-<h3 id="unit-tests">Unit Tests</h3>
+<h2 id="testing">Testing<a class="headerlink" href="#testing" title="Permanent link">&para;</a></h2>
+<h3 id="unit-tests">Unit Tests<a class="headerlink" href="#unit-tests" title="Permanent link">&para;</a></h3>
 <pre><code class="language-bash"># Run mTLS test suite (29 tests)
 node --test api/tests/mtls.test.js
 </code></pre>
-<h3 id="manual-testing-with-curl">Manual Testing with curl</h3>
+<h3 id="manual-testing-with-curl">Manual Testing with curl<a class="headerlink" href="#manual-testing-with-curl" title="Permanent link">&para;</a></h3>
 <pre><code class="language-bash"># Test with valid client certificate
 curl --cacert certs/ca-cert.pem \
      --cert certs/client-trading-partner-1-cert.pem \
@@ -382,7 +415,7 @@ curl --cacert certs/ca-cert.pem \
 curl --cacert certs/ca-cert.pem \
      https://localhost:3000/api/admin/users
 </code></pre>
-<h3 id="testing-with-postman">Testing with Postman</h3>
+<h3 id="testing-with-postman">Testing with Postman<a class="headerlink" href="#testing-with-postman" title="Permanent link">&para;</a></h3>
 <ol>
 <li>Import CA certificate: Settings → Certificates → CA Certificates</li>
 <li>Add client certificate: Settings → Certificates → Client Certificates</li>
@@ -392,8 +425,8 @@ curl --cacert certs/ca-cert.pem \
 <li>Make request to mTLS-protected endpoint</li>
 </ol>
 <hr />
-<h2 id="production-deployment">Production Deployment</h2>
-<h3 id="pre-deployment-checklist">Pre-deployment Checklist</h3>
+<h2 id="production-deployment">Production Deployment<a class="headerlink" href="#production-deployment" title="Permanent link">&para;</a></h2>
+<h3 id="pre-deployment-checklist">Pre-deployment Checklist<a class="headerlink" href="#pre-deployment-checklist" title="Permanent link">&para;</a></h3>
 <ul>
 <li>[ ] Generate production CA with strong key (4096-bit)</li>
 <li>[ ] Store CA private key in secure vault (not in source control)</li>
@@ -406,7 +439,7 @@ curl --cacert certs/ca-cert.pem \
 <li>[ ] Document certificate issuance process</li>
 <li>[ ] Set up certificate expiry monitoring</li>
 </ul>
-<h3 id="certificate-distribution">Certificate Distribution</h3>
+<h3 id="certificate-distribution">Certificate Distribution<a class="headerlink" href="#certificate-distribution" title="Permanent link">&para;</a></h3>
 <p><strong>Server Certificate</strong>: Deploy to application servers
 - Keep private key secure (0600 permissions)
 - Use environment variables or secret manager
@@ -419,8 +452,8 @@ curl --cacert certs/ca-cert.pem \
 - Include in API documentation
 - Provide via HTTPS download
 - Update when CA rotates</p>
-<h3 id="certificate-rotation">Certificate Rotation</h3>
-<h4 id="rotating-ca-certificate">Rotating CA Certificate</h4>
+<h3 id="certificate-rotation">Certificate Rotation<a class="headerlink" href="#certificate-rotation" title="Permanent link">&para;</a></h3>
+<h4 id="rotating-ca-certificate">Rotating CA Certificate<a class="headerlink" href="#rotating-ca-certificate" title="Permanent link">&para;</a></h4>
 <pre><code class="language-bash"># 1. Generate new CA
 node scripts/generate-certs.js ca --cn=&quot;BridgeFlow CA v2&quot;
 
@@ -431,7 +464,7 @@ node scripts/generate-certs.js server
 # 4. Update clients to trust new CA
 # 5. Deprecate old CA after transition period
 </code></pre>
-<h4 id="rotating-client-certificates">Rotating Client Certificates</h4>
+<h4 id="rotating-client-certificates">Rotating Client Certificates<a class="headerlink" href="#rotating-client-certificates" title="Permanent link">&para;</a></h4>
 <pre><code class="language-bash"># 1. Generate new client cert
 node scripts/generate-certs.js client --cn=&quot;trading-partner-1&quot;
 
@@ -446,7 +479,7 @@ curl -X POST https://admin.bridgeflow.com/api/admin/mtls/certificates \
 # 4. Distribute new certificate to partner
 # 5. Remove old fingerprint after transition period
 </code></pre>
-<h3 id="monitoring">Monitoring</h3>
+<h3 id="monitoring">Monitoring<a class="headerlink" href="#monitoring" title="Permanent link">&para;</a></h3>
 <p>Monitor certificate expiry:</p>
 <pre><code class="language-javascript">// Check certificate expiry
 const daysUntilExpiry = (certValidTo) =&gt; {
@@ -460,7 +493,7 @@ if (daysUntilExpiry(clientCert.valid_to) &lt; 30) {
   alert('Certificate expiring soon!')
 }
 </code></pre>
-<h3 id="performance-considerations">Performance Considerations</h3>
+<h3 id="performance-considerations">Performance Considerations<a class="headerlink" href="#performance-considerations" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Connection Pooling</strong>: Reuse TLS connections to avoid repeated handshakes</li>
 <li><strong>Certificate Caching</strong>: Plugin caches validated certificates for request duration</li>
@@ -468,9 +501,9 @@ if (daysUntilExpiry(clientCert.valid_to) &lt; 30) {
 <li><strong>Fingerprint List</strong>: Keep trusted fingerprint list small (&lt;100 entries)</li>
 </ul>
 <hr />
-<h2 id="troubleshooting">Troubleshooting</h2>
-<h3 id="common-issues">Common Issues</h3>
-<h4 id="client-certificate-required-401">"Client certificate required" (401)</h4>
+<h2 id="troubleshooting">Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permanent link">&para;</a></h2>
+<h3 id="common-issues">Common Issues<a class="headerlink" href="#common-issues" title="Permanent link">&para;</a></h3>
+<h4 id="client-certificate-required-401">"Client certificate required" (401)<a class="headerlink" href="#client-certificate-required-401" title="Permanent link">&para;</a></h4>
 <p><strong>Cause</strong>: No client certificate presented</p>
 <p><strong>Solution</strong>:
 1. Verify client is sending certificate
@@ -480,7 +513,7 @@ if (daysUntilExpiry(clientCert.valid_to) &lt; 30) {
 <pre><code class="language-bash"># Test certificate is readable
 openssl x509 -in certs/client-cert.pem -text -noout
 </code></pre>
-<h4 id="certificate-validation-failed-403">"Certificate validation failed" (403)</h4>
+<h4 id="certificate-validation-failed-403">"Certificate validation failed" (403)<a class="headerlink" href="#certificate-validation-failed-403" title="Permanent link">&para;</a></h4>
 <p><strong>Cause</strong>: Certificate is invalid or not trusted</p>
 <p><strong>Solution</strong>:
 1. Check certificate expiry: <code>openssl x509 -in cert.pem -noout -dates</code>
@@ -491,18 +524,18 @@ openssl x509 -in certs/client-cert.pem -text -noout
 <pre><code class="language-bash"># Verify certificate chain
 openssl verify -CAfile certs/ca-cert.pem certs/client-cert.pem
 </code></pre>
-<h4 id="certificate-has-expired">"Certificate has expired"</h4>
+<h4 id="certificate-has-expired">"Certificate has expired"<a class="headerlink" href="#certificate-has-expired" title="Permanent link">&para;</a></h4>
 <p><strong>Cause</strong>: Certificate valid_to date has passed</p>
 <p><strong>Solution</strong>:
 1. Generate new certificate
 2. Distribute to client
 3. Update trusted fingerprints</p>
-<h4 id="self-signed-certificates-not-allowed">"Self-signed certificates not allowed"</h4>
+<h4 id="self-signed-certificates-not-allowed">"Self-signed certificates not allowed"<a class="headerlink" href="#self-signed-certificates-not-allowed" title="Permanent link">&para;</a></h4>
 <p><strong>Cause</strong>: Client presented self-signed certificate and <code>requireCA=true</code></p>
 <p><strong>Solution</strong>:
 1. Sign certificate with your CA
 2. Or disable <code>MTLS_REQUIRE_CA</code> (not recommended for production)</p>
-<h4 id="fingerprint-mismatch">Fingerprint Mismatch</h4>
+<h4 id="fingerprint-mismatch">Fingerprint Mismatch<a class="headerlink" href="#fingerprint-mismatch" title="Permanent link">&para;</a></h4>
 <p><strong>Cause</strong>: Certificate fingerprint not in trusted list</p>
 <p><strong>Solution</strong>:</p>
 <pre><code class="language-bash"># Get current fingerprint
@@ -515,7 +548,7 @@ export MTLS_TRUSTED_FINGERPRINTS=&quot;AA:BB:CC:...,NEW:FINGERPRINT&quot;
 curl -X POST /api/admin/mtls/certificates \
   -d '{&quot;fingerprint&quot;:&quot;NEW:FINGERPRINT&quot;,&quot;cn&quot;:&quot;partner&quot;}'
 </code></pre>
-<h3 id="debug-mode">Debug Mode</h3>
+<h3 id="debug-mode">Debug Mode<a class="headerlink" href="#debug-mode" title="Permanent link">&para;</a></h3>
 <p>Enable verbose logging:</p>
 <pre><code class="language-javascript">const server = fastify({
   logger: {
@@ -530,7 +563,7 @@ WHERE event LIKE 'mtls.%'
 ORDER BY timestamp DESC
 LIMIT 50;
 </code></pre>
-<h3 id="security-best-practices">Security Best Practices</h3>
+<h3 id="security-best-practices">Security Best Practices<a class="headerlink" href="#security-best-practices" title="Permanent link">&para;</a></h3>
 <ol>
 <li><strong>Strong Keys</strong>: Use 4096-bit keys for CA, 2048-bit for certificates</li>
 <li><strong>Short Validity</strong>: 365 days max for client certs, 90 days for server certs</li>
@@ -542,8 +575,8 @@ LIMIT 50;
 <li><strong>Revocation</strong>: Implement certificate revocation process</li>
 </ol>
 <hr />
-<h2 id="api-reference">API Reference</h2>
-<h3 id="plugin-options">Plugin Options</h3>
+<h2 id="api-reference">API Reference<a class="headerlink" href="#api-reference" title="Permanent link">&para;</a></h2>
+<h3 id="plugin-options">Plugin Options<a class="headerlink" href="#plugin-options" title="Permanent link">&para;</a></h3>
 <pre><code class="language-typescript">interface MtlsOptions {
   enabled?: boolean              // Enable/disable plugin (default: env.MTLS_ENABLED)
   trustedFingerprints?: string[] // SHA256 fingerprints (default: env.MTLS_TRUSTED_FINGERPRINTS)
@@ -553,7 +586,7 @@ LIMIT 50;
   auditSuccess?: boolean         // Log successful auth (default: false)
 }
 </code></pre>
-<h3 id="decorators">Decorators</h3>
+<h3 id="decorators">Decorators<a class="headerlink" href="#decorators" title="Permanent link">&para;</a></h3>
 <pre><code class="language-typescript">// Server decorators
 fastify.requireMTLS(options?: MtlsOptions): FastifyMiddleware
 fastify.optionalMTLS(): FastifyMiddleware
@@ -565,7 +598,7 @@ request.hasClientCert(): boolean
 request.getClientCN(): string | null
 request.clientCert: CertificateInfo | undefined
 </code></pre>
-<h3 id="audit-events">Audit Events</h3>
+<h3 id="audit-events">Audit Events<a class="headerlink" href="#audit-events" title="Permanent link">&para;</a></h3>
 <ul>
 <li><code>mtls.auth.success</code> - Successful authentication</li>
 <li><code>mtls.auth.failed</code> - Failed authentication</li>
@@ -573,14 +606,14 @@ request.clientCert: CertificateInfo | undefined
 <li><code>mtls.cert.removed</code> - Trusted certificate removed</li>
 </ul>
 <hr />
-<h2 id="resources">Resources</h2>
+<h2 id="resources">Resources<a class="headerlink" href="#resources" title="Permanent link">&para;</a></h2>
 <ul>
 <li><a href="https://www.rfc-editor.org/rfc/rfc8705.html">RFC 8705: OAuth 2.0 Mutual-TLS Client Authentication</a></li>
 <li><a href="https://www.openssl.org/docs/">OpenSSL Documentation</a></li>
 <li><a href="https://nodejs.org/api/tls.html">Node.js TLS/SSL</a></li>
 <li><a href="https://www.fastify.io/docs/latest/Reference/Plugins/">Fastify Plugin Guide</a></li>
 </ul>
-<h2 id="support">Support</h2>
+<h2 id="support">Support<a class="headerlink" href="#support" title="Permanent link">&para;</a></h2>
 <p>For questions or issues:
 - Check troubleshooting guide above
 - Review audit logs for auth failures

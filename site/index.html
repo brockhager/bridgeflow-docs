@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="css/theme.css" />
     <link rel="stylesheet" href="css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="stylesheets/extra.css" rel="stylesheet" />
     
       <script>
         // Current page data
@@ -42,28 +43,29 @@
               <ul class="current">
                 <li class="toctree-l1 current"><a class="reference internal current" href="#">Home</a>
     <ul class="current">
-    <li class="toctree-l2"><a class="reference internal" href="#1-live-products">1. Live Products</a>
-        <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#control-tower-live-pilot">Control Tower (Live Pilot)</a>
+    <li class="toctree-l2"><a class="reference internal" href="#start-here">Start Here</a>
     </li>
-        </ul>
+    <li class="toctree-l2"><a class="reference internal" href="#product-suite">Product Suite</a>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#2-platform-stack">2. Platform Stack</a>
-        <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#service-layer-core-services-and-modules">Service Layer (Core Services and Modules)</a>
+    <li class="toctree-l2"><a class="reference internal" href="#platform-services">Platform Services</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#stack-relationship">Stack Relationship</a>
+    <li class="toctree-l2"><a class="reference internal" href="#capability-catalog">Capability Catalog</a>
     </li>
-        </ul>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#3-future-vision">3. Future Vision</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#4-developer-hub">4. Developer Hub</a>
+    <li class="toctree-l2"><a class="reference internal" href="#vision-archive">Vision Archive</a>
     </li>
     </ul>
                 </li>
               </ul>
-              <p class="caption"><span class="caption-text">Products</span></p>
+              <p class="caption"><span class="caption-text">Start Here</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="ONBOARDING/">Onboarding</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="ARCHITECTURE/">Architecture</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="api-reference/">API Reference Hub</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Product Suite</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="products/">Overview</a>
                   </li>
@@ -86,7 +88,7 @@
                   <li class="toctree-l1"><a class="reference internal" href="products/tracking-portal/">Tracking Portal</a>
                   </li>
               </ul>
-              <p class="caption"><span class="caption-text">Platform</span></p>
+              <p class="caption"><span class="caption-text">Platform Services</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="platform/">Overview</a>
                   </li>
@@ -107,12 +109,35 @@
                   <li class="toctree-l1"><a class="reference internal" href="platform/bf-warehouse/">Warehouse Service</a>
                   </li>
               </ul>
+              <p class="caption"><span class="caption-text">Capability Catalog</span></p>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="vision/bf-integration/">Vision</a>
-                </li>
+                  <li class="toctree-l1"><a class="reference internal" href="features/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="features/SHIPMENTS/">Shipments</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="features/ADMIN_CONSOLE/">Admin Console</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="features/CONTROL_TOWER/">Control Tower</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="features/IDENTITY/">Identity</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="features/MASTERDATA/">Masterdata</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="features/ORDERS/">Orders</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="features/WAREHOUSE/">Warehouse</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="features/SEARCH/">Search</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="features/FINTECH/">Fintech</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="features/CARRIER_PORTAL/">Carrier Portal</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="features/TRACKING_PORTAL/">Tracking Portal</a>
+                  </li>
               </ul>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="api-reference/">API Reference</a>
+                <li class="toctree-l1"><a class="reference internal" href="vision/bf-integration/">Vision Archive</a>
                 </li>
               </ul>
       </div>
@@ -138,60 +163,53 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <h1 id="bridgeflow-the-policy-first-logistics-runtime">Bridgeflow: The Policy-First Logistics Runtime</h1>
-<p>Bridgeflow is a policy enforcement layer for logistics operations.<br />
-Core model: <strong>Event -&gt; Policy -&gt; Action</strong>.</p>
-<p>Teams keep their ERP/WMS/TMS systems, while Bridgeflow ingests operational signals, evaluates policy, and coordinates action automatically.</p>
-<h2 id="1-live-products">1. Live Products</h2>
-<h3 id="control-tower-live-pilot">Control Tower (Live Pilot)</h3>
-<p>See the Lima/Callao pilot in production:</p>
+                <h1 id="bridgeflow-documentation-hub">BridgeFlow Documentation Hub<a class="headerlink" href="#bridgeflow-documentation-hub" title="Permanent link">&para;</a></h1>
+<p>BridgeFlow is a policy-first logistics runtime built around one operating loop: <strong>Event → Policy → Action</strong>.</p>
+<p>This site is organized by what teams usually need first: onboarding, product workflows, platform services, and capability coverage.</p>
+<h2 id="start-here">Start Here<a class="headerlink" href="#start-here" title="Permanent link">&para;</a></h2>
 <ul>
-<li>Product docs: <code>products/control-tower/</code></li>
-<li>Live demo: <a href="https://control-tower.up.railway.app/">control-tower.up.railway.app</a></li>
+<li>Onboarding guide: <code>ONBOARDING.md</code></li>
+<li>Architecture overview: <code>ARCHITECTURE.md</code></li>
+<li>API entry point: <code>api-reference.md</code></li>
 </ul>
-<p><img alt="Bridgeflow Control Tower live view" src="images/phase-60-control-tower-home.png" /></p>
-<p>Other product repos in workspace:
-- <code>products/carrier-portal/</code>
-- <code>products/tracking-portal/</code>
-- <code>products/coords-app/</code></p>
-<h2 id="2-platform-stack">2. Platform Stack</h2>
-<p>Bridgeflow products are powered by a modular service layer.</p>
-<h3 id="service-layer-core-services-and-modules">Service Layer (Core Services and Modules)</h3>
+<h2 id="product-suite">Product Suite<a class="headerlink" href="#product-suite" title="Permanent link">&para;</a></h2>
+<p>Customer-facing applications and runtime experiences:</p>
 <ul>
-<li>Auth and tenancy: <code>platform/bf-identity/</code></li>
-<li>Master data: <code>platform/bf-masterdata/</code></li>
-<li>Orders: <code>platform/bf-orders/</code></li>
-<li>Shipments: <code>platform/bf-shipments/</code></li>
-<li>Search: <code>platform/bf-search/</code></li>
-<li>Fintech and billing: <code>platform/bf-fintech/</code></li>
-<li>Warehouse operations: <code>platform/bf-warehouse/</code></li>
-<li>Internal operations console: <code>platform/bf-admin-console/</code></li>
+<li>Control Tower (live pilot)</li>
+<li>Carrier Portal</li>
+<li>Tracking Portal</li>
+<li>Coords App companion</li>
 </ul>
-<h3 id="stack-relationship">Stack Relationship</h3>
+<p>Control Tower live demo: <a href="https://control-tower.up.railway.app/">control-tower.up.railway.app</a></p>
+<p><img alt="BridgeFlow Control Tower live view" src="images/phase-60-control-tower-home.png" /></p>
+<h2 id="platform-services">Platform Services<a class="headerlink" href="#platform-services" title="Permanent link">&para;</a></h2>
+<p>Core services that power BridgeFlow products:</p>
 <ul>
-<li>Products (customer-facing):</li>
-<li>Control Tower, Carrier Portal, Tracking Portal</li>
-<li>Platform (powering services):</li>
-<li>Identity, Masterdata, Orders, Shipments, Search, Fintech, Warehouse, Admin Console</li>
+<li>Identity and tenancy</li>
+<li>Masterdata</li>
+<li>Orders</li>
+<li>Shipments</li>
+<li>Search</li>
+<li>Fintech</li>
+<li>Warehouse</li>
+<li>Admin Console</li>
 </ul>
-<h2 id="3-future-vision">3. Future Vision</h2>
-<p>Bridgeflow's long-term architecture is preserved in the BF-INTEGRATION vision archive:</p>
+<p>Use the <strong>Platform Services</strong> section in the navigation for service-by-service docs.</p>
+<h2 id="capability-catalog">Capability Catalog<a class="headerlink" href="#capability-catalog" title="Permanent link">&para;</a></h2>
+<p>Implemented functionality by app/service is tracked in:</p>
 <ul>
-<li>Vision deep dive: <code>vision/bf-integration/</code></li>
-<li>Vision index and migration map: <code>vision/</code></li>
+<li><code>features/README.md</code></li>
 </ul>
-<h2 id="4-developer-hub">4. Developer Hub</h2>
-<p>Start integrating without choosing a product first:</p>
+<h2 id="vision-archive">Vision Archive<a class="headerlink" href="#vision-archive" title="Permanent link">&para;</a></h2>
+<p>Future-state architecture and BF-INTEGRATION historical materials:</p>
 <ul>
-<li>API reference hub: <code>api-reference/</code></li>
-<li>Integration guide: <code>products/control-tower/integration-guide/</code></li>
-<li>First event quickstart: <code>products/control-tower/quickstart/</code></li>
+<li><code>vision/bf-integration/README.md</code></li>
 </ul>
               
             </div>
           </div><footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
-        <a href="products/" class="btn btn-neutral float-right" title="Overview">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="ONBOARDING/" class="btn btn-neutral float-right" title="Onboarding">Next <span class="icon icon-circle-arrow-right"></span></a>
     </div>
 
   <hr/>
@@ -215,7 +233,7 @@ Core model: <strong>Event -&gt; Policy -&gt; Action</strong>.</p>
     
     
     
-      <span><a href="products/" style="color: #fcfcfc">Next &raquo;</a></span>
+      <span><a href="ONBOARDING/" style="color: #fcfcfc">Next &raquo;</a></span>
     
   </span>
 </div>
@@ -235,5 +253,5 @@ Core model: <strong>Event -&gt; Policy -&gt; Action</strong>.</p>
 
 <!--
 MkDocs version : 1.6.1
-Build Date UTC : 2026-02-23 05:09:01.797286+00:00
+Build Date UTC : 2026-02-27 06:34:08.020435+00:00
 -->

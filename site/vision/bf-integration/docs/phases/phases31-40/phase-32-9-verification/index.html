@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="../../../../../../css/theme.css" />
     <link rel="stylesheet" href="../../../../../../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../../../../../../stylesheets/extra.css" rel="stylesheet" />
     
       <script>
         // Current page data
@@ -43,7 +44,16 @@
                 <li class="toctree-l1"><a class="reference internal" href="../../../../../..">Home</a>
                 </li>
               </ul>
-              <p class="caption"><span class="caption-text">Products</span></p>
+              <p class="caption"><span class="caption-text">Start Here</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../ONBOARDING/">Onboarding</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../ARCHITECTURE/">Architecture</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../api-reference/">API Reference Hub</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Product Suite</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../../../../../products/">Overview</a>
                   </li>
@@ -66,7 +76,7 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../../../../../products/tracking-portal/">Tracking Portal</a>
                   </li>
               </ul>
-              <p class="caption"><span class="caption-text">Platform</span></p>
+              <p class="caption"><span class="caption-text">Platform Services</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../../../../../platform/">Overview</a>
                   </li>
@@ -87,12 +97,35 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../../../../../platform/bf-warehouse/">Warehouse Service</a>
                   </li>
               </ul>
+              <p class="caption"><span class="caption-text">Capability Catalog</span></p>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../../../../">Vision</a>
-                </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/SHIPMENTS/">Shipments</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/ADMIN_CONSOLE/">Admin Console</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/CONTROL_TOWER/">Control Tower</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/IDENTITY/">Identity</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/MASTERDATA/">Masterdata</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/ORDERS/">Orders</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/WAREHOUSE/">Warehouse</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/SEARCH/">Search</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/FINTECH/">Fintech</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/CARRIER_PORTAL/">Carrier Portal</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/TRACKING_PORTAL/">Tracking Portal</a>
+                  </li>
               </ul>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../../../../../../api-reference/">API Reference</a>
+                <li class="toctree-l1"><a class="reference internal" href="../../../../">Vision Archive</a>
                 </li>
               </ul>
       </div>
@@ -123,16 +156,16 @@
 Status: Planned / In Development
 Context: Original BF-INTEGRATION Vision (Pre-Phase 30)</p>
 </blockquote>
-<h1 id="phase-329-implementation-verification-checklist">Phase 32.9 — Implementation Verification Checklist</h1>
-<h2 id="issue-1-canvas-panning-biztalk-style">✅ Issue #1: Canvas Panning (BizTalk-Style)</h2>
-<h3 id="code-locations">Code Locations</h3>
+<h1 id="phase-329-implementation-verification-checklist">Phase 32.9 — Implementation Verification Checklist<a class="headerlink" href="#phase-329-implementation-verification-checklist" title="Permanent link">&para;</a></h1>
+<h2 id="issue-1-canvas-panning-biztalk-style">✅ Issue #1: Canvas Panning (BizTalk-Style)<a class="headerlink" href="#issue-1-canvas-panning-biztalk-style" title="Permanent link">&para;</a></h2>
+<h3 id="code-locations">Code Locations<a class="headerlink" href="#code-locations" title="Permanent link">&para;</a></h3>
 <ul>
 <li>✅ <code>setupCanvasPanning()</code> function defined at <a href="../../src/assembly.js#L1534">assembly.js#L1534</a></li>
 <li>✅ Function called in <code>initAssembly()</code> at <a href="../../src/assembly.js#L1831">assembly.js#L1831</a></li>
 <li>✅ Viewport wrapper in HTML at <a href="../../routes/canvas-assembly.js#L93">canvas-assembly.js#L93</a></li>
 <li>✅ Viewport CSS at <a href="../../css/assembly.css#L150">assembly.css#L150</a></li>
 </ul>
-<h3 id="features-implemented">Features Implemented</h3>
+<h3 id="features-implemented">Features Implemented<a class="headerlink" href="#features-implemented" title="Permanent link">&para;</a></h3>
 <ul>
 <li>✅ Middle mouse button panning</li>
 <li>✅ Ctrl + Left click alternative</li>
@@ -141,28 +174,28 @@ Context: Original BF-INTEGRATION Vision (Pre-Phase 30)</p>
 <li>✅ Excludes interactive elements from pan</li>
 <li>✅ GPU-accelerated transforms</li>
 </ul>
-<h3 id="html-structure">HTML Structure</h3>
+<h3 id="html-structure">HTML Structure<a class="headerlink" href="#html-structure" title="Permanent link">&para;</a></h3>
 <pre><code class="language-html">&lt;div id=&quot;canvas-viewport&quot; class=&quot;canvas-viewport&quot;&gt;
   &lt;div id=&quot;assembly-workspace&quot; class=&quot;assembly-workspace&quot;&gt;
     &lt;!-- components --&gt;
   &lt;/div&gt;
 &lt;/div&gt;
 </code></pre>
-<h3 id="css-classes">CSS Classes</h3>
+<h3 id="css-classes">CSS Classes<a class="headerlink" href="#css-classes" title="Permanent link">&para;</a></h3>
 <ul>
 <li><code>.canvas-viewport</code> — Container with overflow:hidden</li>
 <li><code>.canvas-viewport.panning</code> — Cursor: grabbing state</li>
 <li><code>.canvas-viewport .assembly-workspace</code> — Uses transform for positioning</li>
 </ul>
 <hr />
-<h2 id="issue-2-sidebar-slide-off-animation">✅ Issue #2: Sidebar Slide-Off Animation</h2>
-<h3 id="code-locations_1">Code Locations</h3>
+<h2 id="issue-2-sidebar-slide-off-animation">✅ Issue #2: Sidebar Slide-Off Animation<a class="headerlink" href="#issue-2-sidebar-slide-off-animation" title="Permanent link">&para;</a></h2>
+<h3 id="code-locations_1">Code Locations<a class="headerlink" href="#code-locations_1" title="Permanent link">&para;</a></h3>
 <ul>
 <li>✅ <code>setupPanelToggles()</code> updated at <a href="../../src/assembly.js#L1593">assembly.js#L1593</a></li>
 <li>✅ Sidebar CSS at <a href="../../css/assembly.css#L205-L265">assembly.css#L205-L265</a></li>
 <li>✅ Toggle buttons in HTML at <a href="../../routes/canvas-assembly.js#L24">canvas-assembly.js#L24</a></li>
 </ul>
-<h3 id="features-implemented_1">Features Implemented</h3>
+<h3 id="features-implemented_1">Features Implemented<a class="headerlink" href="#features-implemented_1" title="Permanent link">&para;</a></h3>
 <ul>
 <li>✅ Left panel: <code>translateX(-100%)</code> slide left</li>
 <li>✅ Right panel: <code>translateX(100%)</code> slide right</li>
@@ -171,14 +204,14 @@ Context: Original BF-INTEGRATION Vision (Pre-Phase 30)</p>
 <li>✅ Smooth 0.3s ease transition</li>
 <li>✅ Arrow direction updates (→ ←)</li>
 </ul>
-<h3 id="css-classes_1">CSS Classes</h3>
+<h3 id="css-classes_1">CSS Classes<a class="headerlink" href="#css-classes_1" title="Permanent link">&para;</a></h3>
 <ul>
 <li><code>#left-panel.collapsed</code> — Transform &amp; opacity</li>
 <li><code>#left-panel.collapsed .toggle-sidebar</code> — Positioned outside canvas</li>
 <li><code>.canvas-container.sidebar-left-hidden</code> — Grid column: 0</li>
 <li><code>.canvas-container.sidebar-right-hidden</code> — Grid column: 0</li>
 </ul>
-<h3 id="button-wiring">Button Wiring</h3>
+<h3 id="button-wiring">Button Wiring<a class="headerlink" href="#button-wiring" title="Permanent link">&para;</a></h3>
 <pre><code class="language-javascript">// Supports both data-side and data-target attributes
 const side = btn.dataset.side || btn.dataset.target;
 
@@ -188,8 +221,8 @@ if (side === 'left' &amp;&amp; leftPanel) {
 }
 </code></pre>
 <hr />
-<h2 id="issue-3-trading-partner-loading">✅ Issue #3: Trading Partner Loading</h2>
-<h3 id="verified-implementations">Verified Implementations</h3>
+<h2 id="issue-3-trading-partner-loading">✅ Issue #3: Trading Partner Loading<a class="headerlink" href="#issue-3-trading-partner-loading" title="Permanent link">&para;</a></h2>
+<h3 id="verified-implementations">Verified Implementations<a class="headerlink" href="#verified-implementations" title="Permanent link">&para;</a></h3>
 <ul>
 <li>✅ Store auto-syncs from API: <code>syncPartnersFromApi()</code> at <a href="../../state/store.js#L318">store.js#L318</a></li>
 <li>✅ <code>loadTPPalette()</code> renders items at <a href="../../src/assembly.js#L385">assembly.js#L385</a></li>
@@ -197,7 +230,7 @@ if (side === 'left' &amp;&amp; leftPanel) {
 <li>✅ Store subscription for updates at <a href="../../src/assembly.js#L1770-L1775">assembly.js#L1770-L1775</a></li>
 <li>✅ Count display via <code>#tp-count</code> at <a href="../../routes/canvas-assembly.js#L33">canvas-assembly.js#L33</a></li>
 </ul>
-<h3 id="data-flow">Data Flow</h3>
+<h3 id="data-flow">Data Flow<a class="headerlink" href="#data-flow" title="Permanent link">&para;</a></h3>
 <ol>
 <li>Store init → <code>syncPartnersFromApi()</code></li>
 <li>GET <code>/trading-partners</code> → populate <code>store.partners[]</code></li>
@@ -205,13 +238,13 @@ if (side === 'left' &amp;&amp; leftPanel) {
 <li>Subscribe in <code>initAssembly()</code> → call <code>loadTPPalette()</code></li>
 <li>Render palette items + update count</li>
 </ol>
-<h3 id="html-structure_1">HTML Structure</h3>
+<h3 id="html-structure_1">HTML Structure<a class="headerlink" href="#html-structure_1" title="Permanent link">&para;</a></h3>
 <pre><code class="language-html">&lt;span id=&quot;tp-count&quot; class=&quot;folder-count&quot;&gt;(0)&lt;/span&gt;
 &lt;div id=&quot;tp-palette&quot; class=&quot;folder-items&quot;&gt;&lt;/div&gt;
 </code></pre>
 <hr />
-<h2 id="testing-checklist">🧪 Testing Checklist</h2>
-<h3 id="panning-tests">Panning Tests</h3>
+<h2 id="testing-checklist">🧪 Testing Checklist<a class="headerlink" href="#testing-checklist" title="Permanent link">&para;</a></h2>
+<h3 id="panning-tests">Panning Tests<a class="headerlink" href="#panning-tests" title="Permanent link">&para;</a></h3>
 <ul>
 <li>[ ] Open Bridge Assembly route</li>
 <li>[ ] Drag components to create large diagram</li>
@@ -222,7 +255,7 @@ if (side === 'left' &amp;&amp; leftPanel) {
 <li>[ ] Palette items still draggable</li>
 <li>[ ] Regular component clicking unaffected</li>
 </ul>
-<h3 id="sidebar-tests">Sidebar Tests</h3>
+<h3 id="sidebar-tests">Sidebar Tests<a class="headerlink" href="#sidebar-tests" title="Permanent link">&para;</a></h3>
 <ul>
 <li>[ ] Left toggle arrow: Click → panel slides left off-screen</li>
 <li>[ ] Toggle arrow remains visible outside canvas</li>
@@ -233,7 +266,7 @@ if (side === 'left' &amp;&amp; leftPanel) {
 <li>[ ] Connections update after collapse/expand</li>
 <li>[ ] Animation is smooth (0.3s)</li>
 </ul>
-<h3 id="tp-loading-tests">TP Loading Tests</h3>
+<h3 id="tp-loading-tests">TP Loading Tests<a class="headerlink" href="#tp-loading-tests" title="Permanent link">&para;</a></h3>
 <ul>
 <li>[ ] Page loads → TP count &gt; 0</li>
 <li>[ ] TP list shows draggable items</li>
@@ -241,7 +274,7 @@ if (side === 'left' &amp;&amp; leftPanel) {
 <li>[ ] Add new TP → palette updates</li>
 <li>[ ] Status indicators refresh</li>
 </ul>
-<h3 id="browser-tests">Browser Tests</h3>
+<h3 id="browser-tests">Browser Tests<a class="headerlink" href="#browser-tests" title="Permanent link">&para;</a></h3>
 <ul>
 <li>[ ] Chrome/Chromium ✅</li>
 <li>[ ] Firefox ✅</li>
@@ -249,7 +282,7 @@ if (side === 'left' &amp;&amp; leftPanel) {
 <li>[ ] Edge ✅</li>
 </ul>
 <hr />
-<h2 id="build-syntax-verification">📋 Build &amp; Syntax Verification</h2>
+<h2 id="build-syntax-verification">📋 Build &amp; Syntax Verification<a class="headerlink" href="#build-syntax-verification" title="Permanent link">&para;</a></h2>
 <ul>
 <li>✅ No syntax errors in assembly.js</li>
 <li>✅ No syntax errors in canvas-assembly.js</li>
@@ -258,7 +291,7 @@ if (side === 'left' &amp;&amp; leftPanel) {
 <li>✅ No console errors on page load</li>
 </ul>
 <hr />
-<h2 id="files-changed-summary">📦 Files Changed Summary</h2>
+<h2 id="files-changed-summary">📦 Files Changed Summary<a class="headerlink" href="#files-changed-summary" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
@@ -290,7 +323,7 @@ if (side === 'left' &amp;&amp; leftPanel) {
 </tbody>
 </table>
 <hr />
-<h2 id="status-ready-for-production">✅ Status: READY FOR PRODUCTION</h2>
+<h2 id="status-ready-for-production">✅ Status: READY FOR PRODUCTION<a class="headerlink" href="#status-ready-for-production" title="Permanent link">&para;</a></h2>
 <p>All three critical UX fixes are:
 - ✅ Fully implemented
 - ✅ Integrated into initialization flow

@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="../../css/theme.css" />
     <link rel="stylesheet" href="../../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../../stylesheets/extra.css" rel="stylesheet" />
     
       <script>
         // Current page data
@@ -43,7 +44,16 @@
                 <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
                 </li>
               </ul>
-              <p class="caption"><span class="caption-text">Products</span></p>
+              <p class="caption"><span class="caption-text">Start Here</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../ONBOARDING/">Onboarding</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../ARCHITECTURE/">Architecture</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../api-reference/">API Reference Hub</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Product Suite</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../products/">Overview</a>
                   </li>
@@ -66,7 +76,7 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../products/tracking-portal/">Tracking Portal</a>
                   </li>
               </ul>
-              <p class="caption"><span class="caption-text">Platform</span></p>
+              <p class="caption"><span class="caption-text">Platform Services</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../platform/">Overview</a>
                   </li>
@@ -87,12 +97,35 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../platform/bf-warehouse/">Warehouse Service</a>
                   </li>
               </ul>
+              <p class="caption"><span class="caption-text">Capability Catalog</span></p>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../../vision/bf-integration/">Vision</a>
-                </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/SHIPMENTS/">Shipments</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/ADMIN_CONSOLE/">Admin Console</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/CONTROL_TOWER/">Control Tower</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/IDENTITY/">Identity</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/MASTERDATA/">Masterdata</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/ORDERS/">Orders</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/WAREHOUSE/">Warehouse</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/SEARCH/">Search</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/FINTECH/">Fintech</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/CARRIER_PORTAL/">Carrier Portal</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/TRACKING_PORTAL/">Tracking Portal</a>
+                  </li>
               </ul>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../../api-reference/">API Reference</a>
+                <li class="toctree-l1"><a class="reference internal" href="../../vision/bf-integration/">Vision Archive</a>
                 </li>
               </ul>
       </div>
@@ -118,10 +151,10 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <h1 id="demo-phase-10-security-verification-cto">Demo: Phase 10 Security Verification (CTO)</h1>
+                <h1 id="demo-phase-10-security-verification-cto">Demo: Phase 10 Security Verification (CTO)<a class="headerlink" href="#demo-phase-10-security-verification-cto" title="Permanent link">&para;</a></h1>
 <p><strong>Goal:</strong> Provide a short, 30-minute demo script for the CTO to verify Phase 10 security (RBAC, audit, job lockdown, friendly 401/403 UX). ✅</p>
 <hr />
-<h2 id="overview">Overview ✨</h2>
+<h2 id="overview">Overview ✨<a class="headerlink" href="#overview" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Timebox: <strong>30 minutes</strong> (setup + verification)</li>
 <li>Top-level checks:</li>
@@ -134,7 +167,7 @@
 <li>Validate friendly 401/403 messages in the UI</li>
 </ul>
 <hr />
-<h2 id="quick-prereqs">Quick Prereqs 🔧</h2>
+<h2 id="quick-prereqs">Quick Prereqs 🔧<a class="headerlink" href="#quick-prereqs" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Node.js (v18+ recommended)</li>
 <li>pnpm installed</li>
@@ -142,7 +175,7 @@
 <li>Ensure migrations are applied if you use a real DB; tests use mock DB by default.</li>
 </ul>
 <hr />
-<h2 id="commands-get-started">Commands — get started ▶️</h2>
+<h2 id="commands-get-started">Commands — get started ▶️<a class="headerlink" href="#commands-get-started" title="Permanent link">&para;</a></h2>
 <p>1) Start secure dev server (PowerShell):</p>
 <pre><code class="language-powershell">pnpm run dev:secure
 # This runs the API with LOCKDOWN_JOBS=true REQUIRE_AUTH=true ENFORCE_RBAC=true
@@ -176,7 +209,7 @@ node scripts/create-dev-users.mjs
 # Expect: all tests pass (26 passed, 1 skipped as in CI)
 </code></pre>
 <hr />
-<h2 id="manual-verification-steps-recommended-for-cto">Manual verification steps (recommended for CTO) 🧭</h2>
+<h2 id="manual-verification-steps-recommended-for-cto">Manual verification steps (recommended for CTO) 🧭<a class="headerlink" href="#manual-verification-steps-recommended-for-cto" title="Permanent link">&para;</a></h2>
 <p>1) Start the secure server (see commands above).
 2) Create dev users (script above) or create via the UI register flow.
 3) In a browser, open the Hub/UI at: <code>http://localhost:4000/</code> (or specific pages: <code>/login</code>, <code>bridge-form.html</code>, <code>wizard.html</code>).</p>
@@ -199,7 +232,7 @@ curl -i -X POST http://localhost:4000/api/jobs -H &quot;Authorization: Bearer &l
 <p>Tip: Use <code>node scripts/verify-job-lockdown.mjs</code> for a deterministic run that prints results and assertions.</p>
 </blockquote>
 <hr />
-<h2 id="verification-checklist">Verification Checklist ✅</h2>
+<h2 id="verification-checklist">Verification Checklist ✅<a class="headerlink" href="#verification-checklist" title="Permanent link">&para;</a></h2>
 <ul>
 <li>[ ] Secure server started with <code>LOCKDOWN_JOBS</code>, <code>REQUIRE_AUTH</code>, <code>ENFORCE_RBAC</code> enabled</li>
 <li>[ ] <code>create-dev-users.mjs</code> completed and both dev user and super admin accounts exist</li>
@@ -213,7 +246,7 @@ curl -i -X POST http://localhost:4000/api/jobs -H &quot;Authorization: Bearer &l
 </ul>
 <p><strong>Success criteria:</strong> All checks above pass and <code>scripts/verify-job-lockdown.mjs</code> exits with success and test suite is green.</p>
 <hr />
-<h2 id="runbook-troubleshooting">Runbook / Troubleshooting 🛠️</h2>
+<h2 id="runbook-troubleshooting">Runbook / Troubleshooting 🛠️<a class="headerlink" href="#runbook-troubleshooting" title="Permanent link">&para;</a></h2>
 <p>Problem: <code>node scripts/create-dev-users.mjs</code> fails with connection refused
 - Cause: server not fully up yet or network issue
 - Fix: wait 2–5 seconds and retry; check server logs for startup messages.
@@ -231,7 +264,7 @@ curl -i -X POST http://localhost:4000/api/jobs -H &quot;Authorization: Bearer &l
 - Server stdout for <code>JOB_STARTED</code>, <code>JOB_SUCCEEDED</code>, <code>JOB_FAILED</code> messages.
 - API request/response logs when running <code>pnpm run dev:secure</code>.</p>
 <hr />
-<h2 id="optional-assets-quick-guides">Optional assets &amp; quick guides 📸</h2>
+<h2 id="optional-assets-quick-guides">Optional assets &amp; quick guides 📸<a class="headerlink" href="#optional-assets-quick-guides" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Terminal recording suggestion (cross-platform):</li>
 <li>Linux/macOS: <code>asciinema rec demo.cast</code> (stop with <code>Ctrl-D</code>), upload to asciinema.org</li>
@@ -248,7 +281,7 @@ curl -i -X POST http://localhost:4000/api/jobs -H &quot;Authorization: Bearer &l
 <li>Run tests: <code>pnpm -s test</code></li>
 </ul>
 <hr />
-<h2 id="agenda-for-the-30-minute-cto-verification-session">Agenda for the 30-minute CTO verification session</h2>
+<h2 id="agenda-for-the-30-minute-cto-verification-session">Agenda for the 30-minute CTO verification session<a class="headerlink" href="#agenda-for-the-30-minute-cto-verification-session" title="Permanent link">&para;</a></h2>
 <p>1) (5m) Start secure server &amp; create dev users
 2) (10m) Walk through automated verification script and review outputs
 3) (10m) Manual UI checks (login, create job, try operator action as user, then as operator)
@@ -262,7 +295,7 @@ curl -i -X POST http://localhost:4000/api/jobs -H &quot;Authorization: Bearer &l
 <p><em>File location:</em> <code>docs/instructions/demo-phase10-security-ctoverification.md</code></p>
 <p>If this looks good I will mark the demo materials done and prepare the optional terminal recording/screenshot assets.</p>
 <hr />
-<h2 id="recent-fixes-dec-22-2025">Recent fixes (dec 22, 2025) 🔧</h2>
+<h2 id="recent-fixes-dec-22-2025">Recent fixes (dec 22, 2025) 🔧<a class="headerlink" href="#recent-fixes-dec-22-2025" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Fixed Hub login form JavaScript calling the wrong endpoint (<code>/auth/login</code> → <strong>now</strong> calls <code>/api/auth/login</code>). This resolves the "POST /auth/login Not Found" error reported in the verification run.</li>
 <li><code>create-dev-users.mjs</code> now falls back to direct DB insertion if the API is unreachable; see <code>scripts/create-dev-users-direct.mjs</code> for an always-direct option.</li>

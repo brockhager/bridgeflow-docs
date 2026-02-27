@@ -1,6 +1,6 @@
-# BridgeFlow Features Index
+# Capability Catalog
 
-This section documents product and platform capabilities organized by app.
+This section tracks implemented BridgeFlow capabilities by product and service.
 
 ## Core Operations Apps
 

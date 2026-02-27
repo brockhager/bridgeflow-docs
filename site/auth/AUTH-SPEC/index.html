@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="../../css/theme.css" />
     <link rel="stylesheet" href="../../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../../stylesheets/extra.css" rel="stylesheet" />
     
       <script>
         // Current page data
@@ -43,7 +44,16 @@
                 <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
                 </li>
               </ul>
-              <p class="caption"><span class="caption-text">Products</span></p>
+              <p class="caption"><span class="caption-text">Start Here</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../ONBOARDING/">Onboarding</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../ARCHITECTURE/">Architecture</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../api-reference/">API Reference Hub</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Product Suite</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../products/">Overview</a>
                   </li>
@@ -66,7 +76,7 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../products/tracking-portal/">Tracking Portal</a>
                   </li>
               </ul>
-              <p class="caption"><span class="caption-text">Platform</span></p>
+              <p class="caption"><span class="caption-text">Platform Services</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../platform/">Overview</a>
                   </li>
@@ -87,12 +97,35 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../platform/bf-warehouse/">Warehouse Service</a>
                   </li>
               </ul>
+              <p class="caption"><span class="caption-text">Capability Catalog</span></p>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../../vision/bf-integration/">Vision</a>
-                </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/SHIPMENTS/">Shipments</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/ADMIN_CONSOLE/">Admin Console</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/CONTROL_TOWER/">Control Tower</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/IDENTITY/">Identity</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/MASTERDATA/">Masterdata</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/ORDERS/">Orders</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/WAREHOUSE/">Warehouse</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/SEARCH/">Search</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/FINTECH/">Fintech</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/CARRIER_PORTAL/">Carrier Portal</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/TRACKING_PORTAL/">Tracking Portal</a>
+                  </li>
               </ul>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../../api-reference/">API Reference</a>
+                <li class="toctree-l1"><a class="reference internal" href="../../vision/bf-integration/">Vision Archive</a>
                 </li>
               </ul>
       </div>
@@ -118,12 +151,12 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <h1 id="authentication-mvp-spec-thin-slice">Authentication MVP Spec (Thin Slice)</h1>
+                <h1 id="authentication-mvp-spec-thin-slice">Authentication MVP Spec (Thin Slice)<a class="headerlink" href="#authentication-mvp-spec-thin-slice" title="Permanent link">&para;</a></h1>
 <p><strong>Owner:</strong> Customer Core | Agent4
 <strong>Date:</strong> 2025-12-23</p>
-<h2 id="goal">Goal</h2>
+<h2 id="goal">Goal<a class="headerlink" href="#goal" title="Permanent link">&para;</a></h2>
 <p>Ship a minimal, secure authentication system to support user registration, login, session management, and a basic "My workspace" endpoint for the next phase of work.</p>
-<h2 id="scope-6-point-mvp">Scope (6-point MVP)</h2>
+<h2 id="scope-6-point-mvp">Scope (6-point MVP)<a class="headerlink" href="#scope-6-point-mvp" title="Permanent link">&para;</a></h2>
 <ol>
 <li><strong>User registration</strong> (POST /api/auth/register)</li>
 <li>Accepts: email, password, name</li>
@@ -170,21 +203,21 @@
 <li>Basic tests: registration success, registration missing fields, login success/fail</li>
 <li>Add integration test that exercises full registration -&gt; login flow</li>
 </ol>
-<h2 id="non-goals-for-mvp">Non-goals for MVP</h2>
+<h2 id="non-goals-for-mvp">Non-goals for MVP<a class="headerlink" href="#non-goals-for-mvp" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Email verification</li>
 <li>Multi-factor auth</li>
 <li>OAuth/OIDC</li>
 <li>Account recovery pages</li>
 </ul>
-<h2 id="acceptance-criteria">Acceptance criteria</h2>
+<h2 id="acceptance-criteria">Acceptance criteria<a class="headerlink" href="#acceptance-criteria" title="Permanent link">&para;</a></h2>
 <ul>
 <li>All auth-related unit and integration tests pass locally (USE_MOCK_DB=true)</li>
 <li>Registration endpoint returns 201 and creates a user record</li>
 <li>Login endpoint returns 200 with token for valid credentials and 401 for invalid</li>
 <li>Auth middleware protects <code>/api/auth/me</code> and returns 401 when no token</li>
 </ul>
-<h2 id="next-steps-after-mvp">Next steps after MVP</h2>
+<h2 id="next-steps-after-mvp">Next steps after MVP<a class="headerlink" href="#next-steps-after-mvp" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Add password reset flow, email verification, account recovery</li>
 <li>Add account management pages and admin user management UI</li>

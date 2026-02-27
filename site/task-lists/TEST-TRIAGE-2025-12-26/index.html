@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="../../css/theme.css" />
     <link rel="stylesheet" href="../../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../../stylesheets/extra.css" rel="stylesheet" />
     
       <script>
         // Current page data
@@ -43,7 +44,16 @@
                 <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
                 </li>
               </ul>
-              <p class="caption"><span class="caption-text">Products</span></p>
+              <p class="caption"><span class="caption-text">Start Here</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../ONBOARDING/">Onboarding</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../ARCHITECTURE/">Architecture</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../api-reference/">API Reference Hub</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Product Suite</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../products/">Overview</a>
                   </li>
@@ -66,7 +76,7 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../products/tracking-portal/">Tracking Portal</a>
                   </li>
               </ul>
-              <p class="caption"><span class="caption-text">Platform</span></p>
+              <p class="caption"><span class="caption-text">Platform Services</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../platform/">Overview</a>
                   </li>
@@ -87,12 +97,35 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../platform/bf-warehouse/">Warehouse Service</a>
                   </li>
               </ul>
+              <p class="caption"><span class="caption-text">Capability Catalog</span></p>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../../vision/bf-integration/">Vision</a>
-                </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/SHIPMENTS/">Shipments</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/ADMIN_CONSOLE/">Admin Console</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/CONTROL_TOWER/">Control Tower</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/IDENTITY/">Identity</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/MASTERDATA/">Masterdata</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/ORDERS/">Orders</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/WAREHOUSE/">Warehouse</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/SEARCH/">Search</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/FINTECH/">Fintech</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/CARRIER_PORTAL/">Carrier Portal</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/TRACKING_PORTAL/">Tracking Portal</a>
+                  </li>
               </ul>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../../api-reference/">API Reference</a>
+                <li class="toctree-l1"><a class="reference internal" href="../../vision/bf-integration/">Vision Archive</a>
                 </li>
               </ul>
       </div>
@@ -118,16 +151,16 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <h1 id="test-triage-report-december-26-2025">Test Triage Report — December 26, 2025</h1>
-<h2 id="baseline-metrics">📊 BASELINE METRICS</h2>
+                <h1 id="test-triage-report-december-26-2025">Test Triage Report — December 26, 2025<a class="headerlink" href="#test-triage-report-december-26-2025" title="Permanent link">&para;</a></h1>
+<h2 id="baseline-metrics">📊 BASELINE METRICS<a class="headerlink" href="#baseline-metrics" title="Permanent link">&para;</a></h2>
 <ul>
 <li><strong>Total Test Files</strong>: 62 (3 failed | 57 passed | 2 skipped)</li>
 <li><strong>Total Tests</strong>: 220 (192 passed | 25 skipped | 3 explicit failures)</li>
 <li><strong>Unhandled Errors</strong>: 31 (<code>ERR_HTTP_HEADERS_SENT</code> race conditions)</li>
 <li><strong>Duration</strong>: 12.98s</li>
 </ul>
-<h2 id="p1-blockers-fix-today">🎯 P1 - BLOCKERS (Fix Today)</h2>
-<h3 id="1-missing-prisma-slug-field-2-tests-critical">1. Missing Prisma <code>slug</code> field (2 tests) ⚠️ <strong>CRITICAL</strong></h3>
+<h2 id="p1-blockers-fix-today">🎯 P1 - BLOCKERS (Fix Today)<a class="headerlink" href="#p1-blockers-fix-today" title="Permanent link">&para;</a></h2>
+<h3 id="1-missing-prisma-slug-field-2-tests-critical">1. Missing Prisma <code>slug</code> field (2 tests) ⚠️ <strong>CRITICAL</strong><a class="headerlink" href="#1-missing-prisma-slug-field-2-tests-critical" title="Permanent link">&para;</a></h3>
 <p><strong>Files</strong>:
 - <code>test/backup.export.test.js</code>
 - <code>test/scripts.backup.test.js</code></p>
@@ -140,7 +173,7 @@ Argument `slug` is missing.
 <strong>Estimated Time</strong>: 10 minutes
 <strong>Priority</strong>: P1 (blocks backup/export functionality tests)</p>
 <hr />
-<h3 id="2-vite-transform-error-on-mtls-test-1-test-known-issue">2. Vite Transform Error on mTLS Test (1 test) 🔧 <strong>KNOWN ISSUE</strong></h3>
+<h3 id="2-vite-transform-error-on-mtls-test-1-test-known-issue">2. Vite Transform Error on mTLS Test (1 test) 🔧 <strong>KNOWN ISSUE</strong><a class="headerlink" href="#2-vite-transform-error-on-mtls-test-1-test-known-issue" title="Permanent link">&para;</a></h3>
 <p><strong>File</strong>: <code>api/tests/mtls.test.js</code></p>
 <p><strong>Root Cause</strong>: Vite attempting to parse file with invalid JS syntax (likely JSX in .js file or dynamic import issue).</p>
 <p><strong>Error</strong>:</p>
@@ -155,8 +188,8 @@ name the file with the .jsx or .tsx extension.
 <p><strong>Estimated Time</strong>: 30 minutes investigation + 15 minutes fix
 <strong>Priority</strong>: P1 (Phase 13 known issue, already excluded from suite)</p>
 <hr />
-<h2 id="p2-infrastructure-fix-this-week">🔥 P2 - INFRASTRUCTURE (Fix This Week)</h2>
-<h3 id="3-err_http_headers_sent-race-conditions-31-unhandled-errors-pattern">3. ERR_HTTP_HEADERS_SENT Race Conditions (31 unhandled errors) 🚨 <strong>PATTERN</strong></h3>
+<h2 id="p2-infrastructure-fix-this-week">🔥 P2 - INFRASTRUCTURE (Fix This Week)<a class="headerlink" href="#p2-infrastructure-fix-this-week" title="Permanent link">&para;</a></h2>
+<h3 id="3-err_http_headers_sent-race-conditions-31-unhandled-errors-pattern">3. ERR_HTTP_HEADERS_SENT Race Conditions (31 unhandled errors) 🚨 <strong>PATTERN</strong><a class="headerlink" href="#3-err_http_headers_sent-race-conditions-31-unhandled-errors-pattern" title="Permanent link">&para;</a></h3>
 <p><strong>Affected Test Files</strong>:
 - <code>api/tests/audit.test.js</code> (6 errors)
 - <code>test/worker.integration.test.js</code> (7 errors)
@@ -176,8 +209,8 @@ name the file with the .jsx or .tsx extension.
 <p><strong>Estimated Time</strong>: 2-4 hours (investigate pattern + fix hooks + verify)
 <strong>Priority</strong>: P2 (causes noise but tests are passing, unhandled rejections don't fail suite)</p>
 <hr />
-<h2 id="p3-non-critical-phase-14-backlog">✅ P3 - NON-CRITICAL (Phase 14 Backlog)</h2>
-<h3 id="4-react-testing-warnings-admin-login-tests">4. React Testing Warnings (Admin Login Tests)</h3>
+<h2 id="p3-non-critical-phase-14-backlog">✅ P3 - NON-CRITICAL (Phase 14 Backlog)<a class="headerlink" href="#p3-non-critical-phase-14-backlog" title="Permanent link">&para;</a></h2>
+<h3 id="4-react-testing-warnings-admin-login-tests">4. React Testing Warnings (Admin Login Tests)<a class="headerlink" href="#4-react-testing-warnings-admin-login-tests" title="Permanent link">&para;</a></h3>
 <p><strong>File</strong>: <code>admin-bridgeflow/test/login.test.jsx</code></p>
 <p><strong>Warning Pattern</strong>:</p>
 <pre><code>Warning: `ReactDOMTestUtils.act` is deprecated
@@ -188,7 +221,7 @@ Warning: The current testing environment is not configured to support act(...)
 <strong>Estimated Time</strong>: 30 minutes
 <strong>Priority</strong>: P3 (cosmetic, doesn't block functionality)</p>
 <hr />
-<h3 id="5-jsdom-navigation-warning">5. JSDOM Navigation Warning</h3>
+<h3 id="5-jsdom-navigation-warning">5. JSDOM Navigation Warning<a class="headerlink" href="#5-jsdom-navigation-warning" title="Permanent link">&para;</a></h3>
 <p><strong>File</strong>: <code>web/tests/admin.audit.test.js</code></p>
 <p><strong>Warning</strong>:</p>
 <pre><code>Not implemented: navigation to another Document
@@ -198,7 +231,7 @@ Warning: The current testing environment is not configured to support act(...)
 <strong>Estimated Time</strong>: 15 minutes
 <strong>Priority</strong>: P3 (expected behavior, test passes)</p>
 <hr />
-<h2 id="wins-no-action-needed">🎉 WINS / NO ACTION NEEDED</h2>
+<h2 id="wins-no-action-needed">🎉 WINS / NO ACTION NEEDED<a class="headerlink" href="#wins-no-action-needed" title="Permanent link">&para;</a></h2>
 <p>✅ <strong>RBAC Dev Stub</strong>: <code>api/tests/dev-stub-rbac.test.js</code> <strong>PASSES</strong> (dev stub RBAC fix confirmed working!)
 ✅ <strong>Admin Auth</strong>: All admin authentication tests passing
 ✅ <strong>Admin UI</strong>: All admin React component tests passing (Tenants, Users, Operations, etc.)
@@ -206,7 +239,7 @@ Warning: The current testing environment is not configured to support act(...)
 ✅ <strong>Security</strong>: mTLS, RBAC, rate-limiting, audit tests all passing
 ✅ <strong>EDI Library</strong>: All EDI transaction tests passing (850, 810, 820, 856, 997, etc.)</p>
 <hr />
-<h2 id="categorized-failure-summary">📈 CATEGORIZED FAILURE SUMMARY</h2>
+<h2 id="categorized-failure-summary">📈 CATEGORIZED FAILURE SUMMARY<a class="headerlink" href="#categorized-failure-summary" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
@@ -250,41 +283,41 @@ Warning: The current testing environment is not configured to support act(...)
 </tbody>
 </table>
 <hr />
-<h2 id="recommended-fix-order">🎯 RECOMMENDED FIX ORDER</h2>
-<h3 id="today-next-2-hours">Today (Next 2 Hours):</h3>
+<h2 id="recommended-fix-order">🎯 RECOMMENDED FIX ORDER<a class="headerlink" href="#recommended-fix-order" title="Permanent link">&para;</a></h2>
+<h3 id="today-next-2-hours">Today (Next 2 Hours):<a class="headerlink" href="#today-next-2-hours" title="Permanent link">&para;</a></h3>
 <ol>
 <li><strong>Fix Prisma <code>slug</code> field</strong> (10 min) → Immediate 2 test pass</li>
 <li><strong>Investigate mTLS Vite error</strong> (45 min) → Document findings, determine if fixable or permanent exclude</li>
 <li><strong>Quick header race condition investigation</strong> (30 min) → Identify if this is test-order dependent or systematic</li>
 </ol>
-<h3 id="this-week">This Week:</h3>
+<h3 id="this-week">This Week:<a class="headerlink" href="#this-week" title="Permanent link">&para;</a></h3>
 <ol>
 <li><strong>Fix header race conditions</strong> (2-4 hours) → Eliminate 31 unhandled errors</li>
 <li><strong>Clean up React testing warnings</strong> (30 min) → Improve test quality</li>
 </ol>
 <hr />
-<h2 id="success-metrics-update">💡 SUCCESS METRICS UPDATE</h2>
-<h3 id="current-state">Current State:</h3>
+<h2 id="success-metrics-update">💡 SUCCESS METRICS UPDATE<a class="headerlink" href="#success-metrics-update" title="Permanent link">&para;</a></h2>
+<h3 id="current-state">Current State:<a class="headerlink" href="#current-state" title="Permanent link">&para;</a></h3>
 <ul>
 <li>✅ RBAC tests passing (dev stub fix worked!)</li>
 <li>❌ 3 explicit test failures (Prisma slug + Vite transform)</li>
 <li>⚠️ 31 unhandled errors (header races, non-blocking)</li>
 </ul>
-<h3 id="target-by-eod">Target by EOD:</h3>
+<h3 id="target-by-eod">Target by EOD:<a class="headerlink" href="#target-by-eod" title="Permanent link">&para;</a></h3>
 <ul>
 <li>✅ All explicit test failures fixed (Prisma slug)</li>
 <li>✅ Vite transform error root cause documented</li>
 <li>✅ Header race pattern identified</li>
 <li>Target: <strong>&lt;5 failing tests by EOD</strong></li>
 </ul>
-<h3 id="phase-14-complete-target">Phase 14 Complete Target:</h3>
+<h3 id="phase-14-complete-target">Phase 14 Complete Target:<a class="headerlink" href="#phase-14-complete-target" title="Permanent link">&para;</a></h3>
 <ul>
 <li>✅ All tests passing</li>
 <li>✅ Zero unhandled errors</li>
 <li>✅ Full test suite green without exclusions</li>
 </ul>
 <hr />
-<h2 id="next-steps">🔄 NEXT STEPS</h2>
+<h2 id="next-steps">🔄 NEXT STEPS<a class="headerlink" href="#next-steps" title="Permanent link">&para;</a></h2>
 <ol>
 <li><strong>Immediate</strong>: Fix Prisma slug field in backup export tests</li>
 <li><strong>Next Hour</strong>: Investigate mtls.test.js Vite transform error</li>

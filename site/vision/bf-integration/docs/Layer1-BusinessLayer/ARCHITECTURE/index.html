@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="../../../../../css/theme.css" />
     <link rel="stylesheet" href="../../../../../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../../../../../stylesheets/extra.css" rel="stylesheet" />
     
       <script>
         // Current page data
@@ -43,7 +44,16 @@
                 <li class="toctree-l1"><a class="reference internal" href="../../../../..">Home</a>
                 </li>
               </ul>
-              <p class="caption"><span class="caption-text">Products</span></p>
+              <p class="caption"><span class="caption-text">Start Here</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../ONBOARDING/">Onboarding</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../ARCHITECTURE/">Architecture</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../api-reference/">API Reference Hub</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Product Suite</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../../../../products/">Overview</a>
                   </li>
@@ -66,7 +76,7 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../../../../products/tracking-portal/">Tracking Portal</a>
                   </li>
               </ul>
-              <p class="caption"><span class="caption-text">Platform</span></p>
+              <p class="caption"><span class="caption-text">Platform Services</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../../../../platform/">Overview</a>
                   </li>
@@ -87,12 +97,35 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../../../../platform/bf-warehouse/">Warehouse Service</a>
                   </li>
               </ul>
+              <p class="caption"><span class="caption-text">Capability Catalog</span></p>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../../../">Vision</a>
-                </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../features/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../features/SHIPMENTS/">Shipments</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../features/ADMIN_CONSOLE/">Admin Console</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../features/CONTROL_TOWER/">Control Tower</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../features/IDENTITY/">Identity</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../features/MASTERDATA/">Masterdata</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../features/ORDERS/">Orders</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../features/WAREHOUSE/">Warehouse</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../features/SEARCH/">Search</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../features/FINTECH/">Fintech</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../features/CARRIER_PORTAL/">Carrier Portal</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../features/TRACKING_PORTAL/">Tracking Portal</a>
+                  </li>
               </ul>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../../../../../api-reference/">API Reference</a>
+                <li class="toctree-l1"><a class="reference internal" href="../../../">Vision Archive</a>
                 </li>
               </ul>
       </div>
@@ -123,8 +156,8 @@
 Status: Planned / In Development
 Context: Original BF-INTEGRATION Vision (Pre-Phase 30)</p>
 </blockquote>
-<h1 id="layer-1-architecture-overview">Layer 1 Architecture (Overview)</h1>
-<h2 id="components">Components</h2>
+<h1 id="layer-1-architecture-overview">Layer 1 Architecture (Overview)<a class="headerlink" href="#layer-1-architecture-overview" title="Permanent link">&para;</a></h1>
+<h2 id="components">Components<a class="headerlink" href="#components" title="Permanent link">&para;</a></h2>
 <ul>
 <li>api/server.js — Fastify server and route registration</li>
 <li>api/handlers/* — Resource-specific handlers (mappings, templates, users, orgs)</li>
@@ -133,28 +166,28 @@ Context: Original BF-INTEGRATION Vision (Pre-Phase 30)</p>
 <li>prisma/ — DB schema (multi-schema pattern: <code>public</code> + <code>admin</code>), migrations</li>
 <li>tests/ &amp; api/tests/ — Unit and integration tests (Vitest), worker integration tests</li>
 </ul>
-<h2 id="data-flow-high-level">Data flow (high-level)</h2>
+<h2 id="data-flow-high-level">Data flow (high-level)<a class="headerlink" href="#data-flow-high-level" title="Permanent link">&para;</a></h2>
 <p>Client -&gt; api/server (preHandlers: auth, rate-limit, mTLS) -&gt; Handler -&gt; Service -&gt; Prisma -&gt; DB</p>
 <p>When jobs are enqueued:
 Handler -&gt; enqueue job -&gt; Worker (separate process) -&gt; execute task -&gt; write audit/events -&gt; update DB</p>
-<h2 id="integration-points">Integration points</h2>
+<h2 id="integration-points">Integration points<a class="headerlink" href="#integration-points" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Database: Postgres via Prisma (multi-schema). Tests may use <code>USE_MOCK_DB=true</code> (mock DB) for fast CI runs.</li>
 <li>Redis: used for rate-limiting and TTL stores; in-memory fallback used in tests when Redis not available.</li>
 <li>mTLS / TLS validation: plugin lives in <code>api/lib/mtls.js</code> and is exercised by Node-only tests (moved to node runner).</li>
 <li>External services: Stripe webhook handler, secrets backends (AWS, Vault), emailer (nodemailer/Ethereal for dev).</li>
 </ul>
-<h2 id="technology-choices">Technology choices</h2>
+<h2 id="technology-choices">Technology choices<a class="headerlink" href="#technology-choices" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Node.js (ESM-only), Fastify (HTTP), Prisma (ORM), Vitest (test runner), pnpm (package manager)</li>
 </ul>
-<h2 id="operational-notes">Operational notes</h2>
+<h2 id="operational-notes">Operational notes<a class="headerlink" href="#operational-notes" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Feature flags and environment variables drive behavior: <code>REQUIRE_AUTH</code>, <code>ENFORCE_RBAC</code>, <code>LOCKDOWN_JOBS</code>, <code>USE_MOCK_DB</code>.</li>
 <li>mTLS-heavy tests are isolated and run under <code>node --test</code> with a memory limit to avoid OOM (see <code>scripts/run-mtls-safely.js</code>).</li>
 </ul>
 <hr />
-<h2 id="todos">TODOs</h2>
+<h2 id="todos">TODOs<a class="headerlink" href="#todos" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Add component diagrams (SVG/plantuml) for the architecture doc.</li>
 <li>Expand the worker lifecycle section with error handling and retries.</li>

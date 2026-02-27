@@ -1,8 +1,12 @@
 site_name: BridgeFlow Docs
 site_url: https://brockhager.github.io/bridgeflow-docs/
 nav:
-  - Home: index.md
-  - Products:
+    - Home: index.md
+    - Start Here:
+            - Onboarding: ONBOARDING.md
+            - Architecture: ARCHITECTURE.md
+            - API Reference Hub: api-reference.md
+    - Product Suite:
       - Overview: products/README.md
       - Control Tower: products/control-tower/README.md
       - Quickstart: products/control-tower/quickstart.md
@@ -13,7 +17,7 @@ nav:
       - Coords App: products/coords-app.md
       - Carrier Portal: products/carrier-portal.md
       - Tracking Portal: products/tracking-portal.md
-  - Platform:
+    - Platform Services:
       - Overview: platform/README.md
       - Admin Console: platform/bf-admin-console.md
       - Identity Service: platform/bf-identity.md
@@ -23,7 +27,7 @@ nav:
       - Search Service: platform/bf-search.md
       - Fintech Service: platform/bf-fintech.md
       - Warehouse Service: platform/bf-warehouse.md
-  - Features:
+    - Capability Catalog:
       - Overview: features/README.md
       - Shipments: features/SHIPMENTS.md
       - Admin Console: features/ADMIN_CONSOLE.md
@@ -36,7 +40,12 @@ nav:
       - Fintech: features/FINTECH.md
       - Carrier Portal: features/CARRIER_PORTAL.md
       - Tracking Portal: features/TRACKING_PORTAL.md
-  - Vision: vision/bf-integration/README.md
-  - API Reference: api-reference.md
+    - Vision Archive: vision/bf-integration/README.md
 theme: readthedocs
+markdown_extensions:
+  - admonition
+  - toc:
+      permalink: true
+extra_css:
+  - stylesheets/extra.css
 

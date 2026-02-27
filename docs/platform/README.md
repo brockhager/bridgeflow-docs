@@ -1,8 +1,8 @@
-# Platform: Core Services and Modules
+# Platform Services
 
-The Platform section documents the underlying services that power Bridgeflow products.
+This section documents the core services and modules that power BridgeFlow products.
 
-These repos are not positioned as standalone customer products, but they are critical runtime components.
+These repositories are runtime building blocks, not standalone end-user products.
 
 ## Workspace Inventory (`c:\bridgeflow-core`)
 
@@ -20,7 +20,7 @@ These repos are not positioned as standalone customer products, but they are cri
 | `bf-fintech` | Platform Service | Invoicing and payment workflows | Development | Service endpoint not yet documented |
 | `bf-warehouse` | Platform Service | Inventory and pick task flows | Development | Service endpoint not yet documented |
 
-## BF Umbrella Companion Apps
+## Companion Apps
 
 | App | Role | Status | Primary Endpoint |
 |---|---|---|---|

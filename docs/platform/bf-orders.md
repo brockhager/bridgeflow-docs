@@ -1,23 +1,23 @@
-# Service: bf-orders
+# Orders Service (`bf-orders`)
 
-## Purpose
-
-Order lifecycle management with organization scoping and fulfillment signaling.
-
-## API Endpoint
-
-- Base deployment endpoint not yet documented.
-- Core endpoints:
-  - `GET /health`
-  - `POST /orders`
-  - `GET /orders`
-  - `GET /orders/{order_id}`
-  - `POST /orders/{order_id}/fulfill`
+Order lifecycle management with org scoping and fulfillment state transitions.
 
 ## Status
 
 Active.
 
+## Endpoint
+
+- Stable public base endpoint not documented yet.
+
+## Key Routes
+
+- `GET /health`
+- `POST /orders`
+- `GET /orders`
+- `GET /orders/{order_id}`
+- `POST /orders/{order_id}/fulfill`
+
 ## Repository
 
-- `https://github.com/brockhager/bf-orders`
+- https://github.com/brockhager/bf-orders

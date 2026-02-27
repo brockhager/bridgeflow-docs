@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="../../../css/theme.css" />
     <link rel="stylesheet" href="../../../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../../../stylesheets/extra.css" rel="stylesheet" />
     
       <script>
         // Current page data
@@ -43,7 +44,16 @@
                 <li class="toctree-l1"><a class="reference internal" href="../../..">Home</a>
                 </li>
               </ul>
-              <p class="caption"><span class="caption-text">Products</span></p>
+              <p class="caption"><span class="caption-text">Start Here</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../ONBOARDING/">Onboarding</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../ARCHITECTURE/">Architecture</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../api-reference/">API Reference Hub</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Product Suite</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../../products/">Overview</a>
                   </li>
@@ -66,7 +76,7 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../../products/tracking-portal/">Tracking Portal</a>
                   </li>
               </ul>
-              <p class="caption"><span class="caption-text">Platform</span></p>
+              <p class="caption"><span class="caption-text">Platform Services</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../../platform/">Overview</a>
                   </li>
@@ -87,12 +97,35 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../../platform/bf-warehouse/">Warehouse Service</a>
                   </li>
               </ul>
+              <p class="caption"><span class="caption-text">Capability Catalog</span></p>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../../../vision/bf-integration/">Vision</a>
-                </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../features/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../features/SHIPMENTS/">Shipments</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../features/ADMIN_CONSOLE/">Admin Console</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../features/CONTROL_TOWER/">Control Tower</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../features/IDENTITY/">Identity</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../features/MASTERDATA/">Masterdata</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../features/ORDERS/">Orders</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../features/WAREHOUSE/">Warehouse</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../features/SEARCH/">Search</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../features/FINTECH/">Fintech</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../features/CARRIER_PORTAL/">Carrier Portal</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../features/TRACKING_PORTAL/">Tracking Portal</a>
+                  </li>
               </ul>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../../../api-reference/">API Reference</a>
+                <li class="toctree-l1"><a class="reference internal" href="../../../vision/bf-integration/">Vision Archive</a>
                 </li>
               </ul>
       </div>
@@ -118,12 +151,12 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <h1 id="phase-13-adminbridgeflow-specification">Phase 13 — AdminBridgeflow (Specification)</h1>
+                <h1 id="phase-13-adminbridgeflow-specification">Phase 13 — AdminBridgeflow (Specification)<a class="headerlink" href="#phase-13-adminbridgeflow-specification" title="Permanent link">&para;</a></h1>
 <p><strong>Timebox:</strong> 30 minutes for planning; MVP implementation estimate: 2–3 weeks</p>
-<h2 id="goal">Goal</h2>
+<h2 id="goal">Goal<a class="headerlink" href="#goal" title="Permanent link">&para;</a></h2>
 <p>Deliver an operational admin console and admin API to manage tenants, monitor system health, perform manual operations (impersonation, remediation), and report revenue/usage analytics. The admin surface must be secure, auditable, and operationally safe.</p>
 <hr />
-<h2 id="1-architecture-decisions-tradeoffs-recommendation">1) Architecture Decisions (tradeoffs &amp; recommendation)</h2>
+<h2 id="1-architecture-decisions-tradeoffs-recommendation">1) Architecture Decisions (tradeoffs &amp; recommendation)<a class="headerlink" href="#1-architecture-decisions-tradeoffs-recommendation" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Separate admin app vs extend existing admin UI</li>
 <li>Options:<ul>
@@ -158,9 +191,9 @@
 <li>Recommendation: <strong>Same Postgres instance, separate schema/clear conventions for admin-only tables</strong> where applicable (e.g., <code>admin_*</code>), plus strict RBAC checks in application layer.</li>
 </ul>
 <hr />
-<h2 id="2-mvp-feature-set-minimal-viable-admin-product">2) MVP Feature Set (minimal viable admin product)</h2>
+<h2 id="2-mvp-feature-set-minimal-viable-admin-product">2) MVP Feature Set (minimal viable admin product)<a class="headerlink" href="#2-mvp-feature-set-minimal-viable-admin-product" title="Permanent link">&para;</a></h2>
 <hr />
-<h3 id="non-negotiable-security-architecture-requirements">Non-negotiable Security &amp; Architecture Requirements</h3>
+<h3 id="non-negotiable-security-architecture-requirements">Non-negotiable Security &amp; Architecture Requirements<a class="headerlink" href="#non-negotiable-security-architecture-requirements" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Separate application</strong>: Admin must be a distinct application with a separate hostname and deployment.</li>
 <li><strong>Separate authentication</strong>: Admin credentials and session tokens are distinct from customer JWTs; no customer JWT acceptance in admin flows.</li>
@@ -168,7 +201,7 @@
 <li><strong>Audit for all admin actions</strong>: Every admin operation must generate an audit record with actor, tenant, action, ip, and correlation id.</li>
 </ul>
 <hr />
-<h2 id="phase-13-completion-summary-2025-12-25">Phase 13 — Completion Summary (2025-12-25) ✅</h2>
+<h2 id="phase-13-completion-summary-2025-12-25">Phase 13 — Completion Summary (2025-12-25) ✅<a class="headerlink" href="#phase-13-completion-summary-2025-12-25" title="Permanent link">&para;</a></h2>
 <p>Phase 13 goals for the AdminBridgeflow MVP have been met for operational readiness. The following were delivered and validated:</p>
 <ul>
 <li>Tenant management UI and API (search, details, impersonation)</li>
@@ -207,7 +240,7 @@
 </ul>
 <p>Acceptance criteria: Each action must be logged to <code>auditLog</code> with meta showing actor, tenantId, action, and correlation ids.</p>
 <hr />
-<h2 id="3-technology-stack-options-recommendation">3) Technology Stack (options + recommendation)</h2>
+<h2 id="3-technology-stack-options-recommendation">3) Technology Stack (options + recommendation)<a class="headerlink" href="#3-technology-stack-options-recommendation" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Frontend:</li>
 <li>React (with existing design system) — recommended for long-term maintainability</li>
@@ -229,7 +262,7 @@
 <li>Same cluster, separate deployment unit (namespace) for admin UI/service. Use ingress rules and WAF policies accordingly.</li>
 </ul>
 <hr />
-<h2 id="4-api-specification-high-level">4) API Specification (high level)</h2>
+<h2 id="4-api-specification-high-level">4) API Specification (high level)<a class="headerlink" href="#4-api-specification-high-level" title="Permanent link">&para;</a></h2>
 <p>Base path: <code>POST/GET /admin-api/*</code> or namespace under <code>/api/admin/*</code></p>
 <p>Key endpoints (examples):
 - GET <code>/admin-api/tenants</code> — list tenants (filters, pagination)
@@ -246,14 +279,14 @@
 - Every admin action must produce an <code>auditLog</code> entry with: <code>actorId</code>, <code>tenantId</code> (if applicable), <code>action</code>, <code>meta</code>, <code>ip</code>, <code>requestId</code>.
 - Audit retention policy to be defined (export-ready and searchable).</p>
 <hr />
-<h2 id="5-deliverables-timeline-23-weeks-mvp">5) Deliverables &amp; Timeline (2–3 weeks MVP)</h2>
+<h2 id="5-deliverables-timeline-23-weeks-mvp">5) Deliverables &amp; Timeline (2–3 weeks MVP)<a class="headerlink" href="#5-deliverables-timeline-23-weeks-mvp" title="Permanent link">&para;</a></h2>
 <p>Week 0 (planning / spec) — this doc + CTO review (30 min)
 Week 1 — scaffold admin routes, basic auth checks, tenant list/detail endpoints + tests
 Week 2 — add impersonation, basic health endpoint, audit views, and UI scaffolds
 Week 3 — polish dashboards (analytics), CI tests, documentation, and handover</p>
 <p>MVP Definition: Tenant management, health dashboard, manual ops (impersonation, job retry), audit view.</p>
 <hr />
-<h2 id="next-actions-immediate">Next Actions (immediate)</h2>
+<h2 id="next-actions-immediate">Next Actions (immediate)<a class="headerlink" href="#next-actions-immediate" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Schedule a 30-minute review with the CTO to validate architecture and scope.</li>
 <li>Create an issue &amp; PR with this spec and basic API scaffolding (<code>/api/admin/*</code>) and RBAC strings.</li>
@@ -264,7 +297,7 @@ Week 3 — polish dashboards (analytics), CI tests, documentation, and handover<
 <li>Admin login UI scaffold (React) — prototype and local dev flow</li>
 <li>Timebox: 3 days for working admin login + basic dashboard</li>
 </ul>
-<h3 id="admin-credential-management-onboarding">Admin credential management (onboarding)</h3>
+<h3 id="admin-credential-management-onboarding">Admin credential management (onboarding)<a class="headerlink" href="#admin-credential-management-onboarding" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Onboard admin accounts via a CLI or secure invite flow (email invite with short-lived link)</li>
 <li>Require initial credential setup + enforce MFA within first login</li>
@@ -276,7 +309,7 @@ Week 3 — polish dashboards (analytics), CI tests, documentation, and handover<
 </li>
 </ul>
 <hr />
-<h2 id="risks-notes">Risks &amp; Notes</h2>
+<h2 id="risks-notes">Risks &amp; Notes<a class="headerlink" href="#risks-notes" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Admin capabilities are powerful: ensure strict RBAC, MFA and audit-before-action pattern.</li>
 <li>Keep admin features behind feature flags for staged rollout.</li>

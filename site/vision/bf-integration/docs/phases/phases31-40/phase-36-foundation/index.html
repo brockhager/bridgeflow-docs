@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="../../../../../../css/theme.css" />
     <link rel="stylesheet" href="../../../../../../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../../../../../../stylesheets/extra.css" rel="stylesheet" />
     
       <script>
         // Current page data
@@ -43,7 +44,16 @@
                 <li class="toctree-l1"><a class="reference internal" href="../../../../../..">Home</a>
                 </li>
               </ul>
-              <p class="caption"><span class="caption-text">Products</span></p>
+              <p class="caption"><span class="caption-text">Start Here</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../ONBOARDING/">Onboarding</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../ARCHITECTURE/">Architecture</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../api-reference/">API Reference Hub</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Product Suite</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../../../../../products/">Overview</a>
                   </li>
@@ -66,7 +76,7 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../../../../../products/tracking-portal/">Tracking Portal</a>
                   </li>
               </ul>
-              <p class="caption"><span class="caption-text">Platform</span></p>
+              <p class="caption"><span class="caption-text">Platform Services</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../../../../../platform/">Overview</a>
                   </li>
@@ -87,12 +97,35 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../../../../../platform/bf-warehouse/">Warehouse Service</a>
                   </li>
               </ul>
+              <p class="caption"><span class="caption-text">Capability Catalog</span></p>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../../../../">Vision</a>
-                </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/SHIPMENTS/">Shipments</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/ADMIN_CONSOLE/">Admin Console</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/CONTROL_TOWER/">Control Tower</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/IDENTITY/">Identity</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/MASTERDATA/">Masterdata</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/ORDERS/">Orders</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/WAREHOUSE/">Warehouse</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/SEARCH/">Search</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/FINTECH/">Fintech</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/CARRIER_PORTAL/">Carrier Portal</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/TRACKING_PORTAL/">Tracking Portal</a>
+                  </li>
               </ul>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../../../../../../api-reference/">API Reference</a>
+                <li class="toctree-l1"><a class="reference internal" href="../../../../">Vision Archive</a>
                 </li>
               </ul>
       </div>
@@ -123,12 +156,12 @@
 Status: Planned / In Development
 Context: Original BF-INTEGRATION Vision (Pre-Phase 30)</p>
 </blockquote>
-<h1 id="phase-36-foundation-onboarding-startup-templates-week-1-complete">Phase 36 — Foundation: Onboarding &amp; Startup Templates (Week 1 Complete)</h1>
+<h1 id="phase-36-foundation-onboarding-startup-templates-week-1-complete">Phase 36 — Foundation: Onboarding &amp; Startup Templates (Week 1 Complete)<a class="headerlink" href="#phase-36-foundation-onboarding-startup-templates-week-1-complete" title="Permanent link">&para;</a></h1>
 <p><strong>Status:</strong> ✅ Week 1 Complete — Foundation Built (January 11, 2026)
 <strong>Owner:</strong> TBD (Onboarding team)</p>
-<h2 id="week-1-summary">Week 1 Summary</h2>
+<h2 id="week-1-summary">Week 1 Summary<a class="headerlink" href="#week-1-summary" title="Permanent link">&para;</a></h2>
 <p>Week 1 delivered the foundational backend and data models to enable guided onboarding and one-click provisioning of starter templates for new customers. The emphasis in Week 1 was on schema design, API surface, seed data scripts, and a provisioning job engine.</p>
-<h3 id="files-created">Files Created</h3>
+<h3 id="files-created">Files Created<a class="headerlink" href="#files-created" title="Permanent link">&para;</a></h3>
 <ul>
 <li><code>prisma/schema.prisma</code> — Added <code>OnboardingSession</code> and <code>StartupTemplate</code> models</li>
 <li><code>api/handlers/onboarding.js</code> — Questionnaire flow, session management, status tracking</li>
@@ -138,7 +171,7 @@ Context: Original BF-INTEGRATION Vision (Pre-Phase 30)</p>
 <li><code>api/routes/startupTemplates.js</code> — Startup template endpoints</li>
 <li><code>scripts/seed-startup-templates.js</code> — Seed script to create 4 initial startup templates</li>
 </ul>
-<h2 id="api-endpoints-week-1">API Endpoints (Week 1)</h2>
+<h2 id="api-endpoints-week-1">API Endpoints (Week 1)<a class="headerlink" href="#api-endpoints-week-1" title="Permanent link">&para;</a></h2>
 <p><strong>Onboarding:</strong>
 - POST <code>/api/onboarding/start</code> — Create session
 - POST <code>/api/onboarding/questionnaire</code> — Submit answers
@@ -150,7 +183,7 @@ Context: Original BF-INTEGRATION Vision (Pre-Phase 30)</p>
 - GET  <code>/api/startup-templates</code> — List templates
 - GET  <code>/api/startup-templates/:id</code> — Get details
 - POST <code>/api/startup-templates/seed</code> — Seed initial templates (admin only)</p>
-<h2 id="startup-templates-seeded-scenarios">Startup Templates (seeded scenarios)</h2>
+<h2 id="startup-templates-seeded-scenarios">Startup Templates (seeded scenarios)<a class="headerlink" href="#startup-templates-seeded-scenarios" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
@@ -187,7 +220,7 @@ Context: Original BF-INTEGRATION Vision (Pre-Phase 30)</p>
 </tr>
 </tbody>
 </table>
-<h2 id="week-2-accomplished-user-experience-ui">Week 2 — Accomplished (User Experience &amp; UI)</h2>
+<h2 id="week-2-accomplished-user-experience-ui">Week 2 — Accomplished (User Experience &amp; UI)<a class="headerlink" href="#week-2-accomplished-user-experience-ui" title="Permanent link">&para;</a></h2>
 <p>Week 2 delivered the full Onboarding Wizard and front-end polish. Key accomplishments:</p>
 <ul>
 <li><strong>Complete Onboarding Wizard</strong>: 4-step guided flow (Company → Integrations → Team → Template) with session persistence and resume capability ✅</li>
@@ -198,7 +231,7 @@ Context: Original BF-INTEGRATION Vision (Pre-Phase 30)</p>
 <li><strong>Mobile-ready</strong>: Responsive design for admins and power users on mobile devices ✅</li>
 <li><strong>Layer 0 integration</strong>: Admin menu links and navigation completed for onboarding workflow ✅</li>
 </ul>
-<h2 id="week-3-remaining-final-touches">Week 3 (Remaining — Final Touches)</h2>
+<h2 id="week-3-remaining-final-touches">Week 3 (Remaining — Final Touches)<a class="headerlink" href="#week-3-remaining-final-touches" title="Permanent link">&para;</a></h2>
 <p>Priority items to complete in Week 3 (ordered):
 1. <strong>Email notifications (High priority)</strong>
    - Welcome email, provisioning start, completion, and failure templates
@@ -210,7 +243,7 @@ Context: Original BF-INTEGRATION Vision (Pre-Phase 30)</p>
    - Allow modifications to templates before provisioning; hybrid templates mixing adapters
 5. <strong>Monitoring &amp; Observability</strong>
    - Add job duration dashboards, provision metrics, and long-running job alerts (&gt;10 minutes)</p>
-<h2 id="testing-success-criteria">Testing &amp; Success Criteria</h2>
+<h2 id="testing-success-criteria">Testing &amp; Success Criteria<a class="headerlink" href="#testing-success-criteria" title="Permanent link">&para;</a></h2>
 <ul>
 <li>End-to-end onboarding flow (signup → wizard → provision → production bridge) fully covered by Playwright</li>
 <li>Failure scenarios validated: network errors, validation failures, and timeouts</li>
@@ -218,7 +251,7 @@ Context: Original BF-INTEGRATION Vision (Pre-Phase 30)</p>
 <li>Performance: acceptable provisioning times for large templates (benchmark targets in infra)</li>
 </ul>
 <p><strong>Notes:</strong> Prioritize email notifications and support escalation UI to maximize customer trust and enterprise readiness.</p>
-<h2 id="how-to-run-locally-dev">How to run locally (dev)</h2>
+<h2 id="how-to-run-locally-dev">How to run locally (dev)<a class="headerlink" href="#how-to-run-locally-dev" title="Permanent link">&para;</a></h2>
 <ol>
 <li>Ensure DB is available and <code>DATABASE_URL</code> set</li>
 <li>Seed templates (when DB is available):</li>
@@ -236,7 +269,7 @@ pnpm run web:dev
 </ol>
 <pre><code class="language-bash">npx playwright test -c playwright/playwright.config.js
 </code></pre>
-<h2 id="notes-next-steps">Notes &amp; Next Steps</h2>
+<h2 id="notes-next-steps">Notes &amp; Next Steps<a class="headerlink" href="#notes-next-steps" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Add frontend onboarding wizard and progress polling components (Week 2)</li>
 <li>Implement real-time provisioning notifications (WebSockets + email) and add monitoring dashboards (Week 3)</li>

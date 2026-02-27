@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="../../css/theme.css" />
     <link rel="stylesheet" href="../../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../../stylesheets/extra.css" rel="stylesheet" />
     
       <script>
         // Current page data
@@ -43,7 +44,16 @@
                 <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
                 </li>
               </ul>
-              <p class="caption"><span class="caption-text">Products</span></p>
+              <p class="caption"><span class="caption-text">Start Here</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../ONBOARDING/">Onboarding</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../ARCHITECTURE/">Architecture</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../api-reference/">API Reference Hub</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Product Suite</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../products/">Overview</a>
                   </li>
@@ -66,7 +76,7 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../products/tracking-portal/">Tracking Portal</a>
                   </li>
               </ul>
-              <p class="caption"><span class="caption-text">Platform</span></p>
+              <p class="caption"><span class="caption-text">Platform Services</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../platform/">Overview</a>
                   </li>
@@ -87,12 +97,35 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../platform/bf-warehouse/">Warehouse Service</a>
                   </li>
               </ul>
+              <p class="caption"><span class="caption-text">Capability Catalog</span></p>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../../vision/bf-integration/">Vision</a>
-                </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/SHIPMENTS/">Shipments</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/ADMIN_CONSOLE/">Admin Console</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/CONTROL_TOWER/">Control Tower</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/IDENTITY/">Identity</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/MASTERDATA/">Masterdata</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/ORDERS/">Orders</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/WAREHOUSE/">Warehouse</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/SEARCH/">Search</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/FINTECH/">Fintech</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/CARRIER_PORTAL/">Carrier Portal</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/TRACKING_PORTAL/">Tracking Portal</a>
+                  </li>
               </ul>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../../api-reference/">API Reference</a>
+                <li class="toctree-l1"><a class="reference internal" href="../../vision/bf-integration/">Vision Archive</a>
                 </li>
               </ul>
       </div>
@@ -118,9 +151,9 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <h1 id="router-internals">Router Internals</h1>
+                <h1 id="router-internals">Router Internals<a class="headerlink" href="#router-internals" title="Permanent link">&para;</a></h1>
 <p>Deep dive into how BridgeFlow's router works under the hood.</p>
-<h2 id="router-lifecycle">Router Lifecycle</h2>
+<h2 id="router-lifecycle">Router Lifecycle<a class="headerlink" href="#router-lifecycle" title="Permanent link">&para;</a></h2>
 <pre><code>Page Load
     ↓
 main.js executes
@@ -149,8 +182,8 @@ Push new URL to history
     ↓
 Call new route.init()
 </code></pre>
-<h2 id="core-functions">Core Functions</h2>
-<h3 id="routepatharg"><code>route(pathArg)</code></h3>
+<h2 id="core-functions">Core Functions<a class="headerlink" href="#core-functions" title="Permanent link">&para;</a></h2>
+<h3 id="routepatharg"><code>route(pathArg)</code><a class="headerlink" href="#routepatharg" title="Permanent link">&para;</a></h3>
 <p>Main routing function that matches URLs to route handlers.</p>
 <pre><code class="language-javascript">export async function route(pathArg) {
   // Run cleanup for previous page
@@ -208,7 +241,7 @@ Call new route.init()
 - Async support for routes that load data
 - Error handling</p>
 <hr />
-<h3 id="navigatetopath"><code>navigateTo(path)</code></h3>
+<h3 id="navigatetopath"><code>navigateTo(path)</code><a class="headerlink" href="#navigatetopath" title="Permanent link">&para;</a></h3>
 <p>Programmatic navigation helper.</p>
 <pre><code class="language-javascript">export function navigateTo(path) {
   const next = path || '/'
@@ -225,7 +258,7 @@ Call new route.init()
 window.router.navigateTo('/admin/users')
 </code></pre>
 <hr />
-<h3 id="init"><code>init()</code></h3>
+<h3 id="init"><code>init()</code><a class="headerlink" href="#init" title="Permanent link">&para;</a></h3>
 <p>Initialize router on page load.</p>
 <pre><code class="language-javascript">export async function init() {
   return route(window.location.pathname + window.location.search)
@@ -233,7 +266,7 @@ window.router.navigateTo('/admin/users')
 </code></pre>
 <p>Called automatically by <code>main.js</code> on <code>DOMContentLoaded</code>.</p>
 <hr />
-<h2 id="link-interception">Link Interception</h2>
+<h2 id="link-interception">Link Interception<a class="headerlink" href="#link-interception" title="Permanent link">&para;</a></h2>
 <p>Router intercepts all same-origin link clicks to enable SPA navigation.</p>
 <pre><code class="language-javascript">document.addEventListener('click', (e) =&gt; {
   try {
@@ -287,9 +320,9 @@ window.router.navigateTo('/admin/users')
 - ❌ <code>&lt;a href="/page" target="_blank"&gt;New Tab&lt;/a&gt;</code> (target="_blank")
 - ❌ Ctrl+Click, Cmd+Click (open in new tab/window)</p>
 <hr />
-<h2 id="history-api-integration">History API Integration</h2>
+<h2 id="history-api-integration">History API Integration<a class="headerlink" href="#history-api-integration" title="Permanent link">&para;</a></h2>
 <p>Router uses the browser's History API for URL management.</p>
-<h3 id="forward-navigation">Forward Navigation</h3>
+<h3 id="forward-navigation">Forward Navigation<a class="headerlink" href="#forward-navigation" title="Permanent link">&para;</a></h3>
 <pre><code class="language-javascript">// User clicks link or calls navigateTo()
 window.history.pushState({}, '', '/new-path')
 route('/new-path')
@@ -298,7 +331,7 @@ route('/new-path')
 - URL changes to <code>/new-path</code>
 - Browser history updated (back button works)
 - Page does not reload</p>
-<h3 id="backforward-navigation">Back/Forward Navigation</h3>
+<h3 id="backforward-navigation">Back/Forward Navigation<a class="headerlink" href="#backforward-navigation" title="Permanent link">&para;</a></h3>
 <pre><code class="language-javascript">window.addEventListener('popstate', () =&gt; {
   route(window.location.pathname + window.location.search)
 })
@@ -312,7 +345,7 @@ route('/new-path')
 - No page reload
 - State preserved</p>
 <hr />
-<h2 id="path-normalization">Path Normalization</h2>
+<h2 id="path-normalization">Path Normalization<a class="headerlink" href="#path-normalization" title="Permanent link">&para;</a></h2>
 <p>Router normalizes URLs for consistent matching:</p>
 <pre><code class="language-javascript">const normalized = (path || '')
   .replace(/\/$/, '')        // Remove trailing slash
@@ -328,8 +361,8 @@ route('/new-path')
 - Legacy links may include <code>.html</code>
 - Consistent matching prevents duplicate route handlers</p>
 <hr />
-<h2 id="route-registration-patterns">Route Registration Patterns</h2>
-<h3 id="simple-route">Simple Route</h3>
+<h2 id="route-registration-patterns">Route Registration Patterns<a class="headerlink" href="#route-registration-patterns" title="Permanent link">&para;</a></h2>
+<h3 id="simple-route">Simple Route<a class="headerlink" href="#simple-route" title="Permanent link">&para;</a></h3>
 <pre><code class="language-javascript">if (normalized === '/my-route') {
   app.innerHTML = myRoute.render()
   if (myRoute.init) await myRoute.init()
@@ -337,7 +370,7 @@ route('/new-path')
   return
 }
 </code></pre>
-<h3 id="parameterized-route">Parameterized Route</h3>
+<h3 id="parameterized-route">Parameterized Route<a class="headerlink" href="#parameterized-route" title="Permanent link">&para;</a></h3>
 <pre><code class="language-javascript">// Match pattern: /tp/123/profile
 const tpMatch = path.match(/^\/tp\/(.+?)\/profile$/)
 if (tpMatch) {
@@ -348,7 +381,7 @@ if (tpMatch) {
   return
 }
 </code></pre>
-<h3 id="dynamic-import-route">Dynamic Import Route</h3>
+<h3 id="dynamic-import-route">Dynamic Import Route<a class="headerlink" href="#dynamic-import-route" title="Permanent link">&para;</a></h3>
 <pre><code class="language-javascript">if (normalized === '/bridges') {
   const mod = await import('../src/bridges.js')
   app.innerHTML = mod.render ? mod.render() : ''
@@ -366,7 +399,7 @@ if (tpMatch) {
 - Faster initial load
 - Code splitting</p>
 <hr />
-<h2 id="cleanup-mechanism">Cleanup Mechanism</h2>
+<h2 id="cleanup-mechanism">Cleanup Mechanism<a class="headerlink" href="#cleanup-mechanism" title="Permanent link">&para;</a></h2>
 <p>Router calls cleanup before navigating to new route:</p>
 <pre><code class="language-javascript">let currentCleanup = null
 
@@ -393,7 +426,7 @@ export async function route(pathArg) {
 - Abort fetch requests: <code>controller.abort()</code>
 - Reset global state: <code>delete window.myVar</code></p>
 <hr />
-<h2 id="error-handling">Error Handling</h2>
+<h2 id="error-handling">Error Handling<a class="headerlink" href="#error-handling" title="Permanent link">&para;</a></h2>
 <p>Router catches errors to prevent crashes:</p>
 <pre><code class="language-javascript">try {
   // Route matching logic
@@ -422,7 +455,7 @@ export async function route(pathArg) {
 }
 </code></pre>
 <hr />
-<h2 id="global-router-object">Global Router Object</h2>
+<h2 id="global-router-object">Global Router Object<a class="headerlink" href="#global-router-object" title="Permanent link">&para;</a></h2>
 <p>Router exposes itself globally for convenience:</p>
 <pre><code class="language-javascript">window.router = { 
   navigateTo, 
@@ -441,7 +474,7 @@ button.onclick = () =&gt; window.router.navigateTo('/dashboard')
 window.router.route('/admin/users')
 </code></pre>
 <hr />
-<h2 id="authentication-flow">Authentication Flow</h2>
+<h2 id="authentication-flow">Authentication Flow<a class="headerlink" href="#authentication-flow" title="Permanent link">&para;</a></h2>
 <p>Router handles auth at the root route:</p>
 <pre><code class="language-javascript">if (normalized === '' || normalized === '/') {
   // Check if user is authenticated
@@ -480,7 +513,7 @@ window.router.route('/admin/users')
 }
 </code></pre>
 <hr />
-<h2 id="fallback-handling">Fallback Handling</h2>
+<h2 id="fallback-handling">Fallback Handling<a class="headerlink" href="#fallback-handling" title="Permanent link">&para;</a></h2>
 <p>Fastify server serves <code>index.html</code> for all unmatched routes:</p>
 <pre><code class="language-javascript">// api/server.js
 app.setNotFoundHandler((req, reply) =&gt; {
@@ -496,8 +529,8 @@ app.setNotFoundHandler((req, reply) =&gt; {
 - Router reads URL, renders canvas-assembly route
 - Works for direct URL access and browser refresh</p>
 <hr />
-<h2 id="debugging">Debugging</h2>
-<h3 id="enable-router-logging">Enable router logging</h3>
+<h2 id="debugging">Debugging<a class="headerlink" href="#debugging" title="Permanent link">&para;</a></h2>
+<h3 id="enable-router-logging">Enable router logging<a class="headerlink" href="#enable-router-logging" title="Permanent link">&para;</a></h3>
 <pre><code class="language-javascript">// Temporarily add to router.js
 export async function route(pathArg) {
   console.log('[ROUTER] Routing to:', pathArg)
@@ -510,33 +543,33 @@ export async function route(pathArg) {
   // ... rest of function
 }
 </code></pre>
-<h3 id="inspect-current-route">Inspect current route</h3>
+<h3 id="inspect-current-route">Inspect current route<a class="headerlink" href="#inspect-current-route" title="Permanent link">&para;</a></h3>
 <pre><code class="language-javascript">// In browser console
 console.log(window.location.pathname)
 </code></pre>
-<h3 id="manually-trigger-route">Manually trigger route</h3>
+<h3 id="manually-trigger-route">Manually trigger route<a class="headerlink" href="#manually-trigger-route" title="Permanent link">&para;</a></h3>
 <pre><code class="language-javascript">// In browser console
 window.router.route('/admin/users')
 </code></pre>
-<h3 id="view-app-container">View app container</h3>
+<h3 id="view-app-container">View app container<a class="headerlink" href="#view-app-container" title="Permanent link">&para;</a></h3>
 <pre><code class="language-javascript">// In browser console
 console.log(document.getElementById('app').innerHTML)
 </code></pre>
 <hr />
-<h2 id="performance-considerations">Performance Considerations</h2>
-<h3 id="bundle-size">Bundle Size</h3>
+<h2 id="performance-considerations">Performance Considerations<a class="headerlink" href="#performance-considerations" title="Permanent link">&para;</a></h2>
+<h3 id="bundle-size">Bundle Size<a class="headerlink" href="#bundle-size" title="Permanent link">&para;</a></h3>
 <p>Router is included in main bundle (~80KB total).</p>
 <p><strong>Optimization strategies:</strong>
 - Use dynamic imports for large features
 - Code splitting per route (future enhancement)
 - Tree shaking unused route modules</p>
-<h3 id="navigation-speed">Navigation Speed</h3>
+<h3 id="navigation-speed">Navigation Speed<a class="headerlink" href="#navigation-speed" title="Permanent link">&para;</a></h3>
 <p>SPA navigation is ~10-50ms (vs 200-500ms for full page load).</p>
 <p><strong>Bottlenecks:</strong>
 - Large <code>render()</code> functions → use templates
 - Slow <code>init()</code> → defer non-critical work
 - Heavy DOM manipulation → batch updates</p>
-<h3 id="memory-management">Memory Management</h3>
+<h3 id="memory-management">Memory Management<a class="headerlink" href="#memory-management" title="Permanent link">&para;</a></h3>
 <p><strong>Potential leaks:</strong>
 - Event listeners not removed in <code>cleanup()</code>
 - Global variables not reset
@@ -546,8 +579,8 @@ console.log(document.getElementById('app').innerHTML)
 - Use module-scoped variables instead of globals
 - Clear timers before navigating away</p>
 <hr />
-<h2 id="future-enhancements">Future Enhancements</h2>
-<h3 id="planned-improvements">Planned improvements:</h3>
+<h2 id="future-enhancements">Future Enhancements<a class="headerlink" href="#future-enhancements" title="Permanent link">&para;</a></h2>
+<h3 id="planned-improvements">Planned improvements:<a class="headerlink" href="#planned-improvements" title="Permanent link">&para;</a></h3>
 <ol>
 <li>
 <p><strong>Route guards</strong>

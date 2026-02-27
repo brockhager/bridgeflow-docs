@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="../../../../../../css/theme.css" />
     <link rel="stylesheet" href="../../../../../../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../../../../../../stylesheets/extra.css" rel="stylesheet" />
     
       <script>
         // Current page data
@@ -43,7 +44,16 @@
                 <li class="toctree-l1"><a class="reference internal" href="../../../../../..">Home</a>
                 </li>
               </ul>
-              <p class="caption"><span class="caption-text">Products</span></p>
+              <p class="caption"><span class="caption-text">Start Here</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../ONBOARDING/">Onboarding</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../ARCHITECTURE/">Architecture</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../api-reference/">API Reference Hub</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Product Suite</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../../../../../products/">Overview</a>
                   </li>
@@ -66,7 +76,7 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../../../../../products/tracking-portal/">Tracking Portal</a>
                   </li>
               </ul>
-              <p class="caption"><span class="caption-text">Platform</span></p>
+              <p class="caption"><span class="caption-text">Platform Services</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../../../../../platform/">Overview</a>
                   </li>
@@ -87,12 +97,35 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../../../../../platform/bf-warehouse/">Warehouse Service</a>
                   </li>
               </ul>
+              <p class="caption"><span class="caption-text">Capability Catalog</span></p>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../../../../">Vision</a>
-                </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/SHIPMENTS/">Shipments</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/ADMIN_CONSOLE/">Admin Console</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/CONTROL_TOWER/">Control Tower</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/IDENTITY/">Identity</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/MASTERDATA/">Masterdata</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/ORDERS/">Orders</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/WAREHOUSE/">Warehouse</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/SEARCH/">Search</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/FINTECH/">Fintech</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/CARRIER_PORTAL/">Carrier Portal</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../../../features/TRACKING_PORTAL/">Tracking Portal</a>
+                  </li>
               </ul>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../../../../../../api-reference/">API Reference</a>
+                <li class="toctree-l1"><a class="reference internal" href="../../../../">Vision Archive</a>
                 </li>
               </ul>
       </div>
@@ -123,14 +156,14 @@
 Status: Planned / In Development
 Context: Original BF-INTEGRATION Vision (Pre-Phase 30)</p>
 </blockquote>
-<h1 id="phase-31b-document-intelligence-advanced-adapters">Phase 31B — Document Intelligence &amp; Advanced Adapters</h1>
+<h1 id="phase-31b-document-intelligence-advanced-adapters">Phase 31B — Document Intelligence &amp; Advanced Adapters<a class="headerlink" href="#phase-31b-document-intelligence-advanced-adapters" title="Permanent link">&para;</a></h1>
 <p><strong>Completed:</strong> January 8, 2026<br />
 <strong>Effort:</strong> 3-4 hours<br />
 <strong>Priority:</strong> High (enterprise integration foundation)</p>
-<h2 id="objective">🎯 Objective</h2>
+<h2 id="objective">🎯 Objective<a class="headerlink" href="#objective" title="Permanent link">&para;</a></h2>
 <p>Add intelligence to the Phase 31A foundation, enabling enterprise-tier adapters to ingest data from advanced sources, parse &amp; validate intelligently, and transform to standardized BridgeFlow Packages while maintaining the symmetric architecture.</p>
-<h2 id="core-deliverables-44">📋 Core Deliverables (4/4)</h2>
-<h3 id="1-advanced-adapter-implementations-enterprise-only">✅ 1. Advanced Adapter Implementations (Enterprise Only)</h3>
+<h2 id="core-deliverables-44">📋 Core Deliverables (4/4)<a class="headerlink" href="#core-deliverables-44" title="Permanent link">&para;</a></h2>
+<h3 id="1-advanced-adapter-implementations-enterprise-only">✅ 1. Advanced Adapter Implementations (Enterprise Only)<a class="headerlink" href="#1-advanced-adapter-implementations-enterprise-only" title="Permanent link">&para;</a></h3>
 <p><strong>DatabaseAdapter</strong>: SQL/NoSQL integration with change detection
 - <strong>Database Support</strong>: PostgreSQL, MySQL, MongoDB
 - <strong>Polling Mechanism</strong>: Configurable polling intervals with change detection
@@ -149,7 +182,7 @@ Context: Original BF-INTEGRATION Vision (Pre-Phase 30)</p>
 | Database | SQL/NoSQL tables, queries | Database tables, APIs | ✅ |
 | API | REST endpoints, webhooks | REST APIs, webhooks | ✅ |
 | File | Files (from 31A) | Files (from 31A) | ❌ (both tiers) |</p>
-<h3 id="2-document-intelligence-engine">✅ 2. Document Intelligence Engine</h3>
+<h3 id="2-document-intelligence-engine">✅ 2. Document Intelligence Engine<a class="headerlink" href="#2-document-intelligence-engine" title="Permanent link">&para;</a></h3>
 <p><strong>DataTypeRegistry</strong>: Centralized data type management
 - <strong>Built-in Types</strong>: X12_850, X12_837, JSON_GENERIC, CSV_GENERIC
 - <strong>Parser Registration</strong>: Pluggable parser system for all data types
@@ -173,7 +206,7 @@ const detection = typeDetector.detectType('ISA*00*...*ST*850~', {
 const result = typeDetector.detectTypeWithFallback(content);
 // Result: { requiresManualSelection: true, suggestedTypes: [...] }
 </code></pre>
-<h3 id="3-transformation-pipeline">✅ 3. Transformation Pipeline</h3>
+<h3 id="3-transformation-pipeline">✅ 3. Transformation Pipeline<a class="headerlink" href="#3-transformation-pipeline" title="Permanent link">&para;</a></h3>
 <p><strong>Rule-Based Mapping</strong>: Enterprise-only transformation engine
 - <strong>Field Mapping</strong>: Source field to target field mapping with transformations
 - <strong>Transform Functions</strong>: Uppercase, date formatting, encoding, custom logic
@@ -193,7 +226,7 @@ const result = typeDetector.detectTypeWithFallback(content);
 - <strong>Validation Failures</strong>: Alert system with retry mechanisms
 - <strong>Transformation Errors</strong>: Graceful degradation with error logging
 - <strong>Data Quality</strong>: Confidence scoring and quality metrics</p>
-<h3 id="4-admin-integration-foundation">✅ 4. Admin Integration Foundation</h3>
+<h3 id="4-admin-integration-foundation">✅ 4. Admin Integration Foundation<a class="headerlink" href="#4-admin-integration-foundation" title="Permanent link">&para;</a></h3>
 <p><strong>Adapter Management</strong>: Enterprise adapter configuration
 - <strong>Adapter Registration</strong>: Create and configure database/API adapters
 - <strong>Organization Assignment</strong>: Assign adapters to specific organizations
@@ -209,8 +242,8 @@ const result = typeDetector.detectTypeWithFallback(content);
 - <strong>Token Management</strong>: Upgrade free TP tokens to unlock features
 - <strong>Usage Analytics</strong>: Monitor free TP adapter usage and performance
 - <strong>Support Tools</strong>: Troubleshooting and diagnostic capabilities</p>
-<h2 id="intelligence-architecture">🧠 <strong>Intelligence Architecture</strong></h2>
-<h3 id="data-type-foundation"><strong>Data Type Foundation</strong></h3>
+<h2 id="intelligence-architecture">🧠 <strong>Intelligence Architecture</strong><a class="headerlink" href="#intelligence-architecture" title="Permanent link">&para;</a></h2>
+<h3 id="data-type-foundation"><strong>Data Type Foundation</strong><a class="headerlink" href="#data-type-foundation" title="Permanent link">&para;</a></h3>
 <pre><code>DataTypeRegistry
 ├── X12_850 (Purchase Order)
 │   ├── Parser: x12
@@ -231,7 +264,7 @@ const result = typeDetector.detectTypeWithFallback(content);
     ├── Validation: Column headers
     └── Fields: OrderID, CustomerName, ProductID
 </code></pre>
-<h3 id="detection-pipeline"><strong>Detection Pipeline</strong></h3>
+<h3 id="detection-pipeline"><strong>Detection Pipeline</strong><a class="headerlink" href="#detection-pipeline" title="Permanent link">&para;</a></h3>
 <pre><code>Content Input
     ↓
 TypeDetector
@@ -245,7 +278,7 @@ Confidence Scoring (0-1)
     ↓
 Result: { dataType, confidence, requiresManualSelection }
 </code></pre>
-<h3 id="transformation-pipeline"><strong>Transformation Pipeline</strong></h3>
+<h3 id="transformation-pipeline"><strong>Transformation Pipeline</strong><a class="headerlink" href="#transformation-pipeline" title="Permanent link">&para;</a></h3>
 <pre><code>Package Content
     ↓
 Transformation Engine
@@ -256,8 +289,8 @@ Transformation Engine
     ↓
 Transformed Package
 </code></pre>
-<h2 id="security-permissions">🔐 <strong>Security &amp; Permissions</strong></h2>
-<h3 id="enterprise-only-capabilities"><strong>Enterprise-Only Capabilities</strong></h3>
+<h2 id="security-permissions">🔐 <strong>Security &amp; Permissions</strong><a class="headerlink" href="#security-permissions" title="Permanent link">&para;</a></h2>
+<h3 id="enterprise-only-capabilities"><strong>Enterprise-Only Capabilities</strong><a class="headerlink" href="#enterprise-only-capabilities" title="Permanent link">&para;</a></h3>
 <pre><code class="language-typescript">// Database Adapter Permissions
 'onramp:database', 'offramp:database', 'monitor:database'
 
@@ -267,22 +300,22 @@ Transformed Package
 // Transformation Permissions
 'transform:custom' // Enterprise only
 </code></pre>
-<h3 id="data-type-security"><strong>Data Type Security</strong></h3>
+<h3 id="data-type-security"><strong>Data Type Security</strong><a class="headerlink" href="#data-type-security" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Type Validation</strong>: Only allowed data types per organization</li>
 <li><strong>Schema Enforcement</strong>: Strict validation against data type schemas</li>
 <li><strong>Field Access Control</strong>: Field-level permissions for sensitive data</li>
 <li><strong>Audit Logging</strong>: Complete transformation audit trail</li>
 </ul>
-<h3 id="connection-security"><strong>Connection Security</strong></h3>
+<h3 id="connection-security"><strong>Connection Security</strong><a class="headerlink" href="#connection-security" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Encrypted Credentials</strong>: Database passwords and API keys encrypted at rest</li>
 <li><strong>Network Security</strong>: HTTPS, VPN, dedicated connections for sensitive data</li>
 <li><strong>Access Control</strong>: Granular permissions for database/API access</li>
 <li><strong>Session Management</strong>: Secure token-based authentication</li>
 </ul>
-<h2 id="real-world-use-cases">📊 <strong>Real-World Use Cases</strong></h2>
-<h3 id="healthcare-provider-integration"><strong>Healthcare Provider Integration</strong></h3>
+<h2 id="real-world-use-cases">📊 <strong>Real-World Use Cases</strong><a class="headerlink" href="#real-world-use-cases" title="Permanent link">&para;</a></h2>
+<h3 id="healthcare-provider-integration"><strong>Healthcare Provider Integration</strong><a class="headerlink" href="#healthcare-provider-integration" title="Permanent link">&para;</a></h3>
 <pre><code class="language-typescript">// Database polling for claims
 const dbAdapter = new DatabaseAdapter();
 await dbAdapter.monitorSource({
@@ -299,7 +332,7 @@ await dbAdapter.monitorSource({
   console.log(`Created ${pkg.type} package from database`);
 });
 </code></pre>
-<h3 id="retail-supply-chain-integration"><strong>Retail Supply Chain Integration</strong></h3>
+<h3 id="retail-supply-chain-integration"><strong>Retail Supply Chain Integration</strong><a class="headerlink" href="#retail-supply-chain-integration" title="Permanent link">&para;</a></h3>
 <pre><code class="language-typescript">// API polling for orders
 const apiAdapter = new APIAdapter();
 await apiAdapter.monitorSource({
@@ -316,7 +349,7 @@ await apiAdapter.monitorSource({
   console.log(`Processed order: ${pkg.content.orderId}`);
 });
 </code></pre>
-<h3 id="financial-services-integration"><strong>Financial Services Integration</strong></h3>
+<h3 id="financial-services-integration"><strong>Financial Services Integration</strong><a class="headerlink" href="#financial-services-integration" title="Permanent link">&para;</a></h3>
 <pre><code class="language-typescript">// Transformation from JSON to EDI
 const transformationRules = {
   &quot;payment_amount&quot;: { &quot;transform&quot;: &quot;multiply&quot;, &quot;factor&quot;: 100 },
@@ -328,53 +361,53 @@ const transformationRules = {
 const transformed = await apiAdapter.transform(pkg, transformationRules);
 // Result: EDI 820 format payment order
 </code></pre>
-<h2 id="integration-points">🔄 <strong>Integration Points</strong></h2>
-<h3 id="phase-31a-foundation"><strong>Phase 31A Foundation</strong></h3>
+<h2 id="integration-points">🔄 <strong>Integration Points</strong><a class="headerlink" href="#integration-points" title="Permanent link">&para;</a></h2>
+<h3 id="phase-31a-foundation"><strong>Phase 31A Foundation</strong><a class="headerlink" href="#phase-31a-foundation" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>BridgeFlowAdapter</strong>: Same interface for all adapters</li>
 <li><strong>PermissionManager</strong>: Token-based capability gating</li>
 <li><strong>FileAdapter</strong>: Continues to work for free tier (no changes)</li>
 <li><strong>Database Schema</strong>: Extended with transformation rules</li>
 </ul>
-<h3 id="phase-28-package-integration"><strong>Phase 28 Package Integration</strong></h3>
+<h3 id="phase-28-package-integration"><strong>Phase 28 Package Integration</strong><a class="headerlink" href="#phase-28-package-integration" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Package Creation</strong>: Intelligent packages with parsed data and metadata</li>
 <li><strong>Metadata Enrichment</strong>: Detection confidence, source type, processing duration</li>
 <li><strong>Tenet Application</strong>: Business rules applied during validation</li>
 <li><strong>Statistics</strong>: Real-time adapter and package statistics</li>
 </ul>
-<h3 id="phase-30-connector-integration"><strong>Phase 30 Connector Integration</strong></h3>
+<h3 id="phase-30-connector-integration"><strong>Phase 30 Connector Integration</strong><a class="headerlink" href="#phase-30-connector-integration" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Protocol Processing</strong>: Connectors handle final delivery</li>
 <li><strong>End-to-End Flow</strong>: Database → Package → Connector → Trading Partner</li>
 <li><strong>Status Tracking</strong>: Complete package lifecycle management</li>
 <li><strong>Error Handling</strong>: Unified error reporting and recovery</li>
 </ul>
-<h2 id="files-delivered">📁 <strong>Files Delivered</strong></h2>
-<h3 id="intelligence-engine"><strong>Intelligence Engine</strong></h3>
+<h2 id="files-delivered">📁 <strong>Files Delivered</strong><a class="headerlink" href="#files-delivered" title="Permanent link">&para;</a></h2>
+<h3 id="intelligence-engine"><strong>Intelligence Engine</strong><a class="headerlink" href="#intelligence-engine" title="Permanent link">&para;</a></h3>
 <ul>
 <li><code>api/lib/intelligence/DataTypeRegistry.ts</code> - Centralized data type management</li>
 <li><code>api/lib/intelligence/TypeDetector.ts</code> - Multi-strategy type detection</li>
 </ul>
-<h3 id="enterprise-adapters"><strong>Enterprise Adapters</strong></h3>
+<h3 id="enterprise-adapters"><strong>Enterprise Adapters</strong><a class="headerlink" href="#enterprise-adapters" title="Permanent link">&para;</a></h3>
 <ul>
 <li><code>api/lib/adapter/adapters/DatabaseAdapter.ts</code> - Database integration (PostgreSQL, MySQL, MongoDB)</li>
 <li><code>api/lib/adapter/adapters/APIAdapter.ts</code> - REST API and webhook integration</li>
 </ul>
-<h3 id="database-extensions"><strong>Database Extensions</strong></h3>
+<h3 id="database-extensions"><strong>Database Extensions</strong><a class="headerlink" href="#database-extensions" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>TransformationRule Model</strong> - Field mapping and transformation rules</li>
 <li><strong>DataType Model</strong> - Data type definitions and validation schemas</li>
 <li><strong>AdapterCapability Extensions</strong> - Enterprise capability tracking</li>
 </ul>
-<h3 id="frontend-foundation"><strong>Frontend Foundation</strong></h3>
+<h3 id="frontend-foundation"><strong>Frontend Foundation</strong><a class="headerlink" href="#frontend-foundation" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Adapter Management UI</strong> - Enterprise adapter configuration (planned)</li>
 <li><strong>Transformation Builder</strong> - Visual field mapping interface (planned)</li>
 <li><strong>Data Type Manager</strong> - Admin data type configuration (planned)</li>
 </ul>
-<h2 id="success-criteria">🎯 <strong>Success Criteria</strong></h2>
-<h3 id="enterprise-user-capabilities">✅ <strong>Enterprise User Capabilities</strong></h3>
+<h2 id="success-criteria">🎯 <strong>Success Criteria</strong><a class="headerlink" href="#success-criteria" title="Permanent link">&para;</a></h2>
+<h3 id="enterprise-user-capabilities">✅ <strong>Enterprise User Capabilities</strong><a class="headerlink" href="#enterprise-user-capabilities" title="Permanent link">&para;</a></h3>
 <ul>
 <li>[x] Create DB adapter → poll orders table → create 850 Packages</li>
 <li>[x] Build field mapping in UI → transform ERP data → EDI</li>
@@ -382,42 +415,42 @@ const transformed = await apiAdapter.transform(pkg, transformationRules);
 <li>[x] Monitor adapter performance and health</li>
 <li>[x] Manage sponsored free trading partners</li>
 </ul>
-<h3 id="free-tier-continuity">✅ <strong>Free Tier Continuity</strong></h3>
+<h3 id="free-tier-continuity">✅ <strong>Free Tier Continuity</strong><a class="headerlink" href="#free-tier-continuity" title="Permanent link">&para;</a></h3>
 <ul>
 <li>[x] Free TP still receives files via simple FileAdapter (no change)</li>
 <li>[x] No impact on existing free tier functionality</li>
 <li>[x] Seamless upgrade path when needed</li>
 </ul>
-<h3 id="cto-management">✅ <strong>CTO Management</strong></h3>
+<h3 id="cto-management">✅ <strong>CTO Management</strong><a class="headerlink" href="#cto-management" title="Permanent link">&para;</a></h3>
 <ul>
 <li>[x] Can manage all adapters across organizations</li>
 <li>[x] Global view of adapter performance and usage</li>
 <li>[x] Ability to upgrade free TPs to enterprise features</li>
 <li>[x] Complete audit trail of all adapter activities</li>
 </ul>
-<h2 id="strategic-impact">🚀 <strong>Strategic Impact</strong></h2>
-<h3 id="enterprise-integration"><strong>Enterprise Integration</strong></h3>
+<h2 id="strategic-impact">🚀 <strong>Strategic Impact</strong><a class="headerlink" href="#strategic-impact" title="Permanent link">&para;</a></h2>
+<h3 id="enterprise-integration"><strong>Enterprise Integration</strong><a class="headerlink" href="#enterprise-integration" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Real-World Connectors</strong>: Database and API adapters for actual systems</li>
 <li><strong>Intelligent Processing</strong>: Automatic type detection and validation</li>
 <li><strong>Custom Transformations</strong>: Enterprise-specific data mapping rules</li>
 <li><strong>Production Ready</strong>: Error handling, retry logic, monitoring</li>
 </ul>
-<h3 id="developer-experience"><strong>Developer Experience</strong></h3>
+<h3 id="developer-experience"><strong>Developer Experience</strong><a class="headerlink" href="#developer-experience" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Unified SDK</strong>: Single adapter interface for all data sources</li>
 <li><strong>Type Safety</strong>: Comprehensive TypeScript definitions</li>
 <li><strong>Testing Support</strong>: Mock implementations and test utilities</li>
 <li><strong>Documentation</strong>: Complete API documentation and examples</li>
 </ul>
-<h3 id="business-value"><strong>Business Value</strong></h3>
+<h3 id="business-value"><strong>Business Value</strong><a class="headerlink" href="#business-value" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Faster Onboarding</strong>: Enterprise customers can integrate existing systems</li>
 <li><strong>Reduced Integration Costs</strong>: Standardized adapters and transformations</li>
 <li><strong>Improved Data Quality</strong>: Intelligent validation and error handling</li>
 <li><strong>Scalable Architecture</strong>: Add new data types without code changes</li>
 </ul>
-<h2 id="next-steps">📈 <strong>Next Steps</strong></h2>
+<h2 id="next-steps">📈 <strong>Next Steps</strong><a class="headerlink" href="#next-steps" title="Permanent link">&para;</a></h2>
 <p>Phase 31B completes the intelligence layer. Future phases will build on this foundation:</p>
 <ul>
 <li><strong>Phase 32</strong>: Real protocol implementation (AS2, SFTP, API handlers)</li>

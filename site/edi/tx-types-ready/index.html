@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="../../css/theme.css" />
     <link rel="stylesheet" href="../../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../../stylesheets/extra.css" rel="stylesheet" />
     
       <script>
         // Current page data
@@ -43,7 +44,16 @@
                 <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
                 </li>
               </ul>
-              <p class="caption"><span class="caption-text">Products</span></p>
+              <p class="caption"><span class="caption-text">Start Here</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../ONBOARDING/">Onboarding</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../ARCHITECTURE/">Architecture</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../api-reference/">API Reference Hub</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Product Suite</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../products/">Overview</a>
                   </li>
@@ -66,7 +76,7 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../products/tracking-portal/">Tracking Portal</a>
                   </li>
               </ul>
-              <p class="caption"><span class="caption-text">Platform</span></p>
+              <p class="caption"><span class="caption-text">Platform Services</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../platform/">Overview</a>
                   </li>
@@ -87,12 +97,35 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../platform/bf-warehouse/">Warehouse Service</a>
                   </li>
               </ul>
+              <p class="caption"><span class="caption-text">Capability Catalog</span></p>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../../vision/bf-integration/">Vision</a>
-                </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/SHIPMENTS/">Shipments</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/ADMIN_CONSOLE/">Admin Console</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/CONTROL_TOWER/">Control Tower</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/IDENTITY/">Identity</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/MASTERDATA/">Masterdata</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/ORDERS/">Orders</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/WAREHOUSE/">Warehouse</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/SEARCH/">Search</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/FINTECH/">Fintech</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/CARRIER_PORTAL/">Carrier Portal</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/TRACKING_PORTAL/">Tracking Portal</a>
+                  </li>
               </ul>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../../api-reference/">API Reference</a>
+                <li class="toctree-l1"><a class="reference internal" href="../../vision/bf-integration/">Vision Archive</a>
                 </li>
               </ul>
       </div>
@@ -130,10 +163,10 @@
  - <code>docs/examples/variants/standard-freight-210.txt</code> - Standard freight invoice variant
  - <code>docs/examples/variants/international-freight-210.txt</code> - International freight invoice variant
  - <code>docs/examples/variants/accessorial-charges-210.txt</code> - Accessorial charges variant</p>
-<h1 id="edi-transaction-types-ready-for-customers">EDI Transaction Types - Ready for Customers</h1>
+<h1 id="edi-transaction-types-ready-for-customers">EDI Transaction Types - Ready for Customers<a class="headerlink" href="#edi-transaction-types-ready-for-customers" title="Permanent link">&para;</a></h1>
 <p>This document lists all X12 EDI transaction types that are currently supported by the BridgeFlow EDI Library with complete specifications, parser support, and generator capabilities.</p>
-<h2 id="production-ready-transaction-types">Production-Ready Transaction Types</h2>
-<h3 id="850-purchase-order">850 - Purchase Order</h3>
+<h2 id="production-ready-transaction-types">Production-Ready Transaction Types<a class="headerlink" href="#production-ready-transaction-types" title="Permanent link">&para;</a></h2>
+<h3 id="850-purchase-order">850 - Purchase Order<a class="headerlink" href="#850-purchase-order" title="Permanent link">&para;</a></h3>
 <p><strong>Status</strong>: ✅ Fully Supported (Parser + Generator + Tested)</p>
 <ul>
 <li><strong>Functional Group</strong>: PO</li>
@@ -156,7 +189,7 @@
 - PO1 - Baseline Item Data
 - CTT - Transaction Totals</p>
 <hr />
-<h3 id="810-invoice">810 - Invoice</h3>
+<h3 id="810-invoice">810 - Invoice<a class="headerlink" href="#810-invoice" title="Permanent link">&para;</a></h3>
 <p><strong>Status</strong>: ✅ Specification Complete (Parser + Generator Ready)</p>
 <ul>
 <li><strong>Functional Group</strong>: IN</li>
@@ -175,8 +208,8 @@
 - IT1 - Baseline Item Data (Invoice)
 - TDS - Total Monetary Value Summary</p>
 <hr />
-<h2 id="in-development">In Development</h2>
-<h3 id="210-motor-carrier-freight-details-and-invoice">210 - Motor Carrier Freight Details and Invoice</h3>
+<h2 id="in-development">In Development<a class="headerlink" href="#in-development" title="Permanent link">&para;</a></h2>
+<h3 id="210-motor-carrier-freight-details-and-invoice">210 - Motor Carrier Freight Details and Invoice<a class="headerlink" href="#210-motor-carrier-freight-details-and-invoice" title="Permanent link">&para;</a></h3>
 <p><strong>Status</strong>: ✅ Implemented (Core segments + Variants + Tests)</p>
 <ul>
 <li><strong>Functional Group</strong>: MI</li>
@@ -194,7 +227,7 @@
 <strong>Target</strong>: Complete remaining optional segments and expand edge-case tests in follow-up work</li>
 </ul>
 <hr />
-<h3 id="820-payment-orderremittance-advice">820 - Payment Order/Remittance Advice</h3>
+<h3 id="820-payment-orderremittance-advice">820 - Payment Order/Remittance Advice<a class="headerlink" href="#820-payment-orderremittance-advice" title="Permanent link">&para;</a></h3>
 <p><strong>Status</strong>: ✅ Fully Supported (Parser + Generator + Tested)</p>
 <ul>
 <li><strong>Functional Group</strong>: RA</li>
@@ -210,7 +243,7 @@
 <li><code>examples/sample-820.txt</code> - Sample generated 820 file</li>
 </ul>
 <hr />
-<h3 id="856-ship-noticemanifest-asn">856 - Ship Notice/Manifest (ASN)</h3>
+<h3 id="856-ship-noticemanifest-asn">856 - Ship Notice/Manifest (ASN)<a class="headerlink" href="#856-ship-noticemanifest-asn" title="Permanent link">&para;</a></h3>
 <p><strong>Status</strong>: ✅ Fully Supported (Parser + Generator + Variants + Tests)</p>
 <ul>
 <li><strong>Functional Group</strong>: SH</li>
@@ -228,7 +261,7 @@
 -- <strong>Target Completion</strong>: TBD - work in progress (tests added)</li>
 </ul>
 <hr />
-<h3 id="945-warehouse-shipping-advice">945 - Warehouse Shipping Advice</h3>
+<h3 id="945-warehouse-shipping-advice">945 - Warehouse Shipping Advice<a class="headerlink" href="#945-warehouse-shipping-advice" title="Permanent link">&para;</a></h3>
 <p><strong>Status</strong>: ✅ Fully Supported (Parser + Generator + Variants + Tests)</p>
 <ul>
 <li><strong>Functional Group</strong>: WA</li>
@@ -244,7 +277,7 @@
 <li><strong>Target Completion</strong>: Phase 5 complete for core 945 scenarios; edge-case tests tracked for follow-up</li>
 </ul>
 <hr />
-<h3 id="997-functional-acknowledgment">997 - Functional Acknowledgment</h3>
+<h3 id="997-functional-acknowledgment">997 - Functional Acknowledgment<a class="headerlink" href="#997-functional-acknowledgment" title="Permanent link">&para;</a></h3>
 <p><strong>Status</strong>: ✅ Fully Supported (Parser + Generator + Tested)</p>
 <ul>
 <li><strong>Functional Group</strong>: FA</li>
@@ -260,8 +293,8 @@
 <li><code>examples/sample-997.txt</code> - Sample generated 997 file</li>
 </ul>
 <hr />
-<h2 id="how-to-use">How to Use</h2>
-<h3 id="parsing-edi-files">Parsing EDI Files</h3>
+<h2 id="how-to-use">How to Use<a class="headerlink" href="#how-to-use" title="Permanent link">&para;</a></h2>
+<h3 id="parsing-edi-files">Parsing EDI Files<a class="headerlink" href="#parsing-edi-files" title="Permanent link">&para;</a></h3>
 <pre><code class="language-javascript">import { parseX12 } from '@bridgeflow/edi-library'
 
 const ediText = '...' // Your X12 EDI text
@@ -269,7 +302,7 @@ const parsed = parseX12(ediText, { validate: true })
 
 console.log(parsed.transactionSets[0].type) // '850', '810', etc.
 </code></pre>
-<h3 id="generating-edi-files">Generating EDI Files</h3>
+<h3 id="generating-edi-files">Generating EDI Files<a class="headerlink" href="#generating-edi-files" title="Permanent link">&para;</a></h3>
 <pre><code class="language-javascript">import { generateX12 } from '@bridgeflow/edi-library'
 
 const data = {
@@ -280,7 +313,7 @@ const data = {
 
 const ediText = generateX12(data, { prettyPrint: false })
 </code></pre>
-<h3 id="round-trip-validation">Round-trip Validation</h3>
+<h3 id="round-trip-validation">Round-trip Validation<a class="headerlink" href="#round-trip-validation" title="Permanent link">&para;</a></h3>
 <pre><code class="language-javascript">import { parseX12, generateX12 } from '@bridgeflow/edi-library'
 
 const original = '...' // Original EDI
@@ -291,10 +324,10 @@ const regenerated = generateX12(parsed)
 console.log(original === regenerated)
 </code></pre>
 <hr />
-<h2 id="version-support">Version Support</h2>
+<h2 id="version-support">Version Support<a class="headerlink" href="#version-support" title="Permanent link">&para;</a></h2>
 <p>All transaction types support X12 version <strong>004010</strong> (and later versions as needed).</p>
 <hr />
-<h2 id="documentation">Documentation</h2>
+<h2 id="documentation">Documentation<a class="headerlink" href="#documentation" title="Permanent link">&para;</a></h2>
 <ul>
 <li><strong>Parser Documentation</strong>: See <code>src/formats/x12/parser.js</code></li>
 <li><strong>Generator Documentation</strong>: See <code>src/formats/x12/generator.js</code></li>
@@ -302,7 +335,7 @@ console.log(original === regenerated)
 <li><strong>Examples</strong>: See <code>examples/</code> directory</li>
 </ul>
 <hr />
-<h2 id="getting-started">Getting Started</h2>
+<h2 id="getting-started">Getting Started<a class="headerlink" href="#getting-started" title="Permanent link">&para;</a></h2>
 <ol>
 <li>
 <p>Install the library:

@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="../../css/theme.css" />
     <link rel="stylesheet" href="../../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../../stylesheets/extra.css" rel="stylesheet" />
     
       <script>
         // Current page data
@@ -43,7 +44,16 @@
                 <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
                 </li>
               </ul>
-              <p class="caption"><span class="caption-text">Products</span></p>
+              <p class="caption"><span class="caption-text">Start Here</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../ONBOARDING/">Onboarding</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../ARCHITECTURE/">Architecture</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../api-reference/">API Reference Hub</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Product Suite</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../products/">Overview</a>
                   </li>
@@ -66,7 +76,7 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../products/tracking-portal/">Tracking Portal</a>
                   </li>
               </ul>
-              <p class="caption"><span class="caption-text">Platform</span></p>
+              <p class="caption"><span class="caption-text">Platform Services</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../platform/">Overview</a>
                   </li>
@@ -87,12 +97,35 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../platform/bf-warehouse/">Warehouse Service</a>
                   </li>
               </ul>
+              <p class="caption"><span class="caption-text">Capability Catalog</span></p>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../../vision/bf-integration/">Vision</a>
-                </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/SHIPMENTS/">Shipments</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/ADMIN_CONSOLE/">Admin Console</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/CONTROL_TOWER/">Control Tower</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/IDENTITY/">Identity</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/MASTERDATA/">Masterdata</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/ORDERS/">Orders</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/WAREHOUSE/">Warehouse</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/SEARCH/">Search</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/FINTECH/">Fintech</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/CARRIER_PORTAL/">Carrier Portal</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/TRACKING_PORTAL/">Tracking Portal</a>
+                  </li>
               </ul>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../../api-reference/">API Reference</a>
+                <li class="toctree-l1"><a class="reference internal" href="../../vision/bf-integration/">Vision Archive</a>
                 </li>
               </ul>
       </div>
@@ -118,10 +151,10 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <h1 id="super-admin-configuration">Super Admin Configuration</h1>
-<h2 id="overview">Overview</h2>
+                <h1 id="super-admin-configuration">Super Admin Configuration<a class="headerlink" href="#super-admin-configuration" title="Permanent link">&para;</a></h1>
+<h2 id="overview">Overview<a class="headerlink" href="#overview" title="Permanent link">&para;</a></h2>
 <p>Super admins bypass organization membership requirements and can perform global administrative tasks (e.g., creating public blueprints, system configuration).</p>
-<h2 id="configuration">Configuration</h2>
+<h2 id="configuration">Configuration<a class="headerlink" href="#configuration" title="Permanent link">&para;</a></h2>
 <p>Set the <code>SUPER_ADMINS</code> environment variable with a comma-separated list of email addresses:</p>
 <pre><code class="language-bash"># Single super admin
 SUPER_ADMINS=cto@bridgeflow.test
@@ -129,7 +162,7 @@ SUPER_ADMINS=cto@bridgeflow.test
 # Multiple super admins
 SUPER_ADMINS=cto@bridgeflow.test,admin@company.com,ops@bridgeflow.io
 </code></pre>
-<h2 id="capabilities">Capabilities</h2>
+<h2 id="capabilities">Capabilities<a class="headerlink" href="#capabilities" title="Permanent link">&para;</a></h2>
 <p>Super admins can:</p>
 <ul>
 <li>✅ Create global blueprints (organizationId: null)</li>
@@ -137,14 +170,14 @@ SUPER_ADMINS=cto@bridgeflow.test,admin@company.com,ops@bridgeflow.io
 <li>✅ Bypass RBAC permission checks (when ENFORCE_RBAC is off)</li>
 <li>✅ Manage organizations they're not members of (with proper permissions)</li>
 </ul>
-<h2 id="security">Security</h2>
+<h2 id="security">Security<a class="headerlink" href="#security" title="Permanent link">&para;</a></h2>
 <ul>
 <li><strong>Email-based</strong>: Super admin status is determined by email match against <code>SUPER_ADMINS</code> list</li>
 <li><strong>Case-insensitive</strong>: Email matching is case-insensitive</li>
 <li><strong>Environment-only</strong>: Cannot be set via API or UI; must be configured in environment</li>
 <li><strong>No database</strong>: Super admin list is not stored in the database</li>
 </ul>
-<h2 id="jwt-token">JWT Token</h2>
+<h2 id="jwt-token">JWT Token<a class="headerlink" href="#jwt-token" title="Permanent link">&para;</a></h2>
 <p>Super admins receive a JWT token with:</p>
 <pre><code class="language-json">{
   &quot;userId&quot;: &quot;...&quot;,
@@ -154,20 +187,20 @@ SUPER_ADMINS=cto@bridgeflow.test,admin@company.com,ops@bridgeflow.io
   &quot;role&quot;: &quot;bf_employee&quot;
 }
 </code></pre>
-<h2 id="legacy-compatibility">Legacy Compatibility</h2>
+<h2 id="legacy-compatibility">Legacy Compatibility<a class="headerlink" href="#legacy-compatibility" title="Permanent link">&para;</a></h2>
 <p>The <code>BRIDGEFLOW_OPERATOR_EMAILS</code> environment variable has been removed. Use <code>SUPER_ADMINS</code> for all deployments.</p>
-<h2 id="testing">Testing</h2>
+<h2 id="testing">Testing<a class="headerlink" href="#testing" title="Permanent link">&para;</a></h2>
 <p>Use the integration test to verify super admin functionality:</p>
 <pre><code class="language-bash">pnpm run test -- test/integration/super-admin.test.js
 </code></pre>
-<h2 id="deployment-examples">Deployment Examples</h2>
-<h3 id="docker-compose">Docker Compose</h3>
+<h2 id="deployment-examples">Deployment Examples<a class="headerlink" href="#deployment-examples" title="Permanent link">&para;</a></h2>
+<h3 id="docker-compose">Docker Compose<a class="headerlink" href="#docker-compose" title="Permanent link">&para;</a></h3>
 <pre><code class="language-yaml">services:
   api:
     environment:
       - SUPER_ADMINS=cto@bridgeflow.test,admin@company.com
 </code></pre>
-<h3 id="kubernetes">Kubernetes</h3>
+<h3 id="kubernetes">Kubernetes<a class="headerlink" href="#kubernetes" title="Permanent link">&para;</a></h3>
 <pre><code class="language-yaml">apiVersion: v1
 kind: ConfigMap
 metadata:
@@ -175,11 +208,11 @@ metadata:
 data:
   SUPER_ADMINS: &quot;cto@bridgeflow.test,admin@company.com&quot;
 </code></pre>
-<h3 id="railway">Railway</h3>
+<h3 id="railway">Railway<a class="headerlink" href="#railway" title="Permanent link">&para;</a></h3>
 <p>Set environment variable in Railway dashboard:</p>
 <pre><code>SUPER_ADMINS=cto@bridgeflow.test
 </code></pre>
-<h2 id="best-practices">Best Practices</h2>
+<h2 id="best-practices">Best Practices<a class="headerlink" href="#best-practices" title="Permanent link">&para;</a></h2>
 <ol>
 <li><strong>Limit access</strong>: Only assign super admin to trusted personnel</li>
 <li><strong>Use work emails</strong>: Prefer organizational email addresses over personal</li>
@@ -187,7 +220,7 @@ data:
 <li><strong>Separate from dev</strong>: Don't use super admin in development (use BRIDGEFLOW_DEV_ADMIN instead)</li>
 <li><strong>Document</strong>: Maintain a list of super admins in your internal documentation</li>
 </ol>
-<h2 id="related">Related</h2>
+<h2 id="related">Related<a class="headerlink" href="#related" title="Permanent link">&para;</a></h2>
 <ul>
 <li><a href="../auth/README.md">Authentication</a></li>
 <li><a href="../rbac/README.md">RBAC</a></li>

@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="../../css/theme.css" />
     <link rel="stylesheet" href="../../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../../stylesheets/extra.css" rel="stylesheet" />
     
       <script>
         // Current page data
@@ -43,7 +44,16 @@
                 <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
                 </li>
               </ul>
-              <p class="caption"><span class="caption-text">Products</span></p>
+              <p class="caption"><span class="caption-text">Start Here</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../ONBOARDING/">Onboarding</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../ARCHITECTURE/">Architecture</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../api-reference/">API Reference Hub</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Product Suite</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../products/">Overview</a>
                   </li>
@@ -66,7 +76,7 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../products/tracking-portal/">Tracking Portal</a>
                   </li>
               </ul>
-              <p class="caption"><span class="caption-text">Platform</span></p>
+              <p class="caption"><span class="caption-text">Platform Services</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../platform/">Overview</a>
                   </li>
@@ -87,12 +97,35 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../platform/bf-warehouse/">Warehouse Service</a>
                   </li>
               </ul>
+              <p class="caption"><span class="caption-text">Capability Catalog</span></p>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../../vision/bf-integration/">Vision</a>
-                </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/SHIPMENTS/">Shipments</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/ADMIN_CONSOLE/">Admin Console</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/CONTROL_TOWER/">Control Tower</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/IDENTITY/">Identity</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/MASTERDATA/">Masterdata</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/ORDERS/">Orders</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/WAREHOUSE/">Warehouse</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/SEARCH/">Search</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/FINTECH/">Fintech</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/CARRIER_PORTAL/">Carrier Portal</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../features/TRACKING_PORTAL/">Tracking Portal</a>
+                  </li>
               </ul>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../../api-reference/">API Reference</a>
+                <li class="toctree-l1"><a class="reference internal" href="../../vision/bf-integration/">Vision Archive</a>
                 </li>
               </ul>
       </div>
@@ -118,22 +151,22 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <h1 id="partner-inbound-gateway-phase-20ab">Partner Inbound Gateway (Phase 20A/B)</h1>
+                <h1 id="partner-inbound-gateway-phase-20ab">Partner Inbound Gateway (Phase 20A/B)<a class="headerlink" href="#partner-inbound-gateway-phase-20ab" title="Permanent link">&para;</a></h1>
 <p>This document describes the Partner Inbound Gateway contract for partners to post invoices to BridgeFlow.</p>
-<h2 id="endpoint">Endpoint</h2>
+<h2 id="endpoint">Endpoint<a class="headerlink" href="#endpoint" title="Permanent link">&para;</a></h2>
 <ul>
 <li>POST /partner/:partnerId/invoice</li>
 <li>Auth: <code>X-Partner-Key: &lt;raw-key&gt;</code> (returned once at creation; server stores sha256 hash only)</li>
 <li>Dev note: Partner API keys are stored in <code>PartnerApiKey</code> model and mapped to <code>organizationId</code> for RLS.</li>
 </ul>
-<h2 id="auth-rls">Auth &amp; RLS</h2>
+<h2 id="auth-rls">Auth &amp; RLS<a class="headerlink" href="#auth-rls" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Use <code>X-Partner-Key</code> header (or <code>Authorization: Bearer &lt;key&gt;</code>)</li>
 <li>The middleware <code>validatePartnerApiKey</code> validates the header and attaches <code>request.partnerOrgId</code> and <code>request.partnerId</code>.</li>
 <li>If missing or invalid: 401 Unauthorized</li>
 <li>If partnerId in URL does not match key: 403 Forbidden</li>
 </ul>
-<h2 id="payload-invoice-json">Payload (invoice JSON)</h2>
+<h2 id="payload-invoice-json">Payload (invoice JSON)<a class="headerlink" href="#payload-invoice-json" title="Permanent link">&para;</a></h2>
 <p>Required fields (minimal):
 - <code>invoiceId</code> (string)
 - <code>customerId</code> (string)
@@ -149,24 +182,24 @@
   &quot;invoiceDate&quot;: &quot;2025-06-01&quot;
 }
 </code></pre>
-<h2 id="idempotency">Idempotency</h2>
+<h2 id="idempotency">Idempotency<a class="headerlink" href="#idempotency" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Supports <code>Idempotency-Key</code>/<code>X-Idempotency-Key</code> header.</li>
 <li>Uses existing idempotency middleware (TTL controlled by <code>IDEMPOTENCY_TTL_HOURS</code>).</li>
 <li>Duplicate requests with same idempotency key return stored response and include header <code>x-from-idempotency: true</code>.</li>
 </ul>
-<h2 id="enqueue-delivery">Enqueue &amp; Delivery</h2>
+<h2 id="enqueue-delivery">Enqueue &amp; Delivery<a class="headerlink" href="#enqueue-delivery" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Partner invoices are enqueued to Redis stream <code>partner_inbound:&lt;organizationId&gt;</code> with fields:</li>
 <li><code>idempotencyKey</code>, <code>payload</code> (JSON string), <code>source: 'partner'</code></li>
 <li>A copy is also converted to CSV and uploaded to S3 inbox path <code>inbox/&lt;orgId&gt;/&lt;uuid&gt;.csv</code> for visibility.</li>
 <li>If <code>TradingPartner.deliveryMethod === 'email'</code>, an email notification can be triggered (via <code>sendInvoiceNotification</code>).</li>
 </ul>
-<h2 id="observability">Observability</h2>
+<h2 id="observability">Observability<a class="headerlink" href="#observability" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Metrics added: <code>partner_invoice_received_total</code>, <code>partner_invoice_failures_total</code></li>
 </ul>
-<h2 id="notes-for-frontend-admin">Notes for Frontend / Admin</h2>
+<h2 id="notes-for-frontend-admin">Notes for Frontend / Admin<a class="headerlink" href="#notes-for-frontend-admin" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Admin UI (20C) will create and return raw partner API keys; keys are stored as sha256 hashes and are shown <strong>only once</strong> on creation.</li>
 <li>Ensure the partner is associated with a single organization (enforced in UI and validated by gateway).</li>

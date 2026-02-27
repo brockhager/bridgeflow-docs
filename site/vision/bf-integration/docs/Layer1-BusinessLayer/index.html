@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="../../../../css/theme.css" />
     <link rel="stylesheet" href="../../../../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../../../../stylesheets/extra.css" rel="stylesheet" />
     
       <script>
         // Current page data
@@ -43,7 +44,16 @@
                 <li class="toctree-l1"><a class="reference internal" href="../../../..">Home</a>
                 </li>
               </ul>
-              <p class="caption"><span class="caption-text">Products</span></p>
+              <p class="caption"><span class="caption-text">Start Here</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../ONBOARDING/">Onboarding</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../ARCHITECTURE/">Architecture</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../api-reference/">API Reference Hub</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Product Suite</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../../../products/">Overview</a>
                   </li>
@@ -66,7 +76,7 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../../../products/tracking-portal/">Tracking Portal</a>
                   </li>
               </ul>
-              <p class="caption"><span class="caption-text">Platform</span></p>
+              <p class="caption"><span class="caption-text">Platform Services</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../../../platform/">Overview</a>
                   </li>
@@ -87,12 +97,35 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../../../platform/bf-warehouse/">Warehouse Service</a>
                   </li>
               </ul>
+              <p class="caption"><span class="caption-text">Capability Catalog</span></p>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../../">Vision</a>
-                </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../features/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../features/SHIPMENTS/">Shipments</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../features/ADMIN_CONSOLE/">Admin Console</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../features/CONTROL_TOWER/">Control Tower</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../features/IDENTITY/">Identity</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../features/MASTERDATA/">Masterdata</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../features/ORDERS/">Orders</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../features/WAREHOUSE/">Warehouse</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../features/SEARCH/">Search</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../features/FINTECH/">Fintech</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../features/CARRIER_PORTAL/">Carrier Portal</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../features/TRACKING_PORTAL/">Tracking Portal</a>
+                  </li>
               </ul>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../../../../api-reference/">API Reference</a>
+                <li class="toctree-l1"><a class="reference internal" href="../../">Vision Archive</a>
                 </li>
               </ul>
       </div>
@@ -123,10 +156,10 @@
 Status: Planned / In Development
 Context: Original BF-INTEGRATION Vision (Pre-Phase 30)</p>
 </blockquote>
-<h1 id="layer-1-business-layer">Layer 1 — Business Layer</h1>
-<h2 id="overview">Overview</h2>
+<h1 id="layer-1-business-layer">Layer 1 — Business Layer<a class="headerlink" href="#layer-1-business-layer" title="Permanent link">&para;</a></h1>
+<h2 id="overview">Overview<a class="headerlink" href="#overview" title="Permanent link">&para;</a></h2>
 <p>Layer 1 (Business Layer) implements the platform's core business logic, domain rules, and API surface. It serves as the orchestrator for BridgeFlow, enforcing permissions, managing data models, and coordinating interactions between the frontend Canvas and the backend processing engines.</p>
-<h2 id="key-responsibilities">Key Responsibilities</h2>
+<h2 id="key-responsibilities">Key Responsibilities<a class="headerlink" href="#key-responsibilities" title="Permanent link">&para;</a></h2>
 <ol>
 <li>
 <p><strong>API Surface &amp; Routing</strong></p>
@@ -158,7 +191,7 @@ Context: Original BF-INTEGRATION Vision (Pre-Phase 30)</p>
 </ul>
 </li>
 </ol>
-<h2 id="core-components">Core Components</h2>
+<h2 id="core-components">Core Components<a class="headerlink" href="#core-components" title="Permanent link">&para;</a></h2>
 <ul>
 <li>
 <p><strong>Blueprints Engine</strong> (<code>api/services/BlueprintService.js</code>)</p>
@@ -181,23 +214,23 @@ Context: Original BF-INTEGRATION Vision (Pre-Phase 30)</p>
 </ul>
 </li>
 </ul>
-<h2 id="relationship-to-other-layers">Relationship to Other Layers</h2>
+<h2 id="relationship-to-other-layers">Relationship to Other Layers<a class="headerlink" href="#relationship-to-other-layers" title="Permanent link">&para;</a></h2>
 <ul>
 <li><strong>Layer 0 (Admin)</strong>: Consumes Layer 1 APIs for platform-wide management.</li>
 <li><strong>Layer 2 (Connection)</strong>: Layer 1 orchestrates connections but delegates actual protocol handling to Layer 2 adapters.</li>
 <li><strong>Layer 5 (Infrastructure)</strong>: Layer 1 runs on top of the container orchestration provided by Layer 5.</li>
 </ul>
-<h2 id="recent-updates-phase-32">Recent Updates (Phase 32)</h2>
+<h2 id="recent-updates-phase-32">Recent Updates (Phase 32)<a class="headerlink" href="#recent-updates-phase-32" title="Permanent link">&para;</a></h2>
 <ul>
 <li><strong>Blueprint Catalog</strong>: Added endpoints for dynamic blueprint fetching and filtering.</li>
 <li><strong>Bridge Activation</strong>: Added <code>BRIDGE_CONFIG</code> package type to support instant provisioning from the Canvas UI.</li>
 </ul>
-<h2 id="phase-39-update-global-blueprints-super-admin">Phase 39 Update — Global Blueprints &amp; Super Admin</h2>
+<h2 id="phase-39-update-global-blueprints-super-admin">Phase 39 Update — Global Blueprints &amp; Super Admin<a class="headerlink" href="#phase-39-update-global-blueprints-super-admin" title="Permanent link">&para;</a></h2>
 <ul>
 <li><strong>Global Blueprints:</strong> Phase 39 enables creation of system-level (global) blueprints where <code>organizationId</code> is <code>null</code> — intended for platform-provided templates and CTO/ops workflows.</li>
 <li><strong>Super-Admin Bypass:</strong> Super-admins (configured via <code>SUPER_ADMINS</code>) can create and manage these global blueprints; services should treat <code>organizationId: null</code> as system-scoped. For details see <code>docs/phases/phases31-40/PHASE-39-COMPLETE-SUMMARY.md</code> and <code>api/handlers/auth.js</code>.</li>
 </ul>
-<h2 id="developer-guide">Developer Guide</h2>
+<h2 id="developer-guide">Developer Guide<a class="headerlink" href="#developer-guide" title="Permanent link">&para;</a></h2>
 <ul>
 <li><strong>Run Tests</strong>: <code>npm test</code> (Uses in-memory DB mocks for speed).</li>
 <li><strong>Add Endpoint</strong>: Create handler in <code>api/routes/</code>, register in <code>api/server.js</code>, and add integration test.</li>

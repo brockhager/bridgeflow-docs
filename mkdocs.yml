@@ -5,6 +5,7 @@ nav:
   - Product Suite:
       - Overview: products/README.md
       - Control Tower: products/control-tower/README.md
+      - Shipments: products/shipments.md
       - Quickstart: products/control-tower/quickstart.md
       - Concepts: products/control-tower/concepts.md
       - TRL 7 Validation: products/control-tower/trl7-validation.md

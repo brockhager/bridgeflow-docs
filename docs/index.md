@@ -4,7 +4,20 @@ BridgeFlow is a policy-first logistics runtime built around one operating loop: 
 
 This site is organized by what teams usually need first: onboarding, product workflows, platform services, and capability coverage.
 
-## Start Here
+## Overview
+
+Use this page as the entry point for products, platform services, and implementation references.
+
+## What You Can Browse
+
+- Product Suite
+- Platform Services
+- Capability Catalog
+- API Reference
+- Onboarding and Architecture
+- Vision Archive
+
+## Quick Links
 
 - Onboarding guide: `ONBOARDING.md`
 - Architecture overview: `ARCHITECTURE.md`

@@ -2,6 +2,10 @@
 
 BridgeFlow products are customer-facing applications used by operations, carriers, and customers.
 
+## Overview
+
+This section covers each customer-facing product and where it fits in the runtime.
+
 ## Current Inventory
 
 | Repo | Product | Status | Primary Access |
@@ -11,7 +15,7 @@ BridgeFlow products are customer-facing applications used by operations, carrier
 | `bf-carrier-portal` | Carrier Portal | Development | Endpoint not yet documented |
 | `bf-tracking-portal` | Tracking Portal | Development | Endpoint not yet documented |
 
-## How This Section Is Organized
+## Quick Links
 
 - Product-specific docs live under each product page in this section.
 - Cross-service architecture details are in `../platform/README.md`.

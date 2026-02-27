@@ -21,9 +21,16 @@
 - User list and role management workflows.
 - Password reset/deactivate patterns via backend proxies.
 - Super-admin tools isolated from non-admin users.
+- User management proxies route to Identity (`/users*`) as source of truth.
+- Platform impersonation start and audit-log retrieval proxy to Identity admin endpoints.
 
 ## Operational Dashboards
 
 - Private dashboard entry point for internal operators.
 - Public resilience view page for externally visible status context.
 - Control tower case view integration points.
+
+## Service Boundary
+
+- Admin Console orchestrates cross-service admin actions.
+- Identity owns platform-security data and privileged audit records.

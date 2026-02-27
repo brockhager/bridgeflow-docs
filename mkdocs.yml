@@ -2,6 +2,16 @@ site_name: BridgeFlow Docs
 site_url: https://brockhager.github.io/bridgeflow-docs/
 nav:
   - Home: index.md
+  - Overview:
+      - Docs Overview: overview/README.md
+      - Product Suite: overview/product-suite.md
+      - Platform Services: overview/platform-services.md
+      - Capability Catalog: overview/capability-catalog.md
+      - API Reference: overview/api-reference.md
+      - Onboarding: overview/onboarding.md
+      - Architecture: overview/architecture.md
+      - Vision Archive: overview/vision-archive.md
+      - Releases: overview/releases.md
   - Product Suite:
       - Overview: products/README.md
       - Control Tower: products/control-tower/README.md

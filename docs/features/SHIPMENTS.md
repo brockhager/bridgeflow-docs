@@ -34,6 +34,12 @@
 - Asset/location sync and geofence push orchestration.
 - Sync status tracking and audit visibility via admin endpoints.
 
+## Security and Ownership Boundary
+
+- `bf-shipments` focuses on TMS operations and shipment-domain controls.
+- Platform impersonation and platform-level audit log ownership are implemented in `bf-identity`.
+- `bf-admin-console` proxies platform-admin security actions to Identity.
+
 ## Customer and Public Experience
 
 - Public shipment tracking page support.

@@ -19,6 +19,12 @@ Active.
 - `PATCH /api/shipments/{shipment_id}`
 - `POST /api/shipments/{shipment_id}/pod`
 
+## Security Boundary
+
+- `bf-shipments` owns TMS operational workflows.
+- Platform-level impersonation and platform audit logging are owned by `bf-identity`.
+- Admin Console routes privileged platform-security operations to Identity.
+
 ## Repository
 
 - https://github.com/brockhager/bf-shipments

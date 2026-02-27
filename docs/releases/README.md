@@ -4,6 +4,7 @@ This folder contains monthly release notes for BridgeFlow. Use the `release-<MM>
 
 ## Current releases
 - [January 2026 — release-01-2026](release-01-2026.md)
+- [February 2026 — release-02-2026](release-02-2026.md)
 
 ## See also
 - Project docs index: `../README.md` — lists beginner guides, phases, and key references

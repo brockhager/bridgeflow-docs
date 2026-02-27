@@ -35,6 +35,10 @@ Date: February 27, 2026
 2. Deploy `bf-admin-console` proxy updates.
 3. Deploy `bf-shipments` cleanup changes.
 
+Operational runbook:
+
+- `docs/operations/phase79-production-rollout-checklist.md`
+
 ## Follow-ups
 
 - Optional: replace deprecated FastAPI `on_event` startup hooks with lifespan handlers.

@@ -50,6 +50,10 @@ nav:
   - API Reference: api-reference.md
   - Onboarding: ONBOARDING.md
   - Architecture: ARCHITECTURE.md
+  - Operations:
+      - Logging: operations/logging.md
+      - Monitoring: operations/monitoring.md
+      - Phase 79 Rollout Checklist: operations/phase79-production-rollout-checklist.md
   - Vision Archive: vision/bf-integration/README.md
 theme: readthedocs
 markdown_extensions:

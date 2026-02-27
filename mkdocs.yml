@@ -54,6 +54,9 @@ nav:
       - Logging: operations/logging.md
       - Monitoring: operations/monitoring.md
       - Phase 79 Rollout Checklist: operations/phase79-production-rollout-checklist.md
+      - Phase 80 Admin Personas: operations/phase80-admin-personas.md
+  - Changelog:
+      - Phase 80 Dual-Persona Admin Console: changelog/phase80-dual-persona-admin-console.md
   - Vision Archive: vision/bf-integration/README.md
 theme: readthedocs
 markdown_extensions:

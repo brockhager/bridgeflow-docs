@@ -6,6 +6,9 @@ This folder contains monthly release notes for BridgeFlow. Use the `release-<MM>
 - [January 2026 — release-01-2026](release-01-2026.md)
 - [February 2026 — release-02-2026](release-02-2026.md)
 
+## Phase milestone notes
+- [Phase 81 — Multi-Tenant Security Milestone](phase81-security-milestone.md)
+
 ## See also
 - Project docs index: `../README.md` — lists beginner guides, phases, and key references
 - Phases: `../phases/readme.md` — development phases and links to phase groups

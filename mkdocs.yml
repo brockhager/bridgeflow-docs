@@ -1,7 +1,8 @@
 site_name: BridgeFlow Docs
 site_url: https://brockhager.github.io/bridgeflow-docs/
+docs_dir: docs
 nav:
-  - Home: index.md
+  - Home: README.md
   - Overview:
       - Docs Overview: overview/README.md
       - Product Suite: overview/product-suite.md
@@ -12,46 +13,11 @@ nav:
       - Architecture: overview/architecture.md
       - Vision Archive: overview/vision-archive.md
       - Releases: overview/releases.md
-  - Product Suite:
-      - Overview: products/README.md
-      - Control Tower: products/control-tower/README.md
-      - Shipments: products/shipments.md
-      - Quickstart: products/control-tower/quickstart.md
-      - Concepts: products/control-tower/concepts.md
-      - TRL 7 Validation: products/control-tower/trl7-validation.md
-      - Public API: products/control-tower/public-api.md
-      - Integration Guide: products/control-tower/integration-guide.md
-      - Coords App: products/coords-app.md
-      - Carrier Portal: products/carrier-portal.md
-      - Tracking Portal: products/tracking-portal.md
-  - Platform Services:
-      - Overview: platform/README.md
-      - Admin Console: platform/bf-admin-console.md
-      - Identity Service: platform/bf-identity.md
-      - Masterdata Service: platform/bf-masterdata.md
-      - Orders Service: platform/bf-orders.md
-      - Shipments Service: platform/bf-shipments.md
-      - Search Service: platform/bf-search.md
-      - Fintech Service: platform/bf-fintech.md
-      - Warehouse Service: platform/bf-warehouse.md
-  - Capability Catalog:
-      - Overview: features/README.md
-      - Shipments: features/SHIPMENTS.md
-      - Admin Console: features/ADMIN_CONSOLE.md
-      - Control Tower: features/CONTROL_TOWER.md
-      - Identity: features/IDENTITY.md
-      - Masterdata: features/MASTERDATA.md
-      - Orders: features/ORDERS.md
-      - Warehouse: features/WAREHOUSE.md
-      - Search: features/SEARCH.md
-      - Fintech: features/FINTECH.md
-      - Carrier Portal: features/CARRIER_PORTAL.md
-      - Tracking Portal: features/TRACKING_PORTAL.md
-  - API Reference: api-reference.md
-  - Architecture: ARCHITECTURE.md
-  - Changelog:
-      - Phase 80 Dual-Persona Admin Console: changelog/phase80-dual-persona-admin-console.md
-  - Vision Archive: vision/bf-integration/README.md
+  - Releases:
+      - Releases Overview: releases/README.md
+      - January 2026: releases/release-01-2026.md
+      - February 2026: releases/release-02-2026.md
+      - Phase 81 Multi-Tenant Security Milestone: releases/phase81-security-milestone.md
 theme: readthedocs
 markdown_extensions:
   - admonition

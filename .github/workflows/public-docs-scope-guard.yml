@@ -1,0 +1,55 @@
+name: Public Docs Scope Guard
+
+on:
+  pull_request:
+    paths:
+      - 'docs/**'
+      - 'mkdocs.yml'
+      - '.readthedocs.yaml'
+      - '.github/workflows/public-docs-scope-guard.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'docs/**'
+      - 'mkdocs.yml'
+      - '.readthedocs.yaml'
+      - '.github/workflows/public-docs-scope-guard.yml'
+
+jobs:
+  guard:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install docs dependencies
+        run: pip install -r docs/requirements.txt
+
+      - name: Enforce public docs boundaries
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import sys
+
+          mkdocs_text = Path('mkdocs.yml').read_text(encoding='utf-8')
+          checks = {
+              'docs-internal': 'Public mkdocs navigation or config references docs-internal.',
+              'releases/phase81-security-hardening.md': 'Detailed Phase 81 hardening note must remain internal.',
+          }
+
+          failures = [message for token, message in checks.items() if token in mkdocs_text]
+          if Path('docs/releases/phase81-security-hardening.md').exists():
+              failures.append('Public repo must not contain docs/releases/phase81-security-hardening.md.')
+
+          if failures:
+              for failure in failures:
+                  print(f'ERROR: {failure}')
+              sys.exit(1)
+
+          print('Public docs scope guard passed.')
+          PY

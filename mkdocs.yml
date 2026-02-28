@@ -8,7 +8,7 @@ nav:
       - Platform Services: overview/platform-services.md
       - Capability Catalog: overview/capability-catalog.md
       - API Reference: overview/api-reference.md
-      - Onboarding: overview/onboarding.md
+      - Getting Started: overview/onboarding.md
       - Architecture: overview/architecture.md
       - Vision Archive: overview/vision-archive.md
       - Releases: overview/releases.md
@@ -48,13 +48,7 @@ nav:
       - Carrier Portal: features/CARRIER_PORTAL.md
       - Tracking Portal: features/TRACKING_PORTAL.md
   - API Reference: api-reference.md
-  - Onboarding: ONBOARDING.md
   - Architecture: ARCHITECTURE.md
-  - Operations:
-      - Logging: operations/logging.md
-      - Monitoring: operations/monitoring.md
-      - Phase 79 Rollout Checklist: operations/phase79-production-rollout-checklist.md
-      - Phase 80 Admin Personas: operations/phase80-admin-personas.md
   - Changelog:
       - Phase 80 Dual-Persona Admin Console: changelog/phase80-dual-persona-admin-console.md
   - Vision Archive: vision/bf-integration/README.md
